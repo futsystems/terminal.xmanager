@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AA41EFFA-887D-4C4D-8BE4-91B08C98FF42}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TradingLib.MoniterCore</RootNamespace>
+    <AssemblyName>TradingLib.MoniterCore</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging">
+      <HintPath>..\RequiredLibraries\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core">
+      <HintPath>..\RequiredLibraries\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NetMQ">
+      <HintPath>..\RequiredLibraries\NetMQ.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TradingLib.API">
+      <HintPath>..\..\..\Futs.base\lib\TradingLib\TradingLib.API.dll</HintPath>
+    </Reference>
+    <Reference Include="TradingLib.Common">
+      <HintPath>..\..\..\Futs.base\lib\TradingLib\TradingLib.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="TradingLib.Mixins">
+      <HintPath>..\..\..\Futs.base\lib\TradingLib\TradingLib.Mixins.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abstract\MoniterCommand.cs" />
+    <Compile Include="Abstract\MonitorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Abstract\MonitorControl.Designer.cs">
+      <DependentUpon>MonitorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\EnumCallbackTypes.cs" />
+    <Compile Include="API\EnumControlLocation.cs" />
+    <Compile Include="API\IEventBinder.cs" />
+    <Compile Include="API\IMoniterControl.cs" />
+    <Compile Include="API\IMonterCommand.cs" />
+    <Compile Include="Attr\CallbackAttr.cs" />
+    <Compile Include="Attr\MoniterCommandAttr.cs" />
+    <Compile Include="Attr\MoniterControlAttr.cs" />
+    <Compile Include="Client\AsyncClient_MQ.cs" />
+    <Compile Include="Client\PacketHandler\TLClientNet_PacketHandler_.cs" />
+    <Compile Include="Client\PacketHandler\TLClientNet_Request_.cs" />
+    <Compile Include="Client\PacketHandler\TLClientNet_Rule.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_SettleManager.cs" />
+    <Compile Include="Client\TLClientNet_PacketHandler_HistQuery.cs" />
+    <Compile Include="Client\TLClientNet_PacketHandler_Login.cs" />
+    <Compile Include="Client\TLClientNet_PacketHandler_Account.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_Account.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_AccountConnector.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_BasicInfo.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_CashOPAccount.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_CashOpAgent.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_CommissionMargin.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_Connector.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_Domain.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_ExCore_Exchange.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_ExStrategy.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_FinAgent.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_FinService.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_HistQry.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_log.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_Manager.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_Msic.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_Permission.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_Rule.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_Vendor.cs" />
+    <Compile Include="Client\TLClientNet.cs" />
+    <Compile Include="Client\TLClientNet_.cs" />
+    <Compile Include="Client\TLClientNet_PacketHandler_Router.cs" />
+    <Compile Include="Client\TLClientNet_PacketHandler_Trading.cs" />
+    <Compile Include="Client\TLClientNet_PacketHandler_BasicInfo.cs" />
+    <Compile Include="Client\TLClientNet_Request.cs" />
+    <Compile Include="Client\TLClient_MQ.cs" />
+    <Compile Include="Client\ZMessage.cs" />
+    <Compile Include="Client\TLClientNet_PacketHandler_Contrib.cs" />
+    <Compile Include="Common\HandlerInfo.cs" />
+    <Compile Include="Common\SplashScreenApplication.cs" />
+    <Compile Include="ILogicHandler\ILogicHandler.cs" />
+    <Compile Include="ILogicHandler\ILogicHandler_.cs" />
+    <Compile Include="ILogicHandler\ILogicHandler_Account.cs" />
+    <Compile Include="ILogicHandler\ILogicHandler_Basic.cs" />
+    <Compile Include="ILogicHandler\ILogicHandler_Contrib.cs" />
+    <Compile Include="ILogicHandler\ILogicHandler_Rule.cs" />
+    <Compile Include="ILogicHandler\ILogicHandler_Trading.cs" />
+    <Compile Include="MonitorPlugin.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BasicInfotracker\BasicInfoTracker.cs" />
+    <Compile Include="Services\BasicInfotracker\BasicInfoTracker_.cs" />
+    <Compile Include="Services\BasicInfotracker\BasicInfoTracker_Handler.cs" />
+    <Compile Include="Services\BasicInfotracker\BasicInfoTracker_data.cs" />
+    <Compile Include="Services\BasicInfotracker\BasicInfoUtils.cs" />
+    <Compile Include="Services\Event\EventAccount.cs" />
+    <Compile Include="Services\Event\EventBasicInfo.cs" />
+    <Compile Include="Services\Event\EventContrib.cs" />
+    <Compile Include="Services\Event\EventCore.cs" />
+    <Compile Include="Services\Event\EventIndicator.cs" />
+    <Compile Include="Services\CoreService.cs" />
+    <Compile Include="Services\LoggingService.cs" />
+    <Compile Include="Services\SiteInfo.cs" />
+    <Compile Include="Services\TradingInfoTracker.cs" />
+    <Compile Include="Utils\Utils.cs" />
+    <Compile Include="ValueObject.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abstract\MonitorControl.resx">
+      <DependentUpon>MonitorControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
