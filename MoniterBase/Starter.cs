@@ -106,8 +106,11 @@ namespace TradingLib.MoniterBase
             // Localized strings are automatically picked up when they are put into the
             // "data/resources" directory.
 
+            //ResourceService.RegisterNeutralStrings(new ResourceManager("TradingLib.MoniterControl.StringResources", exe));
+            //ResourceService.RegisterNeutralImages(new ResourceManager("TradingLib.MoniterControl.ImageResources", exe));
             ResourceService.RegisterNeutralStrings(new ResourceManager("TradingLib.MoniterBase.StringResources", exe));
             ResourceService.RegisterNeutralImages(new ResourceManager("TradingLib.MoniterBase.ImageResources", exe));
+
 
             LoggingService.Info("Looking for AddIns...");
             // Searches for ".addin" files in the application directory.

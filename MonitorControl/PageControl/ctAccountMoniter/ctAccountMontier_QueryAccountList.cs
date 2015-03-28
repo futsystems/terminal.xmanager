@@ -154,18 +154,19 @@ namespace TradingLib.MoniterControl
                 strFilter = string.Format(strFilter + " and " + AGENTMGRFK + " = '{0}'", filterArgs.AgentID);
             }
 
-            //登入
-            if (accLogin.Checked)
-            {
-                strFilter = string.Format(strFilter + " and " + LOGINSTATUS + " = '{0}'", getLoginStatus(true));
-            }
-            //持仓
-            if (acchodpos.Checked)
-            {
-                strFilter = string.Format(strFilter + " and " + HOLDSIZE + " > 0");
-            }
+            ////登入
+            //if (accLogin.Checked)
+            //{
+            //    strFilter = string.Format(strFilter + " and " + LOGINSTATUS + " = '{0}'", getLoginStatus(true));
+            //}
+            ////持仓
+            //if (acchodpos.Checked)
+            //{
+            //    strFilter = string.Format(strFilter + " and " + HOLDSIZE + " > 0");
+            //}
             //帐户检索
-            string acctstr = acct.Text;
+            //string acctstr = acct.Text;
+            string acctstr = string.Empty;
             if (!string.IsNullOrEmpty(acctstr))
             {
                 strFilter = string.Format(strFilter + " and " + ACCOUNT + " like '{0}*'", acctstr);
@@ -187,7 +188,7 @@ namespace TradingLib.MoniterControl
 
         void UpdateAccountNum()
         {
-            num.Text = accountgrid.Rows.Count.ToString();
+            //num.Text = accountgrid.Rows.Count.ToString();
         }
 
         #endregion

@@ -157,12 +157,36 @@
   <Path name = "/Workbench/Toolbar">
     <ToolbarItem id = "ViewAccount"
 		             tooltip = "查看帐户列表"
-		             icon = "Icons.New"
+		             icon = "Icons.ViewAccount"
 		             class = "TradingLib.MoniterBase.Command.ShowAccountListCommand"/>
     <ToolbarItem id = "ViewQuote"
 		             tooltip = "查看实时行情"
-		             icon = "Icons.Open"
+		             icon = "Icons.ViewQuote"
 		             class  = "TradingLib.MoniterBase.Command.ShowQuoteCommand"/>
+    
+    <ToolbarItem id = "ExpandViewCommand"
+		             tooltip = "扩展主视区"
+		             icon = "Icons.ViewExpand"
+		             class  = "TradingLib.MoniterBase.Command.ExpandViewCommand"/>
+    
+    <ToolbarItem id = "CollapseViewCommand"
+		             tooltip = "收缩主视区"
+		             icon = "Icons.ViewCollapse"
+		             class  = "TradingLib.MoniterBase.Command.CollapseViewCommand"/>
+
+    <ToolbarItem id = "ResetViewCommand"
+		             tooltip = "重置视区"
+		             icon = "Icons.ViewReset"
+		             class  = "TradingLib.MoniterBase.Command.ResetViewCommand"/>
+    
+    <ToolbarItem id = "Separator1" type = "Separator"/>
+    
+    <ToolbarItem id = "CollapseViewCommand"
+                 tooltip = "查看实时行情"
+                 icon = "Icons.FilterAccount"
+                 class  = "TradingLib.MoniterBase.Command.CollapseViewCommand"/>
+    
+    
   </Path>
   
 </AddIn>

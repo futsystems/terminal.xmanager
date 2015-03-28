@@ -111,6 +111,14 @@ namespace TradingLib.MoniterBase
             this.bottomContainer.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.mainContainer.Panel2.Controls.Add(this.bottomContainer);
             //this.mainContainer.Panel2.Controls.Add()
+
+            this.bottomContainer.Panel2MinSize = 270;
+            this.bottomContainer.SplitterDistance = this.Width - 300;
+            this.mainContainer.SplitterDistance = this.Height-350;
+            //SplitContainer s1 = new SplitContainer();
+            //s1.SplitterDistance
+
+            
         }
 
         public void ShowControl(string mcName)
@@ -129,6 +137,31 @@ namespace TradingLib.MoniterBase
                 Control ctl = controlmap[mcName.ToUpper()];
                 ctl.Visible = false;
             }
+        }
+
+        /// <summary>
+        /// 底部视区关闭
+        /// </summary>
+        public void CollapseBottom()
+        {
+            this.mainContainer.Panel2Collapsed = true;
+        }
+
+        /// <summary>
+        /// 底部视区打开
+        /// </summary>
+        public void ExpandBottom()
+        { 
+            this.mainContainer.Panel2Collapsed = false;
+        }
+
+        public void ResetView()
+        {
+            //this.mainContainer.Panel2Collapsed = false;
+            //this.mainContainer.Panel2.Height = (int)(this.Size.Height / 4);
+            //this.bottomContainer.Panel2.Width = 250;
+            this.bottomContainer.SplitterDistance = this.Width -  300;
+            this.mainContainer.SplitterDistance = this.Height - 350;
         }
 
         /// <summary>

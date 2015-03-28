@@ -707,6 +707,7 @@
     <EmbeddedResource Include="Forms\System\SettlementManager\fmUpdateSettlementPrice.resx">
       <DependentUpon>fmUpdateSettlementPrice.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ImageResources.resources" />
     <EmbeddedResource Include="PageControl\ctAccountMoniter\ctAccountMontier.resx">
       <DependentUpon>ctAccountMontier.cs</DependentUpon>
     </EmbeddedResource>
@@ -728,6 +729,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="StringResources.resources" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ICSharpCode.Core\ICSharpCode.Core.csproj">

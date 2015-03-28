@@ -73,11 +73,11 @@ namespace TradingLib.MoniterControl
         void WireEvents()
         {
             //交易帐户过滤控件
-            accLogin.CheckedChanged+=new EventHandler(accLogin_CheckedChanged);
-            acct.TextChanged+=new EventHandler(acct_TextChanged);
-            acchodpos.CheckedChanged +=new EventHandler(acchodpos_CheckedChanged);
+            //accLogin.CheckedChanged+=new EventHandler(accLogin_CheckedChanged);
+            //acct.TextChanged+=new EventHandler(acct_TextChanged);
+            //acchodpos.CheckedChanged +=new EventHandler(acchodpos_CheckedChanged);
             
-            btnAcctFilter.Click +=new EventHandler(btnAcctFilter_Click);
+            //btnAcctFilter.Click +=new EventHandler(btnAcctFilter_Click);
             //帐户表格事件
             accountgrid.CellDoubleClick +=new DataGridViewCellEventHandler(accountgrid_CellDoubleClick);//双击单元格
             accountgrid.CellFormatting +=new DataGridViewCellFormattingEventHandler(accountgrid_CellFormatting);//格式化单元格
@@ -90,7 +90,7 @@ namespace TradingLib.MoniterControl
             
 
             //绑定事件
-            btnAddAccount.Click += new EventHandler(btnAddAccount_Click);
+            //btnAddAccount.Click += new EventHandler(btnAddAccount_Click);
 
             CoreService.EventCore.RegIEventHandler(this);
         }
@@ -151,11 +151,12 @@ namespace TradingLib.MoniterControl
             fmAcctFilter fm = new fmAcctFilter();
             fm.SetFilterArgs(ref filterArgs);
             fm.FilterArgsChangedEvent += new VoidDelegate(fm_FilterArgsChangedEvent);
-            Point p = this.PointToScreen(btnAcctFilter.Location);
-            p.X = p.X + btnAcctFilter.Width + 5;
-            p.Y = p.Y + btnAcctFilter.Height + 5;
-            fm.Location = p;
-            fm.Show();
+
+            //Point p = this.PointToScreen(btnAcctFilter.Location);
+            //p.X = p.X + btnAcctFilter.Width + 5;
+            //p.Y = p.Y + btnAcctFilter.Height + 5;
+            //fm.Location = p;
+            //fm.Show();
         }
 
         void fm_FilterArgsChangedEvent()

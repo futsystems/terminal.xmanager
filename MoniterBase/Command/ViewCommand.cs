@@ -57,13 +57,35 @@ namespace TradingLib.MoniterBase.Command
         }
     }
 
-    public class HideCommand : AbstractMenuCommand
+
+
+    public class ExpandViewCommand : AbstractMenuCommand
     {
         public override void Run()
         {
-            Workbench workbench = (Workbench)this.Owner;
-            //MessageBox.Show("it is here");
-            workbench.HideControl("ACCOUNTMONITER");
+            Workbench workbench = Workbench.Instance;
+
+            workbench.CollapseBottom();
+        }
+    }
+
+    public class CollapseViewCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            Workbench workbench = Workbench.Instance;
+
+            workbench.ExpandBottom();
+        }
+    }
+
+    public class ResetViewCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            Workbench workbench = Workbench.Instance;
+
+            workbench.ResetView();
         }
     }
 

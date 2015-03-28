@@ -62,12 +62,12 @@ namespace TradingLib.MoniterControl
             if (CoreService.SiteInfo.ProductType == QSEnumProductType.VendorMoniter)
             {
                 //隐藏帐户过滤窗口以及其他过滤控件
-                btnAcctFilter.Visible = false;
-                accLogin.Visible = false;
-                acchodpos.Visible = false;
-                btnAddAccount.Text = "添加配资客户";
-                btnAddAccount.Width = 100;
-                btnAddAccount.Location = new System.Drawing.Point(btnAddAccount.Location.X - 40, btnAddAccount.Location.Y);
+                //btnAcctFilter.Visible = false;
+                //accLogin.Visible = false;
+                //acchodpos.Visible = false;
+                //btnAddAccount.Text = "添加配资客户";
+                //btnAddAccount.Width = 100;
+                //btnAddAccount.Location = new System.Drawing.Point(btnAddAccount.Location.X - 40, btnAddAccount.Location.Y);
 
                 //accountgrid.Columns[ACCOUNT].Visible = false;
                 accountgrid.Columns[ROUTEIMG].Visible = false;

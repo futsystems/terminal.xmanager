@@ -159,7 +159,7 @@ namespace TradingLib.MoniterControl
                 //设定当前选中帐号
                 accountselected = accountlite;
                 //更新选中lable
-                lbCurrentAccount.Text = accountlite.Account;
+                //lbCurrentAccount.Text = accountlite.Account;
 
                 //触发事件中继的帐户选择事件
                 CoreService.EventAccount.FireAccountSelectedEvent(accountlite);
