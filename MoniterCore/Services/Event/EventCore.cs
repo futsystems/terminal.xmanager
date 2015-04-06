@@ -72,6 +72,7 @@ namespace TradingLib.MoniterCore
                 {
                     IEventBinder h = control as IEventBinder;
                     //注册初始化完成事件响应函数 用于响应初始化完成事件 当对象在初始化完成之前创建 需要在完成初始化后 加载基础数据
+                    LogService.Debug("EventCore Register EventHandler:" + control.ToString());
                     RegisterInitializedCallBack(h.OnInit);
                     //将组件销毁的事件与对应的注销函数进行绑定
                     (control as Form).Disposed += (s, e) => { h.OnDisposed(); };

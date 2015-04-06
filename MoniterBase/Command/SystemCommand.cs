@@ -41,6 +41,7 @@ namespace TradingLib.MoniterBase.Command
         {
             fmInterface fm = new fmInterface();
             fm.ShowDialog();
+            fm.Close();
         }
     }
 
@@ -53,6 +54,7 @@ namespace TradingLib.MoniterBase.Command
         {
             fmDefaultConnector fm = new fmDefaultConnector();
             fm.ShowDialog();
+            fm.Close();
         }
     }
 
@@ -65,6 +67,7 @@ namespace TradingLib.MoniterBase.Command
         {
             fmCoreStatus fm = new fmCoreStatus();
             fm.ShowDialog();
+            fm.Close();
         }
     }
 
@@ -77,18 +80,48 @@ namespace TradingLib.MoniterBase.Command
         {
             fmTaskMoniter fm = new fmTaskMoniter();
             fm.ShowDialog();
+            fm.Close();
         }
     }
 
     /// <summary>
-    /// 结算管理
+    /// 托管分区管理
     /// </summary>
-    public class SettleManagerCommand : AbstractMenuCommand
+    public class HostedManagerCommand : AbstractMenuCommand
     {
         public override void Run()
         {
-            fmSettleManager fm = new fmSettleManager();
+            fmDomain fm = new fmDomain();
             fm.ShowDialog();
+            fm.Close();
         }
     }
+
+    /// <summary>
+    /// 修改管理员密码
+    /// </summary>
+    public class ChangePasswordCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            fmChangePasswordAgent fm = new fmChangePasswordAgent();
+            fm.ShowDialog();
+            fm.Close();
+        }
+    }
+
+    public class ExitCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            if (MoniterHelper.WindowConfirm("确认退出系统") == System.Windows.Forms.DialogResult.Yes)
+            {
+                Workbench workbench = (Workbench)this.Owner;
+                workbench.Close();
+            }
+        }
+    }
+
+
+    
 }

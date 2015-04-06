@@ -20,6 +20,7 @@ namespace TradingLib.MoniterBase.Command
         {
             fmHistQuery fm = new fmHistQuery();
             fm.ShowDialog();
+            fm.Close();
         }
     }
 
@@ -32,6 +33,7 @@ namespace TradingLib.MoniterBase.Command
         {
             fmHistQueryCashTrans fm = new fmHistQueryCashTrans();
             fm.ShowDialog();
+            fm.Close();
 
         }
     }
@@ -45,6 +47,7 @@ namespace TradingLib.MoniterBase.Command
         {
             fmSettlement fm = new fmSettlement();
             fm.ShowDialog();
+            fm.Close();
         }
     }
 }

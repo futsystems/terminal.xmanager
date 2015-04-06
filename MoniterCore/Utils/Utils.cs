@@ -8,6 +8,7 @@ namespace TradingLib.MoniterCore
 {
     public class MoniterUtil
     {
+        public static string AnyCBStr = "所有";
 
         /// <summary>
         /// 解析返回的Json数据到对象

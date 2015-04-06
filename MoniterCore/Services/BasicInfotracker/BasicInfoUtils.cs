@@ -62,15 +62,64 @@ namespace TradingLib.MoniterCore
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static ArrayList GetSecurityCombListViaExchange(this BasicInfoTracker info, int id)
+        public static ArrayList GetSecurityCombListViaExchange(this BasicInfoTracker info, int id,SecurityType type = SecurityType.NIL,bool any=false)
         {
             ArrayList list = new ArrayList();
-            foreach (SecurityFamilyImpl sec in info.Securities.Where(ex => (ex != null && ((ex.Exchange as Exchange).ID == id))).ToArray())
+            if (any)
             {
                 ValueObject<int> vo = new ValueObject<int>();
-                vo.Name = sec.Code + "-" + sec.Name;
-                vo.Value = sec.ID;
+                vo.Name = MoniterUtil.AnyCBStr;
+                vo.Value = 0;
                 list.Add(vo);
+            }
+            //未指定品种类型 则返回所有品种
+            if (type == SecurityType.NIL)
+            {
+                if (id == 0)
+                {
+                    foreach (SecurityFamilyImpl sec in info.Securities)
+                    {
+                        ValueObject<int> vo = new ValueObject<int>();
+                        vo.Name = sec.Code + "-" + sec.Name;
+                        vo.Value = sec.ID;
+                        list.Add(vo);
+                    }
+
+                }
+                else
+                {
+                    foreach (SecurityFamilyImpl sec in info.Securities.Where(ex => (ex != null && ((ex.Exchange as Exchange).ID == id))).ToArray())
+                    {
+                        ValueObject<int> vo = new ValueObject<int>();
+                        vo.Name = sec.Code + "-" + sec.Name;
+                        vo.Value = sec.ID;
+                        list.Add(vo);
+                    }
+                }
+            }
+            else
+            {
+                if (id == 0)
+                {
+                    foreach (SecurityFamilyImpl sec in info.Securities.Where(s=>s.Type == type))
+                    {
+                        ValueObject<int> vo = new ValueObject<int>();
+                        vo.Name = sec.Code + "-" + sec.Name;
+                        vo.Value = sec.ID;
+                        list.Add(vo);
+                    }
+
+                }
+                else
+                {
+                    foreach (SecurityFamilyImpl sec in info.Securities.Where(s => s.Type == type).Where(ex => (ex != null && ((ex.Exchange as Exchange).ID == id))).ToArray())
+                    {
+                        ValueObject<int> vo = new ValueObject<int>();
+                        vo.Name = sec.Code + "-" + sec.Name;
+                        vo.Value = sec.ID;
+                        list.Add(vo);
+                    }
+                }
             }
             return list;
         }
@@ -81,7 +130,7 @@ namespace TradingLib.MoniterCore
             if (isany)
             {
                 ValueObject<int> vo1 = new ValueObject<int>();
-                vo1.Name = "<Any>";
+                vo1.Name = MoniterUtil.AnyCBStr;
                 vo1.Value = 0;
                 list.Add(vo1);
             }
@@ -116,7 +165,7 @@ namespace TradingLib.MoniterCore
             if (isany)
             {
                 ValueObject<int> vo1 = new ValueObject<int>();
-                vo1.Name = "<Any>";
+                vo1.Name =MoniterUtil.AnyCBStr;
                 vo1.Value = 0;
                 list.Add(vo1);
             }
@@ -136,7 +185,7 @@ namespace TradingLib.MoniterCore
             if (isany)
             {
                 ValueObject<int> vo1 = new ValueObject<int>();
-                vo1.Name = "<Any>";
+                vo1.Name = MoniterUtil.AnyCBStr;
                 vo1.Value = 0;
                 list.Add(vo1);
             }
@@ -156,7 +205,7 @@ namespace TradingLib.MoniterCore
             if (isany)
             {
                 ValueObject<SecurityType> vo = new ValueObject<SecurityType>();
-                vo.Name = "Any";
+                vo.Name = MoniterUtil.AnyCBStr;
                 vo.Value = (SecurityType)(Enum.GetValues(typeof(SecurityType)).GetValue(0));
                 list.Add(vo);
             }
@@ -203,7 +252,7 @@ namespace TradingLib.MoniterCore
 
             if (all)
             {
-                list.Add(new ValueObject<int> { Name = "<Any>", Value = 0 });
+                list.Add(new ValueObject<int> { Name = MoniterUtil.AnyCBStr, Value = 0 });
             }
             //从柜员列表中获得管理员或代理域
             foreach (ManagerSetting m in info.Managers.Where(g => (g.Type == QSEnumManagerType.ROOT || g.Type == QSEnumManagerType.AGENT)))

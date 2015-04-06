@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<Resources Extension=".resources">
+  <Resource Name="Icons.Folder" Type="System.Drawing.Bitmap" FileName="D:\worktable\Futs.Moniter\XConsole\Resource\folder.png" Value="" />
+  <Resource Name="Icons.Folder_Sel" Type="System.Drawing.Bitmap" FileName="D:\worktable\Futs.Moniter\XConsole\Resource\folder_sel.png" Value="" />
+</Resources>

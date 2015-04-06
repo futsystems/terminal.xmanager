@@ -42,6 +42,17 @@ namespace TradingLib.MoniterCore
         
         }
 
+        /// <summary>
+        /// 启动行情连接
+        /// </summary>
+        public void StartTick()
+        {
+            if (connecton != null && connecton.IsConnected)
+            {
+                connecton.StartTick();
+            }
+        }
+
         public void Stop()
         {
             logger.Info("TLClientNet Stopping......");
@@ -50,7 +61,7 @@ namespace TradingLib.MoniterCore
                 connecton.Stop();
             }
             connecton = null;
-            
+            logger.Info("TLClientNet Stopped");
         }
 
         void BindConnectionEvent()
@@ -110,11 +121,11 @@ namespace TradingLib.MoniterCore
 
 
 
-        ILogicHandler handler = null;
-        public void BindLogicHandler(ILogicHandler h)
-        {
-            handler = h;
-        }
+        //ILogicHandler handler = null;
+        //public void BindLogicHandler(ILogicHandler h)
+        //{
+        //    handler = h;
+        //}
 
         //#region 功能函数
 

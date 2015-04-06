@@ -175,7 +175,7 @@ namespace TradingLib.MoniterCore
             }
             else
             {
-                this.handler.OnMGRSecurityAddResponse(response.SecurityFaimly, response.IsLast);
+                //this.handler.OnMGRSecurityAddResponse(response.SecurityFaimly, response.IsLast);
             }
         }
 
@@ -188,7 +188,7 @@ namespace TradingLib.MoniterCore
             }
             else
             {
-                this.handler.OnMGRSymbolAddResponse(response.Symbol, response.IsLast);
+                //this.handler.OnMGRSymbolAddResponse(response.Symbol, response.IsLast);
 
             }
         }
@@ -282,7 +282,7 @@ namespace TradingLib.MoniterCore
                     CliOnMGRSesssionUpdate(packet as NotifyMGRSessionUpdateNotify);
                     break;
                 case MessageTypes.MGRACCOUNTINFORESPONSE://管理 查询交易帐户信息
-                    CliOnMGRQryAccountInfo(packet as RspMGRQryAccountInfoResponse);
+                    //CliOnMGRQryAccountInfo(packet as RspMGRQryAccountInfoResponse);
                     break;
                 case MessageTypes.MGRACCOUNTCHANGEUPDATE://交易客户端更改通知
                     CliOnMGRAccountUpdate(packet as NotifyMGRAccountChangeUpdateResponse);
@@ -301,18 +301,18 @@ namespace TradingLib.MoniterCore
                     CliOnMGRSymbol(packet as RspMGRQrySymbolResponse);
                     break;
                 case MessageTypes.MGRRULECLASSRESPONSE://风控规则回报
-                    CliOnMGRRuleClass(packet as RspMGRQryRuleSetResponse);
+                    //CliOnMGRRuleClass(packet as RspMGRQryRuleSetResponse);
                     break;
 
 
                 case MessageTypes.MGRRULEITEMRESPONSE://帐户风控项目回报
-                    CliOnMGRRuleItem(packet as RspMGRQryRuleItemResponse);
+                    //CliOnMGRRuleItem(packet as RspMGRQryRuleItemResponse);
                     break;
                 case MessageTypes.MGRUPDATERULEITEMRESPONSE://帐户风控更新回报
-                    CliOnMGRUpdateRuleItem(packet as RspMGRUpdateRuleResponse);
+                    //CliOnMGRUpdateRuleItem(packet as RspMGRUpdateRuleResponse);
                     break;
                 case MessageTypes.MGRDELRULEITEMRESPONSE://删除风控项回报
-                    CliOnMGRDelRule(packet as RspMGRDelRuleItemResponse);
+                    //CliOnMGRDelRule(packet as RspMGRDelRuleItemResponse);
                     break;
                 //case MessageTypes.MGRSYSTEMSTATUSRESPONSE://查询系统状态回报
                 //    CliOnMGRystemStatus(packet as RspMGRQrySystemStatusResponse);

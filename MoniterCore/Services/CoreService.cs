@@ -114,12 +114,12 @@ namespace TradingLib.MoniterCore
 
         public static void InitClient(string address,int port)
         {
-            //if (defaultinstance._tlclient == null)
-            //{
+            if (defaultinstance._tlclient == null)
+            {
                 TLClientNet tlclient = new TLClientNet(new string[] { address }, port);
 
                 defaultinstance._tlclient = tlclient;
-            //}
+            }
             //else
             //{ 
                 
@@ -134,6 +134,16 @@ namespace TradingLib.MoniterCore
             {
                 return defaultinstance._tlclient;
             }
+        }
+
+        public static void Destory()
+        {
+            LogService.Debug("destory tlclient .........");
+            if (defaultinstance._tlclient != null)
+            {
+                TLClient.Stop();
+            }
+
         }
 
         EventCore _eventCore = null;

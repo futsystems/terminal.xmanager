@@ -40,15 +40,14 @@
             this.ckremberuser = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.lbLoginStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.btnExit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.imageheader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.servers)).BeginInit();
-            this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // imageheader
@@ -137,25 +136,6 @@
             this.kryptonManager1.GlobalPalette = this.kryptonPalette1;
             this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Custom;
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lbLoginStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 265);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
-            this.statusStrip1.Size = new System.Drawing.Size(406, 22);
-            this.statusStrip1.TabIndex = 32;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // lbLoginStatus
-            // 
-            this.lbLoginStatus.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.lbLoginStatus.Name = "lbLoginStatus";
-            this.lbLoginStatus.Size = new System.Drawing.Size(15, 17);
-            this.lbLoginStatus.Text = "--";
-            // 
             // kryptonPanel1
             // 
             this.kryptonPanel1.Controls.Add(this.btnExit);
@@ -170,7 +150,7 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 66);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(406, 199);
+            this.kryptonPanel1.Size = new System.Drawing.Size(406, 221);
             this.kryptonPanel1.TabIndex = 33;
             // 
             // btnExit
@@ -187,26 +167,24 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(406, 287);
             this.Controls.Add(this.kryptonPanel1);
-            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.imageheader);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LoginForm";
+            this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Blue;
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "系统登入";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.imageheader)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.servers)).EndInit();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -225,10 +203,9 @@
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox ckremberuser;
         private ComponentFactory.Krypton.Toolkit.KryptonPalette kryptonPalette1;
         private ComponentFactory.Krypton.Toolkit.KryptonManager kryptonManager1;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel lbLoginStatus;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnExit;
+        private System.Windows.Forms.BindingSource bindingSource1;
         //private Telerik.WinControls.Themes.Windows8Theme windows8Theme1;
     }
 }

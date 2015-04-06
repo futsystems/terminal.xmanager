@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingLib.MoniterBase", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingLib.MoniterCore", "MoniterCore\TradingLib.MoniterCore.csproj", "{AA41EFFA-887D-4C4D-8BE4-91B08C98FF42}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutsMoniter", "..\..\Futs.base\Program\FutsMoniter\FutsMoniter.csproj", "{908E3D8C-A9D0-4296-91B7-EB8909A66CB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,6 +133,26 @@ Global
 		{AA41EFFA-887D-4C4D-8BE4-91B08C98FF42}.Release-OEM|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{AA41EFFA-887D-4C4D-8BE4-91B08C98FF42}.Release-OEM|Mixed Platforms.Build.0 = Release|Any CPU
 		{AA41EFFA-887D-4C4D-8BE4-91B08C98FF42}.Release-OEM|x86.ActiveCfg = Release|Any CPU
+		{908E3D8C-A9D0-4296-91B7-EB8909A66CB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{908E3D8C-A9D0-4296-91B7-EB8909A66CB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{908E3D8C-A9D0-4296-91B7-EB8909A66CB8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{908E3D8C-A9D0-4296-91B7-EB8909A66CB8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{908E3D8C-A9D0-4296-91B7-EB8909A66CB8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{908E3D8C-A9D0-4296-91B7-EB8909A66CB8}.Debug-OEM|Any CPU.ActiveCfg = Debug-OEM|Any CPU
+		{908E3D8C-A9D0-4296-91B7-EB8909A66CB8}.Debug-OEM|Any CPU.Build.0 = Debug-OEM|Any CPU
+		{908E3D8C-A9D0-4296-91B7-EB8909A66CB8}.Debug-OEM|Mixed Platforms.ActiveCfg = Debug-OEM|Any CPU
+		{908E3D8C-A9D0-4296-91B7-EB8909A66CB8}.Debug-OEM|Mixed Platforms.Build.0 = Debug-OEM|Any CPU
+		{908E3D8C-A9D0-4296-91B7-EB8909A66CB8}.Debug-OEM|x86.ActiveCfg = Debug-OEM|Any CPU
+		{908E3D8C-A9D0-4296-91B7-EB8909A66CB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{908E3D8C-A9D0-4296-91B7-EB8909A66CB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{908E3D8C-A9D0-4296-91B7-EB8909A66CB8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{908E3D8C-A9D0-4296-91B7-EB8909A66CB8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{908E3D8C-A9D0-4296-91B7-EB8909A66CB8}.Release|x86.ActiveCfg = Release|Any CPU
+		{908E3D8C-A9D0-4296-91B7-EB8909A66CB8}.Release-OEM|Any CPU.ActiveCfg = Release-OEM|Any CPU
+		{908E3D8C-A9D0-4296-91B7-EB8909A66CB8}.Release-OEM|Any CPU.Build.0 = Release-OEM|Any CPU
+		{908E3D8C-A9D0-4296-91B7-EB8909A66CB8}.Release-OEM|Mixed Platforms.ActiveCfg = Release-OEM|Any CPU
+		{908E3D8C-A9D0-4296-91B7-EB8909A66CB8}.Release-OEM|Mixed Platforms.Build.0 = Release-OEM|Any CPU
+		{908E3D8C-A9D0-4296-91B7-EB8909A66CB8}.Release-OEM|x86.ActiveCfg = Release-OEM|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

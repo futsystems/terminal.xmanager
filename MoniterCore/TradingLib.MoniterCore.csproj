@@ -110,13 +110,6 @@
     <Compile Include="Client\TLClientNet_PacketHandler_Contrib.cs" />
     <Compile Include="Common\HandlerInfo.cs" />
     <Compile Include="Common\SplashScreenApplication.cs" />
-    <Compile Include="ILogicHandler\ILogicHandler.cs" />
-    <Compile Include="ILogicHandler\ILogicHandler_.cs" />
-    <Compile Include="ILogicHandler\ILogicHandler_Account.cs" />
-    <Compile Include="ILogicHandler\ILogicHandler_Basic.cs" />
-    <Compile Include="ILogicHandler\ILogicHandler_Contrib.cs" />
-    <Compile Include="ILogicHandler\ILogicHandler_Rule.cs" />
-    <Compile Include="ILogicHandler\ILogicHandler_Trading.cs" />
     <Compile Include="MonitorPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BasicInfotracker\BasicInfoTracker.cs" />

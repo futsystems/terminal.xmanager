@@ -66,11 +66,11 @@ namespace TradingLib.MoniterCore
         /// 查询交易帐户信息
         /// </summary>
         /// <param name="response"></param>
-        void CliOnMGRQryAccountInfo(RspMGRQryAccountInfoResponse response)
-        {
-            //logger.Info("got mgr account info response:" + response.ToString());
-            this.handler.OnAccountInfo(response.AccountInfoToSend);
-        }
+        //void CliOnMGRQryAccountInfo(RspMGRQryAccountInfoResponse response)
+        //{
+        //    //logger.Info("got mgr account info response:" + response.ToString());
+        //    //this.handler.OnAccountInfo(response.AccountInfoToSend);
+        //}
 
 
     }

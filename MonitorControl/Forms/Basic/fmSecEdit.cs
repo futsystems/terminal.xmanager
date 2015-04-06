@@ -19,8 +19,8 @@ namespace TradingLib.MoniterControl
         {
             InitializeComponent();
 
-            MoniterHelper.AdapterToIDataSource(currency).BindDataSource(MoniterHelper.GetEnumValueObjects<CurrencyType>());
-            MoniterHelper.AdapterToIDataSource(securitytype).BindDataSource(MoniterHelper.GetEnumValueObjects<SecurityType>());
+            //MoniterHelper.AdapterToIDataSource(currency).BindDataSource(MoniterHelper.GetEnumValueObjects<CurrencyType>());
+            //MoniterHelper.AdapterToIDataSource(securitytype).BindDataSource(MoniterHelper.GetEnumValueObjects<SecurityType>());
             MoniterHelper.AdapterToIDataSource(exchange).BindDataSource(CoreService.BasicInfoTracker.GetExchangeCombList());
             MoniterHelper.AdapterToIDataSource(underlay).BindDataSource(CoreService.BasicInfoTracker.GetSecurityCombList(true));
             MoniterHelper.AdapterToIDataSource(markettime).BindDataSource(CoreService.BasicInfoTracker.GetMarketTimeCombList());
@@ -42,8 +42,8 @@ namespace TradingLib.MoniterControl
                 _sec = value;
                 code.Text = _sec.Code;
                 name.Text = _sec.Name;
-                currency.SelectedValue = _sec.Currency;
-                securitytype.SelectedValue = _sec.Type;
+                //currency.SelectedValue = _sec.Currency;
+                //securitytype.SelectedValue = _sec.Type;
 
                 multiple.Value = _sec.Multiple;
                 pricetick.Value = _sec.PriceTick;
@@ -68,8 +68,8 @@ namespace TradingLib.MoniterControl
                 //
                 _sec.Code = code.Text;
                 _sec.Name = name.Text;
-                _sec.Currency = (CurrencyType)currency.SelectedValue;
-                _sec.Type = (SecurityType)securitytype.SelectedValue;
+                _sec.Currency = CurrencyType.RMB;// (CurrencyType)currency.SelectedValue;
+                _sec.Type = SecurityType.FUT;// (SecurityType)securitytype.SelectedValue;
 
                 _sec.Multiple = (int)multiple.Value;
                 _sec.PriceTick = pricetick.Value;
@@ -92,8 +92,8 @@ namespace TradingLib.MoniterControl
                 target.ID = 0;//0标识新增 数据库ID非0
                 target.Code = code.Text;
                 target.Name = name.Text;
-                target.Currency = (CurrencyType)currency.SelectedValue;
-                target.Type = (SecurityType)securitytype.SelectedValue;
+                target.Currency = CurrencyType.RMB;// (CurrencyType)currency.SelectedValue;
+                target.Type = SecurityType.FUT;// (SecurityType)securitytype.SelectedValue;
 
                 target.Multiple = (int)multiple.Value;
                 target.PriceTick = pricetick.Value;

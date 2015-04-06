@@ -124,11 +124,23 @@
   <data name="account_stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resource\account_stop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="close_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\close_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="connect" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resource\connect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="disconnect" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resource\disconnect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_sel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\folder_sel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="items" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\items.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="loss" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resource\loss.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

@@ -51,7 +51,7 @@ namespace TradingLib.MoniterControl
             foreach (TradingLib.Mixins.Json.JsonData connector in data)
             {
                 ValueObject<int> vo = new ValueObject<int>();
-                vo.Name = string.Format("{0}-{1}", connector["Token"].ToString(), connector["LoginID"].ToString());
+                vo.Name = string.Format("{0}-{1}", connector["UserName"].ToString(), connector["LoginID"].ToString());
                 vo.Value = int.Parse(connector["ConnectorID"].ToString());
                 list.Add(vo);
                 //CoreService.Debug("????????????????? got avabile list:" + connector["Token"].ToString());

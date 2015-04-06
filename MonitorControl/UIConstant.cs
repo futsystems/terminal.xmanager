@@ -18,5 +18,7 @@ namespace TradingLib.MoniterControl
         public static System.Drawing.Font BoldFont = new Font("微软雅黑", 9, FontStyle.Bold);
         public static System.Drawing.Font DefaultFont = new Font("微软雅黑", 9, FontStyle.Regular);
         public static System.Windows.Forms.Form MainForm = null;
+
+        //public static string AnyCBStr = "所有";
     }
 }

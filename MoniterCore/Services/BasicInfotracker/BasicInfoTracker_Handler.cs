@@ -374,6 +374,8 @@ namespace TradingLib.MoniterCore
                 logger.Info("        Manager num:" + this.Managers.Count().ToString());
                 logger.Info("    RouterGroup num:" + this.RouterGroups.Count().ToString());
                 logger.Info("        Account num:" + this.Accounts.Count().ToString());
+
+                CoreService.TLClient.StartTick();
                 //触发数据初始化完成事件
                 CoreService.EventCore.FireInitializedEvent();
             }

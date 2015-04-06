@@ -16,16 +16,53 @@ namespace TradingLib.MoniterControl
 {
     public partial class fmAcctFilter : ComponentFactory.Krypton.Toolkit.KryptonForm,IEventBinder
     {
-        public event VoidDelegate FilterArgsChangedEvent;
-        public fmAcctFilter()
+        static fmAcctFilter instance;
+
+        public static fmAcctFilter Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
+
+        static fmAcctFilter()
+        {
+            instance = new fmAcctFilter();
+
+            int ScreenWidth = Screen.PrimaryScreen.WorkingArea.Width;
+            int ScreenHeight = Screen.PrimaryScreen.WorkingArea.Height;
+            //计算窗体显示的坐标值，可以根据需要微调几个像素
+            int x = ScreenWidth - instance.Width - 5;
+            int y = ScreenHeight - instance.Height - 300;
+
+            instance.Location = new Point(x, y);
+        }
+
+
+        //public event VoidDelegate FilterArgsChangedEvent;
+
+        private  fmAcctFilter()
         {
             InitializeComponent();
-            accexecute.Items.Add("<Any>");
+            accexecute.Items.Add("<所有>");
             accexecute.Items.Add("允许");
             accexecute.Items.Add("冻结");
             accexecute.SelectedIndex = 0;
+
+            macctconnected.Items.Add("<所有>");
+            macctconnected.Items.Add("<连接>");
+            macctconnected.Items.Add("<断开>");
+            macctconnected.SelectedIndex = 0;
+
+            macctbinded.Items.Add("<所有>");
+            macctbinded.Items.Add("<分配>");
+            macctbinded.Items.Add("<未分配>");
+            macctbinded.SelectedIndex = 0;
+
             this.Load += new EventHandler(fmAcctFilter_Load);
         }
+
         /// <summary>
         /// 所有ct组件初始化完毕后才会调用OnInit 这样才可以正常的将参数显示到界面 如果组件没有OnInit成功，则对应的SelectedValue无法正常的显示到界面
         /// </summary>
@@ -75,46 +112,90 @@ namespace TradingLib.MoniterControl
         { 
             
         }
-        FilterArgs _args = null;
+
+        FilterArgs _args = ControlService.FilterArgs;
         /// <summary>
         /// 设定过滤参数
         /// </summary>
         /// <param name="args"></param>
-        internal void SetFilterArgs(ref FilterArgs args)
-        {
-            _args = args;
-        }
+        //internal void SetFilterArgs(ref FilterArgs args)
+        //{
+        //    _args = args;
+        //}
+
         void fmAcctFilter_Load(object sender, EventArgs e)
         {
-            this.Deactivate += new EventHandler(fmAcctFilter_Deactivate);
+            //this.Deactivate += new EventHandler(fmAcctFilter_Deactivate);
 
             accexecute.SelectedIndexChanged += new EventHandler(accexecute_SelectedIndexChanged);
             ctAccountType1.AccountTypeSelectedChangedEvent += new VoidDelegate(ctAccountType1_AccountTypeSelectedChangedEvent);
             ctAgentList1.AgentSelectedChangedEvent += new VoidDelegate(ctAgentList1_AgentSelectedChangedEvent);
             ctRouterType1.RouterTypeSelectedChangedEvent += new VoidDelegate(ctRouterType1_RouterTypeSelectedChangedEvent);
             ctRouterGroupList1.RouterGroupSelectedChangedEvent += new VoidDelegate(ctRouterGroupList1_RouterGroupSelectedChangedEvent);
-            //kryptonPanel1.Paint += new PaintEventHandler(kryptonPanel1_Paint);
+            macctbinded.SelectedIndexChanged += new EventHandler(macctbinded_SelectedIndexChanged);
+            macctconnected.SelectedIndexChanged += new EventHandler(macctconnected_SelectedIndexChanged);
+            account.TextChanged += new EventHandler(account_TextChanged);
             
             CoreService.EventCore.RegIEventHandler(this);
+
+            this.kryptonPanel1.MouseDown += new MouseEventHandler(kryptonPanel1_MouseDown);
+            this.kryptonPanel1.MouseUp += new MouseEventHandler(kryptonPanel1_MouseUp);
+            this.kryptonPanel1.MouseMove += new MouseEventHandler(kryptonPanel1_MouseMove);
+
+            closeimg.Click += new EventHandler(closeimg_Click);
+
+            this.FormClosing += new FormClosingEventHandler(fmAcctFilter_FormClosing);
         }
 
-        //void kryptonPanel1_Paint(object sender, PaintEventArgs e)
-        //{
-        //    ControlPaint.DrawBorder(e.Graphics,
-        //                        kryptonPanel1.ClientRectangle,
-        //                        Color.LightSeaGreen,         //left
-        //                       5,
-        //                        ButtonBorderStyle.Solid,
-        //                        Color.LightSeaGreen,         //top
-        //                        5,
-        //                        ButtonBorderStyle.Solid,
-        //                        Color.LightSeaGreen,        //right
-        //                        5,
-        //                        ButtonBorderStyle.Solid,
-        //                        Color.LightSeaGreen,        //bottom
-        //                        5,
-        //                        ButtonBorderStyle.Solid);
-        //}
+
+
+        void fmAcctFilter_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+
+        void closeimg_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+
+
+        #region 鼠标移动窗体
+        private bool m_isMouseDown = false;
+        private Point m_mousePos = new Point();
+
+        void kryptonPanel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+            if (m_isMouseDown)
+            {
+                Point tempPos = Cursor.Position;
+                this.Location = new Point(Location.X + (tempPos.X - m_mousePos.X), Location.Y + (tempPos.Y - m_mousePos.Y));
+                m_mousePos = Cursor.Position;
+            }
+        }
+
+        void kryptonPanel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+            m_isMouseDown = false;
+        }
+
+        void kryptonPanel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+            m_mousePos = Cursor.Position;
+            m_isMouseDown = true;
+        }
+        #endregion
+
+        void account_TextChanged(object sender, EventArgs e)
+        {
+            _args.AcctFilter = account.Text;
+            FilterAccount();
+        }
 
         void ctRouterGroupList1_RouterGroupSelectedChangedEvent()
         {
@@ -130,6 +211,37 @@ namespace TradingLib.MoniterControl
             FilterAccount();
         }
 
+        void macctconnected_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (macctconnected.SelectedIndex == 0)
+            {
+                _args.MAcctConnectedEnable = false;
+            }
+            else
+            {
+                _args.MAcctConnectedEnable = true;
+                _args.MAcctConnected = macctconnected.SelectedIndex == 1 ? true : false;
+            }
+            FilterAccount();
+        }
+
+
+
+        void macctbinded_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (macctbinded.SelectedIndex == 0)
+            {
+                _args.MAcctBindedEnable = false;
+            }
+            else
+            {
+                _args.MAcctBindedEnable = true;
+                _args.MAcctBinded = macctbinded.SelectedIndex == 1 ? true : false;
+            }
+            FilterAccount();
+        }
+
+
         void ctRouterType1_RouterTypeSelectedChangedEvent()
         {
             if (ctRouterType1.SelectedIndex == 0)
@@ -143,8 +255,6 @@ namespace TradingLib.MoniterControl
             }
             FilterAccount();
         }
-
-
 
         void ctAgentList1_AgentSelectedChangedEvent()
         {
@@ -198,8 +308,9 @@ namespace TradingLib.MoniterControl
         /// </summary>
         void FilterAccount()
         {
-            if (FilterArgsChangedEvent!=null)
-                FilterArgsChangedEvent();
+            ControlService.FireFilterArgsChangeEvent();
+            //if (FilterArgsChangedEvent!=null)
+            //    FilterArgsChangedEvent();
         }
     }
 }

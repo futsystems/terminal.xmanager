@@ -59,12 +59,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Command\BasicInfoCommand.cs" />
+    <Compile Include="Command\ConditionEvaluator.cs" />
+    <Compile Include="Command\HelpCommand.cs" />
     <Compile Include="Command\ManagerCommand.cs" />
     <Compile Include="Command\AccountCommand.cs" />
     <Compile Include="Command\ReportCommand.cs" />
     <Compile Include="Command\SystemCommand.cs" />
+    <Compile Include="Command\ToolsCommand.cs" />
     <Compile Include="EnumControlLocation.cs" />
     <Compile Include="Command\ViewCommand.cs" />
+    <Compile Include="fmHelp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fmHelp.Designer.cs">
+      <DependentUpon>fmHelp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +97,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="fmHelp.resx">
+      <DependentUpon>fmHelp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

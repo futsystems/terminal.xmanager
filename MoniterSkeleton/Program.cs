@@ -110,6 +110,8 @@ namespace MoniterSkeleton
                 {
                     // Save changed properties
                     PropertyService.Save();
+
+                    
                 }
                 catch (Exception ex)
                 {

@@ -41,7 +41,7 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(737, 524);
+            this.kryptonPanel1.Size = new System.Drawing.Size(506, 524);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // configgrid
@@ -51,20 +51,21 @@
             this.configgrid.Location = new System.Drawing.Point(0, 0);
             this.configgrid.Name = "configgrid";
             this.configgrid.RowTemplate.Height = 23;
-            this.configgrid.Size = new System.Drawing.Size(737, 524);
+            this.configgrid.Size = new System.Drawing.Size(506, 524);
             this.configgrid.TabIndex = 1;
             // 
             // fmConnectorManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(737, 524);
+            this.ClientSize = new System.Drawing.Size(506, 524);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "fmConnectorManager";
-            this.Text = "主帐户管理";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "主帐户列表";
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.configgrid)).EndInit();

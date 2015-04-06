@@ -169,7 +169,7 @@ namespace TradingLib.MoniterControl
             if (any)
             {
                 ValueObject<QSEnumAccountCategory> vo = new ValueObject<QSEnumAccountCategory>();
-                vo.Name = "<Any>";
+                vo.Name = MoniterUtil.AnyCBStr;
                 vo.Value = (QSEnumAccountCategory)(-1);
                 list.Add(vo);
             }
@@ -200,7 +200,7 @@ namespace TradingLib.MoniterControl
             if (any)
             {
                 ValueObject<QSEnumOrderTransferType> vo = new ValueObject<QSEnumOrderTransferType>();
-                vo.Name = "<Any>";
+                vo.Name = MoniterUtil.AnyCBStr;
                 vo.Value = (QSEnumOrderTransferType)(-1);
                 list.Add(vo);
             }
@@ -286,7 +286,7 @@ namespace TradingLib.MoniterControl
             if (any)
             {
                 ValueObject<int> vo = new ValueObject<int>();
-                vo.Name = "<Any>";
+                vo.Name = MoniterUtil.AnyCBStr;
                 vo.Value = 0;
                 list.Add(vo);
             }
@@ -336,7 +336,7 @@ namespace TradingLib.MoniterControl
             if (isany)
             {
                 ValueObject<T> vo = new ValueObject<T>();
-                vo.Name = "<Any>";
+                vo.Name = MoniterUtil.AnyCBStr;
                 vo.Value = (T)(Enum.GetValues(typeof(T)).GetValue(0));
                 list.Add(vo);
             }

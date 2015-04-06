@@ -25,7 +25,7 @@ namespace TradingLib.MoniterBase
         {
             //没有更新我们返回false 程序正常运行
             Updater update = new Updater();
-            if (update.Detect())
+            if (false)
             {
                 update.Update("Moniter.exe", true);
                 return true;
@@ -135,8 +135,8 @@ namespace TradingLib.MoniterBase
             LoggingService.Info("Initializing Workbench...");
             // Workbench is our class from the base project, this method creates an instance
             // of the main form.
+            //Workbench.InitializeWorkbench();
             Workbench.InitializeWorkbench();
-
             
         }
         protected override void SetSeconds()

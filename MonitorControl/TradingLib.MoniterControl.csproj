@@ -165,8 +165,12 @@
       <DependentUpon>ctHistTrade.cs</DependentUpon>
     </Compile>
     <Compile Include="Command\CashViewType.cs" />
+    <Compile Include="Command\ConditionEvaluator.cs" />
     <Compile Include="Command\MotherAccountCommand.cs" />
+    <Compile Include="Common\FilterArgs.cs" />
+    <Compile Include="Common\JsonProtocolFinService.cs" />
     <Compile Include="ContribProtocol\ProtocolLogServer.cs" />
+    <Compile Include="ControlService.cs" />
     <Compile Include="ctDebug.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -179,6 +183,12 @@
     </Compile>
     <Compile Include="DemoControl.Designer.cs">
       <DependentUpon>DemoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Account\fmAddAccount.cs">
       <SubType>Form</SubType>
@@ -222,11 +232,11 @@
     <Compile Include="Forms\Account\fmChangeRouter.Designer.cs">
       <DependentUpon>fmChangeRouter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Account\fmConnectorAccountInfo.cs">
+    <Compile Include="Forms\Account\fmMainAccountManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Account\fmConnectorAccountInfo.Designer.cs">
-      <DependentUpon>fmConnectorAccountInfo.cs</DependentUpon>
+    <Compile Include="Forms\Account\fmMainAccountManager.Designer.cs">
+      <DependentUpon>fmMainAccountManager.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Account\fmEditVendorFlatRule.cs">
       <SubType>Form</SubType>
@@ -324,6 +334,24 @@
     <Compile Include="Forms\Contrib\fmInsertTrade.Designer.cs">
       <DependentUpon>fmInsertTrade.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Domain\fmDomain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Domain\fmDomain.Designer.cs">
+      <DependentUpon>fmDomain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Domain\fmDomainEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Domain\fmDomainEdit.Designer.cs">
+      <DependentUpon>fmDomainEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Domain\fmDomainInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Domain\fmDomainInfo.Designer.cs">
+      <DependentUpon>fmDomainInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmLoginInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -372,10 +400,10 @@
     <Compile Include="Forms\System\ConnectorManager\fmConnectorManager.Designer.cs">
       <DependentUpon>fmConnectorManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\System\fmConnectorEdit.cs">
+    <Compile Include="Forms\System\ConnectorManager\fmConnectorEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\System\fmConnectorEdit.Designer.cs">
+    <Compile Include="Forms\System\ConnectorManager\fmConnectorEdit.Designer.cs">
       <DependentUpon>fmConnectorEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\System\fmCoreStatus.cs">
@@ -476,7 +504,7 @@
     <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier_OnXXXXX.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier_QueryAccountList.cs">
+    <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier_FilterAccountList.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier_UpdateAccountInfo.cs">
@@ -575,6 +603,9 @@
     <EmbeddedResource Include="Abstract\MonitorControl.resx">
       <DependentUpon>MonitorControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\fmAddAccount.resx">
       <DependentUpon>fmAddAccount.cs</DependentUpon>
     </EmbeddedResource>
@@ -596,8 +627,8 @@
     <EmbeddedResource Include="Forms\Account\fmChangeRouter.resx">
       <DependentUpon>fmChangeRouter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Account\fmConnectorAccountInfo.resx">
-      <DependentUpon>fmConnectorAccountInfo.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Account\fmMainAccountManager.resx">
+      <DependentUpon>fmMainAccountManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\fmEditVendorFlatRule.resx">
       <DependentUpon>fmEditVendorFlatRule.cs</DependentUpon>
@@ -647,6 +678,15 @@
     <EmbeddedResource Include="Forms\Contrib\fmInsertTrade.resx">
       <DependentUpon>fmInsertTrade.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Domain\fmDomain.resx">
+      <DependentUpon>fmDomain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Domain\fmDomainEdit.resx">
+      <DependentUpon>fmDomainEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Domain\fmDomainInfo.resx">
+      <DependentUpon>fmDomainInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmLoginInfo.resx">
       <DependentUpon>fmLoginInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -671,7 +711,7 @@
     <EmbeddedResource Include="Forms\System\ConnectorManager\fmConnectorManager.resx">
       <DependentUpon>fmConnectorManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\System\fmConnectorEdit.resx">
+    <EmbeddedResource Include="Forms\System\ConnectorManager\fmConnectorEdit.resx">
       <DependentUpon>fmConnectorEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\System\fmCoreStatus.resx">
@@ -707,6 +747,7 @@
     <EmbeddedResource Include="Forms\System\SettlementManager\fmUpdateSettlementPrice.resx">
       <DependentUpon>fmUpdateSettlementPrice.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ImageFolder.resources" />
     <EmbeddedResource Include="ImageResources.resources" />
     <EmbeddedResource Include="PageControl\ctAccountMoniter\ctAccountMontier.resx">
       <DependentUpon>ctAccountMontier.cs</DependentUpon>
@@ -772,9 +813,14 @@
     <Content Include="AddIns\MoniterControl.addin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resource\items.png" />
+    <None Include="Resource\folder.png" />
+    <None Include="Resource\folder_sel.png" />
+    <None Include="Resource\close_16.png" />
     <None Include="Resource\connect.png" />
     <None Include="Resource\disconnect.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

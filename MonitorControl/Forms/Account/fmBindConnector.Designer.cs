@@ -68,7 +68,7 @@
             // 
             this.kryptonLabel2.Location = new System.Drawing.Point(21, 55);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(75, 20);
+            this.kryptonLabel2.Size = new System.Drawing.Size(82, 18);
             this.kryptonLabel2.TabIndex = 5;
             this.kryptonLabel2.Values.Text = "可用主帐户:";
             // 
@@ -95,7 +95,7 @@
             // 
             this.cutrgname.Location = new System.Drawing.Point(109, 15);
             this.cutrgname.Name = "cutrgname";
-            this.cutrgname.Size = new System.Drawing.Size(20, 20);
+            this.cutrgname.Size = new System.Drawing.Size(19, 18);
             this.cutrgname.TabIndex = 2;
             this.cutrgname.Values.Text = "--";
             // 
@@ -103,7 +103,7 @@
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(21, 15);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(75, 20);
+            this.kryptonLabel1.Size = new System.Drawing.Size(82, 18);
             this.kryptonLabel1.TabIndex = 1;
             this.kryptonLabel1.Values.Text = "当前主帐户:";
             // 
@@ -118,7 +118,7 @@
             this.MinimizeBox = false;
             this.Name = "fmBindConnector";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "绑定主帐户";
+            this.Text = "设定主帐户";
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();

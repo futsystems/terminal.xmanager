@@ -171,7 +171,7 @@
             this.MinimizeBox = false;
             this.Name = "fmLogTaskEvent";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "任务运行日志";
+            this.Text = "任务日志";
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();

@@ -340,13 +340,13 @@ namespace TradingLib.MoniterControl
         {
             if (status == QSEnumConnectorStatus.Start)
             {
-                return (Image)Properties.Resources.online;
+                return (Image)Properties.Resources.connect;
             }
             else if (status == QSEnumConnectorStatus.Stop)
             {
-                return (Image)Properties.Resources.offline;
+                return (Image)Properties.Resources.disconnect;
             }
-            return (Image)Properties.Resources.offline;
+            return (Image)Properties.Resources.disconnect;
         }
 
 
@@ -439,12 +439,12 @@ namespace TradingLib.MoniterControl
         const string USR1 = "参数1/U";
         const string USR2 = "参数2/U";
         const string INTERFACE = "接口";
-        const string TOKEN = "标识";
-        const string NAME = "名称";
+        const string TOKEN = "主帐户编号";
+        const string NAME = "投资者姓名";
         //const string VENDORACCOUNT = "实盘帐户";
         const string ISBINDED = "Binded";
         const string CONSTATUS = "status";
-        const string CONSTATUSIMG = "状态";
+        const string CONSTATUSIMG = "连接";
         #endregion
 
         DataTable gt = new DataTable();
@@ -640,13 +640,15 @@ namespace TradingLib.MoniterControl
             grid.Columns[SRVPORT].Visible = false;
             grid.Columns[ISBINDED].Visible = false;
             grid.Columns[CONSTATUS].Visible = false;
+            grid.Columns[ID].Visible = false;
+            grid.Columns[INTERFACE].Visible = false;
 
-            grid.Columns[ID].Width = 50;
+            //grid.Columns[ID].Width = 50;
 
-            grid.Columns[TOKEN].Width = 100;
-            grid.Columns[NAME].Width = 130;
-            grid.Columns[USERID].Width = 100;
-            grid.Columns[INTERFACE].Width = 150;
+            grid.Columns[TOKEN].Width = 80;
+            grid.Columns[NAME].Width = 100;
+            grid.Columns[USERID].Width = 150;
+            //grid.Columns[INTERFACE].Width = 150;
             grid.Columns[CONSTATUSIMG].Width = 40;
         }
 

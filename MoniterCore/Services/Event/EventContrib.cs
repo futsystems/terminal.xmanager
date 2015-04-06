@@ -40,7 +40,7 @@ namespace TradingLib.MoniterCore
             {
                 callbackmap.TryAdd(key, new List<Action<string, bool>>());
             }
-
+            LogService.Debug("EventContrib RegisterCallback:" + key);
             callbackmap[key].Add(del);
 
         }
@@ -80,6 +80,9 @@ namespace TradingLib.MoniterCore
             {
                 callbackmap.TryAdd(key, new List<Action<string, bool>>());
             }
+
+            LogService.Debug("EventContrib UnRegisterCallback:" + key);
+
             if (callbackmap[key].Contains(del))
             {
                 callbackmap[key].Remove(del);

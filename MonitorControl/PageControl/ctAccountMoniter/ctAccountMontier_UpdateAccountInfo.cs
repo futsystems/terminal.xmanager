@@ -37,7 +37,7 @@ namespace TradingLib.MoniterControl
         const string LASTEQUITY = "昨日权益";
         const string NOWEQUITY = "当前权益";
         const string CREDIT = "优先资金";
-        const string TOTALEQUITY = "帐户总权益";
+        const string TOTALEQUITY = "总权益";
 
         const string MARGIN = "保证金";
         const string FROZENMARGIN = "冻结保证金";
@@ -65,7 +65,8 @@ namespace TradingLib.MoniterControl
         const string DELETE = "DELETE";
         const string ROUTERGROUP = "Group";
         const string ROUTERGROUPSTR = "路由组";
-        const string MAINACCOUNT = "主帐户编号";
+        const string MAINACCOUNT = "主帐户";
+        const string MAINACCOUNTBINDED = "主帐户是否绑定";
         const string MAINACCTRISKRULE = "强平规则";
 
 
@@ -131,8 +132,9 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(AGENTMGRFK);//21
             gt.Columns.Add(ROUTERGROUP);
             gt.Columns.Add(ROUTERGROUPSTR);
-            gt.Columns.Add(MAINACCOUNT);//
 
+            gt.Columns.Add(MAINACCOUNT);//
+            gt.Columns.Add(MAINACCOUNTBINDED);//是否绑定
             gt.Columns.Add(MAINACCTRISKRULE);
 
             gt.Columns.Add(MACTCONNSTATUS);
@@ -168,6 +170,7 @@ namespace TradingLib.MoniterControl
             accountgrid.Columns[DELETE].Visible = false;
             accountgrid.Columns[ROUTERGROUP].Visible = false;
             accountgrid.Columns[MACTCONNSTATUS].Visible = false;
+            accountgrid.Columns[MAINACCOUNTBINDED].Visible = false;
 
             //accountgrid.Columns[ACCOUNT].Width = 100;
             //accountgrid.Columns[ROUTEIMG].Width = 30;
@@ -471,6 +474,8 @@ namespace TradingLib.MoniterControl
                         if (CoreService.SiteInfo.ProductType== QSEnumProductType.VendorMoniter)
                         {
                             gt.Rows[i][MAINACCOUNT] = account.ConnectorToken;
+                            gt.Rows[i][MAINACCOUNTBINDED] = !string.IsNullOrEmpty(account.ConnectorToken);
+
                             gt.Rows[i][MACTCONNSTATUS] = account.MAcctConnected;
                             gt.Rows[i][MACTCONNIMG] = getMAcctConnectImg(account.MAcctConnected);
                             gt.Rows[i][MAINACCTRISKRULE] = account.MAcctRiskRule;
@@ -506,6 +511,8 @@ namespace TradingLib.MoniterControl
                         if (CoreService.TLClient.ServerVersion.ProductType == QSEnumProductType.VendorMoniter)
                         {
                             gt.Rows[r][MAINACCOUNT] = account.ConnectorToken;
+                            gt.Rows[r][MAINACCOUNTBINDED] = !string.IsNullOrEmpty(account.ConnectorToken);
+
                             gt.Rows[r][MACTCONNSTATUS] = account.MAcctConnected;
                             gt.Rows[r][MACTCONNIMG] = getMAcctConnectImg(account.MAcctConnected);
                             gt.Rows[r][MAINACCTRISKRULE] = account.MAcctRiskRule;

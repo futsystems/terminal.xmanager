@@ -67,6 +67,7 @@ namespace TradingLib.MoniterControl
             fmChangePassword fm = new fmChangePassword();
             fm.SetAccount(account.Account);
             fm.ShowDialog();
+            fm.Close();
         }
 
     }
@@ -86,6 +87,7 @@ namespace TradingLib.MoniterControl
             fmChangeInvestor fm = new fmChangeInvestor();
             fm.SetAccount(account);
             fm.ShowDialog();
+            fm.Close();
         }
     }
 
@@ -104,6 +106,7 @@ namespace TradingLib.MoniterControl
             fmEditFinAccount fm = new fmEditFinAccount();
             fm.SetAccount(account);
             fm.ShowDialog();
+            fm.Close();
         }
     }
 
@@ -123,6 +126,7 @@ namespace TradingLib.MoniterControl
             fmEditAccountTemplate fm = new fmEditAccountTemplate();
             fm.SetAccount(account);
             fm.ShowDialog();
+            fm.Close();
         }
     }
 
@@ -141,6 +145,7 @@ namespace TradingLib.MoniterControl
             fmEditVendorFlatRule fm = new fmEditVendorFlatRule();
             fm.SetAccount(account);
             fm.ShowDialog();
+            fm.Close();
         }
     }
     /// <summary>
@@ -158,6 +163,7 @@ namespace TradingLib.MoniterControl
             fmLoginInfo fm = new fmLoginInfo();
             fm.SetAccount(account);
             fm.ShowDialog();
+            fm.Close();
         }
     }
 
@@ -177,6 +183,7 @@ namespace TradingLib.MoniterControl
             fmChangeRouter fm = new fmChangeRouter();
             fm.SetAccount(account);
             fm.Show();
+            fm.Close();
         }
     }
 
@@ -243,6 +250,7 @@ namespace TradingLib.MoniterControl
             fmBindConnector fm = new fmBindConnector();
             fm.SetAccount(account);
             fm.ShowDialog();
+            fm.Close();
         }
     }
 
@@ -279,9 +287,10 @@ namespace TradingLib.MoniterControl
                 return;
             }
 
-            fmConnectorAccountInfo fm = new fmConnectorAccountInfo();
+            fmMainAccountManager fm = new fmMainAccountManager();
             fm.SetAccount(account);
             fm.ShowDialog();
+            fm.Close();
         }
     }
 
@@ -303,6 +312,25 @@ namespace TradingLib.MoniterControl
             {
                 CoreService.TLClient.ReqClearTerminals(account.Account);
             }
+        }
+    }
+
+    /// <summary>
+    /// 过来交易帐户
+    /// </summary>
+    public class FilterAccountCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+        //    fmAcctFilter fm = 
+        //    fm.FilterArgsChangedEvent += new VoidDelegate(fm_FilterArgsChangedEvent);
+        //    fm.Show();
+            fmAcctFilter.Instance.Show();
+        }
+
+        void fm_FilterArgsChangedEvent()
+        {
+            LogService.Debug("filter args changed");
         }
     }
 

@@ -21,24 +21,115 @@ namespace TradingLib.MoniterControl
             SetPreferences();
             InitTable();
             BindToTable();
+
+            this.imageList1.Images.Add((System.Drawing.Image)Properties.Resources.folder);
+            this.imageList1.Images.Add((System.Drawing.Image)Properties.Resources.folder_sel);
+            this.imageList1.Images.Add((System.Drawing.Image)Properties.Resources.items);
+            tempateTree.ImageList = this.imageList1;
+
+
+            tempateTree.Nodes.Add(CreateBaseItem("手续费率模板"));
+
             this.Load += new EventHandler(fmCommission_Load);
+            this.Disposed += new EventHandler(fmCommission_Disposed);
+            this.FormClosing += new FormClosingEventHandler(fmCommission_FormClosing);
+            this.FormClosed += new FormClosedEventHandler(fmCommission_FormClosed);
+            this.tempateTree.Disposed += new EventHandler(tempateTree_Disposed);
         }
+
+        void tempateTree_Disposed(object sender, EventArgs e)
+        {
+            LogService.Debug("tempateTree disposed......");
+        }
+
+        void fmCommission_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            LogService.Debug("fmcommission closed......");
+        }
+
+        void fmCommission_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            LogService.Debug("fmcommission closing......");
+        }
+
+        void fmCommission_Disposed(object sender, EventArgs e)
+        {
+            LogService.Debug("fmcommission disposed......");
+        }
+
+        private ComponentFactory.Krypton.Toolkit.KryptonTreeNode CreateBaseItem(string lb)
+        {
+            ComponentFactory.Krypton.Toolkit.KryptonTreeNode item = new ComponentFactory.Krypton.Toolkit.KryptonTreeNode();
+            item.Text = lb;
+            item.ImageIndex = 2;
+            item.SelectedImageIndex = item.ImageIndex;
+            item.Tag = lb;
+            return item;
+        }
+
+        private ComponentFactory.Krypton.Toolkit.KryptonTreeNode CreateCommissionTemplateItem(CommissionTemplateSetting template)
+        {
+            ComponentFactory.Krypton.Toolkit.KryptonTreeNode item = new ComponentFactory.Krypton.Toolkit.KryptonTreeNode();
+            item.Text = template.ToString();
+            //item.ImageIndex = _rand.Next(imageList.Images.Count - 1);
+            //item.SelectedImageIndex = item.ImageIndex;
+            item.ImageIndex = 0;
+            item.SelectedImageIndex = 1;
+            item.Tag = template;
+            return item;
+        }
+
 
         void fmCommission_Load(object sender, EventArgs e)
         {
-            this.templatelist.ContextMenuStrip = new ContextMenuStrip();
-            this.templatelist.ContextMenuStrip.Items.Add("添加模板", null, new EventHandler(Add_Click));
-            this.templatelist.ContextMenuStrip.Items.Add("修改模板", null, new EventHandler(Edit_Click));
-            this.templatelist.ContextMenuStrip.Items.Add(new System.Windows.Forms.ToolStripSeparator());
-            this.templatelist.ContextMenuStrip.Items.Add("加载数据", null, new EventHandler(Qry_Click));
+            //this.templatelist.ContextMenuStrip = new ContextMenuStrip();
+            //this.templatelist.ContextMenuStrip.Items.Add("添加模板", null, new EventHandler(Add_Click));
+            //this.templatelist.ContextMenuStrip.Items.Add("修改模板", null, new EventHandler(Edit_Click));
+            //this.templatelist.ContextMenuStrip.Items.Add(new System.Windows.Forms.ToolStripSeparator());
+            //this.templatelist.ContextMenuStrip.Items.Add("加载数据", null, new EventHandler(Qry_Click));
 
             commissionGrid.ContextMenuStrip = new ContextMenuStrip();
             commissionGrid.ContextMenuStrip.Items.Add("添加模板项目", null, new EventHandler(AddItem_Click));
 
-            CoreService.EventCore.RegIEventHandler(this);
+            this.tempateTree.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+            this.tempateTree.ContextMenuStrip.Items.Add("添加手续费模板", null, new EventHandler(Add_Click));
+            //this.tempateTree.ContextMenuStrip.Items.Add("添加手续费模板项目", null, new EventHandler(AddItem_Click));
+
+
+            
             //this.templatelist.ContextMenuStrip.Items.Add("添加模板", null, new EventHandler(Add_Click));
             commissionGrid.DoubleClick += new EventHandler(commissionGrid_DoubleClick);
             commissionGrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(commissionGrid_RowPrePaint);
+
+            tempateTree.NodeMouseClick += new TreeNodeMouseClickEventHandler(tempateTree_NodeMouseClick);
+            tempateTree.MouseClick += new MouseEventHandler(tempateTree_MouseClick);
+
+            CoreService.EventCore.RegIEventHandler(this);
+
+            
+        }
+
+        void tempateTree_MouseClick(object sender, MouseEventArgs e)
+        {
+            
+        }
+
+        void tempateTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                return;
+            if(e.Node.Parent != null)
+            {
+                if (e.Node.Parent.Index == 0)
+                {
+                    CommissionTemplateSetting t = e.Node.Tag as CommissionTemplateSetting;
+                    if (t != null)
+                    {
+                        ClearItem();
+                        CoreService.TLClient.ReqQryCommissionTemplateItem(t.ID);
+                    }
+                }
+            }
         }
 
         void commissionGrid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -102,9 +193,19 @@ namespace TradingLib.MoniterControl
             fmCommissionTemplateItemEdit fm = new fmCommissionTemplateItemEdit();
             try
             {
-                int id = int.Parse(templateid.Text);
-                fm.SetCommissionTemplateID(id);
-                fm.ShowDialog();
+                if (tempateTree.SelectedNode.Parent != null)
+                {
+                    CommissionTemplateSetting t = tempateTree.SelectedNode.Tag as CommissionTemplateSetting;
+                    if (t != null)
+                    {
+                        //ClearItem();
+                        //CoreService.TLClient.ReqQryCommissionTemplateItem(t.ID);
+                        //int id = int.Parse(templateid.Text);
+                        fm.SetCommissionTemplateID(t.ID);
+                        fm.ShowDialog();
+                    }
+
+                }
             }
             catch (Exception ex)
             {
@@ -114,30 +215,30 @@ namespace TradingLib.MoniterControl
 
         void Qry_Click(object sender, EventArgs e)
         {
-            CommissionTemplateSetting t = templatelist.SelectedItem as CommissionTemplateSetting;
-            if (t == null)
-            {
-                MoniterHelper.WindowMessage("请选择手续费模板");
-                return;
-            }
-            ClearItem();
-            templatename.Text = t.Name;
-            templateid.Text = t.ID.ToString();
-            CoreService.TLClient.ReqQryCommissionTemplateItem(t.ID);
+            //CommissionTemplateSetting t = templatelist.SelectedItem as CommissionTemplateSetting;
+            //if (t == null)
+            //{
+            //    MoniterHelper.WindowMessage("请选择手续费模板");
+            //    return;
+            //}
+            //ClearItem();
+            //templatename.Text = t.Name;
+            //templateid.Text = t.ID.ToString();
+            //CoreService.TLClient.ReqQryCommissionTemplateItem(t.ID);
         }
         void Add_Click(object sender, EventArgs e)
         {
             fmTemplateEdit fm = new fmTemplateEdit(TemplateEditType.Commission);
             fm.ShowDialog();
         }
-        void Edit_Click(object sender, EventArgs e)
-        {
-            CommissionTemplateSetting t = templatelist.SelectedItem as CommissionTemplateSetting;
-            fmTemplateEdit fm = new fmTemplateEdit(TemplateEditType.Commission);
+        //void Edit_Click(object sender, EventArgs e)
+        //{
+        //    CommissionTemplateSetting t = templatelist.SelectedItem as CommissionTemplateSetting;
+        //    fmTemplateEdit fm = new fmTemplateEdit(TemplateEditType.Commission);
 
-            fm.SetTemplate(t);
-            fm.ShowDialog();
-        }
+        //    fm.SetTemplate(t);
+        //    fm.ShowDialog();
+        //}
 
         public void OnInit()
         {
@@ -151,6 +252,7 @@ namespace TradingLib.MoniterControl
 
         public void OnDisposed()
         {
+            LogService.Debug("disposed.....");
             CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QryCommissionTemplate", this.OnQryCommissionTemplate);
             CoreService.EventContrib.UnRegisterNotifyCallback("MgrExchServer", "NotifyCommissionTemplate", this.OnNotifyCommissionTemplate);
 
@@ -265,14 +367,40 @@ namespace TradingLib.MoniterControl
         Dictionary<int, CommissionTemplateSetting> templatemap = new Dictionary<int, CommissionTemplateSetting>();
         void OnQryCommissionTemplate(string json, bool islast)
         {
-            CommissionTemplateSetting[] list = MoniterHelper.ParseJsonResponse<CommissionTemplateSetting[]>(json);
-            if (list != null)
+            try
             {
-                foreach (CommissionTemplateSetting t in list)
+                LogService.Debug("template str:" + json);
+                CommissionTemplateSetting[] list = MoniterHelper.ParseJsonResponse<CommissionTemplateSetting[]>(json);
+                if (list != null)
                 {
-                    templatemap.Add(t.ID, t);
-                    templatelist.Items.Add(t);
+                    foreach (CommissionTemplateSetting t in list)
+                    {
+                        LogService.Debug("commissiontempalte:" + t.ID + " " + t.Name);
+                        templatemap.Add(t.ID, t);
+                        //templatelist.Items.Add(t);
+                        InvokeGotCommissiontTemplateItem(t);
+                    }
                 }
+                if (islast)
+                { 
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        void InvokeGotCommissiontTemplateItem(CommissionTemplateSetting commission)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action<CommissionTemplateSetting>(InvokeGotCommissiontTemplateItem), new object[] { commission });
+            }
+            else
+            {
+                tempateTree.Nodes[0].Nodes.Add(CreateCommissionTemplateItem(commission));
             }
         }
 
@@ -286,12 +414,14 @@ namespace TradingLib.MoniterControl
                 {
                     target.Name = obj.Name;
                     target.Description = obj.Description;
-                    templatelist.Refresh();
+                    //templatelist.Refresh();
+                    tempateTree.Refresh();
                 }
                 else
                 {
                     templatemap.Add(obj.ID, obj);
-                    templatelist.Items.Add(obj);
+                    //templatelist.Items.Add(obj);
+                    InvokeGotCommissiontTemplateItem(obj);
                 }
             }
         }
@@ -311,8 +441,8 @@ namespace TradingLib.MoniterControl
         const string CLOSETODAYBYVOLUME = "平今(手数)";
         const string CLOSEBYMONEY = "平仓(金额)";
         const string CLOSEBYVOLUME = "平仓(手数)";
-        const string PERCENT = "上浮率";
-        const string CHARGETYPE = "收费方式";
+        const string PERCENT = "百分比";
+        const string CHARGETYPE = "计算方式";
 
         #endregion
 
@@ -367,9 +497,13 @@ namespace TradingLib.MoniterControl
             datasource.DataSource = gt;
             grid.DataSource = datasource;
 
+            grid.Columns[ID].Visible = false;
+
             grid.Columns[ID].Width = 60;
             grid.Columns[CODE].Width =60;
             grid.Columns[MONTH].Width = 60;
+
+            
 
         }
 

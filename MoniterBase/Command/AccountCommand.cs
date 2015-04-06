@@ -19,6 +19,7 @@ namespace TradingLib.MoniterBase.Command
         {
             fmConnectorManager fm = new fmConnectorManager();
             fm.ShowDialog();
+            fm.Close();
         }
     }
 
@@ -31,6 +32,7 @@ namespace TradingLib.MoniterBase.Command
         {
             fmEditFinAccount fm = new fmEditFinAccount();
             fm.ShowDialog();
+            fm.Close();
         }
     }
 

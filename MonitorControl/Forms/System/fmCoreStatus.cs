@@ -40,11 +40,24 @@ namespace TradingLib.MoniterControl
                 settlecentrestatus.Text = s.IsSettleNormal ? "正常" : "异常";
                 istradingday.Text = s.IsTradingday ? "开市" : "休市";
 
-                clearcentrestatus.Text = Util.GetEnumDescription(s.ClearCentreStatus);//? "开启" : "关闭";
+                clearcentrestatus.Text = GetClearCentreStatus(s.ClearCentreStatus);//? "开启" : "关闭";
                 totalaccountnum.Text = s.TotalAccountNum.ToString();
                 marketopencheck.Text = s.MarketOpenCheck ? "检查" : "不检查";
-                runmode.Text = s.IsDevMode ? "开发模式" : "工作模式";
+                runmode.Text = s.IsDevMode ? "开发" : "运营";
             }
+        }
+
+        string GetClearCentreStatus(QSEnumClearCentreStatus status)
+        {
+            if (status == QSEnumClearCentreStatus.CCOPEN)
+            {
+                return "是";
+            }
+            if (status == QSEnumClearCentreStatus.CCCLOSE)
+            {
+                return "否";
+            }
+            return Util.GetEnumDescription(status);
         }
 
         public void OnInit()
@@ -65,5 +78,6 @@ namespace TradingLib.MoniterControl
                 GotSystemStatus(status);
             }
         }
+
     }
 }

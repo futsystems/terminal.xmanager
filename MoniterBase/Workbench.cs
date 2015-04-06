@@ -52,6 +52,21 @@ namespace TradingLib.MoniterBase
             contentPanel.Dock = DockStyle.Fill;
             this.Controls.Add(contentPanel);
 
+            // Use the Idle event to update the status of menu and toolbar items.
+            Application.Idle += OnApplicationIdle;
+            this.Load += new EventHandler(Workbench_Load);
+        }
+
+        /// <summary>
+        /// 窗体第一次显示时加载控件初始化操作
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void Workbench_Load(object sender, EventArgs e)
+        {
+            LoggingService.Info("Run Control Init");
+
+            //窗体第一次显示时才进行菜单和工具栏的加载，提前加载由于没有登入无法获得权限等信息
             menu = new MenuStrip();
             MenuService.AddItemsToMenu(menu.Items, this, "/Workbench/MainMenu");
 
@@ -66,20 +81,6 @@ namespace TradingLib.MoniterBase
 
             InitSplitContainer();
 
-            
-            // Use the Idle event to update the status of menu and toolbar items.
-            Application.Idle += OnApplicationIdle;
-            this.Load += new EventHandler(Workbench_Load);
-        }
-
-        /// <summary>
-        /// 窗体第一次显示时加载控件初始化操作
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void Workbench_Load(object sender, EventArgs e)
-        {
-            LoggingService.Info("Run Control Init");
             foreach (ICommand command in AddInTree.BuildItems("/Workspace/ControlInit", this, false))
             {
                 command.Run();
@@ -121,23 +122,23 @@ namespace TradingLib.MoniterBase
             
         }
 
-        public void ShowControl(string mcName)
-        {
-            if (controlmap.Keys.Contains(mcName.ToUpper()))
-            {
-                Control ctl = controlmap[mcName.ToUpper()];
-                ctl.Visible = true;
-            }
-        }
+        //public void ShowControl(string mcName)
+        //{
+        //    if (controlmap.Keys.Contains(mcName.ToUpper()))
+        //    {
+        //        Control ctl = controlmap[mcName.ToUpper()];
+        //        ctl.Visible = true;
+        //    }
+        //}
 
-        public void HideControl(string mcName)
-        {
-            if (controlmap.Keys.Contains(mcName.ToUpper()))
-            {
-                Control ctl = controlmap[mcName.ToUpper()];
-                ctl.Visible = false;
-            }
-        }
+        //public void HideControl(string mcName)
+        //{
+        //    if (controlmap.Keys.Contains(mcName.ToUpper()))
+        //    {
+        //        Control ctl = controlmap[mcName.ToUpper()];
+        //        ctl.Visible = false;
+        //    }
+        //}
 
         /// <summary>
         /// 底部视区关闭
@@ -155,6 +156,9 @@ namespace TradingLib.MoniterBase
             this.mainContainer.Panel2Collapsed = false;
         }
 
+        /// <summary>
+        /// 恢复视区到默认尺寸
+        /// </summary>
         public void ResetView()
         {
             //this.mainContainer.Panel2Collapsed = false;
@@ -162,10 +166,15 @@ namespace TradingLib.MoniterBase
             //this.bottomContainer.Panel2.Width = 250;
             this.bottomContainer.SplitterDistance = this.Width -  300;
             this.mainContainer.SplitterDistance = this.Height - 350;
+            this.ExpandBottom();
+
+            //显示默认控件
+            //ShowControl("AccountMoniter", EnumControlLocation.TopPanel);
         }
 
+
         /// <summary>
-        /// 将某个控件显示到对应的位置
+        /// 将某个控件显示到对应的视区
         /// </summary>
         /// <param name="mcName"></param>
         /// <param name="location"></param>
@@ -182,8 +191,9 @@ namespace TradingLib.MoniterBase
             panel.Controls.Add(ctl);
         }
 
+
         /// <summary>
-        /// 向工作区域添加控件
+        /// 向视区添加控件
         /// </summary>
         /// <param name="ctl"></param>
         public void AppendControl(Control ctl)
@@ -208,43 +218,7 @@ namespace TradingLib.MoniterBase
                 return;
             }
             controlmap[key] = ctl;
-            
-
         }
-        ///// <summary>
-        ///// 在某个工作区域显示某个控件
-        ///// </summary>
-        ///// <param name="ctl"></param>
-        ///// <param name="location"></param>
-        //public void ShowControl(Control ctl, EnumControlLocation location)
-        //{
-        //    IMoniterControl mc = ctl as IMoniterControl;
-        //    if (mc == null)
-        //    {
-        //        MoniterHelper.WindowMessage("只允许在工作窗区域显示实现IMoniterControl的控件");
-        //    }
-
-        //    MoniterControlAttr attr = MoniterPlugin.GetMoniterControlAttr(ctl.GetType());
-        //    if (attr == null)
-        //    {
-        //        MoniterHelper.WindowMessage("窗口显示组件需用用属性MoniterControlAttr进行标注");
-        //    }
-
-
-        //    var panel = this.GetPanel(location);
-        //    panel.Controls.Clear();
-        //    panel.Controls.Add(ctl);
-
-        //    string key = attr.Name.ToUpper();
-
-        //    locationmap[key] = location;
-        //    if (controlmap.Keys.Contains(key))
-        //    {
-                
-        //    }
-        //    controlmap[key] = ctl;
-        //}
-
 
         ComponentFactory.Krypton.Toolkit.KryptonSplitterPanel GetPanel(EnumControlLocation location)
         {
@@ -262,24 +236,24 @@ namespace TradingLib.MoniterBase
         }
 
 
-        /// <summary>
-        /// 在第一层split的上部主窗体显示控件
-        /// </summary>
-        /// <param name="ctl"></param>
-        void ShowInTop(Control ctl)
-        {
-            this.mainContainer.Panel1.Controls.Add(ctl);
-        }
+        ///// <summary>
+        ///// 在第一层split的上部主窗体显示控件
+        ///// </summary>
+        ///// <param name="ctl"></param>
+        //void ShowInTop(Control ctl)
+        //{
+        //    this.mainContainer.Panel1.Controls.Add(ctl);
+        //}
 
-        void ShowInBottomLeft(Control ctl)
-        {
-            this.bottomContainer.Panel1.Controls.Add(ctl);
-        }
+        //void ShowInBottomLeft(Control ctl)
+        //{
+        //    this.bottomContainer.Panel1.Controls.Add(ctl);
+        //}
 
-        void ShowInBottomRight(Control ctl)
-        {
-            this.bottomContainer.Panel2.Controls.Add(ctl);
-        }
+        //void ShowInBottomRight(Control ctl)
+        //{
+        //    this.bottomContainer.Panel2.Controls.Add(ctl);
+        //}
 
         void EventContrib_DemoEvent(string obj)
         {
@@ -327,6 +301,11 @@ namespace TradingLib.MoniterBase
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
+
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
+
+            //CoreService.Destory();
+
             //if (!e.Cancel)
             //{
             //    e.Cancel = !CloseCurrentContent();

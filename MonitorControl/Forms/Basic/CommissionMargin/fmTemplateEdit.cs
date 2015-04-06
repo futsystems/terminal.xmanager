@@ -48,7 +48,7 @@ namespace TradingLib.MoniterControl
                     _commissionTemplate = t as CommissionTemplateSetting;
                     name.Text = _commissionTemplate.Name;
                     desp.Text = _commissionTemplate.Description;
-                    id.Text = _commissionTemplate.ID.ToString();
+                    //id.Text = _commissionTemplate.ID.ToString();
                     this.Text = "编辑手续费模板";
                 }
                 else
@@ -63,7 +63,7 @@ namespace TradingLib.MoniterControl
                     _marginTemplate = t as MarginTemplateSetting;
                     name.Text = _marginTemplate.Name;
                     desp.Text = _marginTemplate.Description;
-                    id.Text = _marginTemplate.ID.ToString();
+                    //id.Text = _marginTemplate.ID.ToString();
                     this.Text = "编辑保证金模板";
                 }
                 else
@@ -78,7 +78,7 @@ namespace TradingLib.MoniterControl
                     _exstrategyTemplate = t as ExStrategyTemplateSetting;
                     name.Text = _exstrategyTemplate.Name;
                     desp.Text = _exstrategyTemplate.Description;
-                    id.Text = _exstrategyTemplate.ID.ToString();
+                    //id.Text = _exstrategyTemplate.ID.ToString();
                     this.Text = "标记交易参数模板";
                 }
             }

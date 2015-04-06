@@ -87,7 +87,9 @@ namespace TradingLib.MoniterControl
 
             accountgrid.Scroll +=new ScrollEventHandler(accountgrid_Scroll);//滚轮滚动
             accountgrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(accountgrid_RowPrePaint);
-            
+
+            //响应过滤参数变更事件
+            ControlService.OnFilterArgsChangeEvent += new VoidDelegate(RefreshAccountQuery);
 
             //绑定事件
             //btnAddAccount.Click += new EventHandler(btnAddAccount_Click);
@@ -145,25 +147,25 @@ namespace TradingLib.MoniterControl
 
         #endregion
 
-        private void btnAcctFilter_Click(object sender, EventArgs e)
-        {
+        //private void btnAcctFilter_Click(object sender, EventArgs e)
+        //{
 
-            fmAcctFilter fm = new fmAcctFilter();
-            fm.SetFilterArgs(ref filterArgs);
-            fm.FilterArgsChangedEvent += new VoidDelegate(fm_FilterArgsChangedEvent);
+        //    //fmAcctFilter fm = new fmAcctFilter();
+        //    //fm.SetFilterArgs(ref filterArgs);
+        //    //fm.FilterArgsChangedEvent += new VoidDelegate(fm_FilterArgsChangedEvent);
 
-            //Point p = this.PointToScreen(btnAcctFilter.Location);
-            //p.X = p.X + btnAcctFilter.Width + 5;
-            //p.Y = p.Y + btnAcctFilter.Height + 5;
-            //fm.Location = p;
-            //fm.Show();
-        }
+        //    //Point p = this.PointToScreen(btnAcctFilter.Location);
+        //    //p.X = p.X + btnAcctFilter.Width + 5;
+        //    //p.Y = p.Y + btnAcctFilter.Height + 5;
+        //    //fm.Location = p;
+        //    //fm.Show();
+        //}
 
-        void fm_FilterArgsChangedEvent()
-        {
-            //MessageBox.Show("filter changed");
-            RefreshAccountQuery();
-        }
+        //void fm_FilterArgsChangedEvent()
+        //{
+        //    //MessageBox.Show("filter changed");
+        //    RefreshAccountQuery();
+        //}
 
 
     }

@@ -14,31 +14,94 @@
 	</Manifest>
 	
 	<Runtime>
-		<Import assembly = "../TradingLib.MoniterBase.dll"/>
+		<Import assembly = "../TradingLib.MoniterBase.dll">
+    </Import>
+    <Import assembly = "../TradingLib.MoniterControl.dll">
+      <ConditionEvaluator name="ProductState" class="TradingLib.MoniterControl.ProductStateConditionEvaluator"/>
+      <ConditionEvaluator name="RoleState" class="TradingLib.MoniterControl.RoleStateConditionEvaluator"/>
+      <ConditionEvaluator name="DeployState" class="TradingLib.MoniterControl.DeployStateConditionEvaluator"/>
+    </Import>
 	</Runtime>
-	
 
+
+  <!--菜单栏-->
+  <Path name = "/Workbench/MainMenu">
+    <MenuItem id = "System"
+		          type = "Menu"
+		          label = "系统">
+      <Include id = "System" path = "/Workspace/SystemManager"/>
+    </MenuItem>
+
+    <MenuItem id = "BasicInfo"
+		          type = "Menu"
+		          label = "交易管理">
+
+      <Include id = "BasicInfo" path = "/Workspace/BasicInfoManager" />
+    </MenuItem>
+
+    <MenuItem id = "Account"
+		          type = "Menu"
+		          label = "帐户管理">
+      <Include id = "Account" path = "/Workspace/MainAccount-Vendor"/>
+    </MenuItem>
+
+    <Condition name="ProductState" product="counter">
+      <MenuItem id = "Manager"
+                type = "Menu"
+                label = "柜员管理">
+        <Include id = "Manager" path = "/Workspace/MgrManager"/>
+      </MenuItem>
+    </Condition>
+
+    <Condition name="ProductState" product="counter">
+      <MenuItem id = "Tools"
+                type = "Menu"
+                label = "工具">
+        <Include id = "Tools" path = "/Workspace/MgrTools"/>
+      </MenuItem>
+    </Condition>
+
+    <Condition name="ProductState" product="counter">
+      <MenuItem id = "HistQuery"
+                type = "Menu"
+                label = "历史查询">
+        <Include id = "HistQuery" path = "/Workspace/HisQryManager"/>
+      </MenuItem>
+    </Condition>
+
+    <MenuItem id = "Help"
+		          type = "Menu"
+				  shortcut = "Alt|H"
+		          label = "帮助">
+      <Include id = "HelpCentre" path = "/Workbench/HelpCentre"/>
+    </MenuItem>
+  </Path>
+
+  <!--工具栏-->
+  <Path name = "/Workbench/Toolbar">
+
+  </Path>
+  
+  <!--系统初始化-->
 	<Path name = "/Workspace/ControlInit">
 			<Class id = "ControlInitCommand" class = "TradingLib.MoniterBase.Command.InitCommand"/>
 	</Path>
 	
+  
+  
+  <!--菜单/工具栏项目细节-->
+  
 	<Path name = "/Workspace/Tools">
 			<MenuItem id = "ShowAccountListCommand"
 			          label = "ShowAccountListCommand"
-			          shortcut = "Control|N"
 			          class = "TradingLib.MoniterBase.Command.ShowAccountListCommand"/>
 			<MenuItem id = "ShowQuoteCommand"
 			          label = "ShowQuoteCommand"
-			          shortcut = "Control|N"
 			          class = "TradingLib.MoniterBase.Command.ShowQuoteCommand"/>
 	</Path>
 
   <!--系统管理菜单-->
   <Path name = "/Workspace/SystemManager">
-    <MenuItem id = "InterfaceManagerCommand"
-              label = "交易接口"
-              class = "TradingLib.MoniterBase.Command.InterfaceManagerCommand"/>
-    
     <MenuItem id = "DefaultConnectorManagerCommand"
               label = "行情与成交服务"
               class = "TradingLib.MoniterBase.Command.DefaultConnectorManagerCommand"/>
@@ -49,77 +112,97 @@
               class = "TradingLib.MoniterBase.Command.SystemStatusCommand"/>
 
     <MenuItem id = "TaskLogManagerCommand"
-              label = "系统定时任务"
+              label = "任务日志"
               class = "TradingLib.MoniterBase.Command.TaskLogManagerCommand"/>
 
     <MenuItem id = "Separator1" type = "Separator"/>
-    <MenuItem id = "SettleManagerCommand"
-              label = "结算管理"
-              class = "TradingLib.MoniterBase.Command.SettleManagerCommand"/>
     
-	</Path>      
+    
+    
+    <MenuItem id = "ChangePasswordCommand"
+          label = "修改密码"
+          class = "TradingLib.MoniterBase.Command.ChangePasswordCommand"/>
+
+    <MenuItem id = "ExitCommand"
+          label = "退出"
+          class = "TradingLib.MoniterBase.Command.ExitCommand"/>
+
+    <!--超级管理员可见菜单-->
+    <Condition name="DeployState" deploy="s">
+      <MenuItem id = "Separator1" type = "Separator"/>
+      <MenuItem id = "InterfaceManagerCommand"
+              label = "交易接口"
+              class = "TradingLib.MoniterBase.Command.InterfaceManagerCommand"/>
+      <MenuItem id = "HostedManagerCommand"
+                label = "托管服务"
+                class = "TradingLib.MoniterBase.Command.HostedManagerCommand"/>
+    </Condition>
+	
+</Path>      
               
   <!--交易管理菜单-->
   <Path name = "/Workspace/BasicInfoManager">
-    <MenuItem id = "MarketTimeManagerCommand"
-            label = "交易时间段"
-            icon = "Icons.New"
-            class = "TradingLib.MoniterBase.Command.MarketTimeManagerCommand"/>
-    
-    <MenuItem id = "ExchangeManagerCommand"
-            label = "交易所"
-            icon = "Icons.New"
-            class = "TradingLib.MoniterBase.Command.ExchangeManagerCommand"/>
-    
-    <MenuItem id = "SecurityManagerCommand"
-            label = "品种数据"
-            icon = "Icons.New"
-            class = "TradingLib.MoniterBase.Command.SecurityManagerCommand"/>
+      <MenuItem id = "SecurityManagerCommand"
+              label = "品种数据"
+              class = "TradingLib.MoniterBase.Command.SecurityManagerCommand"/>
 
-    <MenuItem id = "SymbolManagerCommand"
-            label = "合约数据"
-            icon = "Icons.New"
-            class = "TradingLib.MoniterBase.Command.SymbolManagerCommand"/>
+      <MenuItem id = "SymbolManagerCommand"
+              label = "合约数据"
+              class = "TradingLib.MoniterBase.Command.SymbolManagerCommand"/>
 
-    <MenuItem id = "SynSymbolManagerCommand"
-           label = "合约数据同步"
-           icon = "Icons.New"
-           class = "TradingLib.MoniterBase.Command.SynSymbolManagerCommand"/>
+      <MenuItem id = "SynSymbolManagerCommand"
+             label = "合约数据同步"
+             class = "TradingLib.MoniterBase.Command.SynSymbolManagerCommand"/>
     
     
-    <MenuItem id = "Separator1" type = "Separator"/>
+      <MenuItem id = "Separator1" type = "Separator"/>
     
-    <MenuItem id = "CommissionTemplateCommand"
-            label = "手续费模板管理"
-            icon = "Icons.New"
-            class = "TradingLib.MoniterBase.Command.CommissionTemplateCommand"/>
+      <MenuItem id = "CommissionTemplateCommand"
+              label = "手续费模板管理"
+              class = "TradingLib.MoniterBase.Command.CommissionTemplateCommand"/>
     
     
-    <MenuItem id = "MarginTemplateCommand"
-            label = "保证金模板管理"
-            icon = "Icons.New"
-            class = "TradingLib.MoniterBase.Command.MarginTemplateCommand"/>
+      <MenuItem id = "MarginTemplateCommand"
+              label = "保证金模板管理"
+              class = "TradingLib.MoniterBase.Command.MarginTemplateCommand"/>
 
-    <MenuItem id = "Separator1" type = "Separator"/>
+      <MenuItem id = "Separator1" type = "Separator"/>
     
-    <MenuItem id = "ExStrategyTemplateCommand"
-            label = "交易参数管理"
-            icon = "Icons.New"
-            class = "TradingLib.MoniterBase.Command.ExStrategyTemplateCommand"/>
+      <MenuItem id = "ExStrategyTemplateCommand"
+              label = "交易参数管理"
+              class = "TradingLib.MoniterBase.Command.ExStrategyTemplateCommand"/>
+
+    <!--超级管理员可见菜单-->
+    <Condition name="DeployState" deploy="s">
+      <MenuItem id = "Separator1" type = "Separator"/>
+      <MenuItem id = "MarketTimeManagerCommand"
+              label = "交易时间段"
+              class = "TradingLib.MoniterBase.Command.MarketTimeManagerCommand"/>
+      
+      <MenuItem id = "ExchangeManagerCommand"
+              label = "交易所"
+              class = "TradingLib.MoniterBase.Command.ExchangeManagerCommand"/>
+    </Condition>
+    
   </Path>
   
   <!--帐户管理-->
   <Path name = "/Workspace/MainAccount-Vendor">
-    <MenuItem id = "AddFinServiceAccountCommand"
-            label = "添加配资帐户"
-            icon = "Icons.New"
-            class = "TradingLib.MoniterBase.Command.AddFinServiceAccountCommand"/>
-    
-    <MenuItem id = "Separator1" type = "Separator"/>
-    <MenuItem id = "MainAccount-Vendor"
-            label = "主帐户管理"
-            icon = "Icons.New"
-            class = "TradingLib.MoniterBase.Command.ManagerConnectorCommand"/>
+    <ComplexCondition>
+      <And>
+        <Condition name="ProductState" product="v" />
+        <Condition name="RoleState" role="root" />
+      </And>
+      <MenuItem id = "AddFinServiceAccountCommand"
+              label = "添加配资帐户"
+              class = "TradingLib.MoniterBase.Command.AddFinServiceAccountCommand"/>
+
+      <MenuItem id = "Separator1" type = "Separator"/>
+      <MenuItem id = "MainAccount-Vendor"
+              label = "主帐户管理"
+              shortcut = "Control|A"
+              class = "TradingLib.MoniterBase.Command.ManagerConnectorCommand"/>
+    </ComplexCondition>
   </Path>
 
 
@@ -127,31 +210,55 @@
   <Path name = "/Workspace/MgrManager">
     <MenuItem id = "ManagerCommand"
             label = "柜员管理"
-            icon = "Icons.New"
             class = "TradingLib.MoniterBase.Command.ManagerCommand"/>
 
   </Path>
   
+  <!--管理工具-->
+  <Path name = "/Workspace/MgrTools">
+    <MenuItem id = "SettleManagerCommand"
+            label = "手工结算"
+            class = "TradingLib.MoniterBase.Command.SettleManagerCommand"/>
+
+  </Path>
   
   <!--历史记录查询-->
   <Path name = "/Workspace/HisQryManager">
-    <MenuItem id = "QryHistTradingInfoCommand"
-            label = "交易记录"
-            icon = "Icons.New"
-            class = "TradingLib.MoniterBase.Command.QryHistTradingInfoCommand"/>
-    
-    <MenuItem id = "QryHistCashTransCommand"
+    <Condition name="ProductState" product="vendor">
+      <MenuItem id = "QryHistTradingInfoCommand"
+              label = "交易记录"
+              class = "TradingLib.MoniterBase.Command.QryHistTradingInfoCommand"/>
+    </Condition>
+
+    <ComplexCondition>
+      <And>
+        <Condition name="ProductState" product="*" />
+        <Condition name="RoleState" role="Root" />
+      </And>
+      <MenuItem id = "QryHistCashTransCommand"
             label = "出入金记录"
-            icon = "Icons.New"
             class = "TradingLib.MoniterBase.Command.QryHistCashTransCommand"/>
-    
+    </ComplexCondition>
+
+
     <MenuItem id = "QrySettlementCommand"
             label = "结算单"
-            icon = "Icons.New"
             class = "TradingLib.MoniterBase.Command.QrySettlementCommand"/>
   </Path>
+
   
-  
+  <!--帮助菜单-->
+  <Path name = "/Workbench/HelpCentre">
+    <MenuItem id = "HelpInfoCommand"
+              label = "查看帮助"
+              shortcut = "Control|H"
+              icon = "Icons.Help"
+              class = "TradingLib.MoniterBase.Command.HelpInfoCommand"/>
+    
+    <MenuItem id = "DomainInfoCommand"
+              label = "授权信息"
+              class = "TradingLib.MoniterBase.Command.DomainInfoCommand"/>
+  </Path>
   
   <!--工具栏-->
   <Path name = "/Workbench/Toolbar">
@@ -179,14 +286,10 @@
 		             icon = "Icons.ViewReset"
 		             class  = "TradingLib.MoniterBase.Command.ResetViewCommand"/>
     
-    <ToolbarItem id = "Separator1" type = "Separator"/>
-    
-    <ToolbarItem id = "CollapseViewCommand"
-                 tooltip = "查看实时行情"
-                 icon = "Icons.FilterAccount"
-                 class  = "TradingLib.MoniterBase.Command.CollapseViewCommand"/>
-    
+    <ToolbarItem id = "ViewSeparator" type = "Separator"/>
     
   </Path>
+  
+  
   
 </AddIn>

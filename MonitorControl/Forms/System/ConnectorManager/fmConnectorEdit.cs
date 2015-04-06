@@ -21,7 +21,7 @@ namespace TradingLib.MoniterControl
         public fmConnectorEdit()
         {
             InitializeComponent();
-            this.Text = "添加交易通道";
+            this.Text = "添加主帐户";
             btnSubmit.Enabled = false;
 
             this.Load += new EventHandler(fmConnectorEdit_Load);
@@ -44,12 +44,12 @@ namespace TradingLib.MoniterControl
             if (valid)
             {
                 btnSubmit.Enabled = true;
-                tokenvalid.Text = "标识可用";
+                tokenvalid.Text = "可用";
             }
             else
             {
                 btnSubmit.Enabled = false;
-                tokenvalid.Text = "标识不可用";
+                tokenvalid.Text = "不可用";
             }
         }
 
@@ -63,7 +63,7 @@ namespace TradingLib.MoniterControl
         {
             if (isadd)
             {
-                tokenvalid.Text = "查询中";
+                tokenvalid.Text = "...";
                 tokenvalid.Visible = true;
                 CoreService.TLClient.ReqQryTokenValid(token.Text);
             }
@@ -78,20 +78,20 @@ namespace TradingLib.MoniterControl
         public void SetConnectorConfig(ConnectorConfig cfg)
         {
             _cfg = cfg;
-            id.Text = cfg.ID.ToString();
+            //id.Text = cfg.ID.ToString();
             token.Text = cfg.Token;
             address.Text = cfg.srvinfo_ipaddress;
             port.Text = cfg.srvinfo_port.ToString();
-            srvf1.Text = cfg.srvinfo_field1;
-            srvf2.Text = cfg.srvinfo_field2;
-            srvf3.Text = cfg.srvinfo_field3;
+            //srvf1.Text = cfg.srvinfo_field1;
+            //srvf2.Text = cfg.srvinfo_field2;
+            //srvf3.Text = cfg.srvinfo_field3;
             username.Text = cfg.usrinfo_userid;
             pass.Text = cfg.usrinfo_password;
             uf1.Text = cfg.usrinfo_field1;
             uf2.Text = cfg.usrinfo_field2;
             cbinterfacelist.SelectedValue = cfg.interface_fk;
             name.Text = cfg.Name;
-            this.Text = string.Format("编辑交易通道[{0}]", cfg.Token);
+            this.Text = string.Format("编辑主帐户[{0}-{1}-{2}]",cfg.ID, cfg.Token,cfg.usrinfo_userid);
 
             token.Enabled = false;
             cbinterfacelist.Enabled = false;
@@ -105,12 +105,12 @@ namespace TradingLib.MoniterControl
         {
             if (!InputReg.ConnectorToken.IsMatch(token.Text))
             {
-                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("通道Token只允许使用字母,数字和-");
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("主帐户编号只允许使用字母和数字");
                 return;
             }
             if (!InputReg.ServerPort.IsMatch(port.Text))
             {
-                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("服务器端口之允许正整数");
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请输入正确的交易端口");
                 return;
             }
             System.Net.IPAddress outip;
@@ -121,7 +121,7 @@ namespace TradingLib.MoniterControl
             }
             if (string.IsNullOrEmpty(name.Text))
             {
-                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("通道名称不能为空");
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请输入主帐户名称");
                 return;
             }
             //新增
@@ -132,16 +132,16 @@ namespace TradingLib.MoniterControl
                 cfg.Name = name.Text;
                 cfg.srvinfo_ipaddress = address.Text;
                 cfg.srvinfo_port = int.Parse(port.Text);
-                cfg.srvinfo_field1 = srvf1.Text;
-                cfg.srvinfo_field2 = srvf2.Text;
-                cfg.srvinfo_field3 = srvf3.Text;
+                //cfg.srvinfo_field1 = srvf1.Text;
+                //cfg.srvinfo_field2 = srvf2.Text;
+                //cfg.srvinfo_field3 = srvf3.Text;
 
                 cfg.usrinfo_userid = username.Text;
                 cfg.usrinfo_password = pass.Text;
                 cfg.usrinfo_field1 = uf1.Text;
                 cfg.usrinfo_field2 = uf2.Text;
                 cfg.Token = token.Text;
-                if (MoniterHelper.WindowConfirm("确认添加通道设置?") == System.Windows.Forms.DialogResult.Yes)
+                if (MoniterHelper.WindowConfirm("确认添加主帐户?") == System.Windows.Forms.DialogResult.Yes)
                 {
                     CoreService.TLClient.ReqUpdateConnectorConfig(TradingLib.Mixins.Json.JsonMapper.ToJson(cfg));
                     this.Close();
@@ -151,9 +151,9 @@ namespace TradingLib.MoniterControl
             {
                 _cfg.srvinfo_ipaddress = address.Text;
                 _cfg.srvinfo_port = int.Parse(port.Text);
-                _cfg.srvinfo_field1 = srvf1.Text;
-                _cfg.srvinfo_field2 = srvf2.Text;
-                _cfg.srvinfo_field3 = srvf3.Text;
+                //_cfg.srvinfo_field1 = srvf1.Text;
+                //_cfg.srvinfo_field2 = srvf2.Text;
+                //_cfg.srvinfo_field3 = srvf3.Text;
 
                 _cfg.usrinfo_userid = username.Text;
                 _cfg.usrinfo_password = pass.Text;
@@ -161,7 +161,7 @@ namespace TradingLib.MoniterControl
                 _cfg.usrinfo_field2 = uf2.Text;
                 _cfg.Name = name.Text;
                 _cfg.NeedVendor = true;
-                if (MoniterHelper.WindowMessage("确认修改通道设置?") == System.Windows.Forms.DialogResult.Yes)
+                if (MoniterHelper.WindowConfirm("确认修改主帐户?") == System.Windows.Forms.DialogResult.Yes)
                 {
                     CoreService.TLClient.ReqUpdateConnectorConfig(TradingLib.Mixins.Json.JsonMapper.ToJson(_cfg));
                     this.Close();

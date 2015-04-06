@@ -15,65 +15,65 @@
 	
 	<Runtime>
     <Import assembly = "../TradingLib.MoniterControl.dll">
-      <ConditionEvaluator name="AccountMoniterState" class="TradingLib.MoniterControl.AccountMoniterStateConditionEvaluator"/>
     </Import>
   </Runtime>
 	
   <Path name = "/AccountList/ContextMenu">
 
-    <Condition name="AccountMoniterState" product="All">
+    <Condition name="ProductState" product="All">
       <MenuItem id = "UpdateTemplateCommand"
                 label = "手续费/保证金/交易参数"
                 class = "TradingLib.MoniterControl.UpdateTemplateCommand"/>
     </Condition>
 
-    <Condition name="AccountMoniterState" product="Vendor">
+    <Condition name="ProductState" product="Vendor">
       <MenuItem id = "UpdateTemplateCommand"
                 label = "强平规则"
                 class = "TradingLib.MoniterControl.UpdateFlatRuleCommand"/>
     </Condition>
     
     <MenuItem id = "Separator1" type = "Separator"/>
-    <Condition name="AccountMoniterState" product="Counter">
-      <MenuItem id = "ChangePasswordCommand"
+    
+    <Condition name="ProductState" product="Counter">
+      <MenuItem id = "Product"
                 label = "修改交易密码"
                 class = "TradingLib.MoniterControl.ChangeAccountPasswordCommand"/>
     </Condition>
 
-    <Condition name="AccountMoniterState" product="Counter">
-      <MenuItem id = "ChangeInvestorInfoCommand"
+    <Condition name="ProductState" product="Counter">
+      <MenuItem id = "Product"
                 label = "修改投资者信息"
                 class = "TradingLib.MoniterControl.ChangeInvestorInfoCommand"/>
     </Condition>
 
-    <Condition name="AccountMoniterState" product="All">
+    <Condition name="ProductState" product="All">
       <MenuItem id = "UpdateAccountProfileCommand"
                 label = "修改客户信息"
                 class = "TradingLib.MoniterControl.UpdateAccountProfileCommand"/>
     </Condition>
     
-    <Condition name="AccountMoniterState" product="Counter">
+    <Condition name="ProductState" product="Counter">
       <MenuItem id = "QryAccountPasswordCommand"
                 label = "查询交易密码"
                 class = "TradingLib.MoniterControl.QryAccountPasswordCommand"/>
     </Condition>
 
     <MenuItem id = "Separator1" type = "Separator"/>
-    <Condition name="AccountMoniterState" product="Counter">
+    <Condition name="ProductState" product="Counter">
       <MenuItem id = "UpdateAccountRouterGroup"
                 label = "修改路由组"
                 class = "TradingLib.MoniterControl.UpdateAccountRouterGroup"/>
     </Condition>
 
-    <Condition name="AccountMoniterState" product="Vendor">
+    <Condition name="ProductState" product="Vendor">
       <MenuItem id = "DelAccountConnectorCommand"
-                label = "删除主帐户绑定"
+                label = "收回主帐户"
                 class = "TradingLib.MoniterControl.DelAccountConnectorCommand"/>
     </Condition>
     
-    <Condition name="AccountMoniterState" product="Vendor">
+    <Condition name="ProductState" product="Vendor">
       <MenuItem id = "UpdateAccountConnectorCommand"
-                label = "修改主帐户绑定"
+                label = "借出主帐户"
                 class = "TradingLib.MoniterControl.UpdateAccountConnectorCommand"/>
     </Condition>
 
@@ -81,26 +81,26 @@
 
     <MenuItem id = "Separator1" type = "Separator"/>
 
-    <Condition name="AccountMoniterState" product="Vendor">
+    <Condition name="ProductState" product="Vendor">
       <MenuItem id = "SyncAccountDataCommand"
                 label = "同步交易数据"
                 class = "TradingLib.MoniterControl.SyncAccountDataCommand"/>
     </Condition>
 
-    <Condition name="AccountMoniterState" product="Vendor">
+    <Condition name="ProductState" product="Vendor">
       <MenuItem id = "MotherAccountManagerCommand"
                 label = "主帐户管理"
                 class = "TradingLib.MoniterControl.MotherAccountManagerCommand"/>
     </Condition>
 
     
-    <Condition name="AccountMoniterState" product="Counter">
+    <Condition name="ProductState" product="Counter">
       <MenuItem id = "DelAccountCommand"
                 label = "删除交易帐户"
                 class = "TradingLib.MoniterControl.DelAccountCommand"/>
     </Condition>
 
-    <Condition name="AccountMoniterState" product="Counter">
+    <Condition name="ProductState" product="Counter">
       <MenuItem id = "ClearAccountTerminal"
                 label = "注销帐户终端"
                 class = "TradingLib.MoniterControl.ClearAccountTerminal"/>
@@ -108,6 +108,19 @@
 
     
     
+  </Path>
+
+
+  <!--工具栏-->
+  <Path name = "/Workbench/Toolbar">
+    
+    <ToolbarItem id = "FilterAccountCommand"
+                 tooltip = "筛选帐户"
+                 shortcut = "Control|F"
+                 icon = "Icons.FilterAccount"
+                 class  = "TradingLib.MoniterControl.FilterAccountCommand"/>
+
+
   </Path>
   
 </AddIn>

@@ -21,7 +21,8 @@ namespace TradingLib.MoniterControl
             InitTable();
             BindToTable();
 
-            MoniterHelper.AdapterToIDataSource(cbsecurity).BindDataSource(MoniterHelper.GetEnumValueObjects<SecurityType>(true));
+            //MoniterHelper.AdapterToIDataSource(cbsecurity).BindDataSource(MoniterHelper.GetEnumValueObjects<SecurityType>(true));
+            MoniterHelper.AdapterToIDataSource(cbsecurity).BindDataSource(CoreService.BasicInfoTracker.GetSecurityCombListViaExchange(0, SecurityType.FUT, true));
             MoniterHelper.AdapterToIDataSource(cbtradeable).BindDataSource(MoniterHelper.GetTradeableCBList(true));
             MoniterHelper.AdapterToIDataSource(cbexchange).BindDataSource(CoreService.BasicInfoTracker.GetExchangeCombList(true));
 
@@ -94,10 +95,11 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][EXTRAMARGIN] = sym.ExtraMargin;
                     gt.Rows[i][MAINTANCEMARGIN] = sym.MaintanceMargin;
 
+                    gt.Rows[i][SECID] = sym.SecurityFamily != null ?(sym.SecurityFamily as SecurityFamilyImpl).ID:0;
                     gt.Rows[i][SECCODE] = sym.SecurityFamily != null ? sym.SecurityFamily.Code : "未设置";
                     gt.Rows[i][SECTYPE] = sym.SecurityType;
                     gt.Rows[i][EXCHANGEID] = sym.SecurityFamily != null ? (sym.SecurityFamily.Exchange as Exchange).ID : 0;
-                    gt.Rows[i][EXCHANGE] = sym.SecurityFamily != null ? (sym.SecurityFamily.Exchange as Exchange).EXCode : "未设置";
+                    gt.Rows[i][EXCHANGE] = sym.SecurityFamily != null ? sym.SecurityFamily.Exchange.Title : "未设置";
 
                     gt.Rows[i][UNDERLAYINGID] = sym.underlaying_fk;
                     gt.Rows[i][UNDERLAYING] = sym.ULSymbol != null ? sym.ULSymbol.Symbol : "无";
@@ -119,10 +121,12 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][MARGIN] = sym.Margin;
                     gt.Rows[i][EXTRAMARGIN] = sym.ExtraMargin;
                     gt.Rows[i][MAINTANCEMARGIN] = sym.MaintanceMargin;
+
+                    gt.Rows[i][SECID] = sym.SecurityFamily != null ? (sym.SecurityFamily as SecurityFamilyImpl).ID : 0;
                     gt.Rows[i][SECCODE] = sym.SecurityFamily != null ? sym.SecurityFamily.Code : "未设置";
                     gt.Rows[i][SECTYPE] = sym.SecurityType;
                     gt.Rows[i][EXCHANGEID] = sym.SecurityFamily != null ? (sym.SecurityFamily.Exchange as Exchange).ID : 0;
-                    gt.Rows[i][EXCHANGE] = sym.SecurityFamily != null ? (sym.SecurityFamily.Exchange as Exchange).EXCode : "未设置";
+                    gt.Rows[i][EXCHANGE] = sym.SecurityFamily != null ? sym.SecurityFamily.Exchange.Title : "未设置";
 
                     gt.Rows[i][UNDERLAYINGID] = sym.underlaying_fk;
                     gt.Rows[i][UNDERLAYING] = sym.ULSymbol != null ? sym.ULSymbol.Symbol : "无";
@@ -150,7 +154,8 @@ namespace TradingLib.MoniterControl
         const string MARGIN = "保证金";
         const string EXTRAMARGIN = "额外保证金";
         const string MAINTANCEMARGIN = "过夜保证金";
-        const string SECCODE = "品种字头";
+        const string SECID = "SecID";//品种编号
+        const string SECCODE = "品种";
         const string SECTYPE = "SecType";
         const string EXCHANGEID = "ExchangeID";
         const string EXCHANGE = "交易所";
@@ -161,7 +166,7 @@ namespace TradingLib.MoniterControl
         const string EXPIREMONTH = "到期月份";
         const string EXPIREDATE = "到期日";
         const string TRADEABLE = "TRADEABLE";
-        const string TRADEABLETITLE = "是否可交易";
+        const string TRADEABLETITLE = "允许交易";
 
 
         #endregion
@@ -201,6 +206,7 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(MARGIN);//
             gt.Columns.Add(EXTRAMARGIN);//
             gt.Columns.Add(MAINTANCEMARGIN);//
+            gt.Columns.Add(SECID);
             gt.Columns.Add(SECCODE);
             gt.Columns.Add(SECTYPE);
             gt.Columns.Add(EXCHANGEID);//
@@ -227,6 +233,10 @@ namespace TradingLib.MoniterControl
 
             //需要在绑定数据源后设定具体的可见性
             //grid.Columns[EXCHANGEID].IsVisible = false;
+            grid.Columns[ID].Visible = false;
+            grid.Columns[SECTYPE].Visible = false;
+            grid.Columns[SECID].Visible = false;
+
             grid.Columns[UNDERLAYINGID].Visible = false;
             grid.Columns[UNDERLAYINGSYMBOLID].Visible = false;
 
@@ -252,35 +262,43 @@ namespace TradingLib.MoniterControl
         void RefreshSecurityQuery()
         {
             //if (!_load) return;
-            string sectype = string.Empty;
+            //string sectype = string.Empty;
 
-            if (cbsecurity.SelectedIndex == 0)
-            {
-                sectype = "*";
-            }
-            else
-            {
-                sectype = cbsecurity.SelectedValue.ToString();
-            }
+            //if (cbsecurity.SelectedIndex == 0)
+            //{
+            //    sectype = "*";
+            //}
+            //else
+            //{
+            //    sectype = cbsecurity.SelectedValue.ToString();
+            //}
 
-            string strFilter = string.Empty;
-
-
-            if (cbsecurity.SelectedIndex == 0)
-            {
-                strFilter = string.Format(SECTYPE + " > '{0}'", sectype);
-            }
-            else
-            {
-                strFilter = string.Format(SECTYPE + " = '{0}'", sectype);
-            }
+            string strFilter = string.Format(SECTYPE + " > '{0}'", "*");
 
 
+            //if (cbsecurity.SelectedIndex == 0)
+            //{
+            //    strFilter = string.Format(SECTYPE + " > '{0}'", sectype);
+            //}
+            //else
+            //{
+            //    strFilter = string.Format(SECTYPE + " = '{0}'", sectype);
+            //}
+
+            //通过交易所过滤
             if (cbexchange.SelectedIndex != 0)
             {
                 strFilter = string.Format(strFilter + " and " + EXCHANGEID + " = '{0}'", cbexchange.SelectedValue);
             }
 
+            //通过交易所过滤
+            if (cbsecurity.SelectedIndex != 0)
+            {
+                strFilter = string.Format(strFilter + " and " + SECID + " = '{0}'", cbsecurity.SelectedValue);
+            }
+
+
+            //通过交易标识过滤
             if (cbtradeable.SelectedIndex != 0)
             {
                 int sv = int.Parse(cbtradeable.SelectedValue.ToString());
@@ -353,6 +371,7 @@ namespace TradingLib.MoniterControl
             cbsecurity.SelectedIndexChanged += new EventHandler(cbsecurity_SelectedIndexChanged);
             cbexchange.SelectedIndexChanged += new EventHandler(cbexchange_SelectedIndexChanged);
             cbtradeable.SelectedIndexChanged += new EventHandler(cbtradeable_SelectedIndexChanged);
+
             symgrid.DoubleClick +=new EventHandler(symgrid_DoubleClick);
             symgrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(symgrid_RowPrePaint);
 
@@ -380,6 +399,13 @@ namespace TradingLib.MoniterControl
         private void cbexchange_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.RefreshSecurityQuery();
+
+            //通过交易所ID获得该交易所所有合约
+            if (CoreService.BasicInfoTracker.Initialized)
+            {
+                int exid = (int)cbexchange.SelectedValue;
+                MoniterHelper.AdapterToIDataSource(cbsecurity).BindDataSource(CoreService.BasicInfoTracker.GetSecurityCombListViaExchange(exid,SecurityType.FUT,true));
+            }
         }
 
         private void symgrid_DoubleClick(object sender, EventArgs e)

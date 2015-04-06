@@ -11,27 +11,34 @@ namespace TradingLib.MoniterBase.Command
 {
     public class InitCommand : AbstractCommand
     {
+        /// <summary>
+        /// Workbench初始化默认控件
+        /// </summary>
         public override void Run()
         {
             Workbench workbench = Workbench.Instance;
-            workbench.ShowControl("ACCOUNTMONITER");
 
+            //帐户列表控件
             ctAccountMontier accountMoniter = new ctAccountMontier();
             accountMoniter.Dock = DockStyle.Fill;
             workbench.AppendControl(accountMoniter);
 
+            //交易记录控件
             ctTradingInfo infoMoniter = new ctTradingInfo();
             infoMoniter.Dock = DockStyle.Fill;
             workbench.AppendControl(infoMoniter);
 
+            //行情列表控件
             ctQuoteMoniter quoteMoniter = new ctQuoteMoniter();
             quoteMoniter.Dock = DockStyle.Fill;
             workbench.AppendControl(quoteMoniter);
 
+            //下单面板控件
             ctOrderPanel orderPanel = new ctOrderPanel();
             orderPanel.Dock = DockStyle.Fill;
             workbench.AppendControl(orderPanel);
 
+            //显示默认视区
             workbench.ShowControl("AccountMoniter", EnumControlLocation.TopPanel);
             workbench.ShowControl("TradingInfoMoniter", EnumControlLocation.BottomLeft);
             workbench.ShowControl("OrderPanel", EnumControlLocation.BottomRight);

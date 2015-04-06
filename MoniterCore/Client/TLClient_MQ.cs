@@ -393,6 +393,7 @@ namespace TradingLib.MoniterCore
 
                         TLSend(req);//向服务器发送clearClient消息用于注销客户端
                         _mqcli.Disconnect();
+                        debug("stop to hereh2");
                         markdisconnect();
                     }
                     catch (Exception ex){
@@ -557,6 +558,13 @@ namespace TradingLib.MoniterCore
             }
         }
 
+        /// <summary>
+        /// 启动行情通道
+        /// </summary>
+        public void StartTick()
+        {
+            connectTick();
+        }
         /// <summary>
         /// 首次连接tick数据服务
         /// </summary>
@@ -1033,6 +1041,7 @@ namespace TradingLib.MoniterCore
                 OnDisconnectEvent();
         }
 
+
         //当有服务特性返回如果对应的服务端支持tick则我们需要单独启动tick数据服务
         //我们使用不同的连接来处理数据以及请求当一个Provider同时满足数据和交易的要求时,我们的交易连接也会根据Featuresupport自动注册到服务端的Tick分发接口.在这里我们需要
         //对provider的类型进行验证.该TLClient所对应的连接是DataFeed还是Execution进行区分。这样数据就不会应为多次注册 造成Tick数据的重复
@@ -1043,7 +1052,7 @@ namespace TradingLib.MoniterCore
             if (_rfl.Contains(MessageTypes.TICKNOTIFY) && (ProviderType == QSEnumProviderType.DataFeed || ProviderType == QSEnumProviderType.Both))
             {
                 debug(_skip+"Spuuort Tick we subscribde tick data server",QSEnumDebugLevel.INFO);
-                new Thread(connectTick).Start();
+                // new Thread(connectTick).Start();
             }
         }
 

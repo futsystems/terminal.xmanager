@@ -89,7 +89,7 @@ namespace TradingLib.MoniterControl
             if (EnableAny)
             {
                 ValueObject<int> vo = new ValueObject<int>();
-                vo.Name = "<Any>";
+                vo.Name = MoniterUtil.AnyCBStr;
                 vo.Value = 0;
                 list.Add(vo);
             }

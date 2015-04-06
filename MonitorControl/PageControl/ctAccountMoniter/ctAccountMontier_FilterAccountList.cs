@@ -7,34 +7,12 @@ using TradingLib.Common;
 
 namespace TradingLib.MoniterControl
 {
-    internal class FilterArgs
-    {
-        //帐户状态 冻结 激活
-        public bool AcctExecuteEnable = false;
-        public bool AcctExecute = false;
-
-        //帐户类别
-        public bool AcctTypeEnable = false;
-        public QSEnumAccountCategory AcctType = QSEnumAccountCategory.REAL;
-
-        //所属代理商
-        public bool AgentEnable = false;
-        public int AgentID = 0;
-
-        //路由通道类别
-        public bool OrderRouterTypeEnable = false;
-        public QSEnumOrderTransferType OrderRouterType = QSEnumOrderTransferType.SIM;
+    
 
 
-        //路由组
-        public bool RouterGroupEnable = false;
-        public int RouterGroupID = 0;
-
-
-    }
     public partial class ctAccountMontier
     {
-        FilterArgs filterArgs = new FilterArgs();
+        FilterArgs filterArgs = ControlService.FilterArgs;
 
         #region 过滤帐户列表
 
@@ -154,6 +132,15 @@ namespace TradingLib.MoniterControl
                 strFilter = string.Format(strFilter + " and " + AGENTMGRFK + " = '{0}'", filterArgs.AgentID);
             }
 
+            if (filterArgs.MAcctConnectedEnable)
+            {
+                strFilter = string.Format(strFilter + " and " + MACTCONNSTATUS + " = '{0}'", filterArgs.MAcctConnected);
+            }
+
+            if (filterArgs.MAcctBindedEnable)
+            {
+                strFilter = string.Format(strFilter + " and " + MAINACCOUNTBINDED + " = '{0}'", filterArgs.MAcctBinded);
+            }
             ////登入
             //if (accLogin.Checked)
             //{
@@ -166,10 +153,10 @@ namespace TradingLib.MoniterControl
             //}
             //帐户检索
             //string acctstr = acct.Text;
-            string acctstr = string.Empty;
-            if (!string.IsNullOrEmpty(acctstr))
+            //string acctstr = string.Empty;
+            if (!string.IsNullOrEmpty(filterArgs.AcctFilter))
             {
-                strFilter = string.Format(strFilter + " and " + ACCOUNT + " like '{0}*'", acctstr);
+                strFilter = string.Format(strFilter + " and " + ACCOUNT + " like '{0}*'", filterArgs.AcctFilter);
             }
 
 

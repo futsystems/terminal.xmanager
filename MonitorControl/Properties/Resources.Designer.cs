@@ -74,6 +74,13 @@ namespace TradingLib.MoniterControl.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap close_16 {
+            get {
+                object obj = ResourceManager.GetObject("close_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap connect {
             get {
                 object obj = ResourceManager.GetObject("connect", resourceCulture);
@@ -84,6 +91,27 @@ namespace TradingLib.MoniterControl.Properties {
         internal static System.Drawing.Bitmap disconnect {
             get {
                 object obj = ResourceManager.GetObject("disconnect", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap folder {
+            get {
+                object obj = ResourceManager.GetObject("folder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap folder_sel {
+            get {
+                object obj = ResourceManager.GetObject("folder_sel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap items {
+            get {
+                object obj = ResourceManager.GetObject("items", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

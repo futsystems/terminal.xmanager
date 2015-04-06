@@ -50,7 +50,8 @@ namespace ICSharpCode.Core
 							if (pos < 0)
 								throw new ApplicationException("Expected '/' in path beginning with '$'!");
 							string referencedAddIn = assembly.Substring(1, pos - 1);
-							foreach (AddIn addIn in AddInTree.AddIns) {
+							foreach (AddIn addIn in AddInTree.AddIns) 
+                            {
 								if (addIn.Enabled && addIn.Manifest.Identities.ContainsKey(referencedAddIn)) {
 									string assemblyFile = Path.Combine(Path.GetDirectoryName(addIn.FileName),
 									                                   assembly.Substring(pos + 1));

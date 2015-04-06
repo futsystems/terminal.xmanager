@@ -30,7 +30,13 @@ namespace TradingLib.MoniterControl
         void fmTaskMoniter_Load(object sender, EventArgs e)
         {
             taskgrid.DoubleClick += new EventHandler(taskgrid_DoubleClick);
+            taskgrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(taskgrid_RowPrePaint);
             CoreService.EventCore.RegIEventHandler(this);
+        }
+
+        void taskgrid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            e.PaintParts = e.PaintParts ^ DataGridViewPaintParts.Focus;
         }
 
         //得到当前选择的行号
@@ -165,7 +171,7 @@ namespace TradingLib.MoniterControl
         const string TASKMEMO = "任务描述";
         const string DATE = "完成日期";
         const string TIME = "完成时间";
-        const string RESULT = "状态";
+        const string RESULT = "执行结果";
         //const string EXCEPTION = "异常内容";
 
         #endregion
@@ -206,13 +212,16 @@ namespace TradingLib.MoniterControl
         private void InitTable()
         {
             gt.Columns.Add(ID);//0
+            
+            gt.Columns.Add(DATE);//1
+            gt.Columns.Add(TIME);
             gt.Columns.Add(SETTLEDAY);//0
             gt.Columns.Add(TASKNAME);//1
             gt.Columns.Add(TASKTYPE);//1
             gt.Columns.Add(TASKMEMO);
 
-            gt.Columns.Add(DATE);//1
-            gt.Columns.Add(TIME);
+            
+            
             gt.Columns.Add(RESULT,typeof(Image));//1
             //gt.Columns.Add(EXCEPTION);
         }
@@ -228,6 +237,9 @@ namespace TradingLib.MoniterControl
             datasource.DataSource = gt;
             grid.DataSource = datasource;
             grid.Columns[ID].Visible = false;
+            grid.Columns[TASKTYPE].Visible = false;
+            grid.Columns[TASKMEMO].Visible = false;
+            grid.Columns[SETTLEDAY].Visible = false;
 
             grid.Columns[SETTLEDAY].Width = 80;
             grid.Columns[TASKNAME].Width = 150;
@@ -235,7 +247,7 @@ namespace TradingLib.MoniterControl
             grid.Columns[TASKMEMO].Width = 200;
             grid.Columns[DATE].Width = 80;
             grid.Columns[TIME].Width = 80;
-            grid.Columns[RESULT].Width = 60;
+            grid.Columns[RESULT].Width = 80;
 
         }
 

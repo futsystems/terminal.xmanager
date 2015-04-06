@@ -23,6 +23,8 @@ namespace TradingLib.MoniterBase
         public event VoidDelegate ResetEvent;
 
         Starter mStart;
+        StatusStrip status;
+        ToolStripStatusLabel lbLoginStatus;
         public LoginForm(Starter start)
         {
             logger.Debug("loginform init....");
@@ -32,6 +34,13 @@ namespace TradingLib.MoniterBase
             mStart = start;
             btnLogin.Enabled = false;
 
+            status = new StatusStrip();
+            lbLoginStatus = new ToolStripStatusLabel();
+            status.RenderMode = ToolStripRenderMode.ManagerRenderMode;
+            status.Items.Add(lbLoginStatus);
+            kryptonPanel1.Controls.Add(status);
+
+            //statusStrip1.RenderMode = ToolStripRenderMode.ManagerRenderMode;
 
             //if (Globals.Config["HeaderImg"].AsString() == "OEM")
             //{
@@ -89,7 +98,7 @@ namespace TradingLib.MoniterBase
         { 
             btnLogin.Click +=new EventHandler(btnLogin_Click);
             btnExit.Click += new EventHandler(btnExit_LinkClicked);
-
+            this.FormClosing += new FormClosingEventHandler(LoginForm_FormClosing);
             CoreService.EventCore.OnConnectedEvent += new VoidDelegate(EventCore_OnConnectedEvent);
             CoreService.EventCore.OnDisconnectedEvent += new VoidDelegate(EventCore_OnDisconnectedEvent);
             CoreService.EventCore.OnLoginEvent += new Action<RspMGRLoginResponse>(EventCore_OnLoginEvent);
@@ -98,6 +107,11 @@ namespace TradingLib.MoniterBase
 
             this.AcceptButton = btnLogin;
             //this.CancelButton = btnExit;
+        }
+
+        void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
 
 
@@ -190,6 +204,7 @@ namespace TradingLib.MoniterBase
             {
                 ShowLoginStatus("登入失败:" + response.RspInfo.ErrorMessage);
                 _loggedin = false;
+                Reset();
                 //_loginfailresonse = response.RspInfo.ErrorMessage;
             }
         }
@@ -270,10 +285,24 @@ namespace TradingLib.MoniterBase
             }
         }
 
+        /// <summary>
+        /// 重置异常连接并恢复界面状态
+        /// </summary>
         void Reset()
         {
-            if (ResetEvent != null)
-                ResetEvent();
+            new Thread(delegate()
+            {
+                _connectstart = false;
+                _loginstart = false;
+                _gotloginrep = false;
+                _qrybasicinfo = false;
+                CoreService.TLClient.Stop();
+                this.btnLogin.Enabled = true;
+                //lbLoginStatus.Text = "请登入";
+            }).Start();
+            //this.btnLogin.Enabled = false;
+            //if (ResetEvent != null)
+            //    ResetEvent();
             //Globals.LoginStatus.IsInitSuccess = false;
             //Globals.LoginStatus.IsReported = false;
             //Globals.LoginStatus.needReport = false;
@@ -305,7 +334,7 @@ namespace TradingLib.MoniterBase
                     ShowLoginStatus("连接超时,无法连接到服务器");
                     _connectstart = false;
                     _connected = false;
-                    //
+                    Reset();
                     this.EnableLogin();
                 }
 
@@ -317,7 +346,7 @@ namespace TradingLib.MoniterBase
                     //_initerror = true;
                     _loginstart = false;
                     _gotloginrep = false;
-                    //
+                    Reset();
                     this.EnableLogin();
                 }
                 if (_qrybasicinfo && (DateTime.Now - qrybasicinfoTime).TotalSeconds > 10 && (!initsuccess))
@@ -326,6 +355,8 @@ namespace TradingLib.MoniterBase
                     ShowLoginStatus("获取基础数据失败,请重新登入");
                     _qrybasicinfo = false;
 
+                    Reset();
+                    this.EnableLogin();
                 }
 
                 //if (Globals.LoginStatus.IsInitSuccess && !Globals.LoginStatus.IsReported)

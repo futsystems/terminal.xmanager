@@ -69,6 +69,8 @@ namespace TradingLib.MoniterControl
             if (type == QSEnumChargeType.Percent)
             {
                 gbConfig.Enabled = false;
+                gbConfig2.Enabled = false;
+
                 gbPercent.Enabled = true;
 
                 openbyvolume.Value = 0;
@@ -82,6 +84,7 @@ namespace TradingLib.MoniterControl
             else
             {
                 gbConfig.Enabled = true;
+                gbConfig2.Enabled = true;
                 gbPercent.Enabled = false;
 
                 percent.Value = 0;
@@ -196,7 +199,7 @@ namespace TradingLib.MoniterControl
         public void SetCommissionTemplateItem(CommissionTemplateItemSetting item)
         {
             _item = item;
-            id.Text = _item.ID.ToString();
+            //id.Text = _item.ID.ToString();
             code.Text = _item.Code;
             openbymoney.Value = _item.OpenByMoney;
             openbyvolume.Value = _item.OpenByVolume;

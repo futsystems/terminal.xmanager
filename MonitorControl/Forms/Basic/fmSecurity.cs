@@ -24,7 +24,7 @@ namespace TradingLib.MoniterControl
             InitTable();
             BindToTable();
 
-            MoniterHelper.AdapterToIDataSource(cbsecurity).BindDataSource(MoniterHelper.GetEnumValueObjects<SecurityType>(true));
+            //MoniterHelper.AdapterToIDataSource(cbsecurity).BindDataSource(MoniterHelper.GetEnumValueObjects<SecurityType>(true));
             MoniterHelper.AdapterToIDataSource(cbtradeable).BindDataSource(MoniterHelper.GetTradeableCBList(true));
             MoniterHelper.AdapterToIDataSource(cbexchange).BindDataSource(CoreService.BasicInfoTracker.GetExchangeCombList(true));
   
@@ -83,6 +83,9 @@ namespace TradingLib.MoniterControl
             }
             else
             {
+                //只处理期货品种
+                if (sec.Type != SecurityType.FUT) return;
+
                 int r = SecurityFamilyIdx(sec.ID);
                 if (r == -1)
                 {
@@ -106,7 +109,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][MAINTANCEMARGIN] = sec.MaintanceMargin;
                     gt.Rows[i][EXCHANGEID] = sec.exchange_fk;
                     sec.Exchange = CoreService.BasicInfoTracker.GetExchange(sec.exchange_fk);
-                    gt.Rows[i][EXCHANGE] = sec.Exchange != null ? sec.Exchange.EXCode : "未设置";
+                    gt.Rows[i][EXCHANGE] = sec.Exchange != null ? sec.Exchange.Title : "未设置";
                     gt.Rows[i][UNDERLAYINGID] = sec.underlaying_fk;
                     gt.Rows[i][UNDERLAYING] = "";
                     gt.Rows[i][MARKETTIMEID] = sec.mkttime_fk;
@@ -163,7 +166,7 @@ namespace TradingLib.MoniterControl
                         gt.Rows[i][EXTRAMARGIN] = target.ExtraMargin;
                         gt.Rows[i][MAINTANCEMARGIN] = target.MaintanceMargin;
                         gt.Rows[i][EXCHANGEID] = target.exchange_fk;
-                        gt.Rows[i][EXCHANGE] = target.Exchange != null ? target.Exchange.EXCode : "未设置";
+                        gt.Rows[i][EXCHANGE] = target.Exchange != null ? target.Exchange.Title : "未设置";
                         gt.Rows[i][UNDERLAYINGID] = target.underlaying_fk;
                         gt.Rows[i][UNDERLAYING] = "";
                         gt.Rows[i][MARKETTIMEID] = target.mkttime_fk;
@@ -182,12 +185,12 @@ namespace TradingLib.MoniterControl
         #region 显示字段
 
         const string ID = "全局ID";
-        const string CCODE = "品种编码";
+        const string CCODE = "字头";
         const string NAME = "名称";
         const string CURRENCY = "货币";
         const string TYPE = "证券品种";
         const string MULTIPLE = "乘数";
-        const string PRICETICK = "最小价格变动";
+        const string PRICETICK = "价格变动";
         //const string TRADABLE = "是否交易";
         const string ENTRYCOMMISSION = "开仓手续费";
         const string EXITCOMMISSION = "平仓手续费";
@@ -199,9 +202,9 @@ namespace TradingLib.MoniterControl
         const string UNDERLAYINGID = "UnderLayingID";
         const string UNDERLAYING = "底层证券";
         const string MARKETTIMEID = "MarketTimeID";
-        const string MARKETTIME = "市场交易时间";
+        const string MARKETTIME = "交易时间段";
         const string TRADEABLE = "TRADEABLE";
-        const string TRADEABLETITLE = "是否可交易";
+        const string TRADEABLETITLE = "允许交易";
 
         #endregion
 
@@ -239,6 +242,11 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(NAME);//
             gt.Columns.Add(CURRENCY);//
             gt.Columns.Add(TYPE);//
+            gt.Columns.Add(EXCHANGEID);//
+            gt.Columns.Add(EXCHANGE);//
+            gt.Columns.Add(MARKETTIMEID);//
+            gt.Columns.Add(MARKETTIME);//
+
             gt.Columns.Add(MULTIPLE);//
             gt.Columns.Add(PRICETICK);//
             //gt.Columns.Add(TRADABLE);//
@@ -247,12 +255,10 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(MARGIN);//
             gt.Columns.Add(EXTRAMARGIN);//
             gt.Columns.Add(MAINTANCEMARGIN);//
-            gt.Columns.Add(EXCHANGEID);//
-            gt.Columns.Add(EXCHANGE);//
+            
             gt.Columns.Add(UNDERLAYINGID);//
             gt.Columns.Add(UNDERLAYING);//
-            gt.Columns.Add(MARKETTIMEID);//
-            gt.Columns.Add(MARKETTIME);//
+            
             gt.Columns.Add(TRADEABLE);
             gt.Columns.Add(TRADEABLETITLE);
         }
@@ -268,6 +274,11 @@ namespace TradingLib.MoniterControl
             grid.DataSource = datasource;
 
             //需要在绑定数据源后设定具体的可见性
+            grid.Columns[ID].Visible = false;
+            grid.Columns[CURRENCY].Visible = false;
+            grid.Columns[UNDERLAYING].Visible = false;
+            grid.Columns[TYPE].Visible = false;
+
             grid.Columns[EXCHANGEID].Visible = false;
             grid.Columns[UNDERLAYINGID].Visible = false;
             grid.Columns[MARKETTIMEID].Visible = false;
@@ -287,26 +298,30 @@ namespace TradingLib.MoniterControl
         void RefreshSecurityQuery()
         {
             string sectype = string.Empty;
-            if (cbsecurity.SelectedIndex == 0)
-            {
-                sectype = "*";
-            }
-            else
-            {
-                sectype = cbsecurity.SelectedValue.ToString();
-            }
+            sectype = "*";
+
+            //if (cbsecurity.SelectedIndex == 0)
+            //{
+            //    sectype = "*";
+            //}
+            //else
+            //{
+            //    sectype = cbsecurity.SelectedValue.ToString();
+            //}
 
 
             string strFilter = string.Empty;
 
-            if (cbsecurity.SelectedIndex == 0)
-            {
-                strFilter = string.Format(TYPE + " > '{0}'", sectype);
-            }
-            else
-            {
-                strFilter = string.Format(TYPE + " = '{0}'", sectype);
-            }
+            //if (cbsecurity.SelectedIndex == 0)
+            //{
+            //    strFilter = string.Format(TYPE + " > '{0}'", sectype);
+            //}
+            //else
+            //{
+            //    strFilter = string.Format(TYPE + " = '{0}'", sectype);
+            //}
+
+            strFilter = string.Format(TYPE + " > '{0}'", sectype);
 
             if (cbexchange.SelectedIndex != 0)
             {
@@ -375,7 +390,7 @@ namespace TradingLib.MoniterControl
         void WireEvent()
         {
             CoreService.EventCore.RegIEventHandler(this);
-            cbsecurity.SelectedIndexChanged += new EventHandler(cbsecurity_SelectedIndexChanged);
+            //cbsecurity.SelectedIndexChanged += new EventHandler(cbsecurity_SelectedIndexChanged);
             cbexchange.SelectedIndexChanged += new EventHandler(cbexchange_SelectedIndexChanged);
             cbtradeable.SelectedIndexChanged += new EventHandler(cbtradeable_SelectedIndexChanged);
 

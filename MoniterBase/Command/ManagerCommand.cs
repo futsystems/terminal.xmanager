@@ -19,6 +19,7 @@ namespace TradingLib.MoniterBase.Command
         {
             fmManagerCentre fm = new fmManagerCentre();
             fm.ShowDialog();
+            fm.Close();
         }
     }
 }

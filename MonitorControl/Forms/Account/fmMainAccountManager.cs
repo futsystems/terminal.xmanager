@@ -14,9 +14,9 @@ using TradingLib.MoniterCore;
 
 namespace TradingLib.MoniterControl
 {
-    public partial class fmConnectorAccountInfo : ComponentFactory.Krypton.Toolkit.KryptonForm, IEventBinder
+    public partial class fmMainAccountManager : ComponentFactory.Krypton.Toolkit.KryptonForm, IEventBinder
     {
-        public fmConnectorAccountInfo()
+        public fmMainAccountManager()
         {
             InitializeComponent();
             this.Load += new EventHandler(fmConnectorAccountInfo_Load);
@@ -26,7 +26,7 @@ namespace TradingLib.MoniterControl
         public void SetAccount(AccountLite acc)
         {
             account = acc;
-            this.Text = string.Format("主帐户查询与出入金【{0}】-{1}",account.ConnectorToken,acc.Account);
+            this.Text = string.Format("主帐户管理【{0}】-{1}",account.ConnectorToken,acc.Account);
             
 
         }

@@ -19,6 +19,7 @@ namespace TradingLib.MoniterBase.Command
         {
             fmMarketTime fm = new fmMarketTime();
             fm.ShowDialog();
+            fm.Close();
         }
     }
 
@@ -31,6 +32,7 @@ namespace TradingLib.MoniterBase.Command
         {
             fmExchange fm = new fmExchange();
             fm.ShowDialog();
+            fm.Close();
         }
     }
 
@@ -43,6 +45,7 @@ namespace TradingLib.MoniterBase.Command
         {
             fmSecurity fm = new fmSecurity();
             fm.ShowDialog();
+            fm.Close();
         }
     }
 
@@ -56,6 +59,7 @@ namespace TradingLib.MoniterBase.Command
         {
             fmSymbol fm = new fmSymbol();
             fm.ShowDialog();
+            fm.Close();
         }
     }
 
@@ -68,6 +72,7 @@ namespace TradingLib.MoniterBase.Command
         {
             fmSyncSymbol fm = new fmSyncSymbol();
             fm.ShowDialog();
+            fm.Close();
         }
     }
     /// <summary>
@@ -79,6 +84,7 @@ namespace TradingLib.MoniterBase.Command
         {
             fmCommission fm = new fmCommission();
             fm.ShowDialog();
+            fm.Close();
         }
     }
 
@@ -91,6 +97,7 @@ namespace TradingLib.MoniterBase.Command
         {
             fmMargin fm = new fmMargin();
             fm.ShowDialog();
+            fm.Close();
         }
     }
 
@@ -103,6 +110,7 @@ namespace TradingLib.MoniterBase.Command
         {
             fmExStrategy fm = new fmExStrategy();
             fm.ShowDialog();
+            fm.Close();
         }
     }
 }

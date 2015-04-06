@@ -10,7 +10,7 @@ namespace TradingLib.MoniterControl
         /// <summary>
         /// 通道token
         /// </summary>
-        public static System.Text.RegularExpressions.Regex ConnectorToken = new System.Text.RegularExpressions.Regex(@"^[A-Za-z0-9-]+$");
+        public static System.Text.RegularExpressions.Regex ConnectorToken = new System.Text.RegularExpressions.Regex(@"^[A-Za-z0-9]+$");
 
         /// <summary>
         /// 路由组标识

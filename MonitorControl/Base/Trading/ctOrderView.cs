@@ -295,6 +295,8 @@ namespace TradingLib.MoniterControl
             orderGrid.CellDoubleClick +=new DataGridViewCellEventHandler(orderGrid_CellDoubleClick);
             orderGrid.CellFormatting += new DataGridViewCellFormattingEventHandler(orderGrid_CellFormatting);
             orderGrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(orderGrid_RowPrePaint);
+
+            
         }
 
         void orderGrid_SizeChanged(object sender, EventArgs e)
