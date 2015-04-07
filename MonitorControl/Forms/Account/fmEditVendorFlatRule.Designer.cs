@@ -41,12 +41,18 @@
             this.flatlevel = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.lbFlat = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.lbWarn = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.lbNight = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.lbNight);
+            this.kryptonPanel1.Controls.Add(this.lbWarn);
+            this.kryptonPanel1.Controls.Add(this.lbFlat);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel7);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel6);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel5);
@@ -62,7 +68,7 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(340, 208);
+            this.kryptonPanel1.Size = new System.Drawing.Size(276, 167);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // kryptonLabel7
@@ -100,11 +106,12 @@
             this.equity.Name = "equity";
             this.equity.Size = new System.Drawing.Size(84, 20);
             this.equity.TabIndex = 8;
+            this.equity.ValueChanged += new System.EventHandler(this.equity_ValueChanged);
             // 
             // btnSubmit
             // 
             this.btnSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSubmit.Location = new System.Drawing.Point(258, 171);
+            this.btnSubmit.Location = new System.Drawing.Point(194, 130);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(70, 25);
             this.btnSubmit.TabIndex = 1;
@@ -112,11 +119,11 @@
             // 
             // kryptonLabel4
             // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(12, 12);
+            this.kryptonLabel4.Location = new System.Drawing.Point(26, 12);
             this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(82, 18);
+            this.kryptonLabel4.Size = new System.Drawing.Size(68, 18);
             this.kryptonLabel4.TabIndex = 6;
-            this.kryptonLabel4.Values.Text = "期初始权益:";
+            this.kryptonLabel4.Values.Text = "初始权益:";
             // 
             // nighthold
             // 
@@ -139,6 +146,7 @@
             0,
             0,
             0});
+            this.nighthold.ValueChanged += new System.EventHandler(this.nighthold_ValueChanged);
             // 
             // kryptonLabel3
             // 
@@ -164,6 +172,7 @@
             0,
             0,
             0});
+            this.warnlevel.ValueChanged += new System.EventHandler(this.warnlevel_ValueChanged);
             // 
             // flatlevel
             // 
@@ -181,6 +190,7 @@
             0,
             0,
             0});
+            this.flatlevel.ValueChanged += new System.EventHandler(this.flatlevel_ValueChanged);
             // 
             // kryptonLabel2
             // 
@@ -198,12 +208,39 @@
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "强平线:";
             // 
+            // lbFlat
+            // 
+            this.lbFlat.Location = new System.Drawing.Point(188, 37);
+            this.lbFlat.Name = "lbFlat";
+            this.lbFlat.Size = new System.Drawing.Size(19, 18);
+            this.lbFlat.TabIndex = 12;
+            this.lbFlat.Values.Text = "--";
+            // 
+            // lbWarn
+            // 
+            this.lbWarn.Location = new System.Drawing.Point(188, 60);
+            this.lbWarn.Name = "lbWarn";
+            this.lbWarn.Size = new System.Drawing.Size(19, 18);
+            this.lbWarn.TabIndex = 13;
+            this.lbWarn.Values.Text = "--";
+            // 
+            // lbNight
+            // 
+            this.lbNight.Location = new System.Drawing.Point(188, 87);
+            this.lbNight.Name = "lbNight";
+            this.lbNight.Size = new System.Drawing.Size(19, 18);
+            this.lbNight.TabIndex = 14;
+            this.lbNight.Values.Text = "--";
+            // 
             // fmEditVendorFlatRule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(340, 208);
+            this.ClientSize = new System.Drawing.Size(276, 167);
             this.Controls.Add(this.kryptonPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "fmEditVendorFlatRule";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "强平设置";
@@ -229,5 +266,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel6;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lbNight;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lbWarn;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lbFlat;
     }
 }

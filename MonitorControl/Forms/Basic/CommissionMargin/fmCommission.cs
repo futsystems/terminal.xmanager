@@ -71,8 +71,6 @@ namespace TradingLib.MoniterControl
         {
             ComponentFactory.Krypton.Toolkit.KryptonTreeNode item = new ComponentFactory.Krypton.Toolkit.KryptonTreeNode();
             item.Text = template.ToString();
-            //item.ImageIndex = _rand.Next(imageList.Images.Count - 1);
-            //item.SelectedImageIndex = item.ImageIndex;
             item.ImageIndex = 0;
             item.SelectedImageIndex = 1;
             item.Tag = template;

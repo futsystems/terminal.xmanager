@@ -29,19 +29,23 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.gbConfig2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.closetodaybymoney = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
+            this.closetodaybyvolume = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
+            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel9 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.setAllCodeMonth = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.gbPercent = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.percent = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.gbConfig = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.openbymoney = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.byvolume = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             this.openbyvolume = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.bymoney = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
-            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.closetodaybymoney = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
-            this.closetodaybyvolume = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.closebymoney = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.closebyvolume = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -53,12 +57,11 @@
             this.code = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel9 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.gbConfig2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gbConfig2)).BeginInit();
+            this.gbConfig2.Panel.SuspendLayout();
+            this.gbConfig2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gbPercent)).BeginInit();
             this.gbPercent.Panel.SuspendLayout();
             this.gbPercent.SuspendLayout();
@@ -67,9 +70,6 @@
             this.gbConfig.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.month)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chargetype)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gbConfig2)).BeginInit();
-            this.gbConfig2.Panel.SuspendLayout();
-            this.gbConfig2.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
@@ -92,6 +92,53 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(390, 456);
             this.kryptonPanel1.TabIndex = 0;
             // 
+            // gbConfig2
+            // 
+            this.gbConfig2.Location = new System.Drawing.Point(12, 209);
+            this.gbConfig2.Name = "gbConfig2";
+            // 
+            // gbConfig2.Panel
+            // 
+            this.gbConfig2.Panel.Controls.Add(this.closetodaybymoney);
+            this.gbConfig2.Panel.Controls.Add(this.closetodaybyvolume);
+            this.gbConfig2.Panel.Controls.Add(this.kryptonLabel5);
+            this.gbConfig2.Panel.Controls.Add(this.kryptonLabel9);
+            this.gbConfig2.Size = new System.Drawing.Size(363, 72);
+            this.gbConfig2.TabIndex = 32;
+            this.gbConfig2.Values.Heading = "仅上期所有效";
+            // 
+            // closetodaybymoney
+            // 
+            this.closetodaybymoney.DecimalPlaces = 6;
+            this.closetodaybymoney.Location = new System.Drawing.Point(213, 3);
+            this.closetodaybymoney.Name = "closetodaybymoney";
+            this.closetodaybymoney.Size = new System.Drawing.Size(131, 20);
+            this.closetodaybymoney.TabIndex = 8;
+            // 
+            // closetodaybyvolume
+            // 
+            this.closetodaybyvolume.DecimalPlaces = 6;
+            this.closetodaybyvolume.Location = new System.Drawing.Point(213, 29);
+            this.closetodaybyvolume.Name = "closetodaybyvolume";
+            this.closetodaybyvolume.Size = new System.Drawing.Size(131, 20);
+            this.closetodaybyvolume.TabIndex = 9;
+            // 
+            // kryptonLabel5
+            // 
+            this.kryptonLabel5.Location = new System.Drawing.Point(3, 3);
+            this.kryptonLabel5.Name = "kryptonLabel5";
+            this.kryptonLabel5.Size = new System.Drawing.Size(82, 18);
+            this.kryptonLabel5.TabIndex = 7;
+            this.kryptonLabel5.Values.Text = "平今手续费:";
+            // 
+            // kryptonLabel9
+            // 
+            this.kryptonLabel9.Location = new System.Drawing.Point(3, 27);
+            this.kryptonLabel9.Name = "kryptonLabel9";
+            this.kryptonLabel9.Size = new System.Drawing.Size(131, 18);
+            this.kryptonLabel9.TabIndex = 28;
+            this.kryptonLabel9.Values.Text = "开仓手续费(按数量):";
+            // 
             // setAllCodeMonth
             // 
             this.setAllCodeMonth.Location = new System.Drawing.Point(100, 404);
@@ -111,7 +158,7 @@
             this.gbPercent.Panel.Controls.Add(this.percent);
             this.gbPercent.Size = new System.Drawing.Size(363, 57);
             this.gbPercent.TabIndex = 30;
-            this.gbPercent.Values.Heading = "百分比";
+            this.gbPercent.Values.Heading = "按比例上浮";
             // 
             // kryptonLabel7
             // 
@@ -119,7 +166,7 @@
             this.kryptonLabel7.Name = "kryptonLabel7";
             this.kryptonLabel7.Size = new System.Drawing.Size(68, 18);
             this.kryptonLabel7.TabIndex = 29;
-            this.kryptonLabel7.Values.Text = "加收比例:";
+            this.kryptonLabel7.Values.Text = "上浮比例:";
             // 
             // percent
             // 
@@ -155,13 +202,29 @@
             this.gbConfig.TabIndex = 27;
             this.gbConfig.Values.Heading = "费率设置";
             // 
+            // kryptonLabel10
+            // 
+            this.kryptonLabel10.Location = new System.Drawing.Point(3, 111);
+            this.kryptonLabel10.Name = "kryptonLabel10";
+            this.kryptonLabel10.Size = new System.Drawing.Size(131, 18);
+            this.kryptonLabel10.TabIndex = 29;
+            this.kryptonLabel10.Values.Text = "开仓手续费(按数量):";
+            // 
+            // kryptonLabel8
+            // 
+            this.kryptonLabel8.Location = new System.Drawing.Point(3, 59);
+            this.kryptonLabel8.Name = "kryptonLabel8";
+            this.kryptonLabel8.Size = new System.Drawing.Size(131, 18);
+            this.kryptonLabel8.TabIndex = 27;
+            this.kryptonLabel8.Values.Text = "开仓手续费(按数量):";
+            // 
             // kryptonLabel4
             // 
             this.kryptonLabel4.Location = new System.Drawing.Point(3, 31);
             this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(175, 18);
+            this.kryptonLabel4.Size = new System.Drawing.Size(162, 18);
             this.kryptonLabel4.TabIndex = 4;
-            this.kryptonLabel4.Values.Text = "开仓手续费(按金额,万分之):";
+            this.kryptonLabel4.Values.Text = "开仓手续费(按金额,比例):";
             // 
             // openbymoney
             // 
@@ -195,30 +258,6 @@
             this.bymoney.TabIndex = 25;
             this.bymoney.Values.Text = "按金额";
             // 
-            // kryptonLabel5
-            // 
-            this.kryptonLabel5.Location = new System.Drawing.Point(3, 3);
-            this.kryptonLabel5.Name = "kryptonLabel5";
-            this.kryptonLabel5.Size = new System.Drawing.Size(82, 18);
-            this.kryptonLabel5.TabIndex = 7;
-            this.kryptonLabel5.Values.Text = "平今手续费:";
-            // 
-            // closetodaybymoney
-            // 
-            this.closetodaybymoney.DecimalPlaces = 6;
-            this.closetodaybymoney.Location = new System.Drawing.Point(213, 3);
-            this.closetodaybymoney.Name = "closetodaybymoney";
-            this.closetodaybymoney.Size = new System.Drawing.Size(131, 20);
-            this.closetodaybymoney.TabIndex = 8;
-            // 
-            // closetodaybyvolume
-            // 
-            this.closetodaybyvolume.DecimalPlaces = 6;
-            this.closetodaybyvolume.Location = new System.Drawing.Point(213, 29);
-            this.closetodaybyvolume.Name = "closetodaybyvolume";
-            this.closetodaybyvolume.Size = new System.Drawing.Size(131, 20);
-            this.closetodaybyvolume.TabIndex = 9;
-            // 
             // closebymoney
             // 
             this.closebymoney.DecimalPlaces = 6;
@@ -239,9 +278,9 @@
             // 
             this.kryptonLabel6.Location = new System.Drawing.Point(3, 83);
             this.kryptonLabel6.Name = "kryptonLabel6";
-            this.kryptonLabel6.Size = new System.Drawing.Size(175, 18);
+            this.kryptonLabel6.Size = new System.Drawing.Size(162, 18);
             this.kryptonLabel6.TabIndex = 12;
-            this.kryptonLabel6.Values.Text = "平仓手续费(按金额,万分之):";
+            this.kryptonLabel6.Values.Text = "平仓手续费(按金额,比例):";
             // 
             // setAllMonth
             // 
@@ -307,52 +346,13 @@
             this.kryptonLabel2.TabIndex = 2;
             this.kryptonLabel2.Values.Text = "品种代码:";
             // 
-            // kryptonLabel8
-            // 
-            this.kryptonLabel8.Location = new System.Drawing.Point(3, 59);
-            this.kryptonLabel8.Name = "kryptonLabel8";
-            this.kryptonLabel8.Size = new System.Drawing.Size(131, 18);
-            this.kryptonLabel8.TabIndex = 27;
-            this.kryptonLabel8.Values.Text = "开仓手续费(按数量):";
-            // 
-            // kryptonLabel9
-            // 
-            this.kryptonLabel9.Location = new System.Drawing.Point(3, 27);
-            this.kryptonLabel9.Name = "kryptonLabel9";
-            this.kryptonLabel9.Size = new System.Drawing.Size(131, 18);
-            this.kryptonLabel9.TabIndex = 28;
-            this.kryptonLabel9.Values.Text = "开仓手续费(按数量):";
-            // 
-            // kryptonLabel10
-            // 
-            this.kryptonLabel10.Location = new System.Drawing.Point(3, 111);
-            this.kryptonLabel10.Name = "kryptonLabel10";
-            this.kryptonLabel10.Size = new System.Drawing.Size(131, 18);
-            this.kryptonLabel10.TabIndex = 29;
-            this.kryptonLabel10.Values.Text = "开仓手续费(按数量):";
-            // 
-            // gbConfig2
-            // 
-            this.gbConfig2.Location = new System.Drawing.Point(12, 209);
-            this.gbConfig2.Name = "gbConfig2";
-            // 
-            // gbConfig2.Panel
-            // 
-            this.gbConfig2.Panel.Controls.Add(this.closetodaybymoney);
-            this.gbConfig2.Panel.Controls.Add(this.closetodaybyvolume);
-            this.gbConfig2.Panel.Controls.Add(this.kryptonLabel5);
-            this.gbConfig2.Panel.Controls.Add(this.kryptonLabel9);
-            this.gbConfig2.Size = new System.Drawing.Size(363, 72);
-            this.gbConfig2.TabIndex = 32;
-            this.gbConfig2.Values.Heading = "仅上期所有效";
-            // 
             // fmCommissionTemplateItemEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(390, 456);
             this.Controls.Add(this.kryptonPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "fmCommissionTemplateItemEdit";
@@ -361,6 +361,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
+            this.gbConfig2.Panel.ResumeLayout(false);
+            this.gbConfig2.Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gbConfig2)).EndInit();
+            this.gbConfig2.ResumeLayout(false);
             this.gbPercent.Panel.ResumeLayout(false);
             this.gbPercent.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gbPercent)).EndInit();
@@ -371,10 +375,6 @@
             this.gbConfig.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.month)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chargetype)).EndInit();
-            this.gbConfig2.Panel.ResumeLayout(false);
-            this.gbConfig2.Panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gbConfig2)).EndInit();
-            this.gbConfig2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

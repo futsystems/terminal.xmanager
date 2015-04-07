@@ -101,5 +101,27 @@ namespace TradingLib.MoniterControl
         {
             CoreService.TLClient.ReqContribRequest("RiskCentre", "QryVendorFlatRule", account);
         }
+
+        private void equity_ValueChanged(object sender, EventArgs e)
+        {
+            lbFlat.Text = (equity.Value * flatlevel.Value / 100).ToString();
+            lbWarn.Text = (equity.Value * warnlevel.Value / 100).ToString();
+            lbNight.Text = (equity.Value * nighthold.Value).ToString();
+        }
+
+        private void flatlevel_ValueChanged(object sender, EventArgs e)
+        {
+            lbFlat.Text = (equity.Value * flatlevel.Value / 100).ToString();
+        }
+
+        private void warnlevel_ValueChanged(object sender, EventArgs e)
+        {
+            lbWarn.Text = (equity.Value * warnlevel.Value / 100).ToString();
+        }
+
+        private void nighthold_ValueChanged(object sender, EventArgs e)
+        {
+            lbNight.Text = (equity.Value * nighthold.Value).ToString();
+        }
     }
 }

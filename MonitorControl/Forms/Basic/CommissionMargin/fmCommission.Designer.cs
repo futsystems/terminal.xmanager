@@ -49,7 +49,7 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(851, 442);
+            this.kryptonPanel1.Size = new System.Drawing.Size(844, 476);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // tempateTree
@@ -57,7 +57,7 @@
             this.tempateTree.Dock = System.Windows.Forms.DockStyle.Left;
             this.tempateTree.Location = new System.Drawing.Point(0, 0);
             this.tempateTree.Name = "tempateTree";
-            this.tempateTree.Size = new System.Drawing.Size(160, 442);
+            this.tempateTree.Size = new System.Drawing.Size(160, 476);
             this.tempateTree.TabIndex = 5;
             // 
             // commissionGrid
@@ -69,7 +69,7 @@
             this.commissionGrid.Location = new System.Drawing.Point(160, 0);
             this.commissionGrid.Name = "commissionGrid";
             this.commissionGrid.RowTemplate.Height = 23;
-            this.commissionGrid.Size = new System.Drawing.Size(691, 442);
+            this.commissionGrid.Size = new System.Drawing.Size(684, 476);
             this.commissionGrid.TabIndex = 1;
             // 
             // imageList1
@@ -82,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(851, 442);
+            this.ClientSize = new System.Drawing.Size(844, 476);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;

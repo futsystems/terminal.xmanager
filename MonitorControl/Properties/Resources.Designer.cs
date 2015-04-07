@@ -95,6 +95,20 @@ namespace TradingLib.MoniterControl.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap error {
+            get {
+                object obj = ResourceManager.GetObject("error", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap error_24 {
+            get {
+                object obj = ResourceManager.GetObject("error_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap folder {
             get {
                 object obj = ResourceManager.GetObject("folder", resourceCulture);
@@ -161,6 +175,20 @@ namespace TradingLib.MoniterControl.Properties {
         internal static System.Drawing.Bitmap router_sim {
             get {
                 object obj = ResourceManager.GetObject("router_sim", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap success {
+            get {
+                object obj = ResourceManager.GetObject("success", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap success_24 {
+            get {
+                object obj = ResourceManager.GetObject("success_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

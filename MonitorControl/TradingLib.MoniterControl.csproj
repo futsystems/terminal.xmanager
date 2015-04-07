@@ -184,6 +184,12 @@
     <Compile Include="DemoControl.Designer.cs">
       <DependentUpon>DemoControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="fmPopMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fmPopMessage.Designer.cs">
+      <DependentUpon>fmPopMessage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,6 +201,12 @@
     </Compile>
     <Compile Include="Forms\Account\fmAddAccount.Designer.cs">
       <DependentUpon>fmAddAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Account\fmCashOperation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Account\fmCashOperation.Designer.cs">
+      <DependentUpon>fmCashOperation.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Account\fmEditAccountTemplate.cs">
       <SubType>Form</SubType>
@@ -603,11 +615,17 @@
     <EmbeddedResource Include="Abstract\MonitorControl.resx">
       <DependentUpon>MonitorControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="fmPopMessage.resx">
+      <DependentUpon>fmPopMessage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\fmAddAccount.resx">
       <DependentUpon>fmAddAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Account\fmCashOperation.resx">
+      <DependentUpon>fmCashOperation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\fmEditAccountTemplate.resx">
       <DependentUpon>fmEditAccountTemplate.cs</DependentUpon>
@@ -813,6 +831,10 @@
     <Content Include="AddIns\MoniterControl.addin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resource\success_24.png" />
+    <None Include="Resource\error_24.png" />
+    <None Include="Resource\success.png" />
+    <None Include="Resource\error.png" />
     <None Include="Resource\items.png" />
     <None Include="Resource\folder.png" />
     <None Include="Resource\folder_sel.png" />

@@ -22,24 +22,78 @@ namespace TradingLib.MoniterControl
             SetPreferences();
             InitTable();
             BindToTable();
+
+            this.imageList1.Images.Add((System.Drawing.Image)Properties.Resources.folder);
+            this.imageList1.Images.Add((System.Drawing.Image)Properties.Resources.folder_sel);
+            this.imageList1.Images.Add((System.Drawing.Image)Properties.Resources.items);
+            templateTree.ImageList = this.imageList1;
+
+
+            templateTree.Nodes.Add(CreateBaseItem("保证金率模板"));
+
             this.Load += new EventHandler(fmCommission_Load);
+        }
+
+        private ComponentFactory.Krypton.Toolkit.KryptonTreeNode CreateBaseItem(string lb)
+        {
+            ComponentFactory.Krypton.Toolkit.KryptonTreeNode item = new ComponentFactory.Krypton.Toolkit.KryptonTreeNode();
+            item.Text = lb;
+            item.ImageIndex = 2;
+            item.SelectedImageIndex = item.ImageIndex;
+            item.Tag = lb;
+            return item;
+        }
+
+        private ComponentFactory.Krypton.Toolkit.KryptonTreeNode CreateMarginTemplateItem(MarginTemplateSetting template)
+        {
+            ComponentFactory.Krypton.Toolkit.KryptonTreeNode item = new ComponentFactory.Krypton.Toolkit.KryptonTreeNode();
+            item.Text = template.ToString();
+            item.ImageIndex = 0;
+            item.SelectedImageIndex = 1;
+            item.Tag = template;
+            return item;
         }
 
         void fmCommission_Load(object sender, EventArgs e)
         {
-            this.templatelist.ContextMenuStrip = new ContextMenuStrip();
-            this.templatelist.ContextMenuStrip.Items.Add("添加模板", null, new EventHandler(Add_Click));
-            this.templatelist.ContextMenuStrip.Items.Add("修改模板", null, new EventHandler(Edit_Click));
-            this.templatelist.ContextMenuStrip.Items.Add(new System.Windows.Forms.ToolStripSeparator());
-            this.templatelist.ContextMenuStrip.Items.Add("加载数据", null, new EventHandler(Qry_Click));
+            //this.templatelist.ContextMenuStrip = new ContextMenuStrip();
+            //this.templatelist.ContextMenuStrip.Items.Add("添加模板", null, new EventHandler(Add_Click));
+            //this.templatelist.ContextMenuStrip.Items.Add("修改模板", null, new EventHandler(Edit_Click));
+            //this.templatelist.ContextMenuStrip.Items.Add(new System.Windows.Forms.ToolStripSeparator());
+            //this.templatelist.ContextMenuStrip.Items.Add("加载数据", null, new EventHandler(Qry_Click));
 
             marginGrid.ContextMenuStrip = new ContextMenuStrip();
             marginGrid.ContextMenuStrip.Items.Add("添加模板项目", null, new EventHandler(AddItem_Click));
 
-            CoreService.EventCore.RegIEventHandler(this);
+            this.templateTree.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+            this.templateTree.ContextMenuStrip.Items.Add("添加保证金模板", null, new EventHandler(Add_Click));
+
+            
             //this.templatelist.ContextMenuStrip.Items.Add("添加模板", null, new EventHandler(Add_Click));
             marginGrid.DoubleClick += new EventHandler(commissionGrid_DoubleClick);
             marginGrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(commissionGrid_RowPrePaint);
+
+            templateTree.NodeMouseClick += new TreeNodeMouseClickEventHandler(templateTree_NodeMouseClick);
+
+            CoreService.EventCore.RegIEventHandler(this);
+        }
+
+        void templateTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                return;
+            if (e.Node.Parent != null)
+            {
+                if (e.Node.Parent.Index == 0)
+                {
+                    MarginTemplateSetting t = e.Node.Tag as MarginTemplateSetting;
+                    if (t != null)
+                    {
+                        ClearItem();
+                        CoreService.TLClient.ReqQryMarginTemplateItem(t.ID);
+                    }
+                }
+            }
         }
 
         void commissionGrid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -95,12 +149,22 @@ namespace TradingLib.MoniterControl
         void AddItem_Click(object sender, EventArgs e)
         {
 
-            fmCommissionTemplateItemEdit fm = new fmCommissionTemplateItemEdit();
+            fmMarginTemplateItemEdit fm = new fmMarginTemplateItemEdit();
             try
             {
-                int id = int.Parse(templateid.Text);
-                fm.SetCommissionTemplateID(id);
-                fm.ShowDialog();
+                if (templateTree.SelectedNode.Parent != null)
+                {
+                    MarginTemplateSetting t = templateTree.SelectedNode.Tag as MarginTemplateSetting;
+                    if (t != null)
+                    {
+                        //ClearItem();
+                        //CoreService.TLClient.ReqQryCommissionTemplateItem(t.ID);
+                        //int id = int.Parse(templateid.Text);
+                        fm.SetCommissionTemplateID(t.ID);
+                        fm.ShowDialog();
+                    }
+
+                }
             }
             catch (Exception ex)
             {
@@ -108,32 +172,32 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        void Qry_Click(object sender, EventArgs e)
-        {
-            MarginTemplateSetting t = templatelist.SelectedItem as MarginTemplateSetting;
-            if (t == null)
-            {
-                MoniterHelper.WindowMessage("请选择保证金模板");
-                return;
-            }
-            ClearItem();
-            templatename.Text = t.Name;
-            templateid.Text = t.ID.ToString();
-            CoreService.TLClient.ReqQryMarginTemplateItem(t.ID);
-        }
+        //void Qry_Click(object sender, EventArgs e)
+        //{
+        //    MarginTemplateSetting t = templatelist.SelectedItem as MarginTemplateSetting;
+        //    if (t == null)
+        //    {
+        //        MoniterHelper.WindowMessage("请选择保证金模板");
+        //        return;
+        //    }
+        //    ClearItem();
+        //    templatename.Text = t.Name;
+        //    templateid.Text = t.ID.ToString();
+        //    CoreService.TLClient.ReqQryMarginTemplateItem(t.ID);
+        //}
         void Add_Click(object sender, EventArgs e)
         {
             fmTemplateEdit fm = new fmTemplateEdit(TemplateEditType.Margin);
             fm.ShowDialog();
         }
-        void Edit_Click(object sender, EventArgs e)
-        {
-            MarginTemplateSetting t = templatelist.SelectedItem as MarginTemplateSetting;
-            fmTemplateEdit fm = new fmTemplateEdit(TemplateEditType.Margin);
+        //void Edit_Click(object sender, EventArgs e)
+        //{
+        //    MarginTemplateSetting t = templatelist.SelectedItem as MarginTemplateSetting;
+        //    fmTemplateEdit fm = new fmTemplateEdit(TemplateEditType.Margin);
 
-            fm.SetTemplate(t);
-            fm.ShowDialog();
-        }
+        //    fm.SetTemplate(t);
+        //    fm.ShowDialog();
+        //}
 
         public void OnInit()
         {
@@ -257,10 +321,25 @@ namespace TradingLib.MoniterControl
                 foreach (MarginTemplateSetting t in list)
                 {
                     templatemap.Add(t.ID, t);
-                    templatelist.Items.Add(t);
+                    //templatelist.Items.Add(t);
+                    InvokeGotMarginTemplate(t);
                 }
             }
         }
+
+        void InvokeGotMarginTemplate(MarginTemplateSetting margin)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action<MarginTemplateSetting>(InvokeGotMarginTemplate), new object[] { margin });
+            }
+            else
+            {
+                templateTree.Nodes[0].Nodes.Add(CreateMarginTemplateItem(margin));
+            }
+        }
+
+
 
         void OnNotifyMarginTemplate(string json)
         {
@@ -272,12 +351,14 @@ namespace TradingLib.MoniterControl
                 {
                     target.Name = obj.Name;
                     target.Description = obj.Description;
-                    templatelist.Refresh();
+                    //templatelist.Refresh();
+                    templateTree.Refresh();
                 }
                 else
                 {
                     templatemap.Add(obj.ID, obj);
-                    templatelist.Items.Add(obj);
+                    //templatelist.Items.Add(obj);
+                    InvokeGotMarginTemplate(obj);
                 }
             }
         }
@@ -292,8 +373,8 @@ namespace TradingLib.MoniterControl
         const string CODE = "品种";
         const string MONTH = "月份";
         const string MARGINBYMONEY = "保证金(金额)";
-        const string MARGINBYVOLUME = "保证金(手数)";
-        const string PERCENT = "上浮率";
+        const string MARGINBYVOLUME = "保证金(数量)";
+        const string PERCENT = "上浮比例";
         const string CHARGETYPE = "计算方式";
 
         #endregion
@@ -345,6 +426,7 @@ namespace TradingLib.MoniterControl
             datasource.DataSource = gt;
             grid.DataSource = datasource;
 
+            grid.Columns[ID].Visible = false;
             grid.Columns[ID].Width = 60;
             grid.Columns[CODE].Width =60;
             grid.Columns[MONTH].Width = 60;

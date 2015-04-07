@@ -51,6 +51,75 @@ namespace TradingLib.MoniterControl
     }
 
 
+
+    /// <summary>
+    /// 出入金操作
+    /// </summary>
+    public class CashOperationCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            AccountLite account = null;
+            if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
+            {
+                return;
+            }
+
+            fmCashOperation fm = new fmCashOperation();
+            fm.SetAccount(account);
+            fm.ShowDialog();
+            fm.Close();
+        }
+
+    }
+
+    /// <summary>
+    /// 激活交易帐户
+    /// </summary>
+    public class ActiveAccountCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            AccountLite account = null;
+            if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
+            {
+                return;
+            }
+
+            if (MoniterHelper.WindowConfirm(string.Format("确认激活交易帐户:{0}?", account.Account)) == System.Windows.Forms.DialogResult.Yes)
+            {
+                CoreService.TLClient.ReqUpdateAccountExecute(account.Account,true);
+
+            }
+        }
+
+    }
+
+    /// <summary>
+    /// 冻结交易帐户
+    /// </summary>
+    public class InActiveAccountCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            AccountLite account = null;
+            if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
+            {
+                return;
+            }
+
+            if (MoniterHelper.WindowConfirm(string.Format("确认激活交易帐户:{0}?", account.Account)) == System.Windows.Forms.DialogResult.Yes)
+            {
+                CoreService.TLClient.ReqUpdateAccountExecute(account.Account,false);
+            }
+        }
+
+    }
+
+
+
+
+
     /// <summary>
     /// 修改交易帐户密码
     /// </summary>

@@ -85,6 +85,9 @@ namespace TradingLib.MoniterBase
             {
                 command.Run();
             }
+
+            //启动弹窗线程
+            InitPopBW();
         }
 
 
@@ -359,5 +362,72 @@ namespace TradingLib.MoniterBase
         //    }
         //}
 
+
+        #region pop message
+
+
+        fmPopMessage popwindow = new fmPopMessage();
+        System.ComponentModel.BackgroundWorker bg;
+
+        RingBuffer<RspInfo> infobuffer = new RingBuffer<RspInfo>(1000);
+
+
+        /// <summary>
+        /// 将需要弹出的消息放入缓存
+        /// </summary>
+        /// <param name="info"></param>
+        void OnRspInfo(TradingLib.API.RspInfo info)
+        {
+            //将RspInfo写入缓存 等待后台线程进行处理
+            infobuffer.Write(info);
+        }
+
+        void InitPopBW()
+        {
+            bg = new BackgroundWorker();
+            bg.WorkerReportsProgress = true;
+            bg.DoWork += new DoWorkEventHandler(bg_DoWork);
+            bg.ProgressChanged += new ProgressChangedEventHandler(bg_ProgressChanged);
+            bg.RunWorkerAsync();
+
+            CoreService.EventCore.OnRspInfoEvent += new Action<RspInfo>(OnRspInfo);
+        }
+
+        /// <summary>
+        /// 当后台线程有触发时 调用显示窗口
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void bg_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            RspInfo info = e.UserState as RspInfo;
+            System.Drawing.Point p = PointToScreen(status.Location);
+            p = new System.Drawing.Point(p.X, p.Y - popwindow.Height + status.Height);
+
+            popwindow.Location = p;
+            popwindow.PopMessage(info);
+        }
+
+        /// <summary>
+        /// 后台工作流程 当缓存中有数据是通过ReportProgress进行触发
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void bg_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                //检查变量 然后对外触发 
+                while (infobuffer.hasItems)
+                {
+                    RspInfo info = infobuffer.Read();
+                    bg.ReportProgress(1, info);
+                    Util.sleep(1000);
+                }
+                Util.sleep(50);
+            }
+        }
+
+        #endregion
     }
 }

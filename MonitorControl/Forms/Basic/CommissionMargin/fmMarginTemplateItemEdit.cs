@@ -158,7 +158,7 @@ namespace TradingLib.MoniterControl
         public void SetMarginTemplateItem(MarginTemplateItemSetting item)
         {
             _item = item;
-            id.Text = _item.ID.ToString();
+            //id.Text = _item.ID.ToString();
             code.Text = _item.Code;
             marginbymoney.Value = _item.MarginByMoney;
             marginbyvolume.Value = _item.MarginByVolume;

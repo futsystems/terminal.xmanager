@@ -49,10 +49,10 @@ namespace TradingLib.MoniterCore
             SendPacket(request);
         }
 
-        public void ReqCashOperation(string account, decimal amount,QSEnumEquityType eq_type, string transref, string comment)
+        public void ReqCashOperation(string account, decimal amount,QSEnumEquityType eq_type, string transref, string comment,bool syncmacct)
         {
-            logger.Info("请求出入金操作:" + account + " amount:" + amount.ToString() + " transref:" + transref + " comment:" + comment);
-            this.ReqContribRequest("AccountManager", "AccountCashOperation", Mixins.Json.JsonMapper.ToJson(new { account = account, amount = amount, txnref = transref, comment = comment,equity_type=eq_type }));
+            logger.Info("请求出入金操作:" + account + " amount:" + amount.ToString() + " transref:" + transref + " comment:" + comment + " syncmainacct:" + syncmacct.ToString());
+            this.ReqContribRequest("AccountManager", "AccountCashOperation", Mixins.Json.JsonMapper.ToJson(new { account = account, amount = amount, txnref = transref, comment = comment,equity_type=eq_type,sync_mainacct=syncmacct }));
      
         }
 
