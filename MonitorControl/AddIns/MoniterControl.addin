@@ -46,6 +46,7 @@
 
     <Condition name="ProductState" product="Vendor">
       <MenuItem id = "UpdateTemplateCommand"
+                shortcut = "Control|F"
                 label = "强平规则"
                 class = "TradingLib.MoniterControl.UpdateFlatRuleCommand"/>
     </Condition>

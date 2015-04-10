@@ -103,6 +103,7 @@ namespace TradingLib.MoniterControl
         void SelectSymbol(Symbol symbol)
         {
             //ctOrderSenderM1.SetSymbol(symbol);
+            CoreService.EventUI.FireSymbolselectedEvent(symbol);
         }
 
         void GotSecurity(SecurityFamily sec)

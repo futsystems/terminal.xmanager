@@ -68,7 +68,8 @@ namespace TradingLib.MoniterControl
         const string MAINACCOUNT = "主帐户";
         const string MAINACCOUNTBINDED = "主帐户是否绑定";
         const string MAINACCTRISKRULE = "强平规则";
-
+        const string WARN = "警告";
+        const string WARNSTR = "警告消息";
 
         DataTable gt = new DataTable();
         BindingSource datasource = new BindingSource();
@@ -137,6 +138,9 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(MAINACCOUNTBINDED);//是否绑定
             gt.Columns.Add(MAINACCTRISKRULE);
 
+            gt.Columns.Add(WARN);
+            gt.Columns.Add(WARNSTR);
+
             gt.Columns.Add(MACTCONNSTATUS);
             gt.Columns.Add(MACTCONNIMG,typeof(Image));
 
@@ -171,6 +175,9 @@ namespace TradingLib.MoniterControl
             accountgrid.Columns[ROUTERGROUP].Visible = false;
             accountgrid.Columns[MACTCONNSTATUS].Visible = false;
             accountgrid.Columns[MAINACCOUNTBINDED].Visible = false;
+
+            accountgrid.Columns[WARN].Visible = false;
+            accountgrid.Columns[WARNSTR].Visible = false;
 
             //accountgrid.Columns[ACCOUNT].Width = 100;
             //accountgrid.Columns[ROUTEIMG].Width = 30;
@@ -245,7 +252,7 @@ namespace TradingLib.MoniterControl
         AccountLite accountselected = null;
         public AccountLite AccountSetlected { get { return accountselected; } }
 
-        //得到当前选择的行号
+        //得到当前选择的交易帐户
         public string CurrentAccount
         {
             get
@@ -374,6 +381,9 @@ namespace TradingLib.MoniterControl
                     }
                     //设置观察帐户列表
                     SwtWathAccounts();
+
+                    //闪烁警告
+                    FlashAccountWarn();
                     Thread.Sleep(10);
                 }
                 catch (Exception ex)
@@ -481,6 +491,10 @@ namespace TradingLib.MoniterControl
                             gt.Rows[i][MAINACCTRISKRULE] = account.MAcctRiskRule;
                         }
 
+                        gt.Rows[i][WARN] = account.IsWarn;
+                        gt.Rows[i][WARNSTR] = account.WarnMessage;
+
+
                         accountmap.TryAdd(account.Account, account);
                         accountrowmap.TryAdd(account.Account, i);
                         //Globals.Debug("got account:" + account.Account);
@@ -516,6 +530,14 @@ namespace TradingLib.MoniterControl
                             gt.Rows[r][MACTCONNSTATUS] = account.MAcctConnected;
                             gt.Rows[r][MACTCONNIMG] = getMAcctConnectImg(account.MAcctConnected);
                             gt.Rows[r][MAINACCTRISKRULE] = account.MAcctRiskRule;
+                        }
+
+                        bool oldwarn = bool.Parse(gt.Rows[r][WARN].ToString());
+                        gt.Rows[r][WARN] = account.IsWarn;
+                        gt.Rows[r][WARNSTR] = account.WarnMessage;
+                        if (oldwarn && !account.IsWarn)
+                        {
+                            AccountWarnOff(account.Account);
                         }
                     }
 

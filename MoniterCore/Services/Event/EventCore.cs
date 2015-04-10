@@ -11,6 +11,7 @@ namespace TradingLib.MoniterCore
 {
     public class EventCore
     {
+
         /// <summary>
         /// 基础数据与帐户列表数据初始化完成事件
         /// </summary>
@@ -146,6 +147,23 @@ namespace TradingLib.MoniterCore
                 OnRspInfoEvent(info);
         }
 
+
+        public event Action<ManagerNotify> OnManagerNotifyEvent;
+        internal void FireManagerNotifyEvent(ManagerNotify notify)
+        {
+            LogService.Debug("FireManagerNotifyEvent");
+
+            RspInfo info = new TradingLib.Common.RspInfoImpl();
+            info.ErrorID = notify.ErrorID;
+            info.ErrorMessage = notify.ErrorMessage;
+
+            //触发pop窗口
+            FireRspInfoEvent(info);
+
+            //触发其他监听事件
+            if (OnManagerNotifyEvent != null)
+                OnManagerNotifyEvent(notify);
+        }
         
     }
 }

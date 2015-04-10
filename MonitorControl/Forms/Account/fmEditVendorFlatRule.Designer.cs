@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.lbNight = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.lbWarn = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.lbFlat = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -41,15 +44,14 @@
             this.flatlevel = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.lbFlat = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.lbWarn = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.lbNight = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.btnDel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.btnDel);
             this.kryptonPanel1.Controls.Add(this.lbNight);
             this.kryptonPanel1.Controls.Add(this.lbWarn);
             this.kryptonPanel1.Controls.Add(this.lbFlat);
@@ -70,6 +72,30 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(276, 167);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // lbNight
+            // 
+            this.lbNight.Location = new System.Drawing.Point(188, 87);
+            this.lbNight.Name = "lbNight";
+            this.lbNight.Size = new System.Drawing.Size(19, 18);
+            this.lbNight.TabIndex = 14;
+            this.lbNight.Values.Text = "--";
+            // 
+            // lbWarn
+            // 
+            this.lbWarn.Location = new System.Drawing.Point(188, 60);
+            this.lbWarn.Name = "lbWarn";
+            this.lbWarn.Size = new System.Drawing.Size(19, 18);
+            this.lbWarn.TabIndex = 13;
+            this.lbWarn.Values.Text = "--";
+            // 
+            // lbFlat
+            // 
+            this.lbFlat.Location = new System.Drawing.Point(188, 37);
+            this.lbFlat.Name = "lbFlat";
+            this.lbFlat.Size = new System.Drawing.Size(19, 18);
+            this.lbFlat.TabIndex = 12;
+            this.lbFlat.Values.Text = "--";
             // 
             // kryptonLabel7
             // 
@@ -208,29 +234,15 @@
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "强平线:";
             // 
-            // lbFlat
+            // btnDel
             // 
-            this.lbFlat.Location = new System.Drawing.Point(188, 37);
-            this.lbFlat.Name = "lbFlat";
-            this.lbFlat.Size = new System.Drawing.Size(19, 18);
-            this.lbFlat.TabIndex = 12;
-            this.lbFlat.Values.Text = "--";
-            // 
-            // lbWarn
-            // 
-            this.lbWarn.Location = new System.Drawing.Point(188, 60);
-            this.lbWarn.Name = "lbWarn";
-            this.lbWarn.Size = new System.Drawing.Size(19, 18);
-            this.lbWarn.TabIndex = 13;
-            this.lbWarn.Values.Text = "--";
-            // 
-            // lbNight
-            // 
-            this.lbNight.Location = new System.Drawing.Point(188, 87);
-            this.lbNight.Name = "lbNight";
-            this.lbNight.Size = new System.Drawing.Size(19, 18);
-            this.lbNight.TabIndex = 14;
-            this.lbNight.Values.Text = "--";
+            this.btnDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDel.Location = new System.Drawing.Point(104, 130);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(70, 25);
+            this.btnDel.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnDel.TabIndex = 15;
+            this.btnDel.Values.Text = "删 除";
             // 
             // fmEditVendorFlatRule
             // 
@@ -269,5 +281,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbNight;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbWarn;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbFlat;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnDel;
     }
 }

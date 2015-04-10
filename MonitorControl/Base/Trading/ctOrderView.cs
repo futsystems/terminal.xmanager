@@ -242,7 +242,7 @@ namespace TradingLib.MoniterControl
 
             grid.Columns[DIRECTION].Visible = false;
             grid.Columns[STATUS].Visible = false;
-            grid.Columns[ID].Visible = false;
+            //grid.Columns[ID].Visible = false;
             grid.Columns[ORDERREF].Visible = false;
 
             ResetColumeSize();
@@ -352,6 +352,9 @@ namespace TradingLib.MoniterControl
             }
             else
             {
+                Order o = ord.SentOrder(oid);//[oid];
+
+                MessageBox.Show("orderid:" + oid +" order status:"+o.Status);
                 if (ord.isPending(oid))
                 {
                     if (SendOrderCancel != null)
@@ -411,7 +414,7 @@ namespace TradingLib.MoniterControl
             get
             {
                 int row = (orderGrid.SelectedRows.Count > 0 ? orderGrid.SelectedRows[0].Index : -1);
-                return long.Parse(orderGrid[0, row].Value.ToString());
+                return long.Parse(orderGrid[ID, row].Value.ToString());
             }
         }
 

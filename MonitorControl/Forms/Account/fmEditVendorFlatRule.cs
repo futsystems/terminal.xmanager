@@ -24,8 +24,11 @@ namespace TradingLib.MoniterControl
         void fmEditRiskItem_Load(object sender, EventArgs e)
         {
             btnSubmit.Click += new EventHandler(btnSubmit_Click);
+            btnDel.Click += new EventHandler(btnDel_Click);
             CoreService.EventCore.RegIEventHandler(this);
         }
+
+
 
         public void OnInit()
         {
@@ -63,6 +66,7 @@ namespace TradingLib.MoniterControl
         public void SetAccount(AccountLite account)
         {
             _account = account;
+            this.Text = string.Format("强平设置[{0}]", _account.Account);
 
         }
         void btnSubmit_Click(object sender, EventArgs e)
@@ -76,13 +80,21 @@ namespace TradingLib.MoniterControl
                 night_hold = nighthold.Value
             };
 
-            if (MoniterHelper.WindowConfirm("确认更新强平规则") == System.Windows.Forms.DialogResult.Yes)
+            if (MoniterHelper.WindowConfirm("确认更新强平规则?") == System.Windows.Forms.DialogResult.Yes)
             {
                 this.ReqUpdateVendorFlatRule(args);
                 this.Close();
             }
         }
 
+        void btnDel_Click(object sender, EventArgs e)
+        {
+            if (MoniterHelper.WindowConfirm("确认删除强平规则?") == System.Windows.Forms.DialogResult.Yes)
+            {
+                this.ReqDelVendorFlatRule(_account.Account);
+
+            }
+        }
 
         /// <summary>
         /// 更新主帐户风控强平规则
@@ -102,6 +114,14 @@ namespace TradingLib.MoniterControl
             CoreService.TLClient.ReqContribRequest("RiskCentre", "QryVendorFlatRule", account);
         }
 
+        /// <summary>
+        /// 删除某个帐户的主帐户风控规则
+        /// </summary>
+        /// <param name="account"></param>
+        void ReqDelVendorFlatRule(string account)
+        {
+            CoreService.TLClient.ReqContribRequest("RiskCentre", "DelVendorFlatRule", account);
+        }
         private void equity_ValueChanged(object sender, EventArgs e)
         {
             lbFlat.Text = (equity.Value * flatlevel.Value / 100).ToString();

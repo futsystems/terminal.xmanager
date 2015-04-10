@@ -4,6 +4,8 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Text;
 using Common.Logging;
+using TradingLib.API;
+using TradingLib.Common;
 
 namespace TradingLib.MoniterCore
 {
@@ -13,6 +15,16 @@ namespace TradingLib.MoniterCore
     public class EventContrib
     {
 
+        public EventContrib()
+        {
+            this.RegisterNotifyCallback("MgrExchServer", "ManagerNotify", HandleManagerNotify);
+        }
+
+        void HandleManagerNotify(string message)
+        {
+            var obj = TradingLib.Mixins.Json.JsonMapper.ToObject<ManagerNotify>(message);
+            CoreService.EventCore.FireManagerNotifyEvent(obj);
+        }
         ILog logger = LogManager.GetLogger("EventContrib");
 
         public event Action<string> DemoEvent;

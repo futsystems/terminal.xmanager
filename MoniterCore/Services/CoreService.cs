@@ -53,6 +53,20 @@ namespace TradingLib.MoniterCore
             }
         }
 
+        EventUI _eventUI = null;
+        /// <summary>
+        /// 界面事件汇聚器
+        /// </summary>
+        public static EventUI EventUI
+        {
+            get
+            {
+                if (defaultinstance._eventUI == null)
+                    defaultinstance._eventUI = new EventUI();
+                return defaultinstance._eventUI;
+            }
+        }
+
         EventBasicInfo _eventBasicInfo = null;
         /// <summary>
         /// 基础数据事件集合

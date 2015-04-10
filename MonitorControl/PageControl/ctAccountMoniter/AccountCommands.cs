@@ -108,7 +108,7 @@ namespace TradingLib.MoniterControl
                 return;
             }
 
-            if (MoniterHelper.WindowConfirm(string.Format("确认激活交易帐户:{0}?", account.Account)) == System.Windows.Forms.DialogResult.Yes)
+            if (MoniterHelper.WindowConfirm(string.Format("确认冻结交易帐户:{0}?", account.Account)) == System.Windows.Forms.DialogResult.Yes)
             {
                 CoreService.TLClient.ReqUpdateAccountExecute(account.Account,false);
             }
