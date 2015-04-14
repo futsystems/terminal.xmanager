@@ -30,10 +30,10 @@
         {
             this.kryptonNavigator1 = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
             this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.ctPositionView1 = new TradingLib.MoniterControl.ctPositionView();
             this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.ctOrderView1 = new TradingLib.MoniterControl.ctOrderView();
             this.kryptonPage3 = new ComponentFactory.Krypton.Navigator.KryptonPage();
+            this.ctPositionView1 = new TradingLib.MoniterControl.ctPositionView();
+            this.ctOrderView1 = new TradingLib.MoniterControl.ctOrderView();
             this.ctTradeView1 = new TradingLib.MoniterControl.ctTradeView();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
             this.kryptonNavigator1.SuspendLayout();
@@ -48,6 +48,7 @@
             // kryptonNavigator1
             // 
             this.kryptonNavigator1.Bar.BarOrientation = ComponentFactory.Krypton.Toolkit.VisualOrientation.Left;
+            this.kryptonNavigator1.Bar.TabStyle = ComponentFactory.Krypton.Toolkit.TabStyle.LowProfile;
             this.kryptonNavigator1.Button.ButtonDisplayLogic = ComponentFactory.Krypton.Navigator.ButtonDisplayLogic.None;
             this.kryptonNavigator1.Button.CloseButtonAction = ComponentFactory.Krypton.Navigator.CloseButtonAction.None;
             this.kryptonNavigator1.Button.CloseButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Hide;
@@ -55,13 +56,11 @@
             this.kryptonNavigator1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonNavigator1.Location = new System.Drawing.Point(0, 0);
             this.kryptonNavigator1.Name = "kryptonNavigator1";
-            this.kryptonNavigator1.NavigatorMode = ComponentFactory.Krypton.Navigator.NavigatorMode.BarRibbonTabGroup;
-            this.kryptonNavigator1.PageBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.PanelCustom1;
             this.kryptonNavigator1.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
             this.kryptonPage1,
             this.kryptonPage2,
             this.kryptonPage3});
-            this.kryptonNavigator1.SelectedIndex = 1;
+            this.kryptonNavigator1.SelectedIndex = 0;
             this.kryptonNavigator1.Size = new System.Drawing.Size(822, 384);
             this.kryptonNavigator1.TabIndex = 0;
             this.kryptonNavigator1.Text = "kryptonNavigator1";
@@ -74,21 +73,10 @@
             this.kryptonPage1.LastVisibleSet = true;
             this.kryptonPage1.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage1.Name = "kryptonPage1";
-            this.kryptonPage1.Size = new System.Drawing.Size(795, 382);
+            this.kryptonPage1.Size = new System.Drawing.Size(797, 382);
             this.kryptonPage1.Text = "持 仓";
             this.kryptonPage1.ToolTipTitle = "Page ToolTip";
             this.kryptonPage1.UniqueName = "B6362063223E49E221847AF2AE1AB0DB";
-            // 
-            // ctPositionView1
-            // 
-            this.ctPositionView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctPositionView1.EnableOperation = true;
-            this.ctPositionView1.Location = new System.Drawing.Point(0, 0);
-            this.ctPositionView1.Name = "ctPositionView1";
-            this.ctPositionView1.OrderTracker = null;
-            this.ctPositionView1.PositionTracker = null;
-            this.ctPositionView1.Size = new System.Drawing.Size(795, 382);
-            this.ctPositionView1.TabIndex = 0;
             // 
             // kryptonPage2
             // 
@@ -103,16 +91,6 @@
             this.kryptonPage2.ToolTipTitle = "Page ToolTip";
             this.kryptonPage2.UniqueName = "EA05F9BF9E0C443A4C9443BDC9B6198C";
             // 
-            // ctOrderView1
-            // 
-            this.ctOrderView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctOrderView1.EnableOperation = true;
-            this.ctOrderView1.Location = new System.Drawing.Point(0, 0);
-            this.ctOrderView1.Name = "ctOrderView1";
-            this.ctOrderView1.OrderTracker = null;
-            this.ctOrderView1.Size = new System.Drawing.Size(795, 382);
-            this.ctOrderView1.TabIndex = 0;
-            // 
             // kryptonPage3
             // 
             this.kryptonPage3.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
@@ -125,6 +103,27 @@
             this.kryptonPage3.Text = "成 交";
             this.kryptonPage3.ToolTipTitle = "Page ToolTip";
             this.kryptonPage3.UniqueName = "54AAB2FD540042632FB3A8F005373A06";
+            // 
+            // ctPositionView1
+            // 
+            this.ctPositionView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctPositionView1.EnableOperation = true;
+            this.ctPositionView1.Location = new System.Drawing.Point(0, 0);
+            this.ctPositionView1.Name = "ctPositionView1";
+            this.ctPositionView1.OrderTracker = null;
+            this.ctPositionView1.PositionTracker = null;
+            this.ctPositionView1.Size = new System.Drawing.Size(797, 382);
+            this.ctPositionView1.TabIndex = 0;
+            // 
+            // ctOrderView1
+            // 
+            this.ctOrderView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctOrderView1.EnableOperation = true;
+            this.ctOrderView1.Location = new System.Drawing.Point(0, 0);
+            this.ctOrderView1.Name = "ctOrderView1";
+            this.ctOrderView1.OrderTracker = null;
+            this.ctOrderView1.Size = new System.Drawing.Size(795, 382);
+            this.ctOrderView1.TabIndex = 0;
             // 
             // ctTradeView1
             // 

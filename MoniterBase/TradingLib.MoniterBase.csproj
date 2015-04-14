@@ -40,6 +40,7 @@
     <Reference Include="Common.Logging.Core">
       <HintPath>..\RequiredLibraries\Common.Logging.Core.dll</HintPath>
     </Reference>
+    <Reference Include="ComponentFactory.Krypton.Navigator, Version=4.4.0.0, Culture=neutral, PublicKeyToken=dc91bbef911870e2, processorArchitecture=MSIL" />
     <Reference Include="ComponentFactory.Krypton.Toolkit, Version=4.4.0.0, Culture=neutral, PublicKeyToken=dc91bbef911870e2, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\RequiredLibraries\kypton\ComponentFactory.Krypton.Toolkit.dll</HintPath>
@@ -107,6 +108,7 @@
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="StringResources.resources" />
     <EmbeddedResource Include="Workbench.resx">
       <DependentUpon>Workbench.cs</DependentUpon>

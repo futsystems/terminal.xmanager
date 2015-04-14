@@ -44,9 +44,9 @@ namespace TradingLib.MoniterBase
         private Workbench()
         {
             InitializeComponent();
-
+            
             // restore form location from last session
-            FormLocationHelper.Apply(this, "StartupFormPosition", true);
+            //FormLocationHelper.Apply(this, "StartupFormPosition", true);
 
             contentPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             contentPanel.Dock = DockStyle.Fill;
@@ -81,11 +81,15 @@ namespace TradingLib.MoniterBase
 
             InitSplitContainer();
 
+
+            this.WindowState = FormWindowState.Maximized;
             foreach (ICommand command in AddInTree.BuildItems("/Workspace/ControlInit", this, false))
             {
                 command.Run();
             }
 
+
+            
             //启动弹窗线程
             InitPopBW();
         }

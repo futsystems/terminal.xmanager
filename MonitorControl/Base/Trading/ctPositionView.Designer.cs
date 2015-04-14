@@ -34,7 +34,6 @@
             this.num = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btnCancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btnReserve = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnFlatAll = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnFlat = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnShowAll = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
@@ -51,7 +50,6 @@
             this.kryptonPanel1.Controls.Add(this.num);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
             this.kryptonPanel1.Controls.Add(this.btnCancel);
-            this.kryptonPanel1.Controls.Add(this.btnReserve);
             this.kryptonPanel1.Controls.Add(this.btnFlatAll);
             this.kryptonPanel1.Controls.Add(this.btnFlat);
             this.kryptonPanel1.Controls.Add(this.btnShowAll);
@@ -110,15 +108,6 @@
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Values.Text = "撤 单";
             // 
-            // btnReserve
-            // 
-            this.btnReserve.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnReserve.Location = new System.Drawing.Point(318, 233);
-            this.btnReserve.Name = "btnReserve";
-            this.btnReserve.Size = new System.Drawing.Size(59, 25);
-            this.btnReserve.TabIndex = 4;
-            this.btnReserve.Values.Text = "反 手";
-            // 
             // btnFlatAll
             // 
             this.btnFlatAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -176,7 +165,6 @@
 
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnCancel;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btnReserve;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnFlatAll;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnFlat;
         private ComponentFactory.Krypton.Toolkit.KryptonRadioButton btnShowAll;

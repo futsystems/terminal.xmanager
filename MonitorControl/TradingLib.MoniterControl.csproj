@@ -494,7 +494,7 @@
     <Compile Include="Abstract\MonitorControl.Designer.cs">
       <DependentUpon>MonitorControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="PageControl\ctAccountMoniter\AccountCommands.cs" />
+    <Compile Include="Command\AccountCommands.cs" />
     <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -830,6 +830,7 @@
   <ItemGroup>
     <Content Include="AddIns\MoniterControl.addin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <None Include="Resource\success_24.png" />
     <None Include="Resource\error_24.png" />

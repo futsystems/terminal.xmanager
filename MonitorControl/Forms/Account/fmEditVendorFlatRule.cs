@@ -67,6 +67,8 @@ namespace TradingLib.MoniterControl
         {
             _account = account;
             this.Text = string.Format("强平设置[{0}]", _account.Account);
+            equity.Value = _account.NowEquity;
+
 
         }
         void btnSubmit_Click(object sender, EventArgs e)
@@ -124,24 +126,24 @@ namespace TradingLib.MoniterControl
         }
         private void equity_ValueChanged(object sender, EventArgs e)
         {
-            lbFlat.Text = (equity.Value * flatlevel.Value / 100).ToString();
-            lbWarn.Text = (equity.Value * warnlevel.Value / 100).ToString();
-            lbNight.Text = (equity.Value * nighthold.Value).ToString();
+            lbFlat.Text = Util.FormatDecimal((equity.Value * flatlevel.Value / 100));
+            lbWarn.Text = Util.FormatDecimal((equity.Value * warnlevel.Value / 100));
+            lbNight.Text = Util.FormatDecimal((equity.Value * nighthold.Value));
         }
 
         private void flatlevel_ValueChanged(object sender, EventArgs e)
         {
-            lbFlat.Text = (equity.Value * flatlevel.Value / 100).ToString();
+            lbFlat.Text = Util.FormatDecimal((equity.Value * flatlevel.Value / 100));
         }
 
         private void warnlevel_ValueChanged(object sender, EventArgs e)
         {
-            lbWarn.Text = (equity.Value * warnlevel.Value / 100).ToString();
+            lbWarn.Text = Util.FormatDecimal((equity.Value * warnlevel.Value / 100));
         }
 
         private void nighthold_ValueChanged(object sender, EventArgs e)
         {
-            lbNight.Text = (equity.Value * nighthold.Value).ToString();
+            lbNight.Text = Util.FormatDecimal((equity.Value * nighthold.Value));
         }
     }
 }

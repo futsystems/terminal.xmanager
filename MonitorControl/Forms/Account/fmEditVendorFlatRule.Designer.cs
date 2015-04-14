@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btnDel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.lbNight = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lbWarn = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lbFlat = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -44,7 +45,6 @@
             this.flatlevel = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.btnDel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -72,6 +72,16 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(276, 167);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // btnDel
+            // 
+            this.btnDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDel.Location = new System.Drawing.Point(104, 130);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(70, 25);
+            this.btnDel.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnDel.TabIndex = 15;
+            this.btnDel.Values.Text = "删 除";
             // 
             // lbNight
             // 
@@ -168,7 +178,7 @@
             this.nighthold.Size = new System.Drawing.Size(51, 20);
             this.nighthold.TabIndex = 5;
             this.nighthold.Value = new decimal(new int[] {
-            1,
+            3,
             0,
             0,
             0});
@@ -194,7 +204,7 @@
             this.warnlevel.Size = new System.Drawing.Size(51, 20);
             this.warnlevel.TabIndex = 3;
             this.warnlevel.Value = new decimal(new int[] {
-            10,
+            30,
             0,
             0,
             0});
@@ -212,7 +222,7 @@
             this.flatlevel.Size = new System.Drawing.Size(51, 20);
             this.flatlevel.TabIndex = 2;
             this.flatlevel.Value = new decimal(new int[] {
-            10,
+            25,
             0,
             0,
             0});
@@ -233,16 +243,6 @@
             this.kryptonLabel1.Size = new System.Drawing.Size(55, 18);
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "强平线:";
-            // 
-            // btnDel
-            // 
-            this.btnDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDel.Location = new System.Drawing.Point(104, 130);
-            this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(70, 25);
-            this.btnDel.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnDel.TabIndex = 15;
-            this.btnDel.Values.Text = "删 除";
             // 
             // fmEditVendorFlatRule
             // 

@@ -16,6 +16,11 @@
 	<Runtime>
     <Import assembly = "../TradingLib.MoniterControl.dll">
     </Import>
+    <Import assembly = "../TradingLib.MoniterControl.dll">
+      <ConditionEvaluator name="AccountBindedState" class="TradingLib.MoniterControl.AccountBindedStateConditionEvaluator"/>
+      <ConditionEvaluator name="AccountActiveState" class="TradingLib.MoniterControl.AccountActiveStateConditionEvaluator"/>
+
+    </Import>
   </Runtime>
 	
   <Path name = "/AccountList/ContextMenu">
@@ -26,14 +31,20 @@
                 class = "TradingLib.MoniterControl.CashOperationCommand"/>
     </Condition>
     <Condition name="ProductState" product="All">
-      <MenuItem id = "ActiveAccountCommand"
+      <ComplexCondition>
+        <Not>
+          <Condition name="AccountActiveState" />
+        </Not>
+        <MenuItem id = "ActiveAccountCommand"
                 label = "激活交易帐户"
                 class = "TradingLib.MoniterControl.ActiveAccountCommand"/>
-    </Condition>
-    <Condition name="ProductState" product="All">
-      <MenuItem id = "InActiveAccountCommand"
-                label = "冻结交易帐户"
-                class = "TradingLib.MoniterControl.InActiveAccountCommand"/>
+       </ComplexCondition>
+
+      <Condition name="AccountActiveState">
+        <MenuItem id = "InActiveAccountCommand"
+                  label = "冻结交易帐户"
+                  class = "TradingLib.MoniterControl.InActiveAccountCommand"/>
+      </Condition>
     </Condition>
     
     <MenuItem id = "Separator1" type = "Separator"/>
@@ -85,31 +96,33 @@
     </Condition>
 
     <Condition name="ProductState" product="Vendor">
-      <MenuItem id = "DelAccountConnectorCommand"
-                label = "收回主帐户"
-                class = "TradingLib.MoniterControl.DelAccountConnectorCommand"/>
-    </Condition>
-    
-    <Condition name="ProductState" product="Vendor">
-      <MenuItem id = "UpdateAccountConnectorCommand"
-                label = "借出主帐户"
-                class = "TradingLib.MoniterControl.UpdateAccountConnectorCommand"/>
-    </Condition>
 
+      <ComplexCondition>
+        <Not>
+          <Condition name="AccountBindedState" />
+        </Not>
+        <MenuItem id = "UpdateAccountConnectorCommand"
+                  label = "借出主帐户"
+                  class = "TradingLib.MoniterControl.UpdateAccountConnectorCommand"/>
+      </ComplexCondition>
+      
+      <!--交易帐户绑定主帐户 显示菜单-->
+      <Condition name="AccountBindedState">
+        <MenuItem id = "DelAccountConnectorCommand"
+                  label = "收回主帐户"
+                  class = "TradingLib.MoniterControl.DelAccountConnectorCommand"/>
+      
+        <MenuItem id = "Separator1" type = "Separator"/>
 
+        <MenuItem id = "SyncAccountDataCommand"
+                  label = "同步交易数据"
+                  class = "TradingLib.MoniterControl.SyncAccountDataCommand"/>
 
-    <MenuItem id = "Separator1" type = "Separator"/>
-
-    <Condition name="ProductState" product="Vendor">
-      <MenuItem id = "SyncAccountDataCommand"
-                label = "同步交易数据"
-                class = "TradingLib.MoniterControl.SyncAccountDataCommand"/>
-    </Condition>
-
-    <Condition name="ProductState" product="Vendor">
-      <MenuItem id = "MotherAccountManagerCommand"
-                label = "主帐户管理"
-                class = "TradingLib.MoniterControl.MotherAccountManagerCommand"/>
+        <MenuItem id = "MotherAccountManagerCommand"
+                  label = "主帐户管理"
+                  class = "TradingLib.MoniterControl.MotherAccountManagerCommand"/>
+      </Condition>
+      
     </Condition>
 
     

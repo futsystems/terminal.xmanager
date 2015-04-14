@@ -19,7 +19,6 @@ namespace TradingLib.MoniterControl
     {
         string _defaultformat = "{0:F1}";
 
-
         BindingSource datasource = new BindingSource();
         //持仓记录器 客户端是通过TradingTracker组件来记录order position记录的,服务端我们需要自己内建一个positiontracker用于记录相关信息
         LSPositionTracker pt;
@@ -37,12 +36,8 @@ namespace TradingLib.MoniterControl
         public event DebugDelegate SendDebugEvent;//日志对外输出时间
         public event OrderDelegate SendOrderEvent;//发送委托
         public event LongDelegate SendCancelEvent;//取消委托
-        //public event FindSymbolDel FindSecurityEvent;//获得对应的合约信息
-        //public event PositionOffsetArgsDel UpdatePostionOffsetEvent;//对外触发止盈止损更新事件
 
         public event PositionDelegate PositionSelectedEvent;//选择了某个持仓
-        //public event LookUpLossArgs LookUpLossArgsEvent;//获得sendorder中的某个合约的止损参数
-        //public event LookUpProfitArgs LookUpProfitArgsEvent;//获得sendorder中的某个合约的止盈参数
 
         //通过symbol查找到对应的security
         Symbol findSecurity(string symbol)
@@ -66,7 +61,6 @@ namespace TradingLib.MoniterControl
                 btnCancel.Visible = _enableoperation;
                 btnFlat.Visible = _enableoperation;
                 btnFlatAll.Visible = _enableoperation;
-                btnReserve.Visible = _enableoperation;
                 btnCancel.Visible = _enableoperation;
                 isDoubleFlat.Visible = _enableoperation;
             }
@@ -104,21 +98,6 @@ namespace TradingLib.MoniterControl
             else
                 return sym.Multiple;
         }
-
-        ////获得止盈参数
-        //ProfitArgs getDefaultprofitargs(string symbol)
-        //{
-        //    if (LookUpProfitArgsEvent != null)
-        //        return LookUpProfitArgsEvent(symbol);
-        //    return null;
-        //}
-        ////获得止损参数
-        //StopLossArgs getDefaultlossargs(string symbol)
-        //{
-        //    if (LookUpLossArgsEvent != null)
-        //        return LookUpLossArgsEvent(symbol);
-        //    return null;
-        //}
 
         void SendOrder(Order o)
         {
@@ -179,46 +158,34 @@ namespace TradingLib.MoniterControl
 
         const string SYMBOL = "合约";
         const string SIDE = "方向";
-        const string DIRECTION = "多空";
+        const string DIRECTION = "买卖";
         const string SIZE = "总持仓";
         const string YDSIZE = "昨仓";
         const string CANFLATSIZE = "可平量";//用于计算当前限价委托可以挂单数量
         const string LASTPRICE = "最新";//最新成交价
         const string AVGPRICE = "持仓均价";
-        const string UNREALIZEDPL = "浮盈";
-        const string REALIZEDPL = "平盈";
-        const string UNREALIZEDPLPOINT = "浮盈点数";
-        const string REALIZEDPLPOINT = "平盈点数";
-        const string ACCOUNT = "账户";
+        const string UNREALIZEDPL = "持仓盈亏";
+        const string UNREALIZEDPLPOINT = "点数(持)";
+        const string REALIZEDPL = "平仓盈亏";
+        const string REALIZEDPLPOINT = "点数(平)";
+        const string ACCOUNT = "交易帐户";
         const string PROFITTARGET = "止盈";
         const string STOPLOSS = "止损";
         const string KEY = "编号";
-        //const string ACCOUNT = "帐户";
-        //const string STRATEGY = "出场策略";
+
         DataTable gt = new DataTable();
 
 
         public ctPositionView()
         {
             InitializeComponent();
+
             SetPreferences();
             InitTable();
             BindToTable();
 
-            WireEvent();
-            _ordTransHelper = new OrderTransactionHelper("Moniter");
-            _ordTransHelper.SendOrderEvent += new OrderDelegate(SendOrder);
             
-            _ordTransHelper.Start();
-            //初始化止盈止损设置窗口
-            //frmPosOffset = new frmPositionOffset();
-            //frmPosOffset.TopMost = true;
-            //frmPosOffset.UpdatePostionOffsetEvent += (PositionOffsetArgs args) =>
-            //{
-            //    if (UpdatePostionOffsetEvent != null)
-            //        UpdatePostionOffsetEvent(args);
-            //};
-            
+           
         }
 
 
@@ -314,7 +281,7 @@ namespace TradingLib.MoniterControl
             //如果不存在,则我们将该account-symbol对插入映射列表我们的键用的是account_symbol配对
             string key = pos.GetKey(positionside);
             gt.Rows[i][SIDE] = positionside;
-            gt.Rows[i][DIRECTION] = positionside ? "多" : "空";
+            gt.Rows[i][DIRECTION] = positionside ? "买" : "卖";
             gt.Rows[i][KEY] = key;
             gt.Rows[i][ACCOUNT] = pos.Account;
 
@@ -654,15 +621,16 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(SIDE);//1
             
             gt.Columns.Add(DIRECTION);//2
+
             gt.Columns.Add(SIZE, typeof(int));//3
-            gt.Columns.Add(YDSIZE,typeof(int));//1
-            gt.Columns.Add(CANFLATSIZE, typeof(int));//4
-            gt.Columns.Add(LASTPRICE);//5
-            gt.Columns.Add(AVGPRICE);//6
-            gt.Columns.Add(UNREALIZEDPL);//7
-            gt.Columns.Add(REALIZEDPL);//8
+            gt.Columns.Add(YDSIZE,typeof(int));//4
+            gt.Columns.Add(CANFLATSIZE, typeof(int));//5
+            gt.Columns.Add(LASTPRICE);//6
+            gt.Columns.Add(AVGPRICE);//7
+            gt.Columns.Add(UNREALIZEDPL);//8
             gt.Columns.Add(UNREALIZEDPLPOINT);//9
-            gt.Columns.Add(REALIZEDPLPOINT);//10
+            gt.Columns.Add(REALIZEDPL);//10
+            gt.Columns.Add(REALIZEDPLPOINT);//11
             
             gt.Columns.Add(PROFITTARGET);
             gt.Columns.Add(STOPLOSS);
@@ -682,45 +650,42 @@ namespace TradingLib.MoniterControl
             datasource.DataSource = gt;
             grid.DataSource = datasource;
             //grid.Columns[ACCOUNT].IsVisible = false;
+            grid.Columns[SIDE].Visible = false;
             grid.Columns[KEY].Visible = false;
             grid.Columns[PROFITTARGET].Visible = false;
             grid.Columns[STOPLOSS].Visible = false;
-            grid.Columns[SIDE].Visible = false;
 
-            //set width
-            grid.Columns[SYMBOL].Width = 45;
-            //grid.Columns[SYMBOL].TextAlignment = ContentAlignment.MiddleCenter;
-            grid.Columns[DIRECTION].Width = 45;
-            //grid.Columns[DIRECTION].TextAlignment = ContentAlignment.MiddleCenter;
-            grid.Columns[SIZE].Width = 45;
-            //grid.Columns[SIZE].TextAlignment = ContentAlignment.MiddleCenter;
-            grid.Columns[CANFLATSIZE].Width = 45;
-            //grid.Columns[CANFLATSIZE].TextAlignment = ContentAlignment.MiddleCenter;
-            grid.Columns[LASTPRICE].Width = 65;
-            //grid.Columns[LASTPRICE].TextAlignment = ContentAlignment.MiddleRight;
-            grid.Columns[AVGPRICE].Width = 65;
-            //grid.Columns[AVGPRICE].TextAlignment = ContentAlignment.MiddleRight;
-            grid.Columns[UNREALIZEDPL].Width = 65;
-            //grid.Columns[UNREALIZEDPL].TextAlignment = ContentAlignment.MiddleRight;
-            grid.Columns[REALIZEDPL].Width = 65;
-            //grid.Columns[REALIZEDPL].TextAlignment = ContentAlignment.MiddleRight;
-            grid.Columns[PROFITTARGET].Width = 75;
-            //grid.Columns[PROFITTARGET].TextAlignment = ContentAlignment.MiddleCenter;
-            grid.Columns[STOPLOSS].Width = 75;
-            //grid.Columns[STOPLOSS].TextAlignment = ContentAlignment.MiddleCenter;
+            ResetColumeSize();
 
             for (int i = 0; i < gt.Columns.Count; i++)
             {
                 grid.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+        }
+
+        void ResetColumeSize()
+        {
+            ComponentFactory.Krypton.Toolkit.KryptonDataGridView grid = positiongrid;
+            grid.Columns[SYMBOL].Width = 70;
+            grid.Columns[DIRECTION].Width = 40;
+            grid.Columns[SIZE].Width = 50;
+            grid.Columns[YDSIZE].Width = 50;
+            grid.Columns[CANFLATSIZE].Width = 50;
+            grid.Columns[LASTPRICE].Width = 80;
+
+            grid.Columns[AVGPRICE].Width =80;
+
+            grid.Columns[UNREALIZEDPL].Width = 80;
+            grid.Columns[UNREALIZEDPLPOINT].Width = 60;
+            grid.Columns[REALIZEDPL].Width = 80;
+            grid.Columns[REALIZEDPLPOINT].Width = 60;
 
         }
 
+
         private void ctPositionView_Load(object sender, EventArgs e)
         {
-            //SetPreferences();
-            //InitTable();
-            //BindToTable();
+            WireEvent();
         }
 
 
@@ -733,11 +698,16 @@ namespace TradingLib.MoniterControl
             btnFlat.Click +=new EventHandler(btnFlat_Click);
             btnFlatAll.Click +=new EventHandler(btnFlatAll_Click);
             btnCancel.Click +=new EventHandler(btnCancel_Click);
-            btnReserve.Click +=new EventHandler(btnReserve_Click);
 
-            positiongrid.DoubleClick +=new EventHandler(positiongrid_DoubleClick);
+            //positiongrid.DoubleClick +=new EventHandler(positiongrid_DoubleClick);
             positiongrid.CellFormatting += new DataGridViewCellFormattingEventHandler(positiongrid_CellFormatting);
             positiongrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(positiongrid_RowPrePaint);
+            positiongrid.SizeChanged += new EventHandler(positiongrid_SizeChanged);
+        }
+
+        void positiongrid_SizeChanged(object sender, EventArgs e)
+        {
+            ResetColumeSize();
         }
 
         void positiongrid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -752,12 +722,12 @@ namespace TradingLib.MoniterControl
                 if (e.ColumnIndex == 2)
                 {
                     string direction = positiongrid[DIRECTION, e.RowIndex].Value.ToString();
-                    if (direction.Equals("多"))
+                    if (direction.Equals("买"))
                     {
                         e.CellStyle.ForeColor = UIConstant.LongSideColor;
                         e.CellStyle.Font = UIConstant.BoldFont;
                     }
-                    else if (direction.Equals("空"))
+                    else if (direction.Equals("卖"))
                     {
                         e.CellStyle.ForeColor = UIConstant.ShortSideColor;
                         e.CellStyle.Font = UIConstant.BoldFont;
@@ -854,86 +824,10 @@ namespace TradingLib.MoniterControl
                 }
             }
         }
-        //反手
-        private void btnReserve_Click(object sender, EventArgs e)
-        {
-            Position pos = CurrentPositoin;
-            if (pos != null && !pos.isFlat)
-            {
-                Order o = new MarketOrderFlat(pos);
-                debug("提交反手事务");
-                _ordTransHelper.AddFlatPositionBeforeInsert(pos, o);
-                Order no = new OrderImpl(o);
-                SendOrder(no);
-            }
-            else
-            {
-                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请选择有效持仓!");
-            }
-        }
 
-        //双击持仓某行
-        //1.修改止盈止损参数
-        private void positiongrid_DoubleClick(object sender, EventArgs e)
-        {
-            
-            int rownum = positiongrid.CurrentRow.Index+1;
-            //止盈 止损设置
-            //if (positiongrid.CurrentColumn.Name == STOPLOSS)
-            //{
-            //    //MessageBox.Show("stoploss edit");
-            //    //frmPositionOffset fm = new frmPositionOffset();
-            //    //fm.TopMost = true;
-            //    frmPosOffset.ParseOffset(GetLossArgs(CurrentKey),CurrentPositoin,findSecurity(CurrentSymbol));
-            //    Point p = this.PointToScreen(positiongrid.Location);
-            //    p.X = p.X + 250;
-            //    p.Y = p.Y + UIGlobals.HeaderHeight + UIGlobals.RowHeight * rownum;
-            //    frmPosOffset.Location = p;
-            //    frmPosOffset.Show();
-            //    return;
-            //}
-            //if (positiongrid.CurrentColumn.Name == PROFITTARGET)
-            //{
-            //    //frmPositionOffset fm = new frmPositionOffset();
-            //    //fm.TopMost = true;
-            //    frmPosOffset.ParseOffset(GetProfitArgs(CurrentKey), CurrentPositoin, findSecurity(CurrentSymbol));
-            //    Point p = this.PointToScreen(positiongrid.Location);
-            //    p.X = p.X + 250;
-            //    p.Y = p.Y + UIGlobals.HeaderHeight + UIGlobals.RowHeight * rownum;
-            //    frmPosOffset.Location = p;
-            //    frmPosOffset.Show();
-            //    return;
-            //}
 
-            //非止盈止损列的双击并且设定为双击平仓,平调所选持仓
-            if (isDoubleFlat.Checked)
-            {
-                FlatPosition(CurrentPositoin);
-            }
-            else
-            { 
-            
-            }
-
-        }
+        
         #endregion
-
-
-
-        // Fires when the editor changes its value. The value is stored only inside the editor. 
-        //private void positiongrid_ValueChanged(object sender, EventArgs e)
-        //{
-        //    MessageBox.Show("eidtor value changed");
-        //    StopLossEditor edit = sender as StopLossEditor;
-        //    if (edit != null)
-        //    {
-        //        GridCellElement cellstop = positiongrid.TableElement.GetCellElement(positiongrid.CurrentRow, positiongrid.Columns[STOPLOSS]);
-        //        if (cellstop != null)
-        //        {
-        //            cellstop.Text = "i am here";
-        //        }
-        //    }
-        //}
 
 
 

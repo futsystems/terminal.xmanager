@@ -242,7 +242,7 @@ namespace TradingLib.MoniterControl
 
             grid.Columns[DIRECTION].Visible = false;
             grid.Columns[STATUS].Visible = false;
-            //grid.Columns[ID].Visible = false;
+            grid.Columns[ID].Visible = false;
             grid.Columns[ORDERREF].Visible = false;
 
             ResetColumeSize();
@@ -256,7 +256,7 @@ namespace TradingLib.MoniterControl
         void ResetColumeSize()
         {
             ComponentFactory.Krypton.Toolkit.KryptonDataGridView grid = orderGrid;
-            grid.Columns[EXCHORDERID].Width = 70;
+            grid.Columns[EXCHORDERID].Width = 120;
             grid.Columns[SYMBOL].Width = 60;
             grid.Columns[DIRECTION].Width = 60;
             grid.Columns[OPERATION].Width = 60;

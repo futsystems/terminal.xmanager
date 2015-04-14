@@ -52,6 +52,10 @@ namespace TradingLib.MoniterControl
 
 
 
+
+
+
+
     /// <summary>
     /// 出入金操作
     /// </summary>

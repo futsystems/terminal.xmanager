@@ -97,4 +97,51 @@ namespace TradingLib.MoniterControl
         }
     }
 
+
+    /// <summary>
+    /// 帐户是否绑定主帐户
+    /// </summary>
+    public class AccountBindedStateConditionEvaluator : IConditionEvaluator
+    {
+        public bool IsValid(object caller, Condition condition)
+        {
+            AccountLite account = null;
+            if (!AccountMoniterHelper.GetCurrentAccount(caller, out account))
+            {
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(account.ConnectorToken))
+            {
+                return false;
+            }
+            return true;
+        }
+    }
+
+
+    /// <summary>
+    /// 判断帐户是否处于激活状态
+    /// </summary>
+    public class AccountActiveStateConditionEvaluator : IConditionEvaluator
+    {
+        public bool IsValid(object caller, Condition condition)
+        {
+            AccountLite account = null;
+            if (!AccountMoniterHelper.GetCurrentAccount(caller, out account))
+            {
+                return false;
+            }
+
+            if (account.Execute)
+            {
+                return true;
+            }
+            return false;
+        }
+    }
+
+
+
+
 }
