@@ -39,17 +39,12 @@ namespace TradingLib.MoniterBase
 
         protected override void OnCreateSplashScreenForm()
         {
+            InitCSharpCode();
+
             _loginform = new LoginForm(this);
             this.SplashScreenForm = _loginform;//启动窗体
-            
-            _loginform.ResetEvent += new TradingLib.API.VoidDelegate(_loginform_ResetEvent);
-
         }
 
-        void _loginform_ResetEvent()
-        {
-            //mainfm.Reset();
-        }
 
 
         protected override void OnActiveMainForm()
@@ -70,7 +65,7 @@ namespace TradingLib.MoniterBase
             }).Start();
         }
 
-        void InitWorkbench()
+        void InitCSharpCode()
         {
             LogService.Debug("在后台线程初始化主窗体对象");
             // The LoggingService is a small wrapper around log4net.
@@ -84,7 +79,7 @@ namespace TradingLib.MoniterBase
             // Set the root path of our application. ICSharpCode.Core looks for some other
             // paths relative to the application root:
             // "data/resources" for language resources, "data/options" for default options
-            FileUtility.ApplicationRootPath = Path.GetDirectoryName(exe.Location);
+            FileUtility.ApplicationRootPath = AppDomain.CurrentDomain.BaseDirectory;// Path.GetDirectoryName(exe.Location);
 
             LoggingService.Info("Starting core services...");
 
@@ -131,6 +126,10 @@ namespace TradingLib.MoniterBase
             // creates the AddIn tree. It also automatically runs the commands in
             // "/Workspace/Autostart"
             coreStartup.RunInitialization();
+        }
+        void InitWorkbench()
+        {
+
 
             LoggingService.Info("Initializing Workbench...");
             // Workbench is our class from the base project, this method creates an instance

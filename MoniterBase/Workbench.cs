@@ -88,10 +88,24 @@ namespace TradingLib.MoniterBase
                 command.Run();
             }
 
+            this.Text = string.Format("{0}-{1}", GetProductName(CoreService.SiteInfo.ProductType), CoreService.SiteInfo.Domain.Name);
 
             
             //启动弹窗线程
             InitPopBW();
+        }
+
+        string GetProductName(QSEnumProductType type)
+        {
+            switch (type)
+            { 
+                case QSEnumProductType.CounterSystem:
+                    return "分帐户柜台系统";
+                case QSEnumProductType.VendorMoniter:
+                    return "主帐户监控系统";
+                default:
+                    return "业务系统";
+            }
         }
 
 
@@ -309,7 +323,7 @@ namespace TradingLib.MoniterBase
         {
             base.OnClosing(e);
 
-            System.Diagnostics.Process.GetCurrentProcess().Kill();
+            //System.Diagnostics.Process.GetCurrentProcess().Kill();
 
             //CoreService.Destory();
 

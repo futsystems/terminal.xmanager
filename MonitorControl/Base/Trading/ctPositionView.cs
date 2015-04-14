@@ -58,11 +58,11 @@ namespace TradingLib.MoniterControl
             set
             {
                 _enableoperation = value;
-                btnCancel.Visible = _enableoperation;
+                //btnCancel.Visible = _enableoperation;
                 btnFlat.Visible = _enableoperation;
                 btnFlatAll.Visible = _enableoperation;
-                btnCancel.Visible = _enableoperation;
-                isDoubleFlat.Visible = _enableoperation;
+                //btnCancel.Visible = _enableoperation;
+                //isDoubleFlat.Visible = _enableoperation;
             }
         }
 
@@ -387,7 +387,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[posidx][AVGPRICE] = string.Format(getDisplayFormat(pos.oSymbol), pos.AvgPrice);
                     gt.Rows[posidx][REALIZEDPL] = string.Format(getDisplayFormat(pos.oSymbol), pos.ClosedPL * getMultiple(pos.oSymbol));
                     gt.Rows[posidx][REALIZEDPLPOINT] = string.Format(getDisplayFormat(pos.oSymbol), pos.ClosedPL);
-                    num.Text = positiongrid.RowCount.ToString();
+                    //num.Text = positiongrid.RowCount.ToString();
                 }
                 else//idx不存在
                 {
@@ -400,7 +400,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][AVGPRICE] = string.Format(getDisplayFormat(pos.oSymbol), pos.AvgPrice);
                     gt.Rows[i][REALIZEDPL] = string.Format(getDisplayFormat(pos.oSymbol), pos.ClosedPL * getMultiple(pos.oSymbol));
                     gt.Rows[i][REALIZEDPLPOINT] = string.Format(getDisplayFormat(pos.oSymbol), pos.ClosedPL);
-                    num.Text = positiongrid.RowCount.ToString();
+                    //num.Text = positiongrid.RowCount.ToString();
                     
                 }
             }
@@ -570,7 +570,7 @@ namespace TradingLib.MoniterControl
                     }
                     //gt.Rows[posidx][STOPLOSS] = GetGridOffsetText(pos, posside,QSEnumPositionOffsetDirection.LOSS);
                     //gt.Rows[posidx][PROFITTARGET] = GetGridOffsetText(pos,posside, QSEnumPositionOffsetDirection.PROFIT);
-                    num.Text = positiongrid.RowCount.ToString();
+                    //num.Text = positiongrid.RowCount.ToString();
                 }
                 else
                 {
@@ -697,7 +697,7 @@ namespace TradingLib.MoniterControl
             btnShowHold.CheckedChanged += new EventHandler(btnShowHold_CheckedChanged);
             btnFlat.Click +=new EventHandler(btnFlat_Click);
             btnFlatAll.Click +=new EventHandler(btnFlatAll_Click);
-            btnCancel.Click +=new EventHandler(btnCancel_Click);
+            //btnCancel.Click +=new EventHandler(btnCancel_Click);
 
             //positiongrid.DoubleClick +=new EventHandler(positiongrid_DoubleClick);
             positiongrid.CellFormatting += new DataGridViewCellFormattingEventHandler(positiongrid_CellFormatting);

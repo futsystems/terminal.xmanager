@@ -20,28 +20,29 @@ namespace TradingLib.MoniterCore
 
         public void GotMarketTime(MarketTime mt,bool islast)
         {
-            if (mt == null) return;
-            MarketTime target = null;
-            MarketTime notify = null;
-            if (markettimemap.TryGetValue(mt.ID, out target))
+            if (mt != null)
             {
-                //更新
-                target.Name = mt.Name;
-                target.Description = mt.Description;
-                notify = target;
-            }
-            else
-            {
-                markettimemap.Add(mt.ID, mt);
-                notify = mt;
-            }
+                MarketTime target = null;
+                MarketTime notify = null;
+                if (markettimemap.TryGetValue(mt.ID, out target))
+                {
+                    //更新
+                    target.Name = mt.Name;
+                    target.Description = mt.Description;
+                    notify = target;
+                }
+                else
+                {
+                    markettimemap.Add(mt.ID, mt);
+                    notify = mt;
+                }
 
-            //对外触发
-            if (_initialized)
-            {
-                CoreService.EventBasicInfo.FireMarketTime(notify);
+                //对外触发
+                if (_initialized)
+                {
+                    CoreService.EventBasicInfo.FireMarketTime(notify);
+                }
             }
-
             if (islast && !_initialized)
             {
                 Status("交易时间查询完毕,查询交易所信息");
@@ -52,26 +53,28 @@ namespace TradingLib.MoniterCore
 
         public void GotExchange(Exchange ex,bool islast)
         {
-            if (ex == null) return;
-            Exchange target = null;
-            Exchange notify = null;
-            if (exchangemap.TryGetValue(ex.ID, out target))
+            if (ex != null)
             {
-                //更新
-                target.Name = ex.Name;
-                target.EXCode = ex.EXCode;
-                target.Country = ex.Country;
-                notify = target;
-            }
-            else
-            {
-                exchangemap.Add(ex.ID, ex);
-                notify = ex;
-            }
-            //对外触发
-            if (_initialized)
-            {
-                CoreService.EventBasicInfo.FireExchangeEvent(notify);
+                Exchange target = null;
+                Exchange notify = null;
+                if (exchangemap.TryGetValue(ex.ID, out target))
+                {
+                    //更新
+                    target.Name = ex.Name;
+                    target.EXCode = ex.EXCode;
+                    target.Country = ex.Country;
+                    notify = target;
+                }
+                else
+                {
+                    exchangemap.Add(ex.ID, ex);
+                    notify = ex;
+                }
+                //对外触发
+                if (_initialized)
+                {
+                    CoreService.EventBasicInfo.FireExchangeEvent(notify);
+                }
             }
             if (islast && !_initialized)
             {
@@ -86,47 +89,50 @@ namespace TradingLib.MoniterCore
         /// <param name="sec"></param>
         public void GotSecurity(SecurityFamilyImpl sec,bool islast)
         {
-            if (sec == null) return;
-            SecurityFamilyImpl target = null;
-            SecurityFamilyImpl notify = null;
-            if (securitymap.TryGetValue(sec.ID, out target))
+            if (sec != null)
             {
-                //更新
-                target.Code = sec.Code;
-                target.Name = sec.Name;
-                target.Currency = sec.Currency;
-                target.Type = sec.Type;
+                SecurityFamilyImpl target = null;
+                SecurityFamilyImpl notify = null;
+                if (securitymap.TryGetValue(sec.ID, out target))
+                {
+                    //更新
+                    target.Code = sec.Code;
+                    target.Name = sec.Name;
+                    target.Currency = sec.Currency;
+                    target.Type = sec.Type;
 
-                target.exchange_fk = sec.exchange_fk;
-                target.Exchange = this.GetExchange(target.exchange_fk);
+                    target.exchange_fk = sec.exchange_fk;
+                    target.Exchange = this.GetExchange(target.exchange_fk);
 
-                target.mkttime_fk = sec.mkttime_fk;
-                target.MarketTime = this.GetMarketTime(target.mkttime_fk);
+                    target.mkttime_fk = sec.mkttime_fk;
+                    target.MarketTime = this.GetMarketTime(target.mkttime_fk);
 
-                target.underlaying_fk = sec.underlaying_fk;
-                target.UnderLaying = this.GetSecurity(target.underlaying_fk);
+                    target.underlaying_fk = sec.underlaying_fk;
+                    target.UnderLaying = this.GetSecurity(target.underlaying_fk);
 
-                target.Multiple = sec.Multiple;
-                target.PriceTick = sec.PriceTick;
-                target.EntryCommission = sec.EntryCommission;
-                target.ExitCommission = sec.ExitCommission;
-                target.Margin = sec.Margin;
-                target.ExtraMargin = sec.ExtraMargin;
-                target.MaintanceMargin = sec.MaintanceMargin;
-                target.Tradeable = sec.Tradeable;
-                notify = target;
+                    target.Multiple = sec.Multiple;
+                    target.PriceTick = sec.PriceTick;
+                    target.EntryCommission = sec.EntryCommission;
+                    target.ExitCommission = sec.ExitCommission;
+                    target.Margin = sec.Margin;
+                    target.ExtraMargin = sec.ExtraMargin;
+                    target.MaintanceMargin = sec.MaintanceMargin;
+                    target.Tradeable = sec.Tradeable;
+                    notify = target;
+                }
+                else
+                {
+                    securitymap.Add(sec.ID, sec);
+                    notify = sec;
+                }
+
+                //对外触发
+                if (_initialized)
+                {
+                    CoreService.EventBasicInfo.FireSecurityEvent(notify);
+                }
             }
-            else
-            {
-                securitymap.Add(sec.ID, sec);
-                notify = sec;
-            }
 
-            //对外触发
-            if (_initialized)
-            {
-                CoreService.EventBasicInfo.FireSecurityEvent(notify);
-            }
             if (islast && !_initialized)
             {
                 Status("品种查询完毕,查询合约信息");
@@ -140,56 +146,55 @@ namespace TradingLib.MoniterCore
         /// <param name="symbol"></param>
         public void GotSymbol(SymbolImpl symbol,bool islast)
         {
-            if (symbol == null) return;
-            SymbolImpl target = null;
-            SymbolImpl notify = null;
-            if (symbolmap.TryGetValue(symbol.ID, out target))
+            if (symbol != null)
             {
-                //更新
-                target.Symbol = symbol.Symbol;
-                target.EntryCommission = symbol._entrycommission;
-                target.ExitCommission = symbol._exitcommission;
-                target.Margin = symbol._margin;
-                target.ExtraMargin = symbol._extramargin;
-                target.MaintanceMargin = symbol._maintancemargin;
-                target.Strike = symbol.Strike;
-                target.OptionSide = symbol.OptionSide;
-                target.ExpireDate = symbol.ExpireDate;
+                SymbolImpl target = null;
+                SymbolImpl notify = null;
+                if (symbolmap.TryGetValue(symbol.ID, out target))
+                {
+                    //更新
+                    target.Symbol = symbol.Symbol;
+                    target.EntryCommission = symbol._entrycommission;
+                    target.ExitCommission = symbol._exitcommission;
+                    target.Margin = symbol._margin;
+                    target.ExtraMargin = symbol._extramargin;
+                    target.MaintanceMargin = symbol._maintancemargin;
+                    target.Strike = symbol.Strike;
+                    target.OptionSide = symbol.OptionSide;
+                    target.ExpireDate = symbol.ExpireDate;
 
-                target.security_fk = symbol.security_fk;
-                target.SecurityFamily = this.GetSecurity(target.security_fk);
+                    target.security_fk = symbol.security_fk;
+                    target.SecurityFamily = this.GetSecurity(target.security_fk);
 
-                target.underlaying_fk = symbol.underlaying_fk;
-                target.ULSymbol = this.GetSymbol(target.underlaying_fk);
+                    target.underlaying_fk = symbol.underlaying_fk;
+                    target.ULSymbol = this.GetSymbol(target.underlaying_fk);
 
-                target.underlayingsymbol_fk = symbol.underlayingsymbol_fk;
-                target.UnderlayingSymbol = this.GetSymbol(target.underlayingsymbol_fk);
-                target.Tradeable = symbol.Tradeable;
+                    target.underlayingsymbol_fk = symbol.underlayingsymbol_fk;
+                    target.UnderlayingSymbol = this.GetSymbol(target.underlayingsymbol_fk);
+                    target.Tradeable = symbol.Tradeable;
 
-                notify = target;
+                    notify = target;
+                }
+                else //添加
+                {
+                    symbolmap.Add(symbol.ID, symbol);
+                    symbol.SecurityFamily = this.GetSecurity(symbol.security_fk);
+                    symbol.ULSymbol = this.GetSymbol(symbol.underlaying_fk);
+                    symbol.UnderlayingSymbol = this.GetSymbol(symbol.underlayingsymbol_fk);
+                    symbolnammap[symbol.Symbol] = symbol;
+                    notify = symbol;
+                }
+
+                //如果已经初始化完毕则需要对外触发事件
+                if (_initialized)
+                {
+                    CoreService.EventBasicInfo.FireSymbolEvent(notify);
+                }
             }
-            else //添加
-            {
-                symbolmap.Add(symbol.ID, symbol);
-                symbol.SecurityFamily = this.GetSecurity(symbol.security_fk);
-                symbol.ULSymbol = this.GetSymbol(symbol.underlaying_fk);
-                symbol.UnderlayingSymbol = this.GetSymbol(symbol.underlayingsymbol_fk);
-                symbolnammap[symbol.Symbol] = symbol;
-                notify = symbol;
-            }
-
-            //如果已经初始化完毕则需要对外触发事件
-            if (_initialized)
-            {
-                CoreService.EventBasicInfo.FireSymbolEvent(notify);
-            }
-
             if (islast && !_initialized)
             {
                 Status("合约查询完毕,查询委托风控规则");
-                CoreService.TLClient.ReqQryRuleSet();
-                //合约加载成功后进行合约 品种绑定
-                //basicinfotracker.OnFinishLoad();
+                CoreService.TLClient.ReqQryRuleSet();;
             }
 
         }

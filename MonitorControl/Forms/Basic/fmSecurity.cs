@@ -404,7 +404,7 @@ namespace TradingLib.MoniterControl
 
         void btnSyncSec_Click(object sender, EventArgs e)
         {
-            if (MoniterHelper.WindowMessage("确认同步品种信息？") == System.Windows.Forms.DialogResult.Yes)
+            if (MoniterHelper.WindowConfirm("确认同步品种信息？") == System.Windows.Forms.DialogResult.Yes)
             {
                 CoreService.TLClient.ReqSyncSecurity();
             }

@@ -106,6 +106,7 @@ namespace MoniterSkeleton
             }
             finally
             {
+
                 try
                 {
                     // Save changed properties

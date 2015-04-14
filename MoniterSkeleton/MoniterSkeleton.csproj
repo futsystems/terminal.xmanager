@@ -35,6 +35,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>main_96.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ant.Component">
       <HintPath>..\RequiredLibraries\update\Ant.Component.dll</HintPath>
@@ -98,6 +101,9 @@
       <Project>{AA41EFFA-887D-4C4D-8BE4-91B08C98FF42}</Project>
       <Name>TradingLib.MoniterCore</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="main_96.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

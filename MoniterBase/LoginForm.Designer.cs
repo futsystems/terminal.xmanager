@@ -41,13 +41,17 @@
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.ckremberpass = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.btnExit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lbLoginStatus = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.imageheader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.servers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageheader
@@ -95,7 +99,6 @@
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(147, 22);
             this.username.TabIndex = 23;
-            this.username.Text = "root";
             // 
             // password
             // 
@@ -104,7 +107,6 @@
             this.password.PasswordChar = '#';
             this.password.Size = new System.Drawing.Size(147, 22);
             this.password.TabIndex = 24;
-            this.password.Text = "123456";
             // 
             // servers
             // 
@@ -117,7 +119,7 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(137, 148);
+            this.btnLogin.Location = new System.Drawing.Point(137, 110);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(60, 31);
             this.btnLogin.TabIndex = 27;
@@ -125,11 +127,11 @@
             // 
             // ckremberuser
             // 
-            this.ckremberuser.Location = new System.Drawing.Point(137, 124);
+            this.ckremberuser.Location = new System.Drawing.Point(289, 53);
             this.ckremberuser.Name = "ckremberuser";
-            this.ckremberuser.Size = new System.Drawing.Size(105, 18);
+            this.ckremberuser.Size = new System.Drawing.Size(78, 18);
             this.ckremberuser.TabIndex = 28;
-            this.ckremberuser.Values.Text = "记住柜员代码";
+            this.ckremberuser.Values.Text = "记住代码";
             // 
             // kryptonManager1
             // 
@@ -138,6 +140,8 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.statusStrip1);
+            this.kryptonPanel1.Controls.Add(this.ckremberpass);
             this.kryptonPanel1.Controls.Add(this.btnExit);
             this.kryptonPanel1.Controls.Add(this.label1);
             this.kryptonPanel1.Controls.Add(this.label0);
@@ -150,22 +154,48 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 66);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(406, 221);
+            this.kryptonPanel1.Size = new System.Drawing.Size(406, 188);
             this.kryptonPanel1.TabIndex = 33;
+            // 
+            // ckremberpass
+            // 
+            this.ckremberpass.Location = new System.Drawing.Point(289, 85);
+            this.ckremberpass.Name = "ckremberpass";
+            this.ckremberpass.Size = new System.Drawing.Size(78, 18);
+            this.ckremberpass.TabIndex = 33;
+            this.ckremberpass.Values.Text = "记住密码";
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(224, 148);
+            this.btnExit.Location = new System.Drawing.Point(224, 110);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(60, 31);
             this.btnExit.TabIndex = 32;
             this.btnExit.Values.Text = "退 出";
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lbLoginStatus});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 166);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
+            this.statusStrip1.Size = new System.Drawing.Size(406, 22);
+            this.statusStrip1.TabIndex = 35;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lbLoginStatus
+            // 
+            this.lbLoginStatus.Name = "lbLoginStatus";
+            this.lbLoginStatus.Size = new System.Drawing.Size(15, 17);
+            this.lbLoginStatus.Text = "--";
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(406, 287);
+            this.ClientSize = new System.Drawing.Size(406, 254);
             this.Controls.Add(this.kryptonPanel1);
             this.Controls.Add(this.imageheader);
             this.DoubleBuffered = true;
@@ -184,6 +214,8 @@
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -206,6 +238,9 @@
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnExit;
         private System.Windows.Forms.BindingSource bindingSource1;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox ckremberpass;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel lbLoginStatus;
         //private Telerik.WinControls.Themes.Windows8Theme windows8Theme1;
     }
 }

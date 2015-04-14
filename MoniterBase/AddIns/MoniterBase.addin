@@ -102,11 +102,17 @@
 
   <!--系统管理菜单-->
   <Path name = "/Workspace/SystemManager">
-    <MenuItem id = "DefaultConnectorManagerCommand"
-              label = "行情与成交服务"
-              class = "TradingLib.MoniterBase.Command.DefaultConnectorManagerCommand"/>
-
-    <MenuItem id = "Separator1" type = "Separator"/>
+    <ComplexCondition>
+      <Or>
+        <Condition name="DeployState" deploy="s" />
+        <Condition name="DeployState" deploy="d" />
+      </Or>
+      <MenuItem id = "DefaultConnectorManagerCommand"
+                label = "行情与成交服务"
+                class = "TradingLib.MoniterBase.Command.DefaultConnectorManagerCommand"/>
+      <MenuItem id = "Separator1" type = "Separator"/>
+    </ComplexCondition>
+    
     <MenuItem id = "SystemStatusCommand"
               label = "系统状态"
               class = "TradingLib.MoniterBase.Command.SystemStatusCommand"/>

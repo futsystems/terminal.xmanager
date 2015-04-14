@@ -30,10 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmCoreStatus));
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.marketopencheck = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel30 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonGroupBox2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.marketopencheck = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.runmode = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel30 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.totalaccountnum = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel40 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.clearcentrestatus = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -50,8 +52,6 @@
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).BeginInit();
@@ -71,22 +71,6 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(255, 337);
             this.kryptonPanel1.TabIndex = 0;
-            // 
-            // marketopencheck
-            // 
-            this.marketopencheck.Location = new System.Drawing.Point(106, 106);
-            this.marketopencheck.Name = "marketopencheck";
-            this.marketopencheck.Size = new System.Drawing.Size(19, 18);
-            this.marketopencheck.TabIndex = 5;
-            this.marketopencheck.Values.Text = "--";
-            // 
-            // kryptonLabel30
-            // 
-            this.kryptonLabel30.Location = new System.Drawing.Point(39, 106);
-            this.kryptonLabel30.Name = "kryptonLabel30";
-            this.kryptonLabel30.Size = new System.Drawing.Size(68, 18);
-            this.kryptonLabel30.TabIndex = 0;
-            this.kryptonLabel30.Values.Text = "时间检查:";
             // 
             // kryptonGroupBox2
             // 
@@ -109,6 +93,30 @@
             this.kryptonGroupBox2.TabIndex = 1;
             this.kryptonGroupBox2.Values.Heading = "状态信息";
             // 
+            // kryptonLabel6
+            // 
+            this.kryptonLabel6.Location = new System.Drawing.Point(106, 34);
+            this.kryptonLabel6.Name = "kryptonLabel6";
+            this.kryptonLabel6.Size = new System.Drawing.Size(19, 18);
+            this.kryptonLabel6.TabIndex = 8;
+            this.kryptonLabel6.Values.Text = "--";
+            // 
+            // kryptonLabel7
+            // 
+            this.kryptonLabel7.Location = new System.Drawing.Point(25, 34);
+            this.kryptonLabel7.Name = "kryptonLabel7";
+            this.kryptonLabel7.Size = new System.Drawing.Size(82, 18);
+            this.kryptonLabel7.TabIndex = 7;
+            this.kryptonLabel7.Values.Text = "主帐户数量:";
+            // 
+            // marketopencheck
+            // 
+            this.marketopencheck.Location = new System.Drawing.Point(106, 106);
+            this.marketopencheck.Name = "marketopencheck";
+            this.marketopencheck.Size = new System.Drawing.Size(19, 18);
+            this.marketopencheck.TabIndex = 5;
+            this.marketopencheck.Values.Text = "--";
+            // 
             // runmode
             // 
             this.runmode.Location = new System.Drawing.Point(106, 82);
@@ -116,6 +124,14 @@
             this.runmode.Size = new System.Drawing.Size(19, 18);
             this.runmode.TabIndex = 5;
             this.runmode.Values.Text = "--";
+            // 
+            // kryptonLabel30
+            // 
+            this.kryptonLabel30.Location = new System.Drawing.Point(39, 106);
+            this.kryptonLabel30.Name = "kryptonLabel30";
+            this.kryptonLabel30.Size = new System.Drawing.Size(68, 18);
+            this.kryptonLabel30.TabIndex = 0;
+            this.kryptonLabel30.Values.Text = "时间检查:";
             // 
             // totalaccountnum
             // 
@@ -258,29 +274,13 @@
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "上个结算日:";
             // 
-            // kryptonLabel6
-            // 
-            this.kryptonLabel6.Location = new System.Drawing.Point(106, 34);
-            this.kryptonLabel6.Name = "kryptonLabel6";
-            this.kryptonLabel6.Size = new System.Drawing.Size(19, 18);
-            this.kryptonLabel6.TabIndex = 8;
-            this.kryptonLabel6.Values.Text = "--";
-            // 
-            // kryptonLabel7
-            // 
-            this.kryptonLabel7.Location = new System.Drawing.Point(25, 34);
-            this.kryptonLabel7.Name = "kryptonLabel7";
-            this.kryptonLabel7.Size = new System.Drawing.Size(82, 18);
-            this.kryptonLabel7.TabIndex = 7;
-            this.kryptonLabel7.Values.Text = "主帐户数量:";
-            // 
             // fmCoreStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(255, 337);
             this.Controls.Add(this.kryptonPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;

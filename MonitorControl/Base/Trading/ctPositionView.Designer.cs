@@ -30,10 +30,6 @@
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.positiongrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.isDoubleFlat = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
-            this.num = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.btnCancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnFlatAll = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnFlat = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnShowAll = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
@@ -46,10 +42,6 @@
             // kryptonPanel1
             // 
             this.kryptonPanel1.Controls.Add(this.positiongrid);
-            this.kryptonPanel1.Controls.Add(this.isDoubleFlat);
-            this.kryptonPanel1.Controls.Add(this.num);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
-            this.kryptonPanel1.Controls.Add(this.btnCancel);
             this.kryptonPanel1.Controls.Add(this.btnFlatAll);
             this.kryptonPanel1.Controls.Add(this.btnFlat);
             this.kryptonPanel1.Controls.Add(this.btnShowAll);
@@ -72,46 +64,10 @@
             this.positiongrid.Size = new System.Drawing.Size(872, 230);
             this.positiongrid.TabIndex = 12;
             // 
-            // isDoubleFlat
-            // 
-            this.isDoubleFlat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.isDoubleFlat.Location = new System.Drawing.Point(448, 236);
-            this.isDoubleFlat.Name = "isDoubleFlat";
-            this.isDoubleFlat.Size = new System.Drawing.Size(78, 18);
-            this.isDoubleFlat.TabIndex = 11;
-            this.isDoubleFlat.Values.Text = "双击平仓";
-            // 
-            // num
-            // 
-            this.num.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.num.Location = new System.Drawing.Point(846, 236);
-            this.num.Name = "num";
-            this.num.Size = new System.Drawing.Size(19, 18);
-            this.num.TabIndex = 10;
-            this.num.Values.Text = "--";
-            // 
-            // kryptonLabel1
-            // 
-            this.kryptonLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonLabel1.Location = new System.Drawing.Point(757, 236);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(68, 18);
-            this.kryptonLabel1.TabIndex = 9;
-            this.kryptonLabel1.Values.Text = "记录条数:";
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCancel.Location = new System.Drawing.Point(383, 233);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(59, 25);
-            this.btnCancel.TabIndex = 5;
-            this.btnCancel.Values.Text = "撤 单";
-            // 
             // btnFlatAll
             // 
             this.btnFlatAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnFlatAll.Location = new System.Drawing.Point(241, 233);
+            this.btnFlatAll.Location = new System.Drawing.Point(221, 233);
             this.btnFlatAll.Name = "btnFlatAll";
             this.btnFlatAll.Size = new System.Drawing.Size(71, 25);
             this.btnFlatAll.TabIndex = 3;
@@ -164,14 +120,10 @@
         #endregion
 
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btnCancel;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnFlatAll;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnFlat;
         private ComponentFactory.Krypton.Toolkit.KryptonRadioButton btnShowAll;
         private ComponentFactory.Krypton.Toolkit.KryptonRadioButton btnShowHold;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel num;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox isDoubleFlat;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView positiongrid;
     }
 }

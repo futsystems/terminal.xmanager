@@ -42,6 +42,9 @@ namespace TradingLib.MoniterBase.Command
             workbench.ShowControl("AccountMoniter", EnumControlLocation.TopPanel);
             workbench.ShowControl("TradingInfoMoniter", EnumControlLocation.BottomLeft);
             workbench.ShowControl("OrderPanel", EnumControlLocation.BottomRight);
+
+            workbench.ResetView();
+
         }
     }
 

@@ -120,6 +120,11 @@ namespace TradingLib.MoniterCore
             List<string> dllfilelist = new List<string>();
             //遍历搜索路径 获得所有dll文件
             string path = Path.Combine(new string[] { AppDomain.CurrentDomain.BaseDirectory, "plugin" });
+            //目录不存在直接返回
+            if (!Directory.Exists(path))
+            {
+                return;
+            }
             dllfilelist.AddRange(Directory.GetFiles(path, "*.dll"));
 
             Dictionary<Type, bool> dictionary = new Dictionary<Type, bool>();

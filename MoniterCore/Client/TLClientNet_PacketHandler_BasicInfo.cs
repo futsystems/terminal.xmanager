@@ -12,25 +12,25 @@ namespace TradingLib.MoniterCore
     {
         void CliOnMGRMarketTime(RspMGRQryMarketTimeResponse response)
         {
-            //logger.Debug("got markettime response:" + response.ToString());
+            logger.Debug("got markettime response:" + response.ToString());
             CoreService.BasicInfoTracker.GotMarketTime(response.MarketTime, response.IsLast);
         }
 
         void CliOnMGRExchange(RspMGRQryExchangeResponse response)
         {
-            //logger.Debug("got exchange response:" + response.ToString());
+            logger.Debug("got exchange response:" + response.ToString());
             CoreService.BasicInfoTracker.GotExchange(response.Exchange, response.IsLast);
         }
 
         void CliOnMGRSecurity(RspMGRQrySecurityResponse response)
         {
-            //logger.Debug("got security response:" + response.ToString());
+            logger.Debug("got security response:" + response.ToString());
             CoreService.BasicInfoTracker.GotSecurity(response.SecurityFaimly, response.IsLast);
         }
 
         void CliOnMGRSymbol(RspMGRQrySymbolResponse response)
         {
-            //logger.Debug("got symbol response:" + response.ToString());
+            logger.Debug("got symbol response:" + response.ToString());
             CoreService.BasicInfoTracker.GotSymbol(response.Symbol, response.IsLast);
         }
     }

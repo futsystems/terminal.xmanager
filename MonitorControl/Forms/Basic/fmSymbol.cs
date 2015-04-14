@@ -463,7 +463,7 @@ namespace TradingLib.MoniterControl
                     return;
                 }
             }
-            if (MoniterHelper.WindowMessage("确认同步合约数据?") == System.Windows.Forms.DialogResult.Yes)
+            if (MoniterHelper.WindowConfirm("确认同步合约数据?") == System.Windows.Forms.DialogResult.Yes)
             {
                 CoreService.TLClient.ReqSyncSymbol();
                 _first = false;
