@@ -26,16 +26,25 @@ namespace TradingLib.MoniterCore
         }
         public SplashScreenApplicationContext()
         {
-            //如果有更新则我们先进行更新 然后再重新启动
-            if (!this.OnUpdate())
+            try
             {
-                this.ShowSplashScreen();//这里创建和显示启动窗体
-                this.MainFormLoad();//这里创建和显示启动主窗体
+                LogService.Debug("SplashScreenApplicationContext created");
+
+                //如果有更新则我们先进行更新 然后再重新启动
+                if (!this.OnUpdate())
+                {
+                    this.ShowSplashScreen();//这里创建和显示启动窗体
+                    this.MainFormLoad();//这里创建和显示启动主窗体
+                }
+                else
+                {
+                    //关闭本进程等待更新程序进行覆盖更新
+                    System.Diagnostics.Process.GetCurrentProcess().Kill();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                //关闭本进程等待更新程序进行覆盖更新
-                System.Diagnostics.Process.GetCurrentProcess().Kill();
+                MessageBox.Show(ex.ToString());
             }
         }
 

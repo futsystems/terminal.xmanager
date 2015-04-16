@@ -13,58 +13,135 @@ using TradingLib.MoniterCore;
 
 namespace TradingLib.MoniterControl
 {
-    public partial class fmCashOperation : ComponentFactory.Krypton.Toolkit.KryptonForm
+    public partial class fmCashOperation : ComponentFactory.Krypton.Toolkit.KryptonForm,IEventBinder
     {
         public fmCashOperation()
         {
             InitializeComponent();
-            cashop_type.Items.Add("入金");
-            cashop_type.Items.Add("出金");
-            cashop_type.SelectedIndex = 0;
+            //cashop_type.Items.Add("入金");
+            //cashop_type.Items.Add("出金");
+            //cashop_type.SelectedIndex = 0;
             MoniterHelper.AdapterToIDataSource(cbEquityTypeList).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumEquityType>());
 
             this.Load += new EventHandler(fmCashOperation_Load);
         }
 
-        void fmCashOperation_Load(object sender, EventArgs e)
+        public void OnInit()
         {
-            btnCashOperation.Click += new EventHandler(btnCashOperation_Click);
+            CoreService.EventContrib.RegisterCallback("BrokerRouterPassThrough", "QryBrokerAccountInfo", this.OnAccountInfo);
         }
 
-        void btnCashOperation_Click(object sender, EventArgs e)
+        public void OnDisposed()
         {
-            decimal amount = cashop_amount.Value;
-            string cashopref = cashop_ref.Text;
-            string comment = cashop_ref.Text;
-            int cashopvalue = cashop_type.SelectedIndex;
-            string cashoptitle = string.Empty;
-            decimal amount2 = 0;
+            CoreService.EventContrib.UnRegisterCallback("BrokerRouterPassThrough", "QryBrokerAccountInfo", this.OnAccountInfo);
+
+        }
+
+        void OnAccountInfo(string json, bool islast)
+        {
+            var data = TradingLib.Mixins.Json.JsonMapper.ToObject(json)["Payload"];
+            decimal lastequity = decimal.Parse(data["LastEquity"].ToString());
+            decimal deposit = decimal.Parse(data["Deposit"].ToString());
+            decimal withdraw = decimal.Parse(data["Withdraw"].ToString());
+            decimal commission = decimal.Parse(data["Commission"].ToString());
+            decimal closeprofit = decimal.Parse(data["CloseProfit"].ToString());
+            decimal positionprofit = decimal.Parse(data["PositionProfit"].ToString());
+
+            lbPreBalance.Text = Util.FormatDecimal(lastequity);
+            lbDeposit.Text = Util.FormatDecimal(deposit);
+            lbWithDraw.Text = Util.FormatDecimal(withdraw);
+            lbCommission.Text = Util.FormatDecimal(commission);
+            lbCloseProfit.Text = Util.FormatDecimal(closeprofit);
+            lbPositionProfit.Text = Util.FormatDecimal(positionprofit);
+            lbNowEquity.Text = Util.FormatDecimal(lastequity + deposit - withdraw + closeprofit + positionprofit - commission);
+            lbStaticEquity.Text = Util.FormatDecimal(lastequity + deposit - withdraw);
+            lbProfit.Text = Util.FormatDecimal(closeprofit + positionprofit - commission);
+        }
+
+        void btnWithdraw_Click(object sender, EventArgs e)
+        {
+            string _acc = _account.Account;
+            double _amount = (double)amount.Value;
+            string _pass = pass.Text;
+
+            if (MoniterHelper.WindowConfirm(string.Format("确认从主帐户:{0}所绑定的底层帐户出金:{1}", _account.ConnectorToken, _amount)) == System.Windows.Forms.DialogResult.Yes)
+            {
+                CoreService.TLClient.ReqWithdrawMainAccount(_acc, _amount, _pass);
+            }
+
+        }
+
+        void btnDeposit_Click(object sender, EventArgs e)
+        {
+            string _acc = _account.Account;
+            double _amount = (double)amount.Value;
+            string _pass = pass.Text;
+
+            if (MoniterHelper.WindowConfirm(string.Format("确认向主帐户:{0}所绑定的底层帐户入金:{1}", _account.ConnectorToken, _amount)) == System.Windows.Forms.DialogResult.Yes)
+            {
+                CoreService.TLClient.ReqDepositMainAccount(_acc, _amount, _pass);
+            }
+        }
+
+
+
+
+        private void btnQry_Click(object sender, EventArgs e)
+        {
+            CoreService.TLClient.ReqQryConnectorAccountInfo(_account.Account);
+        }
+
+
+        void fmCashOperation_Load(object sender, EventArgs e)
+        {
+            btnAccountDeposit.Click += new EventHandler(btnAccountDeposit_Click);
+            btnAccountWithdraw.Click += new EventHandler(btnAccountWithdraw_Click);
+            btnDeposit.Click += new EventHandler(btnDeposit_Click);
+            btnWithdraw.Click += new EventHandler(btnWithdraw_Click);
+            CoreService.EventCore.RegIEventHandler(this);
+            CoreService.TLClient.ReqQryConnectorAccountInfo(_account.Account);
+        }
+
+        void btnAccountWithdraw_Click(object sender, EventArgs e)
+        {
             bool sync = cashop_sync.Checked;
-            if (cashopvalue == -1)
-            {
-                MoniterHelper.WindowMessage("请选择出入金类型");
-                return;
-            }
-            if (cashopvalue == 0)
-            {
-                cashoptitle = "入金";
-                amount2 = Math.Abs(amount);
-            }
-            else if (cashopvalue == 1)
-            {
-                cashoptitle = "出金";
-                amount2 = -1 * Math.Abs(amount);
-            }
+            decimal amount = cashop_amount.Value;
             if (amount == 0)
             {
                 MoniterHelper.WindowMessage("请输入出入金金额");
                 return;
             }
+            string comment = cashop_comment.Text;
+            string cashoptitle = string.Empty;
+
+            decimal amount2 = amount * -1;
+
+            QSEnumEquityType type = (QSEnumEquityType)cbEquityTypeList.SelectedValue;
+            if (MoniterHelper.WindowConfirm("确认向帐户[" + _account.Account + "] 出金" + amount.ToString()) == System.Windows.Forms.DialogResult.Yes)
+            {
+                CoreService.TLClient.ReqCashOperation(_account.Account, amount2, type, "", comment, sync);
+            }
+        }
+
+        void btnAccountDeposit_Click(object sender, EventArgs e)
+        {
+            
+            bool sync = cashop_sync.Checked;
+            decimal amount = cashop_amount.Value;
+            if (amount == 0)
+            {
+                MoniterHelper.WindowMessage("请输入出入金金额");
+                return;
+            }
+            string comment = cashop_comment.Text;
+            string cashoptitle = string.Empty;
+
+            decimal amount2 = amount * 1;
             
             QSEnumEquityType type = (QSEnumEquityType)cbEquityTypeList.SelectedValue;
-            if (MoniterHelper.WindowConfirm("确认向帐户[" + _account.Account + "] " + cashoptitle + " " + amount.ToString() + " 流水号:" + cashopref) == System.Windows.Forms.DialogResult.Yes)
+            if (MoniterHelper.WindowConfirm("确认向帐户[" + _account.Account + "] " + cashoptitle + " " + amount.ToString()) == System.Windows.Forms.DialogResult.Yes)
             {
-                CoreService.TLClient.ReqCashOperation(_account.Account, amount2, type, cashopref, comment, sync);
+                CoreService.TLClient.ReqCashOperation(_account.Account, amount2, type,"", comment, sync);
             }
         }
 
@@ -76,6 +153,7 @@ namespace TradingLib.MoniterControl
         public void SetAccount(AccountLite account)
         {
             _account = account;
+            ctFinanceInfo1.SetAccount(account);
         }
 
 

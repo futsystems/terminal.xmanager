@@ -221,6 +221,25 @@ namespace TradingLib.MoniterControl
             fm.Close();
         }
     }
+
+    /// <summary>
+    /// 更新配资服务
+    /// </summary>
+    public class UpdateFinServiceCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            AccountLite account = null;
+            if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
+            {
+                return;
+            }
+            fmEditService fm = new fmEditService();
+            fm.SetAccount(account);
+            fm.ShowDialog();
+            fm.Close();
+        }
+    }
     /// <summary>
     /// 查询交易密码
     /// </summary>

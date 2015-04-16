@@ -76,6 +76,12 @@
     <Compile Include="Base\ctCashTrans.Designer.cs">
       <DependentUpon>ctCashTrans.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\ctFinanceInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Base\ctFinanceInfo.Designer.cs">
+      <DependentUpon>ctFinanceInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\ctOrderSenderM.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -196,6 +202,24 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Account\FeeManagerment\ctTodayFeeList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Account\FeeManagerment\ctTodayFeeList.Designer.cs">
+      <DependentUpon>ctTodayFeeList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Account\FeeManagerment\fmCollectFeeManual.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Account\FeeManagerment\fmCollectFeeManual.Designer.cs">
+      <DependentUpon>fmCollectFeeManual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Account\FeeManagerment\fmEditFee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Account\FeeManagerment\fmEditFee.Designer.cs">
+      <DependentUpon>fmEditFee.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Account\fmAddAccount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -244,6 +268,12 @@
     <Compile Include="Forms\Account\fmChangeRouter.Designer.cs">
       <DependentUpon>fmChangeRouter.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Account\MainAcctFinService\fmEditService.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Account\MainAcctFinService\fmEditService.Designer.cs">
+      <DependentUpon>fmEditService.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Account\fmMainAccountManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,6 +286,13 @@
     <Compile Include="Forms\Account\fmEditVendorFlatRule.Designer.cs">
       <DependentUpon>fmEditVendorFlatRule.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Account\FeeManagerment\fmFeeManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Account\FeeManagerment\fmFeeManagement.Designer.cs">
+      <DependentUpon>fmFeeManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Account\MainAcctFinService\Protocol_MainAcctFinService.cs" />
     <Compile Include="Forms\Basic\CommissionMargin\fmCommission.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -563,6 +600,9 @@
     <EmbeddedResource Include="Base\ctCashTrans.resx">
       <DependentUpon>ctCashTrans.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Base\ctFinanceInfo.resx">
+      <DependentUpon>ctFinanceInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Base\ctOrderSenderM.resx">
       <DependentUpon>ctOrderSenderM.cs</DependentUpon>
     </EmbeddedResource>
@@ -621,6 +661,15 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Account\FeeManagerment\ctTodayFeeList.resx">
+      <DependentUpon>ctTodayFeeList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Account\FeeManagerment\fmCollectFeeManual.resx">
+      <DependentUpon>fmCollectFeeManual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Account\FeeManagerment\fmEditFee.resx">
+      <DependentUpon>fmEditFee.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\fmAddAccount.resx">
       <DependentUpon>fmAddAccount.cs</DependentUpon>
     </EmbeddedResource>
@@ -645,11 +694,17 @@
     <EmbeddedResource Include="Forms\Account\fmChangeRouter.resx">
       <DependentUpon>fmChangeRouter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Account\MainAcctFinService\fmEditService.resx">
+      <DependentUpon>fmEditService.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\fmMainAccountManager.resx">
       <DependentUpon>fmMainAccountManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\fmEditVendorFlatRule.resx">
       <DependentUpon>fmEditVendorFlatRule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Account\FeeManagerment\fmFeeManagement.resx">
+      <DependentUpon>fmFeeManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Basic\CommissionMargin\fmCommission.resx">
       <DependentUpon>fmCommission.cs</DependentUpon>

@@ -23,11 +23,14 @@ namespace TradingLib.MoniterBase
         //用于调用升级逻辑,然后再显示启动窗口与主窗口
         protected override bool OnUpdate()
         {
+            LogService.Info("check update information.............");
             //没有更新我们返回false 程序正常运行
             Updater update = new Updater();
-            if (false)
+            //MessageBox.Show("it is here");
+            if (update.Detect())
             {
-                update.Update("Moniter.exe", true);
+                //MessageBox.Show("it is here2");
+                update.Update("Manager.exe", true);
                 return true;
             }
             else

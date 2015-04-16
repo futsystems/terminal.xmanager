@@ -22,4 +22,14 @@ namespace TradingLib.MoniterBase.Command
             fm.Close();
         }
     }
+
+    public class FeeManagerCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            fmFeeManagement fm = new fmFeeManagement();
+            fm.ShowDialog();
+            fm.Close();
+        }
+    }
 }

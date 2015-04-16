@@ -14,9 +14,9 @@
 	</Manifest>
 	
 	<Runtime>
-		<Import assembly = "../TradingLib.MoniterBase.dll">
+		<Import assembly = "../XSystem.Base.dll">
     </Import>
-    <Import assembly = "../TradingLib.MoniterControl.dll">
+    <Import assembly = "../XSystem.Control.dll">
       <ConditionEvaluator name="ProductState" class="TradingLib.MoniterControl.ProductStateConditionEvaluator"/>
       <ConditionEvaluator name="RoleState" class="TradingLib.MoniterControl.RoleStateConditionEvaluator"/>
       <ConditionEvaluator name="DeployState" class="TradingLib.MoniterControl.DeployStateConditionEvaluator"/>
@@ -293,6 +293,11 @@
 		             class  = "TradingLib.MoniterBase.Command.ResetViewCommand"/>
     
     <ToolbarItem id = "ViewSeparator" type = "Separator"/>
+
+    <ToolbarItem id = "FeeManagerCommand"
+		             tooltip = "收费管理"
+		             icon = "Icons.ViewReset"
+		             class  = "TradingLib.MoniterBase.Command.FeeManagerCommand"/>
     
   </Path>
   

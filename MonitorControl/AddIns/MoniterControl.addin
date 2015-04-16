@@ -14,9 +14,9 @@
 	</Manifest>
 	
 	<Runtime>
-    <Import assembly = "../TradingLib.MoniterControl.dll">
+    <Import assembly = "../XSystem.Control.dll">
     </Import>
-    <Import assembly = "../TradingLib.MoniterControl.dll">
+    <Import assembly = "../XSystem.Control.dll">
       <ConditionEvaluator name="AccountBindedState" class="TradingLib.MoniterControl.AccountBindedStateConditionEvaluator"/>
       <ConditionEvaluator name="AccountActiveState" class="TradingLib.MoniterControl.AccountActiveStateConditionEvaluator"/>
 
@@ -61,6 +61,13 @@
                 label = "强平规则"
                 class = "TradingLib.MoniterControl.UpdateFlatRuleCommand"/>
     </Condition>
+
+    <Condition name="ProductState" product="Vendor">
+      <MenuItem id = "UpdateFinServiceCommand"
+                label = "配资服务"
+                class = "TradingLib.MoniterControl.UpdateFinServiceCommand"/>
+    </Condition>
+    
     
     <MenuItem id = "Separator1" type = "Separator"/>
     
