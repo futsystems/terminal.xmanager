@@ -69,6 +69,15 @@
       </MenuItem>
     </Condition>
 
+    <Condition name="ProductState" product="*">
+      <MenuItem id = "FinManager"
+                type = "Menu"
+                label = "财务管理">
+        <Include id = "FinManager" path = "/Workspace/FinManager"/>
+      </MenuItem>
+    </Condition>
+    
+
     <MenuItem id = "Help"
 		          type = "Menu"
 				  shortcut = "Alt|H"
@@ -252,7 +261,18 @@
             class = "TradingLib.MoniterBase.Command.QrySettlementCommand"/>
   </Path>
 
+  <!--财务管理-->
+  <Path name = "/Workspace/FinManager">
+    <Condition name="ProductState" product="vendor">
+      <MenuItem id = "FeeManagerCommand"
+              label = "收费管理"
+              class = "TradingLib.MoniterBase.Command.FeeManagerCommand"/>
+    </Condition>
+
+  </Path>
+
   
+
   <!--帮助菜单-->
   <Path name = "/Workbench/HelpCentre">
     <MenuItem id = "HelpInfoCommand"

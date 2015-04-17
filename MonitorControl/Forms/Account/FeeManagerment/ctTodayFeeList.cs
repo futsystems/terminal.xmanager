@@ -46,6 +46,7 @@ namespace TradingLib.MoniterControl
             feeGrid.MouseClick += new MouseEventHandler(feeGrid_MouseClick);
             feeGrid.ContextMenuStrip = new ContextMenuStrip();
             feeGrid.ContextMenuStrip.Items.Add("手工收取", null, new EventHandler(CollectFee_Click));//1
+            feeGrid.ContextMenuStrip.Items.Add("回滚", null, new EventHandler(RollbackFee_Click));//1
             feeGrid.ContextMenuStrip.Items.Add("编辑收费项目", null, new EventHandler(EditFee_Click));//1
         }
 
@@ -64,6 +65,19 @@ namespace TradingLib.MoniterControl
             e.PaintParts = e.PaintParts ^ DataGridViewPaintParts.Focus;
         }
 
+        void RollbackFee_Click(object sender, EventArgs e)
+        {
+            FeeSetting f = CurrentFee;
+            if (f == null)
+            {
+                MoniterHelper.WindowMessage("请选择收费项目");
+                return;
+            }
+            if (MoniterHelper.WindowConfirm("确认回滚收费项目:" + f.ID.ToString()) == DialogResult.Yes)
+            {
+                CoreService.TLClient.ReqContribRequest("MainAcctFinService", "RollBackFee", f);
+            }
+        }
         void EditFee_Click(object sender, EventArgs e)
         {
             FeeSetting f = CurrentFee;
@@ -175,6 +189,14 @@ namespace TradingLib.MoniterControl
             }
         }
 
+        Image GetCollectedImage(bool collected)
+        {
+            if (collected)
+                return (Image)Properties.Resources.account_go;
+            else
+                return (Image)Properties.Resources.account_stop;
+
+        }
         void InvokeGotFee(FeeSetting f)
         {
             if (InvokeRequired)
@@ -195,6 +217,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][AMOUNT] = f.Amount;
                     gt.Rows[i][DATETIME] = f.DateTime;
                     gt.Rows[i][COLLECTED] = f.Collected;
+                    gt.Rows[i][COLLECTEDIMG] = GetCollectedImage(f.Collected);
                     gt.Rows[i][COMMENT] = f.Comment;
                     gt.Rows[i][CHARGETIME] =  Util.GetEnumDescription(f.ChargeTime);
                     gt.Rows[i][CHARGEMETHOD] =  Util.GetEnumDescription(f.ChargeMethod);
@@ -211,11 +234,13 @@ namespace TradingLib.MoniterControl
                     gt.Rows[r][AMOUNT] = f.Amount;
 
                     gt.Rows[r][COLLECTED] = f.Collected;
+                    gt.Rows[r][COLLECTEDIMG] = GetCollectedImage(f.Collected);
                     gt.Rows[r][COMMENT] = f.Comment;
 
                     gt.Rows[r][FEESTATUS] = f.FeeStatus;
                     gt.Rows[r][FEESTATUSSTR] = Util.GetEnumDescription(f.FeeStatus);
                     gt.Rows[r][ERROR] = f.Error;
+                    feemap[f.ID] = f;
                 }
             }
         }
@@ -226,7 +251,8 @@ namespace TradingLib.MoniterControl
         const string FEETYPE = "收费类别";
         const string AMOUNT = "金额";
         const string DATETIME = "创建时间";
-        const string COLLECTED = "是否收取";
+        const string COLLECTED = "Collected";
+        const string COLLECTEDIMG = "收取";
         const string COMMENT = "备注";
         const string CHARGEMETHOD = "收费方式";
         const string CHARGETIME = "收费时间";
@@ -271,13 +297,15 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(AMOUNT);//
             gt.Columns.Add(CHARGEMETHOD);//
             gt.Columns.Add(CHARGETIME);//
+            gt.Columns.Add(COLLECTED);//
+            gt.Columns.Add(COLLECTEDIMG, typeof(Image));
             
-            gt.Columns.Add(COMMENT);//
             gt.Columns.Add(DATETIME);//
             gt.Columns.Add(FEESTATUS);
             gt.Columns.Add(FEESTATUSSTR);
+            gt.Columns.Add(COMMENT);//
             gt.Columns.Add(ERROR);
-            gt.Columns.Add(COLLECTED);//
+            
         }
 
         /// <summary>
@@ -295,10 +323,25 @@ namespace TradingLib.MoniterControl
             grid.Columns[FEESTATUS].Visible = false;
             grid.Columns[DATETIME].Visible = false;
             grid.Columns[FEESTATUS].Visible = false;
+            grid.Columns[COLLECTED].Visible = false;
             //grid.Columns[ID].Visible = false;
             //grid.Columns[ID].Visible = false;
+            ResetColumeSize();
 
+        }
 
+        void ResetColumeSize()
+        {
+            ComponentFactory.Krypton.Toolkit.KryptonDataGridView grid = feeGrid;
+            grid.Columns[SETTLEDAY].Width = 60;
+            grid.Columns[ACCOUNT].Width = 60;
+            grid.Columns[FEETYPE].Width = 55;
+            grid.Columns[AMOUNT].Width = 50;
+            grid.Columns[CHARGEMETHOD].Width = 50;
+            grid.Columns[CHARGETIME].Width = 50;
+            grid.Columns[FEESTATUSSTR].Width = 50;
+            grid.Columns[COLLECTEDIMG].Width = 40;
+            
         }
 
 

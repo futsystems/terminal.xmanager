@@ -41,9 +41,10 @@
             this.chargeservicebefore = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.ctTodayFeeList1 = new TradingLib.MoniterControl.ctTodayFeeList();
             this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonPage3 = new ComponentFactory.Krypton.Navigator.KryptonPage();
+            this.ctTodayFeeList1 = new TradingLib.MoniterControl.ctTodayFeeList();
+            this.btnForceChargeServiceFee = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
@@ -117,6 +118,7 @@
             // 
             // kryptonGroupBox1.Panel
             // 
+            this.kryptonGroupBox1.Panel.Controls.Add(this.btnForceChargeServiceFee);
             this.kryptonGroupBox1.Panel.Controls.Add(this.chargecommissionafter);
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel3);
             this.kryptonGroupBox1.Panel.Controls.Add(this.chargeserviceafter);
@@ -193,16 +195,6 @@
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "开盘前扣服务费:";
             // 
-            // ctTodayFeeList1
-            // 
-            this.ctTodayFeeList1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.ctTodayFeeList1.Location = new System.Drawing.Point(0, 86);
-            this.ctTodayFeeList1.Name = "ctTodayFeeList1";
-            this.ctTodayFeeList1.Size = new System.Drawing.Size(807, 329);
-            this.ctTodayFeeList1.TabIndex = 0;
-            // 
             // kryptonPage2
             // 
             this.kryptonPage2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
@@ -226,6 +218,24 @@
             this.kryptonPage3.Text = "统计报表";
             this.kryptonPage3.ToolTipTitle = "Page ToolTip";
             this.kryptonPage3.UniqueName = "FCF7F4C350F842A3E186C4B2B154FBBF";
+            // 
+            // ctTodayFeeList1
+            // 
+            this.ctTodayFeeList1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ctTodayFeeList1.Location = new System.Drawing.Point(0, 86);
+            this.ctTodayFeeList1.Name = "ctTodayFeeList1";
+            this.ctTodayFeeList1.Size = new System.Drawing.Size(807, 329);
+            this.ctTodayFeeList1.TabIndex = 0;
+            // 
+            // btnForceChargeServiceFee
+            // 
+            this.btnForceChargeServiceFee.Location = new System.Drawing.Point(460, 10);
+            this.btnForceChargeServiceFee.Name = "btnForceChargeServiceFee";
+            this.btnForceChargeServiceFee.Size = new System.Drawing.Size(110, 42);
+            this.btnForceChargeServiceFee.TabIndex = 8;
+            this.btnForceChargeServiceFee.Values.Text = "生成服务费记录";
             // 
             // fmFeeManagement
             // 
@@ -275,5 +285,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel chargeserviceafter;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel chargecommissionafter;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnForceChargeServiceFee;
     }
 }

@@ -25,18 +25,19 @@ namespace TradingLib.MoniterBase
         {
             LogService.Info("check update information.............");
             //没有更新我们返回false 程序正常运行
-            Updater update = new Updater();
-            //MessageBox.Show("it is here");
-            if (update.Detect())
-            {
-                //MessageBox.Show("it is here2");
-                update.Update("Manager.exe", true);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            //Updater update = new Updater();
+            ////MessageBox.Show("it is here");
+            //if (update.Detect())
+            //{
+            //    //MessageBox.Show("it is here2");
+            //    update.Update("Manager.exe", true);
+            //    return true;
+            //}
+            //else
+            //{
+            //    return false;
+            //}
+            return false;
 
         }
 

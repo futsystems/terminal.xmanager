@@ -25,6 +25,15 @@ namespace TradingLib.MoniterControl
         void fmFeeManagement_Load(object sender, EventArgs e)
         {
             CoreService.EventCore.RegIEventHandler(this);
+            btnForceChargeServiceFee.Click += new EventHandler(btnForceChargeServiceFee_Click);
+        }
+
+        void btnForceChargeServiceFee_Click(object sender, EventArgs e)
+        {
+            if (MoniterHelper.WindowConfirm("确认生成服务费记录？如果服务设定为自动扣费，则会执行扣费操作") == System.Windows.Forms.DialogResult.Yes)
+            {
+                CoreService.TLClient.ReqContribRequest("MainAcctFinService", "ManualForceChargeServiceFee", "");
+            }
         }
 
         public void OnInit()

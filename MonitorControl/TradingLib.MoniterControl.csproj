@@ -268,6 +268,12 @@
     <Compile Include="Forms\Account\fmChangeRouter.Designer.cs">
       <DependentUpon>fmChangeRouter.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Account\fmSyncEquity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Account\fmSyncEquity.Designer.cs">
+      <DependentUpon>fmSyncEquity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Account\MainAcctFinService\fmEditService.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -693,6 +699,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\fmChangeRouter.resx">
       <DependentUpon>fmChangeRouter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Account\fmSyncEquity.resx">
+      <DependentUpon>fmSyncEquity.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\MainAcctFinService\fmEditService.resx">
       <DependentUpon>fmEditService.cs</DependentUpon>

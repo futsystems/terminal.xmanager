@@ -91,6 +91,9 @@ namespace TradingLib.MoniterControl
 
         AccountLite _account = null;
 
+        AccountInfo _info = null;
+        public AccountInfo AccountInfo { get { return _info; } }
+
         public void GotAccountInfo(AccountInfo info)
         {
             if (InvokeRequired)
@@ -99,6 +102,7 @@ namespace TradingLib.MoniterControl
             }
             else
             {
+                _info = info;
                 account.Text = info.Account;
                 lastequtiy.Text = Util.FormatDecimal(info.LastEquity);
                 realizedpl.Text = Util.FormatDecimal(info.RealizedPL);

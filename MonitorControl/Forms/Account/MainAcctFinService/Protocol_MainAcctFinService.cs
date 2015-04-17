@@ -192,12 +192,18 @@ namespace TradingLib.Protocol.MainAcctFinService
     {
         [Description("创建")]
         Charged,
-        [Description("提交")]
+        [Description("提交扣费")]
         Placed,
-        [Description("成功")]
+        [Description("回滚扣费")]
+        Rollback,
+        [Description("扣费成功")]
         Success,
-        [Description("失败")]
+        [Description("扣费失败")]
         Fail,
+        [Description("回滚成功")]
+        RollbackSuccess,
+        [Description("回滚失败")]
+        RollbackFail,
     }
 
     public class FinServiceCentreStatus

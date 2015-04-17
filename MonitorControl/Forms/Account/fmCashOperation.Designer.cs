@@ -29,15 +29,6 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
-            this.kryptonGroupBox2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
-            this.cashop_sync = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
-            this.cbEquityTypeList = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.btnAccountDeposit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.cashop_amount = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
-            this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonGroupBox3 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.amount = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
@@ -46,6 +37,10 @@
             this.btnDeposit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.pass = new ComponentFactory.Krypton.Toolkit.KryptonMaskedTextBox();
             this.kryptonGroupBox4 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.lbProfit = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.lbStaticEquity = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel18 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lbNowEquity = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel11 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -61,15 +56,27 @@
             this.lbCloseProfit = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lbCommission = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lbPositionProfit = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.lbStaticEquity = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel18 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.kryptonGroupBox2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.btnAccountWithdraw = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.cashop_sync = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.cbEquityTypeList = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.btnAccountDeposit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.cashop_comment = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.lbProfit = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.cashop_amount = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
+            this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.btnSyncEquity = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.ctFinanceInfo1 = new TradingLib.MoniterControl.ctFinanceInfo();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3)).BeginInit();
+            this.kryptonGroupBox3.Panel.SuspendLayout();
+            this.kryptonGroupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox4)).BeginInit();
+            this.kryptonGroupBox4.Panel.SuspendLayout();
+            this.kryptonGroupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
             this.kryptonGroupBox1.Panel.SuspendLayout();
             this.kryptonGroupBox1.SuspendLayout();
@@ -77,16 +84,11 @@
             this.kryptonGroupBox2.Panel.SuspendLayout();
             this.kryptonGroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbEquityTypeList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3)).BeginInit();
-            this.kryptonGroupBox3.Panel.SuspendLayout();
-            this.kryptonGroupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox4)).BeginInit();
-            this.kryptonGroupBox4.Panel.SuspendLayout();
-            this.kryptonGroupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.btnSyncEquity);
             this.kryptonPanel1.Controls.Add(this.kryptonGroupBox3);
             this.kryptonPanel1.Controls.Add(this.kryptonGroupBox4);
             this.kryptonPanel1.Controls.Add(this.kryptonGroupBox1);
@@ -94,104 +96,8 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(851, 486);
+            this.kryptonPanel1.Size = new System.Drawing.Size(844, 357);
             this.kryptonPanel1.TabIndex = 0;
-            // 
-            // kryptonGroupBox1
-            // 
-            this.kryptonGroupBox1.Location = new System.Drawing.Point(295, 3);
-            this.kryptonGroupBox1.Name = "kryptonGroupBox1";
-            // 
-            // kryptonGroupBox1.Panel
-            // 
-            this.kryptonGroupBox1.Panel.Controls.Add(this.ctFinanceInfo1);
-            this.kryptonGroupBox1.Size = new System.Drawing.Size(522, 190);
-            this.kryptonGroupBox1.TabIndex = 4;
-            this.kryptonGroupBox1.Values.Heading = "帐户查询";
-            // 
-            // kryptonGroupBox2
-            // 
-            this.kryptonGroupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.kryptonGroupBox2.Location = new System.Drawing.Point(3, 3);
-            this.kryptonGroupBox2.Name = "kryptonGroupBox2";
-            // 
-            // kryptonGroupBox2.Panel
-            // 
-            this.kryptonGroupBox2.Panel.Controls.Add(this.btnAccountWithdraw);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.cashop_sync);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.cbEquityTypeList);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel2);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.btnAccountDeposit);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.cashop_comment);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel8);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.cashop_amount);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel6);
-            this.kryptonGroupBox2.Size = new System.Drawing.Size(286, 190);
-            this.kryptonGroupBox2.TabIndex = 3;
-            this.kryptonGroupBox2.Values.Heading = "出入金";
-            // 
-            // cashop_sync
-            // 
-            this.cashop_sync.Location = new System.Drawing.Point(90, 97);
-            this.cashop_sync.Name = "cashop_sync";
-            this.cashop_sync.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cashop_sync.Size = new System.Drawing.Size(149, 18);
-            this.cashop_sync.TabIndex = 11;
-            this.cashop_sync.Values.Text = ":同步操作主帐户帐户";
-            // 
-            // cbEquityTypeList
-            // 
-            this.cbEquityTypeList.DropDownWidth = 121;
-            this.cbEquityTypeList.Location = new System.Drawing.Point(90, 29);
-            this.cbEquityTypeList.Name = "cbEquityTypeList";
-            this.cbEquityTypeList.Size = new System.Drawing.Size(100, 21);
-            this.cbEquityTypeList.TabIndex = 10;
-            // 
-            // kryptonLabel2
-            // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(11, 29);
-            this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(68, 18);
-            this.kryptonLabel2.TabIndex = 9;
-            this.kryptonLabel2.Values.Text = "资金类型:";
-            // 
-            // btnAccountDeposit
-            // 
-            this.btnAccountDeposit.Location = new System.Drawing.Point(103, 121);
-            this.btnAccountDeposit.Name = "btnAccountDeposit";
-            this.btnAccountDeposit.Size = new System.Drawing.Size(80, 35);
-            this.btnAccountDeposit.TabIndex = 8;
-            this.btnAccountDeposit.Values.Text = "入 金";
-            // 
-            // kryptonLabel8
-            // 
-            this.kryptonLabel8.Location = new System.Drawing.Point(38, 53);
-            this.kryptonLabel8.Name = "kryptonLabel8";
-            this.kryptonLabel8.Size = new System.Drawing.Size(41, 18);
-            this.kryptonLabel8.TabIndex = 6;
-            this.kryptonLabel8.Values.Text = "说明:";
-            // 
-            // cashop_amount
-            // 
-            this.cashop_amount.DecimalPlaces = 2;
-            this.cashop_amount.Location = new System.Drawing.Point(90, 4);
-            this.cashop_amount.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.cashop_amount.Name = "cashop_amount";
-            this.cashop_amount.Size = new System.Drawing.Size(100, 20);
-            this.cashop_amount.TabIndex = 3;
-            // 
-            // kryptonLabel6
-            // 
-            this.kryptonLabel6.Location = new System.Drawing.Point(38, 8);
-            this.kryptonLabel6.Name = "kryptonLabel6";
-            this.kryptonLabel6.Size = new System.Drawing.Size(41, 18);
-            this.kryptonLabel6.TabIndex = 2;
-            this.kryptonLabel6.Values.Text = "金额:";
             // 
             // kryptonGroupBox3
             // 
@@ -206,7 +112,7 @@
             this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonLabel9);
             this.kryptonGroupBox3.Panel.Controls.Add(this.btnDeposit);
             this.kryptonGroupBox3.Panel.Controls.Add(this.pass);
-            this.kryptonGroupBox3.Size = new System.Drawing.Size(286, 158);
+            this.kryptonGroupBox3.Size = new System.Drawing.Size(223, 160);
             this.kryptonGroupBox3.TabIndex = 25;
             this.kryptonGroupBox3.Values.Heading = "主帐户出入金";
             // 
@@ -233,9 +139,10 @@
             // 
             // btnWithdraw
             // 
-            this.btnWithdraw.Location = new System.Drawing.Point(194, 68);
+            this.btnWithdraw.Location = new System.Drawing.Point(126, 68);
             this.btnWithdraw.Name = "btnWithdraw";
             this.btnWithdraw.Size = new System.Drawing.Size(80, 35);
+            this.btnWithdraw.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnWithdraw.TabIndex = 19;
             this.btnWithdraw.Values.Text = "出 金";
             // 
@@ -249,9 +156,10 @@
             // 
             // btnDeposit
             // 
-            this.btnDeposit.Location = new System.Drawing.Point(103, 68);
+            this.btnDeposit.Location = new System.Drawing.Point(25, 68);
             this.btnDeposit.Name = "btnDeposit";
             this.btnDeposit.Size = new System.Drawing.Size(80, 35);
+            this.btnDeposit.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnDeposit.TabIndex = 18;
             this.btnDeposit.Values.Text = "入 金";
             // 
@@ -264,7 +172,7 @@
             // 
             // kryptonGroupBox4
             // 
-            this.kryptonGroupBox4.Location = new System.Drawing.Point(295, 197);
+            this.kryptonGroupBox4.Location = new System.Drawing.Point(234, 197);
             this.kryptonGroupBox4.Name = "kryptonGroupBox4";
             // 
             // kryptonGroupBox4.Panel
@@ -288,9 +196,41 @@
             this.kryptonGroupBox4.Panel.Controls.Add(this.lbCloseProfit);
             this.kryptonGroupBox4.Panel.Controls.Add(this.lbCommission);
             this.kryptonGroupBox4.Panel.Controls.Add(this.lbPositionProfit);
-            this.kryptonGroupBox4.Size = new System.Drawing.Size(522, 158);
+            this.kryptonGroupBox4.Size = new System.Drawing.Size(522, 160);
             this.kryptonGroupBox4.TabIndex = 24;
             this.kryptonGroupBox4.Values.Heading = "主帐户财务信息";
+            // 
+            // kryptonLabel1
+            // 
+            this.kryptonLabel1.Location = new System.Drawing.Point(27, 97);
+            this.kryptonLabel1.Name = "kryptonLabel1";
+            this.kryptonLabel1.Size = new System.Drawing.Size(55, 18);
+            this.kryptonLabel1.TabIndex = 24;
+            this.kryptonLabel1.Values.Text = "净利润:";
+            // 
+            // lbProfit
+            // 
+            this.lbProfit.Location = new System.Drawing.Point(84, 97);
+            this.lbProfit.Name = "lbProfit";
+            this.lbProfit.Size = new System.Drawing.Size(19, 18);
+            this.lbProfit.TabIndex = 25;
+            this.lbProfit.Values.Text = "--";
+            // 
+            // lbStaticEquity
+            // 
+            this.lbStaticEquity.Location = new System.Drawing.Point(263, 77);
+            this.lbStaticEquity.Name = "lbStaticEquity";
+            this.lbStaticEquity.Size = new System.Drawing.Size(19, 18);
+            this.lbStaticEquity.TabIndex = 23;
+            this.lbStaticEquity.Values.Text = "--";
+            // 
+            // kryptonLabel18
+            // 
+            this.kryptonLabel18.Location = new System.Drawing.Point(192, 77);
+            this.kryptonLabel18.Name = "kryptonLabel18";
+            this.kryptonLabel18.Size = new System.Drawing.Size(68, 18);
+            this.kryptonLabel18.TabIndex = 22;
+            this.kryptonLabel18.Values.Text = "静态权益:";
             // 
             // kryptonLabel10
             // 
@@ -351,7 +291,7 @@
             // btnQry
             // 
             this.btnQry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnQry.Location = new System.Drawing.Point(453, 108);
+            this.btnQry.Location = new System.Drawing.Point(453, 110);
             this.btnQry.Name = "btnQry";
             this.btnQry.Size = new System.Drawing.Size(62, 25);
             this.btnQry.TabIndex = 13;
@@ -413,53 +353,128 @@
             this.lbPositionProfit.TabIndex = 10;
             this.lbPositionProfit.Values.Text = "--";
             // 
-            // lbStaticEquity
+            // kryptonGroupBox1
             // 
-            this.lbStaticEquity.Location = new System.Drawing.Point(263, 77);
-            this.lbStaticEquity.Name = "lbStaticEquity";
-            this.lbStaticEquity.Size = new System.Drawing.Size(19, 18);
-            this.lbStaticEquity.TabIndex = 23;
-            this.lbStaticEquity.Values.Text = "--";
+            this.kryptonGroupBox1.Location = new System.Drawing.Point(232, 3);
+            this.kryptonGroupBox1.Name = "kryptonGroupBox1";
             // 
-            // kryptonLabel18
+            // kryptonGroupBox1.Panel
             // 
-            this.kryptonLabel18.Location = new System.Drawing.Point(192, 77);
-            this.kryptonLabel18.Name = "kryptonLabel18";
-            this.kryptonLabel18.Size = new System.Drawing.Size(68, 18);
-            this.kryptonLabel18.TabIndex = 22;
-            this.kryptonLabel18.Values.Text = "静态权益:";
+            this.kryptonGroupBox1.Panel.Controls.Add(this.ctFinanceInfo1);
+            this.kryptonGroupBox1.Size = new System.Drawing.Size(522, 190);
+            this.kryptonGroupBox1.TabIndex = 4;
+            this.kryptonGroupBox1.Values.Heading = "帐户查询";
+            // 
+            // kryptonGroupBox2
+            // 
+            this.kryptonGroupBox2.Location = new System.Drawing.Point(3, 3);
+            this.kryptonGroupBox2.Name = "kryptonGroupBox2";
+            // 
+            // kryptonGroupBox2.Panel
+            // 
+            this.kryptonGroupBox2.Panel.Controls.Add(this.btnAccountWithdraw);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.cashop_sync);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.cbEquityTypeList);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel2);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.btnAccountDeposit);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.cashop_comment);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel8);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.cashop_amount);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel6);
+            this.kryptonGroupBox2.Size = new System.Drawing.Size(223, 190);
+            this.kryptonGroupBox2.TabIndex = 3;
+            this.kryptonGroupBox2.Values.Heading = "出入金";
             // 
             // btnAccountWithdraw
             // 
-            this.btnAccountWithdraw.Location = new System.Drawing.Point(194, 121);
+            this.btnAccountWithdraw.Location = new System.Drawing.Point(126, 121);
             this.btnAccountWithdraw.Name = "btnAccountWithdraw";
             this.btnAccountWithdraw.Size = new System.Drawing.Size(80, 35);
+            this.btnAccountWithdraw.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnAccountWithdraw.TabIndex = 13;
             this.btnAccountWithdraw.Values.Text = "出 金";
             // 
+            // cashop_sync
+            // 
+            this.cashop_sync.Checked = true;
+            this.cashop_sync.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cashop_sync.Location = new System.Drawing.Point(57, 97);
+            this.cashop_sync.Name = "cashop_sync";
+            this.cashop_sync.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cashop_sync.Size = new System.Drawing.Size(149, 18);
+            this.cashop_sync.TabIndex = 11;
+            this.cashop_sync.Values.Text = ":同步操作主帐户帐户";
+            // 
+            // cbEquityTypeList
+            // 
+            this.cbEquityTypeList.DropDownWidth = 121;
+            this.cbEquityTypeList.Location = new System.Drawing.Point(77, 29);
+            this.cbEquityTypeList.Name = "cbEquityTypeList";
+            this.cbEquityTypeList.Size = new System.Drawing.Size(100, 21);
+            this.cbEquityTypeList.TabIndex = 10;
+            // 
+            // kryptonLabel2
+            // 
+            this.kryptonLabel2.Location = new System.Drawing.Point(3, 29);
+            this.kryptonLabel2.Name = "kryptonLabel2";
+            this.kryptonLabel2.Size = new System.Drawing.Size(68, 18);
+            this.kryptonLabel2.TabIndex = 9;
+            this.kryptonLabel2.Values.Text = "资金类型:";
+            // 
+            // btnAccountDeposit
+            // 
+            this.btnAccountDeposit.Location = new System.Drawing.Point(28, 121);
+            this.btnAccountDeposit.Name = "btnAccountDeposit";
+            this.btnAccountDeposit.Size = new System.Drawing.Size(80, 35);
+            this.btnAccountDeposit.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnAccountDeposit.TabIndex = 8;
+            this.btnAccountDeposit.Values.Text = "入 金";
+            // 
             // cashop_comment
             // 
-            this.cashop_comment.Location = new System.Drawing.Point(90, 53);
+            this.cashop_comment.Location = new System.Drawing.Point(77, 53);
             this.cashop_comment.Multiline = true;
             this.cashop_comment.Name = "cashop_comment";
-            this.cashop_comment.Size = new System.Drawing.Size(184, 38);
+            this.cashop_comment.Size = new System.Drawing.Size(129, 38);
             this.cashop_comment.TabIndex = 7;
             // 
-            // kryptonLabel1
+            // kryptonLabel8
             // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(27, 97);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(55, 18);
-            this.kryptonLabel1.TabIndex = 24;
-            this.kryptonLabel1.Values.Text = "净利润:";
+            this.kryptonLabel8.Location = new System.Drawing.Point(25, 53);
+            this.kryptonLabel8.Name = "kryptonLabel8";
+            this.kryptonLabel8.Size = new System.Drawing.Size(41, 18);
+            this.kryptonLabel8.TabIndex = 6;
+            this.kryptonLabel8.Values.Text = "说明:";
             // 
-            // lbProfit
+            // cashop_amount
             // 
-            this.lbProfit.Location = new System.Drawing.Point(84, 97);
-            this.lbProfit.Name = "lbProfit";
-            this.lbProfit.Size = new System.Drawing.Size(19, 18);
-            this.lbProfit.TabIndex = 25;
-            this.lbProfit.Values.Text = "--";
+            this.cashop_amount.DecimalPlaces = 2;
+            this.cashop_amount.Location = new System.Drawing.Point(77, 6);
+            this.cashop_amount.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.cashop_amount.Name = "cashop_amount";
+            this.cashop_amount.Size = new System.Drawing.Size(100, 20);
+            this.cashop_amount.TabIndex = 3;
+            // 
+            // kryptonLabel6
+            // 
+            this.kryptonLabel6.Location = new System.Drawing.Point(30, 8);
+            this.kryptonLabel6.Name = "kryptonLabel6";
+            this.kryptonLabel6.Size = new System.Drawing.Size(41, 18);
+            this.kryptonLabel6.TabIndex = 2;
+            this.kryptonLabel6.Values.Text = "金额:";
+            // 
+            // btnSyncEquity
+            // 
+            this.btnSyncEquity.Location = new System.Drawing.Point(758, 14);
+            this.btnSyncEquity.Name = "btnSyncEquity";
+            this.btnSyncEquity.Size = new System.Drawing.Size(80, 35);
+            this.btnSyncEquity.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnSyncEquity.TabIndex = 26;
+            this.btnSyncEquity.Values.Text = "同步资金";
             // 
             // ctFinanceInfo1
             // 
@@ -473,7 +488,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(851, 486);
+            this.ClientSize = new System.Drawing.Size(844, 357);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
@@ -483,14 +498,6 @@
             this.Text = "出入金操作与帐户查询";
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
-            this.kryptonGroupBox1.Panel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
-            this.kryptonGroupBox1.ResumeLayout(false);
-            this.kryptonGroupBox2.Panel.ResumeLayout(false);
-            this.kryptonGroupBox2.Panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).EndInit();
-            this.kryptonGroupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.cbEquityTypeList)).EndInit();
             this.kryptonGroupBox3.Panel.ResumeLayout(false);
             this.kryptonGroupBox3.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3)).EndInit();
@@ -499,6 +506,14 @@
             this.kryptonGroupBox4.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox4)).EndInit();
             this.kryptonGroupBox4.ResumeLayout(false);
+            this.kryptonGroupBox1.Panel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
+            this.kryptonGroupBox1.ResumeLayout(false);
+            this.kryptonGroupBox2.Panel.ResumeLayout(false);
+            this.kryptonGroupBox2.Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).EndInit();
+            this.kryptonGroupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cbEquityTypeList)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -545,5 +560,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox cashop_comment;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbProfit;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnSyncEquity;
     }
 }

@@ -37,6 +37,7 @@ namespace TradingLib.MoniterControl
 
         }
 
+        decimal _mainstaticequity = 0;
         void OnAccountInfo(string json, bool islast)
         {
             var data = TradingLib.Mixins.Json.JsonMapper.ToObject(json)["Payload"];
@@ -54,7 +55,8 @@ namespace TradingLib.MoniterControl
             lbCloseProfit.Text = Util.FormatDecimal(closeprofit);
             lbPositionProfit.Text = Util.FormatDecimal(positionprofit);
             lbNowEquity.Text = Util.FormatDecimal(lastequity + deposit - withdraw + closeprofit + positionprofit - commission);
-            lbStaticEquity.Text = Util.FormatDecimal(lastequity + deposit - withdraw);
+            _mainstaticequity = lastequity + deposit - withdraw;
+            lbStaticEquity.Text = Util.FormatDecimal(_mainstaticequity);
             lbProfit.Text = Util.FormatDecimal(closeprofit + positionprofit - commission);
         }
 
@@ -98,8 +100,21 @@ namespace TradingLib.MoniterControl
             btnAccountWithdraw.Click += new EventHandler(btnAccountWithdraw_Click);
             btnDeposit.Click += new EventHandler(btnDeposit_Click);
             btnWithdraw.Click += new EventHandler(btnWithdraw_Click);
+            btnSyncEquity.Click += new EventHandler(btnSyncEquity_Click);
             CoreService.EventCore.RegIEventHandler(this);
             CoreService.TLClient.ReqQryConnectorAccountInfo(_account.Account);
+        }
+
+        void btnSyncEquity_Click(object sender, EventArgs e)
+        {
+            fmSyncEquity fm = new fmSyncEquity();
+            if(ctFinanceInfo1.AccountInfo != null)
+            {
+                fm.SetAccountInfo(ctFinanceInfo1.AccountInfo);
+                fm.SetStaticEquity(_mainstaticequity);
+                fm.ShowDialog();
+                fm.Close();
+            }
         }
 
         void btnAccountWithdraw_Click(object sender, EventArgs e)

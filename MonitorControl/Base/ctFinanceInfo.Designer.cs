@@ -29,6 +29,18 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.totalEquity = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel18 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.staticEquity = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel17 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.credit = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.lastcredit = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.creditcashout = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.creditcashin = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel15 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.account = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -52,18 +64,6 @@
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.creditcashout = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.creditcashin = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel15 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.lastcredit = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.credit = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.staticEquity = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel17 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.totalEquity = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel18 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -110,6 +110,102 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(533, 192);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // totalEquity
+            // 
+            this.totalEquity.Location = new System.Drawing.Point(423, 104);
+            this.totalEquity.Name = "totalEquity";
+            this.totalEquity.Size = new System.Drawing.Size(19, 18);
+            this.totalEquity.TabIndex = 34;
+            this.totalEquity.Values.Text = "--";
+            // 
+            // kryptonLabel18
+            // 
+            this.kryptonLabel18.Location = new System.Drawing.Point(362, 104);
+            this.kryptonLabel18.Name = "kryptonLabel18";
+            this.kryptonLabel18.Size = new System.Drawing.Size(55, 18);
+            this.kryptonLabel18.TabIndex = 33;
+            this.kryptonLabel18.Values.Text = "总权益:";
+            // 
+            // staticEquity
+            // 
+            this.staticEquity.Location = new System.Drawing.Point(263, 80);
+            this.staticEquity.Name = "staticEquity";
+            this.staticEquity.Size = new System.Drawing.Size(19, 18);
+            this.staticEquity.TabIndex = 32;
+            this.staticEquity.Values.Text = "--";
+            // 
+            // kryptonLabel17
+            // 
+            this.kryptonLabel17.Location = new System.Drawing.Point(189, 80);
+            this.kryptonLabel17.Name = "kryptonLabel17";
+            this.kryptonLabel17.Size = new System.Drawing.Size(68, 18);
+            this.kryptonLabel17.TabIndex = 31;
+            this.kryptonLabel17.Values.Text = "静态权益:";
+            // 
+            // credit
+            // 
+            this.credit.Location = new System.Drawing.Point(425, 80);
+            this.credit.Name = "credit";
+            this.credit.Size = new System.Drawing.Size(19, 18);
+            this.credit.TabIndex = 30;
+            this.credit.Values.Text = "--";
+            // 
+            // kryptonLabel6
+            // 
+            this.kryptonLabel6.Location = new System.Drawing.Point(349, 80);
+            this.kryptonLabel6.Name = "kryptonLabel6";
+            this.kryptonLabel6.Size = new System.Drawing.Size(68, 18);
+            this.kryptonLabel6.TabIndex = 29;
+            this.kryptonLabel6.Values.Text = "静态优先:";
+            // 
+            // lastcredit
+            // 
+            this.lastcredit.Location = new System.Drawing.Point(425, 12);
+            this.lastcredit.Name = "lastcredit";
+            this.lastcredit.Size = new System.Drawing.Size(19, 18);
+            this.lastcredit.TabIndex = 28;
+            this.lastcredit.Values.Text = "--";
+            // 
+            // kryptonLabel8
+            // 
+            this.kryptonLabel8.Location = new System.Drawing.Point(349, 12);
+            this.kryptonLabel8.Name = "kryptonLabel8";
+            this.kryptonLabel8.Size = new System.Drawing.Size(68, 18);
+            this.kryptonLabel8.TabIndex = 27;
+            this.kryptonLabel8.Values.Text = "昨日优先:";
+            // 
+            // creditcashout
+            // 
+            this.creditcashout.Location = new System.Drawing.Point(425, 56);
+            this.creditcashout.Name = "creditcashout";
+            this.creditcashout.Size = new System.Drawing.Size(19, 18);
+            this.creditcashout.TabIndex = 26;
+            this.creditcashout.Values.Text = "--";
+            // 
+            // kryptonLabel7
+            // 
+            this.kryptonLabel7.Location = new System.Drawing.Point(349, 56);
+            this.kryptonLabel7.Name = "kryptonLabel7";
+            this.kryptonLabel7.Size = new System.Drawing.Size(68, 18);
+            this.kryptonLabel7.TabIndex = 25;
+            this.kryptonLabel7.Values.Text = "优先出金:";
+            // 
+            // creditcashin
+            // 
+            this.creditcashin.Location = new System.Drawing.Point(425, 32);
+            this.creditcashin.Name = "creditcashin";
+            this.creditcashin.Size = new System.Drawing.Size(19, 18);
+            this.creditcashin.TabIndex = 24;
+            this.creditcashin.Values.Text = "--";
+            // 
+            // kryptonLabel15
+            // 
+            this.kryptonLabel15.Location = new System.Drawing.Point(349, 36);
+            this.kryptonLabel15.Name = "kryptonLabel15";
+            this.kryptonLabel15.Size = new System.Drawing.Size(68, 18);
+            this.kryptonLabel15.TabIndex = 23;
+            this.kryptonLabel15.Values.Text = "优先入金:";
             // 
             // btnSubmit
             // 
@@ -296,102 +392,6 @@
             this.kryptonLabel1.Size = new System.Drawing.Size(68, 18);
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "昨日权益:";
-            // 
-            // creditcashout
-            // 
-            this.creditcashout.Location = new System.Drawing.Point(425, 56);
-            this.creditcashout.Name = "creditcashout";
-            this.creditcashout.Size = new System.Drawing.Size(19, 18);
-            this.creditcashout.TabIndex = 26;
-            this.creditcashout.Values.Text = "--";
-            // 
-            // kryptonLabel7
-            // 
-            this.kryptonLabel7.Location = new System.Drawing.Point(349, 56);
-            this.kryptonLabel7.Name = "kryptonLabel7";
-            this.kryptonLabel7.Size = new System.Drawing.Size(68, 18);
-            this.kryptonLabel7.TabIndex = 25;
-            this.kryptonLabel7.Values.Text = "优先出金:";
-            // 
-            // creditcashin
-            // 
-            this.creditcashin.Location = new System.Drawing.Point(425, 32);
-            this.creditcashin.Name = "creditcashin";
-            this.creditcashin.Size = new System.Drawing.Size(19, 18);
-            this.creditcashin.TabIndex = 24;
-            this.creditcashin.Values.Text = "--";
-            // 
-            // kryptonLabel15
-            // 
-            this.kryptonLabel15.Location = new System.Drawing.Point(349, 36);
-            this.kryptonLabel15.Name = "kryptonLabel15";
-            this.kryptonLabel15.Size = new System.Drawing.Size(68, 18);
-            this.kryptonLabel15.TabIndex = 23;
-            this.kryptonLabel15.Values.Text = "优先入金:";
-            // 
-            // lastcredit
-            // 
-            this.lastcredit.Location = new System.Drawing.Point(425, 12);
-            this.lastcredit.Name = "lastcredit";
-            this.lastcredit.Size = new System.Drawing.Size(19, 18);
-            this.lastcredit.TabIndex = 28;
-            this.lastcredit.Values.Text = "--";
-            // 
-            // kryptonLabel8
-            // 
-            this.kryptonLabel8.Location = new System.Drawing.Point(349, 12);
-            this.kryptonLabel8.Name = "kryptonLabel8";
-            this.kryptonLabel8.Size = new System.Drawing.Size(68, 18);
-            this.kryptonLabel8.TabIndex = 27;
-            this.kryptonLabel8.Values.Text = "昨日优先:";
-            // 
-            // kryptonLabel6
-            // 
-            this.kryptonLabel6.Location = new System.Drawing.Point(349, 80);
-            this.kryptonLabel6.Name = "kryptonLabel6";
-            this.kryptonLabel6.Size = new System.Drawing.Size(68, 18);
-            this.kryptonLabel6.TabIndex = 29;
-            this.kryptonLabel6.Values.Text = "当前优先:";
-            // 
-            // credit
-            // 
-            this.credit.Location = new System.Drawing.Point(425, 80);
-            this.credit.Name = "credit";
-            this.credit.Size = new System.Drawing.Size(19, 18);
-            this.credit.TabIndex = 30;
-            this.credit.Values.Text = "--";
-            // 
-            // staticEquity
-            // 
-            this.staticEquity.Location = new System.Drawing.Point(263, 80);
-            this.staticEquity.Name = "staticEquity";
-            this.staticEquity.Size = new System.Drawing.Size(19, 18);
-            this.staticEquity.TabIndex = 32;
-            this.staticEquity.Values.Text = "--";
-            // 
-            // kryptonLabel17
-            // 
-            this.kryptonLabel17.Location = new System.Drawing.Point(189, 80);
-            this.kryptonLabel17.Name = "kryptonLabel17";
-            this.kryptonLabel17.Size = new System.Drawing.Size(68, 18);
-            this.kryptonLabel17.TabIndex = 31;
-            this.kryptonLabel17.Values.Text = "静态权益:";
-            // 
-            // totalEquity
-            // 
-            this.totalEquity.Location = new System.Drawing.Point(423, 104);
-            this.totalEquity.Name = "totalEquity";
-            this.totalEquity.Size = new System.Drawing.Size(19, 18);
-            this.totalEquity.TabIndex = 34;
-            this.totalEquity.Values.Text = "--";
-            // 
-            // kryptonLabel18
-            // 
-            this.kryptonLabel18.Location = new System.Drawing.Point(362, 104);
-            this.kryptonLabel18.Name = "kryptonLabel18";
-            this.kryptonLabel18.Size = new System.Drawing.Size(55, 18);
-            this.kryptonLabel18.TabIndex = 33;
-            this.kryptonLabel18.Values.Text = "总权益:";
             // 
             // ctFinanceInfo
             // 
