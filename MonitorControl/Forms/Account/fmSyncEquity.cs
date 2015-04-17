@@ -24,9 +24,11 @@ namespace TradingLib.MoniterControl
         void fmSyncEquity_Load(object sender, EventArgs e)
         {
             targetCredit.ValueChanged += new EventHandler(targetCredit_ValueChanged);
-            targetCredit.KeyUp += new KeyEventHandler(targetCredit_KeyUp);
+            targetCredit.TextChanged += new EventHandler(num_Changed);
             btnSync.Click += new EventHandler(btnSync_Click);
         }
+
+
 
         void btnSync_Click(object sender, EventArgs e)
         {
@@ -37,7 +39,7 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        void targetCredit_KeyUp(object sender, KeyEventArgs e)
+        void num_Changed(object sender, EventArgs e)
         {
             CalValue();
         }
@@ -68,6 +70,8 @@ namespace TradingLib.MoniterControl
             lbMainAcctStaticEquity.Text = Util.FormatDecimal(_mainAcctStaticEquity);
             targetCredit.Maximum = _mainAcctStaticEquity;
         }
+
+
 
 
     }

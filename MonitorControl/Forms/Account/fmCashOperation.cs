@@ -101,7 +101,14 @@ namespace TradingLib.MoniterControl
             btnDeposit.Click += new EventHandler(btnDeposit_Click);
             btnWithdraw.Click += new EventHandler(btnWithdraw_Click);
             btnSyncEquity.Click += new EventHandler(btnSyncEquity_Click);
+
+            btnQryBrokerAccountInfo.Click += new EventHandler(btnQryBrokerAccountInfo_Click);
             CoreService.EventCore.RegIEventHandler(this);
+            CoreService.TLClient.ReqQryConnectorAccountInfo(_account.Account);
+        }
+
+        void btnQryBrokerAccountInfo_Click(object sender, EventArgs e)
+        {
             CoreService.TLClient.ReqQryConnectorAccountInfo(_account.Account);
         }
 

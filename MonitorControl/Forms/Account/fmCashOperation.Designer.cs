@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btnSyncEquity = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonGroupBox3 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.amount = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
@@ -48,7 +49,7 @@
             this.kryptonLabel13 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel14 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel15 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.btnQry = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnQryBrokerAccountInfo = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonLabel16 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lbPreBalance = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lbDeposit = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -57,6 +58,7 @@
             this.lbCommission = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lbPositionProfit = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.ctFinanceInfo1 = new TradingLib.MoniterControl.ctFinanceInfo();
             this.kryptonGroupBox2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.btnAccountWithdraw = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.cashop_sync = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -67,8 +69,6 @@
             this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cashop_amount = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.btnSyncEquity = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.ctFinanceInfo1 = new TradingLib.MoniterControl.ctFinanceInfo();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3)).BeginInit();
@@ -98,6 +98,15 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(844, 357);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // btnSyncEquity
+            // 
+            this.btnSyncEquity.Location = new System.Drawing.Point(758, 14);
+            this.btnSyncEquity.Name = "btnSyncEquity";
+            this.btnSyncEquity.Size = new System.Drawing.Size(80, 35);
+            this.btnSyncEquity.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnSyncEquity.TabIndex = 26;
+            this.btnSyncEquity.Values.Text = "同步资金";
             // 
             // kryptonGroupBox3
             // 
@@ -188,7 +197,7 @@
             this.kryptonGroupBox4.Panel.Controls.Add(this.kryptonLabel13);
             this.kryptonGroupBox4.Panel.Controls.Add(this.kryptonLabel14);
             this.kryptonGroupBox4.Panel.Controls.Add(this.kryptonLabel15);
-            this.kryptonGroupBox4.Panel.Controls.Add(this.btnQry);
+            this.kryptonGroupBox4.Panel.Controls.Add(this.btnQryBrokerAccountInfo);
             this.kryptonGroupBox4.Panel.Controls.Add(this.kryptonLabel16);
             this.kryptonGroupBox4.Panel.Controls.Add(this.lbPreBalance);
             this.kryptonGroupBox4.Panel.Controls.Add(this.lbDeposit);
@@ -288,14 +297,14 @@
             this.kryptonLabel15.TabIndex = 3;
             this.kryptonLabel15.Values.Text = "平仓盈亏:";
             // 
-            // btnQry
+            // btnQryBrokerAccountInfo
             // 
-            this.btnQry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnQry.Location = new System.Drawing.Point(453, 110);
-            this.btnQry.Name = "btnQry";
-            this.btnQry.Size = new System.Drawing.Size(62, 25);
-            this.btnQry.TabIndex = 13;
-            this.btnQry.Values.Text = "查 询";
+            this.btnQryBrokerAccountInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnQryBrokerAccountInfo.Location = new System.Drawing.Point(453, 110);
+            this.btnQryBrokerAccountInfo.Name = "btnQryBrokerAccountInfo";
+            this.btnQryBrokerAccountInfo.Size = new System.Drawing.Size(62, 25);
+            this.btnQryBrokerAccountInfo.TabIndex = 13;
+            this.btnQryBrokerAccountInfo.Values.Text = "查 询";
             // 
             // kryptonLabel16
             // 
@@ -364,6 +373,14 @@
             this.kryptonGroupBox1.Size = new System.Drawing.Size(522, 190);
             this.kryptonGroupBox1.TabIndex = 4;
             this.kryptonGroupBox1.Values.Heading = "帐户查询";
+            // 
+            // ctFinanceInfo1
+            // 
+            this.ctFinanceInfo1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctFinanceInfo1.Location = new System.Drawing.Point(0, 0);
+            this.ctFinanceInfo1.Name = "ctFinanceInfo1";
+            this.ctFinanceInfo1.Size = new System.Drawing.Size(518, 168);
+            this.ctFinanceInfo1.TabIndex = 0;
             // 
             // kryptonGroupBox2
             // 
@@ -467,23 +484,6 @@
             this.kryptonLabel6.TabIndex = 2;
             this.kryptonLabel6.Values.Text = "金额:";
             // 
-            // btnSyncEquity
-            // 
-            this.btnSyncEquity.Location = new System.Drawing.Point(758, 14);
-            this.btnSyncEquity.Name = "btnSyncEquity";
-            this.btnSyncEquity.Size = new System.Drawing.Size(80, 35);
-            this.btnSyncEquity.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnSyncEquity.TabIndex = 26;
-            this.btnSyncEquity.Values.Text = "同步资金";
-            // 
-            // ctFinanceInfo1
-            // 
-            this.ctFinanceInfo1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctFinanceInfo1.Location = new System.Drawing.Point(0, 0);
-            this.ctFinanceInfo1.Name = "ctFinanceInfo1";
-            this.ctFinanceInfo1.Size = new System.Drawing.Size(518, 168);
-            this.ctFinanceInfo1.TabIndex = 0;
-            // 
             // fmCashOperation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -548,7 +548,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel13;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel14;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel15;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btnQry;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnQryBrokerAccountInfo;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel16;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbPreBalance;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbDeposit;
