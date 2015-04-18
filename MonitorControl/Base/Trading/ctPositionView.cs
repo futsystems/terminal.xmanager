@@ -259,11 +259,7 @@ namespace TradingLib.MoniterControl
                 return symRowMap[acc_sym];
             return -1;
         }
-        //获得持昂方向
-        //string getDirection(int size)
-        //{
-        //    return size == 0 ? "无持仓" : (size > 0 ? "看多" : "看空");
-        //}
+
 
         //获得某个持仓的可平数量
         int getCanFlatSize(Position pos)
@@ -409,12 +405,9 @@ namespace TradingLib.MoniterControl
 
         public void GotTick(Tick t)
         {
-            //debug("position view got tick:" + t.ToString());
             if (InvokeRequired)
             {
-                
-                    Invoke(new TickDelegate(GotTick), new object[] { t });
-               
+                Invoke(new TickDelegate(GotTick), new object[] { t });
             }
             else
             {
@@ -442,6 +435,7 @@ namespace TradingLib.MoniterControl
                                 gt.Rows[i][LASTPRICE] = string.Format(getDisplayFormat(t.Symbol), t.Trade);
                             }
                             //空仓 未平仓合约与 最新价格
+                            
                             if (pos.isFlat)
                             {
                                 gt.Rows[i][UNREALIZEDPL] = 0;
@@ -453,9 +447,6 @@ namespace TradingLib.MoniterControl
                                 gt.Rows[i][UNREALIZEDPL] = string.Format(getDisplayFormat(pos.oSymbol), unrealizedpl * getMultiple(pos.oSymbol));
                                 gt.Rows[i][UNREALIZEDPLPOINT] = string.Format(getDisplayFormat(pos.oSymbol), unrealizedpl);
                             }
-
-                            //gt.Rows[i][STOPLOSS] = GetGridOffsetText(pos, QSEnumPositionOffsetDirection.LOSS);
-                            //gt.Rows[i][PROFITTARGET] = GetGridOffsetText(pos, QSEnumPositionOffsetDirection.PROFIT);
                         }
                     }
                 }
@@ -568,9 +559,6 @@ namespace TradingLib.MoniterControl
                     {
                         ResetOffset(key);
                     }
-                    //gt.Rows[posidx][STOPLOSS] = GetGridOffsetText(pos, posside,QSEnumPositionOffsetDirection.LOSS);
-                    //gt.Rows[posidx][PROFITTARGET] = GetGridOffsetText(pos,posside, QSEnumPositionOffsetDirection.PROFIT);
-                    //num.Text = positiongrid.RowCount.ToString();
                 }
                 else
                 {

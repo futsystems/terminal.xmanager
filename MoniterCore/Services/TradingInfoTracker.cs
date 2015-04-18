@@ -42,6 +42,7 @@ namespace TradingLib.MoniterCore
             HoldPositionTracker = new LSPositionTracker("");
             TradeTracker = new ThreadSafeList<Trade>();
             Account = new AccountLite();
+            
         }
 
         /// <summary>
