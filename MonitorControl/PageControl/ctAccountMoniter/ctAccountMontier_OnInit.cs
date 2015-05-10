@@ -61,26 +61,31 @@ namespace TradingLib.MoniterControl
             //主帐户监控
             if (CoreService.SiteInfo.ProductType == QSEnumProductType.VendorMoniter)
             {
-                //隐藏帐户过滤窗口以及其他过滤控件
-                //btnAcctFilter.Visible = false;
-                //accLogin.Visible = false;
-                //acchodpos.Visible = false;
-                //btnAddAccount.Text = "添加配资客户";
-                //btnAddAccount.Width = 100;
-                //btnAddAccount.Location = new System.Drawing.Point(btnAddAccount.Location.X - 40, btnAddAccount.Location.Y);
-
-                //accountgrid.Columns[ACCOUNT].Visible = false;
-                accountgrid.Columns[ROUTEIMG].Visible = false;
-                accountgrid.Columns[PROFITLOSSIMG].Visible = false;//盈亏标识
-                accountgrid.Columns[LOGINSTATUSIMG].Visible = false;//登入标识
-                accountgrid.Columns[ADDRESS].Visible = false;//终端地址
+                
                 accountgrid.Columns[CATEGORYSTR].Visible = false;
-                accountgrid.Columns[ROUTERGROUPSTR].Visible = false;
-                accountgrid.Columns[HOLDSIZE].Visible = false;
                 accountgrid.Columns[AGENTCODE].Visible = false;
+
+
+                accountgrid.Columns[LOGINSTATUSIMG].Visible = false;//登入标识
+                //accountgrid.Columns[ADDRESS].Visible = false;//终端地址
+
+                accountgrid.Columns[ROUTEIMG].Visible = false;
+                accountgrid.Columns[ROUTERGROUPSTR].Visible = false;
 
                 //调整宽度
                 VendorMoniterWidth();
+            }
+
+            if (CoreService.SiteInfo.ProductType == QSEnumProductType.CounterSystem)
+            {
+                accountgrid.Columns[CATEGORYSTR].Visible = false;
+                accountgrid.Columns[AGENTCODE].Visible = false;
+
+                accountgrid.Columns[MAINACCOUNT].Visible = false;
+                accountgrid.Columns[MAINACCTRISKRULE].Visible = false;
+                accountgrid.Columns[MACTCONNIMG].Visible = false;
+
+                CounterMoniterWidth();
             }
 
             //根据产品类别来调整界面

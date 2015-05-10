@@ -34,14 +34,18 @@ namespace TradingLib.MoniterBase.Command
             workbench.AppendControl(quoteMoniter);
 
             //下单面板控件
-            ctOrderPanel orderPanel = new ctOrderPanel();
-            orderPanel.Dock = DockStyle.Fill;
-            workbench.AppendControl(orderPanel);
+            ctFunctionPanel functoinPanel = new ctFunctionPanel();
+            functoinPanel.Dock = DockStyle.Fill;
+            workbench.AppendControl(functoinPanel);
+
+            //ctOrderPanel orderPanel = new ctOrderPanel();
+            //orderPanel.Dock = DockStyle.Fill;
+            //workbench.AppendControl(orderPanel);
 
             //显示默认视区
             workbench.ShowControl("AccountMoniter", EnumControlLocation.TopPanel);
             workbench.ShowControl("TradingInfoMoniter", EnumControlLocation.BottomLeft);
-            workbench.ShowControl("OrderPanel", EnumControlLocation.BottomRight);
+            workbench.ShowControl("FunctionPanel", EnumControlLocation.BottomRight);
 
             workbench.ResetView();
 

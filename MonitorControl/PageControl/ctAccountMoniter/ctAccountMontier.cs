@@ -81,6 +81,8 @@ namespace TradingLib.MoniterControl
             //帐户表格事件
             accountgrid.CellDoubleClick +=new DataGridViewCellEventHandler(accountgrid_CellDoubleClick);//双击单元格
             accountgrid.CellFormatting +=new DataGridViewCellFormattingEventHandler(accountgrid_CellFormatting);//格式化单元格
+            
+
             accountgrid.SizeChanged +=new EventHandler(accountgrid_SizeChanged);//大小改变
 
             accountgrid.SizeChanged += new EventHandler(accountgrid_SizeChanged_FixWidth);//大小改变

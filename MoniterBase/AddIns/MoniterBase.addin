@@ -61,7 +61,7 @@
       </MenuItem>
     </Condition>
 
-    <Condition name="ProductState" product="counter">
+    <Condition name="ProductState" product="*">
       <MenuItem id = "HistQuery"
                 type = "Menu"
                 label = "历史查询">
@@ -218,6 +218,21 @@
               shortcut = "Control|A"
               class = "TradingLib.MoniterBase.Command.ManagerConnectorCommand"/>
     </ComplexCondition>
+    <ComplexCondition>
+      <And>
+        <Condition name="ProductState" product="c" />
+        <Condition name="RoleState" role="root" />
+      </And>
+      <MenuItem id = "AddFAccountCommand"
+              label = "添加交易帐户"
+              class = "TradingLib.MoniterBase.Command.AddFAccountCommand"/>
+
+      <MenuItem id = "Separator1" type = "Separator"/>
+      <MenuItem id = "MainAccount-Vendor"
+              label = "主帐户管理"
+              shortcut = "Control|A"
+              class = "TradingLib.MoniterBase.Command.ManagerConnectorCommand"/>
+    </ComplexCondition>
   </Path>
 
 
@@ -245,6 +260,10 @@
               class = "TradingLib.MoniterBase.Command.QryHistTradingInfoCommand"/>
     </Condition>
 
+    <MenuItem id = "QrySettlementCommand"
+            label = "结算单"
+            class = "TradingLib.MoniterBase.Command.QrySettlementCommand"/>
+
     <ComplexCondition>
       <And>
         <Condition name="ProductState" product="*" />
@@ -254,11 +273,7 @@
             label = "出入金记录"
             class = "TradingLib.MoniterBase.Command.QryHistCashTransCommand"/>
     </ComplexCondition>
-
-
-    <MenuItem id = "QrySettlementCommand"
-            label = "结算单"
-            class = "TradingLib.MoniterBase.Command.QrySettlementCommand"/>
+    
   </Path>
 
   <!--财务管理-->

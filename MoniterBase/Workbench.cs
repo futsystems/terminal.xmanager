@@ -135,8 +135,8 @@ namespace TradingLib.MoniterBase
             //this.mainContainer.Panel2.Controls.Add()
 
             this.bottomContainer.Panel2MinSize = 270;
-            this.bottomContainer.SplitterDistance = this.Width - 300;
-            this.mainContainer.SplitterDistance = this.Height-350;
+            this.bottomContainer.SplitterDistance = this.Width - 430;
+            this.mainContainer.SplitterDistance = this.Height-380;
             //SplitContainer s1 = new SplitContainer();
             //s1.SplitterDistance
 
@@ -185,8 +185,8 @@ namespace TradingLib.MoniterBase
             //this.mainContainer.Panel2Collapsed = false;
             //this.mainContainer.Panel2.Height = (int)(this.Size.Height / 4);
             //this.bottomContainer.Panel2.Width = 250;
-            this.bottomContainer.SplitterDistance = this.Width -  300;
-            this.mainContainer.SplitterDistance = this.Height - 350;
+            this.bottomContainer.SplitterDistance = this.Width -  430;
+            this.mainContainer.SplitterDistance = this.Height - 380;
             this.ExpandBottom();
 
             //显示默认控件

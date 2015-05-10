@@ -19,11 +19,11 @@ namespace TradingLib.MoniterControl
             InitializeComponent();
         }
 
-        SettlementPrice _price;
-        public void SetSettlementPrice(SettlementPrice price)
+        MarketData _price;
+        public void SetSettlementPrice(MarketData price)
         {
             _price = price;
-            lbPrice.Text = Util.FormatDecimal(price.Price);
+            lbPrice.Text = Util.FormatDecimal(price.Settlement);
             lbSettleday.Text = price.SettleDay.ToString();
             lbSymbol.Text = price.Symbol;
 
@@ -33,8 +33,8 @@ namespace TradingLib.MoniterControl
         {
             decimal p = ndPrice.Value;
             if (MoniterHelper.WindowConfirm(string.Format("确认更新合约:{0}的结算价为:{1}", lbSymbol.Text, p)) == System.Windows.Forms.DialogResult.Yes)
-            { 
-                _price.Price = p;
+            {
+                _price.Settlement = p;
                 CoreService.TLClient.ReqUpdateSettlementPrice(_price);
             }
         }

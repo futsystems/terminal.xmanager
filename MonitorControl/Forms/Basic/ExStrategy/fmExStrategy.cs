@@ -20,8 +20,8 @@ namespace TradingLib.MoniterControl
         {
             InitializeComponent();
 
-            MoniterHelper.AdapterToIDataSource(margin).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumMarginStrategy>());
-            MoniterHelper.AdapterToIDataSource(avabilefund).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumAvabileFundStrategy>());
+            MoniterHelper.AdapterToIDataSource(margin).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumMarginPrice>());
+            //MoniterHelper.AdapterToIDataSource(avabilefund).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumAvabileFundStrategy>());
 
             this.imageList1.Images.Add((System.Drawing.Image)Properties.Resources.folder);
             this.imageList1.Images.Add((System.Drawing.Image)Properties.Resources.folder_sel);
@@ -66,8 +66,8 @@ namespace TradingLib.MoniterControl
 
             _current.SideMargin = sidemargin.Checked;
             _current.CreditSeparate = creditseparate.Checked;
-            _current.Margin = (QSEnumMarginStrategy)margin.SelectedValue;
-            _current.AvabileFund = (QSEnumAvabileFundStrategy)avabilefund.SelectedValue;
+            _current.MarginPrice = (QSEnumMarginPrice)margin.SelectedValue;
+            _current.IncludeCloseProfit = includecloseprofit.Checked;
             _current.PositionLock = poslock.Checked;
 
             CoreService.TLClient.ReqUpdateExStrategyTemplateItem(_current);
@@ -208,8 +208,9 @@ namespace TradingLib.MoniterControl
 
         void GotExStrategy(ExStrategy item)
         {
-            margin.SelectedValue = item.Margin;
-            avabilefund.SelectedValue = item.AvabileFund;
+            margin.SelectedValue = item.MarginPrice;
+            includecloseprofit.Checked = item.IncludeCloseProfit;
+            //avabilefund.SelectedValue = item.AvabileFund;
             sidemargin.Checked = item.SideMargin;
             creditseparate.Checked = item.CreditSeparate;
             poslock.Checked = item.PositionLock;

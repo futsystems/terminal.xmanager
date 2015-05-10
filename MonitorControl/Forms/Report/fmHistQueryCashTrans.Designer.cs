@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmHistQueryCashTrans));
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.ctCashTrans1 = new ctCashTrans();
+            this.ctCashTrans1 = new TradingLib.MoniterControl.ctCashTrans();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -51,7 +51,7 @@
             this.ctCashTrans1.Name = "ctCashTrans1";
             this.ctCashTrans1.Size = new System.Drawing.Size(752, 566);
             this.ctCashTrans1.TabIndex = 0;
-            this.ctCashTrans1.ViewType = CashOpViewType.Account;
+            this.ctCashTrans1.ViewType = TradingLib.MoniterControl.CashOpViewType.Account;
             // 
             // fmHistQueryCashTrans
             // 
@@ -59,6 +59,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(752, 566);
             this.Controls.Add(this.kryptonPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;

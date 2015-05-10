@@ -13,8 +13,8 @@ using TradingLib.MoniterCore;
 
 namespace TradingLib.MoniterControl
 {
-    [MoniterControlAttr("OrderPanel", "下单面板", EnumControlLocation.BottomRight)]
-    public partial class ctOrderPanel : UserControl,IEventBinder,IMoniterControl
+    
+    public partial class ctOrderPanel : UserControl,IEventBinder
     {
 
         AccountLite _account = null;

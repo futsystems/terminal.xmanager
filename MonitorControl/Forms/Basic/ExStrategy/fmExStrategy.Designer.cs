@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.templateTree = new ComponentFactory.Krypton.Toolkit.KryptonTreeView();
             this.kryptonGroupBox2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.creditseparate = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -40,11 +41,10 @@
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.margin = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.avabilefund = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.sidemargin = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.templateTree = new ComponentFactory.Krypton.Toolkit.KryptonTreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.includecloseprofit = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).BeginInit();
@@ -54,7 +54,6 @@
             this.kryptonGroupBox1.Panel.SuspendLayout();
             this.kryptonGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.margin)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.avabilefund)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPanel1
@@ -68,6 +67,14 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(519, 420);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // templateTree
+            // 
+            this.templateTree.Dock = System.Windows.Forms.DockStyle.Left;
+            this.templateTree.Location = new System.Drawing.Point(0, 0);
+            this.templateTree.Name = "templateTree";
+            this.templateTree.Size = new System.Drawing.Size(160, 420);
+            this.templateTree.TabIndex = 18;
             // 
             // kryptonGroupBox2
             // 
@@ -123,11 +130,11 @@
             // 
             // kryptonGroupBox1.Panel
             // 
+            this.kryptonGroupBox1.Panel.Controls.Add(this.includecloseprofit);
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel1);
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel3);
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel4);
             this.kryptonGroupBox1.Panel.Controls.Add(this.margin);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.avabilefund);
             this.kryptonGroupBox1.Panel.Controls.Add(this.sidemargin);
             this.kryptonGroupBox1.Size = new System.Drawing.Size(317, 150);
             this.kryptonGroupBox1.TabIndex = 16;
@@ -147,11 +154,11 @@
             this.kryptonLabel3.Name = "kryptonLabel3";
             this.kryptonLabel3.Size = new System.Drawing.Size(123, 18);
             this.kryptonLabel3.TabIndex = 6;
-            this.kryptonLabel3.Values.Text = "可用资金计算方式:";
+            this.kryptonLabel3.Values.Text = "可用包含平仓盈亏:";
             // 
             // kryptonLabel4
             // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(60, 57);
+            this.kryptonLabel4.Location = new System.Drawing.Point(63, 81);
             this.kryptonLabel4.Name = "kryptonLabel4";
             this.kryptonLabel4.Size = new System.Drawing.Size(68, 18);
             this.kryptonLabel4.TabIndex = 7;
@@ -165,17 +172,9 @@
             this.margin.Size = new System.Drawing.Size(146, 21);
             this.margin.TabIndex = 9;
             // 
-            // avabilefund
-            // 
-            this.avabilefund.DropDownWidth = 146;
-            this.avabilefund.Location = new System.Drawing.Point(130, 29);
-            this.avabilefund.Name = "avabilefund";
-            this.avabilefund.Size = new System.Drawing.Size(146, 21);
-            this.avabilefund.TabIndex = 10;
-            // 
             // sidemargin
             // 
-            this.sidemargin.Location = new System.Drawing.Point(130, 57);
+            this.sidemargin.Location = new System.Drawing.Point(133, 81);
             this.sidemargin.Name = "sidemargin";
             this.sidemargin.Size = new System.Drawing.Size(51, 18);
             this.sidemargin.TabIndex = 11;
@@ -190,19 +189,19 @@
             this.btnSubmit.TabIndex = 13;
             this.btnSubmit.Values.Text = "提 交";
             // 
-            // templateTree
-            // 
-            this.templateTree.Dock = System.Windows.Forms.DockStyle.Left;
-            this.templateTree.Location = new System.Drawing.Point(0, 0);
-            this.templateTree.Name = "templateTree";
-            this.templateTree.Size = new System.Drawing.Size(160, 420);
-            this.templateTree.TabIndex = 18;
-            // 
             // imageList1
             // 
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // includecloseprofit
+            // 
+            this.includecloseprofit.Location = new System.Drawing.Point(133, 29);
+            this.includecloseprofit.Name = "includecloseprofit";
+            this.includecloseprofit.Size = new System.Drawing.Size(19, 13);
+            this.includecloseprofit.TabIndex = 12;
+            this.includecloseprofit.Values.Text = "";
             // 
             // fmExStrategy
             // 
@@ -227,7 +226,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
             this.kryptonGroupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.margin)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.avabilefund)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -241,7 +239,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox creditseparate;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox sidemargin;
-        private ComponentFactory.Krypton.Toolkit.KryptonComboBox avabilefund;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox margin;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnSubmit;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox poslock;
@@ -250,5 +247,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox2;
         private ComponentFactory.Krypton.Toolkit.KryptonTreeView templateTree;
         private System.Windows.Forms.ImageList imageList1;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox includecloseprofit;
     }
 }

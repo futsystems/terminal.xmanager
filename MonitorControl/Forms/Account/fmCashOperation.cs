@@ -18,9 +18,6 @@ namespace TradingLib.MoniterControl
         public fmCashOperation()
         {
             InitializeComponent();
-            //cashop_type.Items.Add("入金");
-            //cashop_type.Items.Add("出金");
-            //cashop_type.SelectedIndex = 0;
             MoniterHelper.AdapterToIDataSource(cbEquityTypeList).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumEquityType>());
 
             this.Load += new EventHandler(fmCashOperation_Load);

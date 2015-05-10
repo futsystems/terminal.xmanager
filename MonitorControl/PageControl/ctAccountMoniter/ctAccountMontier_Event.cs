@@ -16,26 +16,7 @@ namespace TradingLib.MoniterControl
         void InitMenu()
         {
             accountgrid.ContextMenuStrip = MenuService.CreateContextMenu(this, "/AccountList/ContextMenu");
-            /*
-            accountgrid.ContextMenuStrip = new ContextMenuStrip();
-            accountgrid.ContextMenuStrip.Items.Add("编辑账户", null, new EventHandler(EditAccount_Click));//0
-            accountgrid.ContextMenuStrip.Items.Add("修改密码",null, new EventHandler(ChangePass_Click));//1
-            accountgrid.ContextMenuStrip.Items.Add("修改信息", null, new EventHandler(ChangeInvestor_Click));//2
-            accountgrid.ContextMenuStrip.Items.Add(new System.Windows.Forms.ToolStripSeparator());//3
-            accountgrid.ContextMenuStrip.Items.Add("交易记录查询", null, new EventHandler(QryHist_Click));//4
-            accountgrid.ContextMenuStrip.Items.Add("结算单查询", null, new EventHandler(QrySettlement_Click));//5
-            accountgrid.ContextMenuStrip.Items.Add("查询密码", null, new EventHandler(QryLoginInfo_Click));//6
-            accountgrid.ContextMenuStrip.Items.Add(new System.Windows.Forms.ToolStripSeparator());//7
-            accountgrid.ContextMenuStrip.Items.Add("修改路由组", null, new EventHandler(UpdateRouterGroup_Click));//8
-            accountgrid.ContextMenuStrip.Items.Add("解绑主帐户", null, new EventHandler(DelAccountConnecotr_Click));//9
-            accountgrid.ContextMenuStrip.Items.Add("绑定主帐户", null, new EventHandler(UpdateAccountConnecotr_Click));//10
-            accountgrid.ContextMenuStrip.Items.Add(new System.Windows.Forms.ToolStripSeparator());//11
-            accountgrid.ContextMenuStrip.Items.Add("同步交易数据", null, new EventHandler(SyncData_Click));//13
-            accountgrid.ContextMenuStrip.Items.Add("主帐户出入金与查询", null, new EventHandler(QryAccountInfo_Click));//13
-            accountgrid.ContextMenuStrip.Items.Add(new System.Windows.Forms.ToolStripSeparator());//11
-            accountgrid.ContextMenuStrip.Items.Add("删除帐户", null, new EventHandler(DelAccount_Click));//12
-            accountgrid.ContextMenuStrip.Items.Add("注销帐户", null, new EventHandler(ClearTerminal_Click));
-      **/
+            
         
         }
 
@@ -158,8 +139,6 @@ namespace TradingLib.MoniterControl
             {
                 //设定当前选中帐号
                 accountselected = accountlite;
-                //更新选中lable
-                //lbCurrentAccount.Text = accountlite.Account;
 
                 //触发事件中继的帐户选择事件
                 CoreService.EventAccount.FireAccountSelectedEvent(accountlite);

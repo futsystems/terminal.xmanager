@@ -1,6 +1,6 @@
 ﻿namespace TradingLib.MoniterControl
 {
-    partial class fmEditFinAccount
+    partial class fmEditAccount
     {
         /// <summary>
         /// Required designer variable.
@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.cbAccountType = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.kryptonLabel9 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.account = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -36,7 +38,6 @@
             this.bankac = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.ctBankList1 = new TradingLib.MoniterControl.ctBankList();
             this.branch = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -49,18 +50,29 @@
             this.idcard = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.mobile = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.qq = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.ctBankList1 = new TradingLib.MoniterControl.ctBankList();
+            this.kryptonGroupBox3 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.kryptonLabel11 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.broker = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbAccountType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).BeginInit();
             this.kryptonGroupBox2.Panel.SuspendLayout();
             this.kryptonGroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
             this.kryptonGroupBox1.Panel.SuspendLayout();
             this.kryptonGroupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3)).BeginInit();
+            this.kryptonGroupBox3.Panel.SuspendLayout();
+            this.kryptonGroupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonGroupBox3);
+            this.kryptonPanel1.Controls.Add(this.cbAccountType);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel9);
             this.kryptonPanel1.Controls.Add(this.btnSubmit);
             this.kryptonPanel1.Controls.Add(this.account);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel5);
@@ -69,12 +81,28 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(333, 401);
+            this.kryptonPanel1.Size = new System.Drawing.Size(333, 519);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // cbAccountType
+            // 
+            this.cbAccountType.DropDownWidth = 181;
+            this.cbAccountType.Location = new System.Drawing.Point(105, 37);
+            this.cbAccountType.Name = "cbAccountType";
+            this.cbAccountType.Size = new System.Drawing.Size(181, 21);
+            this.cbAccountType.TabIndex = 18;
+            // 
+            // kryptonLabel9
+            // 
+            this.kryptonLabel9.Location = new System.Drawing.Point(27, 40);
+            this.kryptonLabel9.Name = "kryptonLabel9";
+            this.kryptonLabel9.Size = new System.Drawing.Size(68, 18);
+            this.kryptonLabel9.TabIndex = 17;
+            this.kryptonLabel9.Values.Text = "帐户类别:";
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(217, 354);
+            this.btnSubmit.Location = new System.Drawing.Point(217, 482);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(90, 25);
             this.btnSubmit.TabIndex = 16;
@@ -97,7 +125,7 @@
             // 
             // kryptonGroupBox2
             // 
-            this.kryptonGroupBox2.Location = new System.Drawing.Point(21, 219);
+            this.kryptonGroupBox2.Location = new System.Drawing.Point(21, 276);
             this.kryptonGroupBox2.Name = "kryptonGroupBox2";
             // 
             // kryptonGroupBox2.Panel
@@ -134,14 +162,6 @@
             this.kryptonLabel6.TabIndex = 12;
             this.kryptonLabel6.Values.Text = "分行:";
             // 
-            // ctBankList1
-            // 
-            this.ctBankList1.BankSelected = 0;
-            this.ctBankList1.Location = new System.Drawing.Point(31, 3);
-            this.ctBankList1.Name = "ctBankList1";
-            this.ctBankList1.Size = new System.Drawing.Size(173, 21);
-            this.ctBankList1.TabIndex = 11;
-            // 
             // branch
             // 
             this.branch.Location = new System.Drawing.Point(82, 30);
@@ -151,7 +171,7 @@
             // 
             // kryptonGroupBox1
             // 
-            this.kryptonGroupBox1.Location = new System.Drawing.Point(21, 36);
+            this.kryptonGroupBox1.Location = new System.Drawing.Point(21, 93);
             this.kryptonGroupBox1.Name = "kryptonGroupBox1";
             // 
             // kryptonGroupBox1.Panel
@@ -245,21 +265,58 @@
             this.qq.Size = new System.Drawing.Size(181, 21);
             this.qq.TabIndex = 6;
             // 
-            // fmAddFinAccount
+            // ctBankList1
+            // 
+            this.ctBankList1.BankSelected = 0;
+            this.ctBankList1.Location = new System.Drawing.Point(31, 3);
+            this.ctBankList1.Name = "ctBankList1";
+            this.ctBankList1.Size = new System.Drawing.Size(173, 21);
+            this.ctBankList1.TabIndex = 11;
+            // 
+            // kryptonGroupBox3
+            // 
+            this.kryptonGroupBox3.Location = new System.Drawing.Point(21, 396);
+            this.kryptonGroupBox3.Name = "kryptonGroupBox3";
+            // 
+            // kryptonGroupBox3.Panel
+            // 
+            this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonLabel11);
+            this.kryptonGroupBox3.Panel.Controls.Add(this.broker);
+            this.kryptonGroupBox3.Size = new System.Drawing.Size(286, 74);
+            this.kryptonGroupBox3.TabIndex = 19;
+            this.kryptonGroupBox3.Values.Heading = "期货公司";
+            // 
+            // kryptonLabel11
+            // 
+            this.kryptonLabel11.Location = new System.Drawing.Point(8, 12);
+            this.kryptonLabel11.Name = "kryptonLabel11";
+            this.kryptonLabel11.Size = new System.Drawing.Size(68, 18);
+            this.kryptonLabel11.TabIndex = 12;
+            this.kryptonLabel11.Values.Text = "期货公司:";
+            // 
+            // broker
+            // 
+            this.broker.Location = new System.Drawing.Point(82, 9);
+            this.broker.Name = "broker";
+            this.broker.Size = new System.Drawing.Size(181, 21);
+            this.broker.TabIndex = 10;
+            // 
+            // fmEditAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(333, 401);
+            this.ClientSize = new System.Drawing.Size(333, 519);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "fmAddFinAccount";
+            this.Name = "fmEditAccount";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "添加配资客户";
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbAccountType)).EndInit();
             this.kryptonGroupBox2.Panel.ResumeLayout(false);
             this.kryptonGroupBox2.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).EndInit();
@@ -268,6 +325,10 @@
             this.kryptonGroupBox1.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
             this.kryptonGroupBox1.ResumeLayout(false);
+            this.kryptonGroupBox3.Panel.ResumeLayout(false);
+            this.kryptonGroupBox3.Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3)).EndInit();
+            this.kryptonGroupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -295,5 +356,10 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox account;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnSubmit;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel9;
+        private ComponentFactory.Krypton.Toolkit.KryptonComboBox cbAccountType;
+        private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox3;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel11;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox broker;
     }
 }

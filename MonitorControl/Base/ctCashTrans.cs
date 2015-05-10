@@ -154,6 +154,7 @@ namespace TradingLib.MoniterControl
                 gt.Rows[i][ACCOUNT] = trans.Account;
                 gt.Rows[i][MGRFK] = trans.mgr_fk;
                 gt.Rows[i][OPERATION] = trans.Amount > 0 ? "入金" : "出金";
+                gt.Rows[i][TYPE] = Util.GetEnumDescription(trans.Equity_Type);
                 gt.Rows[i][AMOUNT] = Math.Abs(trans.Amount);
                 gt.Rows[i][REF] = trans.TransRef;
 
@@ -176,13 +177,14 @@ namespace TradingLib.MoniterControl
         #region 显示字段
 
         const string ID = "ID";
-        const string SETTLEDAY = "结算日";
+        const string SETTLEDAY = "交易日";
         const string DATETIME = "时间";
         const string ACCOUNT = "帐户";
         const string MGRFK = "代理域ID";
         const string OPERATION = "操作";
         const string AMOUNT = "金额";
-        const string REF = "出入金流水号";
+        const string REF = "流水号";
+        const string TYPE = "资金类别";
         #endregion
 
         DataTable gt = new DataTable();
@@ -215,12 +217,14 @@ namespace TradingLib.MoniterControl
         private void InitTable()
         {
             gt.Columns.Add(ID);//1
-            gt.Columns.Add(SETTLEDAY);//2
-            gt.Columns.Add(DATETIME);//3
             gt.Columns.Add(ACCOUNT);//4
             gt.Columns.Add(MGRFK);//5
+
+            gt.Columns.Add(SETTLEDAY);//2
+            gt.Columns.Add(DATETIME);//3
             gt.Columns.Add(OPERATION);//6
             gt.Columns.Add(AMOUNT);//
+            gt.Columns.Add(TYPE);
             gt.Columns.Add(REF);//
         }
 
@@ -250,6 +254,7 @@ namespace TradingLib.MoniterControl
             {
                 cashgrid.Columns[ACCOUNT].Visible = false;
             }
+            cashgrid.Columns[ID].Visible = false;
         }
         #endregion
 

@@ -88,6 +88,7 @@ namespace TradingLib.MoniterControl
         const string SYMBOL = "合约";
         const string DIRECTION = "方向";
         const string OPERATION = "买卖";
+        const string OFFSETFLAG = "开平";
         const string SIZE = "未成交";
         const string TOTALSIZE = "报单量";
         const string PRICE = "报单价格";
@@ -120,7 +121,7 @@ namespace TradingLib.MoniterControl
 
         public void GotOrder(Order o)
         {
-            debug("order view got order:" + o.ToString());
+            //debug("order view got order:" + o.ToString());
             if (InvokeRequired)
                 Invoke(new OrderDelegate(GotOrder), new object[] { o });
             else
@@ -139,6 +140,7 @@ namespace TradingLib.MoniterControl
                         tb.Rows[i][SYMBOL] = o.Symbol;
                         tb.Rows[i][DIRECTION] = o.Side ? "1" : "-1";
                         tb.Rows[i][OPERATION] = o.Side ? "买入" : "   卖出";
+                        tb.Rows[i][OFFSETFLAG] = o.OffsetFlag == QSEnumOffsetFlag.OPEN ? "开仓" : "平仓";
                         tb.Rows[i][SIZE] = Math.Abs(o.Size);
                         tb.Rows[i][TOTALSIZE] = Math.Abs(o.TotalSize);
                         tb.Rows[i][PRICE] = GetOrderPrice(o);
@@ -173,7 +175,7 @@ namespace TradingLib.MoniterControl
                     debug("OrderView got order error:" + ex.ToString());
                 }
             }
-            debug("xxxxxxxxxxxxx got order");
+            //debug("xxxxxxxxxxxxx got order");
         
         }
 
@@ -209,6 +211,7 @@ namespace TradingLib.MoniterControl
             tb.Columns.Add(SYMBOL);//1
             tb.Columns.Add(DIRECTION);//2
             tb.Columns.Add(OPERATION);//3
+            tb.Columns.Add(OFFSETFLAG);//3
             tb.Columns.Add(STATUS);//8
             tb.Columns.Add(STATUSSTR);//9
 

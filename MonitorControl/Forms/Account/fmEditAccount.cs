@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -13,9 +14,9 @@ using TradingLib.MoniterCore;
 
 namespace TradingLib.MoniterControl
 {
-    public partial class fmEditFinAccount : ComponentFactory.Krypton.Toolkit.KryptonForm,IEventBinder
+    public partial class fmEditAccount : ComponentFactory.Krypton.Toolkit.KryptonForm,IEventBinder
     {
-        public fmEditFinAccount()
+        public fmEditAccount()
         {
             InitializeComponent();
             this.Load += new EventHandler(fmAddFinAccount_Load);
@@ -24,6 +25,39 @@ namespace TradingLib.MoniterControl
         void fmAddFinAccount_Load(object sender, EventArgs e)
         {
             btnSubmit.Click += new EventHandler(btnSubmit_Click);
+
+            if (CoreService.SiteInfo.ProductType == QSEnumProductType.VendorMoniter)
+            {
+
+                ValueObject<QSEnumAccountCategory> vo = new ValueObject<QSEnumAccountCategory>();
+                vo.Name = "配资帐户";
+                vo.Value = QSEnumAccountCategory.LOANNEE;
+
+                ArrayList list = new ArrayList();
+                list.Add(vo);
+                MoniterHelper.AdapterToIDataSource(cbAccountType).BindDataSource(list);
+                cbAccountType.SelectedIndex = 0;
+                cbAccountType.Enabled = false;
+            }
+            //分帐户柜台系统 可以选择添加的帐户类别
+            if (CoreService.SiteInfo.ProductType == QSEnumProductType.CounterSystem)
+            {
+                ValueObject<QSEnumAccountCategory> vo1 = new ValueObject<QSEnumAccountCategory>();
+                vo1.Name = "模拟帐户";
+                vo1.Value = QSEnumAccountCategory.SIMULATION;
+
+                ValueObject<QSEnumAccountCategory> vo2 = new ValueObject<QSEnumAccountCategory>();
+                vo2.Name = "实盘帐户";
+                vo2.Value = QSEnumAccountCategory.REAL;
+
+                ArrayList list = new ArrayList();
+                list.Add(vo1);
+                list.Add(vo2);
+
+                MoniterHelper.AdapterToIDataSource(cbAccountType).BindDataSource(list);
+                cbAccountType.SelectedIndex = 0;
+            }
+
             CoreService.EventCore.RegIEventHandler(this);
 
         }
@@ -59,7 +93,7 @@ namespace TradingLib.MoniterControl
                 mobile.Text = profile.Mobile;
                 name.Text = profile.Name;
                 qq.Text = profile.QQ;
-
+                broker.Text = profile.Broker;
             }
         }
         AccountLite _account=null;
@@ -68,6 +102,7 @@ namespace TradingLib.MoniterControl
             _account = acc;
             this.Text = string.Format("查看/编辑帐户[{0}]个人信息", _account.Account);
             account.Enabled = false;
+            cbAccountType.Enabled = false;
         }
 
 
@@ -83,13 +118,33 @@ namespace TradingLib.MoniterControl
             profile.Mobile = mobile.Text;
             profile.Name = name.Text;
             profile.QQ = qq.Text;
+            profile.Broker = broker.Text;
+
+            AccountCreation createion = new AccountCreation();
+            createion.Account = account.Text;
+            createion.Category = (QSEnumAccountCategory)cbAccountType.SelectedValue;
+
+
+            createion.Profile = profile;
+
+            if (createion.Category == QSEnumAccountCategory.REAL)
+            {
+                createion.RouterType = QSEnumOrderTransferType.LIVE;
+            }
+            else
+            {
+                createion.RouterType = QSEnumOrderTransferType.SIM;
+            }
+
+            
 
             //这里加入数据验证和检查
             if (_account == null)
             {
                 if (MoniterHelper.WindowConfirm("请确认个人信息填写准确") == System.Windows.Forms.DialogResult.Yes)
                 {
-                    ReqAddFinServiceAccount(profile);
+                    //ReqAddFinServiceAccount(profile);
+                    ReqAddAccount(createion);
                     this.Close();
                 }
             }
@@ -103,6 +158,15 @@ namespace TradingLib.MoniterControl
             }
         }
 
+
+        /// <summary>
+        /// 添加交易帐户
+        /// </summary>
+        /// <param name="createion"></param>
+        void ReqAddAccount(AccountCreation createion)
+        {
+            CoreService.TLClient.ReqContribRequest("AccountManager", "AddAccountFacde", createion);
+        }
         /// <summary>
         /// 请求添加配资客户
         /// </summary>

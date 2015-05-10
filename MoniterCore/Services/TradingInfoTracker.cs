@@ -64,7 +64,7 @@ namespace TradingLib.MoniterCore
         public void GotFill(Trade f)
         {
             if (Account.Account != f.Account) return;
-
+            LogService.Debug("got trade notify:" + f.GetTradeDetail());
             OrderTracker.GotFill(f);
             PositionTracker.GotFill(f);
             TradeTracker.Add(f);

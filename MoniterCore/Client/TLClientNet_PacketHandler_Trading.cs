@@ -30,7 +30,7 @@ namespace TradingLib.MoniterCore
 
         void CliOnTradeNotify(TradeNotify response)
         {
-            //logger.Debug("got trade notify:" + response.Trade.ToString());
+            
             Trade f = response.Trade;
             f.oSymbol = CoreService.BasicInfoTracker.GetSymbol(f.Symbol);
             CoreService.TradingInfoTracker.GotFill(f);

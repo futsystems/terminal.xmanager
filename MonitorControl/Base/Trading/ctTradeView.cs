@@ -90,10 +90,20 @@ namespace TradingLib.MoniterControl
                 tb.Rows[i][SIZE] = Math.Abs(t.xSize);
                 tb.Rows[i][PRICE] = string.Format(getDisplayFormat(t.Symbol), t.xPrice);
                 tb.Rows[i][COMMISSION] = string.Format(_defaultformat, t.Commission);
-                tb.Rows[i][OPERATION] = Util.GetEnumDescription(t.PositionOperation);
+                tb.Rows[i][OPERATION] = Util.GetEnumDescription(t.OffsetFlag);
                 tb.Rows[i][ACCOUNT] = t.Account;
                 tb.Rows[i][PROFIT] = string.Format(_defaultformat,t.Profit);
-                tb.Rows[i][FILLID] = t.TradeID;
+                LogService.Debug("xxxxxxxx:" + t.BrokerTradeID);
+                if (CoreService.SiteInfo.ProductType == QSEnumProductType.VendorMoniter)
+                {
+                    tb.Rows[i][FILLID] = t.BrokerTradeID;
+                }
+                if (CoreService.SiteInfo.ProductType == QSEnumProductType.CounterSystem)
+                {
+                    tb.Rows[i][FILLID] = t.TradeID;
+                }
+                
+
                 tb.Rows[i][EXCHANGE] = CoreService.BasicInfoTracker.GetExchangeName(t.Exchange);
                 tb.Rows[i][ORDERSYSID] = t.OrderSysID;
                 //num.Text = tradeGrid.RowCount.ToString();
@@ -229,13 +239,13 @@ namespace TradingLib.MoniterControl
         {
             try
             {
-                if (e.ColumnIndex == 2)
-                {
-                    e.CellStyle.Font = UIConstant.BoldFont;
-                }
+                //if (e.ColumnIndex == 2)
+                //{
+                //    e.CellStyle.Font = UIConstant.BoldFont;
+                //}
 
                 
-                if (e.ColumnIndex == 3)
+                if (e.ColumnIndex == 2)
                 {
                     e.CellStyle.Font = UIConstant.BoldFont;
                     if (e.Value.ToString() == "买入")

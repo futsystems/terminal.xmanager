@@ -202,6 +202,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Account\fmCashOperationCounter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Account\fmCashOperationCounter.Designer.cs">
+      <DependentUpon>fmCashOperationCounter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Account\FeeManagerment\ctTodayFeeList.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -238,11 +244,11 @@
     <Compile Include="Forms\Account\fmEditAccountTemplate.Designer.cs">
       <DependentUpon>fmEditAccountTemplate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Account\fmEditFinAccount.cs">
+    <Compile Include="Forms\Account\fmEditAccount.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Account\fmEditFinAccount.Designer.cs">
-      <DependentUpon>fmEditFinAccount.cs</DependentUpon>
+    <Compile Include="Forms\Account\fmEditAccount.Designer.cs">
+      <DependentUpon>fmEditAccount.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Account\fmBindConnector.cs">
       <SubType>Form</SubType>
@@ -538,6 +544,12 @@
       <DependentUpon>MonitorControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Command\AccountCommands.cs" />
+    <Compile Include="PageControl\ctAccountInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PageControl\ctAccountInfo.Designer.cs">
+      <DependentUpon>ctAccountInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -570,6 +582,12 @@
     </Compile>
     <Compile Include="PageControl\ctAccountMoniter\fmAcctFilter.Designer.cs">
       <DependentUpon>fmAcctFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PageControl\ctFunctionPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PageControl\ctFunctionPanel.Designer.cs">
+      <DependentUpon>ctFunctionPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="PageControl\ctOrderPanel.cs">
       <SubType>UserControl</SubType>
@@ -667,6 +685,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Account\fmCashOperationCounter.resx">
+      <DependentUpon>fmCashOperationCounter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\FeeManagerment\ctTodayFeeList.resx">
       <DependentUpon>ctTodayFeeList.cs</DependentUpon>
     </EmbeddedResource>
@@ -685,8 +706,8 @@
     <EmbeddedResource Include="Forms\Account\fmEditAccountTemplate.resx">
       <DependentUpon>fmEditAccountTemplate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Account\fmEditFinAccount.resx">
-      <DependentUpon>fmEditFinAccount.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Account\fmEditAccount.resx">
+      <DependentUpon>fmEditAccount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\fmBindConnector.resx">
       <DependentUpon>fmBindConnector.cs</DependentUpon>
@@ -831,11 +852,17 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ImageFolder.resources" />
     <EmbeddedResource Include="ImageResources.resources" />
+    <EmbeddedResource Include="PageControl\ctAccountInfo.resx">
+      <DependentUpon>ctAccountInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PageControl\ctAccountMoniter\ctAccountMontier.resx">
       <DependentUpon>ctAccountMontier.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PageControl\ctAccountMoniter\fmAcctFilter.resx">
       <DependentUpon>fmAcctFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PageControl\ctFunctionPanel.resx">
+      <DependentUpon>ctFunctionPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PageControl\ctOrderPanel.resx">
       <DependentUpon>ctOrderPanel.cs</DependentUpon>

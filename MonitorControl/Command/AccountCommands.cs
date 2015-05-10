@@ -69,10 +69,20 @@ namespace TradingLib.MoniterControl
                 return;
             }
 
-            fmCashOperation fm = new fmCashOperation();
-            fm.SetAccount(account);
-            fm.ShowDialog();
-            fm.Close();
+            if (CoreService.SiteInfo.ProductType == QSEnumProductType.VendorMoniter)
+            {
+                fmCashOperation fm = new fmCashOperation();
+                fm.SetAccount(account);
+                fm.ShowDialog();
+                fm.Close();
+            }
+            if (CoreService.SiteInfo.ProductType == QSEnumProductType.CounterSystem)
+            {
+                fmCashOperationCounter fm = new fmCashOperationCounter();
+                fm.SetAccount(account);
+                fm.ShowDialog();
+                fm.Close();
+            }
         }
 
     }
@@ -176,7 +186,7 @@ namespace TradingLib.MoniterControl
             {
                 return;
             }
-            fmEditFinAccount fm = new fmEditFinAccount();
+            fmEditAccount fm = new fmEditAccount();
             fm.SetAccount(account);
             fm.ShowDialog();
             fm.Close();

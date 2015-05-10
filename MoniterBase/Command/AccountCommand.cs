@@ -30,7 +30,20 @@ namespace TradingLib.MoniterBase.Command
     {
         public override void Run()
         {
-            fmEditFinAccount fm = new fmEditFinAccount();
+            fmEditAccount fm = new fmEditAccount();
+            fm.ShowDialog();
+            fm.Close();
+        }
+    }
+
+    /// <summary>
+    /// 添加交易帐户
+    /// </summary>
+    public class AddFAccountCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            fmEditAccount fm = new fmEditAccount();
             fm.ShowDialog();
             fm.Close();
         }
