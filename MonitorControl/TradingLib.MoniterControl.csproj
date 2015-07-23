@@ -467,6 +467,12 @@
     <Compile Include="Forms\fmLoginInfo.Designer.cs">
       <DependentUpon>fmLoginInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Follow\fmStrategyCfg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Follow\fmStrategyCfg.Designer.cs">
+      <DependentUpon>fmStrategyCfg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Manager\fmChangePasswordAgent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -870,6 +876,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmLoginInfo.resx">
       <DependentUpon>fmLoginInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Follow\fmStrategyCfg.resx">
+      <DependentUpon>fmStrategyCfg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Manager\fmChangePasswordAgent.resx">
       <DependentUpon>fmChangePasswordAgent.cs</DependentUpon>
