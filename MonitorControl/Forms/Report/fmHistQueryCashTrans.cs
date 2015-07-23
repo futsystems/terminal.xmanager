@@ -16,6 +16,10 @@ namespace TradingLib.MoniterControl
             InitializeComponent();
         }
 
-         
+
+        public void SetAccount(string account)
+        {
+            ctCashTrans1.SetAccount(account);
+        }
     }
 }

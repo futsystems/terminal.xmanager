@@ -109,18 +109,18 @@ namespace TradingLib.MoniterControl
         {
             
             gt.Columns.Add(ACCOUNT);//0
-            gt.Columns.Add(NAME);//23
+            gt.Columns.Add(NAME);//1
 
-            gt.Columns.Add(LASTEQUITY);//9
-            gt.Columns.Add(NOWEQUITY);//10
-            gt.Columns.Add(CREDIT);//
-            gt.Columns.Add(TOTALEQUITY);//12
-            gt.Columns.Add(MARGIN);//13
-            gt.Columns.Add(FROZENMARGIN);//14
-            gt.Columns.Add(REALIZEDPL);//15
-            gt.Columns.Add(UNREALIZEDPL);//16
-            gt.Columns.Add(COMMISSION);//17
-            gt.Columns.Add(PROFIT);//18
+            gt.Columns.Add(LASTEQUITY);//2
+            gt.Columns.Add(NOWEQUITY);//3
+            gt.Columns.Add(CREDIT);//4
+            gt.Columns.Add(TOTALEQUITY);//5
+            gt.Columns.Add(MARGIN);//6
+            gt.Columns.Add(FROZENMARGIN);//7
+            gt.Columns.Add(REALIZEDPL);//8
+            gt.Columns.Add(UNREALIZEDPL);//9
+            gt.Columns.Add(COMMISSION);//10
+            gt.Columns.Add(PROFIT);//11
 
             //帐户类别
             gt.Columns.Add(CATEGORY);//18
@@ -196,8 +196,8 @@ namespace TradingLib.MoniterControl
             accountgrid.Columns[ROUTERGROUP].Visible = false;
 
 
-            accountgrid.Columns[WARN].Visible = false;
-            accountgrid.Columns[WARNSTR].Visible = false;
+            //accountgrid.Columns[WARN].Visible = false;
+            //accountgrid.Columns[WARNSTR].Visible = false;
 
             accountgrid.Columns[EXECUTE].Visible = false;
             accountgrid.Columns[DELETE].Visible = false;
@@ -533,21 +533,8 @@ namespace TradingLib.MoniterControl
                         gt.Rows[i][EXECUTE] = getExecuteStatus(account.Execute);
                         gt.Rows[i][EXECUTEIMG] = getExecuteStatusImage(account.Execute);
 
-
-
-                        //if (account.IsLogin)
-                        //{
-                        //    gt.Rows[i][ADDRESS] = account.IPAddress;
-                        //}
-                        //else
-                        //{
-                        //    gt.Rows[i][ADDRESS] = "";
-                        //}
                         gt.Rows[i][DELETE] = account.Deleted;
                         
-
-                        
-
                         gt.Rows[i][WARN] = account.IsWarn;
                         gt.Rows[i][WARNSTR] = account.WarnMessage;
 
@@ -684,7 +671,7 @@ namespace TradingLib.MoniterControl
 
         private void accountgrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 16 || e.ColumnIndex == 17 || e.ColumnIndex == 19)
+            if (e.ColumnIndex == 8 || e.ColumnIndex == 9 || e.ColumnIndex == 11)
             {
                 e.CellStyle.Font =  UIConstant.BoldFont;
                 decimal v = 0;

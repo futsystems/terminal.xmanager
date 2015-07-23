@@ -297,5 +297,13 @@ namespace TradingLib.MoniterControl
                 e.CellStyle.Font = UIConstant.BoldFont;
             }
         }
+
+
+        public void SetAccount(string account)
+        {
+            if (this._viewType == CashOpViewType.Agent)
+                return;
+            boxaccount.Text = account;
+        }
     }
 }

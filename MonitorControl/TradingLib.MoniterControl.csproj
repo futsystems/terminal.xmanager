@@ -94,6 +94,18 @@
     <Compile Include="Base\ctRouterGroupList.Designer.cs">
       <DependentUpon>ctRouterGroupList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\Follow\ctFollowItemList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Base\Follow\ctFollowItemList.Designer.cs">
+      <DependentUpon>ctFollowItemList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Base\Follow\ctFollowStrategyMoniter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Base\Follow\ctFollowStrategyMoniter.Designer.cs">
+      <DependentUpon>ctFollowStrategyMoniter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\Trading\ctOrderView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -274,6 +286,24 @@
     <Compile Include="Forms\Account\fmChangeRouter.Designer.cs">
       <DependentUpon>fmChangeRouter.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Account\RiskRule\fm\fmAccountRule_Equity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Account\RiskRule\fm\fmAccountRule_Equity.Designer.cs">
+      <DependentUpon>fmAccountRule_Equity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Account\RiskRule\fmEditRiskRule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Account\RiskRule\fmEditRiskRule.Designer.cs">
+      <DependentUpon>fmEditRiskRule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Account\RiskRule\fmRuleSetConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Account\RiskRule\fmRuleSetConfig.Designer.cs">
+      <DependentUpon>fmRuleSetConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Account\fmSyncEquity.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -292,10 +322,10 @@
     <Compile Include="Forms\Account\fmMainAccountManager.Designer.cs">
       <DependentUpon>fmMainAccountManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Account\fmEditVendorFlatRule.cs">
+    <Compile Include="Forms\Account\RiskRule\fmEditVendorFlatRule.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Account\fmEditVendorFlatRule.Designer.cs">
+    <Compile Include="Forms\Account\RiskRule\fmEditVendorFlatRule.Designer.cs">
       <DependentUpon>fmEditVendorFlatRule.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Account\FeeManagerment\fmFeeManagement.cs">
@@ -305,6 +335,24 @@
       <DependentUpon>fmFeeManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Account\MainAcctFinService\Protocol_MainAcctFinService.cs" />
+    <Compile Include="Forms\Account\RiskRule\fm\fmAccountRule_Loss.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Account\RiskRule\fm\fmAccountRule_Loss.Designer.cs">
+      <DependentUpon>fmAccountRule_Loss.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Account\RiskRule\fm\fmAccountRule_Profit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Account\RiskRule\fm\fmAccountRule_Profit.Designer.cs">
+      <DependentUpon>fmAccountRule_Profit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Account\RiskRule\fm\fmAccountRule_EquityByCredit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Account\RiskRule\fm\fmAccountRule_EquityByCredit.Designer.cs">
+      <DependentUpon>fmAccountRule_EquityByCredit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Basic\CommissionMargin\fmCommission.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -583,6 +631,12 @@
     <Compile Include="PageControl\ctAccountMoniter\fmAcctFilter.Designer.cs">
       <DependentUpon>fmAcctFilter.cs</DependentUpon>
     </Compile>
+    <Compile Include="PageControl\ctFollowCentre.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PageControl\ctFollowCentre.Designer.cs">
+      <DependentUpon>ctFollowCentre.cs</DependentUpon>
+    </Compile>
     <Compile Include="PageControl\ctFunctionPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -632,6 +686,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\ctRouterGroupList.resx">
       <DependentUpon>ctRouterGroupList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\Follow\ctFollowItemList.resx">
+      <DependentUpon>ctFollowItemList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\Follow\ctFollowStrategyMoniter.resx">
+      <DependentUpon>ctFollowStrategyMoniter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Base\Trading\ctOrderView.resx">
       <DependentUpon>ctOrderView.cs</DependentUpon>
@@ -721,6 +781,15 @@
     <EmbeddedResource Include="Forms\Account\fmChangeRouter.resx">
       <DependentUpon>fmChangeRouter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Account\RiskRule\fm\fmAccountRule_Equity.resx">
+      <DependentUpon>fmAccountRule_Equity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Account\RiskRule\fmEditRiskRule.resx">
+      <DependentUpon>fmEditRiskRule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Account\RiskRule\fmRuleSetConfig.resx">
+      <DependentUpon>fmRuleSetConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\fmSyncEquity.resx">
       <DependentUpon>fmSyncEquity.cs</DependentUpon>
     </EmbeddedResource>
@@ -730,11 +799,20 @@
     <EmbeddedResource Include="Forms\Account\fmMainAccountManager.resx">
       <DependentUpon>fmMainAccountManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Account\fmEditVendorFlatRule.resx">
+    <EmbeddedResource Include="Forms\Account\RiskRule\fmEditVendorFlatRule.resx">
       <DependentUpon>fmEditVendorFlatRule.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\FeeManagerment\fmFeeManagement.resx">
       <DependentUpon>fmFeeManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Account\RiskRule\fm\fmAccountRule_Loss.resx">
+      <DependentUpon>fmAccountRule_Loss.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Account\RiskRule\fm\fmAccountRule_Profit.resx">
+      <DependentUpon>fmAccountRule_Profit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Account\RiskRule\fm\fmAccountRule_EquityByCredit.resx">
+      <DependentUpon>fmAccountRule_EquityByCredit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Basic\CommissionMargin\fmCommission.resx">
       <DependentUpon>fmCommission.cs</DependentUpon>
@@ -860,6 +938,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PageControl\ctAccountMoniter\fmAcctFilter.resx">
       <DependentUpon>fmAcctFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PageControl\ctFollowCentre.resx">
+      <DependentUpon>ctFollowCentre.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PageControl\ctFunctionPanel.resx">
       <DependentUpon>ctFunctionPanel.cs</DependentUpon>

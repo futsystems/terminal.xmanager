@@ -29,6 +29,15 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.lbGLocation = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.lbFront = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.lbIPAddress = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.lbProductInfo = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btnExecute = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnUpdateTransferType = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnUpdateInterday = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -39,23 +48,13 @@
             this.lbAccountType = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lbAccount = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.lbProductInfo = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.lbIPAddress = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
-            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.lbFront = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.lbGLocation = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbTransferType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
             this.kryptonGroupBox1.Panel.SuspendLayout();
             this.kryptonGroupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbTransferType)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPanel1
@@ -77,6 +76,89 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(391, 281);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // kryptonGroupBox1
+            // 
+            this.kryptonGroupBox1.Location = new System.Drawing.Point(15, 126);
+            this.kryptonGroupBox1.Name = "kryptonGroupBox1";
+            // 
+            // kryptonGroupBox1.Panel
+            // 
+            this.kryptonGroupBox1.Panel.Controls.Add(this.lbGLocation);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel6);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel5);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.lbFront);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel2);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel3);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.lbIPAddress);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.lbProductInfo);
+            this.kryptonGroupBox1.Size = new System.Drawing.Size(333, 105);
+            this.kryptonGroupBox1.TabIndex = 1;
+            this.kryptonGroupBox1.Values.Heading = "终端信息";
+            // 
+            // lbGLocation
+            // 
+            this.lbGLocation.Location = new System.Drawing.Point(72, 54);
+            this.lbGLocation.Name = "lbGLocation";
+            this.lbGLocation.Size = new System.Drawing.Size(19, 18);
+            this.lbGLocation.TabIndex = 8;
+            this.lbGLocation.Values.Text = "--";
+            // 
+            // kryptonLabel6
+            // 
+            this.kryptonLabel6.Location = new System.Drawing.Point(3, 55);
+            this.kryptonLabel6.Name = "kryptonLabel6";
+            this.kryptonLabel6.Size = new System.Drawing.Size(68, 18);
+            this.kryptonLabel6.TabIndex = 7;
+            this.kryptonLabel6.Values.Text = "物理地址:";
+            // 
+            // kryptonLabel5
+            // 
+            this.kryptonLabel5.Location = new System.Drawing.Point(3, 7);
+            this.kryptonLabel5.Name = "kryptonLabel5";
+            this.kryptonLabel5.Size = new System.Drawing.Size(68, 18);
+            this.kryptonLabel5.TabIndex = 5;
+            this.kryptonLabel5.Values.Text = "交易前置:";
+            // 
+            // lbFront
+            // 
+            this.lbFront.Location = new System.Drawing.Point(72, 6);
+            this.lbFront.Name = "lbFront";
+            this.lbFront.Size = new System.Drawing.Size(19, 18);
+            this.lbFront.TabIndex = 6;
+            this.lbFront.Values.Text = "--";
+            // 
+            // kryptonLabel2
+            // 
+            this.kryptonLabel2.Location = new System.Drawing.Point(205, 6);
+            this.kryptonLabel2.Name = "kryptonLabel2";
+            this.kryptonLabel2.Size = new System.Drawing.Size(68, 18);
+            this.kryptonLabel2.TabIndex = 1;
+            this.kryptonLabel2.Values.Text = "交易终端:";
+            // 
+            // kryptonLabel3
+            // 
+            this.kryptonLabel3.Location = new System.Drawing.Point(18, 31);
+            this.kryptonLabel3.Name = "kryptonLabel3";
+            this.kryptonLabel3.Size = new System.Drawing.Size(53, 18);
+            this.kryptonLabel3.TabIndex = 2;
+            this.kryptonLabel3.Values.Text = "IP地址:";
+            // 
+            // lbIPAddress
+            // 
+            this.lbIPAddress.Location = new System.Drawing.Point(72, 30);
+            this.lbIPAddress.Name = "lbIPAddress";
+            this.lbIPAddress.Size = new System.Drawing.Size(19, 18);
+            this.lbIPAddress.TabIndex = 3;
+            this.lbIPAddress.Values.Text = "--";
+            // 
+            // lbProductInfo
+            // 
+            this.lbProductInfo.Location = new System.Drawing.Point(270, 6);
+            this.lbProductInfo.Name = "lbProductInfo";
+            this.lbProductInfo.Size = new System.Drawing.Size(19, 18);
+            this.lbProductInfo.TabIndex = 4;
+            this.lbProductInfo.Values.Text = "--";
             // 
             // btnExecute
             // 
@@ -158,38 +240,6 @@
             this.lbAccount.TabIndex = 5;
             this.lbAccount.Values.Text = "--";
             // 
-            // lbProductInfo
-            // 
-            this.lbProductInfo.Location = new System.Drawing.Point(257, 5);
-            this.lbProductInfo.Name = "lbProductInfo";
-            this.lbProductInfo.Size = new System.Drawing.Size(19, 18);
-            this.lbProductInfo.TabIndex = 4;
-            this.lbProductInfo.Values.Text = "--";
-            // 
-            // lbIPAddress
-            // 
-            this.lbIPAddress.Location = new System.Drawing.Point(77, 30);
-            this.lbIPAddress.Name = "lbIPAddress";
-            this.lbIPAddress.Size = new System.Drawing.Size(19, 18);
-            this.lbIPAddress.TabIndex = 3;
-            this.lbIPAddress.Values.Text = "--";
-            // 
-            // kryptonLabel3
-            // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(13, 31);
-            this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(53, 18);
-            this.kryptonLabel3.TabIndex = 2;
-            this.kryptonLabel3.Values.Text = "IP地址:";
-            // 
-            // kryptonLabel2
-            // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(183, 6);
-            this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(68, 18);
-            this.kryptonLabel2.TabIndex = 1;
-            this.kryptonLabel2.Values.Text = "交易终端:";
-            // 
             // kryptonLabel1
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(15, 15);
@@ -197,67 +247,6 @@
             this.kryptonLabel1.Size = new System.Drawing.Size(68, 18);
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "交易帐号:";
-            // 
-            // kryptonGroupBox1
-            // 
-            this.kryptonGroupBox1.Location = new System.Drawing.Point(15, 126);
-            this.kryptonGroupBox1.Name = "kryptonGroupBox1";
-            // 
-            // kryptonGroupBox1.Panel
-            // 
-            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonButton1);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.lbGLocation);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel6);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel5);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.lbFront);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel2);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel3);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.lbIPAddress);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.lbProductInfo);
-            this.kryptonGroupBox1.Size = new System.Drawing.Size(333, 105);
-            this.kryptonGroupBox1.TabIndex = 1;
-            this.kryptonGroupBox1.Values.Heading = "终端信息";
-            // 
-            // kryptonLabel5
-            // 
-            this.kryptonLabel5.Location = new System.Drawing.Point(3, 7);
-            this.kryptonLabel5.Name = "kryptonLabel5";
-            this.kryptonLabel5.Size = new System.Drawing.Size(68, 18);
-            this.kryptonLabel5.TabIndex = 5;
-            this.kryptonLabel5.Values.Text = "交易前置:";
-            // 
-            // lbFront
-            // 
-            this.lbFront.Location = new System.Drawing.Point(77, 6);
-            this.lbFront.Name = "lbFront";
-            this.lbFront.Size = new System.Drawing.Size(19, 18);
-            this.lbFront.TabIndex = 6;
-            this.lbFront.Values.Text = "--";
-            // 
-            // kryptonLabel6
-            // 
-            this.kryptonLabel6.Location = new System.Drawing.Point(3, 55);
-            this.kryptonLabel6.Name = "kryptonLabel6";
-            this.kryptonLabel6.Size = new System.Drawing.Size(68, 18);
-            this.kryptonLabel6.TabIndex = 7;
-            this.kryptonLabel6.Values.Text = "物理地址:";
-            // 
-            // lbGLocation
-            // 
-            this.lbGLocation.Location = new System.Drawing.Point(77, 54);
-            this.lbGLocation.Name = "lbGLocation";
-            this.lbGLocation.Size = new System.Drawing.Size(19, 18);
-            this.lbGLocation.TabIndex = 8;
-            this.lbGLocation.Values.Text = "--";
-            // 
-            // kryptonButton1
-            // 
-            this.kryptonButton1.Location = new System.Drawing.Point(236, 23);
-            this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.Size = new System.Drawing.Size(90, 25);
-            this.kryptonButton1.TabIndex = 9;
-            this.kryptonButton1.Values.Text = "kryptonButton1";
-            this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
             // 
             // ctAccountInfo
             // 
@@ -269,11 +258,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbTransferType)).EndInit();
             this.kryptonGroupBox1.Panel.ResumeLayout(false);
             this.kryptonGroupBox1.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
             this.kryptonGroupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cbTransferType)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -301,6 +290,5 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbFront;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbGLocation;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel6;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
     }
 }

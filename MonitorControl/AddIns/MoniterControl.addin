@@ -14,8 +14,8 @@
 	</Manifest>
 	
 	<Runtime>
-    <Import assembly = "../XSystem.Control.dll">
-    </Import>
+    <Import assembly = "../XSystem.Control.dll"/>
+    <Import assembly = "../XSystem.Base.dll"/>
     <Import assembly = "../XSystem.Control.dll">
       <ConditionEvaluator name="AccountBindedState" class="TradingLib.MoniterControl.AccountBindedStateConditionEvaluator"/>
       <ConditionEvaluator name="AccountActiveState" class="TradingLib.MoniterControl.AccountActiveStateConditionEvaluator"/>
@@ -54,7 +54,14 @@
                 label = "手续费/保证金/交易参数"
                 class = "TradingLib.MoniterControl.UpdateTemplateCommand"/>
     </Condition>
-
+    
+    <Condition name="ProductState" product="c">
+      <MenuItem id = "EditRiskRuleCommand"
+                shortcut = "Control|R"
+                label = "风控规则"
+                class = "TradingLib.MoniterControl.EditRiskRuleCommand"/>
+    </Condition>
+    
     <Condition name="ProductState" product="Vendor">
       <MenuItem id = "UpdateTemplateCommand"
                 shortcut = "Control|F"
@@ -67,20 +74,19 @@
                 label = "配资服务"
                 class = "TradingLib.MoniterControl.UpdateFinServiceCommand"/>
     </Condition>
-    
-    
+
+    <MenuItem id = "Separator1" type = "Separator"/>
+      <MenuItem id = "QryMenu"
+                 type = "Menu"
+                 label = "记录查询">
+        <Include id = "QryMenu" path = "/AccountList/ContextMenu/Qry"/>
+      </MenuItem>
     <MenuItem id = "Separator1" type = "Separator"/>
     
     <Condition name="ProductState" product="Counter">
       <MenuItem id = "Product"
                 label = "修改交易密码"
                 class = "TradingLib.MoniterControl.ChangeAccountPasswordCommand"/>
-    </Condition>
-
-    <Condition name="ProductState" product="Counter">
-      <MenuItem id = "Product"
-                label = "修改投资者信息"
-                class = "TradingLib.MoniterControl.ChangeInvestorInfoCommand"/>
     </Condition>
 
     <Condition name="ProductState" product="All">
@@ -149,6 +155,18 @@
     
   </Path>
 
+
+  <Path name = "/AccountList/ContextMenu/Qry">
+    <MenuItem id = "QryHistTradingInfoCommand"
+          label = "交易记录"
+          class = "TradingLib.MoniterBase.Command.QryHistTradingInfoCommand"/>
+    <MenuItem id = "QrySettlementCommand"
+              label = "结算单"
+              class = "TradingLib.MoniterBase.Command.QrySettlementCommand"/>
+    <MenuItem id = "QryHistCashTransCommand"
+              label = "出入金记录"
+              class = "TradingLib.MoniterBase.Command.QryHistCashTransCommand"/>
+  </Path>
 
   <!--工具栏-->
   <Path name = "/Workbench/Toolbar">

@@ -38,6 +38,10 @@ namespace TradingLib.MoniterBase.Command
             functoinPanel.Dock = DockStyle.Fill;
             workbench.AppendControl(functoinPanel);
 
+            ctFollowCentre followMoniter = new ctFollowCentre();
+            followMoniter.Dock = DockStyle.Fill;
+            workbench.AppendControl(followMoniter);
+
             //ctOrderPanel orderPanel = new ctOrderPanel();
             //orderPanel.Dock = DockStyle.Fill;
             //workbench.AppendControl(orderPanel);
@@ -59,6 +63,15 @@ namespace TradingLib.MoniterBase.Command
         {
             Workbench workbench = (Workbench)this.Owner;
             workbench.ShowControl("QuoteMoniter", EnumControlLocation.TopPanel);
+        }
+    }
+
+    public class ShowFollowCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            Workbench workbench = (Workbench)this.Owner;
+            workbench.ShowControl("FollowMoniter", EnumControlLocation.TopPanel);
         }
     }
 

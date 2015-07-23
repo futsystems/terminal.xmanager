@@ -10,7 +10,7 @@ using ICSharpCode.Core;
 namespace TradingLib.MoniterControl
 {
 
-    internal class AccountMoniterHelper
+    public class AccountMoniterHelper
     {
         public static bool GetCurrentAccount(object obj, out AccountLite acct)
         {
@@ -213,6 +213,21 @@ namespace TradingLib.MoniterControl
         }
     }
 
+    public class EditRiskRuleCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            AccountLite account = null;
+            if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
+            {
+                return;
+            }
+            fmEditRiskRule fm = new fmEditRiskRule();
+            fm.SetAccount(account);
+            fm.ShowDialog();
+            fm.Close();
+        }
+    }
     /// <summary>
     /// 更新主帐户强平规则
     /// </summary>
