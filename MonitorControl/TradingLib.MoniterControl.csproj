@@ -106,6 +106,12 @@
     <Compile Include="Base\Follow\ctFollowStrategyMoniter.Designer.cs">
       <DependentUpon>ctFollowStrategyMoniter.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\Follow\ctSignalList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Base\Follow\ctSignalList.Designer.cs">
+      <DependentUpon>ctSignalList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\Trading\ctOrderView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -184,6 +190,7 @@
     </Compile>
     <Compile Include="Command\CashViewType.cs" />
     <Compile Include="Command\ConditionEvaluator.cs" />
+    <Compile Include="Command\FollowStrategyList.cs" />
     <Compile Include="Command\MotherAccountCommand.cs" />
     <Compile Include="Common\FilterArgs.cs" />
     <Compile Include="Common\JsonProtocolFinService.cs" />
@@ -467,11 +474,17 @@
     <Compile Include="Forms\fmLoginInfo.Designer.cs">
       <DependentUpon>fmLoginInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Follow\fmStrategyCfg.cs">
+    <Compile Include="Forms\Follow\fmFollowStrategyCfg.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Follow\fmStrategyCfg.Designer.cs">
-      <DependentUpon>fmStrategyCfg.cs</DependentUpon>
+    <Compile Include="Forms\Follow\fmFollowStrategyCfg.Designer.cs">
+      <DependentUpon>fmFollowStrategyCfg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Follow\fmFollowStrategySignals.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Follow\fmFollowStrategySignals.Designer.cs">
+      <DependentUpon>fmFollowStrategySignals.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Manager\fmChangePasswordAgent.cs">
       <SubType>Form</SubType>
@@ -699,6 +712,9 @@
     <EmbeddedResource Include="Base\Follow\ctFollowStrategyMoniter.resx">
       <DependentUpon>ctFollowStrategyMoniter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Base\Follow\ctSignalList.resx">
+      <DependentUpon>ctSignalList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Base\Trading\ctOrderView.resx">
       <DependentUpon>ctOrderView.cs</DependentUpon>
     </EmbeddedResource>
@@ -877,8 +893,11 @@
     <EmbeddedResource Include="Forms\fmLoginInfo.resx">
       <DependentUpon>fmLoginInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Follow\fmStrategyCfg.resx">
-      <DependentUpon>fmStrategyCfg.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Follow\fmFollowStrategyCfg.resx">
+      <DependentUpon>fmFollowStrategyCfg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Follow\fmFollowStrategySignals.resx">
+      <DependentUpon>fmFollowStrategySignals.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Manager\fmChangePasswordAgent.resx">
       <DependentUpon>fmChangePasswordAgent.cs</DependentUpon>

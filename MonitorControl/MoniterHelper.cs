@@ -178,16 +178,16 @@ namespace TradingLib.MoniterControl
             if (CoreService.SiteInfo.Domain.Super || (CoreService.SiteInfo.Domain.Router_Sim))
             {
                 ValueObject<QSEnumAccountCategory> vo = new ValueObject<QSEnumAccountCategory>();
-                vo.Name = Util.GetEnumDescription(QSEnumAccountCategory.SIMULATION);
-                vo.Value = QSEnumAccountCategory.SIMULATION;
+                vo.Name = Util.GetEnumDescription(QSEnumAccountCategory.SUBACCOUNT);
+                vo.Value = QSEnumAccountCategory.SUBACCOUNT;
                 list.Add(vo);
             }
 
             if (CoreService.SiteInfo.Domain.Super || (CoreService.SiteInfo.Domain.Router_Live))
             {
                 ValueObject<QSEnumAccountCategory> vo = new ValueObject<QSEnumAccountCategory>();
-                vo.Name = Util.GetEnumDescription(QSEnumAccountCategory.REAL);
-                vo.Value = QSEnumAccountCategory.REAL;
+                vo.Name = Util.GetEnumDescription(QSEnumAccountCategory.SIGACCOUNT);
+                vo.Value = QSEnumAccountCategory.SIGACCOUNT;
                 list.Add(vo);
             }
             return list;

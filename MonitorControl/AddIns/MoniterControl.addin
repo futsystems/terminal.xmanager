@@ -22,7 +22,23 @@
 
     </Import>
   </Runtime>
-	
+
+  <Path name = "/FollowStrategyList/ContextMenu">
+    <MenuItem id = "EditFollowStrategyCommand"
+                      label = "编辑跟单策略"
+                      class = "TradingLib.MoniterControl.EditFollowStrategyCommand"/>
+
+    <MenuItem id = "Separator1" type = "Separator"/>
+
+    <MenuItem id = "SyncAccountDataCommand"
+              label = "同步交易数据"
+              class = "TradingLib.MoniterControl.SyncAccountDataCommand"/>
+    <MenuItem id = "EditFollowStrategySignalCommand"
+              label = "选择策略信号源"
+              class = "TradingLib.MoniterControl.EditFollowStrategySignalCommand"/>
+  </Path>
+  
+  
   <Path name = "/AccountList/ContextMenu">
 
     <Condition name="ProductState" product="All">

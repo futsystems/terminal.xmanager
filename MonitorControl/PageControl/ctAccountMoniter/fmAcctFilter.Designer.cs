@@ -129,7 +129,7 @@
             // 
             // ctAccountType1
             // 
-            this.ctAccountType1.AccountType = TradingLib.API.QSEnumAccountCategory.SIMULATION;
+            this.ctAccountType1.AccountType = TradingLib.API.QSEnumAccountCategory.SUBACCOUNT;
             this.ctAccountType1.EnableAny = true;
             this.ctAccountType1.Location = new System.Drawing.Point(15, 122);
             this.ctAccountType1.Name = "ctAccountType1";

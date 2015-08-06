@@ -10,9 +10,9 @@ using System.Windows.Forms;
 using TradingLib.API;
 using TradingLib.Common;
 using TradingLib.MoniterCore;
+using ICSharpCode.Core;
 
-
-namespace TradingLib.MoniterControl.Base.Follow
+namespace TradingLib.MoniterControl
 {
     /// <summary>
     /// 显示跟单策略列表
@@ -34,21 +34,100 @@ namespace TradingLib.MoniterControl.Base.Follow
         {
             //全局事件回调
             CoreService.EventCore.RegIEventHandler(this);
+            try
+            {
+                strategyGrid.ContextMenuStrip = MenuService.CreateContextMenu(this, "/FollowStrategyList/ContextMenu");
+                strategyGrid.DoubleClick += new EventHandler(strategyGrid_DoubleClick);
+            }
+            catch (Exception ex)
+            { 
+            
+            }
+
+            strategyGrid.MouseClick += new MouseEventHandler(strategyGrid_MouseClick);
+            
         }
+
+        DateTime _lastresumetime = DateTime.Now;
+        void strategyGrid_DoubleClick(object sender, EventArgs e)
+        {
+            if (CoreService.TradingInfoTracker.IsInResume)
+            {
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("交易记录恢复中,请稍候!");
+                return;
+            }
+
+            if (DateTime.Now.Subtract(_lastresumetime).TotalSeconds <= 1)
+            {
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请不要频繁请求帐户日内数据");
+                return;
+            }
+            _lastresumetime = DateTime.Now;
+            string account = CurrentStrategyConfig.Account;
+
+            AccountLite accountlite = CoreService.BasicInfoTracker.GetAccount(account);
+            if (accountlite != null)
+            {
+                //触发事件中继的帐户选择事件
+                CoreService.EventAccount.FireAccountSelectedEvent(accountlite);
+            }
+            else
+            {
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("跟单策略绑定的交易帐户不存在");
+                return;
+            }
+        }
+
+        void strategyGrid_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                MoniterHelper.WindowMessage("右键单击");
+            }
+        }
+
+       
+        /// <summary>
+        /// 获得当前选中的跟单策略
+        /// </summary>
+        public FollowStrategyConfig CurrentStrategyConfig
+        {
+            get
+            {
+                int row = (strategyGrid.SelectedRows.Count > 0 ? strategyGrid.SelectedRows[0].Index : -1);
+                if(row == -1) return null;
+                int strategy_id = int.Parse(strategyGrid[0, row].Value.ToString());
+
+                return GetStrategyConfig(strategy_id);
+            }
+        }
+
 
 
         public void OnInit()
         {
             CoreService.EventContrib.RegisterCallback("FollowCentre", "QryFollowStrategyList", OnQryFollowStrategyList);
+
+            CoreService.EventContrib.RegisterNotifyCallback("FollowCentre", "FollowStrategyStatusNotify", OnFollowStrategyStatusNotify);
+            
             CoreService.TLClient.ReqContribRequest("FollowCentre", "QryFollowStrategyList", "");
         }
 
         public void OnDisposed()
         {
             CoreService.EventContrib.UnRegisterCallback("FollowCentre", "QryFollowStrategyList", OnQryFollowStrategyList);
-     
+            CoreService.EventContrib.UnRegisterNotifyCallback("FollowCentre", "FollowStrategyStatusNotify", OnFollowStrategyStatusNotify);
+           
         }
 
+        void OnFollowStrategyStatusNotify(string json)
+        {
+            FollowStrategyStatus status = MoniterHelper.ParseJsonResponse<FollowStrategyStatus>(json);
+            if (status != null)
+            {
+                InvokeGotStrategyStatusNotify(status);
+            }
+        }
 
         void OnQryFollowStrategyList(string json, bool islast)
         {
@@ -71,6 +150,40 @@ namespace TradingLib.MoniterControl.Base.Follow
             return -1;
         }
 
+        FollowStrategyConfig GetStrategyConfig(int strategy_id)
+        {
+            FollowStrategyConfig target = null;
+            if (cfgmap.TryGetValue(strategy_id, out target))
+            {
+                return target;
+            }
+            return null;
+        }
+
+        void InvokeGotStrategyStatusNotify(FollowStrategyStatus status)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action<FollowStrategyStatus>(InvokeGotStrategyStatusNotify), new object[] { status });
+            }
+            else
+            {
+                int r = cfgID2RowIdx(status.StrategyID);
+                if (r != -1)
+                {
+                    gt.Rows[r][SIGNALCNT] = status.SignalCount;
+
+                    gt.Rows[r][SIGREALIZEDPL] = status.SignalRealizedPL;
+                    gt.Rows[r][SIGUNREALIZEDPL] = status.SignalUnRealizedPL;
+                    gt.Rows[r][FOLLOWREALIZEDPL] = status.FollowRealizedPL;
+                    gt.Rows[r][FOLLOWUNREALIZEDPL] = status.FollowUnRealizedPL;
+                    gt.Rows[r][TOTALSLIP] = status.TotalSlip;
+                    gt.Rows[r][ENTRYITEMTOTAL] = status.TotalEntryCount;
+                    gt.Rows[r][ENTRYITEMSUCCESS] = status.TotalEntrySuccessCount;
+
+                }
+            }
+        }
         void InvokeGotStrategyCfg(FollowStrategyConfig cfg)
         {
             if(InvokeRequired)
@@ -82,9 +195,9 @@ namespace TradingLib.MoniterControl.Base.Follow
                 int r = cfgID2RowIdx(cfg.ID);
                 if (r == -1)
                 {
-                    gt.Rows.Add(cfg.ID);
+                    gt.Rows.Add();
                     int i = gt.Rows.Count - 1;
-
+                    gt.Rows[i][STRATEGYID] = cfg.ID;
                     gt.Rows[i][NAME] = cfg.Token;
                     gt.Rows[i][RUNNING] = true;
                     gt.Rows[i][SIGNALCNT] = 10;

@@ -16,7 +16,7 @@ namespace TradingLib.MoniterControl
 
         //帐户类别
         public bool AcctTypeEnable = false;
-        public QSEnumAccountCategory AcctType = QSEnumAccountCategory.REAL;
+        public QSEnumAccountCategory AcctType = QSEnumAccountCategory.SUBACCOUNT;
 
         //所属代理商
         public bool AgentEnable = false;

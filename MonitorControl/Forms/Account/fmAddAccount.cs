@@ -32,7 +32,7 @@ namespace TradingLib.MoniterControl
                 //如果开通实盘交易 则默认添加实盘帐户
                 if (CoreService.SiteInfo.Domain.Router_Live)
                 {
-                    ctAccountType1.AccountType = QSEnumAccountCategory.REAL;
+                    ctAccountType1.AccountType = QSEnumAccountCategory.SUBACCOUNT;
                 }
             }
             //代理无法选择添加哪种帐号，只能按照系统设定进行默认添加
@@ -45,7 +45,7 @@ namespace TradingLib.MoniterControl
                 {
                     ctAccountType1.Enabled = false;
                     //如果没有实盘交易 则默认添加模拟帐户 且界面隐藏
-                    if (ctAccountType1.AccountType == QSEnumAccountCategory.SIMULATION)
+                    if (ctAccountType1.AccountType == QSEnumAccountCategory.SUBACCOUNT)
                     {
                         ctAccountType1.Visible = false;
                     }
@@ -56,7 +56,7 @@ namespace TradingLib.MoniterControl
         void ctAccountType1_AccountTypeSelectedChangedEvent()
         {
             QSEnumAccountCategory cat = ctAccountType1.AccountType;
-            if (cat == QSEnumAccountCategory.REAL)
+            if (cat == QSEnumAccountCategory.SUBACCOUNT)
             {
                 ctRouterGroupList1.Visible = true;
             }
@@ -72,14 +72,14 @@ namespace TradingLib.MoniterControl
             QSEnumAccountCategory acccat = ctAccountType1.AccountType;
             try
             {
-                grid = (acccat == QSEnumAccountCategory.REAL ? ctRouterGroupList1.RouterGroup.ID : 0);
+                grid = (acccat == QSEnumAccountCategory.SUBACCOUNT ? ctRouterGroupList1.RouterGroup.ID : 0);
             }
             catch (Exception ex)
             { 
                 
             }
 
-            if (acccat == QSEnumAccountCategory.REAL && grid == 0)
+            if (acccat == QSEnumAccountCategory.SUBACCOUNT && grid == 0)
             {
                 MoniterHelper.WindowMessage("请选择路由组");
                 return;

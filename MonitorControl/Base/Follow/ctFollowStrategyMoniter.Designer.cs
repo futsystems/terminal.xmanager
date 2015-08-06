@@ -1,4 +1,4 @@
-﻿namespace TradingLib.MoniterControl.Base.Follow
+﻿namespace TradingLib.MoniterControl
 {
     partial class ctFollowStrategyMoniter
     {

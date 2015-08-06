@@ -31,7 +31,7 @@ namespace TradingLib.MoniterControl
 
                 ValueObject<QSEnumAccountCategory> vo = new ValueObject<QSEnumAccountCategory>();
                 vo.Name = "配资帐户";
-                vo.Value = QSEnumAccountCategory.LOANNEE;
+                vo.Value = QSEnumAccountCategory.MONITERACCOUNT;
 
                 ArrayList list = new ArrayList();
                 list.Add(vo);
@@ -44,11 +44,11 @@ namespace TradingLib.MoniterControl
             {
                 ValueObject<QSEnumAccountCategory> vo1 = new ValueObject<QSEnumAccountCategory>();
                 vo1.Name = "模拟帐户";
-                vo1.Value = QSEnumAccountCategory.SIMULATION;
+                vo1.Value = QSEnumAccountCategory.SUBACCOUNT;
 
                 ValueObject<QSEnumAccountCategory> vo2 = new ValueObject<QSEnumAccountCategory>();
                 vo2.Name = "实盘帐户";
-                vo2.Value = QSEnumAccountCategory.REAL;
+                vo2.Value = QSEnumAccountCategory.SUBACCOUNT;
 
                 ArrayList list = new ArrayList();
                 list.Add(vo1);
@@ -127,7 +127,7 @@ namespace TradingLib.MoniterControl
 
             createion.Profile = profile;
 
-            if (createion.Category == QSEnumAccountCategory.REAL)
+            if (createion.Category == QSEnumAccountCategory.SUBACCOUNT)
             {
                 createion.RouterType = QSEnumOrderTransferType.LIVE;
             }

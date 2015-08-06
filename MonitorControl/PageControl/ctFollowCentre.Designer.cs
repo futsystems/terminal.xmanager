@@ -30,14 +30,16 @@
         {
             this.kryptonNavigator1 = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
             this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.ctFollowStrategyMoniter1 = new TradingLib.MoniterControl.Base.Follow.ctFollowStrategyMoniter();
             this.ctFollowItemList1 = new TradingLib.MoniterControl.ctFollowItemList();
+            this.ctFollowStrategyMoniter1 = new TradingLib.MoniterControl.ctFollowStrategyMoniter();
+            this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
+            this.ctSignalList1 = new TradingLib.MoniterControl.Base.Follow.ctSignalList();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
             this.kryptonNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
             this.kryptonPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).BeginInit();
+            this.kryptonPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonNavigator1
@@ -67,29 +69,9 @@
             this.kryptonPage1.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage1.Name = "kryptonPage1";
             this.kryptonPage1.Size = new System.Drawing.Size(834, 418);
-            this.kryptonPage1.Text = "kryptonPage1";
+            this.kryptonPage1.Text = "跟单策略";
             this.kryptonPage1.ToolTipTitle = "Page ToolTip";
             this.kryptonPage1.UniqueName = "40ACF9BE760B408A668E571448FC0AAF";
-            // 
-            // kryptonPage2
-            // 
-            this.kryptonPage2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.kryptonPage2.Flags = 65534;
-            this.kryptonPage2.LastVisibleSet = true;
-            this.kryptonPage2.MinimumSize = new System.Drawing.Size(50, 50);
-            this.kryptonPage2.Name = "kryptonPage2";
-            this.kryptonPage2.Size = new System.Drawing.Size(834, 418);
-            this.kryptonPage2.Text = "kryptonPage2";
-            this.kryptonPage2.ToolTipTitle = "Page ToolTip";
-            this.kryptonPage2.UniqueName = "DB804578AF564B10AD814B74A1A670DA";
-            // 
-            // ctFollowStrategyMoniter1
-            // 
-            this.ctFollowStrategyMoniter1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctFollowStrategyMoniter1.Location = new System.Drawing.Point(0, 0);
-            this.ctFollowStrategyMoniter1.Name = "ctFollowStrategyMoniter1";
-            this.ctFollowStrategyMoniter1.Size = new System.Drawing.Size(834, 109);
-            this.ctFollowStrategyMoniter1.TabIndex = 0;
             // 
             // ctFollowItemList1
             // 
@@ -100,6 +82,35 @@
             this.ctFollowItemList1.Name = "ctFollowItemList1";
             this.ctFollowItemList1.Size = new System.Drawing.Size(829, 300);
             this.ctFollowItemList1.TabIndex = 1;
+            // 
+            // ctFollowStrategyMoniter1
+            // 
+            this.ctFollowStrategyMoniter1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctFollowStrategyMoniter1.Location = new System.Drawing.Point(0, 0);
+            this.ctFollowStrategyMoniter1.Name = "ctFollowStrategyMoniter1";
+            this.ctFollowStrategyMoniter1.Size = new System.Drawing.Size(834, 109);
+            this.ctFollowStrategyMoniter1.TabIndex = 0;
+            // 
+            // kryptonPage2
+            // 
+            this.kryptonPage2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.kryptonPage2.Controls.Add(this.ctSignalList1);
+            this.kryptonPage2.Flags = 65534;
+            this.kryptonPage2.LastVisibleSet = true;
+            this.kryptonPage2.MinimumSize = new System.Drawing.Size(50, 50);
+            this.kryptonPage2.Name = "kryptonPage2";
+            this.kryptonPage2.Size = new System.Drawing.Size(834, 418);
+            this.kryptonPage2.Text = "信号源";
+            this.kryptonPage2.ToolTipTitle = "Page ToolTip";
+            this.kryptonPage2.UniqueName = "DB804578AF564B10AD814B74A1A670DA";
+            // 
+            // ctSignalList1
+            // 
+            this.ctSignalList1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctSignalList1.Location = new System.Drawing.Point(0, 0);
+            this.ctSignalList1.Name = "ctSignalList1";
+            this.ctSignalList1.Size = new System.Drawing.Size(834, 418);
+            this.ctSignalList1.TabIndex = 0;
             // 
             // ctFollowCentre
             // 
@@ -113,6 +124,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).EndInit();
             this.kryptonPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).EndInit();
+            this.kryptonPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -122,7 +134,8 @@
         private ComponentFactory.Krypton.Navigator.KryptonNavigator kryptonNavigator1;
         private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage1;
         private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage2;
-        private Base.Follow.ctFollowStrategyMoniter ctFollowStrategyMoniter1;
+        private ctFollowStrategyMoniter ctFollowStrategyMoniter1;
         private ctFollowItemList ctFollowItemList1;
+        private Base.Follow.ctSignalList ctSignalList1;
     }
 }
