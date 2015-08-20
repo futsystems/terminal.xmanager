@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -14,7 +15,7 @@ using TradingLib.MoniterCore;
 
 namespace TradingLib.MoniterControl
 {
-    public partial class fmFollowStrategyCfg : ComponentFactory.Krypton.Toolkit.KryptonForm
+    public partial class fmFollowStrategyCfg : ComponentFactory.Krypton.Toolkit.KryptonForm,IEventBinder
     {
         public fmFollowStrategyCfg()
         {
@@ -28,22 +29,100 @@ namespace TradingLib.MoniterControl
             MoniterHelper.AdapterToIDataSource(exitpricetype).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumFollowPriceType>());
             MoniterHelper.AdapterToIDataSource(exitpendingtype).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumPendingThresholdType>());
             MoniterHelper.AdapterToIDataSource(exitpendingoptype).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumPendingOperationType>());
-        
 
+            this.Text = "添加跟单策略";
             this.Load += new EventHandler(fmFollowStrategyCfg_Load);
         }
 
         void fmFollowStrategyCfg_Load(object sender, EventArgs e)
         {
             this.btnSubmit.Click += new EventHandler(btnSubmit_Click);
+            CoreService.EventCore.RegIEventHandler(this);
             
         }
 
-        void btnSubmit_Click(object sender, EventArgs e)
+        public void OnInit()
         {
             if (_cfg == null)
-            { 
-            
+            {
+                CoreService.EventContrib.RegisterCallback("FollowCentre", "QryAvabileStrategyAccount", OnQryAvabileStrategyAccount);
+          
+                CoreService.TLClient.ReqContribRequest("FollowCentre", "QryAvabileStrategyAccount","");
+     
+            }
+        }
+
+        public void OnDisposed()
+        {
+            if (_cfg == null)
+            {
+                CoreService.EventContrib.UnRegisterCallback("FollowCentre", "QryAvabileStrategyAccount", OnQryAvabileStrategyAccount);
+          
+            }
+        
+        }
+
+
+        void OnQryAvabileStrategyAccount(string json,bool last)
+        {
+            string[] accounts = MoniterHelper.ParseJsonResponse<string[]>(json);
+            if (accounts != null)
+            {
+                InvokeGotAvabileStrategyAccount(accounts);
+            }
+        }
+
+        void InvokeGotAvabileStrategyAccount(string[] accounts)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action<string[]>(InvokeGotAvabileStrategyAccount), new object[] { accounts });
+            }
+            else
+            {
+                ArrayList acclist = new ArrayList();
+                foreach (string account in accounts)
+                {
+                    ValueObject<string> vo = new ValueObject<string>();
+                    vo.Name = account;
+                    vo.Value = account;
+                    acclist.Add(vo);
+                }
+                MoniterHelper.AdapterToIDataSource(followaccount).BindDataSource(acclist);
+
+            }
+        }
+
+
+        void btnSubmit_Click(object sender, EventArgs e)
+        {
+            //添加
+            if (_cfg == null)
+            {
+                if (MoniterHelper.WindowConfirm("确认添加跟单策略?") == System.Windows.Forms.DialogResult.Yes)
+                {
+                    FollowStrategyConfig cfg = new FollowStrategyConfig();
+
+                    cfg.Token = token.Text;
+                    cfg.FollowDirection = (QSEnumFollowDirection)direction.SelectedValue;
+                    cfg.FollowPower = (int)power.Value;
+                    cfg.Account = (string)followaccount.SelectedValue;
+
+                    cfg.EntryPriceType = (QSEnumFollowPriceType)entrypricetype.SelectedValue;
+                    cfg.EntryOffsetTicks = (int)entrypricetickoffset.Value;
+                    cfg.EntryPendingThresholdType = (QSEnumPendingThresholdType)entrypendingtype.SelectedValue;
+                    cfg.EntryPendingThresholdValue = (int)entrypendingvalue.Value;
+                    cfg.EntryPendingOperationType = (QSEnumPendingOperationType)entrypendingoptype.SelectedValue;
+
+                    cfg.ExitPriceType = (QSEnumFollowPriceType)exitpricetype.SelectedValue;
+                    cfg.ExitOffsetTicks = (int)exitpricetickoffset.Value;
+                    cfg.ExitPendingThreadsholdType = (QSEnumPendingThresholdType)exitpendingtype.SelectedValue;
+                    cfg.ExitPendingThresholdValue = (int)exitpendingvalue.Value;
+                    cfg.ExitPendingOperationType = (QSEnumPendingOperationType)exitpendingoptype.SelectedValue;
+
+                    CoreService.TLClient.ReqContribRequest("FollowCentre", "UpdateFollowStrategyCfg", cfg);
+                    this.Close();
+                }
             }
             else
             {

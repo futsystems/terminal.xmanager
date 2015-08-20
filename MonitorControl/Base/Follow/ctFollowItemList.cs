@@ -138,6 +138,35 @@ namespace TradingLib.MoniterControl
             return -1;
         }
 
+        FollowStrategyConfig cfgSelected = null;
+
+        /// <summary>
+        /// 响应策略列表中双击某个策略 用于查询并显示该策略的跟单项目
+        /// </summary>
+        /// <param name="cfg"></param>
+        public void OnStrategySelected(FollowStrategyConfig cfg)
+        {
+            //MessageBox.Show("strategy id:" + cfg.ID.ToString());
+            if (cfg == null) return;
+            Clear();
+
+            cfgSelected = cfg;
+            CoreService.TLClient.ReqContribRequest("FollowCentre", "QryEntryFollowItemList", cfg.ID.ToString());
+        }
+
+        void Clear()
+        {
+            entrymap.Clear();
+            entryrowmap.Clear();
+            exitmap.Clear();
+            exitrowmp.Clear();
+
+            //清空缓存
+            itemGrid.DataSource = null;
+            gt.Rows.Clear();
+            BindToTable();
+
+        }
         public void OnInit()
         {
             CoreService.EventContrib.RegisterCallback("FollowCentre", "QryEntryFollowItemList", OnQryEntryItemList);
@@ -145,7 +174,7 @@ namespace TradingLib.MoniterControl
             CoreService.EventContrib.RegisterNotifyCallback("FollowCentre", "EntryFollowItemNotify", OnNotifyEntryItem);
             CoreService.EventContrib.RegisterNotifyCallback("FollowCentre", "ExitFollowItemNotify", OnNotifyExitItem);
 
-            CoreService.TLClient.ReqContribRequest("FollowCentre", "QryEntryFollowItemList", "1");
+            //CoreService.TLClient.ReqContribRequest("FollowCentre", "QryEntryFollowItemList", "1");
         }
 
         public void OnDisposed()
@@ -163,6 +192,11 @@ namespace TradingLib.MoniterControl
             EntryFollowItemStruct item = MoniterHelper.ParseJsonResponse<EntryFollowItemStruct>(json);
             if (item != null)
             {
+                if (cfgSelected == null)
+                    return;
+                if (cfgSelected.ID != item.StrategyID)
+                    return;
+
                 InvokeGotFollowItem(item);
             }
 
@@ -173,6 +207,11 @@ namespace TradingLib.MoniterControl
             ExitFollowItemStruct item = MoniterHelper.ParseJsonResponse<ExitFollowItemStruct>(json);
             if (item != null)
             {
+                if (cfgSelected == null)
+                    return;
+                if (cfgSelected.ID != item.StrategyID)
+                    return;
+
                 InvokeGotFollowItem(item);
             }
         }
@@ -182,11 +221,19 @@ namespace TradingLib.MoniterControl
             EntryFollowItemStruct item = MoniterHelper.ParseJsonResponse<EntryFollowItemStruct>(json);
             if (item != null)
             {
+                if (cfgSelected == null)
+                    return;
+                if (cfgSelected.ID != item.StrategyID)
+                    return;
+
                 InvokeGotFollowItem(item);
             }
             if (islast)
             {
-                CoreService.TLClient.ReqContribRequest("FollowCentre", "QryExitFollowItemList", "1");
+                if (cfgSelected != null)
+                {
+                    CoreService.TLClient.ReqContribRequest("FollowCentre", "QryExitFollowItemList", cfgSelected.ID.ToString());
+                }
             }
         }
 
@@ -195,6 +242,11 @@ namespace TradingLib.MoniterControl
             ExitFollowItemStruct item = MoniterHelper.ParseJsonResponse<ExitFollowItemStruct>(json);
             if (item != null)
             {
+                if (cfgSelected == null)
+                    return;
+                if (cfgSelected.ID != item.StrategyID)
+                    return;
+
                 InvokeGotFollowItem(item);
             }
         }

@@ -20,8 +20,11 @@ namespace TradingLib.MoniterControl
     /// </summary>
     public partial class ctFollowStrategyMoniter : UserControl, IEventBinder
     {
+        public event Action<FollowStrategyConfig> StrategySelected;
+
         public ctFollowStrategyMoniter()
         {
+            
             InitializeComponent();
             SetPreferences();
             InitTable();
@@ -70,6 +73,12 @@ namespace TradingLib.MoniterControl
             {
                 //触发事件中继的帐户选择事件
                 CoreService.EventAccount.FireAccountSelectedEvent(accountlite);
+
+                //对外触发跟单策略选中事件
+                if (StrategySelected != null)
+                {
+                    StrategySelected(CurrentStrategyConfig);
+                }
             }
             else
             {
@@ -107,7 +116,7 @@ namespace TradingLib.MoniterControl
         public void OnInit()
         {
             CoreService.EventContrib.RegisterCallback("FollowCentre", "QryFollowStrategyList", OnQryFollowStrategyList);
-
+            CoreService.EventContrib.RegisterNotifyCallback("FollowCentre", "FollowStrategyConfigNotify", OnFollowStrategyConfigNotify);
             CoreService.EventContrib.RegisterNotifyCallback("FollowCentre", "FollowStrategyStatusNotify", OnFollowStrategyStatusNotify);
             
             CoreService.TLClient.ReqContribRequest("FollowCentre", "QryFollowStrategyList", "");
@@ -116,8 +125,20 @@ namespace TradingLib.MoniterControl
         public void OnDisposed()
         {
             CoreService.EventContrib.UnRegisterCallback("FollowCentre", "QryFollowStrategyList", OnQryFollowStrategyList);
+            CoreService.EventContrib.UnRegisterNotifyCallback("FollowCentre", "FollowStrategyConfigNotify", OnFollowStrategyConfigNotify);
+          
             CoreService.EventContrib.UnRegisterNotifyCallback("FollowCentre", "FollowStrategyStatusNotify", OnFollowStrategyStatusNotify);
            
+        }
+
+
+        void OnFollowStrategyConfigNotify(string json)
+        {
+            FollowStrategyConfig cfg = MoniterHelper.ParseJsonResponse<FollowStrategyConfig>(json);
+            if (cfg != null)
+            {
+                InvokeGotStrategyCfg(cfg);
+            }
         }
 
         void OnFollowStrategyStatusNotify(string json)
@@ -171,6 +192,8 @@ namespace TradingLib.MoniterControl
                 int r = cfgID2RowIdx(status.StrategyID);
                 if (r != -1)
                 {
+                    gt.Rows[r][WORKSTATE] = status.WorkState;
+
                     gt.Rows[r][SIGNALCNT] = status.SignalCount;
 
                     gt.Rows[r][SIGREALIZEDPL] = status.SignalRealizedPL;
@@ -199,8 +222,8 @@ namespace TradingLib.MoniterControl
                     int i = gt.Rows.Count - 1;
                     gt.Rows[i][STRATEGYID] = cfg.ID;
                     gt.Rows[i][NAME] = cfg.Token;
-                    gt.Rows[i][RUNNING] = true;
-                    gt.Rows[i][SIGNALCNT] = 10;
+                    gt.Rows[i][WORKSTATE] = QSEnumFollowWorkState.Shutdown;
+                    gt.Rows[i][SIGNALCNT] = 0;
                     gt.Rows[i][FOLLOWACCOUNT] = cfg.Account;
 
 
@@ -221,8 +244,8 @@ namespace TradingLib.MoniterControl
 
         const string STRATEGYID = "ID";
         const string NAME = "名称";
-        const string RUNNING = "RunningStatus";
-        const string RUNNINGIMG = "状态";
+        const string WORKSTATE = "WORKSTATE";
+        const string WORKSTATEIMG = "状态";
 
         const string SIGNALCNT = "信号数";
         const string FOLLOWACCOUNT = "跟单帐户";
@@ -274,8 +297,8 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(STRATEGYID);//0
             gt.Columns.Add(NAME);//1
 
-            gt.Columns.Add(RUNNING);//2
-            gt.Columns.Add(RUNNINGIMG);//3
+            gt.Columns.Add(WORKSTATE);//2
+            gt.Columns.Add(WORKSTATEIMG);//3
 
 
             gt.Columns.Add(SIGNALCNT);//4

@@ -19,6 +19,12 @@ namespace TradingLib.MoniterControl
         public ctFollowCentre()
         {
             InitializeComponent();
+            this.Load += new EventHandler(ctFollowCentre_Load);
+        }
+
+        void ctFollowCentre_Load(object sender, EventArgs e)
+        {
+            ctFollowStrategyMoniter1.StrategySelected += new Action<FollowStrategyConfig>(ctFollowItemList1.OnStrategySelected);
         }
 
         public void OnInit()

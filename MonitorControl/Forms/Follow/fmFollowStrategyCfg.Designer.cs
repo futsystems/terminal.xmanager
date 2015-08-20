@@ -32,7 +32,6 @@
             this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.token = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel14 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.followaccount = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel13 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.power = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.kryptonLabel12 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -60,6 +59,7 @@
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.entrypricetype = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.followaccount = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.direction)).BeginInit();
@@ -77,14 +77,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.entrypendingoptype)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.entrypendingtype)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.entrypricetype)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.followaccount)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.followaccount);
             this.kryptonPanel1.Controls.Add(this.btnSubmit);
             this.kryptonPanel1.Controls.Add(this.token);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel14);
-            this.kryptonPanel1.Controls.Add(this.followaccount);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel13);
             this.kryptonPanel1.Controls.Add(this.power);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel12);
@@ -121,13 +122,6 @@
             this.kryptonLabel14.Size = new System.Drawing.Size(60, 20);
             this.kryptonLabel14.TabIndex = 8;
             this.kryptonLabel14.Values.Text = "策略标识";
-            // 
-            // followaccount
-            // 
-            this.followaccount.Location = new System.Drawing.Point(70, 93);
-            this.followaccount.Name = "followaccount";
-            this.followaccount.Size = new System.Drawing.Size(161, 20);
-            this.followaccount.TabIndex = 7;
             // 
             // kryptonLabel13
             // 
@@ -381,6 +375,14 @@
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "下单方式";
             // 
+            // followaccount
+            // 
+            this.followaccount.DropDownWidth = 85;
+            this.followaccount.Location = new System.Drawing.Point(69, 91);
+            this.followaccount.Name = "followaccount";
+            this.followaccount.Size = new System.Drawing.Size(161, 21);
+            this.followaccount.TabIndex = 11;
+            // 
             // fmFollowStrategyCfg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -413,6 +415,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.entrypendingoptype)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.entrypendingtype)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.entrypricetype)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.followaccount)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -447,9 +450,9 @@
         private ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown power;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel12;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel13;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox followaccount;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel14;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox token;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnSubmit;
+        private ComponentFactory.Krypton.Toolkit.KryptonComboBox followaccount;
     }
 }
