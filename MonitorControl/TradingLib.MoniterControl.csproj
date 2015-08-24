@@ -534,6 +534,24 @@
     <Compile Include="Forms\System\ConnectorManager\fmConnectorEdit.Designer.cs">
       <DependentUpon>fmConnectorEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\System\ConnectorManager\fmRouterGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\System\ConnectorManager\fmRouterGroup.Designer.cs">
+      <DependentUpon>fmRouterGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\System\ConnectorManager\fmRouterGroupEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\System\ConnectorManager\fmRouterGroupEdit.Designer.cs">
+      <DependentUpon>fmRouterGroupEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\System\ConnectorManager\fmRouterItemEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\System\ConnectorManager\fmRouterItemEdit.Designer.cs">
+      <DependentUpon>fmRouterItemEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\System\fmCoreStatus.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -922,6 +940,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\System\ConnectorManager\fmConnectorEdit.resx">
       <DependentUpon>fmConnectorEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\System\ConnectorManager\fmRouterGroup.resx">
+      <DependentUpon>fmRouterGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\System\ConnectorManager\fmRouterGroupEdit.resx">
+      <DependentUpon>fmRouterGroupEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\System\ConnectorManager\fmRouterItemEdit.resx">
+      <DependentUpon>fmRouterItemEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\System\fmCoreStatus.resx">
       <DependentUpon>fmCoreStatus.cs</DependentUpon>

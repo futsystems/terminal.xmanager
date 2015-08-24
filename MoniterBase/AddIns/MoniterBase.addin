@@ -232,6 +232,10 @@
               label = "主帐户管理"
               shortcut = "Control|A"
               class = "TradingLib.MoniterBase.Command.ManagerConnectorCommand"/>
+      <MenuItem id = "RouterGroup"
+              label = "主帐户组管理"
+              shortcut = "Control|R"
+              class = "TradingLib.MoniterBase.Command.RouterGroupCommand"/>
     </ComplexCondition>
   </Path>
 

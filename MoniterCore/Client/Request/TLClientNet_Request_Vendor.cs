@@ -66,9 +66,9 @@ namespace TradingLib.MoniterCore
             this.ReqContribRequest("ConnectorManager", "UnBindVendor", cid.ToString());
         }
 
-        public void ReqUpdateVendor(VendorSetting vendor)
-        {
-            this.ReqContribRequest("MgrExchServer", "UpdateVendor", TradingLib.Mixins.Json.JsonMapper.ToJson(vendor));
-        }
+        //public void ReqUpdateVendor(VendorSetting vendor)
+        //{
+        //    this.ReqContribRequest("MgrExchServer", "UpdateVendor", TradingLib.Mixins.Json.JsonMapper.ToJson(vendor));
+        //}
     }
 }

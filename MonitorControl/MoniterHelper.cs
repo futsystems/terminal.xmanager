@@ -174,8 +174,6 @@ namespace TradingLib.MoniterControl
                 list.Add(vo);
             }
 
-            //根据域实盘和模拟权限来控制显示的帐户类型列表
-            if (CoreService.SiteInfo.Domain.Super || (CoreService.SiteInfo.Domain.Router_Sim))
             {
                 ValueObject<QSEnumAccountCategory> vo = new ValueObject<QSEnumAccountCategory>();
                 vo.Name = Util.GetEnumDescription(QSEnumAccountCategory.SUBACCOUNT);
@@ -183,13 +181,35 @@ namespace TradingLib.MoniterControl
                 list.Add(vo);
             }
 
-            if (CoreService.SiteInfo.Domain.Super || (CoreService.SiteInfo.Domain.Router_Live))
+            if (CoreService.SiteInfo.Domain.Super || (CoreService.SiteInfo.Domain.Module_Follow))
             {
-                ValueObject<QSEnumAccountCategory> vo = new ValueObject<QSEnumAccountCategory>();
-                vo.Name = Util.GetEnumDescription(QSEnumAccountCategory.SIGACCOUNT);
-                vo.Value = QSEnumAccountCategory.SIGACCOUNT;
-                list.Add(vo);
+                ValueObject<QSEnumAccountCategory> vo1 = new ValueObject<QSEnumAccountCategory>();
+                vo1.Name = Util.GetEnumDescription(QSEnumAccountCategory.SIGACCOUNT);
+                vo1.Value = QSEnumAccountCategory.SIGACCOUNT;
+                list.Add(vo1);
+
+                ValueObject<QSEnumAccountCategory> vo2 = new ValueObject<QSEnumAccountCategory>();
+                vo2.Name = Util.GetEnumDescription(QSEnumAccountCategory.STRATEGYACCOUNT);
+                vo2.Value = QSEnumAccountCategory.STRATEGYACCOUNT;
+                list.Add(vo2);
             }
+
+            //根据域实盘和模拟权限来控制显示的帐户类型列表
+            //if (CoreService.SiteInfo.Domain.Super || (CoreService.SiteInfo.Domain.Router_Sim))
+            //{
+            //    ValueObject<QSEnumAccountCategory> vo = new ValueObject<QSEnumAccountCategory>();
+            //    vo.Name = Util.GetEnumDescription(QSEnumAccountCategory.SUBACCOUNT);
+            //    vo.Value = QSEnumAccountCategory.SUBACCOUNT;
+            //    list.Add(vo);
+            //}
+
+            //if (CoreService.SiteInfo.Domain.Super || (CoreService.SiteInfo.Domain.Router_Live))
+            //{
+            //    ValueObject<QSEnumAccountCategory> vo = new ValueObject<QSEnumAccountCategory>();
+            //    vo.Name = Util.GetEnumDescription(QSEnumAccountCategory.SIGACCOUNT);
+            //    vo.Value = QSEnumAccountCategory.SIGACCOUNT;
+            //    list.Add(vo);
+            //}
             return list;
         }
 

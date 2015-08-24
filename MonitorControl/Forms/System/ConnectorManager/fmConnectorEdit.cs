@@ -57,6 +57,42 @@ namespace TradingLib.MoniterControl
         {
             CoreService.EventCore.RegIEventHandler(this);
             token.Leave += new EventHandler(token_Leave);
+            token.TextChanged += new EventHandler(token_TextChanged);
+
+            name.Leave += new EventHandler(name_Leave);
+            username.Leave += new EventHandler(username_Leave);
+            cbinterfacelist.SelectedIndexChanged += new EventHandler(cbinterfacelist_SelectedIndexChanged);
+        }
+
+        void token_TextChanged(object sender, EventArgs e)
+        {
+            if (isadd)
+            {
+                tokenvalid.Text = "...";
+                tokenvalid.Visible = true;
+                CoreService.TLClient.ReqQryTokenValid(token.Text);
+            }
+        }
+
+        void cbinterfacelist_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.token.Text = GenToken();
+        }
+
+        void username_Leave(object sender, EventArgs e)
+        {
+            this.token.Text = GenToken();
+        }
+
+        void name_Leave(object sender, EventArgs e)
+        {
+            this.token.Text = GenToken();
+        }
+
+        string GenToken()
+        {
+            return string.Format("{0}-{1}-{2}",ChinSpell.GetChinSpell(name.Text),username.Text,cbinterfacelist.SelectedIndex);
+        
         }
 
         void token_Leave(object sender, EventArgs e)
@@ -91,7 +127,7 @@ namespace TradingLib.MoniterControl
             uf2.Text = cfg.usrinfo_field2;
             cbinterfacelist.SelectedValue = cfg.interface_fk;
             name.Text = cfg.Name;
-            this.Text = string.Format("编辑主帐户[{0}-{1}-{2}]",cfg.ID, cfg.Token,cfg.usrinfo_userid);
+            this.Text = string.Format("编辑主帐户[{0}-{1}]",cfg.ID, cfg.Token);
 
             token.Enabled = false;
             cbinterfacelist.Enabled = false;
@@ -103,11 +139,11 @@ namespace TradingLib.MoniterControl
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            if (!InputReg.ConnectorToken.IsMatch(token.Text))
-            {
-                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("主帐户编号只允许使用字母和数字");
-                return;
-            }
+            //if (!InputReg.ConnectorToken.IsMatch(token.Text))
+            //{
+            //    ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("主帐户编号只允许使用字母和数字");
+            //    return;
+            //}
             if (!InputReg.ServerPort.IsMatch(port.Text))
             {
                 ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请输入正确的交易端口");

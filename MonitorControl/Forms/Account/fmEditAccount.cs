@@ -26,38 +26,41 @@ namespace TradingLib.MoniterControl
         {
             btnSubmit.Click += new EventHandler(btnSubmit_Click);
 
-            if (CoreService.SiteInfo.ProductType == QSEnumProductType.VendorMoniter)
-            {
+            //if (CoreService.SiteInfo.ProductType == QSEnumProductType.VendorMoniter)
+            //{
 
-                ValueObject<QSEnumAccountCategory> vo = new ValueObject<QSEnumAccountCategory>();
-                vo.Name = "配资帐户";
-                vo.Value = QSEnumAccountCategory.MONITERACCOUNT;
+            //    ValueObject<QSEnumAccountCategory> vo = new ValueObject<QSEnumAccountCategory>();
+            //    vo.Name = "配资帐户";
+            //    vo.Value = QSEnumAccountCategory.MONITERACCOUNT;
 
-                ArrayList list = new ArrayList();
-                list.Add(vo);
-                MoniterHelper.AdapterToIDataSource(cbAccountType).BindDataSource(list);
-                cbAccountType.SelectedIndex = 0;
-                cbAccountType.Enabled = false;
-            }
+            //    ArrayList list = new ArrayList();
+            //    list.Add(vo);
+            //    MoniterHelper.AdapterToIDataSource(cbAccountType).BindDataSource(list);
+            //    cbAccountType.SelectedIndex = 0;
+            //    cbAccountType.Enabled = false;
+            //}
+
             //分帐户柜台系统 可以选择添加的帐户类别
-            if (CoreService.SiteInfo.ProductType == QSEnumProductType.CounterSystem)
+            //if (CoreService.SiteInfo.ProductType == QSEnumProductType.CounterSystem)
             {
-                ValueObject<QSEnumAccountCategory> vo1 = new ValueObject<QSEnumAccountCategory>();
-                vo1.Name = "模拟帐户";
-                vo1.Value = QSEnumAccountCategory.SUBACCOUNT;
 
-                ValueObject<QSEnumAccountCategory> vo2 = new ValueObject<QSEnumAccountCategory>();
-                vo2.Name = "实盘帐户";
-                vo2.Value = QSEnumAccountCategory.SUBACCOUNT;
+                //ValueObject<QSEnumAccountCategory> vo1 = new ValueObject<QSEnumAccountCategory>();
+                //vo1.Name = "模拟帐户";
+                //vo1.Value = QSEnumAccountCategory.SUBACCOUNT;
 
-                ArrayList list = new ArrayList();
-                list.Add(vo1);
-                list.Add(vo2);
+                //ValueObject<QSEnumAccountCategory> vo2 = new ValueObject<QSEnumAccountCategory>();
+                //vo2.Name = "实盘帐户";
+                //vo2.Value = QSEnumAccountCategory.SUBACCOUNT;
 
-                MoniterHelper.AdapterToIDataSource(cbAccountType).BindDataSource(list);
-                cbAccountType.SelectedIndex = 0;
+                //ArrayList list = new ArrayList();
+                //list.Add(vo1);
+                //list.Add(vo2);
+
+
             }
-
+            //生成帐户类型列表
+            MoniterHelper.AdapterToIDataSource(cbAccountType).BindDataSource(MoniterHelper.GetAccountTypeCombList());
+            cbAccountType.SelectedIndex = 0;
             CoreService.EventCore.RegIEventHandler(this);
 
         }
@@ -123,18 +126,19 @@ namespace TradingLib.MoniterControl
             AccountCreation createion = new AccountCreation();
             createion.Account = account.Text;
             createion.Category = (QSEnumAccountCategory)cbAccountType.SelectedValue;
-
-
+            //默认交易帐户走模拟成交
+            createion.RouterType = QSEnumOrderTransferType.SIM;
             createion.Profile = profile;
 
-            if (createion.Category == QSEnumAccountCategory.SUBACCOUNT)
-            {
-                createion.RouterType = QSEnumOrderTransferType.LIVE;
-            }
-            else
-            {
-                createion.RouterType = QSEnumOrderTransferType.SIM;
-            }
+
+            //if (createion.Category == QSEnumAccountCategory.SUBACCOUNT)
+            //{
+            //    createion.RouterType = QSEnumOrderTransferType.LIVE;
+            //}
+            //else
+            //{
+            //    createion.RouterType = QSEnumOrderTransferType.SIM;
+            //}
 
             
 
@@ -143,12 +147,11 @@ namespace TradingLib.MoniterControl
             {
                 if (MoniterHelper.WindowConfirm("请确认个人信息填写准确") == System.Windows.Forms.DialogResult.Yes)
                 {
-                    //ReqAddFinServiceAccount(profile);
                     ReqAddAccount(createion);
                     this.Close();
                 }
             }
-            else
+            else//如果交易帐户存在 则更新交易帐户对应的profile信息
             {
                 if (MoniterHelper.WindowConfirm("确认更新个人信息") == System.Windows.Forms.DialogResult.Yes)
                 {
@@ -167,14 +170,15 @@ namespace TradingLib.MoniterControl
         {
             CoreService.TLClient.ReqContribRequest("AccountManager", "AddAccountFacde", createion);
         }
+
         /// <summary>
         /// 请求添加配资客户
         /// </summary>
         /// <param name="profile"></param>
-        void ReqAddFinServiceAccount(AccountProfile profile)
-        {
-            CoreService.TLClient.ReqContribRequest("AccountManager", "AddFinServiceAccount", profile);
-        }
+        //void ReqAddFinServiceAccount(AccountProfile profile)
+        //{
+        //    CoreService.TLClient.ReqContribRequest("AccountManager", "AddFinServiceAccount", profile);
+        //}
 
         /// <summary>
         /// 查询个人信息

@@ -23,6 +23,17 @@ namespace TradingLib.MoniterBase.Command
         }
     }
 
+    public class RouterGroupCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            fmRouterGroup fm = new fmRouterGroup();
+            fm.ShowDialog();
+            fm.Close();
+        }
+    }
+
+
     /// <summary>
     /// 添加配资客户
     /// </summary>

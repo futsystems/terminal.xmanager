@@ -41,7 +41,7 @@ namespace TradingLib.MoniterControl
         {
             
             string evtype = itemGrid.Rows[e.RowIndex].Cells[1].Value.ToString();
-            //if (e.ColumnIndex == 1)
+            ////if (e.ColumnIndex == 1)
             {
                 QSEnumPositionEventType type = (QSEnumPositionEventType)Enum.Parse(typeof(QSEnumPositionEventType), evtype);
                 if (type == QSEnumPositionEventType.EntryPosition)
@@ -49,9 +49,9 @@ namespace TradingLib.MoniterControl
                     e.CellStyle.BackColor = Color.WhiteSmoke;
                     //itemGrid.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.WhiteSmoke; 
 
-                    if (e.ColumnIndex == 9)
+                    if (e.ColumnIndex == 8)
                     {
-                        bool side = (bool)itemGrid.Rows[e.RowIndex].Cells[8].Value;
+                        bool side = (bool)itemGrid.Rows[e.RowIndex].Cells[7].Value;
                         if (side)
                         {
                             e.CellStyle.ForeColor = UIConstant.LongSideColor;
@@ -64,9 +64,9 @@ namespace TradingLib.MoniterControl
                 }
                 else
                 {
-                    if (e.ColumnIndex == 19)
+                    if (e.ColumnIndex == 16)
                     {
-                        bool side = (bool)itemGrid.Rows[e.RowIndex].Cells[18].Value;
+                        bool side = (bool)itemGrid.Rows[e.RowIndex].Cells[15].Value;
                         if (side)
                         {
                             e.CellStyle.ForeColor = UIConstant.LongSideColor;
@@ -272,12 +272,12 @@ namespace TradingLib.MoniterControl
                     //gt.Rows[i][SIGNAL] = string.Format("{0}[1]", item.SignalToken, item.SignalID);
 
                     gt.Rows[i][EXITCLOSETRADEID] = item.CloseTradeID;
-                    gt.Rows[i][EXITSIGPRICE] = item.SigPrice;
-                    gt.Rows[i][EXITSIGSIZE] = item.SigSize;
+                    gt.Rows[i][EXITSIGINFO] = string.Format("{0}/{1}", item.SigPrice, item.SigSize); //item.SigPrice;
+                    //gt.Rows[i][EXITSIGSIZE] = item.SigSize;
                     gt.Rows[i][EXITSIDE] = item.Side;
                     gt.Rows[i][EXITSIDESTR] = item.Side ? "买平" : "卖平";
-                    gt.Rows[i][EXITFOLLOWSIZE] = item.FollowSentSize;
-                    gt.Rows[i][EXITFOLLOWFILLSIZE] = item.FollowFillSize;
+                    gt.Rows[i][EXITFOLLOWSIZEINFO] = string.Format("{0}/{1}", item.FollowSentSize, item.FollowFillSize); //item.FollowSentSize;
+                    //gt.Rows[i][EXITFOLLOWFILLSIZE] = item.FollowFillSize;
                     gt.Rows[i][EXITFOLLOWAVGPRICE] = item.FollowAvgPrice;
                     gt.Rows[i][EXITFOLLOWSLIP] = item.FollowSlip;
                     gt.Rows[i][EXITFOLLOWPROFIT] = item.FollowProfit;
@@ -289,8 +289,8 @@ namespace TradingLib.MoniterControl
                 }
                 else //更新
                 {
-                    gt.Rows[i][EXITFOLLOWSIZE] = item.FollowSentSize;
-                    gt.Rows[i][EXITFOLLOWFILLSIZE] = item.FollowFillSize;
+                    gt.Rows[i][EXITFOLLOWSIZEINFO] = string.Format("{0}/{1}", item.FollowSentSize, item.FollowFillSize); //item.FollowSentSize;
+                    //gt.Rows[i][EXITFOLLOWFILLSIZE] = item.FollowFillSize;
                     gt.Rows[i][EXITFOLLOWAVGPRICE] = item.FollowAvgPrice;
                     gt.Rows[i][EXITFOLLOWSLIP] = item.FollowSlip;
                     gt.Rows[i][EXITFOLLOWPROFIT] = item.FollowProfit;
@@ -326,13 +326,13 @@ namespace TradingLib.MoniterControl
 
                     gt.Rows[i][SIGNAL] = string.Format("{0}[1]", item.SignalToken, item.SignalID);
                     gt.Rows[i][ENTRYOPENTRADEID] = item.OpenTradeID;
-                    gt.Rows[i][ENTRYSIGPRICE] = item.SigPrice;
-                    gt.Rows[i][ENTRYSIGSIZE] = item.SigSize;
+                    gt.Rows[i][ENTRYSIGINFO] = string.Format("{0}/{1}",item.SigPrice,item.SigSize);
+                    //gt.Rows[i][ENTRYSIGSIZE] = item.SigSize;
                     gt.Rows[i][ENTRYSIDE] = item.Side;
                     gt.Rows[i][ENTRYSIDESTR] = item.Side ? "买开" : "卖开";
 
-                    gt.Rows[i][ENTRYFOLLOWSIZE] = item.FollowSentSize;
-                    gt.Rows[i][ENTRYFOLLOWFILLSIZE] = item.FollowFillSize;
+                    gt.Rows[i][ENTRYFOLLOWSIZEINFO] = string.Format("{0}/{1}",item.FollowSentSize,item.FollowFillSize);
+                    //gt.Rows[i][ENTRYFOLLOWFILLSIZE] = item.FollowFillSize;
                     gt.Rows[i][ENTRYFOLLOWAVGPRICE] = item.FollowAvgPrice;
                     gt.Rows[i][ENTRYFOLLOWSLIP] = item.FollowSlip;
                     gt.Rows[i][ENTRYFOLLOWSTAGE] = Util.GetEnumDescription(item.Stage);
@@ -345,8 +345,8 @@ namespace TradingLib.MoniterControl
                 }
                 else
                 {
-                    gt.Rows[i][ENTRYFOLLOWSIZE] = item.FollowSentSize;
-                    gt.Rows[i][ENTRYFOLLOWFILLSIZE] = item.FollowFillSize;
+                    gt.Rows[i][ENTRYFOLLOWSIZEINFO] = string.Format("{0}/{1}", item.FollowSentSize, item.FollowFillSize);
+                    //gt.Rows[i][ENTRYFOLLOWFILLSIZE] = item.FollowFillSize;
                     gt.Rows[i][ENTRYFOLLOWAVGPRICE] = item.FollowAvgPrice;
                     gt.Rows[i][ENTRYFOLLOWSLIP] = item.FollowSlip;
                     gt.Rows[i][ENTRYFOLLOWSTAGE] = Util.GetEnumDescription(item.Stage);
@@ -373,23 +373,25 @@ namespace TradingLib.MoniterControl
 
 
         const string ENTRYOPENTRADEID = "开仓成交";
-        const string ENTRYSIGPRICE = "价格(O)";
-        const string ENTRYSIGSIZE = "数量(O)";
+        const string ENTRYSIGINFO = "P/S(O)";
+        //const string ENTRYSIGSIZE = "数量(O)";
         const string ENTRYSIDE = "Side(O)";
         const string ENTRYSIDESTR = "方向(O)";
-        const string ENTRYFOLLOWSIZE = "跟单(O)";
-        const string ENTRYFOLLOWFILLSIZE = "成交(O)";
+        const string ENTRYFOLLOWSIZEINFO = "S/F(O)";
+        //const string ENTRYFOLLOWFILLSIZE = "成交(O)";
+
         const string ENTRYFOLLOWAVGPRICE = "均价(O)";
         const string ENTRYFOLLOWSLIP = "滑点(O)";
         const string ENTRYFOLLOWSTAGE = "状态(O)";
 
         const string EXITCLOSETRADEID = "平仓成交";
-        const string EXITSIGPRICE = "价格(C)";
-        const string EXITSIGSIZE = "数量(C)";
+        const string EXITSIGINFO = "P/S(C)";
+        //const string EXITSIGSIZE = "数量(C)";
         const string EXITSIDE = "Side(C)";
         const string EXITSIDESTR = "方向(C)";
-        const string EXITFOLLOWSIZE = "跟单(C)";
-        const string EXITFOLLOWFILLSIZE = "成交(C)";
+        const string EXITFOLLOWSIZEINFO = "S/F(C)";
+        //const string EXITFOLLOWFILLSIZE = "成交(C)";
+
         const string EXITFOLLOWAVGPRICE = "均价(C)";
         const string EXITFOLLOWSLIP = "滑点(C)";
         const string EXITFOLLOWPROFIT = "盈亏(C)";
@@ -441,31 +443,26 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(SIGNAL);//4
 
             gt.Columns.Add(ENTRYOPENTRADEID);//5
-            gt.Columns.Add(ENTRYSIGPRICE);//6
-            gt.Columns.Add(ENTRYSIGSIZE);//7
-            gt.Columns.Add(ENTRYSIDE,typeof(bool));//8
-            gt.Columns.Add(ENTRYSIDESTR);//9
-            gt.Columns.Add(ENTRYFOLLOWSIZE);//10
-            gt.Columns.Add(ENTRYFOLLOWFILLSIZE);//11
-            gt.Columns.Add(ENTRYFOLLOWAVGPRICE);//12
-            gt.Columns.Add(ENTRYFOLLOWSLIP);//13
-            gt.Columns.Add(ENTRYFOLLOWSTAGE);//14
+            gt.Columns.Add(ENTRYSIGINFO);//6
+            gt.Columns.Add(ENTRYSIDE,typeof(bool));//7
+            gt.Columns.Add(ENTRYSIDESTR);//8
+            gt.Columns.Add(ENTRYFOLLOWSIZEINFO);//9
+            gt.Columns.Add(ENTRYFOLLOWAVGPRICE);//10
+            gt.Columns.Add(ENTRYFOLLOWSLIP);//11
+            gt.Columns.Add(ENTRYFOLLOWSTAGE);//12
 
 
-            gt.Columns.Add(EXITCLOSETRADEID);//15
-            gt.Columns.Add(EXITSIGPRICE);//16
-            gt.Columns.Add(EXITSIGSIZE);//17
-            gt.Columns.Add(EXITSIDE,typeof(bool));//18
-            gt.Columns.Add(EXITSIDESTR);//19
-            gt.Columns.Add(EXITFOLLOWSIZE);//20
-            gt.Columns.Add(EXITFOLLOWFILLSIZE);//21
-            gt.Columns.Add(EXITFOLLOWAVGPRICE);//22
-            gt.Columns.Add(EXITFOLLOWSLIP);//23
-            gt.Columns.Add(EXITFOLLOWPROFIT);//24
-            gt.Columns.Add(EXITFOLLOWSTAGE);//25
-
-            gt.Columns.Add(TOTALSLIP);//26
-            gt.Columns.Add(TOTALPROFIT);//27
+            gt.Columns.Add(EXITCLOSETRADEID);//13
+            gt.Columns.Add(EXITSIGINFO);//14
+            gt.Columns.Add(EXITSIDE,typeof(bool));//15
+            gt.Columns.Add(EXITSIDESTR);//16
+            gt.Columns.Add(EXITFOLLOWSIZEINFO);//17
+            gt.Columns.Add(EXITFOLLOWAVGPRICE);//18
+            gt.Columns.Add(EXITFOLLOWSLIP);//19
+            gt.Columns.Add(EXITFOLLOWPROFIT);//20
+            gt.Columns.Add(EXITFOLLOWSTAGE);//21
+            gt.Columns.Add(TOTALSLIP);//22
+            gt.Columns.Add(TOTALPROFIT);//23
 
 
 
@@ -503,16 +500,16 @@ namespace TradingLib.MoniterControl
             itemGrid.Columns[SIGNAL].Width = 80;
 
             itemGrid.Columns[ENTRYOPENTRADEID].Width = 80;
-            itemGrid.Columns[ENTRYSIGPRICE].Width = 60;
-            itemGrid.Columns[ENTRYSIGSIZE].Width = 60;
-            itemGrid.Columns[ENTRYFOLLOWFILLSIZE].Width = 60;
+            itemGrid.Columns[ENTRYSIGINFO].Width = 60;
+            //itemGrid.Columns[ENTRYSIGSIZE].Width = 60;
+            itemGrid.Columns[ENTRYFOLLOWSIZEINFO].Width = 60;
             itemGrid.Columns[ENTRYFOLLOWAVGPRICE].Width = 60;
             itemGrid.Columns[ENTRYFOLLOWSTAGE].Width = 60;
 
             itemGrid.Columns[EXITCLOSETRADEID].Width = 80;
-            itemGrid.Columns[EXITSIGPRICE].Width = 60;
-            itemGrid.Columns[EXITSIGSIZE].Width = 60;
-            itemGrid.Columns[EXITFOLLOWFILLSIZE].Width = 60;
+            itemGrid.Columns[EXITSIGINFO].Width = 60;
+            itemGrid.Columns[EXITFOLLOWSIZEINFO].Width = 60;
+            //itemGrid.Columns[EXITFOLLOWFILLSIZE].Width = 60;
             itemGrid.Columns[EXITFOLLOWAVGPRICE].Width = 60;
             //itemGrid.Columns[EXITFOLLOWSTAGE].Width = 50;
 
