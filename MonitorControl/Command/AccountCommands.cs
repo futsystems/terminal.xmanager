@@ -299,7 +299,7 @@ namespace TradingLib.MoniterControl
 
             fmChangeRouter fm = new fmChangeRouter();
             fm.SetAccount(account);
-            fm.Show();
+            fm.ShowDialog();
             fm.Close();
         }
     }

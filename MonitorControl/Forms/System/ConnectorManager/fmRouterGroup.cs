@@ -25,18 +25,90 @@ namespace TradingLib.MoniterControl
             this.imageList1.Images.Add((System.Drawing.Image)Properties.Resources.items);
             this.rgTree.ImageList = this.imageList1;
 
-            this.rgGrid.ContextMenuStrip = new ContextMenuStrip();
-            this.rgGrid.ContextMenuStrip.Items.Add("添加主帐户项", null, new EventHandler(AddRouterItem_Click));
-            this.rgGrid.ContextMenuStrip.Items.Add("编辑主帐户项", null, new EventHandler(EditRouterItem_Click));
+            //this.rgGrid.ContextMenuStrip = new ContextMenuStrip();
+            //this.rgGrid.ContextMenuStrip.Items.Add("添加主帐户项", null, new EventHandler(AddRouterItem_Click));
+            //this.rgGrid.ContextMenuStrip.Items.Add("编辑主帐户项", null, new EventHandler(EditRouterItem_Click));
 
+            //this.rgGrid.CellMouseClick += new DataGridViewCellMouseEventHandler(rgGrid_CellMouseClick);
+            this.rgGrid.MouseClick += new MouseEventHandler(rgGrid_MouseClick);
             this.rgTree.Nodes.Add(CreateBaseItem("主帐户组"));
             this.rgTree.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
-            this.rgTree.ContextMenuStrip.Items.Add("添加主帐户组", null, new EventHandler(Add_Click));
+            this.rgTree.ContextMenuStrip.Items.Add("添加主帐户组", null, new EventHandler(AddRouterGroup_Click));
+            this.rgTree.ContextMenuStrip.Items.Add("编辑主帐户组", null, new EventHandler(EditRouterGroup_Click));
 
 
             this.Load += new EventHandler(fmRouterGroup_Load);
         }
 
+        void rgGrid_MouseClick(object sender, MouseEventArgs e)
+        {
+            
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                //int rid = e.RowIndex;
+                GenRouterItemContextMenu().Show(Control.MousePosition);
+            }
+        }
+
+
+        //void rgGrid_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        //{
+            
+        //    if (e.Button == System.Windows.Forms.MouseButtons.Right)
+        //    {
+        //        int rid = e.RowIndex;
+        //        GenRouterItemContextMenu(rid).Show(Control.MousePosition);
+        //    }
+        //}
+
+        ContextMenuStrip GenRouterItemContextMenu()
+        {
+            ContextMenuStrip _menu1 = new ContextMenuStrip();
+            _menu1.Items.Add("添加主帐户项", null, new EventHandler(AddRouterItem_Click));
+            
+
+            RouterItemSetting item = CurrentRouterItem;
+            if (item != null)
+            {
+                _menu1.Items.Add("编辑主帐户项", null, new EventHandler(EditRouterItem_Click));
+                _menu1.Items.Add(new System.Windows.Forms.ToolStripSeparator());
+
+                int row = rgGrid.SelectedRows.Count > 0 ? rgGrid.SelectedRows[0].Index : -1;
+                if (row >= 0)
+                {
+                    QSEnumConnectorStatus status = Util.ParseEnum<QSEnumConnectorStatus>(rgGrid[CONSTATUS, row].Value.ToString());
+                    if (status == QSEnumConnectorStatus.Start)
+                    {
+                        _menu1.Items.Add("停止", null, new EventHandler(StopConnector));
+                    }
+                    else if (status == QSEnumConnectorStatus.Stop)
+                    {
+                        _menu1.Items.Add("启动", null, new EventHandler(StartConnector));
+                    }
+                }
+
+
+                
+            }
+            return _menu1;
+        }
+
+        void StopConnector(object sender, EventArgs e)
+        {
+            if (MoniterHelper.WindowConfirm(string.Format("确认停止主帐户:{0}", ID2ConnectorCfg(CurrentRouterItem.Connector_ID).Token)) == System.Windows.Forms.DialogResult.Yes)
+            {
+                CoreService.TLClient.ReqStopConnector(CurrentRouterItem.Connector_ID);
+            }
+        }
+
+        void StartConnector(object sender, EventArgs e)
+        {
+            if (MoniterHelper.WindowConfirm(string.Format("确认启动主帐户:{0}", ID2ConnectorCfg(CurrentRouterItem.Connector_ID).Token)) == System.Windows.Forms.DialogResult.Yes)
+            {
+                CoreService.TLClient.ReqStartConnector(CurrentRouterItem.Connector_ID);
+            }
+
+        }
         void AddRouterItem_Click(object sender, EventArgs e)
         {
             if (_current == null)
@@ -73,9 +145,17 @@ namespace TradingLib.MoniterControl
             fm.Close();
         }
 
-        void Add_Click(object sender, EventArgs e)
+        void AddRouterGroup_Click(object sender, EventArgs e)
         {
             fmRouterGroupEdit fm = new fmRouterGroupEdit();
+            fm.ShowDialog();
+            fm.Close();
+        }
+
+        void EditRouterGroup_Click(object sender, EventArgs e)
+        {
+            fmRouterGroupEdit fm = new fmRouterGroupEdit();
+            fm.SetRouterGroup(_current);
             fm.ShowDialog();
             fm.Close();
         }

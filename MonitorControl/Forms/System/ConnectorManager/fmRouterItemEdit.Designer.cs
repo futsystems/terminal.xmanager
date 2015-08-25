@@ -106,6 +106,11 @@
             // marginlimit
             // 
             this.marginlimit.Location = new System.Drawing.Point(83, 48);
+            this.marginlimit.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
             this.marginlimit.Name = "marginlimit";
             this.marginlimit.Size = new System.Drawing.Size(120, 22);
             this.marginlimit.TabIndex = 3;
