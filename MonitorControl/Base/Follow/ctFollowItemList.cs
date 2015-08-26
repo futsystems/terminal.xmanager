@@ -33,8 +33,48 @@ namespace TradingLib.MoniterControl
             itemGrid.SizeChanged += new EventHandler(itemGrid_SizeChanged);
             itemGrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(itemGrid_RowPrePaint);
             itemGrid.CellFormatting += new DataGridViewCellFormattingEventHandler(itemGrid_CellFormatting);
-            
+            itemGrid.DoubleClick += new EventHandler(itemGrid_DoubleClick);
             GridWidth();
+        }
+
+
+        private int CurrentRowIdx
+        { 
+            get
+            {
+                int row = itemGrid.SelectedRows.Count > 0 ? itemGrid.SelectedRows[0].Index : -1;
+                return row;
+            }
+        }
+        //得到当前选择的行号
+        /// <summary>
+        /// 获得当前选中的FollowItemKey
+        /// </summary>
+        private string CurrentFollowKey
+        {
+            get
+            {
+
+                int row = CurrentRowIdx;
+                if (row >= 0)
+                {
+                    return itemGrid[2, row].Value.ToString();
+                }
+                else
+                {
+                    return "";
+                }
+            }
+        }
+        void itemGrid_DoubleClick(object sender, EventArgs e)
+        {
+            fmFollowItemView fm = new fmFollowItemView();
+            //MessageBox.Show("rowidx:" + CurrentRowIdx.ToString() + " currentfollowkey:" + CurrentFollowKey);
+            fm.SetFollowKey(CurrentFollowKey);
+            //fm.Visible = false;
+
+            fm.ShowDialog();
+            fm.Close();
         }
 
         void itemGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -339,6 +379,7 @@ namespace TradingLib.MoniterControl
 
                     gt.Rows[i][TOTALSLIP] = item.TotalSlip;
                     gt.Rows[i][TOTALPROFIT] = item.TotalRealizedPL;
+                    gt.Rows[i][POSITIONHOLDSIZE] = item.PositionHoldSize;
 
                     entrymap.TryAdd(item.FollowKey, item);
                     entryrowmap.TryAdd(item.FollowKey, i);
@@ -353,6 +394,7 @@ namespace TradingLib.MoniterControl
 
                     gt.Rows[i][TOTALSLIP] = item.TotalSlip;
                     gt.Rows[i][TOTALPROFIT] = item.TotalRealizedPL;
+                    gt.Rows[i][POSITIONHOLDSIZE] = item.PositionHoldSize;
                 }
 
                 //cfgmap.TryAdd(cfg.ID, cfg);
@@ -397,6 +439,7 @@ namespace TradingLib.MoniterControl
         const string EXITFOLLOWPROFIT = "盈亏(C)";
         const string EXITFOLLOWSTAGE = "状态(C)";
 
+        const string POSITIONHOLDSIZE = "持仓";
         const string TOTALSLIP = "滑点(T)";
         const string TOTALPROFIT = "平仓盈亏(T)";
 
@@ -461,6 +504,7 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(EXITFOLLOWSLIP);//19
             gt.Columns.Add(EXITFOLLOWPROFIT);//20
             gt.Columns.Add(EXITFOLLOWSTAGE);//21
+            gt.Columns.Add(POSITIONHOLDSIZE);
             gt.Columns.Add(TOTALSLIP);//22
             gt.Columns.Add(TOTALPROFIT);//23
 
