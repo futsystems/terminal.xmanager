@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
@@ -18,7 +19,7 @@ namespace TradingLib.MoniterControl
     {
 
         AccountLite _account = null;
-        Symbol _symbol = null;
+        //Symbol _symbol = null;
         public event OrderDelegate SendOrderEvent;
         public ctOrderPanel()
         {
@@ -40,7 +41,7 @@ namespace TradingLib.MoniterControl
 
         void EventUI_OnSymbolSelectedEvent(Symbol obj)
         {
-            this.SetSymbol(obj);
+            this.cbSymbolList.SelectedValue = obj;
         }
 
         public void OnInit()
@@ -56,6 +57,24 @@ namespace TradingLib.MoniterControl
             {
                 btnInsertTrade.Visible = CoreService.SiteInfo.Domain.Misc_InsertTrade && CoreService.SiteInfo.Manager.IsRoot();
             }
+            if (CoreService.BasicInfoTracker.Symbols.Count() > 0)
+            {
+                MoniterHelper.AdapterToIDataSource(cbSymbolList).BindDataSource(GetSymbolCombList());
+            }
+        }
+
+        ArrayList GetSymbolCombList()
+        {
+            ArrayList list = new ArrayList();
+
+            foreach (var sym in CoreService.BasicInfoTracker.Symbols)
+            {
+                ValueObject<Symbol> vo = new ValueObject<Symbol>();
+                vo.Name = sym.SecurityFamily.Name + "-" + sym.Symbol;
+                vo.Value = sym;
+                list.Add(vo);
+            }
+            return list;
         }
 
         
@@ -87,13 +106,13 @@ namespace TradingLib.MoniterControl
             account.Text = _account.Account;
         }
 
-        public void SetSymbol(Symbol sym)
-        {
-            _symbol = sym;
-            symbol.Text = _symbol.Symbol;
-            int decimalplace = Util.GetDecimalPlace(sym.SecurityFamily.PriceTick);
-            price.DecimalPlaces = decimalplace;
-        }
+        //public void SetSymbol(Symbol sym)
+        //{
+        //    _symbol = sym;
+        //    symbol.Text = _symbol.Symbol;
+        //    int decimalplace = Util.GetDecimalPlace(sym.SecurityFamily.PriceTick);
+        //    price.DecimalPlaces = decimalplace;
+        //}
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
@@ -132,6 +151,7 @@ namespace TradingLib.MoniterControl
             if (!validSize()) return;
             if (!validPrice()) return;
 
+            Symbol _symbol = cbSymbolList.SelectedValue as Symbol;
             //生成对应的委托
             Order work = new OrderImpl(_symbol.Symbol, 0);
             work.Account = _account.Account;
@@ -176,7 +196,7 @@ namespace TradingLib.MoniterControl
         /// <returns></returns>
         bool validSecurity()
         {
-            if (_symbol == null)
+            if((cbSymbolList.SelectedValue as Symbol) == null)
             {
                 MoniterHelper.WindowMessage("请选择合约！");
                 return false;
@@ -204,7 +224,7 @@ namespace TradingLib.MoniterControl
 
         bool validPrice()
         {
-            if ((decimal)(price.Value) > 0)
+            if ((decimal)(price.Value) >= 0)
             {
                 return true;
             }

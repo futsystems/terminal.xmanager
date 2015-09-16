@@ -56,26 +56,21 @@ namespace TradingLib.MoniterControl
 
         void fmCommission_Load(object sender, EventArgs e)
         {
-            //this.templatelist.ContextMenuStrip = new ContextMenuStrip();
-            //this.templatelist.ContextMenuStrip.Items.Add("添加模板", null, new EventHandler(Add_Click));
-            //this.templatelist.ContextMenuStrip.Items.Add("修改模板", null, new EventHandler(Edit_Click));
-            //this.templatelist.ContextMenuStrip.Items.Add(new System.Windows.Forms.ToolStripSeparator());
-            //this.templatelist.ContextMenuStrip.Items.Add("加载数据", null, new EventHandler(Qry_Click));
-
-            marginGrid.ContextMenuStrip = new ContextMenuStrip();
-            marginGrid.ContextMenuStrip.Items.Add("添加模板项目", null, new EventHandler(AddItem_Click));
-
             this.templateTree.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
             this.templateTree.ContextMenuStrip.Items.Add("添加保证金模板", null, new EventHandler(Add_Click));
 
-            
-            //this.templatelist.ContextMenuStrip.Items.Add("添加模板", null, new EventHandler(Add_Click));
             marginGrid.DoubleClick += new EventHandler(commissionGrid_DoubleClick);
             marginGrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(commissionGrid_RowPrePaint);
 
             templateTree.NodeMouseClick += new TreeNodeMouseClickEventHandler(templateTree_NodeMouseClick);
-
+            btnAddTemplate.Click += new EventHandler(btnAddTemplate_Click);
             CoreService.EventCore.RegIEventHandler(this);
+        }
+
+        void btnAddTemplate_Click(object sender, EventArgs e)
+        {
+            fmTemplateEdit fm = new fmTemplateEdit(TemplateEditType.Margin);
+            fm.ShowDialog();
         }
 
         void templateTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -157,9 +152,6 @@ namespace TradingLib.MoniterControl
                     MarginTemplateSetting t = templateTree.SelectedNode.Tag as MarginTemplateSetting;
                     if (t != null)
                     {
-                        //ClearItem();
-                        //CoreService.TLClient.ReqQryCommissionTemplateItem(t.ID);
-                        //int id = int.Parse(templateid.Text);
                         fm.SetCommissionTemplateID(t.ID);
                         fm.ShowDialog();
                     }
@@ -172,35 +164,23 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        //void Qry_Click(object sender, EventArgs e)
-        //{
-        //    MarginTemplateSetting t = templatelist.SelectedItem as MarginTemplateSetting;
-        //    if (t == null)
-        //    {
-        //        MoniterHelper.WindowMessage("请选择保证金模板");
-        //        return;
-        //    }
-        //    ClearItem();
-        //    templatename.Text = t.Name;
-        //    templateid.Text = t.ID.ToString();
-        //    CoreService.TLClient.ReqQryMarginTemplateItem(t.ID);
-        //}
         void Add_Click(object sender, EventArgs e)
         {
             fmTemplateEdit fm = new fmTemplateEdit(TemplateEditType.Margin);
             fm.ShowDialog();
         }
-        //void Edit_Click(object sender, EventArgs e)
-        //{
-        //    MarginTemplateSetting t = templatelist.SelectedItem as MarginTemplateSetting;
-        //    fmTemplateEdit fm = new fmTemplateEdit(TemplateEditType.Margin);
 
-        //    fm.SetTemplate(t);
-        //    fm.ShowDialog();
-        //}
 
         public void OnInit()
         {
+            //超级管理员可以单独添加模板项
+            if (CoreService.SiteInfo.Domain.Super)
+            {
+                marginGrid.ContextMenuStrip = new ContextMenuStrip();
+                marginGrid.ContextMenuStrip.Items.Add("添加模板项目", null, new EventHandler(AddItem_Click));
+            }
+
+
             CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryMarginTemplate", this.OnQryMarginTemplate);
             CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyMarginTemplate", this.OnNotifyMarginTemplate);
 
@@ -321,9 +301,12 @@ namespace TradingLib.MoniterControl
                 foreach (MarginTemplateSetting t in list)
                 {
                     templatemap.Add(t.ID, t);
-                    //templatelist.Items.Add(t);
                     InvokeGotMarginTemplate(t);
                 }
+            }
+            if (islast)
+            {
+                templateTree.ExpandAll();
             }
         }
 

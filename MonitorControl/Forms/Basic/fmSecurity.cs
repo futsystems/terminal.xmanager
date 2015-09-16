@@ -377,8 +377,20 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            btnSyncSec.Visible = CoreService.SiteInfo.Manager.IsRoot();
-            btnAddSecurity.Visible = CoreService.SiteInfo.Manager.IsRoot();
+            if (!CoreService.SiteInfo.Domain.Super)
+            {
+                
+                btnSyncSec.Visible = false;
+                btnAddSecurity.Visible = false;
+
+                //如果是管理员 并且没有品种数据 则同步品种按钮可见
+                if (CoreService.SiteInfo.Manager.IsRoot())
+                {
+                    btnSyncSec.Visible = CoreService.BasicInfoTracker.Securities.Count() == 0;
+                }
+
+                //btnAddSecurity.Visible = CoreService.SiteInfo.Manager.IsRoot();
+            }
 
             CoreService.EventBasicInfo.OnSecurityEvent += new Action<SecurityFamilyImpl>(InvokGotSecurity);
         }

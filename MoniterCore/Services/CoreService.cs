@@ -99,7 +99,6 @@ namespace TradingLib.MoniterCore
             }
         }
 
-
         //AccountTracker _accountTracker = null;
         ///// <summary>
         ///// 交易帐户维护器

@@ -115,7 +115,7 @@
             // 
             // side
             // 
-            this.side.Location = new System.Drawing.Point(261, 4);
+            this.side.Location = new System.Drawing.Point(260, 4);
             this.side.Name = "side";
             this.side.Size = new System.Drawing.Size(23, 20);
             this.side.TabIndex = 15;
@@ -139,7 +139,7 @@
             // 
             // kryptonLabel20
             // 
-            this.kryptonLabel20.Location = new System.Drawing.Point(379, 3);
+            this.kryptonLabel20.Location = new System.Drawing.Point(380, 3);
             this.kryptonLabel20.Name = "kryptonLabel20";
             this.kryptonLabel20.Size = new System.Drawing.Size(22, 20);
             this.kryptonLabel20.TabIndex = 9;
@@ -147,7 +147,7 @@
             // 
             // price
             // 
-            this.price.Location = new System.Drawing.Point(407, 3);
+            this.price.Location = new System.Drawing.Point(400, 3);
             this.price.Name = "price";
             this.price.Size = new System.Drawing.Size(17, 20);
             this.price.TabIndex = 8;
@@ -155,11 +155,11 @@
             // 
             // sizeinfo
             // 
-            this.sizeinfo.Location = new System.Drawing.Point(344, 4);
+            this.sizeinfo.Location = new System.Drawing.Point(340, 4);
             this.sizeinfo.Name = "sizeinfo";
-            this.sizeinfo.Size = new System.Drawing.Size(29, 20);
+            this.sizeinfo.Size = new System.Drawing.Size(42, 20);
             this.sizeinfo.TabIndex = 6;
-            this.sizeinfo.Values.Text = "2/3";
+            this.sizeinfo.Values.Text = "12/13";
             // 
             // symbol
             // 
@@ -171,7 +171,7 @@
             // 
             // orderIDs
             // 
-            this.orderIDs.Location = new System.Drawing.Point(80, 4);
+            this.orderIDs.Location = new System.Drawing.Point(100, 4);
             this.orderIDs.Name = "orderIDs";
             this.orderIDs.Size = new System.Drawing.Size(175, 20);
             this.orderIDs.TabIndex = 1;
@@ -181,9 +181,9 @@
             // 
             this.kryptonLabel28.Location = new System.Drawing.Point(0, 4);
             this.kryptonLabel28.Name = "kryptonLabel28";
-            this.kryptonLabel28.Size = new System.Drawing.Size(85, 20);
+            this.kryptonLabel28.Size = new System.Drawing.Size(88, 20);
             this.kryptonLabel28.TabIndex = 0;
-            this.kryptonLabel28.Values.Text = "    +委托编号:";
+            this.kryptonLabel28.Values.Text = "    + 委托编号:";
             // 
             // kryptonLabel14
             // 

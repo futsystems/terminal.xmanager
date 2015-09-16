@@ -53,7 +53,7 @@
             // 
             // xPrice
             // 
-            this.xPrice.Location = new System.Drawing.Point(379, 0);
+            this.xPrice.Location = new System.Drawing.Point(400, 0);
             this.xPrice.Name = "xPrice";
             this.xPrice.Size = new System.Drawing.Size(46, 20);
             this.xPrice.TabIndex = 6;
@@ -61,7 +61,7 @@
             // 
             // kryptonLabel7
             // 
-            this.kryptonLabel7.Location = new System.Drawing.Point(351, 0);
+            this.kryptonLabel7.Location = new System.Drawing.Point(380, 0);
             this.kryptonLabel7.Name = "kryptonLabel7";
             this.kryptonLabel7.Size = new System.Drawing.Size(22, 20);
             this.kryptonLabel7.TabIndex = 5;
@@ -69,7 +69,7 @@
             // 
             // xSize
             // 
-            this.xSize.Location = new System.Drawing.Point(325, 0);
+            this.xSize.Location = new System.Drawing.Point(340, 0);
             this.xSize.Name = "xSize";
             this.xSize.Size = new System.Drawing.Size(17, 20);
             this.xSize.TabIndex = 4;
@@ -77,7 +77,7 @@
             // 
             // tradeIDs
             // 
-            this.tradeIDs.Location = new System.Drawing.Point(105, 0);
+            this.tradeIDs.Location = new System.Drawing.Point(100, 0);
             this.tradeIDs.Name = "tradeIDs";
             this.tradeIDs.Size = new System.Drawing.Size(129, 20);
             this.tradeIDs.TabIndex = 1;
@@ -87,9 +87,9 @@
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(99, 20);
+            this.kryptonLabel1.Size = new System.Drawing.Size(87, 20);
             this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "        +成交编号:";
+            this.kryptonLabel1.Values.Text = "        +    成交:";
             // 
             // ctFollowItemTrade
             // 

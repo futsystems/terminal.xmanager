@@ -98,13 +98,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="..\Resource\ImageResources.resources">
+      <Link>ImageResources.resources</Link>
+    </EmbeddedResource>
     <EmbeddedResource Include="fmHelp.resx">
       <DependentUpon>fmHelp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ImageResources.resources" />
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -131,6 +133,7 @@
   <ItemGroup>
     <Content Include="AddIns\MoniterBase.addin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

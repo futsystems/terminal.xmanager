@@ -18,6 +18,7 @@ namespace TradingLib.MoniterControl
         public fmCoreStatus()
         {
             InitializeComponent();
+            //this.CancelButton = 
             this.Load += new EventHandler(fmCoreStatus_Load);
         }
 

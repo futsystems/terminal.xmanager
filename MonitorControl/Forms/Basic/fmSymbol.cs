@@ -355,7 +355,17 @@ namespace TradingLib.MoniterControl
             btnAddSymbol.Visible = CoreService.SiteInfo.Manager.IsRoot();
             btnSyncSymbols.Visible = CoreService.SiteInfo.Manager.IsRoot();
             //Globals.Debug("绑定获得合约事件");
+            if (!CoreService.SiteInfo.Domain.Super)
+            {
+                btnDisableAll.Visible = false;
+                btnAddSymbol.Visible = false;
+                btnSyncSymbols.Visible = false;
 
+                if (CoreService.SiteInfo.Manager.IsRoot())
+                {
+                    btnSyncSymbols.Visible = CoreService.BasicInfoTracker.Symbols.Count() == 0;
+                }
+            }
             CoreService.EventBasicInfo.OnSymbolEvent += new Action<SymbolImpl>(InvokeGotSymbol);
         }
         public void OnDisposed()

@@ -1,4 +1,5 @@
-﻿<AddIn name        = "Demo Application"
+﻿
+<AddIn name        = "Demo Application"
        author      = "Daniel Grunwald"
        url         = "http://www.codeproject.com/TBD"
        description = "Base add-in of ICSharpCode.Core example"
@@ -45,20 +46,22 @@
       <Include id = "Account" path = "/Workspace/MainAccount-Vendor"/>
     </MenuItem>
 
-    <Condition name="ProductState" product="counter">
-      <MenuItem id = "Manager"
-                type = "Menu"
-                label = "柜员管理">
-        <Include id = "Manager" path = "/Workspace/MgrManager"/>
-      </MenuItem>
-    </Condition>
+    <Condition name="DeployState" deploy="s">
+      <Condition name="ProductState" product="counter">
+        <MenuItem id = "Manager"
+                  type = "Menu"
+                  label = "柜员管理">
+          <Include id = "Manager" path = "/Workspace/MgrManager"/>
+        </MenuItem>
+      </Condition>
 
-    <Condition name="ProductState" product="counter">
-      <MenuItem id = "Tools"
-                type = "Menu"
-                label = "工具">
-        <Include id = "Tools" path = "/Workspace/MgrTools"/>
-      </MenuItem>
+      <Condition name="ProductState" product="counter">
+        <MenuItem id = "Tools"
+                  type = "Menu"
+                  label = "工具">
+          <Include id = "Tools" path = "/Workspace/MgrTools"/>
+        </MenuItem>
+      </Condition>
     </Condition>
 
     <Condition name="ProductState" product="*">
@@ -69,12 +72,14 @@
       </MenuItem>
     </Condition>
 
-    <Condition name="ProductState" product="*">
-      <MenuItem id = "FinManager"
-                type = "Menu"
-                label = "财务管理">
-        <Include id = "FinManager" path = "/Workspace/FinManager"/>
-      </MenuItem>
+    <Condition name="DeployState" deploy="s">
+      <Condition name="ProductState" product="*">
+        <MenuItem id = "FinManager"
+                  type = "Menu"
+                  label = "财务管理">
+          <Include id = "FinManager" path = "/Workspace/FinManager"/>
+        </MenuItem>
+      </Condition>
     </Condition>
     
 
@@ -124,11 +129,15 @@
     
     <MenuItem id = "SystemStatusCommand"
               label = "系统状态"
+              shortcut = "Control|S"
               class = "TradingLib.MoniterBase.Command.SystemStatusCommand"/>
 
-    <MenuItem id = "TaskLogManagerCommand"
-              label = "任务日志"
-              class = "TradingLib.MoniterBase.Command.TaskLogManagerCommand"/>
+    <Condition name="DeployState" deploy="s">
+      <MenuItem id = "TaskLogManagerCommand"
+                label = "任务日志"
+                class = "TradingLib.MoniterBase.Command.TaskLogManagerCommand"/>
+    </Condition>
+    
 
     <MenuItem id = "Separator1" type = "Separator"/>
     
@@ -165,9 +174,9 @@
               label = "合约数据"
               class = "TradingLib.MoniterBase.Command.SymbolManagerCommand"/>
 
-      <MenuItem id = "SynSymbolManagerCommand"
+    <!--MenuItem id = "SynSymbolManagerCommand"
              label = "合约数据同步"
-             class = "TradingLib.MoniterBase.Command.SynSymbolManagerCommand"/>
+             class = "TradingLib.MoniterBase.Command.SynSymbolManagerCommand"/-->
     
     
       <MenuItem id = "Separator1" type = "Separator"/>
@@ -180,12 +189,14 @@
       <MenuItem id = "MarginTemplateCommand"
               label = "保证金模板管理"
               class = "TradingLib.MoniterBase.Command.MarginTemplateCommand"/>
-
-      <MenuItem id = "Separator1" type = "Separator"/>
     
+    <Condition name="DeployState" deploy="s">
+      <MenuItem id = "Separator1" type = "Separator"/>
+
       <MenuItem id = "ExStrategyTemplateCommand"
               label = "交易参数管理"
               class = "TradingLib.MoniterBase.Command.ExStrategyTemplateCommand"/>
+    </Condition>
 
     <!--超级管理员可见菜单-->
     <Condition name="DeployState" deploy="s">
@@ -215,9 +226,10 @@
       <MenuItem id = "Separator1" type = "Separator"/>
       <MenuItem id = "MainAccount-Vendor"
               label = "主帐户管理"
-              shortcut = "Control|A"
+              shortcut = "Control|M"
               class = "TradingLib.MoniterBase.Command.ManagerConnectorCommand"/>
     </ComplexCondition>
+    
     <ComplexCondition>
       <And>
         <Condition name="ProductState" product="c" />
@@ -225,12 +237,13 @@
       </And>
       <MenuItem id = "AddFAccountCommand"
               label = "添加交易帐户"
+                shortcut = "Control|A"
               class = "TradingLib.MoniterBase.Command.AddFAccountCommand"/>
 
       <MenuItem id = "Separator1" type = "Separator"/>
       <MenuItem id = "MainAccount-Vendor"
               label = "主帐户管理"
-              shortcut = "Control|A"
+              shortcut = "Control|E"
               class = "TradingLib.MoniterBase.Command.ManagerConnectorCommand"/>
       <MenuItem id = "RouterGroup"
               label = "主帐户组管理"
@@ -250,9 +263,11 @@
   
   <!--管理工具-->
   <Path name = "/Workspace/MgrTools">
-    <MenuItem id = "SettleManagerCommand"
-            label = "手工结算"
-            class = "TradingLib.MoniterBase.Command.SettleManagerCommand"/>
+    <Condition name="DeployState" deploy="s">
+      <MenuItem id = "SettleManagerCommand"
+              label = "手工结算"
+              class = "TradingLib.MoniterBase.Command.SettleManagerCommand"/>
+    </Condition>
 
   </Path>
   
@@ -311,15 +326,15 @@
 		             tooltip = "查看帐户列表"
 		             icon = "Icons.ViewAccount"
 		             class = "TradingLib.MoniterBase.Command.ShowAccountListCommand"/>
-    <ToolbarItem id = "ViewQuote"
+    <!--ToolbarItem id = "ViewQuote"
 		             tooltip = "查看实时行情"
 		             icon = "Icons.ViewQuote"
-		             class  = "TradingLib.MoniterBase.Command.ShowQuoteCommand"/>
+		             class  = "TradingLib.MoniterBase.Command.ShowQuoteCommand"/-->
 
-    <ToolbarItem id = "ViewQuote"
+    <!--ToolbarItem id = "ViewQuote"
 		             tooltip = "跟单"
 		             icon = "Icons.ViewQuote"
-		             class  = "TradingLib.MoniterBase.Command.ShowFollowCommand"/>
+		             class  = "TradingLib.MoniterBase.Command.ShowFollowCommand"/-->
     
     <ToolbarItem id = "ExpandViewCommand"
 		             tooltip = "扩展主视区"
@@ -338,10 +353,10 @@
     
     <ToolbarItem id = "ViewSeparator" type = "Separator"/>
 
-    <ToolbarItem id = "FeeManagerCommand"
+    <!--ToolbarItem id = "FeeManagerCommand"
 		             tooltip = "收费管理"
 		             icon = "Icons.ViewReset"
-		             class  = "TradingLib.MoniterBase.Command.FeeManagerCommand"/>
+		             class  = "TradingLib.MoniterBase.Command.FeeManagerCommand"/-->
     
   </Path>
   

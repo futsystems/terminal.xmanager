@@ -44,6 +44,7 @@ namespace TradingLib.MoniterControl
                 status.Text = order.Status;
                 symbol.Text = order.Symbol;
                 side.Text = order.Side ? "买入" : "卖出";
+                side.StateCommon.ShortText.Color1 = order.Side ? UIConstant.LongSideColor : UIConstant.ShortSideColor;
                 sizeinfo.Text = string.Format("{0}/{1}", order.SentSize, order.FillSize);
                 //fillsize.Text = order.FillSize.ToString();
                 price.Text = Util.FormatDecimal(order.Price);

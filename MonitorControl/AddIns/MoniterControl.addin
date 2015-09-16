@@ -127,7 +127,7 @@
     <MenuItem id = "Separator1" type = "Separator"/>
     <Condition name="ProductState" product="Counter">
       <MenuItem id = "UpdateAccountRouterGroup"
-                label = "修改路由组"
+                label = "修改主帐户组"
                 class = "TradingLib.MoniterControl.UpdateAccountRouterGroup"/>
     </Condition>
 
@@ -161,8 +161,8 @@
       
     </Condition>
 
-    
-    <Condition name="ProductState" product="Counter">
+
+    <!--Condition name="ProductState" product="Counter">
       <MenuItem id = "DelAccountCommand"
                 label = "删除交易帐户"
                 class = "TradingLib.MoniterControl.DelAccountCommand"/>
@@ -172,7 +172,7 @@
       <MenuItem id = "ClearAccountTerminal"
                 label = "注销帐户终端"
                 class = "TradingLib.MoniterControl.ClearAccountTerminal"/>
-    </Condition>
+    </Condition-->
 
     
     

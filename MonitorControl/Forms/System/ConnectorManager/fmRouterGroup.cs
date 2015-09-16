@@ -385,6 +385,10 @@ namespace TradingLib.MoniterControl
                     InvokeGotRouterGroup(t);
                 }
             }
+            if (islast)
+            {
+                rgTree.ExpandAll();
+            }
         }
 
         void InvokeGotRouterGroup(RouterGroupSetting t)

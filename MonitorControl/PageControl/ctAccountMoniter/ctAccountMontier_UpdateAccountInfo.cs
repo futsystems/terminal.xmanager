@@ -331,6 +331,17 @@ namespace TradingLib.MoniterControl
             }
         }
 
+        /// <summary>
+        /// 帐户数量
+        /// </summary>
+        public int AccountCount
+        {
+            get
+            {
+                return accountmap.Count();
+            }
+        }
+
         #region 根据账户属性获得对应的string 或者 image
         Image getRouteStatusImage(QSEnumOrderTransferType type)
         {

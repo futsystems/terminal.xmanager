@@ -18,6 +18,8 @@ namespace TradingLib.MoniterControl
             ctAccountMontier accountMoniter = obj as ctAccountMontier;
             if (accountMoniter == null) return false;
 
+            if (accountMoniter.AccountCount == 0) return false;
+
             string account = accountMoniter.CurrentAccount;
             acct = CoreService.BasicInfoTracker.GetAccount(account);
             if (acct == null)

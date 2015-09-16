@@ -57,7 +57,7 @@
             // 
             // price
             // 
-            this.price.Location = new System.Drawing.Point(477, 0);
+            this.price.Location = new System.Drawing.Point(400, 0);
             this.price.Name = "price";
             this.price.Size = new System.Drawing.Size(20, 20);
             this.price.TabIndex = 11;
@@ -65,7 +65,7 @@
             // 
             // size
             // 
-            this.size.Location = new System.Drawing.Point(423, 0);
+            this.size.Location = new System.Drawing.Point(340, 0);
             this.size.Name = "size";
             this.size.Size = new System.Drawing.Size(20, 20);
             this.size.TabIndex = 10;
@@ -73,7 +73,7 @@
             // 
             // symbol
             // 
-            this.symbol.Location = new System.Drawing.Point(376, 0);
+            this.symbol.Location = new System.Drawing.Point(290, 0);
             this.symbol.Name = "symbol";
             this.symbol.Size = new System.Drawing.Size(20, 20);
             this.symbol.TabIndex = 9;
@@ -81,7 +81,7 @@
             // 
             // side
             // 
-            this.side.Location = new System.Drawing.Point(350, 0);
+            this.side.Location = new System.Drawing.Point(260, 0);
             this.side.Name = "side";
             this.side.Size = new System.Drawing.Size(20, 20);
             this.side.TabIndex = 8;
@@ -89,7 +89,7 @@
             // 
             // tradeIDs
             // 
-            this.tradeIDs.Location = new System.Drawing.Point(90, 0);
+            this.tradeIDs.Location = new System.Drawing.Point(100, 0);
             this.tradeIDs.Name = "tradeIDs";
             this.tradeIDs.Size = new System.Drawing.Size(20, 20);
             this.tradeIDs.TabIndex = 6;
@@ -97,7 +97,7 @@
             // 
             // kryptonLabel6
             // 
-            this.kryptonLabel6.Location = new System.Drawing.Point(449, 0);
+            this.kryptonLabel6.Location = new System.Drawing.Point(380, 0);
             this.kryptonLabel6.Name = "kryptonLabel6";
             this.kryptonLabel6.Size = new System.Drawing.Size(22, 20);
             this.kryptonLabel6.TabIndex = 5;

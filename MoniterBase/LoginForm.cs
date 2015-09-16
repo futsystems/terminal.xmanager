@@ -31,7 +31,7 @@ namespace TradingLib.MoniterBase
             mStart = start;
             btnLogin.Enabled = false;
 
-
+            //CoreService.BasicInfoTracker.Symbols.
 
             string[] addresses = config["Servers"].AsString().Split(',');
             foreach (string s in addresses)
@@ -79,7 +79,6 @@ namespace TradingLib.MoniterBase
 
         void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-
             SaveLoginConfig();
             System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
@@ -134,6 +133,7 @@ namespace TradingLib.MoniterBase
             CoreService.InitClient(address, 6670);
             CoreService.TLClient.Start();
         }
+
 
         bool _loginstart = false;
         DateTime _logintime = DateTime.Now;

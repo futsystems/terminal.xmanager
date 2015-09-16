@@ -58,11 +58,44 @@ namespace TradingLib.MoniterControl
 
 
             }
+            btnFillInfo.CheckedChanged += new EventHandler(btnFillInfo_CheckedChanged);
             //生成帐户类型列表
             MoniterHelper.AdapterToIDataSource(cbAccountType).BindDataSource(MoniterHelper.GetAccountTypeCombList());
             cbAccountType.SelectedIndex = 0;
             CoreService.EventCore.RegIEventHandler(this);
 
+        }
+
+        void SmallView()
+        {
+            this.Height = 200;
+            lbNotice.Visible = false;
+            kryptonGroupBox1.Visible = false;
+            kryptonGroupBox2.Visible = false;
+            kryptonGroupBox3.Visible = false;
+            btnSubmit.Location = new Point(217, 85);
+            this.Height = 145;
+        }
+
+        void BigView()
+        {
+            this.Height = 560;
+            lbNotice.Visible = true;
+            kryptonGroupBox1.Visible = true;
+            kryptonGroupBox2.Visible = true;
+            kryptonGroupBox3.Visible = true;
+            btnSubmit.Location = new Point(217, 495);
+        }
+        void btnFillInfo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (btnFillInfo.Checked)
+            {
+                BigView();
+            }
+            else
+            {
+                SmallView();
+            }
         }
 
         public void OnInit()
@@ -106,6 +139,10 @@ namespace TradingLib.MoniterControl
             this.Text = string.Format("查看/编辑帐户[{0}]个人信息", _account.Account);
             account.Enabled = false;
             cbAccountType.Enabled = false;
+
+            //设置可以修改扩展信息
+            btnFillInfo.Checked = true;
+            BigView();
         }
 
 

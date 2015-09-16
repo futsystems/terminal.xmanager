@@ -13,7 +13,7 @@ using TradingLib.MoniterCore;
 
 namespace TradingLib.MoniterControl
 {
-    public partial class fmSecEdit : ComponentFactory.Krypton.Toolkit.KryptonForm
+    public partial class fmSecEdit : ComponentFactory.Krypton.Toolkit.KryptonForm,IEventBinder
     {
         public fmSecEdit()
         {
@@ -25,9 +25,33 @@ namespace TradingLib.MoniterControl
             MoniterHelper.AdapterToIDataSource(underlay).BindDataSource(CoreService.BasicInfoTracker.GetSecurityCombList(true));
             MoniterHelper.AdapterToIDataSource(markettime).BindDataSource(CoreService.BasicInfoTracker.GetMarketTimeCombList());
 
-
+            this.Load += new EventHandler(fmSecEdit_Load);
+            
         }
 
+        void fmSecEdit_Load(object sender, EventArgs e)
+        {
+            CoreService.EventCore.RegIEventHandler(this);
+        }
+
+
+        public void OnInit()
+        {
+            if (!CoreService.SiteInfo.Domain.Super)
+            {
+                code.Enabled = false;
+                name.Enabled = false;
+                exchange.Enabled = false;
+                markettime.Enabled = false;
+                multiple.Enabled = false;
+                pricetick.Enabled = false;
+            }
+        }
+
+        public void OnDisposed()
+        { 
+        
+        }
         SecurityFamilyImpl _sec = null;
         //当前编辑的合约
         public SecurityFamilyImpl Security

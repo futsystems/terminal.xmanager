@@ -14,7 +14,6 @@ namespace TradingLib.MoniterCore
         {
             CoreService.EventCore.FireInitializeStatusEvent(msg);
             logger.Info(msg);
-            
         }
 
 

@@ -13,7 +13,7 @@ using TradingLib.MoniterCore;
 
 namespace TradingLib.MoniterControl
 {
-    public partial class fmSymbolEdit : ComponentFactory.Krypton.Toolkit.KryptonForm
+    public partial class fmSymbolEdit : ComponentFactory.Krypton.Toolkit.KryptonForm,IEventBinder
     {
         bool _loaded = false;
         public fmSymbolEdit()
@@ -38,6 +38,20 @@ namespace TradingLib.MoniterControl
         {
             OnCBExchangeChanged();
             OnCBSecurityChanged();
+        }
+
+
+        public void OnInit()
+        {
+            if (!CoreService.SiteInfo.Domain.Super)
+            {
+                expiredate.Enabled = false;
+            }
+        }
+
+        public void OnDisposed()
+        { 
+        
         }
 
 

@@ -54,6 +54,7 @@ namespace TradingLib.MoniterCore
         /// 合约map
         /// </summary>
         Dictionary<int, SymbolImpl> symbolmap = new Dictionary<int, SymbolImpl>();
+
         /// <summary>
         /// 合约名称map
         /// </summary>

@@ -121,28 +121,31 @@ namespace TradingLib.MoniterControl
                     fm.Account = _account;
                     fm.RuleClass = item;
                     fm.ShowDialog();
+                    fm.Close();
                 }
-                if (item.ClassName.Equals("RuleSet2.Account.RSMaxLoss"))
+                else if (item.ClassName.Equals("RuleSet2.Account.RSMaxLoss"))
                 {
                     fmAccountRule_Loss fm = new fmAccountRule_Loss();
                     fm.Account = _account;
                     fm.RuleClass = item;
                     fm.ShowDialog();
+                    fm.Close();
                 }
-                if (item.ClassName.Equals("RuleSet2.Account.RSEquityByCredit"))
+                else if (item.ClassName.Equals("RuleSet2.Account.RSEquityByCredit"))
                 {
                     fmAccountRule_EquityByCredit fm = new fmAccountRule_EquityByCredit();
                     fm.Account = _account;
                     fm.RuleClass = item;
                     fm.ShowDialog();
+                    fm.Close();
                 }
-                else
+                else if (item.ClassName.Equals("RuleSet2.Account.RSMaxProfit"))
                 {
-
-                    fmRuleSetConfig fm = new fmRuleSetConfig();
+                    fmAccountRule_Profit fm = new fmAccountRule_Profit();
                     fm.Account = _account;
-                    fm.RuleClass = (RuleClassItem)accountRuleClassList.SelectedValue;
+                    fm.RuleClass = item;
                     fm.ShowDialog();
+                    fm.Close();
                 }
             }
         }

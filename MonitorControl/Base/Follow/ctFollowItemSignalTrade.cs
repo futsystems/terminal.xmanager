@@ -30,6 +30,7 @@ namespace TradingLib.MoniterControl
                 tradeIDs.Text = string.Format("{0}/{1}", signal.LocalTradeID, signal.RemoteTradeID);
                 //remoteTradeID.Text = signal.RemoteTradeID;
                 side.Text = signal.Side ? "买入" : "卖出";
+                side.StateCommon.ShortText.Color1 = signal.Side ? UIConstant.LongSideColor : UIConstant.ShortSideColor;
                 symbol.Text = signal.Symbol;
                 size.Text = signal.Size.ToString();
                 price.Text = Util.FormatDecimal(signal.Price);

@@ -27,13 +27,19 @@ namespace TradingLib.MoniterControl
         {
 
             CoreService.EventCore.RegIEventHandler(this);
-            //btnDemo.Click += new EventHandler(btnDemo_Click);
+            this.btnFlat.Click += new EventHandler(btnFlat_Click);
+          
         }
 
-        void btnDemo_Click(object sender, EventArgs e)
+        void btnFlat_Click(object sender, EventArgs e)
         {
-            //ctFollowResultView1.GotTrade();
+            if (MoniterHelper.WindowConfirm("确认平掉该跟单项目对应持仓?") == System.Windows.Forms.DialogResult.Yes)
+            {
+                CoreService.TLClient.ReqContribRequest("FollowCentre", "FlatFollowItem", _followkey);
+            }
         }
+
+
 
         public void OnInit()
         {

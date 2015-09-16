@@ -29,18 +29,18 @@ namespace TradingLib.MoniterBase.Command
             workbench.AppendControl(infoMoniter);
 
             //行情列表控件
-            ctQuoteMoniter quoteMoniter = new ctQuoteMoniter();
-            quoteMoniter.Dock = DockStyle.Fill;
-            workbench.AppendControl(quoteMoniter);
+            //ctQuoteMoniter quoteMoniter = new ctQuoteMoniter();
+            //quoteMoniter.Dock = DockStyle.Fill;
+            //workbench.AppendControl(quoteMoniter);
 
             //下单面板控件
             ctFunctionPanel functoinPanel = new ctFunctionPanel();
             functoinPanel.Dock = DockStyle.Fill;
             workbench.AppendControl(functoinPanel);
 
-            ctFollowCentre followMoniter = new ctFollowCentre();
-            followMoniter.Dock = DockStyle.Fill;
-            workbench.AppendControl(followMoniter);
+            //ctFollowCentre followMoniter = new ctFollowCentre();
+            //followMoniter.Dock = DockStyle.Fill;
+            //workbench.AppendControl(followMoniter);
 
             //ctOrderPanel orderPanel = new ctOrderPanel();
             //orderPanel.Dock = DockStyle.Fill;

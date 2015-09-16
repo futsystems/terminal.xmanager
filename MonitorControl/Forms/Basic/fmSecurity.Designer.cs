@@ -89,7 +89,7 @@
             // 
             this.kryptonLabel3.Location = new System.Drawing.Point(209, 11);
             this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(82, 18);
+            this.kryptonLabel3.Size = new System.Drawing.Size(75, 20);
             this.kryptonLabel3.TabIndex = 5;
             this.kryptonLabel3.Values.Text = "是否可交易:";
             // 
@@ -105,7 +105,7 @@
             // 
             this.kryptonLabel2.Location = new System.Drawing.Point(5, 11);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(55, 18);
+            this.kryptonLabel2.Size = new System.Drawing.Size(51, 20);
             this.kryptonLabel2.TabIndex = 3;
             this.kryptonLabel2.Values.Text = "交易所:";
             // 

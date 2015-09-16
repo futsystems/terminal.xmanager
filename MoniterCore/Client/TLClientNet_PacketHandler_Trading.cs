@@ -23,8 +23,12 @@ namespace TradingLib.MoniterCore
         void CliOnOrderNotify(OrderNotify response)
         {
             //logger.Debug("got order notify:" + response.Order.ToString());
+            
             Order o = response.Order;
-            o.oSymbol = CoreService.BasicInfoTracker.GetSymbol(o.Symbol);
+            if (o != null)
+            {
+                o.oSymbol = CoreService.BasicInfoTracker.GetSymbol(o.Symbol);
+            }
             CoreService.TradingInfoTracker.GotOrder(o);
         }
 
@@ -32,7 +36,10 @@ namespace TradingLib.MoniterCore
         {
             
             Trade f = response.Trade;
-            f.oSymbol = CoreService.BasicInfoTracker.GetSymbol(f.Symbol);
+            if (f != null)
+            {
+                f.oSymbol = CoreService.BasicInfoTracker.GetSymbol(f.Symbol);
+            }
             CoreService.TradingInfoTracker.GotFill(f);
         }
 

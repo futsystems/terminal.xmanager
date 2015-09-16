@@ -54,6 +54,8 @@
             this.idcard = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.mobile = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.qq = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.lbNotice = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.btnFillInfo = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3)).BeginInit();
@@ -73,6 +75,8 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.lbNotice);
+            this.kryptonPanel1.Controls.Add(this.btnFillInfo);
             this.kryptonPanel1.Controls.Add(this.kryptonGroupBox3);
             this.kryptonPanel1.Controls.Add(this.cbAccountType);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel9);
@@ -84,12 +88,12 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(333, 519);
+            this.kryptonPanel1.Size = new System.Drawing.Size(333, 118);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // kryptonGroupBox3
             // 
-            this.kryptonGroupBox3.Location = new System.Drawing.Point(21, 396);
+            this.kryptonGroupBox3.Location = new System.Drawing.Point(21, 409);
             this.kryptonGroupBox3.Name = "kryptonGroupBox3";
             // 
             // kryptonGroupBox3.Panel
@@ -133,7 +137,7 @@
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(217, 482);
+            this.btnSubmit.Location = new System.Drawing.Point(215, 85);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(90, 25);
             this.btnSubmit.TabIndex = 16;
@@ -156,7 +160,7 @@
             // 
             // kryptonGroupBox2
             // 
-            this.kryptonGroupBox2.Location = new System.Drawing.Point(21, 276);
+            this.kryptonGroupBox2.Location = new System.Drawing.Point(21, 289);
             this.kryptonGroupBox2.Name = "kryptonGroupBox2";
             // 
             // kryptonGroupBox2.Panel
@@ -210,7 +214,7 @@
             // 
             // kryptonGroupBox1
             // 
-            this.kryptonGroupBox1.Location = new System.Drawing.Point(21, 93);
+            this.kryptonGroupBox1.Location = new System.Drawing.Point(21, 106);
             this.kryptonGroupBox1.Name = "kryptonGroupBox1";
             // 
             // kryptonGroupBox1.Panel
@@ -228,6 +232,7 @@
             this.kryptonGroupBox1.Size = new System.Drawing.Size(286, 177);
             this.kryptonGroupBox1.TabIndex = 12;
             this.kryptonGroupBox1.Values.Heading = "基本信息";
+            this.kryptonGroupBox1.Visible = false;
             // 
             // kryptonLabel8
             // 
@@ -304,11 +309,29 @@
             this.qq.Size = new System.Drawing.Size(181, 20);
             this.qq.TabIndex = 6;
             // 
+            // lbNotice
+            // 
+            this.lbNotice.Location = new System.Drawing.Point(21, 90);
+            this.lbNotice.Name = "lbNotice";
+            this.lbNotice.Size = new System.Drawing.Size(200, 20);
+            this.lbNotice.StateCommon.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lbNotice.TabIndex = 20;
+            this.lbNotice.Values.Text = "以下用于采集客户信息,可不用填写";
+            this.lbNotice.Visible = false;
+            // 
+            // btnFillInfo
+            // 
+            this.btnFillInfo.Location = new System.Drawing.Point(188, 64);
+            this.btnFillInfo.Name = "btnFillInfo";
+            this.btnFillInfo.Size = new System.Drawing.Size(98, 20);
+            this.btnFillInfo.TabIndex = 20;
+            this.btnFillInfo.Values.Text = "填写客户信息";
+            // 
             // fmEditAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(333, 519);
+            this.ClientSize = new System.Drawing.Size(333, 118);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
@@ -367,5 +390,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox3;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel11;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox broker;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lbNotice;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox btnFillInfo;
     }
 }

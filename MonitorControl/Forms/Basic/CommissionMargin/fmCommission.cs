@@ -34,7 +34,14 @@ namespace TradingLib.MoniterControl
             this.Disposed += new EventHandler(fmCommission_Disposed);
             this.FormClosing += new FormClosingEventHandler(fmCommission_FormClosing);
             this.FormClosed += new FormClosedEventHandler(fmCommission_FormClosed);
+            this.btnAddTemplate.Click += new EventHandler(btnAddTemplate_Click);
             this.tempateTree.Disposed += new EventHandler(tempateTree_Disposed);
+        }
+
+        void btnAddTemplate_Click(object sender, EventArgs e)
+        {
+            fmTemplateEdit fm = new fmTemplateEdit(TemplateEditType.Commission);
+            fm.ShowDialog();
         }
 
         void tempateTree_Disposed(object sender, EventArgs e)
@@ -80,14 +87,7 @@ namespace TradingLib.MoniterControl
 
         void fmCommission_Load(object sender, EventArgs e)
         {
-            //this.templatelist.ContextMenuStrip = new ContextMenuStrip();
-            //this.templatelist.ContextMenuStrip.Items.Add("添加模板", null, new EventHandler(Add_Click));
-            //this.templatelist.ContextMenuStrip.Items.Add("修改模板", null, new EventHandler(Edit_Click));
-            //this.templatelist.ContextMenuStrip.Items.Add(new System.Windows.Forms.ToolStripSeparator());
-            //this.templatelist.ContextMenuStrip.Items.Add("加载数据", null, new EventHandler(Qry_Click));
-
-            commissionGrid.ContextMenuStrip = new ContextMenuStrip();
-            commissionGrid.ContextMenuStrip.Items.Add("添加模板项目", null, new EventHandler(AddItem_Click));
+            
 
             this.tempateTree.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
             this.tempateTree.ContextMenuStrip.Items.Add("添加手续费模板", null, new EventHandler(Add_Click));
@@ -196,9 +196,6 @@ namespace TradingLib.MoniterControl
                     CommissionTemplateSetting t = tempateTree.SelectedNode.Tag as CommissionTemplateSetting;
                     if (t != null)
                     {
-                        //ClearItem();
-                        //CoreService.TLClient.ReqQryCommissionTemplateItem(t.ID);
-                        //int id = int.Parse(templateid.Text);
                         fm.SetCommissionTemplateID(t.ID);
                         fm.ShowDialog();
                     }
@@ -240,6 +237,14 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
+            //超级域 可以单独添加模板项
+            if (CoreService.SiteInfo.Domain.Super)
+            {
+                commissionGrid.ContextMenuStrip = new ContextMenuStrip();
+                commissionGrid.ContextMenuStrip.Items.Add("添加模板项目", null, new EventHandler(AddItem_Click));
+            }
+
+
             CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryCommissionTemplate", this.OnQryCommissionTemplate);
             CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyCommissionTemplate", this.OnNotifyCommissionTemplate);
 
@@ -380,8 +385,9 @@ namespace TradingLib.MoniterControl
                     }
                 }
                 if (islast)
-                { 
-                    
+                {
+                    //模板加载完毕后展开所有节点
+                    tempateTree.ExpandAll();
                 }
             }
             catch (Exception ex)

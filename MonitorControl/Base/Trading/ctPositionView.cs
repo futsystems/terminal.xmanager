@@ -426,6 +426,7 @@ namespace TradingLib.MoniterControl
                             string acc = gt.Rows[i][ACCOUNT].ToString();
                             bool posside = bool.Parse(gt.Rows[i][SIDE].ToString());
                             Position pos = pt[t.Symbol, acc, posside];
+                            
                             string key = pos.GetKey(posside);
                             decimal unrealizedpl = pos.UnRealizedPL;
                             //debug("accc-symbol-side:" + key);

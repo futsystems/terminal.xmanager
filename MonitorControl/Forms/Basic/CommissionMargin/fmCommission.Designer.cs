@@ -37,6 +37,7 @@
             this.tempateTree = new ComponentFactory.Krypton.Toolkit.KryptonTreeView();
             this.commissionGrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.btnAddTemplate = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.commissionGrid)).BeginInit();
@@ -44,6 +45,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.btnAddTemplate);
             this.kryptonPanel1.Controls.Add(this.tempateTree);
             this.kryptonPanel1.Controls.Add(this.commissionGrid);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -54,10 +56,9 @@
             // 
             // tempateTree
             // 
-            this.tempateTree.Dock = System.Windows.Forms.DockStyle.Left;
             this.tempateTree.Location = new System.Drawing.Point(0, 0);
             this.tempateTree.Name = "tempateTree";
-            this.tempateTree.Size = new System.Drawing.Size(160, 476);
+            this.tempateTree.Size = new System.Drawing.Size(160, 443);
             this.tempateTree.TabIndex = 5;
             // 
             // commissionGrid
@@ -77,6 +78,14 @@
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth16Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // btnAddTemplate
+            // 
+            this.btnAddTemplate.Location = new System.Drawing.Point(64, 448);
+            this.btnAddTemplate.Name = "btnAddTemplate";
+            this.btnAddTemplate.Size = new System.Drawing.Size(90, 25);
+            this.btnAddTemplate.TabIndex = 6;
+            this.btnAddTemplate.Values.Text = "添加模板";
             // 
             // fmCommission
             // 
@@ -103,5 +112,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView commissionGrid;
         private ComponentFactory.Krypton.Toolkit.KryptonTreeView tempateTree;
         private System.Windows.Forms.ImageList imageList1;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnAddTemplate;
     }
 }

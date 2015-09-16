@@ -386,13 +386,75 @@ namespace TradingLib.MoniterControl
 
         static string GenFutSymbol(SecurityFamilyImpl sec, int month)
         {
-            if (sec.Exchange.EXCode.Equals("CZCE"))
+            if (sec.Exchange.Country == Country.CN)
             {
-                return sec.Code + month.ToString().Substring(3);
+                if (sec.Exchange.EXCode.Equals("CZCE"))
+                {
+                    return sec.Code + month.ToString().Substring(3);
+                }
+                else
+                {
+                    return sec.Code + month.ToString().Substring(2);
+                }
+            }
+            else //外盘品种
+            {
+                //201509
+                string monthstr = month.ToString().Substring(4);
+                string yearstr = month.ToString().Substring(2, 2);
+                return string.Format("{0}{1}{2}", sec.Code, GetMonthCode(monthstr),yearstr);
+            }
+        }
+
+        static string GetMonthCode(string month)
+        {
+            if (month == "01")
+            {
+                return "F";
+            }
+            else if (month == "02")
+            {
+                return "G";
+            }
+            else if (month == "03")
+            {
+                return "H";
+            }
+            else if (month == "04")
+            {
+                return "J";
+            }
+            else if (month == "05")
+            {
+                return "K";
+            }
+            else if (month == "06")
+            {
+                return "M";
+            }
+            else if (month == "07")
+            {
+                return "N";
+            }
+            else if (month == "08")
+            {
+                return "Q";
+            }
+            else if (month == "09")
+            {
+                return "U";
+            }
+            else if (month == "10")
+            {
+                return "V";
+            }
+            else if (month == "11")
+            {
+                return "X";
             }
             else
             {
-                return sec.Code + month.ToString().Substring(2);
+                return "Z";
             }
         }
     }

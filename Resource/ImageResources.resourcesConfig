@@ -8,13 +8,13 @@
   <Resource Name="Icons.Open" Type="System.Drawing.Bitmap" FileName="" Value="" />
   <Resource Name="Icons.Help" Type="System.Drawing.Bitmap" FileName="" Value="" />
   <Resource Name="Icons.FilterAccount" Type="System.Drawing.Bitmap" FileName="D:\worktable\Futs.Moniter\XConsole\Resource\FilterAccount_02_16.png" Value="" />
-  <Resource Name="Icons.ViewExpand" Type="System.Drawing.Bitmap" FileName="" Value="" />
+  <Resource Name="Icons.ViewExpand" Type="System.Drawing.Bitmap" FileName="D:\worktable\Futs.Moniter\XConsole\Resource\ViewExpand_02_24.png" Value="" />
   <Resource Name="Icons.Paste" Type="System.Drawing.Bitmap" FileName="" Value="" />
   <Resource Name="Icons.Print" Type="System.Drawing.Bitmap" FileName="" Value="" />
   <Resource Name="Icons.16x16.OK" Type="System.Drawing.Bitmap" FileName="" Value="" />
-  <Resource Name="Icons.ViewCollapse" Type="System.Drawing.Bitmap" FileName="" Value="" />
+  <Resource Name="Icons.ViewCollapse" Type="System.Drawing.Bitmap" FileName="D:\worktable\Futs.Moniter\XConsole\Resource\ViewCollapse_02_24.png" Value="" />
   <Resource Name="Icons.ViewAccount" Type="System.Drawing.Bitmap" FileName="D:\worktable\Futs.Moniter\XConsole\Resource\ViewAccount_02_16.png" Value="" />
-  <Resource Name="Icons.ViewReset" Type="System.Drawing.Bitmap" FileName="" Value="" />
+  <Resource Name="Icons.ViewReset" Type="System.Drawing.Bitmap" FileName="D:\worktable\Futs.Moniter\XConsole\Resource\ViewReset_02_24.png" Value="" />
   <Resource Name="Icons.ViewQuote" Type="System.Drawing.Bitmap" FileName="" Value="" />
   <Resource Name="Icons.Preview" Type="System.Drawing.Bitmap" FileName="" Value="" />
 </Resources>

@@ -30,6 +30,7 @@
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.itemsPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btnFlat = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsPanel)).BeginInit();
@@ -37,6 +38,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.btnFlat);
             this.kryptonPanel1.Controls.Add(this.itemsPanel);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
@@ -46,11 +48,18 @@
             // 
             // itemsPanel
             // 
-            this.itemsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemsPanel.Location = new System.Drawing.Point(0, 0);
             this.itemsPanel.Name = "itemsPanel";
-            this.itemsPanel.Size = new System.Drawing.Size(692, 334);
+            this.itemsPanel.Size = new System.Drawing.Size(692, 302);
             this.itemsPanel.TabIndex = 2;
+            // 
+            // btnFlat
+            // 
+            this.btnFlat.Location = new System.Drawing.Point(610, 306);
+            this.btnFlat.Name = "btnFlat";
+            this.btnFlat.Size = new System.Drawing.Size(70, 25);
+            this.btnFlat.TabIndex = 3;
+            this.btnFlat.Values.Text = "平 仓";
             // 
             // fmFollowItemView
             // 
@@ -76,5 +85,6 @@
 
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel itemsPanel;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnFlat;
     }
 }
