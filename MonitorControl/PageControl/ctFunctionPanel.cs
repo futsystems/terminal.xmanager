@@ -30,6 +30,12 @@ namespace TradingLib.MoniterControl
                 quoteList.addSecurity(s);
             }
             CoreService.EventIndicator.GotTickEvent += new Action<Tick>(GotTick);
+            CoreService.EventBasicInfo.OnSymbolEvent += new Action<SymbolImpl>(EventBasicInfo_OnSymbolEvent);
+        }
+
+        void EventBasicInfo_OnSymbolEvent(SymbolImpl obj)
+        {
+            quoteList.addSecurity(obj);
         }
 
         public void OnDisposed()

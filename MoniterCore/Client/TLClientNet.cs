@@ -15,6 +15,17 @@ namespace TradingLib.MoniterCore
 
         TLClient_MQ connecton = null;
 
+        /// <summary>
+        /// 是否处于连接状态
+        /// </summary>
+        public bool Connected
+        {
+            get
+            {
+                if (connecton == null) return false;
+                return connecton.IsConnected;
+            }
+        }
 
         public TLVersion ServerVersion { get { return connecton == null ? null : connecton.ServerVersion; } }
         string[] _servers = new string[] { };

@@ -15,7 +15,7 @@ using TradingLib.MoniterControl;
 
 namespace TradingLib.MoniterBase
 {
-    public partial class Workbench : ComponentFactory.Krypton.Toolkit.KryptonForm
+    public partial class Workbench : ComponentFactory.Krypton.Toolkit.KryptonForm,IEventBinder
     {
         static Workbench instance;
 
@@ -32,6 +32,56 @@ namespace TradingLib.MoniterBase
             instance = new Workbench();
         }
 
+        public void OnInit()
+        {
+
+            if (!CoreService.SiteInfo.Domain.Super)
+            {
+                //独立部署
+                if (CoreService.SiteInfo.Domain.Dedicated)
+                {
+                    this.Text = string.Format("{0}(独立部署)-{1}", GetProductName(CoreService.SiteInfo.ProductType), CoreService.SiteInfo.Domain.Name);
+                }
+                else
+                {
+                    this.Text = string.Format("{0}(云平台)-{1}【{2}】", GetProductName(CoreService.SiteInfo.ProductType), CoreService.SiteInfo.Domain.Name, CoreService.SiteInfo.Domain.IsProduction ? "运营" : "测试");
+                }
+            }
+            else
+            {
+                this.Text = string.Format("{0}-{1}", GetProductName(CoreService.SiteInfo.ProductType), CoreService.SiteInfo.Domain.Name);
+            }
+
+            //设置部署编号
+            lbDeployID.Text = CoreService.TLClient.ServerVersion.DeployID;
+
+            if (!CoreService.SiteInfo.Domain.Super)
+            {
+                DateTime expire = Util.ToDateTime(CoreService.SiteInfo.Domain.DateExpired, 235959);
+                DateTime now = DateTime.Now;
+                double daysremain = expire.Subtract(now).TotalDays;
+                if (daysremain < 7)
+                {
+                    lbExpireMessage.Text = string.Format("柜台还有{0:F}天过期,请及时续费", daysremain);
+                    lbExpireMessage.ForeColor = UIConstant.ShortSideColor;
+                }
+                else
+                {
+                    lbExpireMessage.Visible = false;
+                }
+            }
+
+            if (CoreService.TLClient.Connected)
+            {
+                imgLink.Image = (Image)Properties.Resources.online;
+            }
+            //CoreService.TLClient.
+        }
+
+        public void OnDisposed()
+        { 
+        
+        }
         MenuStrip menu;
         ToolStrip toolbar;
         StatusStrip status;
@@ -48,14 +98,25 @@ namespace TradingLib.MoniterBase
             // restore form location from last session
             //FormLocationHelper.Apply(this, "StartupFormPosition", true);
 
-            contentPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            contentPanel.Dock = DockStyle.Fill;
-            this.Controls.Add(contentPanel);
+            
+
+            
 
             // Use the Idle event to update the status of menu and toolbar items.
             Application.Idle += OnApplicationIdle;
             this.Load += new EventHandler(Workbench_Load);
+            this.FormClosing += new FormClosingEventHandler(Workbench_FormClosing);
         }
+
+        void Workbench_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MoniterHelper.WindowConfirm("确认退出管理端?") == System.Windows.Forms.DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
+
+
 
         /// <summary>
         /// 窗体第一次显示时加载控件初始化操作
@@ -64,37 +125,59 @@ namespace TradingLib.MoniterBase
         /// <param name="e"></param>
         void Workbench_Load(object sender, EventArgs e)
         {
-            LoggingService.Info("Run Control Init");
 
-            //窗体第一次显示时才进行菜单和工具栏的加载，提前加载由于没有登入无法获得权限等信息
-            menu = new MenuStrip();
-            MenuService.AddItemsToMenu(menu.Items, this, "/Workbench/MainMenu");
-
-            toolbar = ToolbarService.CreateToolStrip(this, "/Workbench/Toolbar");
-
-            status = new StatusStrip();
-            status.RenderMode = ToolStripRenderMode.ManagerRenderMode;
-
-            this.Controls.Add(toolbar);
-            this.Controls.Add(menu);
-            this.Controls.Add(status);
+            InitControl();
 
             InitSplitContainer();
 
-
+            //初始化界面控件
             this.WindowState = FormWindowState.Maximized;
             foreach (ICommand command in AddInTree.BuildItems("/Workspace/ControlInit", this, false))
             {
                 command.Run();
             }
 
-            this.Text = string.Format("{0}-{1}", GetProductName(CoreService.SiteInfo.ProductType), CoreService.SiteInfo.Domain.Name);
-
             
+
             //启动弹窗线程
             InitPopBW();
+
+            CoreService.EventCore.OnConnectedEvent += new VoidDelegate(EventCore_OnConnectedEvent);
+            CoreService.EventCore.OnDisconnectedEvent += new VoidDelegate(EventCore_OnDisconnectedEvent);
+            //需要在load后再注册核心调用函数 否则会出现 对象未初始化完毕
+            CoreService.EventCore.RegIEventHandler(this);
+
         }
 
+        void EventCore_OnDisconnectedEvent()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new VoidDelegate(EventCore_OnDisconnectedEvent), new object[] { });
+            }
+            else
+            {
+                imgLink.Image = (Image)Properties.Resources.offline;
+                contentPanel.Visible = false;
+                lbSpring.Text = "网络故障,管理段掉线,请退出软件后重新登入";
+            }
+            
+        }
+
+        void EventCore_OnConnectedEvent()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new VoidDelegate(EventCore_OnDisconnectedEvent), new object[] { });
+            }
+            else
+            {
+                imgLink.Image = (Image)Properties.Resources.online;
+                lbSpring.Text = "";
+            }
+        }
+
+        
         string GetProductName(QSEnumProductType type)
         {
             switch (type)
@@ -111,6 +194,12 @@ namespace TradingLib.MoniterBase
 
         ComponentFactory.Krypton.Toolkit.KryptonSplitContainer mainContainer = null;
         ComponentFactory.Krypton.Toolkit.KryptonSplitContainer bottomContainer = null;
+
+
+        #region 初始化
+        /// <summary>
+        /// 初始化split容器控件
+        /// </summary>
         void InitSplitContainer()
         {
             this.mainContainer = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
@@ -142,6 +231,129 @@ namespace TradingLib.MoniterBase
 
             
         }
+        #region 控件
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel lbDeployID;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel lbExpireMessage;
+        private System.Windows.Forms.ToolStripStatusLabel lbSpring;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel imgLink;
+
+        #endregion
+
+        /// <summary>
+        /// 初始化菜单 工具栏 状态栏
+        /// </summary>
+        void InitControl()
+        {
+            LoggingService.Info("Run Control Init");
+
+            contentPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            contentPanel.Dock = DockStyle.Fill;
+            this.Controls.Add(contentPanel);
+
+            //窗体第一次显示时才进行菜单和工具栏的加载，提前加载由于没有登入无法获得权限等信息
+            menu = new MenuStrip();
+            MenuService.AddItemsToMenu(menu.Items, this, "/Workbench/MainMenu");
+            
+
+
+            toolbar = ToolbarService.CreateToolStrip(this, "/Workbench/Toolbar");
+            this.Controls.Add(toolbar);
+            this.Controls.Add(menu);
+
+            status = new StatusStrip();
+            status.RenderMode = ToolStripRenderMode.ManagerRenderMode;
+
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lbDeployID = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lbExpireMessage = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lbSpring = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.imgLink = new System.Windows.Forms.ToolStripStatusLabel();
+            
+
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(59, 17);
+            this.toolStripStatusLabel1.Text = "部署编号:";
+            // 
+            // lbDeployID
+            // 
+            this.lbDeployID.Name = "lbDeployID";
+            this.lbDeployID.Size = new System.Drawing.Size(18, 17);
+            this.lbDeployID.Text = "--";
+
+            
+
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(18, 17);
+            this.toolStripStatusLabel2.Text = "--";
+            this.toolStripStatusLabel2.Visible = false;
+            // 
+            // lbExpireMessage
+            // 
+            this.lbExpireMessage.Name = "lbExpireMessage";
+            this.lbExpireMessage.Size = new System.Drawing.Size(162, 17);
+            this.lbExpireMessage.Text = "柜台还有7天到期,请及时续费";
+
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(18, 17);
+            this.toolStripStatusLabel3.Text = "连接:";
+            //this.toolStripStatusLabel2.Visible = false;
+
+
+            // 
+            // imgLink
+            // 
+            this.imgLink.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.imgLink.Image = global::TradingLib.MoniterBase.Properties.Resources.offline;
+            this.imgLink.Name = "imgLink";
+            this.imgLink.Size = new System.Drawing.Size(16, 17);
+            this.imgLink.Text = "--";
+            // 
+            // lbSpring
+            // 
+            this.lbSpring.Name = "lbSpring";
+            this.lbSpring.Size = new System.Drawing.Size(418, 17);
+            this.lbSpring.Spring = true;
+            this.lbSpring.Text = "";
+            //this.lbSpring.Visible = false;
+
+
+
+
+            // 
+            // statusStrip1
+            // 
+            this.status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.lbDeployID,
+            this.toolStripStatusLabel2,
+            this.lbExpireMessage,
+            this.lbSpring,
+            this.toolStripStatusLabel3,
+            this.imgLink});
+            this.status.Location = new System.Drawing.Point(0, 294);
+            this.status.Name = "statusStrip1";
+            this.status.Size = new System.Drawing.Size(737, 22);
+            this.status.TabIndex = 0;
+            this.status.Text = "statusStrip1";
+
+            this.Controls.Add(status);
+        }
+
+        #endregion
 
         //public void ShowControl(string mcName)
         //{

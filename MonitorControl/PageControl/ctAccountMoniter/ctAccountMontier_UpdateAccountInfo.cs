@@ -47,7 +47,7 @@ namespace TradingLib.MoniterControl
         const string UNREALIZEDPL = "浮动盈亏";
         const string COMMISSION = "手续费";
         const string PROFIT = "净利";
-        //const string HOLDSIZE = "持";
+        const string HOLDSIZE = "持仓";
 
 
         const string CATEGORYSTR = "帐户类型";
@@ -75,6 +75,7 @@ namespace TradingLib.MoniterControl
         const string MAINACCTRISKRULE = "强平规则";
         const string WARN = "警告";
         const string WARNSTR = "警告消息";
+        const string CURRENCY = "货币";
 
         DataTable gt = new DataTable();
         BindingSource datasource = new BindingSource();
@@ -121,7 +122,7 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(UNREALIZEDPL);//9
             gt.Columns.Add(COMMISSION);//10
             gt.Columns.Add(PROFIT);//11
-
+            gt.Columns.Add(HOLDSIZE);//
             //帐户类别
             gt.Columns.Add(CATEGORY);//18
             gt.Columns.Add(CATEGORYSTR);
@@ -168,7 +169,8 @@ namespace TradingLib.MoniterControl
             //交易权限
             gt.Columns.Add(EXECUTE);//3
             gt.Columns.Add(EXECUTEIMG, typeof(Image));//4
-
+            gt.Columns.Add(CURRENCY);
+            
 
             gt.Columns.Add(DELETE);
             
@@ -217,7 +219,7 @@ namespace TradingLib.MoniterControl
             accountgrid.Columns[NAME].Width = 80;
             accountgrid.Columns[EXECUTEIMG].Width = 30;
 
-
+            
             accountgrid.Columns[HOLDNIGHT].Width = 50;
             accountgrid.Columns[MAINACCOUNT].Width = 140;
             accountgrid.Columns[MACTCONNIMG].Width = 50;
@@ -230,14 +232,14 @@ namespace TradingLib.MoniterControl
             accountgrid.Columns[ACCOUNT].Width = 100;
             accountgrid.Columns[NAME].Width = 80;
             accountgrid.Columns[EXECUTEIMG].Width = 30;
-
+            accountgrid.Columns[HOLDSIZE].Width = 40;
 
             accountgrid.Columns[HOLDNIGHT].Width = 50;
 
             accountgrid.Columns[ROUTEIMG].Width = 50;
             accountgrid.Columns[LOGINSTATUSIMG].Width = 50;
             accountgrid.Columns[EXECUTEIMG].Width = 50;
-
+            accountgrid.Columns[CURRENCY].Width = 50;
         }
 
         private void accountgrid_SizeChanged_FixWidth(object sender, EventArgs e)
@@ -501,7 +503,7 @@ namespace TradingLib.MoniterControl
                         gt.Rows[i][UNREALIZEDPL] = decDisp(0);
                         gt.Rows[i][COMMISSION] = decDisp(0);
                         gt.Rows[i][PROFIT] = decDisp(0);
-
+                        gt.Rows[i][HOLDSIZE] = 0;
                         gt.Rows[i][CATEGORY] = account.Category.ToString();
                         gt.Rows[i][CATEGORYSTR] = Util.GetEnumDescription(account.Category);
 
@@ -548,6 +550,7 @@ namespace TradingLib.MoniterControl
                         
                         gt.Rows[i][WARN] = account.IsWarn;
                         gt.Rows[i][WARNSTR] = account.WarnMessage;
+                        gt.Rows[i][CURRENCY] = Util.GetEnumDescription(account.Currency);
 
 
                         accountmap.TryAdd(account.Account, account);
@@ -565,6 +568,7 @@ namespace TradingLib.MoniterControl
                         gt.Rows[r][CATEGORYSTR] = Util.GetEnumDescription(account.Category);
                         gt.Rows[r][CATEGORY] = account.Category.ToString();
                         gt.Rows[r][HOLDNIGHT] = account.IntraDay ? "禁止" : "允许";
+                        //gt.Rows[r][HOLDSIZE] = account.ho
                         //gt.Rows[r][POSLOK] = account.PosLock ? "支持" : "不支持";
                         //gt.Rows[r][SIDEMARGIN] = account.SideMargin ? "支持" : "不支持";
 
@@ -573,6 +577,8 @@ namespace TradingLib.MoniterControl
 
                         gt.Rows[r][NAME] = account.Name;
                         gt.Rows[r][DELETE] = account.Deleted;
+                        gt.Rows[r][CURRENCY] = Util.GetEnumDescription(account.Currency);
+
 
                         gt.Rows[r][ROUTERGROUP] = account.RG_ID;
                         RouterGroupSetting rg = CoreService.BasicInfoTracker.GetRouterGroup(account.RG_ID);
@@ -595,6 +601,7 @@ namespace TradingLib.MoniterControl
                         {
                             AccountWarnOff(account.Account);
                         }
+
                     }
 
                 }
@@ -638,7 +645,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[r][COMMISSION] = decDisp(account.Commission);
                     gt.Rows[r][PROFIT] = decDisp(account.Profit);
                     //gt.Rows[r][PROFITLOSSIMG] = getProfitLossImage(account.Profit);
-                    //gt.Rows[r][HOLDSIZE] = account.TotalPositionSize;
+                    gt.Rows[r][HOLDSIZE] = account.TotalPositionSize;
                 }
             }
         }
@@ -698,7 +705,9 @@ namespace TradingLib.MoniterControl
                 else if (v == 0)
                 {
                     e.CellStyle.ForeColor = System.Drawing.Color.Black;
+                    
                 }
+
 
             }
         }

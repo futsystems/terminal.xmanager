@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.rgTree = new ComponentFactory.Krypton.Toolkit.KryptonTreeView();
             this.rgGrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.rgTree = new ComponentFactory.Krypton.Toolkit.KryptonTreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -48,14 +48,6 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(624, 180);
             this.kryptonPanel1.TabIndex = 0;
             // 
-            // rgTree
-            // 
-            this.rgTree.Dock = System.Windows.Forms.DockStyle.Left;
-            this.rgTree.Location = new System.Drawing.Point(0, 0);
-            this.rgTree.Name = "rgTree";
-            this.rgTree.Size = new System.Drawing.Size(140, 180);
-            this.rgTree.TabIndex = 6;
-            // 
             // rgGrid
             // 
             this.rgGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -67,6 +59,14 @@
             this.rgGrid.RowTemplate.Height = 23;
             this.rgGrid.Size = new System.Drawing.Size(484, 180);
             this.rgGrid.TabIndex = 7;
+            // 
+            // rgTree
+            // 
+            this.rgTree.Dock = System.Windows.Forms.DockStyle.Left;
+            this.rgTree.Location = new System.Drawing.Point(0, 0);
+            this.rgTree.Name = "rgTree";
+            this.rgTree.Size = new System.Drawing.Size(140, 180);
+            this.rgTree.TabIndex = 6;
             // 
             // imageList1
             // 
@@ -84,6 +84,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "fmRouterGroup";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "主帐户组管理";
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();

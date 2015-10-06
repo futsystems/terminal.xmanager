@@ -28,94 +28,96 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
-            this.kryptonNavigator1 = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
-            this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
-            this.kryptonSplitContainer1.Panel1.SuspendLayout();
-            this.kryptonSplitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
-            this.kryptonNavigator1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).BeginInit();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lbDeployID = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lbExpireMessage = new System.Windows.Forms.ToolStripStatusLabel();
+            this.imgLink = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lbSpring = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // kryptonSplitContainer1
+            // statusStrip1
             // 
-            this.kryptonSplitContainer1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.kryptonSplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonSplitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonSplitContainer1.Name = "kryptonSplitContainer1";
-            this.kryptonSplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.lbDeployID,
+            this.toolStripStatusLabel2,
+            this.lbExpireMessage,
+            this.lbSpring,
+            this.imgLink});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 294);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(737, 22);
+            this.statusStrip1.TabIndex = 0;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // kryptonSplitContainer1.Panel1
+            // toolStripStatusLabel1
             // 
-            this.kryptonSplitContainer1.Panel1.Controls.Add(this.kryptonNavigator1);
-            this.kryptonSplitContainer1.Size = new System.Drawing.Size(689, 400);
-            this.kryptonSplitContainer1.SplitterDistance = 260;
-            this.kryptonSplitContainer1.TabIndex = 0;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(59, 17);
+            this.toolStripStatusLabel1.Text = "部署编号:";
             // 
-            // kryptonNavigator1
+            // lbDeployID
             // 
-            this.kryptonNavigator1.Location = new System.Drawing.Point(239, 36);
-            this.kryptonNavigator1.Name = "kryptonNavigator1";
-            this.kryptonNavigator1.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
-            this.kryptonPage1,
-            this.kryptonPage2});
-            this.kryptonNavigator1.SelectedIndex = 0;
-            this.kryptonNavigator1.Size = new System.Drawing.Size(250, 150);
-            this.kryptonNavigator1.TabIndex = 0;
-            this.kryptonNavigator1.Text = "kryptonNavigator1";
+            this.lbDeployID.Name = "lbDeployID";
+            this.lbDeployID.Size = new System.Drawing.Size(18, 17);
+            this.lbDeployID.Text = "--";
             // 
-            // kryptonPage1
+            // toolStripStatusLabel2
             // 
-            this.kryptonPage1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.kryptonPage1.Flags = 65534;
-            this.kryptonPage1.LastVisibleSet = true;
-            this.kryptonPage1.MinimumSize = new System.Drawing.Size(50, 50);
-            this.kryptonPage1.Name = "kryptonPage1";
-            this.kryptonPage1.Size = new System.Drawing.Size(100, 100);
-            this.kryptonPage1.Text = "kryptonPage1";
-            this.kryptonPage1.ToolTipTitle = "Page ToolTip";
-            this.kryptonPage1.UniqueName = "8E0AB381F1AE43C734B0551EBCA7E6F2";
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(18, 17);
+            this.toolStripStatusLabel2.Text = "--";
+            this.toolStripStatusLabel2.Visible = false;
             // 
-            // kryptonPage2
+            // lbExpireMessage
             // 
-            this.kryptonPage2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.kryptonPage2.Flags = 65534;
-            this.kryptonPage2.LastVisibleSet = true;
-            this.kryptonPage2.MinimumSize = new System.Drawing.Size(50, 50);
-            this.kryptonPage2.Name = "kryptonPage2";
-            this.kryptonPage2.Size = new System.Drawing.Size(100, 100);
-            this.kryptonPage2.Text = "kryptonPage2";
-            this.kryptonPage2.ToolTipTitle = "Page ToolTip";
-            this.kryptonPage2.UniqueName = "BCF5F252A67B4EC9ADB3389F90F87F08";
+            this.lbExpireMessage.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lbExpireMessage.Name = "lbExpireMessage";
+            this.lbExpireMessage.Size = new System.Drawing.Size(162, 17);
+            this.lbExpireMessage.Text = "柜台还有7天到期,请及时续费";
+            // 
+            // imgLink
+            // 
+            this.imgLink.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.imgLink.Image = global::TradingLib.MoniterBase.Properties.Resources.offline;
+            this.imgLink.Name = "imgLink";
+            this.imgLink.Size = new System.Drawing.Size(16, 17);
+            this.imgLink.Text = "--";
+            // 
+            // lbSpring
+            // 
+            this.lbSpring.Name = "lbSpring";
+            this.lbSpring.Size = new System.Drawing.Size(418, 17);
+            this.lbSpring.Spring = true;
+            this.lbSpring.Text = "spring";
+            this.lbSpring.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(689, 400);
-            this.Controls.Add(this.kryptonSplitContainer1);
+            this.ClientSize = new System.Drawing.Size(737, 316);
+            this.Controls.Add(this.statusStrip1);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.kryptonSplitContainer1.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).EndInit();
-            this.kryptonSplitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).EndInit();
-            this.kryptonNavigator1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer1;
-        private ComponentFactory.Krypton.Navigator.KryptonNavigator kryptonNavigator1;
-        private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage1;
-        private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage2;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel lbDeployID;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel lbExpireMessage;
+        private System.Windows.Forms.ToolStripStatusLabel lbSpring;
+        private System.Windows.Forms.ToolStripStatusLabel imgLink;
     }
 }

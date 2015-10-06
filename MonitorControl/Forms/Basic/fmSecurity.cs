@@ -97,7 +97,7 @@ namespace TradingLib.MoniterControl
 
                     gt.Rows[i][CCODE] = sec.Code;
                     gt.Rows[i][NAME] = sec.Name;
-                    gt.Rows[i][CURRENCY] = sec.Currency;
+                    gt.Rows[i][CURRENCY] = Util.GetEnumDescription(sec.Currency);
                     gt.Rows[i][TYPE] = sec.Type;
                     gt.Rows[i][MULTIPLE] = sec.Multiple;
                     gt.Rows[i][PRICETICK] = sec.PriceTick;
@@ -155,7 +155,7 @@ namespace TradingLib.MoniterControl
                         //2.更新表格
                         gt.Rows[i][CCODE] = target.Code;
                         gt.Rows[i][NAME] = target.Name;
-                        gt.Rows[i][CURRENCY] = target.Currency;
+                        gt.Rows[i][CURRENCY] = Util.GetEnumDescription(sec.Currency);
                         gt.Rows[i][TYPE] = target.Type;
                         gt.Rows[i][MULTIPLE] = target.Multiple;
                         gt.Rows[i][PRICETICK] = target.PriceTick;
@@ -275,7 +275,7 @@ namespace TradingLib.MoniterControl
 
             //需要在绑定数据源后设定具体的可见性
             grid.Columns[ID].Visible = false;
-            grid.Columns[CURRENCY].Visible = false;
+            //grid.Columns[CURRENCY].Visible = false;
             grid.Columns[UNDERLAYING].Visible = false;
             grid.Columns[TYPE].Visible = false;
 

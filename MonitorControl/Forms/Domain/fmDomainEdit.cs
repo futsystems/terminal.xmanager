@@ -237,6 +237,10 @@ namespace TradingLib.MoniterControl
             router_sim.Checked = _domain.Router_Sim;
             splisttab.Enabled = _domain.Module_FinService;
 
+            agentLimit.Value = _domain.AgentLimit;
+            discountNum.Value = _domain.DiscountNum;
+            isproduction.Checked = _domain.IsProduction;
+
             this.Text = "编辑域分区:" + _domain.Name;
 
         }
@@ -279,6 +283,11 @@ namespace TradingLib.MoniterControl
                 _domain.Router_Live = router_live.Checked;
                 _domain.Router_Sim = router_sim.Checked;
 
+                _domain.AgentLimit = (int)agentLimit.Value;
+                _domain.DiscountNum = (int)discountNum.Value; 
+                _domain.IsProduction = isproduction.Checked;
+
+
                 if (MoniterHelper.WindowConfirm("确认更新分区设置?") == System.Windows.Forms.DialogResult.Yes)
                 {
                     CoreService.TLClient.ReqUpdateDomain(_domain);
@@ -312,6 +321,10 @@ namespace TradingLib.MoniterControl
 
                 _domain.Router_Live = router_live.Checked;
                 _domain.Router_Sim = router_sim.Checked;
+
+                _domain.AgentLimit = (int)agentLimit.Value;
+                _domain.DiscountNum = (int)discountNum.Value;
+                _domain.IsProduction = isproduction.Checked;
 
                 if ( (!_domain.Router_Live)&& (!_domain.Router_Sim))
                 {

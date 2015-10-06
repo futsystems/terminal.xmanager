@@ -26,6 +26,7 @@ namespace TradingLib.MoniterControl
             btnUpdateInterday.Enabled = false;
 
             MoniterHelper.AdapterToIDataSource(cbTransferType).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumOrderTransferType>());
+            MoniterHelper.AdapterToIDataSource(cbCurrnecy).BindDataSource(MoniterHelper.GetEnumValueObjects<CurrencyType>());
             this.Load += new EventHandler(ctAccountInfo_Load);
             
         }
@@ -38,15 +39,23 @@ namespace TradingLib.MoniterControl
             btnUpdateInterday.Click += new EventHandler(btnUpdateInterday_Click);
             btnUpdateTransferType.Click += new EventHandler(btnUpdateTransferType_Click);
             btnExecute.Click += new EventHandler(btnExecute_Click);
+            btnUpdateCurrency.Click += new EventHandler(btnUpdateCurrency_Click);
 
             cbHoldNight.CheckedChanged += new EventHandler(cbHoldNight_CheckedChanged);
             cbTransferType.SelectedIndexChanged += new EventHandler(cbTransferType_SelectedIndexChanged);
+            cbCurrnecy.SelectedIndexChanged += new EventHandler(cbCurrnecy_SelectedIndexChanged);
+            cbCurrnecy.Enabled = false;
+
             CoreService.EventAccount.OnAccountSelectedEvent += new Action<AccountLite>(OnAccountSelected);
             CoreService.EventAccount.OnAccountChangedEvent += new Action<AccountLite>(EventAccount_OnAccountChangedEvent);
 
             CoreService.EventCore.RegIEventHandler(this);
             
         }
+
+
+
+        
 
         public void OnInit()
         {
@@ -78,19 +87,16 @@ namespace TradingLib.MoniterControl
             {
                 if (!string.IsNullOrEmpty(info.ClientID))
                 {
-                    lbFront.Text = info.FrontID;
+                    lbFront.Text = string.IsNullOrEmpty(info.FrontID) ? "直连" : info.FrontID;
                     lbProductInfo.Text = info.ProductInfo;
                     lbIPAddress.Text = info.IPAddress;
-                    //lbGLocation.Text = info.Geography;
                     if (!string.IsNullOrEmpty(info.IPAddress))
                     {
                         string[] rec = info.IPAddress.Split(':');
-                        if (rec.Length >= 2)
-                        {
-                            //异步查询物理位置
-                            Func<string, string> del = new Func<string, string>(QryLocation);
-                            del.BeginInvoke(rec[0], QryLocationCallback, null);
-                        }
+                        string ip =rec[0];
+                        //异步查询物理位置
+                        Func<string, string> del = new Func<string, string>(QryLocation);
+                        del.BeginInvoke(ip, QryLocationCallback, null);
                     }
                 }
             }
@@ -118,6 +124,15 @@ namespace TradingLib.MoniterControl
             }
         }
 
+        void btnUpdateCurrency_Click(object sender, EventArgs e)
+        {
+            if (MoniterHelper.WindowConfirm("确认更新交易帐户货币类型?") == DialogResult.Yes)
+            {
+                CoreService.TLClient.ReqUpdateAccountCurrency(account.Account, (CurrencyType)cbCurrnecy.SelectedValue);
+            }
+        }
+
+
         void EventAccount_OnAccountChangedEvent(AccountLite obj)
         {
             if (account != null && account.Account.Equals(obj.Account))
@@ -132,6 +147,7 @@ namespace TradingLib.MoniterControl
                 cbTransferType.SelectedValue = account.OrderRouteType;
                 btnUpdateInterday.Enabled = false;
                 btnUpdateTransferType.Enabled = false;
+                btnUpdateCurrency.Enabled = false;
             }
         }
 
@@ -160,6 +176,19 @@ namespace TradingLib.MoniterControl
             else
             {
                 btnUpdateInterday.Enabled = true;
+            }
+        }
+
+        void cbCurrnecy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (account == null) return;
+            if (account.Currency != (CurrencyType)cbCurrnecy.SelectedValue)
+            {
+                btnUpdateCurrency.Enabled = true;
+            }
+            else
+            {
+                btnUpdateCurrency.Enabled = false;
             }
         }
 
@@ -204,6 +233,7 @@ namespace TradingLib.MoniterControl
             
             cbHoldNight.Checked = !account.IntraDay;
             cbTransferType.SelectedValue = account.OrderRouteType;
+            cbCurrnecy.SelectedValue = account.Currency;
 
             btnExecute.Enabled = true;
 

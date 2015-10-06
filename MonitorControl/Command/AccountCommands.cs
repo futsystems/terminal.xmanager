@@ -55,7 +55,7 @@ namespace TradingLib.MoniterControl
 
 
 
-
+    
 
 
     /// <summary>

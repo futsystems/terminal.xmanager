@@ -30,12 +30,12 @@ namespace TradingLib.MoniterControl
             if (CoreService.SiteInfo.ProductType == QSEnumProductType.CounterSystem)
             {
                 lbsubacctname.Text = "子帐户数:";
-                lbmainacctname.Text = "母帐户数:";
+                //lbmainacctname.Text = "母帐户数:";
             }
             if (CoreService.SiteInfo.ProductType == QSEnumProductType.VendorMoniter)
             {
                 lbsubacctname.Text = "配资客户数:";
-                lbmainacctname.Text = "主帐户数:";
+                //lbmainacctname.Text = "主帐户数:";
                 panelBrokerEngine.Visible = false;//主帐户监控不用查看成交引擎
             }
 

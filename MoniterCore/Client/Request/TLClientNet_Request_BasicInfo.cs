@@ -73,14 +73,14 @@ namespace TradingLib.MoniterCore
             SendPacket(request);
         }
 
-        public void ReqAddSecurity(SecurityFamilyImpl sec)
-        {
-            logger.Info("请求添加品种信息");
-            MGRReqAddSecurityRequest request = RequestTemplate<MGRReqAddSecurityRequest>.CliSendRequest(requestid++);
-            request.SecurityFaimly = sec;
+        //public void ReqAddSecurity(SecurityFamilyImpl sec)
+        //{
+        //    logger.Info("请求添加品种信息");
+        //    MGRReqAddSecurityRequest request = RequestTemplate<MGRReqAddSecurityRequest>.CliSendRequest(requestid++);
+        //    request.SecurityFaimly = sec;
 
-            SendPacket(request);
-        }
+        //    SendPacket(request);
+        //}
 
         public void ReqQrySymbol()
         {
@@ -99,14 +99,14 @@ namespace TradingLib.MoniterCore
             SendPacket(request);
         }
 
-        public void ReqAddSymbol(SymbolImpl sym)
-        {
-            logger.Info("请求添加合约: expiredate:" + sym.ExpireDate.ToString());
-            MGRReqAddSymbolRequest request = RequestTemplate<MGRReqAddSymbolRequest>.CliSendRequest(requestid++);
-            request.Symbol = sym;
+        //public void ReqUpdateSymbol(SymbolImpl sym)
+        //{
+        //    logger.Info("请求更新合约");
+        //    MGRUpdateSymbolRequest request = RequestTemplate<MGRUpdateSymbolRequest>.CliSendRequest(requestid++);
+        //    request.Symbol = sym;
 
-            SendPacket(request);
-        }
+        //    SendPacket(request);
+        //}
         #endregion
     }
 }

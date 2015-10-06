@@ -83,6 +83,12 @@ namespace TradingLib.MoniterCore
        
         }
 
+        public void ReqUpdateAccountCurrency(string account, CurrencyType currency)
+        {
+            logger.Info("请求更新帐户货贝类型:" + account + " currency:" + currency.ToString());
+            this.ReqContribRequest("AccountManager", "UpdateAccountCurrency", Mixins.Json.JsonMapper.ToJson(new { account = account, currency = currency.ToString() }));
+       
+        }
         public void ReqAddAccount(QSEnumAccountCategory category, string account, string pass, int mgrid, int userid, int routergroupid)
         {
             logger.Info("请求添加交易帐号");

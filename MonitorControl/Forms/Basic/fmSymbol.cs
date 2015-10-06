@@ -490,7 +490,7 @@ namespace TradingLib.MoniterControl
             if (CoreService.BasicInfoTracker.GetSymbol(sym.Symbol) == null)
             {
 
-                CoreService.TLClient.ReqAddSymbol(sym);
+                CoreService.TLClient.ReqUpdateSymbol(sym);
             }
             else
             {

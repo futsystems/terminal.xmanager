@@ -31,6 +31,14 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
+            kryptonLabel15.Visible = false;
+            cbExStrategyTemplate.Visible = false;
+
+            if (CoreService.SiteInfo.Domain.Super)
+            {
+                kryptonLabel15.Visible = true;
+                cbExStrategyTemplate.Visible = true;
+            }
 
             CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryCommissionTemplate", this.OnQryCommissionTemplate);
             CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryMarginTemplate", this.OnQryMarginTemplate);
@@ -38,6 +46,8 @@ namespace TradingLib.MoniterControl
             CoreService.TLClient.ReqQryCommissionTemplate();
             CoreService.TLClient.ReqQryMarginTemplate();
             CoreService.TLClient.ReqQryExStrategyTemplate();
+
+
         }
 
         public void OnDisposed()

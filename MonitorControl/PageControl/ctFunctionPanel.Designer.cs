@@ -54,7 +54,7 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(435, 263);
+            this.kryptonPanel1.Size = new System.Drawing.Size(435, 292);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // kryptonNavigator1
@@ -74,8 +74,8 @@
             this.kryptonPage1,
             this.kryptonPage2,
             this.kryptonPage3});
-            this.kryptonNavigator1.SelectedIndex = 1;
-            this.kryptonNavigator1.Size = new System.Drawing.Size(435, 263);
+            this.kryptonNavigator1.SelectedIndex = 0;
+            this.kryptonNavigator1.Size = new System.Drawing.Size(435, 292);
             this.kryptonNavigator1.TabIndex = 0;
             this.kryptonNavigator1.Text = "kryptonNavigator1";
             // 
@@ -87,7 +87,7 @@
             this.kryptonPage1.LastVisibleSet = true;
             this.kryptonPage1.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage1.Name = "kryptonPage1";
-            this.kryptonPage1.Size = new System.Drawing.Size(433, 236);
+            this.kryptonPage1.Size = new System.Drawing.Size(433, 265);
             this.kryptonPage1.Text = "帐户信息";
             this.kryptonPage1.ToolTipTitle = "Page ToolTip";
             this.kryptonPage1.UniqueName = "4F5C53DB656B4BFD9ABE0F998C4FAAEB";
@@ -97,7 +97,7 @@
             this.ctAccountInfo1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ctAccountInfo1.Location = new System.Drawing.Point(0, 0);
             this.ctAccountInfo1.Name = "ctAccountInfo1";
-            this.ctAccountInfo1.Size = new System.Drawing.Size(433, 236);
+            this.ctAccountInfo1.Size = new System.Drawing.Size(433, 265);
             this.ctAccountInfo1.TabIndex = 0;
             // 
             // kryptonPage2
@@ -164,7 +164,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.kryptonPanel1);
             this.Name = "ctFunctionPanel";
-            this.Size = new System.Drawing.Size(435, 263);
+            this.Size = new System.Drawing.Size(435, 292);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).EndInit();

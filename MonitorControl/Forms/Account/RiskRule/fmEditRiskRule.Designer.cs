@@ -42,6 +42,10 @@
             this.kryptonLabel12 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.accountRuleClassList = new ComponentFactory.Krypton.Toolkit.KryptonListBox();
             this.accountRuleItemList = new ComponentFactory.Krypton.Toolkit.KryptonListBox();
+            this.btnAddAccountRule = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnDelAccountRule = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnDelOrderRule = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnAddOrderRule = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
@@ -62,7 +66,7 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(407, 326);
+            this.kryptonPanel1.Size = new System.Drawing.Size(407, 391);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // kryptonNavigator1
@@ -83,7 +87,7 @@
             this.kryptonPage1,
             this.kryptonPage2});
             this.kryptonNavigator1.SelectedIndex = 1;
-            this.kryptonNavigator1.Size = new System.Drawing.Size(407, 326);
+            this.kryptonNavigator1.Size = new System.Drawing.Size(407, 391);
             this.kryptonNavigator1.TabIndex = 0;
             this.kryptonNavigator1.Text = "kryptonNavigator1";
             // 
@@ -95,28 +99,30 @@
             this.kryptonPage1.LastVisibleSet = true;
             this.kryptonPage1.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage1.Name = "kryptonPage1";
-            this.kryptonPage1.Size = new System.Drawing.Size(343, 303);
+            this.kryptonPage1.Size = new System.Drawing.Size(405, 364);
             this.kryptonPage1.Text = "交易规则";
             this.kryptonPage1.ToolTipTitle = "Page ToolTip";
             this.kryptonPage1.UniqueName = "5E167244D4D64B87BA8633ED5EBD2643";
             // 
             // kryptonPanel2
             // 
+            this.kryptonPanel2.Controls.Add(this.btnDelOrderRule);
             this.kryptonPanel2.Controls.Add(this.kryptonLabel3);
+            this.kryptonPanel2.Controls.Add(this.btnAddOrderRule);
             this.kryptonPanel2.Controls.Add(this.kryptonLabel2);
             this.kryptonPanel2.Controls.Add(this.orderRuleClassList);
             this.kryptonPanel2.Controls.Add(this.orderRuleItemList);
             this.kryptonPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel2.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel2.Name = "kryptonPanel2";
-            this.kryptonPanel2.Size = new System.Drawing.Size(343, 303);
+            this.kryptonPanel2.Size = new System.Drawing.Size(405, 364);
             this.kryptonPanel2.TabIndex = 0;
             // 
             // kryptonLabel3
             // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(5, 153);
+            this.kryptonLabel3.Location = new System.Drawing.Point(5, 183);
             this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(68, 18);
+            this.kryptonLabel3.Size = new System.Drawing.Size(63, 20);
             this.kryptonLabel3.TabIndex = 9;
             this.kryptonLabel3.Values.Text = "当前规则:";
             // 
@@ -124,7 +130,7 @@
             // 
             this.kryptonLabel2.Location = new System.Drawing.Point(3, 3);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(95, 18);
+            this.kryptonLabel2.Size = new System.Drawing.Size(88, 20);
             this.kryptonLabel2.TabIndex = 10;
             this.kryptonLabel2.Values.Text = "交易规则列表:";
             // 
@@ -134,16 +140,16 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.orderRuleClassList.Location = new System.Drawing.Point(5, 27);
             this.orderRuleClassList.Name = "orderRuleClassList";
-            this.orderRuleClassList.Size = new System.Drawing.Size(331, 120);
+            this.orderRuleClassList.Size = new System.Drawing.Size(392, 120);
             this.orderRuleClassList.TabIndex = 7;
             // 
             // orderRuleItemList
             // 
             this.orderRuleItemList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.orderRuleItemList.Location = new System.Drawing.Point(5, 177);
+            this.orderRuleItemList.Location = new System.Drawing.Point(5, 207);
             this.orderRuleItemList.Name = "orderRuleItemList";
-            this.orderRuleItemList.Size = new System.Drawing.Size(330, 120);
+            this.orderRuleItemList.Size = new System.Drawing.Size(392, 120);
             this.orderRuleItemList.TabIndex = 6;
             // 
             // kryptonPage2
@@ -154,13 +160,15 @@
             this.kryptonPage2.LastVisibleSet = true;
             this.kryptonPage2.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage2.Name = "kryptonPage2";
-            this.kryptonPage2.Size = new System.Drawing.Size(405, 301);
+            this.kryptonPage2.Size = new System.Drawing.Size(405, 364);
             this.kryptonPage2.Text = "强平规则";
             this.kryptonPage2.ToolTipTitle = "Page ToolTip";
             this.kryptonPage2.UniqueName = "F1CECBAB5D7F41FD198ACD1AE45AA574";
             // 
             // kryptonPanel3
             // 
+            this.kryptonPanel3.Controls.Add(this.btnDelAccountRule);
+            this.kryptonPanel3.Controls.Add(this.btnAddAccountRule);
             this.kryptonPanel3.Controls.Add(this.kryptonLabel1);
             this.kryptonPanel3.Controls.Add(this.kryptonLabel12);
             this.kryptonPanel3.Controls.Add(this.accountRuleClassList);
@@ -168,22 +176,22 @@
             this.kryptonPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel3.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel3.Name = "kryptonPanel3";
-            this.kryptonPanel3.Size = new System.Drawing.Size(405, 301);
+            this.kryptonPanel3.Size = new System.Drawing.Size(405, 364);
             this.kryptonPanel3.TabIndex = 1;
             // 
             // kryptonLabel1
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(3, 3);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(95, 18);
+            this.kryptonLabel1.Size = new System.Drawing.Size(88, 20);
             this.kryptonLabel1.TabIndex = 9;
             this.kryptonLabel1.Values.Text = "强平规则列表:";
             // 
             // kryptonLabel12
             // 
-            this.kryptonLabel12.Location = new System.Drawing.Point(5, 153);
+            this.kryptonLabel12.Location = new System.Drawing.Point(5, 183);
             this.kryptonLabel12.Name = "kryptonLabel12";
-            this.kryptonLabel12.Size = new System.Drawing.Size(68, 18);
+            this.kryptonLabel12.Size = new System.Drawing.Size(63, 20);
             this.kryptonLabel12.TabIndex = 8;
             this.kryptonLabel12.Values.Text = "当前规则:";
             // 
@@ -200,16 +208,48 @@
             // 
             this.accountRuleItemList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.accountRuleItemList.Location = new System.Drawing.Point(5, 177);
+            this.accountRuleItemList.Location = new System.Drawing.Point(5, 207);
             this.accountRuleItemList.Name = "accountRuleItemList";
-            this.accountRuleItemList.Size = new System.Drawing.Size(393, 120);
+            this.accountRuleItemList.Size = new System.Drawing.Size(392, 120);
             this.accountRuleItemList.TabIndex = 6;
+            // 
+            // btnAddAccountRule
+            // 
+            this.btnAddAccountRule.Location = new System.Drawing.Point(327, 153);
+            this.btnAddAccountRule.Name = "btnAddAccountRule";
+            this.btnAddAccountRule.Size = new System.Drawing.Size(70, 25);
+            this.btnAddAccountRule.TabIndex = 10;
+            this.btnAddAccountRule.Values.Text = "添 加";
+            // 
+            // btnDelAccountRule
+            // 
+            this.btnDelAccountRule.Location = new System.Drawing.Point(327, 332);
+            this.btnDelAccountRule.Name = "btnDelAccountRule";
+            this.btnDelAccountRule.Size = new System.Drawing.Size(70, 25);
+            this.btnDelAccountRule.TabIndex = 11;
+            this.btnDelAccountRule.Values.Text = "删 除";
+            // 
+            // btnDelOrderRule
+            // 
+            this.btnDelOrderRule.Location = new System.Drawing.Point(327, 332);
+            this.btnDelOrderRule.Name = "btnDelOrderRule";
+            this.btnDelOrderRule.Size = new System.Drawing.Size(70, 25);
+            this.btnDelOrderRule.TabIndex = 13;
+            this.btnDelOrderRule.Values.Text = "删 除";
+            // 
+            // btnAddOrderRule
+            // 
+            this.btnAddOrderRule.Location = new System.Drawing.Point(327, 153);
+            this.btnAddOrderRule.Name = "btnAddOrderRule";
+            this.btnAddOrderRule.Size = new System.Drawing.Size(70, 25);
+            this.btnAddOrderRule.TabIndex = 12;
+            this.btnAddOrderRule.Values.Text = "添 加";
             // 
             // fmEditRiskRule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(407, 326);
+            this.ClientSize = new System.Drawing.Size(407, 391);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
@@ -251,5 +291,9 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnAddAccountRule;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnDelAccountRule;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnDelOrderRule;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnAddOrderRule;
     }
 }

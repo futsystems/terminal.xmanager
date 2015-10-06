@@ -135,8 +135,12 @@
     <Condition name="DeployState" deploy="s">
       <MenuItem id = "TaskLogManagerCommand"
                 label = "任务日志"
-                class = "TradingLib.MoniterBase.Command.TaskLogManagerCommand"/>
+                class = "TradingLib.MoniterBase.Command.TaskLogManagerCommand"/>      
     </Condition>
+
+    <MenuItem id = "DomainInfoCommand"
+                label = "授权信息"
+                class = "TradingLib.MoniterBase.Command.DomainInfoCommand"/>
     
 
     <MenuItem id = "Separator1" type = "Separator"/>
@@ -315,13 +319,20 @@
               icon = "Icons.Help"
               class = "TradingLib.MoniterBase.Command.HelpInfoCommand"/>
     
-    <MenuItem id = "DomainInfoCommand"
-              label = "授权信息"
-              class = "TradingLib.MoniterBase.Command.DomainInfoCommand"/>
+    
   </Path>
   
   <!--工具栏-->
   <Path name = "/Workbench/Toolbar">
+
+    
+    <ToolbarItem id = "ViewAccount"
+		             tooltip = "添加子账户"
+		             icon = "Icons.AccountAdd"
+		             class = "TradingLib.MoniterBase.Command.AddFAccountCommand"/>
+
+    <ToolbarItem id = "ViewSeparator" type = "Separator"/>
+    
     <ToolbarItem id = "ViewAccount"
 		             tooltip = "查看帐户列表"
 		             icon = "Icons.ViewAccount"

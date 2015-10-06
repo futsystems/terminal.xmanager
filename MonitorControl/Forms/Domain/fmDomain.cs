@@ -10,11 +10,13 @@ using System.Windows.Forms;
 using TradingLib.API;
 using TradingLib.Common;
 using TradingLib.MoniterCore;
+using Common.Logging;
 
 namespace TradingLib.MoniterControl
 {
     public partial class fmDomain : ComponentFactory.Krypton.Toolkit.KryptonForm, IEventBinder
     {
+        ILog logger = LogManager.GetLogger("DomanManager");
         public fmDomain()
         {
             InitializeComponent();
@@ -67,14 +69,14 @@ namespace TradingLib.MoniterControl
         public void OnInit()
         {
             CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryDomain", this.OnQryDomain);
-            CoreService.EventContrib.RegisterCallback("MgrExchServer", "NotifyDomain", this.OnNotifyDomain);
+            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyDomain", this.OnNotifyDomain);
             CoreService.TLClient.ReqQryDomain();
         }
 
         public void OnDisposed()
         {
             CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QryDomain", this.OnQryDomain);
-            CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "NotifyDomain", this.OnNotifyDomain);
+            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyDomain", this.OnNotifyDomain);
        
         }
 
@@ -96,8 +98,9 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        void OnNotifyDomain(string json, bool islast)
+        void OnNotifyDomain(string json)
         {
+            logger.Debug("Got NotifyDomain:" + json);
             DomainImpl obj = MoniterHelper.ParseJsonResponse<DomainImpl>(json);
             if (obj != null)
             {
@@ -128,6 +131,7 @@ namespace TradingLib.MoniterControl
 
         void InvokeGotDomain(DomainImpl domain)
         {
+            if (domain.ID == 1) return;
             if (InvokeRequired)
             {
                 Invoke(new Action<DomainImpl>(InvokeGotDomain), new object[] { domain });
@@ -147,7 +151,9 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][VENDORLIMIT] = domain.VendorLimit;
                     gt.Rows[i][ACCLIMIT] = domain.AccLimit;
                     gt.Rows[i][ROUTERGROUPLIMIT] = domain.RouterGroupLimit;
-                    gt.Rows[i][ROUTERITEMLIMIT] = domain.RouterItemLimit;
+                    //gt.Rows[i][ROUTERITEMLIMIT] = domain.RouterItemLimit;
+                    gt.Rows[i][DISCOUNTNUM] = domain.DiscountNum;
+                    gt.Rows[i][PRODUCTION] = domain.IsProduction ? "运营" : "测试";
 
 
                     domainrowid.TryAdd(domain.ID, i);
@@ -162,7 +168,9 @@ namespace TradingLib.MoniterControl
                     gt.Rows[r][VENDORLIMIT] = domain.VendorLimit;
                     gt.Rows[r][ACCLIMIT] = domain.AccLimit;
                     gt.Rows[r][ROUTERGROUPLIMIT] = domain.RouterGroupLimit;
-                    gt.Rows[r][ROUTERITEMLIMIT] = domain.RouterItemLimit;
+                    //gt.Rows[r][ROUTERITEMLIMIT] = domain.RouterItemLimit;
+                    gt.Rows[r][DISCOUNTNUM] = domain.DiscountNum;
+                    gt.Rows[r][PRODUCTION] = domain.IsProduction?"运营":"测试";
 
                     domainmap[domain.ID] = domain;
                 }
@@ -183,7 +191,9 @@ namespace TradingLib.MoniterControl
         const string VENDORLIMIT = "实盘帐户";
         const string ACCLIMIT = "分帐户";
         const string ROUTERGROUPLIMIT = "路由组";
-        const string ROUTERITEMLIMIT = "路由项目";
+        //const string ROUTERITEMLIMIT = "路由项目";
+        const string DISCOUNTNUM = "优惠数量";
+        const string PRODUCTION = "状态";
 
         #endregion
 
@@ -229,7 +239,9 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(VENDORLIMIT);
             gt.Columns.Add(ACCLIMIT);//1
             gt.Columns.Add(ROUTERGROUPLIMIT);//1
-            gt.Columns.Add(ROUTERITEMLIMIT);//1
+            //gt.Columns.Add(ROUTERITEMLIMIT);//1
+            gt.Columns.Add(DISCOUNTNUM);
+            gt.Columns.Add(PRODUCTION);
         }
 
         /// <summary>
@@ -254,7 +266,10 @@ namespace TradingLib.MoniterControl
             grid.Columns[VENDORLIMIT].Width = 60;
             grid.Columns[ACCLIMIT].Width = 60;
             grid.Columns[ROUTERGROUPLIMIT].Width = 60;
-            grid.Columns[ROUTERITEMLIMIT].Width = 60;
+            //grid.Columns[ROUTERITEMLIMIT].Width = 60;
+            grid.Columns[DISCOUNTNUM].Width = 60;
+            grid.Columns[PRODUCTION].Width = 60;
+            
             /*
             datasource.Sort = ACCOUNT + " ASC";
             

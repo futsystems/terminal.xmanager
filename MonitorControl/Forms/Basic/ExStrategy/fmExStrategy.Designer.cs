@@ -37,6 +37,7 @@
             this.poslock = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.includecloseprofit = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -44,20 +45,31 @@
             this.sidemargin = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.includecloseprofit = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.kryptonGroupBox3 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.entrySlip = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
+            this.exitSlip = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
+            this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2.Panel)).BeginInit();
             this.kryptonGroupBox2.Panel.SuspendLayout();
             this.kryptonGroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).BeginInit();
             this.kryptonGroupBox1.Panel.SuspendLayout();
             this.kryptonGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.margin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3.Panel)).BeginInit();
+            this.kryptonGroupBox3.Panel.SuspendLayout();
+            this.kryptonGroupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonGroupBox3);
             this.kryptonPanel1.Controls.Add(this.templateTree);
             this.kryptonPanel1.Controls.Add(this.kryptonGroupBox2);
             this.kryptonPanel1.Controls.Add(this.kryptonGroupBox1);
@@ -95,7 +107,7 @@
             // 
             this.kryptonLabel5.Location = new System.Drawing.Point(10, 3);
             this.kryptonLabel5.Name = "kryptonLabel5";
-            this.kryptonLabel5.Size = new System.Drawing.Size(95, 18);
+            this.kryptonLabel5.Size = new System.Drawing.Size(88, 20);
             this.kryptonLabel5.TabIndex = 8;
             this.kryptonLabel5.Values.Text = "信用额度显示:";
             // 
@@ -103,7 +115,7 @@
             // 
             this.creditseparate.Location = new System.Drawing.Point(129, 3);
             this.creditseparate.Name = "creditseparate";
-            this.creditseparate.Size = new System.Drawing.Size(78, 18);
+            this.creditseparate.Size = new System.Drawing.Size(73, 20);
             this.creditseparate.TabIndex = 12;
             this.creditseparate.Values.Text = "单独显示";
             // 
@@ -111,7 +123,7 @@
             // 
             this.poslock.Location = new System.Drawing.Point(129, 29);
             this.poslock.Name = "poslock";
-            this.poslock.Size = new System.Drawing.Size(51, 18);
+            this.poslock.Size = new System.Drawing.Size(48, 20);
             this.poslock.TabIndex = 15;
             this.poslock.Values.Text = "支持";
             // 
@@ -119,7 +131,7 @@
             // 
             this.kryptonLabel6.Location = new System.Drawing.Point(35, 29);
             this.kryptonLabel6.Name = "kryptonLabel6";
-            this.kryptonLabel6.Size = new System.Drawing.Size(95, 18);
+            this.kryptonLabel6.Size = new System.Drawing.Size(88, 20);
             this.kryptonLabel6.TabIndex = 14;
             this.kryptonLabel6.Values.Text = "是否支持锁仓:";
             // 
@@ -140,11 +152,19 @@
             this.kryptonGroupBox1.TabIndex = 16;
             this.kryptonGroupBox1.Values.Heading = "保证金与可用资金";
             // 
+            // includecloseprofit
+            // 
+            this.includecloseprofit.Location = new System.Drawing.Point(133, 29);
+            this.includecloseprofit.Name = "includecloseprofit";
+            this.includecloseprofit.Size = new System.Drawing.Size(19, 13);
+            this.includecloseprofit.TabIndex = 12;
+            this.includecloseprofit.Values.Text = "";
+            // 
             // kryptonLabel1
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(23, 3);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(109, 18);
+            this.kryptonLabel1.Size = new System.Drawing.Size(100, 20);
             this.kryptonLabel1.TabIndex = 5;
             this.kryptonLabel1.Values.Text = "保证金计算方式:";
             // 
@@ -152,7 +172,7 @@
             // 
             this.kryptonLabel3.Location = new System.Drawing.Point(10, 30);
             this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(123, 18);
+            this.kryptonLabel3.Size = new System.Drawing.Size(113, 20);
             this.kryptonLabel3.TabIndex = 6;
             this.kryptonLabel3.Values.Text = "可用包含平仓盈亏:";
             // 
@@ -160,7 +180,7 @@
             // 
             this.kryptonLabel4.Location = new System.Drawing.Point(63, 81);
             this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(68, 18);
+            this.kryptonLabel4.Size = new System.Drawing.Size(63, 20);
             this.kryptonLabel4.TabIndex = 7;
             this.kryptonLabel4.Values.Text = "单向大边:";
             // 
@@ -176,7 +196,7 @@
             // 
             this.sidemargin.Location = new System.Drawing.Point(133, 81);
             this.sidemargin.Name = "sidemargin";
-            this.sidemargin.Size = new System.Drawing.Size(51, 18);
+            this.sidemargin.Size = new System.Drawing.Size(48, 20);
             this.sidemargin.TabIndex = 11;
             this.sidemargin.Values.Text = "支持";
             // 
@@ -195,13 +215,50 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // includecloseprofit
+            // kryptonGroupBox3
             // 
-            this.includecloseprofit.Location = new System.Drawing.Point(133, 29);
-            this.includecloseprofit.Name = "includecloseprofit";
-            this.includecloseprofit.Size = new System.Drawing.Size(19, 13);
-            this.includecloseprofit.TabIndex = 12;
-            this.includecloseprofit.Values.Text = "";
+            this.kryptonGroupBox3.Location = new System.Drawing.Point(177, 265);
+            this.kryptonGroupBox3.Name = "kryptonGroupBox3";
+            // 
+            // kryptonGroupBox3.Panel
+            // 
+            this.kryptonGroupBox3.Panel.Controls.Add(this.exitSlip);
+            this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonLabel7);
+            this.kryptonGroupBox3.Panel.Controls.Add(this.entrySlip);
+            this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonLabel2);
+            this.kryptonGroupBox3.Size = new System.Drawing.Size(316, 91);
+            this.kryptonGroupBox3.TabIndex = 19;
+            this.kryptonGroupBox3.Values.Heading = "滑点设置";
+            // 
+            // kryptonLabel2
+            // 
+            this.kryptonLabel2.Location = new System.Drawing.Point(44, 3);
+            this.kryptonLabel2.Name = "kryptonLabel2";
+            this.kryptonLabel2.Size = new System.Drawing.Size(63, 20);
+            this.kryptonLabel2.TabIndex = 0;
+            this.kryptonLabel2.Values.Text = "开仓滑点:";
+            // 
+            // entrySlip
+            // 
+            this.entrySlip.Location = new System.Drawing.Point(114, 2);
+            this.entrySlip.Name = "entrySlip";
+            this.entrySlip.Size = new System.Drawing.Size(88, 22);
+            this.entrySlip.TabIndex = 1;
+            // 
+            // exitSlip
+            // 
+            this.exitSlip.Location = new System.Drawing.Point(114, 30);
+            this.exitSlip.Name = "exitSlip";
+            this.exitSlip.Size = new System.Drawing.Size(88, 22);
+            this.exitSlip.TabIndex = 3;
+            // 
+            // kryptonLabel7
+            // 
+            this.kryptonLabel7.Location = new System.Drawing.Point(44, 31);
+            this.kryptonLabel7.Name = "kryptonLabel7";
+            this.kryptonLabel7.Size = new System.Drawing.Size(63, 20);
+            this.kryptonLabel7.TabIndex = 2;
+            this.kryptonLabel7.Values.Text = "平仓滑点:";
             // 
             // fmExStrategy
             // 
@@ -217,15 +274,22 @@
             this.Text = "交易参数模板设置";
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2.Panel)).EndInit();
             this.kryptonGroupBox2.Panel.ResumeLayout(false);
             this.kryptonGroupBox2.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).EndInit();
             this.kryptonGroupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).EndInit();
             this.kryptonGroupBox1.Panel.ResumeLayout(false);
             this.kryptonGroupBox1.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
             this.kryptonGroupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.margin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3.Panel)).EndInit();
+            this.kryptonGroupBox3.Panel.ResumeLayout(false);
+            this.kryptonGroupBox3.Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3)).EndInit();
+            this.kryptonGroupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -248,5 +312,10 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTreeView templateTree;
         private System.Windows.Forms.ImageList imageList1;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox includecloseprofit;
+        private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox3;
+        private ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown exitSlip;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
+        private ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown entrySlip;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
     }
 }

@@ -61,6 +61,8 @@ namespace TradingLib.MoniterControl
             btnFillInfo.CheckedChanged += new EventHandler(btnFillInfo_CheckedChanged);
             //生成帐户类型列表
             MoniterHelper.AdapterToIDataSource(cbAccountType).BindDataSource(MoniterHelper.GetAccountTypeCombList());
+            MoniterHelper.AdapterToIDataSource(cbCurrency).BindDataSource(MoniterHelper.GetEnumValueObjects<CurrencyType>());
+
             cbAccountType.SelectedIndex = 0;
             CoreService.EventCore.RegIEventHandler(this);
 
@@ -73,18 +75,18 @@ namespace TradingLib.MoniterControl
             kryptonGroupBox1.Visible = false;
             kryptonGroupBox2.Visible = false;
             kryptonGroupBox3.Visible = false;
-            btnSubmit.Location = new Point(217, 85);
-            this.Height = 145;
+            btnSubmit.Location = new Point(215,109);
+            this.Height = 175;
         }
 
         void BigView()
         {
-            this.Height = 560;
+            this.Height = 590;
             lbNotice.Visible = true;
             kryptonGroupBox1.Visible = true;
             kryptonGroupBox2.Visible = true;
             kryptonGroupBox3.Visible = true;
-            btnSubmit.Location = new Point(217, 495);
+            btnSubmit.Location = new Point(215, 525);
         }
         void btnFillInfo_CheckedChanged(object sender, EventArgs e)
         {
@@ -139,9 +141,11 @@ namespace TradingLib.MoniterControl
             this.Text = string.Format("查看/编辑帐户[{0}]个人信息", _account.Account);
             account.Enabled = false;
             cbAccountType.Enabled = false;
+            cbCurrency.Enabled = false;
 
             //设置可以修改扩展信息
             btnFillInfo.Checked = true;
+            cbCurrency.SelectedValue = acc.Currency;
             BigView();
         }
 
@@ -166,7 +170,7 @@ namespace TradingLib.MoniterControl
             //默认交易帐户走模拟成交
             createion.RouterType = QSEnumOrderTransferType.SIM;
             createion.Profile = profile;
-
+            createion.Currency = (CurrencyType)cbCurrency.SelectedValue;
 
             //if (createion.Category == QSEnumAccountCategory.SUBACCOUNT)
             //{

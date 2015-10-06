@@ -43,6 +43,11 @@ namespace TradingLib.MoniterControl
         public bool IsValid(object caller, Condition condition)
         {
             string product = condition.Properties["product"];//对应的产品
+            //if (CoreService.SiteInfo == null)
+            //{
+            //    MoniterHelper.WindowMessage("系统初始化异常,请重新登入");
+            //    return false;
+            //}
             //所有产品
             if (String.Compare(product, "all", true) == 0 || product.Equals("*"))
             {
@@ -76,6 +81,11 @@ namespace TradingLib.MoniterControl
             {
                 return true;
             }
+            //if (CoreService.SiteInfo == null)
+            //{
+            //    MoniterHelper.WindowMessage("系统初始化异常,请重新登入");
+            //    return false;
+            //}
             //托管分区
             if (String.Compare(product, "hosted", true) == 0 || String.Compare(product, "h", true) == 0)
             {

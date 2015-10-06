@@ -50,7 +50,7 @@
 
     <Condition name="ProductState" product="All">
       <MenuItem id = "CashOperationCommand"
-                label = "出入金"
+                label = "出入金/帐户信息"
                 class = "TradingLib.MoniterControl.CashOperationCommand"/>
     </Condition>
     <Condition name="ProductState" product="All">
@@ -74,7 +74,7 @@
     
     <Condition name="ProductState" product="All">
       <MenuItem id = "UpdateTemplateCommand"
-                label = "手续费/保证金/交易参数"
+                label = "手续费/保证金模板"
                 class = "TradingLib.MoniterControl.UpdateTemplateCommand"/>
     </Condition>
     

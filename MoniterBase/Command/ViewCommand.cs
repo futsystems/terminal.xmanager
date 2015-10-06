@@ -75,6 +75,8 @@ namespace TradingLib.MoniterBase.Command
         }
     }
 
+
+
     public class ShowAccountListCommand : AbstractMenuCommand
     {
         public override void Run()

@@ -69,29 +69,19 @@ namespace TradingLib.MoniterControl
             _current.MarginPrice = (QSEnumMarginPrice)margin.SelectedValue;
             _current.IncludeCloseProfit = includecloseprofit.Checked;
             _current.PositionLock = poslock.Checked;
-
+            _current.EntrySlip = (int)entrySlip.Value;
+            _current.ExitSlip = (int)exitSlip.Value;
             CoreService.TLClient.ReqUpdateExStrategyTemplateItem(_current);
         }
 
         void fmCommission_Load(object sender, EventArgs e)
         {
-            //this.templatelist.ContextMenuStrip = new ContextMenuStrip();
-            //this.templatelist.ContextMenuStrip.Items.Add("添加模板", null, new EventHandler(Add_Click));
-            //this.templatelist.ContextMenuStrip.Items.Add("修改模板", null, new EventHandler(Edit_Click));
-            //this.templatelist.ContextMenuStrip.Items.Add(new System.Windows.Forms.ToolStripSeparator());
-            //this.templatelist.ContextMenuStrip.Items.Add("加载数据", null, new EventHandler(Qry_Click));
-
-            //commissionGrid.ContextMenuStrip = new ContextMenuStrip();
-            //commissionGrid.ContextMenuStrip.Items.Add("添加模板项目", null, new EventHandler(AddItem_Click));
             this.templateTree.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
             this.templateTree.ContextMenuStrip.Items.Add("添加交易参数模板", null, new EventHandler(Add_Click));
 
             templateTree.NodeMouseClick += new TreeNodeMouseClickEventHandler(templateTree_NodeMouseClick);
 
             CoreService.EventCore.RegIEventHandler(this);
-            //this.templatelist.ContextMenuStrip.Items.Add("添加模板", null, new EventHandler(Add_Click));
-            //commissionGrid.DoubleClick += new EventHandler(commissionGrid_DoubleClick);
-            //commissionGrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(commissionGrid_RowPrePaint);
         }
 
 
@@ -114,52 +104,19 @@ namespace TradingLib.MoniterControl
         }
 
 
-        //void AddItem_Click(object sender, EventArgs e)
-        //{
-
-        //    fmCommissionTemplateItemEdit fm = new fmCommissionTemplateItemEdit();
-        //    try
-        //    {
-        //        int id = int.Parse(templateid.Text);
-        //        fm.SetCommissionTemplateID(id);
-        //        fm.ShowDialog();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MoniterHelper.WindowMessage("请选择模板");
-        //    }
-        //}
-
-        //void Qry_Click(object sender, EventArgs e)
-        //{
-        //    ExStrategyTemplateSetting t = templatelist.SelectedItem as ExStrategyTemplateSetting;
-        //    if (t == null)
-        //    {
-        //        MoniterHelper.WindowMessage("请选择交易参数模板");
-        //        return;
-        //    }
-        //    ClearItem();
-        //    templatename.Text = t.Name;
-        //    templateid.Text = t.ID.ToString();
-        //    CoreService.TLClient.ReqQryExStrategyTemplateItem(t.ID);
-        //}
-
         void Add_Click(object sender, EventArgs e)
         {
             fmTemplateEdit fm = new fmTemplateEdit(TemplateEditType.Strategy);
             fm.ShowDialog();
         }
-        //void Edit_Click(object sender, EventArgs e)
-        //{
-        //    ExStrategyTemplateSetting t = templatelist.SelectedItem as ExStrategyTemplateSetting;
-        //    fmTemplateEdit fm = new fmTemplateEdit(TemplateEditType.Strategy);
 
-        //    fm.SetTemplate(t);
-        //    fm.ShowDialog();
-        //}
 
         public void OnInit()
         {
+            if (!CoreService.SiteInfo.Domain.Module_Slip)
+            {
+                kryptonGroupBox3.Visible = false;
+            }
             CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryExStrategyTemplate", this.OnQryExStrategyTemplate);
             CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyExStrategyTemplate", this.OnNotifyExStrategyTemplate);
 
@@ -214,6 +171,8 @@ namespace TradingLib.MoniterControl
             sidemargin.Checked = item.SideMargin;
             creditseparate.Checked = item.CreditSeparate;
             poslock.Checked = item.PositionLock;
+            entrySlip.Value = item.EntrySlip;
+            exitSlip.Value = item.ExitSlip;
             _current = item;
         }
 

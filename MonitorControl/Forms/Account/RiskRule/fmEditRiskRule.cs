@@ -35,8 +35,15 @@ namespace TradingLib.MoniterControl
             accountRuleItemList.ContextMenuStrip = new ContextMenuStrip();
             accountRuleItemList.ContextMenuStrip.Items.Add("删除强平规则", null, new EventHandler(DelAccountRule_Click));//0
 
+
+            btnAddAccountRule.Click += new EventHandler(btnAddAccountRule_Click);
+            btnDelAccountRule.Click += new EventHandler(btnDelAccountRule_Click);
             CoreService.EventCore.RegIEventHandler(this);
         }
+
+      
+
+
 
 
         public void OnInit()
@@ -105,12 +112,27 @@ namespace TradingLib.MoniterControl
 
 
 
+        void btnDelAccountRule_Click(object sender, EventArgs e)
+        {
+            DelAccountRule();
+        }
+
+        void btnAddAccountRule_Click(object sender, EventArgs e)
+        {
+            AddAccountRule();
+        }
+
         /// <summary>
         /// 编辑某个交易帐号
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         void AddAccountRule_Click(object sender, EventArgs e)
+        {
+            AddAccountRule();
+        }
+
+        void AddAccountRule()
         {
             if (accountRuleClassList.SelectedItems.Count > 0)
             {
@@ -150,7 +172,14 @@ namespace TradingLib.MoniterControl
             }
         }
 
+
+
         void DelAccountRule_Click(object sender, EventArgs e)
+        {
+            DelAccountRule();
+        }
+
+        void DelAccountRule()
         {
             if (accountRuleItemList.SelectedItems.Count > 0)
             {
@@ -160,7 +189,7 @@ namespace TradingLib.MoniterControl
                     accountRuleItemList.SelectedItem = null;
                     CoreService.TLClient.ReqDelRuleItem(item);
                 }
-            }
+            }  
         }
 
 

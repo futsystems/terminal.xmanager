@@ -79,7 +79,7 @@
             // 
             this.kryptonLabel15.Location = new System.Drawing.Point(12, 83);
             this.kryptonLabel15.Name = "kryptonLabel15";
-            this.kryptonLabel15.Size = new System.Drawing.Size(95, 18);
+            this.kryptonLabel15.Size = new System.Drawing.Size(88, 20);
             this.kryptonLabel15.TabIndex = 11;
             this.kryptonLabel15.Values.Text = "交易参数模板:";
             // 
@@ -103,7 +103,7 @@
             // 
             this.kryptonLabel13.Location = new System.Drawing.Point(27, 50);
             this.kryptonLabel13.Name = "kryptonLabel13";
-            this.kryptonLabel13.Size = new System.Drawing.Size(82, 18);
+            this.kryptonLabel13.Size = new System.Drawing.Size(75, 20);
             this.kryptonLabel13.TabIndex = 8;
             this.kryptonLabel13.Values.Text = "保证金模板:";
             // 
@@ -111,7 +111,7 @@
             // 
             this.kryptonLabel4.Location = new System.Drawing.Point(27, 21);
             this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(82, 18);
+            this.kryptonLabel4.Size = new System.Drawing.Size(75, 20);
             this.kryptonLabel4.TabIndex = 7;
             this.kryptonLabel4.Values.Text = "手续费模板:";
             // 
@@ -121,7 +121,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(310, 167);
             this.Controls.Add(this.kryptonPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "fmEditAccountTemplate";

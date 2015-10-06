@@ -41,6 +41,11 @@ namespace TradingLib.MoniterBase
                 servers.Items.Add(s);
             }
             servers.SelectedIndex = 0;
+            if (addresses.Length == 1)
+            {
+                servers.Visible = false;
+                label0.Visible = false;
+            }
 
             //获得对应用户名和密码
             bool saveuser = PropertyService.Get<bool>("saveuser", false);

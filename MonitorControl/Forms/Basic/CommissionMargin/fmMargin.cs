@@ -58,6 +58,7 @@ namespace TradingLib.MoniterControl
         {
             this.templateTree.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
             this.templateTree.ContextMenuStrip.Items.Add("添加保证金模板", null, new EventHandler(Add_Click));
+            this.templateTree.ContextMenuStrip.Items.Add("删除保证金模板", null, new EventHandler(Del_Click));
 
             marginGrid.DoubleClick += new EventHandler(commissionGrid_DoubleClick);
             marginGrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(commissionGrid_RowPrePaint);
@@ -170,6 +171,22 @@ namespace TradingLib.MoniterControl
             fm.ShowDialog();
         }
 
+        void Del_Click(object sender, EventArgs e)
+        {
+            if (templateTree.SelectedNode.Parent != null)//父节点不为空 表面为二级节点
+            {
+                if (templateTree.SelectedNode.Parent.Index == 0)//父节点 index为0 表面为二级节点
+                {
+                    MarginTemplateSetting t = templateTree.SelectedNode.Tag as MarginTemplateSetting;
+
+                    if (MoniterHelper.WindowConfirm(string.Format("确认删除保证金模板:{0}?", t.Name)) == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        ClearItem();
+                        CoreService.TLClient.ReqContribRequest("MgrExchServer", "DeleteMarginTemplate", t.ID.ToString());
+                    }
+                }
+            }
+        }
 
         public void OnInit()
         {
@@ -183,6 +200,8 @@ namespace TradingLib.MoniterControl
 
             CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryMarginTemplate", this.OnQryMarginTemplate);
             CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyMarginTemplate", this.OnNotifyMarginTemplate);
+            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyDeleteMarginTemplate", this.OnNotifyDelMarginTemplate);
+
 
             CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryMarginTemplateItem", this.OnQryMarginTemplateItem);
             CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyMarginTemplateItem", this.OnNotifyMarginTemplateItem);
@@ -322,7 +341,18 @@ namespace TradingLib.MoniterControl
             }
         }
 
-
+        void OnNotifyDelMarginTemplate(string json)
+        {
+            MarginTemplateSetting obj = MoniterHelper.ParseJsonResponse<MarginTemplateSetting>(json);
+            if (obj != null)
+            {
+                MarginTemplateSetting template = templateTree.SelectedNode.Tag as MarginTemplateSetting;
+                if (template.ID == obj.ID)
+                {
+                    templateTree.SelectedNode.Parent.Nodes.Remove(templateTree.SelectedNode);
+                }
+            }
+        }
 
         void OnNotifyMarginTemplate(string json)
         {
@@ -343,6 +373,7 @@ namespace TradingLib.MoniterControl
                     //templatelist.Items.Add(obj);
                     InvokeGotMarginTemplate(obj);
                 }
+                templateTree.ExpandAll();
             }
         }
 

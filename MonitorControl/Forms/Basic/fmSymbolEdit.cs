@@ -22,6 +22,7 @@ namespace TradingLib.MoniterControl
             MoniterHelper.AdapterToIDataSource(cbexchange).BindDataSource(CoreService.BasicInfoTracker.GetExchangeCombList());
             MoniterHelper.AdapterToIDataSource(cboptionside).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumOptionSide>());
             MoniterHelper.AdapterToIDataSource(cbexpiremonth).BindDataSource(CoreService.BasicInfoTracker.GetExpireMonth());
+            //MoniterHelper.AdapterToIDataSource(cbCurrency).BindDataSource(MoniterHelper.GetEnumValueObjects<CurrencyType>());
             entrycommission.Value = -1;
             exitcommission.Value = -1;
             margin.Value = -1;
@@ -30,6 +31,7 @@ namespace TradingLib.MoniterControl
             gp_option.Visible = false;// Globals.UIAccess.sectype_option;
             gp_lotto.Visible = false;// Globals.UIAccess.sectype_lotto;
             _loaded = true;
+            //cbCurrency.SelectedIndex = 1;
             WireEvent();
 
         }
@@ -87,6 +89,8 @@ namespace TradingLib.MoniterControl
                 cbexpiremonth.SelectedValue = (int)_symbol.ExpireDate / 100;//_symbol.ExpireMonth;
                 cbexpiremonth.Enabled = false;
 
+                //cbCurrency.SelectedValue = _symbol.Currency;
+
                 if (_symbol.SecurityFamily.Type != SecurityType.OPT)
                 {
                     cboptionside.SelectedValue = QSEnumOptionSide.NULL;
@@ -121,6 +125,7 @@ namespace TradingLib.MoniterControl
         {
             if (_symbol != null)
             {
+                //_symbol.Currency = (CurrencyType)cbCurrency.SelectedValue;
                 _symbol.EntryCommission = entrycommission.Value;
                 _symbol.ExitCommission = exitcommission.Value;
                 _symbol.Margin = margin.Value;
@@ -137,7 +142,7 @@ namespace TradingLib.MoniterControl
 
                 target.Symbol = symbol.Text;
 
-
+                //_symbol.Currency = (CurrencyType)cbCurrency.SelectedValue;
                 target.EntryCommission = entrycommission.Value;
                 target.ExitCommission = exitcommission.Value;
                 target.Margin = margin.Value;
@@ -195,7 +200,7 @@ namespace TradingLib.MoniterControl
                 target.Tradeable = tradeable.Checked;
 
 
-                CoreService.TLClient.ReqAddSymbol(target);
+                CoreService.TLClient.ReqUpdateSymbol(target);
             }
 
             this.Close();

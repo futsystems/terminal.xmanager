@@ -12,46 +12,6 @@ namespace TradingLib.MoniterCore
     public delegate void RspMGRLoginResponseDel(RspMGRLoginResponse response);
     public partial class TLClientNet
     {
-
-        //void CliOnTickNotify(TickNotify response)
-        //{
-        //    if (OnTickEvent != null)
-        //        OnTickEvent(response.Tick);
-        //}
-
-
-        
-
-
-
-        //void CliOnSettleInfoConfirm(RspQrySettleInfoConfirmResponse response)
-        //{
-        //    logger.Info("got confirmsettleconfirm data:" + response.ConfirmDay.ToString() + " time:" + response.ConfirmTime.ToString());
-
-        //}
-
-        //void CliOnSettleInfo(RspQrySettleInfoResponse response)
-        //{
-        //    logger.Info("got settleinfo:");
-        //    string[] rec = response.Content.Split('\n');
-        //    foreach (string s in rec)
-        //    {
-        //        logger.Info(s);
-        //    }
-        //}
-
-
-        //void CliOnOrderAction(OrderActionNotify response)
-        //{
-        //    logger.Info("got order action:" + response.ToString());
-        //}
-
-        //void CliOnErrorOrderActionNotify(ErrorOrderActionNotify response)
-        //{
-        //    logger.Info(string.Format("got orderaction error:{0} message:{1} orderaction:{2}", response.RspInfo.ErrorID, response.RspInfo.ErrorMessage, OrderActionImpl.Serialize(response.OrderAction)));
-        //}
-
-
         void CliOnOperationResponse(RspMGROperationResponse response)
         {
             //
@@ -158,42 +118,6 @@ namespace TradingLib.MoniterCore
 
 
 
-        #region 风控规则类回报
-
-
-        //void CliOnMGRChangePassResponse(RspMGRChangeAccountPassResponse response)
-        //{
-        //    debug("got changepass response:" + response.ToString(), QSEnumDebugLevel.INFO);
-
-        //}
-        void CliOnMGRAddSecurityResponse(RspMGRReqAddSecurityResponse response)
-        {
-            logger.Info("got add security response:" + response.ToString());
-            if (response.RspInfo.ErrorID != 0)
-            {
-                
-            }
-            else
-            {
-                //this.handler.OnMGRSecurityAddResponse(response.SecurityFaimly, response.IsLast);
-            }
-        }
-
-        void CliOnMGRAddSymbolResponse(RspMGRReqAddSymbolResponse response)
-        {
-            logger.Info("got add symbol response:" + response.ToString());
-            if (response.RspInfo.ErrorID != 0)
-            {
-
-            }
-            else
-            {
-                //this.handler.OnMGRSymbolAddResponse(response.Symbol, response.IsLast);
-
-            }
-        }
-        #endregion
-
 
 
         //#region 管理员管理
@@ -297,9 +221,17 @@ namespace TradingLib.MoniterCore
                 case MessageTypes.MGRSECURITYRESPONSE://品种回报
                     CliOnMGRSecurity(packet as RspMGRQrySecurityResponse);
                     break;
-                case MessageTypes.MGRSYMBOLRESPONSE://合约回报
-                    CliOnMGRSymbol(packet as RspMGRQrySymbolResponse);
+                case MessageTypes.MGRUPDATESECURITYRESPONSE://更新品种回报
+                    CliOnMGRUpdateSecurity(packet as RspMGRUpdateSecurityResponse);
                     break;
+                case MessageTypes.MGRSYMBOLRESPONSE://合约回报
+                    CliOnMGRQrySymbol(packet as RspMGRQrySymbolResponse);
+                    break;
+                case MessageTypes.MGRUPDATESYMBOLRESPONSE://合约更新回报
+                    CliOnMGRUpdateSymbol(packet as RspMGRUpdateSymbolResponse);
+                    break;
+                
+
                 case MessageTypes.MGRRULECLASSRESPONSE://风控规则回报
                     //CliOnMGRRuleClass(packet as RspMGRQryRuleSetResponse);
                     break;
@@ -335,12 +267,12 @@ namespace TradingLib.MoniterCore
                 //case MessageTypes.MGRCHANGEACCOUNTPASSRESPONSE://修改密码回报
                 //    CliOnMGRChangePassResponse(packet as RspMGRChangeAccountPassResponse);
                 //    break;
-                case MessageTypes.MGRADDSECURITYRESPONSE://添加品种回报
-                    CliOnMGRAddSecurityResponse(packet as RspMGRReqAddSecurityResponse);
+                //case MessageTypes.MGRADDSECURITYRESPONSE://添加品种回报
+                //    CliOnMGRAddSecurityResponse(packet as RspMGRReqAddSecurityResponse);
                     break;
-                case MessageTypes.MGRADDSYMBOLRESPONSE://添加合约回报
-                    CliOnMGRAddSymbolResponse(packet as RspMGRReqAddSymbolResponse);
-                    break;
+                //case MessageTypes.MGRUPDATESYMBOLRESPONSE://更新合约回报
+                //    CliOnMGRAddSymbolResponse(packet as RspMGRReqAddSymbolResponse);
+                //    break;
                 case MessageTypes.MGROPERATIONRESPONSE://常规操作回报
                     CliOnOperationResponse(packet as RspMGROperationResponse);
                     break;

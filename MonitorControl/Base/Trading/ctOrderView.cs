@@ -116,7 +116,15 @@ namespace TradingLib.MoniterControl
         }
         string GetOrderPrice(Order o)
         {
-            return o.oSymbol.FormatPrice(o.LimitPrice);
+            if (o.isLimit)
+            {
+                return "限价:" + Util.FormatDecimal(o.LimitPrice, Util.GetPriceTickFormat(o.oSymbol.SecurityFamily.PriceTick));
+            }
+            else
+            {
+                return "市价";
+            }
+           // return o.oSymbol.FormatPrice(o.LimitPrice);
         }
 
         public void GotOrder(Order o)

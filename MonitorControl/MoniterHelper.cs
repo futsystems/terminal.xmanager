@@ -401,8 +401,8 @@ namespace TradingLib.MoniterControl
             {
                 //201509
                 string monthstr = month.ToString().Substring(4);
-                string yearstr = month.ToString().Substring(2, 2);
-                return string.Format("{0}{1}{2}", sec.Code, GetMonthCode(monthstr),yearstr);
+                string yearstr = month.ToString().Substring(3,1);
+                return string.Format("{0}{1}{2}", sec.Code, GetMonthCode(monthstr), yearstr);
             }
         }
 

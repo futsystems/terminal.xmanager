@@ -28,10 +28,23 @@ namespace TradingLib.MoniterCore
             CoreService.BasicInfoTracker.GotSecurity(response.SecurityFaimly, response.IsLast);
         }
 
-        void CliOnMGRSymbol(RspMGRQrySymbolResponse response)
+        void CliOnMGRUpdateSymbol(RspMGRUpdateSymbolResponse response)
+        {
+            logger.Debug("got symbol update response:" + response.ToString());
+            CoreService.BasicInfoTracker.GotSymbol(response.Symbol, response.IsLast);
+        }
+        void CliOnMGRUpdateSecurity(RspMGRUpdateSecurityResponse response)
+        {
+            logger.Debug("got security update response:" + response.ToString());
+            CoreService.BasicInfoTracker.GotSecurity(response.SecurityFaimly, response.IsLast);
+        }
+
+        void CliOnMGRQrySymbol(RspMGRQrySymbolResponse response)
         {
             logger.Debug("got symbol response:" + response.ToString());
             CoreService.BasicInfoTracker.GotSymbol(response.Symbol, response.IsLast);
         }
+
+
     }
 }

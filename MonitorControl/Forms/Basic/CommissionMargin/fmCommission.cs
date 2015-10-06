@@ -91,11 +91,8 @@ namespace TradingLib.MoniterControl
 
             this.tempateTree.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
             this.tempateTree.ContextMenuStrip.Items.Add("添加手续费模板", null, new EventHandler(Add_Click));
-            //this.tempateTree.ContextMenuStrip.Items.Add("添加手续费模板项目", null, new EventHandler(AddItem_Click));
+            this.tempateTree.ContextMenuStrip.Items.Add("删除手续费模板", null, new EventHandler(Del_Click));
 
-
-            
-            //this.templatelist.ContextMenuStrip.Items.Add("添加模板", null, new EventHandler(Add_Click));
             commissionGrid.DoubleClick += new EventHandler(commissionGrid_DoubleClick);
             commissionGrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(commissionGrid_RowPrePaint);
 
@@ -208,32 +205,31 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        void Qry_Click(object sender, EventArgs e)
-        {
-            //CommissionTemplateSetting t = templatelist.SelectedItem as CommissionTemplateSetting;
-            //if (t == null)
-            //{
-            //    MoniterHelper.WindowMessage("请选择手续费模板");
-            //    return;
-            //}
-            //ClearItem();
-            //templatename.Text = t.Name;
-            //templateid.Text = t.ID.ToString();
-            //CoreService.TLClient.ReqQryCommissionTemplateItem(t.ID);
-        }
+
         void Add_Click(object sender, EventArgs e)
         {
             fmTemplateEdit fm = new fmTemplateEdit(TemplateEditType.Commission);
             fm.ShowDialog();
         }
-        //void Edit_Click(object sender, EventArgs e)
-        //{
-        //    CommissionTemplateSetting t = templatelist.SelectedItem as CommissionTemplateSetting;
-        //    fmTemplateEdit fm = new fmTemplateEdit(TemplateEditType.Commission);
+        void Del_Click(object sender, EventArgs e)
+        { 
+            if(tempateTree.SelectedNode.Parent != null)//父节点不为空 表面为二级节点
+            {
+                if (tempateTree.SelectedNode.Parent.Index == 0)//父节点 index为0 表面为二级节点
+                {
+                    CommissionTemplateSetting t = tempateTree.SelectedNode.Tag as CommissionTemplateSetting;
+                    MessageBox.Show(t.Name);
 
-        //    fm.SetTemplate(t);
-        //    fm.ShowDialog();
-        //}
+                    if (MoniterHelper.WindowConfirm(string.Format("确认删除手续费模板:{0}?", t.Name)) == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        ClearItem();
+                        CoreService.TLClient.ReqContribRequest("MgrExchServer", "DeleteCommissionTemplate", t.ID.ToString());
+                    }
+
+                }
+            }
+        }
+
 
         public void OnInit()
         {
@@ -247,6 +243,7 @@ namespace TradingLib.MoniterControl
 
             CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryCommissionTemplate", this.OnQryCommissionTemplate);
             CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyCommissionTemplate", this.OnNotifyCommissionTemplate);
+            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyDeleteCommissionTemplate", this.OnNotifyDelCommissionTemplate);
 
             CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryCommissionTemplateItem", this.OnQryCommissionTemplateItem);
             CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyCommissionTemplateItem", this.OnNotifyCommissionTemplateItem);
@@ -408,6 +405,18 @@ namespace TradingLib.MoniterControl
             }
         }
 
+        void OnNotifyDelCommissionTemplate(string json)
+        {
+            CommissionTemplateSetting obj = MoniterHelper.ParseJsonResponse<CommissionTemplateSetting>(json);
+            if (obj != null)
+            {
+                CommissionTemplateSetting template = tempateTree.SelectedNode.Tag as CommissionTemplateSetting;
+                if (template.ID == obj.ID)
+                {
+                    tempateTree.SelectedNode.Parent.Nodes.Remove(tempateTree.SelectedNode);
+                }
+            }
+        }
         void OnNotifyCommissionTemplate(string json)
         {
             CommissionTemplateSetting obj = MoniterHelper.ParseJsonResponse<CommissionTemplateSetting>(json);
@@ -427,6 +436,7 @@ namespace TradingLib.MoniterControl
                     //templatelist.Items.Add(obj);
                     InvokeGotCommissiontTemplateItem(obj);
                 }
+                tempateTree.ExpandAll();
             }
         }
 

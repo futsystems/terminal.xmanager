@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace TradingLib.MoniterBase
 {
-    public partial class Form1 : ComponentFactory.Krypton.Toolkit.KryptonForm
+    public partial class Form1 : Form
     {
         public Form1()
         {

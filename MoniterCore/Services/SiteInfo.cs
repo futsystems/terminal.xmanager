@@ -103,6 +103,10 @@ namespace TradingLib.MoniterCore
         {
             get
             {
+                if (CoreService.TLClient.ServerVersion == null)
+                {
+                    return QSEnumProductType.CounterSystem;
+                }
                 return CoreService.TLClient.ServerVersion.ProductType;
             }
         }
