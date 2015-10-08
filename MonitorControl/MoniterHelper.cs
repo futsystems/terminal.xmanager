@@ -372,6 +372,36 @@ namespace TradingLib.MoniterControl
         }
 
 
+        /// <summary>
+        /// 获得时区列表
+        /// </summary>
+        /// <returns></returns>
+        public static ArrayList GetTimeZoneList()
+        {
+
+            ArrayList list = new ArrayList();
+            ValueObject<string> vo0 = new ValueObject<string>();
+            vo0.Name = "系统默认时区";
+            vo0.Value = "";
+            list.Add(vo0);
+
+            ValueObject<string> vo1 = new ValueObject<string>();
+            vo1.Name = "中国标准时间";
+            vo1.Value = "China Standard Time";
+            list.Add(vo1);
+
+            ValueObject<string> vo2 = new ValueObject<string>();
+            vo2.Name = "新加坡标准时间";
+            vo2.Value = "Singapore Standard Time";
+            list.Add(vo2);
+
+            ValueObject<string> vo3 = new ValueObject<string>();
+            vo3.Name = "美国中部时间(CT)";
+            vo3.Value = "Central Standard Time";
+            list.Add(vo3);
+             
+            return list;
+        }
 
         public static string GenSymbol(SecurityFamilyImpl sec, int month)
         {

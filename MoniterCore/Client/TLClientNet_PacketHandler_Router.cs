@@ -218,6 +218,9 @@ namespace TradingLib.MoniterCore
                 case MessageTypes.MGRMARKETTIMERESPONSE://交易时间段回报
                     CliOnMGRMarketTime(packet as RspMGRQryMarketTimeResponse);
                     break;
+                case MessageTypes.MGRUPDATEMARKETTIMERESPONSE://交易时间段更新回报
+                    CliOnMGRUpdateMarketTimeResponse(packet as RspMGRUpdateMarketTimeResponse);
+                    break;
                 case MessageTypes.MGRSECURITYRESPONSE://品种回报
                     CliOnMGRSecurity(packet as RspMGRQrySecurityResponse);
                     break;

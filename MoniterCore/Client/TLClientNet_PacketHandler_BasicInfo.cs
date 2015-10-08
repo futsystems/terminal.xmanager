@@ -16,6 +16,12 @@ namespace TradingLib.MoniterCore
             CoreService.BasicInfoTracker.GotMarketTime(response.MarketTime, response.IsLast);
         }
 
+        void CliOnMGRUpdateMarketTimeResponse(RspMGRUpdateMarketTimeResponse response)
+        {
+            logger.Debug("got markettime update response:" + response.ToString());
+            CoreService.BasicInfoTracker.GotMarketTime(response.MarketTime, response.IsLast);
+        }
+
         void CliOnMGRExchange(RspMGRQryExchangeResponse response)
         {
             logger.Debug("got exchange response:" + response.ToString());

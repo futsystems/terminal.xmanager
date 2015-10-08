@@ -25,6 +25,15 @@ namespace TradingLib.MoniterBase
         {
             logger.Debug("loginform init....");
 
+            //列举所有支持的时区列表
+
+            //System.Collections.ObjectModel.ReadOnlyCollection<TimeZoneInfo> lst = TimeZoneInfo.GetSystemTimeZones();
+            //foreach (TimeZoneInfo tzi in lst)
+            //{
+            //    logger.Debug(tzi.Id+" "+tzi.DisplayName);
+            //}
+
+
             InitializeComponent();
             
             ConfigFile config = ConfigFile.GetConfigFile("moniter.cfg");

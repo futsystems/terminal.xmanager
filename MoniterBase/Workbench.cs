@@ -70,6 +70,10 @@ namespace TradingLib.MoniterBase
                     lbExpireMessage.Visible = false;
                 }
             }
+            else
+            {
+                lbExpireMessage.Visible = false;
+            }
 
             if (CoreService.TLClient.Connected)
             {

@@ -66,6 +66,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "fmMarketTime";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "交易时间段列表";
             this.TopMost = true;
