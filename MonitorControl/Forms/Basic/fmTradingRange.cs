@@ -42,8 +42,8 @@ namespace TradingLib.MoniterControl
             this.Close();
         }
 
-        TradingRange _range = null;
-        public void SetTradingRange(TradingRange range)
+        TradingRangeImpl _range = null;
+        public void SetTradingRange(TradingRangeImpl range)
         {
             _range = range;
             startday.SelectedValue = range.StartDay;
@@ -55,7 +55,7 @@ namespace TradingLib.MoniterControl
 
         }
 
-        public TradingRange CurrentRange
+        public TradingRangeImpl CurrentRange
         {
             get
             {
@@ -71,7 +71,7 @@ namespace TradingLib.MoniterControl
                 }
                 else
                 {
-                    TradingRange range = new TradingRange();
+                    TradingRangeImpl range = new TradingRangeImpl();
                     range.StartDay = (DayOfWeek)startday.SelectedValue;
                     range.StartTime = Util.ToTLTime(starttime.Value);
                     range.EndDay = (DayOfWeek)endday.SelectedValue;

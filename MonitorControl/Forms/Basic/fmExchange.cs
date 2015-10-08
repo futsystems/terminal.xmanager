@@ -144,6 +144,8 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][EXCODE] = ex.EXCode;
                     gt.Rows[i][EXCOUNTRY] = Util.GetEnumDescription(ex.Country);
                     gt.Rows[i][TITLE] = ex.Title;
+
+                    gt.Rows[i][TIMEZONE] = ex.TimeZoneInfo != null ? ex.TimeZoneInfo.DisplayName : "";
                     gt.Rows[i][CALENDAR] = ex.Calendar;
 
                     exchangemap.Add(ex.ID, ex);
@@ -156,6 +158,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][EXNAME] = ex.Name;
                     gt.Rows[i][EXCOUNTRY] = Util.GetEnumDescription(ex.Country);
                     gt.Rows[i][TITLE] = ex.Title;
+                    gt.Rows[i][TIMEZONE] = ex.TimeZoneInfo != null ? ex.TimeZoneInfo.DisplayName : "";
                     gt.Rows[i][CALENDAR] = ex.Calendar;
 
                 }
@@ -170,6 +173,7 @@ namespace TradingLib.MoniterControl
         const string EXCOUNTRY = "国家";
         const string EXNAME = "名称";
         const string TITLE = "简称";
+        const string TIMEZONE = "时区";
         const string CALENDAR = "交易日历";
 
         DataTable gt = new DataTable();
@@ -207,6 +211,7 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(EXCOUNTRY);//
             gt.Columns.Add(EXNAME);//
             gt.Columns.Add(TITLE);
+            gt.Columns.Add(TIMEZONE);
             gt.Columns.Add(CALENDAR);
         }
 
@@ -222,8 +227,10 @@ namespace TradingLib.MoniterControl
 
             grid.Columns[EXID].Width = 40;
             
-            grid.Columns[EXCODE].Width = 80;
+            grid.Columns[EXCODE].Width = 60;
+            grid.Columns[EXCOUNTRY].Width = 60;
             grid.Columns[EXNAME].Width = 150;
+            grid.Columns[CALENDAR].Width = 60;
 
 
         }

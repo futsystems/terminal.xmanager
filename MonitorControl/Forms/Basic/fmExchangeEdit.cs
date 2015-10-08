@@ -21,7 +21,7 @@ namespace TradingLib.MoniterControl
             InitializeComponent();
             this.Text="添加交易所";
             MoniterHelper.AdapterToIDataSource(country).BindDataSource(MoniterHelper.GetEnumValueObjects<Country>());
-
+            MoniterHelper.AdapterToIDataSource(timezone).BindDataSource(MoniterHelper.GetTimeZoneList());
 
             btnSubmit.Click += new EventHandler(btnSubmit_Click);
             CoreService.EventCore.RegIEventHandler(this);
@@ -38,7 +38,7 @@ namespace TradingLib.MoniterControl
                     _exchange.Title = this.title.Text;
                     _exchange.Country = (Country)this.country.SelectedValue;
                     _exchange.Calendar = this.calendar.SelectedValue.ToString();
-
+                    _exchange.TimeZone = this.timezone.SelectedValue.ToString();
                     CoreService.TLClient.ReqUpdateExchange(_exchange);
                     this.Close();
                 }
@@ -53,6 +53,7 @@ namespace TradingLib.MoniterControl
                     ex.Country = (Country)this.country.SelectedValue;
                     ex.EXCode = this.excode.Text;
                     ex.Calendar = this.calendar.SelectedValue.ToString();
+                    ex.TimeZone = this.timezone.SelectedValue.ToString();
 
                     CoreService.TLClient.ReqUpdateExchange(ex);
                     this.Close();
@@ -130,6 +131,7 @@ namespace TradingLib.MoniterControl
             this.name.Text = _exchange.Name;
             this.title.Text = _exchange.Title;
             this.country.SelectedValue = _exchange.Country;
+            this.timezone.SelectedValue = _exchange.TimeZone;
             
         }
 

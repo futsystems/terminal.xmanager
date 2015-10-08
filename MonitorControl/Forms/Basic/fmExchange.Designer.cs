@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmExchange));
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.exchangegrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.btnAddExchange = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.exchangegrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exchangegrid)).BeginInit();
@@ -44,8 +44,16 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(602, 248);
+            this.kryptonPanel1.Size = new System.Drawing.Size(685, 248);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // btnAddExchange
+            // 
+            this.btnAddExchange.Location = new System.Drawing.Point(592, 218);
+            this.btnAddExchange.Name = "btnAddExchange";
+            this.btnAddExchange.Size = new System.Drawing.Size(90, 25);
+            this.btnAddExchange.TabIndex = 1;
+            this.btnAddExchange.Values.Text = "添加交易所";
             // 
             // exchangegrid
             // 
@@ -53,22 +61,14 @@
             this.exchangegrid.Location = new System.Drawing.Point(0, 0);
             this.exchangegrid.Name = "exchangegrid";
             this.exchangegrid.RowTemplate.Height = 23;
-            this.exchangegrid.Size = new System.Drawing.Size(602, 214);
+            this.exchangegrid.Size = new System.Drawing.Size(685, 214);
             this.exchangegrid.TabIndex = 0;
-            // 
-            // btnAddExchange
-            // 
-            this.btnAddExchange.Location = new System.Drawing.Point(509, 219);
-            this.btnAddExchange.Name = "btnAddExchange";
-            this.btnAddExchange.Size = new System.Drawing.Size(90, 25);
-            this.btnAddExchange.TabIndex = 1;
-            this.btnAddExchange.Values.Text = "添加交易所";
             // 
             // fmExchange
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(602, 248);
+            this.ClientSize = new System.Drawing.Size(685, 248);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

@@ -24,7 +24,7 @@ namespace TradingLib.MoniterControl
             InitTable();
             BindToTable();
 
-            MoniterHelper.AdapterToIDataSource(timezone).BindDataSource(MoniterHelper.GetTimeZoneList());
+            //MoniterHelper.AdapterToIDataSource(timezone).BindDataSource(MoniterHelper.GetTimeZoneList());
             btnAdd.Click += new EventHandler(btnAdd_Click);
             btnDel.Click += new EventHandler(btnDel_Click);
             //btnEdit.Click += new EventHandler(btnEdit_Click);
@@ -32,7 +32,7 @@ namespace TradingLib.MoniterControl
 
             CoreService.EventBasicInfo.OnMarketTimeEvent += new Action<MarketTime>(EventBasicInfo_OnMarketTimeEvent);
 
-            timezone.SelectedIndex = 1;
+            //timezone.SelectedIndex = 1;
         }
 
         void EventBasicInfo_OnMarketTimeEvent(MarketTime obj)
@@ -61,7 +61,7 @@ namespace TradingLib.MoniterControl
             foreach (var range in rangemap.Values)
             {
                 sb.Append('#');
-                sb.Append(TradingRange.Serialize(range));
+                sb.Append(TradingRangeImpl.Serialize(range));
             }
             return sb.ToString();
         }
@@ -73,7 +73,7 @@ namespace TradingLib.MoniterControl
                 
                 string rangestr = GetRangesStr();
                 LogService.Debug("RangeStr:" + rangestr);
-                _mt.TimeZone = timezone.SelectedValue.ToString();
+                //_mt.TimeZone = timezone.SelectedValue.ToString();
                 _mt.DeserializeTradingRange(rangestr);
 
                 CoreService.TLClient.ReqUpdateMarketTime(_mt);
@@ -155,7 +155,7 @@ namespace TradingLib.MoniterControl
             fmTradingRange fm = new fmTradingRange();
             if (fm.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
             {
-                TradingRange range = fm.CurrentRange;
+                TradingRangeImpl range = fm.CurrentRange;
                 GotTradingRange(range);
             }
         }
@@ -171,10 +171,10 @@ namespace TradingLib.MoniterControl
             _mt = mt;
             lbMTName.Text = mt.Name;
             lbDesp.Text = mt.Description;
-            timezone.SelectedValue = string.IsNullOrEmpty(mt.TimeZone) ? "" : mt.TimeZone;
+            //timezone.SelectedValue = string.IsNullOrEmpty(mt.TimeZone) ? "" : mt.TimeZone;
             foreach (var m in mt.RangeList.Values)
             {
-                GotTradingRange(m);
+                GotTradingRange(m as TradingRangeImpl);
             }
         }
 
@@ -209,11 +209,11 @@ namespace TradingLib.MoniterControl
         //    return -1;
         //}
 
-        void GotTradingRange(TradingRange range)
+        void GotTradingRange(TradingRangeImpl range)
         {
             if (InvokeRequired)
             {
-                Invoke(new Action<TradingRange>(GotTradingRange), new object[] { range });
+                Invoke(new Action<TradingRangeImpl>(GotTradingRange), new object[] { range });
             }
             else
             {

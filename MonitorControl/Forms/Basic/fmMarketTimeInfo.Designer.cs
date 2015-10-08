@@ -30,8 +30,6 @@
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.timezone = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.btnDel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnAdd = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.rangeGrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
@@ -42,15 +40,12 @@
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.timezone)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rangeGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
             this.kryptonPanel1.Controls.Add(this.btnSubmit);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel4);
-            this.kryptonPanel1.Controls.Add(this.timezone);
             this.kryptonPanel1.Controls.Add(this.btnDel);
             this.kryptonPanel1.Controls.Add(this.btnAdd);
             this.kryptonPanel1.Controls.Add(this.rangeGrid);
@@ -73,25 +68,9 @@
             this.btnSubmit.TabIndex = 10;
             this.btnSubmit.Values.Text = "更 新";
             // 
-            // kryptonLabel4
-            // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(23, 332);
-            this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(38, 20);
-            this.kryptonLabel4.TabIndex = 9;
-            this.kryptonLabel4.Values.Text = "时区:";
-            // 
-            // timezone
-            // 
-            this.timezone.DropDownWidth = 289;
-            this.timezone.Location = new System.Drawing.Point(70, 331);
-            this.timezone.Name = "timezone";
-            this.timezone.Size = new System.Drawing.Size(289, 21);
-            this.timezone.TabIndex = 8;
-            // 
             // btnDel
             // 
-            this.btnDel.Location = new System.Drawing.Point(289, 288);
+            this.btnDel.Location = new System.Drawing.Point(289, 329);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(70, 25);
             this.btnDel.TabIndex = 7;
@@ -99,7 +78,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(209, 288);
+            this.btnAdd.Location = new System.Drawing.Point(209, 329);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(70, 25);
             this.btnAdd.TabIndex = 6;
@@ -111,7 +90,7 @@
             this.rangeGrid.Location = new System.Drawing.Point(12, 87);
             this.rangeGrid.Name = "rangeGrid";
             this.rangeGrid.RowTemplate.Height = 23;
-            this.rangeGrid.Size = new System.Drawing.Size(363, 183);
+            this.rangeGrid.Size = new System.Drawing.Size(363, 236);
             this.rangeGrid.TabIndex = 5;
             // 
             // lbDesp
@@ -170,7 +149,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.timezone)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rangeGrid)).EndInit();
             this.ResumeLayout(false);
 
@@ -188,7 +166,5 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnDel;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnAdd;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnSubmit;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
-        private ComponentFactory.Krypton.Toolkit.KryptonComboBox timezone;
     }
 }

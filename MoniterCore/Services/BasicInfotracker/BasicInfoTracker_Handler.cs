@@ -28,7 +28,7 @@ namespace TradingLib.MoniterCore
                     //更新
                     target.Name = mt.Name;
                     target.Description = mt.Description;
-                    target.TimeZone = mt.TimeZone;
+                    //target.TimeZone = mt.TimeZone;
                     target.DeserializeTradingRange(mt.SerializeTradingRange());
                     notify = target;
                 }
