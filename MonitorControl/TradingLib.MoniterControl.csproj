@@ -420,6 +420,12 @@
     <Compile Include="Forms\Basic\fmExchange.Designer.cs">
       <DependentUpon>fmExchange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Basic\fmExchangeEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Basic\fmExchangeEdit.Designer.cs">
+      <DependentUpon>fmExchangeEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Basic\fmMarketTime.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -913,6 +919,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Basic\fmExchange.resx">
       <DependentUpon>fmExchange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Basic\fmExchangeEdit.resx">
+      <DependentUpon>fmExchangeEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Basic\fmMarketTime.resx">
       <DependentUpon>fmMarketTime.cs</DependentUpon>

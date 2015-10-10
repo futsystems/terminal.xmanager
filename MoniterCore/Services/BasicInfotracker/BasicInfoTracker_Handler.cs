@@ -62,8 +62,11 @@ namespace TradingLib.MoniterCore
                 {
                     //更新
                     target.Name = ex.Name;
-                    target.EXCode = ex.EXCode;
+                    //target.EXCode = ex.EXCode;
                     target.Country = ex.Country;
+                    target.Calendar = ex.Calendar;
+                    target.Title = ex.Title;
+
                     notify = target;
                 }
                 else

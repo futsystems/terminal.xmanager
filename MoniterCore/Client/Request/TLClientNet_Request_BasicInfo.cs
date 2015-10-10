@@ -50,6 +50,16 @@ namespace TradingLib.MoniterCore
             SendPacket(request);
         }
 
+        public void ReqUpdateExchange(Exchange ex)
+        {
+            logger.Info("请求更新交易所");
+            MGRUpdateExchangeRequest request = RequestTemplate<MGRUpdateExchangeRequest>.CliSendRequest(requestid++);
+            request.Exchange = ex;
+
+            SendPacket(request);
+
+
+        }
         public void ReqQryMarketTime()
         {
             logger.Info("请求查询市场时间列表");

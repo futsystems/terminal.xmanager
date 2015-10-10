@@ -28,6 +28,12 @@ namespace TradingLib.MoniterCore
             CoreService.BasicInfoTracker.GotExchange(response.Exchange, response.IsLast);
         }
 
+        void CliOnMGRUpdateExchangeResponse(RspMGRUpdateExchangeResponse response)
+        {
+            logger.Debug("got exchange update response:" + response.ToString());
+            CoreService.BasicInfoTracker.GotExchange(response.Exchange, response.IsLast);
+        }
+
         void CliOnMGRSecurity(RspMGRQrySecurityResponse response)
         {
             logger.Debug("got security response:" + response.ToString());

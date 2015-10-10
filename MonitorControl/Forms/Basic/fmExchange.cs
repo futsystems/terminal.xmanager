@@ -18,29 +18,96 @@ namespace TradingLib.MoniterControl
         public fmExchange()
         {
             InitializeComponent();
+
+            SetPreferences();
+            InitTable();
+            BindToTable();
+
+
             this.Load += new EventHandler(fmExchange_Load);
            
         }
 
         void fmExchange_Load(object sender, EventArgs e)
         {
-            SetPreferences();
-            InitTable();
-            BindToTable();
+            
             exchangegrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(exchangegrid_RowPrePaint);
-
+            exchangegrid.DoubleClick += new EventHandler(exchangegrid_DoubleClick);
+            btnAddExchange.Click += new EventHandler(btnAddExchange_Click);
             foreach (Exchange ex in CoreService.BasicInfoTracker.Exchanges)
             {
                 this.InvokeGotExchange(ex);
             }
 
+            CoreService.EventBasicInfo.OnExchangeEvent += new Action<Exchange>(EventBasicInfo_OnExchangeEvent);
         }
+
+        void btnAddExchange_Click(object sender, EventArgs e)
+        {
+            fmExchangeEdit fm = new fmExchangeEdit();
+            fm.ShowDialog();
+            fm.Close();
+        }
+
+        void EventBasicInfo_OnExchangeEvent(Exchange obj)
+        {
+            InvokeGotExchange(obj);
+        }
+
+        private int CurrentRow { get { return exchangegrid.SelectedRows.Count > 0 ? exchangegrid.SelectedRows[0].Index : -1; } }
+
+        
+        private int CurrentExchangeID
+        {
+            get
+            {
+                int row = CurrentRow;
+                if (row >= 0)
+                {
+                    return int.Parse(exchangegrid[0, row].Value.ToString());
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+
+        void exchangegrid_DoubleClick(object sender, EventArgs e)
+        {
+            Exchange current = GetExchangeSelected(CurrentExchangeID);
+            if (current == null)
+            {
+                MoniterHelper.WindowMessage("请选择要编辑的交易所");
+                return;
+            }
+            fmExchangeEdit fm = new fmExchangeEdit();
+            fm.SetExchange(current);
+            fm.ShowDialog();
+            fm.Close();
+        }
+
+
 
         void exchangegrid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             e.PaintParts = e.PaintParts ^ DataGridViewPaintParts.Focus;
         }
 
+        //通过行号得该行的Security
+        Exchange GetExchangeSelected(int id)
+        {
+            Exchange ex = null;
+            if (exchangemap.TryGetValue(id, out ex))
+            {
+                return ex;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
 
         Dictionary<int, int> exchangeidmap = new Dictionary<int, int>();
         Dictionary<int, Exchange> exchangemap = new Dictionary<int, Exchange>();
@@ -75,7 +142,9 @@ namespace TradingLib.MoniterControl
                     int i = gt.Rows.Count - 1;
                     gt.Rows[i][EXNAME] = ex.Name;
                     gt.Rows[i][EXCODE] = ex.EXCode;
-                    gt.Rows[i][EXCOUNTRY] = ex.Country;
+                    gt.Rows[i][EXCOUNTRY] = Util.GetEnumDescription(ex.Country);
+                    gt.Rows[i][TITLE] = ex.Title;
+                    gt.Rows[i][CALENDAR] = ex.Calendar;
 
                     exchangemap.Add(ex.ID, ex);
                     exchangeidmap.Add(ex.ID, i);
@@ -83,6 +152,11 @@ namespace TradingLib.MoniterControl
                 }
                 else
                 {
+                    int i = r;
+                    gt.Rows[i][EXNAME] = ex.Name;
+                    gt.Rows[i][EXCOUNTRY] = Util.GetEnumDescription(ex.Country);
+                    gt.Rows[i][TITLE] = ex.Title;
+                    gt.Rows[i][CALENDAR] = ex.Calendar;
 
                 }
             }
@@ -91,9 +165,12 @@ namespace TradingLib.MoniterControl
 
         #region 表格
         const string EXID = "全局ID";
-        const string EXNAME = "名称";
+        
         const string EXCODE = "编号";
         const string EXCOUNTRY = "国家";
+        const string EXNAME = "名称";
+        const string TITLE = "简称";
+        const string CALENDAR = "交易日历";
 
         DataTable gt = new DataTable();
         BindingSource datasource = new BindingSource();
@@ -125,9 +202,12 @@ namespace TradingLib.MoniterControl
         private void InitTable()
         {
             gt.Columns.Add(EXID);//
-            gt.Columns.Add(EXNAME);//
+            
             gt.Columns.Add(EXCODE);//
             gt.Columns.Add(EXCOUNTRY);//
+            gt.Columns.Add(EXNAME);//
+            gt.Columns.Add(TITLE);
+            gt.Columns.Add(CALENDAR);
         }
 
         /// <summary>
@@ -140,9 +220,10 @@ namespace TradingLib.MoniterControl
             datasource.DataSource = gt;
             grid.DataSource = datasource;
 
-            grid.Columns[EXID].Width = 80;
-            grid.Columns[EXNAME].Width = 200;
+            grid.Columns[EXID].Width = 40;
+            
             grid.Columns[EXCODE].Width = 80;
+            grid.Columns[EXNAME].Width = 150;
 
 
         }

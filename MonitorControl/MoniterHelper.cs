@@ -416,8 +416,9 @@ namespace TradingLib.MoniterControl
 
         static string GenFutSymbol(SecurityFamilyImpl sec, int month)
         {
-            if (sec.Exchange.Country == Country.CN)
+            if (sec.Exchange.Country == Country.CN &&　sec.Exchange.EXCode !="HKEX")//中国交易所 非香港交易所 合约按中国格式生成
             {
+                
                 if (sec.Exchange.EXCode.Equals("CZCE"))
                 {
                     return sec.Code + month.ToString().Substring(3);
@@ -427,13 +428,11 @@ namespace TradingLib.MoniterControl
                     return sec.Code + month.ToString().Substring(2);
                 }
             }
-            else //外盘品种
-            {
-                //201509
-                string monthstr = month.ToString().Substring(4);
-                string yearstr = month.ToString().Substring(3,1);
-                return string.Format("{0}{1}{2}", sec.Code, GetMonthCode(monthstr), yearstr);
-            }
+
+            //按合约XXV5 的格式进行合约
+            string monthstr = month.ToString().Substring(4);
+            string yearstr = month.ToString().Substring(3,1);
+            return string.Format("{0}{1}{2}", sec.Code, GetMonthCode(monthstr), yearstr);
         }
 
         static string GetMonthCode(string month)
