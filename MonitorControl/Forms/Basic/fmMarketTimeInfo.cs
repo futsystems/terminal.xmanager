@@ -74,6 +74,7 @@ namespace TradingLib.MoniterControl
                 string rangestr = GetRangesStr();
                 LogService.Debug("RangeStr:" + rangestr);
                 //_mt.TimeZone = timezone.SelectedValue.ToString();
+                _mt.CloseTime = Util.ToTLTime(closetime.Value);
                 _mt.DeserializeTradingRange(rangestr);
 
                 CoreService.TLClient.ReqUpdateMarketTime(_mt);
@@ -171,6 +172,7 @@ namespace TradingLib.MoniterControl
             _mt = mt;
             lbMTName.Text = mt.Name;
             lbDesp.Text = mt.Description;
+            this.closetime.Value = Util.ToDateTime(Util.ToTLDate(), _mt.CloseTime);
             //timezone.SelectedValue = string.IsNullOrEmpty(mt.TimeZone) ? "" : mt.TimeZone;
             foreach (var m in mt.RangeList.Values)
             {

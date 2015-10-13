@@ -44,12 +44,12 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(685, 248);
+            this.kryptonPanel1.Size = new System.Drawing.Size(768, 251);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // btnAddExchange
             // 
-            this.btnAddExchange.Location = new System.Drawing.Point(592, 218);
+            this.btnAddExchange.Location = new System.Drawing.Point(666, 220);
             this.btnAddExchange.Name = "btnAddExchange";
             this.btnAddExchange.Size = new System.Drawing.Size(90, 25);
             this.btnAddExchange.TabIndex = 1;
@@ -58,17 +58,18 @@
             // exchangegrid
             // 
             this.exchangegrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.exchangegrid.Dock = System.Windows.Forms.DockStyle.Top;
             this.exchangegrid.Location = new System.Drawing.Point(0, 0);
             this.exchangegrid.Name = "exchangegrid";
             this.exchangegrid.RowTemplate.Height = 23;
-            this.exchangegrid.Size = new System.Drawing.Size(685, 214);
+            this.exchangegrid.Size = new System.Drawing.Size(768, 214);
             this.exchangegrid.TabIndex = 0;
             // 
             // fmExchange
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 248);
+            this.ClientSize = new System.Drawing.Size(768, 251);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

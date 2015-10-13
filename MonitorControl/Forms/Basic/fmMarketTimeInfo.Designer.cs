@@ -38,6 +38,8 @@
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.closetime = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rangeGrid)).BeginInit();
@@ -45,6 +47,8 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel7);
+            this.kryptonPanel1.Controls.Add(this.closetime);
             this.kryptonPanel1.Controls.Add(this.btnSubmit);
             this.kryptonPanel1.Controls.Add(this.btnDel);
             this.kryptonPanel1.Controls.Add(this.btnAdd);
@@ -90,7 +94,7 @@
             this.rangeGrid.Location = new System.Drawing.Point(12, 87);
             this.rangeGrid.Name = "rangeGrid";
             this.rangeGrid.RowTemplate.Height = 23;
-            this.rangeGrid.Size = new System.Drawing.Size(363, 236);
+            this.rangeGrid.Size = new System.Drawing.Size(363, 228);
             this.rangeGrid.TabIndex = 5;
             // 
             // lbDesp
@@ -133,6 +137,26 @@
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "名称:";
             // 
+            // kryptonLabel7
+            // 
+            this.kryptonLabel7.Location = new System.Drawing.Point(189, 14);
+            this.kryptonLabel7.Name = "kryptonLabel7";
+            this.kryptonLabel7.Size = new System.Drawing.Size(63, 20);
+            this.kryptonLabel7.TabIndex = 16;
+            this.kryptonLabel7.Values.Text = "收盘时间:";
+            // 
+            // closetime
+            // 
+            this.closetime.CalendarShowToday = false;
+            this.closetime.CalendarShowTodayCircle = false;
+            this.closetime.CalendarTodayDate = new System.DateTime(2015, 10, 6, 0, 0, 0, 0);
+            this.closetime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.closetime.Location = new System.Drawing.Point(259, 13);
+            this.closetime.Name = "closetime";
+            this.closetime.ShowUpDown = true;
+            this.closetime.Size = new System.Drawing.Size(100, 21);
+            this.closetime.TabIndex = 15;
+            // 
             // fmMarketTimeInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -166,5 +190,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnDel;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnAdd;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnSubmit;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
+        private ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker closetime;
     }
 }

@@ -39,6 +39,7 @@ namespace TradingLib.MoniterControl
                     _exchange.Country = (Country)this.country.SelectedValue;
                     _exchange.Calendar = this.calendar.SelectedValue.ToString();
                     _exchange.TimeZone = this.timezone.SelectedValue.ToString();
+                    _exchange.CloseTime = Util.ToTLTime(this.closetime.Value);
                     CoreService.TLClient.ReqUpdateExchange(_exchange);
                     this.Close();
                 }
@@ -54,6 +55,7 @@ namespace TradingLib.MoniterControl
                     ex.EXCode = this.excode.Text;
                     ex.Calendar = this.calendar.SelectedValue.ToString();
                     ex.TimeZone = this.timezone.SelectedValue.ToString();
+                    ex.CloseTime = Util.ToTLTime(this.closetime.Value);
 
                     CoreService.TLClient.ReqUpdateExchange(ex);
                     this.Close();
@@ -132,7 +134,7 @@ namespace TradingLib.MoniterControl
             this.title.Text = _exchange.Title;
             this.country.SelectedValue = _exchange.Country;
             this.timezone.SelectedValue = _exchange.TimeZone;
-            
+            this.closetime.Value = Util.ToDateTime(Util.ToTLDate(), _exchange.CloseTime);
         }
 
 

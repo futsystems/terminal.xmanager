@@ -399,6 +399,11 @@ namespace TradingLib.MoniterControl
             vo3.Name = "美国中部时间(CT)";
             vo3.Value = "Central Standard Time";
             list.Add(vo3);
+
+            ValueObject<string> vo4 = new ValueObject<string>();
+            vo4.Name = "美国东部时间(ET)";
+            vo4.Value = "Eastern Standard Time";
+            list.Add(vo4);
              
             return list;
         }

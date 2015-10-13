@@ -381,7 +381,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[posidx][YDSIZE] = pos.PositionDetailYdNew.Sum(p => p.Volume); 
                     gt.Rows[posidx][CANFLATSIZE] = getCanFlatSize(pos);
                     gt.Rows[posidx][AVGPRICE] = string.Format(getDisplayFormat(pos.oSymbol), pos.AvgPrice);
-                    gt.Rows[posidx][REALIZEDPL] = string.Format(getDisplayFormat(pos.oSymbol), pos.ClosedPL * getMultiple(pos.oSymbol));
+                    gt.Rows[posidx][REALIZEDPL] = Util.FormatDecimal(pos.ClosedPL * getMultiple(pos.oSymbol));
                     gt.Rows[posidx][REALIZEDPLPOINT] = string.Format(getDisplayFormat(pos.oSymbol), pos.ClosedPL);
                     //num.Text = positiongrid.RowCount.ToString();
                 }
@@ -394,8 +394,8 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][YDSIZE] = pos.PositionDetailYdNew.Sum(p => p.Volume); 
                     gt.Rows[i][CANFLATSIZE] = getCanFlatSize(pos);
                     gt.Rows[i][AVGPRICE] = string.Format(getDisplayFormat(pos.oSymbol), pos.AvgPrice);
-                    gt.Rows[i][REALIZEDPL] = string.Format(getDisplayFormat(pos.oSymbol), pos.ClosedPL * getMultiple(pos.oSymbol));
-                    gt.Rows[i][REALIZEDPLPOINT] = string.Format(getDisplayFormat(pos.oSymbol), pos.ClosedPL);
+                    gt.Rows[i][REALIZEDPL] = Util.FormatDecimal(pos.ClosedPL * getMultiple(pos.oSymbol));
+                    gt.Rows[i][REALIZEDPLPOINT] =string.Format(getDisplayFormat(pos.oSymbol), pos.ClosedPL);
                     //num.Text = positiongrid.RowCount.ToString();
                     
                 }
@@ -445,7 +445,7 @@ namespace TradingLib.MoniterControl
                             else
                             {
                                 //更新unrealizedpl
-                                gt.Rows[i][UNREALIZEDPL] = string.Format(getDisplayFormat(pos.oSymbol), unrealizedpl * getMultiple(pos.oSymbol));
+                                gt.Rows[i][UNREALIZEDPL] = Util.FormatDecimal(unrealizedpl * getMultiple(pos.oSymbol));
                                 gt.Rows[i][UNREALIZEDPLPOINT] = string.Format(getDisplayFormat(pos.oSymbol), unrealizedpl);
                             }
                         }
@@ -553,7 +553,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[posidx][YDSIZE] = pos.PositionDetailYdNew.Sum(p => p.Volume); 
                     gt.Rows[posidx][CANFLATSIZE] = getCanFlatSize(pos);
                     gt.Rows[posidx][AVGPRICE] = string.Format(getDisplayFormat(pos.oSymbol), pos.AvgPrice);
-                    gt.Rows[posidx][REALIZEDPL] = string.Format(getDisplayFormat(pos.oSymbol), pos.ClosedPL * getMultiple(pos.oSymbol));
+                    gt.Rows[posidx][REALIZEDPL] = Util.FormatDecimal(pos.ClosedPL * getMultiple(pos.oSymbol));
                     gt.Rows[posidx][REALIZEDPLPOINT] = string.Format(getDisplayFormat(pos.oSymbol), pos.ClosedPL);
 
                     if (pos.isFlat)
@@ -570,7 +570,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][YDSIZE] = pos.PositionDetailYdNew.Sum(p => p.Volume); 
                     gt.Rows[i][CANFLATSIZE] = getCanFlatSize(pos);
                     gt.Rows[i][AVGPRICE] = string.Format(getDisplayFormat(pos.Symbol), pos.AvgPrice);
-                    gt.Rows[i][REALIZEDPL] = string.Format(getDisplayFormat(pos.Symbol), pos.ClosedPL * getMultiple(pos.oSymbol));
+                    gt.Rows[i][REALIZEDPL] = Util.FormatDecimal(pos.ClosedPL * getMultiple(pos.oSymbol));
                     gt.Rows[i][REALIZEDPLPOINT] = string.Format(getDisplayFormat(pos.Symbol), pos.ClosedPL);
                 }
                 _ordTransHelper.GotFill(t);

@@ -81,6 +81,7 @@ namespace TradingLib.MoniterControl
                     int i = gt.Rows.Count - 1;
                     gt.Rows[i][MTNAME] = mt.Name;
                     gt.Rows[i][MTDESC] = mt.Description;
+                    gt.Rows[i][CLOSETIME] = Util.ToDateTime(Util.ToTLDate(), mt.CloseTime).ToString("HH:mm:ss");
 
                     markettimemap.Add(mt.ID, mt);
                     markettimeidxmap.Add(mt.ID, i);
@@ -88,6 +89,10 @@ namespace TradingLib.MoniterControl
                 }
                 else
                 {
+                    int i = r;
+                    gt.Rows[i][MTNAME] = mt.Name;
+                    gt.Rows[i][MTDESC] = mt.Description;
+                    gt.Rows[i][CLOSETIME] = Util.ToDateTime(Util.ToTLDate(), mt.CloseTime).ToString("HH:mm:ss");
 
                 }
             }
@@ -109,6 +114,7 @@ namespace TradingLib.MoniterControl
         const string MTID = "全局ID";
         const string MTNAME = "名称";
         const string MTDESC = "描述";
+        const string CLOSETIME = "收盘时间";
         #endregion
 
         DataTable gt = new DataTable();
@@ -143,6 +149,7 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(MTID);//
             gt.Columns.Add(MTNAME);//
             gt.Columns.Add(MTDESC);//
+            gt.Columns.Add(CLOSETIME);
         }
 
         /// <summary>
@@ -154,8 +161,9 @@ namespace TradingLib.MoniterControl
             datasource.DataSource = gt;
             grid.DataSource = datasource;
 
-            grid.Columns[MTID].Width = 80;
-            grid.Columns[MTNAME].Width = 200;
+            grid.Columns[MTID].Width = 60;
+            //grid.Columns[MTNAME].Width = 200;
+            grid.Columns[CLOSETIME].Width = 60;
 
         }
 

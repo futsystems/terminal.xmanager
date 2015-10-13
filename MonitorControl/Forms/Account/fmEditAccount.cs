@@ -186,7 +186,15 @@ namespace TradingLib.MoniterControl
             //这里加入数据验证和检查
             if (_account == null)
             {
-                if (MoniterHelper.WindowConfirm("请确认个人信息填写准确") == System.Windows.Forms.DialogResult.Yes)
+                if (btnFillInfo.Checked)
+                {
+                    if (MoniterHelper.WindowConfirm("请确认个人信息填写准确") == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        ReqAddAccount(createion);
+                        this.Close();
+                    }
+                }
+                else
                 {
                     ReqAddAccount(createion);
                     this.Close();
@@ -194,9 +202,16 @@ namespace TradingLib.MoniterControl
             }
             else//如果交易帐户存在 则更新交易帐户对应的profile信息
             {
-                if (MoniterHelper.WindowConfirm("确认更新个人信息") == System.Windows.Forms.DialogResult.Yes)
+                if (btnFillInfo.Checked)
                 {
-                    ReqUpdateAccountProfile(profile);
+                    if (MoniterHelper.WindowConfirm("确认更新个人信息") == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        ReqUpdateAccountProfile(profile);
+                        this.Close();
+                    }
+                }
+                else
+                {
                     this.Close();
                 }
             }
