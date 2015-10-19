@@ -240,6 +240,8 @@ namespace TradingLib.MoniterControl
             agentLimit.Value = _domain.AgentLimit;
             discountNum.Value = _domain.DiscountNum;
             isproduction.Checked = _domain.IsProduction;
+            dedicated.Checked = _domain.Dedicated;
+            dedicated.Enabled = false;
 
             this.Text = "编辑域分区:" + _domain.Name;
 
@@ -286,7 +288,7 @@ namespace TradingLib.MoniterControl
                 _domain.AgentLimit = (int)agentLimit.Value;
                 _domain.DiscountNum = (int)discountNum.Value; 
                 _domain.IsProduction = isproduction.Checked;
-
+                _domain.Dedicated = dedicated.Checked;
 
                 if (MoniterHelper.WindowConfirm("确认更新分区设置?") == System.Windows.Forms.DialogResult.Yes)
                 {
@@ -325,6 +327,7 @@ namespace TradingLib.MoniterControl
                 _domain.AgentLimit = (int)agentLimit.Value;
                 _domain.DiscountNum = (int)discountNum.Value;
                 _domain.IsProduction = isproduction.Checked;
+                _domain.Dedicated = dedicated.Checked;
 
                 if ( (!_domain.Router_Live)&& (!_domain.Router_Sim))
                 {

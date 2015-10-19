@@ -372,6 +372,12 @@ namespace TradingLib.MoniterControl
         }
 
 
+        static bool IsWindows(PlatformID id)
+        {
+            if (id == PlatformID.Unix)
+                return false;
+            return true;
+        }
         /// <summary>
         /// 获得时区列表
         /// </summary>
@@ -387,22 +393,29 @@ namespace TradingLib.MoniterControl
 
             ValueObject<string> vo1 = new ValueObject<string>();
             vo1.Name = "中国标准时间";
-            vo1.Value = "China Standard Time";
+            vo1.Value = "Asia/Shanghai";
             list.Add(vo1);
+
+
+            ValueObject<string> vo10 = new ValueObject<string>();
+            vo10.Name = "香港标准时间";
+            vo10.Value = "Asia/Hong_Kong";
+            list.Add(vo10);
+
 
             ValueObject<string> vo2 = new ValueObject<string>();
             vo2.Name = "新加坡标准时间";
-            vo2.Value = "Singapore Standard Time";
+            vo2.Value = "Asia/Singapore";
             list.Add(vo2);
 
             ValueObject<string> vo3 = new ValueObject<string>();
             vo3.Name = "美国中部时间(CT)";
-            vo3.Value = "Central Standard Time";
+            vo3.Value = "US/Central";
             list.Add(vo3);
 
             ValueObject<string> vo4 = new ValueObject<string>();
             vo4.Name = "美国东部时间(ET)";
-            vo4.Value = "Eastern Standard Time";
+            vo4.Value = "US/Eastern";
             list.Add(vo4);
              
             return list;

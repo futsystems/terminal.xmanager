@@ -110,5 +110,20 @@ namespace TradingLib.MoniterCore
                 return CoreService.TLClient.ServerVersion.ProductType;
             }
         }
+
+        /// <summary>
+        /// 平台类型 windows或unix
+        /// </summary>
+        public PlatformID Platform
+        {
+            get
+            {
+                if (CoreService.TLClient.ServerVersion == null)
+                {
+                    return PlatformID.Win32NT;
+                }
+                return CoreService.TLClient.ServerVersion.Platfrom;
+            }
+        }
     }
 }

@@ -33,18 +33,14 @@
             this.kryptonGroupBox2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.marketopencheck = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.runmode = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel30 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.totalaccountnum = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel40 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.clearcentrestatus = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel19 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel11 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
-            this.istradingday = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.ccstatus = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.settlecentrestatus = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.nexttradingday = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.nextsettletime = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.currenttradingday = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lastsettleday = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -83,11 +79,7 @@
             // 
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel6);
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel7);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.marketopencheck);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.runmode);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel30);
             this.kryptonGroupBox2.Panel.Controls.Add(this.totalaccountnum);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel40);
             this.kryptonGroupBox2.Panel.Controls.Add(this.clearcentrestatus);
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel19);
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel11);
@@ -111,30 +103,6 @@
             this.kryptonLabel7.TabIndex = 7;
             this.kryptonLabel7.Values.Text = "主帐户数量:";
             // 
-            // marketopencheck
-            // 
-            this.marketopencheck.Location = new System.Drawing.Point(106, 106);
-            this.marketopencheck.Name = "marketopencheck";
-            this.marketopencheck.Size = new System.Drawing.Size(20, 20);
-            this.marketopencheck.TabIndex = 5;
-            this.marketopencheck.Values.Text = "--";
-            // 
-            // runmode
-            // 
-            this.runmode.Location = new System.Drawing.Point(106, 82);
-            this.runmode.Name = "runmode";
-            this.runmode.Size = new System.Drawing.Size(20, 20);
-            this.runmode.TabIndex = 5;
-            this.runmode.Values.Text = "--";
-            // 
-            // kryptonLabel30
-            // 
-            this.kryptonLabel30.Location = new System.Drawing.Point(39, 106);
-            this.kryptonLabel30.Name = "kryptonLabel30";
-            this.kryptonLabel30.Size = new System.Drawing.Size(63, 20);
-            this.kryptonLabel30.TabIndex = 0;
-            this.kryptonLabel30.Values.Text = "时间检查:";
-            // 
             // totalaccountnum
             // 
             this.totalaccountnum.Location = new System.Drawing.Point(106, 10);
@@ -142,14 +110,6 @@
             this.totalaccountnum.Size = new System.Drawing.Size(20, 20);
             this.totalaccountnum.TabIndex = 6;
             this.totalaccountnum.Values.Text = "--";
-            // 
-            // kryptonLabel40
-            // 
-            this.kryptonLabel40.Location = new System.Drawing.Point(39, 82);
-            this.kryptonLabel40.Name = "kryptonLabel40";
-            this.kryptonLabel40.Size = new System.Drawing.Size(63, 20);
-            this.kryptonLabel40.TabIndex = 0;
-            this.kryptonLabel40.Values.Text = "工作状态:";
             // 
             // clearcentrestatus
             // 
@@ -182,9 +142,9 @@
             // 
             // kryptonGroupBox1.Panel
             // 
-            this.kryptonGroupBox1.Panel.Controls.Add(this.istradingday);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.ccstatus);
             this.kryptonGroupBox1.Panel.Controls.Add(this.settlecentrestatus);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.nexttradingday);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.nextsettletime);
             this.kryptonGroupBox1.Panel.Controls.Add(this.currenttradingday);
             this.kryptonGroupBox1.Panel.Controls.Add(this.lastsettleday);
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel5);
@@ -196,13 +156,13 @@
             this.kryptonGroupBox1.TabIndex = 0;
             this.kryptonGroupBox1.Values.Heading = "结算日信息";
             // 
-            // istradingday
+            // ccstatus
             // 
-            this.istradingday.Location = new System.Drawing.Point(103, 73);
-            this.istradingday.Name = "istradingday";
-            this.istradingday.Size = new System.Drawing.Size(20, 20);
-            this.istradingday.TabIndex = 9;
-            this.istradingday.Values.Text = "--";
+            this.ccstatus.Location = new System.Drawing.Point(103, 73);
+            this.ccstatus.Name = "ccstatus";
+            this.ccstatus.Size = new System.Drawing.Size(20, 20);
+            this.ccstatus.TabIndex = 9;
+            this.ccstatus.Values.Text = "--";
             // 
             // settlecentrestatus
             // 
@@ -212,13 +172,13 @@
             this.settlecentrestatus.TabIndex = 8;
             this.settlecentrestatus.Values.Text = "--";
             // 
-            // nexttradingday
+            // nextsettletime
             // 
-            this.nexttradingday.Location = new System.Drawing.Point(103, 49);
-            this.nexttradingday.Name = "nexttradingday";
-            this.nexttradingday.Size = new System.Drawing.Size(20, 20);
-            this.nexttradingday.TabIndex = 7;
-            this.nexttradingday.Values.Text = "--";
+            this.nextsettletime.Location = new System.Drawing.Point(103, 49);
+            this.nextsettletime.Name = "nextsettletime";
+            this.nextsettletime.Size = new System.Drawing.Size(20, 20);
+            this.nextsettletime.TabIndex = 7;
+            this.nextsettletime.Values.Text = "--";
             // 
             // currenttradingday
             // 
@@ -254,11 +214,11 @@
             // 
             // kryptonLabel3
             // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(25, 49);
+            this.kryptonLabel3.Location = new System.Drawing.Point(14, 49);
             this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(75, 20);
+            this.kryptonLabel3.Size = new System.Drawing.Size(88, 20);
             this.kryptonLabel3.TabIndex = 2;
-            this.kryptonLabel3.Values.Text = "下一交易日:";
+            this.kryptonLabel3.Values.Text = "下次结算时间:";
             // 
             // kryptonLabel2
             // 
@@ -315,15 +275,11 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel istradingday;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel ccstatus;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel settlecentrestatus;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel nexttradingday;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel nextsettletime;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel currenttradingday;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lastsettleday;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel runmode;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel40;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel marketopencheck;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel30;
         private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox2;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel totalaccountnum;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel clearcentrestatus;

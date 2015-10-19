@@ -145,9 +145,9 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][EXCOUNTRY] = Util.GetEnumDescription(ex.Country);
                     gt.Rows[i][TITLE] = ex.Title;
 
-                    gt.Rows[i][TIMEZONE] = ex.TimeZoneInfo != null ? ex.TimeZoneInfo.DisplayName : "";
+                    gt.Rows[i][TIMEZONE] = ex.TimeZoneID;//ex.TimeZoneInfo != null ? ex.TimeZoneInfo.DisplayName : "";
                     gt.Rows[i][CALENDAR] = ex.Calendar;
-                    gt.Rows[i][CLOSETIME] = Util.ToDateTime(Util.ToTLDate(), ex.CloseTime).ToString("HH:mm:ss");
+                    gt.Rows[i][SETTLETIME] = Util.ToDateTime(Util.ToTLDate(), ex.CloseTime).ToString("HH:mm:ss");
                     exchangemap.Add(ex.ID, ex);
                     exchangeidmap.Add(ex.ID, i);
 
@@ -158,9 +158,9 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][EXNAME] = ex.Name;
                     gt.Rows[i][EXCOUNTRY] = Util.GetEnumDescription(ex.Country);
                     gt.Rows[i][TITLE] = ex.Title;
-                    gt.Rows[i][TIMEZONE] = ex.TimeZoneInfo != null ? ex.TimeZoneInfo.DisplayName : "";
+                    gt.Rows[i][TIMEZONE] = ex.TimeZoneID;// ex.TimeZoneInfo != null ? ex.TimeZoneInfo.DisplayName : "";
                     gt.Rows[i][CALENDAR] = ex.Calendar;
-                    gt.Rows[i][CLOSETIME] = Util.ToDateTime(Util.ToTLDate(), ex.CloseTime).ToString("HH:mm:ss");
+                    gt.Rows[i][SETTLETIME] = Util.ToDateTime(Util.ToTLDate(), ex.CloseTime).ToString("HH:mm:ss");
 
                 }
             }
@@ -176,7 +176,7 @@ namespace TradingLib.MoniterControl
         const string TITLE = "简称";
         const string TIMEZONE = "时区";
         const string CALENDAR = "交易日历";
-        const string CLOSETIME = "收盘时间";
+        const string SETTLETIME = "结算时间";
 
         DataTable gt = new DataTable();
         BindingSource datasource = new BindingSource();
@@ -215,7 +215,7 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(TITLE);
             gt.Columns.Add(TIMEZONE);
             gt.Columns.Add(CALENDAR);
-            gt.Columns.Add(CLOSETIME);
+            gt.Columns.Add(SETTLETIME);
         }
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace TradingLib.MoniterControl
             grid.Columns[EXCOUNTRY].Width = 60;
             grid.Columns[EXNAME].Width = 150;
             grid.Columns[CALENDAR].Width = 60;
-            grid.Columns[CLOSETIME].Width = 60;
+            grid.Columns[SETTLETIME].Width = 60;
 
 
         }

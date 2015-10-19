@@ -12,6 +12,15 @@ namespace TradingLib.MoniterControl
 
     public class AccountMoniterHelper
     {
+        /// <summary>
+        /// 获得当前选中交易帐户
+        /// 在邮件菜单有预帐户状态相关的状态检查
+        /// 1、如果没有帐户，则不需要弹出选择交易帐户的警告窗口
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="acct"></param>
+        /// <returns></returns>
         public static bool GetCurrentAccount(object obj, out AccountLite acct)
         {
             acct = null;

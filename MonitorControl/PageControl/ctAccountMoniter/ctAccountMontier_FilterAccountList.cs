@@ -14,6 +14,7 @@ namespace TradingLib.MoniterControl
     {
         FilterArgs filterArgs = ControlService.FilterArgs;
 
+        
         #region 过滤帐户列表
 
         /// <summary>

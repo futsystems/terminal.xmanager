@@ -114,6 +114,11 @@
             // 
             this.closetodaybymoney.DecimalPlaces = 6;
             this.closetodaybymoney.Location = new System.Drawing.Point(213, 3);
+            this.closetodaybymoney.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
             this.closetodaybymoney.Name = "closetodaybymoney";
             this.closetodaybymoney.Size = new System.Drawing.Size(131, 22);
             this.closetodaybymoney.TabIndex = 8;
@@ -122,6 +127,11 @@
             // 
             this.closetodaybyvolume.DecimalPlaces = 6;
             this.closetodaybyvolume.Location = new System.Drawing.Point(213, 29);
+            this.closetodaybyvolume.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
             this.closetodaybyvolume.Name = "closetodaybyvolume";
             this.closetodaybyvolume.Size = new System.Drawing.Size(131, 22);
             this.closetodaybyvolume.TabIndex = 9;
@@ -233,6 +243,11 @@
             // 
             this.openbymoney.DecimalPlaces = 6;
             this.openbymoney.Location = new System.Drawing.Point(214, 31);
+            this.openbymoney.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
             this.openbymoney.Name = "openbymoney";
             this.openbymoney.Size = new System.Drawing.Size(131, 22);
             this.openbymoney.TabIndex = 5;
@@ -249,6 +264,11 @@
             // 
             this.openbyvolume.DecimalPlaces = 6;
             this.openbyvolume.Location = new System.Drawing.Point(214, 57);
+            this.openbyvolume.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
             this.openbyvolume.Name = "openbyvolume";
             this.openbyvolume.Size = new System.Drawing.Size(131, 22);
             this.openbyvolume.TabIndex = 6;
@@ -265,6 +285,11 @@
             // 
             this.closebymoney.DecimalPlaces = 6;
             this.closebymoney.Location = new System.Drawing.Point(213, 83);
+            this.closebymoney.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
             this.closebymoney.Name = "closebymoney";
             this.closebymoney.Size = new System.Drawing.Size(131, 22);
             this.closebymoney.TabIndex = 10;
@@ -273,6 +298,11 @@
             // 
             this.closebyvolume.DecimalPlaces = 6;
             this.closebyvolume.Location = new System.Drawing.Point(213, 109);
+            this.closebyvolume.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
             this.closebyvolume.Name = "closebyvolume";
             this.closebyvolume.Size = new System.Drawing.Size(131, 22);
             this.closebyvolume.TabIndex = 11;

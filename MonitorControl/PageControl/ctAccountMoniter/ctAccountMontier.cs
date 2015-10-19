@@ -46,6 +46,8 @@ namespace TradingLib.MoniterControl
             InitMenu();
 
             WireEvents();
+
+            RefreshAccountQuery();
             
         }
 

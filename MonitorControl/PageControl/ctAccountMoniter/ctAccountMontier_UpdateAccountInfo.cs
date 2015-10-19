@@ -77,6 +77,7 @@ namespace TradingLib.MoniterControl
         const string WARNSTR = "警告消息";
         const string CURRENCY = "货币";
 
+
         DataTable gt = new DataTable();
         BindingSource datasource = new BindingSource();
 
@@ -198,7 +199,7 @@ namespace TradingLib.MoniterControl
             accountgrid.Columns[ROUTERGROUP].Visible = false;
 
 
-            //accountgrid.Columns[WARN].Visible = false;
+            accountgrid.Columns[WARN].Visible = false;
             //accountgrid.Columns[WARNSTR].Visible = false;
 
             accountgrid.Columns[EXECUTE].Visible = false;
@@ -335,12 +336,13 @@ namespace TradingLib.MoniterControl
 
         /// <summary>
         /// 帐户数量
+        /// 未删除帐户数量
         /// </summary>
         public int AccountCount
         {
             get
             {
-                return accountmap.Count();
+                return accountmap.Values.Where(acc=>!acc.Deleted).Count();
             }
         }
 
@@ -577,6 +579,7 @@ namespace TradingLib.MoniterControl
 
                         gt.Rows[r][NAME] = account.Name;
                         gt.Rows[r][DELETE] = account.Deleted;
+                        
                         gt.Rows[r][CURRENCY] = Util.GetEnumDescription(account.Currency);
 
 
@@ -602,6 +605,14 @@ namespace TradingLib.MoniterControl
                             AccountWarnOff(account.Account);
                         }
 
+                        //如果删除帐户 则需要刷新帐户列表 防止没有任何选中帐户
+                        if (account.Deleted)
+                        {
+                            if (accountgrid.RowCount > 0)
+                            {
+                                accountgrid.Rows[0].Selected = true;
+                            }
+                        }
                     }
 
                 }

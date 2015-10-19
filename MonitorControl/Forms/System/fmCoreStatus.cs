@@ -36,15 +36,14 @@ namespace TradingLib.MoniterControl
             else
             {
                 lastsettleday.Text = s.LastSettleday.ToString();
-                currenttradingday.Text = s.CurrentTradingday.ToString();
-                nexttradingday.Text = s.NextTradingday.ToString();
+                currenttradingday.Text = s.Tradingday.ToString();
+                nextsettletime.Text = Util.ToDateTime(s.NextSettleTime).ToString("yyyyMMdd HH:mm:ss");
                 settlecentrestatus.Text = s.IsSettleNormal ? "正常" : "异常";
-                istradingday.Text = s.IsTradingday ? "开市" : "休市";
+                ccstatus.Text = GetClearCentreStatus(s.ClearCentreStatus);
 
                 clearcentrestatus.Text = GetClearCentreStatus(s.ClearCentreStatus);//? "开启" : "关闭";
                 totalaccountnum.Text = s.TotalAccountNum.ToString();
-                marketopencheck.Text = s.MarketOpenCheck ? "检查" : "不检查";
-                runmode.Text = s.IsDevMode ? "开发" : "运营";
+                
             }
         }
 

@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.closetime = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.timezone = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -42,8 +44,6 @@
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.closetime = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
-            this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.timezone)).BeginInit();
@@ -73,6 +73,26 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(351, 255);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // kryptonLabel7
+            // 
+            this.kryptonLabel7.Location = new System.Drawing.Point(55, 173);
+            this.kryptonLabel7.Name = "kryptonLabel7";
+            this.kryptonLabel7.Size = new System.Drawing.Size(63, 20);
+            this.kryptonLabel7.TabIndex = 14;
+            this.kryptonLabel7.Values.Text = "结算时间:";
+            // 
+            // closetime
+            // 
+            this.closetime.CalendarShowToday = false;
+            this.closetime.CalendarShowTodayCircle = false;
+            this.closetime.CalendarTodayDate = new System.DateTime(2015, 10, 6, 0, 0, 0, 0);
+            this.closetime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.closetime.Location = new System.Drawing.Point(125, 172);
+            this.closetime.Name = "closetime";
+            this.closetime.ShowUpDown = true;
+            this.closetime.Size = new System.Drawing.Size(100, 21);
+            this.closetime.TabIndex = 13;
             // 
             // timezone
             // 
@@ -174,26 +194,6 @@
             this.kryptonLabel1.Size = new System.Drawing.Size(75, 20);
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "交易所编号:";
-            // 
-            // closetime
-            // 
-            this.closetime.CalendarShowToday = false;
-            this.closetime.CalendarShowTodayCircle = false;
-            this.closetime.CalendarTodayDate = new System.DateTime(2015, 10, 6, 0, 0, 0, 0);
-            this.closetime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.closetime.Location = new System.Drawing.Point(125, 172);
-            this.closetime.Name = "closetime";
-            this.closetime.ShowUpDown = true;
-            this.closetime.Size = new System.Drawing.Size(100, 21);
-            this.closetime.TabIndex = 13;
-            // 
-            // kryptonLabel7
-            // 
-            this.kryptonLabel7.Location = new System.Drawing.Point(55, 173);
-            this.kryptonLabel7.Name = "kryptonLabel7";
-            this.kryptonLabel7.Size = new System.Drawing.Size(63, 20);
-            this.kryptonLabel7.TabIndex = 14;
-            this.kryptonLabel7.Values.Text = "收盘时间:";
             // 
             // fmExchangeEdit
             // 

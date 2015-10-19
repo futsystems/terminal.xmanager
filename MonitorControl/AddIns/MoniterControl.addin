@@ -131,6 +131,13 @@
                 class = "TradingLib.MoniterControl.UpdateAccountRouterGroup"/>
     </Condition>
 
+    <MenuItem id = "Separator1" type = "Separator"/>
+    <Condition name="ProductState" product="Counter">
+      <MenuItem id = "DelAccount"
+                label = "删除帐户"
+                class = "TradingLib.MoniterControl.DelAccountCommand"/>
+    </Condition>
+
     <Condition name="ProductState" product="Vendor">
 
       <ComplexCondition>
