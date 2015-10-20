@@ -563,6 +563,11 @@ namespace TradingLib.MoniterControl
                     {
                         accountmap[account.Account] = account;//直接更新帐户对象 这里并没有通过字段进行修改原始对象
 
+                        gt.Rows[r][LASTEQUITY] = decDisp(account.LastEquity);
+                        //gt.Rows[i][NOWEQUITY] = decDisp(account.NowEquity);
+                        //gt.Rows[i][CREDIT] = decDisp(account.Credit);
+                        //gt.Rows[i][TOTALEQUITY] = decDisp(account.NowEquity + account.Credit);
+
                         gt.Rows[r][ROUTE] = account.OrderRouteType.ToString();
                         gt.Rows[r][ROUTEIMG] = getRouteStatusImage(account.OrderRouteType);
                         gt.Rows[r][EXECUTE] = getExecuteStatus(account.Execute);

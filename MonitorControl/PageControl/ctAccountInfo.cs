@@ -259,6 +259,7 @@ namespace TradingLib.MoniterControl
             InvokeGotGLocation(location);
         }
 
+
         string QryLocation(string ip)
         {
             try

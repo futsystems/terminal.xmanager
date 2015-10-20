@@ -60,7 +60,7 @@ namespace TradingLib.MoniterControl
         }
         void fmSettleManager_Load(object sender, EventArgs e)
         {
-            btnDelSettleInfo.Click += new EventHandler(btnDelSettleInfo_Click);
+            //btnDelSettleInfo.Click += new EventHandler(btnDelSettleInfo_Click);
             btnLoadInfo.Click += new EventHandler(btnLoadInfo_Click);
             btnReSettle.Click += new EventHandler(btnReSettle_Click);
             btnResetSystem.Click += new EventHandler(btnResetSystem_Click);
@@ -100,15 +100,15 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        void btnDelSettleInfo_Click(object sender, EventArgs e)
-        {
-            int settleday = Util.ToTLDate(dpSettleday.Value);
+        //void btnDelSettleInfo_Click(object sender, EventArgs e)
+        //{
+        //    int settleday = Util.ToTLDate(dpSettleday.Value);
 
-            if (MoniterHelper.WindowConfirm(string.Format("确认删除交易日:{0}", settleday)) == System.Windows.Forms.DialogResult.Yes)
-            {
-                CoreService.TLClient.ReqDeleteSettleInfo(settleday);
-            }
-        }
+        //    if (MoniterHelper.WindowConfirm(string.Format("确认删除交易日:{0}", settleday)) == System.Windows.Forms.DialogResult.Yes)
+        //    {
+        //        CoreService.TLClient.ReqDeleteSettleInfo(settleday);
+        //    }
+        //}
 
         void InvokeGotSettleStatus(TradingLib.Mixins.Json.JsonData data)
         {

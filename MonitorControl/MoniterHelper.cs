@@ -6,7 +6,7 @@ using System.Text;
 using System.IO;
 
 using System.Windows.Forms;
-
+using System.Net;
 using TradingLib.API;
 using TradingLib.Common;
 using TradingLib.MoniterCore;
@@ -504,5 +504,7 @@ namespace TradingLib.MoniterControl
                 return "Z";
             }
         }
+
+        
     }
 }

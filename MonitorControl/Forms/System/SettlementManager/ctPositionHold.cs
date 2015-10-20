@@ -156,7 +156,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][SIZE] = pos.Position;
                     gt.Rows[i][YDSIZE] = pos.YdPosition;
                     gt.Rows[i][TDSIZE] = pos.TodayPosition;
-                    gt.Rows[i][AVGPRICE] = pos.PositionCost;
+                    gt.Rows[i][AVGPRICE] = pos.AvgPrice;
                     gt.Rows[i][OPENVOL] = pos.OpenVolume;
                     gt.Rows[i][CLOSEVOL] = pos.CloseVolume;
 

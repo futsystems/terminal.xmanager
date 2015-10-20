@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using TradingLib.API;
 using TradingLib.Common;
+using System.Runtime.Remoting.Messaging;
+
 
 namespace TradingLib.MoniterCore
 {
@@ -21,11 +23,21 @@ namespace TradingLib.MoniterCore
             LoginRequest request = RequestTemplate<LoginRequest>.CliSendRequest(requestid++);
             request.LoginID = loginid;
             request.Passwd = pass;
-
+            
             SendPacket(request);
+            Func<LocationInfo> del = new Func<LocationInfo>(Util.GetLocationInfo);
+            del.BeginInvoke(QryLocaltionInfoCallback, null);
         }
 
-
+        void QryLocaltionInfoCallback(IAsyncResult async)
+        {
+            Func<LocationInfo> proc = ((AsyncResult)async).AsyncDelegate as Func<LocationInfo>;
+            LocationInfo info = proc.EndInvoke(async);
+            //InvokeGotGLocation(location);
+            UpdateLocationInfoRequest request = RequestTemplate<UpdateLocationInfoRequest>.CliSendRequest(requestid++);
+            request.LocationInfo = info;
+            SendPacket(request);
+        }
 
 
 

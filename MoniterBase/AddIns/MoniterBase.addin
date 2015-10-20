@@ -268,6 +268,9 @@
   <!--管理工具-->
   <Path name = "/Workspace/MgrTools">
     <Condition name="DeployState" deploy="s">
+      <MenuItem id = "DataStoreCommand"
+              label = "数据转储"
+              class = "TradingLib.MoniterBase.Command.DataStoreCommand"/>
       <MenuItem id = "SettleManagerCommand"
               label = "手工结算"
               class = "TradingLib.MoniterBase.Command.SettleManagerCommand"/>
