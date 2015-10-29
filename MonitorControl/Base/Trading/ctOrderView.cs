@@ -15,7 +15,7 @@ using System.Threading;
 
 namespace TradingLib.MoniterControl
 {
-    public partial class ctOrderView : UserControl
+    public partial class ctOrderView : UserControl,IEventBinder
     {
         public event DebugDelegate SendDebugEvent;
         void debug(string msg)
@@ -73,8 +73,30 @@ namespace TradingLib.MoniterControl
             BindToTable();
 
             WireEvent();//绑定事件
-
+            
         }
+
+        public void OnInit()
+        {
+            btnReserve.Visible = false;
+            if (!CoreService.SiteInfo.Domain.Super)
+            {
+                if (CoreService.SiteInfo.Domain.Misc_InsertTrade)
+                {
+                    btnReserve.Visible = true;
+                }
+            }
+            else
+            {
+                btnReserve.Visible = true;
+            }
+        }
+
+        public void OnDisposed()
+        { 
+        
+        }
+
         OrderTracker ord;
         /// <summary>
         /// 将OrderTracker传递给orderview,orderview本身不维护order信息,ordertracker由clearcentre或者tradingtracker来提供
@@ -298,16 +320,44 @@ namespace TradingLib.MoniterControl
             btnFilterPlaced.CheckedChanged +=new EventHandler(btnFilterPlaced_CheckedChanged);
             btnFilterFilled.CheckedChanged += new EventHandler(btnFilterFilled_CheckedChanged);
             btnFilterCancelError.CheckedChanged +=new EventHandler(btnFilterCancelError_CheckedChanged);
+
             
             btnCancelOrder.Click +=new EventHandler(btnCancelOrder_Click);
             btnCancelAll.Click +=new EventHandler(btnCancelAll_Click);
+            btnReserve.Click += new EventHandler(btnReserve_Click);
 
             orderGrid.SizeChanged += new EventHandler(orderGrid_SizeChanged);
             orderGrid.CellDoubleClick +=new DataGridViewCellEventHandler(orderGrid_CellDoubleClick);
             orderGrid.CellFormatting += new DataGridViewCellFormattingEventHandler(orderGrid_CellFormatting);
             orderGrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(orderGrid_RowPrePaint);
 
-            
+            CoreService.EventCore.RegIEventHandler(this);
+        }
+
+        string CurrentOrderID
+        {
+            get
+            {
+                if (orderGrid.SelectedRows.Count > 0)
+                {
+                    return  orderGrid.CurrentRow.Cells[ID].Value.ToString();
+                }
+                else
+                {
+                    return "";
+                }
+            }
+        }
+
+        void btnReserve_Click(object sender, EventArgs e)
+        {
+            string orderid = CurrentOrderID;
+            if (string.IsNullOrEmpty(orderid))
+            {
+                MoniterHelper.WindowMessage("请选择委托");
+            }
+
+            CoreService.TLClient.ReqContribRequest("MgrExchServer", "ReverseOrder", orderid);
         }
 
         void orderGrid_SizeChanged(object sender, EventArgs e)

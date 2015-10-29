@@ -28,6 +28,14 @@ namespace TradingLib.MoniterCore
         }
 
         /// <summary>
+        /// 重新执行交易所结算
+        /// </summary>
+        /// <param name="exchange"></param>
+        public void ReqReSettleExchange(string exchange)
+        {
+            this.ReqContribRequest("SettleCentre", "ReSettleExchange", TradingLib.Mixins.Json.JsonMapper.ToJson(new { exchange = exchange }));
+        }
+        /// <summary>
         /// 重新加载某个日期的交易数据
         /// </summary>
         /// <param name="settleday"></param>

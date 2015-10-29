@@ -18,6 +18,7 @@ namespace TradingLib.MoniterControl
         public fmSettleManager()
         {
             InitializeComponent();
+            MoniterHelper.AdapterToIDataSource(exchangelist).BindDataSource(MoniterHelper.GetExchangeList());
             this.Load += new EventHandler(fmSettleManager_Load);
         }
 
@@ -64,10 +65,19 @@ namespace TradingLib.MoniterControl
             btnLoadInfo.Click += new EventHandler(btnLoadInfo_Click);
             btnReSettle.Click += new EventHandler(btnReSettle_Click);
             btnResetSystem.Click += new EventHandler(btnResetSystem_Click);
+            btnSettleExchange.Click += new EventHandler(btnSettleExchange_Click);
             CoreService.EventCore.RegIEventHandler(this);
 
             //查询结算状态
             CoreService.TLClient.ReqQrySettleStatus();
+        }
+
+        void btnSettleExchange_Click(object sender, EventArgs e)
+        {
+            if (MoniterHelper.WindowConfirm("确认执行交易所结算?") == System.Windows.Forms.DialogResult.Yes)
+            {
+                CoreService.TLClient.ReqReSettleExchange(exchangelist.SelectedValue.ToString());
+            }
         }
 
         void btnResetSystem_Click(object sender, EventArgs e)
@@ -119,8 +129,8 @@ namespace TradingLib.MoniterControl
             else
             {
                 lbLastSettleday.Text = data["last_settleday"].ToString();
-                lbNextSettleday.Text = data["next_settleday"].ToString();
                 lbCurrentday.Text = data["current_settleday"].ToString();
+                lbSettleMode.Text = ((QSEnumSettleMode)Enum.Parse(typeof(QSEnumSettleMode), data["settle_mode"].ToString())).ToString();
             }
         }
     }

@@ -193,12 +193,12 @@ namespace TradingLib.MoniterControl
 
         //frmPositionOffset frmPosOffset;
         //止损参数映射
-        ConcurrentDictionary<string, PositionOffsetArgs> lossOffsetMap = new ConcurrentDictionary<string, PositionOffsetArgs>();
+        ConcurrentDictionary<string, PositionOffsetArg> lossOffsetMap = new ConcurrentDictionary<string, PositionOffsetArg>();
         //止盈参数映射
-        ConcurrentDictionary<string, PositionOffsetArgs> profitOffsetMap = new ConcurrentDictionary<string, PositionOffsetArgs>();
+        ConcurrentDictionary<string, PositionOffsetArg> profitOffsetMap = new ConcurrentDictionary<string, PositionOffsetArg>();
 
 
-        PositionOffsetArgs GetLossArgs(string key)
+        PositionOffsetArg GetLossArgs(string key)
         {
             if (lossOffsetMap.Keys.Contains(key))
                 return lossOffsetMap[key];
@@ -206,7 +206,7 @@ namespace TradingLib.MoniterControl
                 return null;
         }
 
-        PositionOffsetArgs GetProfitArgs(string key)
+        PositionOffsetArg GetProfitArgs(string key)
         {
             if (profitOffsetMap.Keys.Contains(key))
                 return profitOffsetMap[key];
@@ -219,10 +219,10 @@ namespace TradingLib.MoniterControl
 
         void ResetOffset(string key)
         {
-            PositionOffsetArgs p = GetProfitArgs(key);
+            PositionOffsetArg p = GetProfitArgs(key);
             if (p != null)
                 p.Enable = false;
-            PositionOffsetArgs l = GetLossArgs(key);
+            PositionOffsetArg l = GetLossArgs(key);
             if (l != null)
                 l.Enable = false;
         }
@@ -285,8 +285,8 @@ namespace TradingLib.MoniterControl
             if (!symRowMap.ContainsKey(key))
                 symRowMap.TryAdd(key, i);
             //同时为该key准备positoinoffsetarg
-            lossOffsetMap[key] = new PositionOffsetArgs(account, symbol,positionside, QSEnumPositionOffsetDirection.LOSS);
-            profitOffsetMap[key] = new PositionOffsetArgs(account, symbol, positionside, QSEnumPositionOffsetDirection.PROFIT);
+            lossOffsetMap[key] = new PositionOffsetArg(account, symbol,positionside, QSEnumPositionOffsetDirection.LOSS);
+            profitOffsetMap[key] = new PositionOffsetArg(account, symbol, positionside, QSEnumPositionOffsetDirection.PROFIT);
 
             return i;
         }

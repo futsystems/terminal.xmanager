@@ -85,18 +85,18 @@
             // btnShowAll
             // 
             this.btnShowAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnShowAll.Location = new System.Drawing.Point(60, 236);
+            this.btnShowAll.Location = new System.Drawing.Point(60, 234);
             this.btnShowAll.Name = "btnShowAll";
-            this.btnShowAll.Size = new System.Drawing.Size(77, 18);
+            this.btnShowAll.Size = new System.Drawing.Size(72, 20);
             this.btnShowAll.TabIndex = 1;
             this.btnShowAll.Values.Text = "当日明细";
             // 
             // btnShowHold
             // 
             this.btnShowHold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnShowHold.Location = new System.Drawing.Point(4, 236);
+            this.btnShowHold.Location = new System.Drawing.Point(4, 234);
             this.btnShowHold.Name = "btnShowHold";
-            this.btnShowHold.Size = new System.Drawing.Size(50, 18);
+            this.btnShowHold.Size = new System.Drawing.Size(47, 20);
             this.btnShowHold.TabIndex = 0;
             this.btnShowHold.Values.Text = "持仓";
             // 

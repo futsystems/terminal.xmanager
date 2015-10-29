@@ -31,12 +31,10 @@
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonGroupBox2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.lbSettleMode = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.lbNextSettleday = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lbCurrentday = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lbLastSettleday = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.btnResetSystem = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -46,9 +44,12 @@
             this.btnLoadInfo = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonNavigator1 = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
             this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.ctPositionHold1 = new TradingLib.MoniterControl.ctPositionHold();
+            this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.ctSettlementPrice1 = new TradingLib.MoniterControl.ctSettlementPrice();
+            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.exchangelist = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.btnSettleExchange = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).BeginInit();
@@ -65,6 +66,7 @@
             this.kryptonPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).BeginInit();
             this.kryptonPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.exchangelist)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPanel1
@@ -86,12 +88,10 @@
             // kryptonGroupBox2.Panel
             // 
             this.kryptonGroupBox2.Panel.Controls.Add(this.lbSettleMode);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.lbNextSettleday);
             this.kryptonGroupBox2.Panel.Controls.Add(this.lbCurrentday);
             this.kryptonGroupBox2.Panel.Controls.Add(this.lbLastSettleday);
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel5);
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel4);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel3);
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel2);
             this.kryptonGroupBox2.Size = new System.Drawing.Size(241, 129);
             this.kryptonGroupBox2.TabIndex = 7;
@@ -99,19 +99,11 @@
             // 
             // lbSettleMode
             // 
-            this.lbSettleMode.Location = new System.Drawing.Point(95, 79);
+            this.lbSettleMode.Location = new System.Drawing.Point(95, 57);
             this.lbSettleMode.Name = "lbSettleMode";
             this.lbSettleMode.Size = new System.Drawing.Size(20, 20);
             this.lbSettleMode.TabIndex = 8;
             this.lbSettleMode.Values.Text = "--";
-            // 
-            // lbNextSettleday
-            // 
-            this.lbNextSettleday.Location = new System.Drawing.Point(95, 55);
-            this.lbNextSettleday.Name = "lbNextSettleday";
-            this.lbNextSettleday.Size = new System.Drawing.Size(20, 20);
-            this.lbNextSettleday.TabIndex = 7;
-            this.lbNextSettleday.Values.Text = "--";
             // 
             // lbCurrentday
             // 
@@ -131,7 +123,7 @@
             // 
             // kryptonLabel5
             // 
-            this.kryptonLabel5.Location = new System.Drawing.Point(21, 79);
+            this.kryptonLabel5.Location = new System.Drawing.Point(21, 57);
             this.kryptonLabel5.Name = "kryptonLabel5";
             this.kryptonLabel5.Size = new System.Drawing.Size(63, 20);
             this.kryptonLabel5.TabIndex = 4;
@@ -144,14 +136,6 @@
             this.kryptonLabel4.Size = new System.Drawing.Size(63, 20);
             this.kryptonLabel4.TabIndex = 3;
             this.kryptonLabel4.Values.Text = "当前日期:";
-            // 
-            // kryptonLabel3
-            // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(7, 55);
-            this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(75, 20);
-            this.kryptonLabel3.TabIndex = 2;
-            this.kryptonLabel3.Values.Text = "下一结算日:";
             // 
             // kryptonLabel2
             // 
@@ -168,6 +152,9 @@
             // 
             // kryptonGroupBox1.Panel
             // 
+            this.kryptonGroupBox1.Panel.Controls.Add(this.btnSettleExchange);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.exchangelist);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel3);
             this.kryptonGroupBox1.Panel.Controls.Add(this.btnResetSystem);
             this.kryptonGroupBox1.Panel.Controls.Add(this.btnReSettle);
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel1);
@@ -179,7 +166,7 @@
             // 
             // btnResetSystem
             // 
-            this.btnResetSystem.Location = new System.Drawing.Point(252, 69);
+            this.btnResetSystem.Location = new System.Drawing.Point(202, 77);
             this.btnResetSystem.Name = "btnResetSystem";
             this.btnResetSystem.Size = new System.Drawing.Size(116, 25);
             this.btnResetSystem.TabIndex = 5;
@@ -187,15 +174,15 @@
             // 
             // btnReSettle
             // 
-            this.btnReSettle.Location = new System.Drawing.Point(252, 15);
+            this.btnReSettle.Location = new System.Drawing.Point(293, 15);
             this.btnReSettle.Name = "btnReSettle";
-            this.btnReSettle.Size = new System.Drawing.Size(116, 44);
+            this.btnReSettle.Size = new System.Drawing.Size(75, 25);
             this.btnReSettle.TabIndex = 4;
             this.btnReSettle.Values.Text = "重新结算";
             // 
             // kryptonLabel1
             // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(2, 7);
+            this.kryptonLabel1.Location = new System.Drawing.Point(3, 15);
             this.kryptonLabel1.Name = "kryptonLabel1";
             this.kryptonLabel1.Size = new System.Drawing.Size(51, 20);
             this.kryptonLabel1.TabIndex = 0;
@@ -203,16 +190,16 @@
             // 
             // dpSettleday
             // 
-            this.dpSettleday.Location = new System.Drawing.Point(2, 38);
+            this.dpSettleday.Location = new System.Drawing.Point(60, 15);
             this.dpSettleday.Name = "dpSettleday";
             this.dpSettleday.Size = new System.Drawing.Size(122, 21);
             this.dpSettleday.TabIndex = 1;
             // 
             // btnLoadInfo
             // 
-            this.btnLoadInfo.Location = new System.Drawing.Point(130, 15);
+            this.btnLoadInfo.Location = new System.Drawing.Point(202, 15);
             this.btnLoadInfo.Name = "btnLoadInfo";
-            this.btnLoadInfo.Size = new System.Drawing.Size(116, 44);
+            this.btnLoadInfo.Size = new System.Drawing.Size(75, 25);
             this.btnLoadInfo.TabIndex = 2;
             this.btnLoadInfo.Values.Text = "回 滚";
             // 
@@ -246,6 +233,14 @@
             this.kryptonPage1.ToolTipTitle = "Page ToolTip";
             this.kryptonPage1.UniqueName = "A547167AB10D46A8B9ACEF5AEC5FCBBF";
             // 
+            // ctPositionHold1
+            // 
+            this.ctPositionHold1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctPositionHold1.Location = new System.Drawing.Point(0, 0);
+            this.ctPositionHold1.Name = "ctPositionHold1";
+            this.ctPositionHold1.Size = new System.Drawing.Size(652, 245);
+            this.ctPositionHold1.TabIndex = 0;
+            // 
             // kryptonPage2
             // 
             this.kryptonPage2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
@@ -259,14 +254,6 @@
             this.kryptonPage2.ToolTipTitle = "Page ToolTip";
             this.kryptonPage2.UniqueName = "F11BFEDFEC8A4A15648EFC526323572D";
             // 
-            // ctPositionHold1
-            // 
-            this.ctPositionHold1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctPositionHold1.Location = new System.Drawing.Point(0, 0);
-            this.ctPositionHold1.Name = "ctPositionHold1";
-            this.ctPositionHold1.Size = new System.Drawing.Size(652, 245);
-            this.ctPositionHold1.TabIndex = 0;
-            // 
             // ctSettlementPrice1
             // 
             this.ctSettlementPrice1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -274,6 +261,30 @@
             this.ctSettlementPrice1.Name = "ctSettlementPrice1";
             this.ctSettlementPrice1.Size = new System.Drawing.Size(652, 247);
             this.ctSettlementPrice1.TabIndex = 1;
+            // 
+            // kryptonLabel3
+            // 
+            this.kryptonLabel3.Location = new System.Drawing.Point(3, 41);
+            this.kryptonLabel3.Name = "kryptonLabel3";
+            this.kryptonLabel3.Size = new System.Drawing.Size(51, 20);
+            this.kryptonLabel3.TabIndex = 6;
+            this.kryptonLabel3.Values.Text = "交易所:";
+            // 
+            // exchangelist
+            // 
+            this.exchangelist.DropDownWidth = 121;
+            this.exchangelist.Location = new System.Drawing.Point(61, 43);
+            this.exchangelist.Name = "exchangelist";
+            this.exchangelist.Size = new System.Drawing.Size(121, 21);
+            this.exchangelist.TabIndex = 7;
+            // 
+            // btnSettleExchange
+            // 
+            this.btnSettleExchange.Location = new System.Drawing.Point(202, 41);
+            this.btnSettleExchange.Name = "btnSettleExchange";
+            this.btnSettleExchange.Size = new System.Drawing.Size(75, 25);
+            this.btnSettleExchange.TabIndex = 8;
+            this.btnSettleExchange.Values.Text = "交易所结算";
             // 
             // fmSettleManager
             // 
@@ -305,6 +316,7 @@
             this.kryptonPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).EndInit();
             this.kryptonPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.exchangelist)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -323,16 +335,17 @@
         private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox2;
         private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbSettleMode;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel lbNextSettleday;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbCurrentday;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbLastSettleday;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private ctPositionHold ctPositionHold1;
         private ctSettlementPrice ctSettlementPrice1;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnResetSystem;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
+        private ComponentFactory.Krypton.Toolkit.KryptonComboBox exchangelist;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnSettleExchange;
         //private ctSettlementPrice ctSettlementPrice1;
     }
 }

@@ -36,6 +36,7 @@
             this.btnFilterPlaced = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             this.btnFilterAll = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             this.orderGrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.btnReserve = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.orderGrid)).BeginInit();
@@ -43,6 +44,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.btnReserve);
             this.kryptonPanel1.Controls.Add(this.btnCancelAll);
             this.kryptonPanel1.Controls.Add(this.btnCancelOrder);
             this.kryptonPanel1.Controls.Add(this.btnFilterCancelError);
@@ -77,36 +79,36 @@
             // btnFilterCancelError
             // 
             this.btnFilterCancelError.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnFilterCancelError.Location = new System.Drawing.Point(201, 194);
+            this.btnFilterCancelError.Location = new System.Drawing.Point(201, 192);
             this.btnFilterCancelError.Name = "btnFilterCancelError";
-            this.btnFilterCancelError.Size = new System.Drawing.Size(94, 18);
+            this.btnFilterCancelError.Size = new System.Drawing.Size(90, 20);
             this.btnFilterCancelError.TabIndex = 4;
             this.btnFilterCancelError.Values.Text = "已撤单/错单";
             // 
             // btnFilterFilled
             // 
             this.btnFilterFilled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnFilterFilled.Location = new System.Drawing.Point(132, 194);
+            this.btnFilterFilled.Location = new System.Drawing.Point(132, 192);
             this.btnFilterFilled.Name = "btnFilterFilled";
-            this.btnFilterFilled.Size = new System.Drawing.Size(63, 18);
+            this.btnFilterFilled.Size = new System.Drawing.Size(60, 20);
             this.btnFilterFilled.TabIndex = 3;
             this.btnFilterFilled.Values.Text = "已成交";
             // 
             // btnFilterPlaced
             // 
             this.btnFilterPlaced.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnFilterPlaced.Location = new System.Drawing.Point(76, 194);
+            this.btnFilterPlaced.Location = new System.Drawing.Point(76, 192);
             this.btnFilterPlaced.Name = "btnFilterPlaced";
-            this.btnFilterPlaced.Size = new System.Drawing.Size(50, 18);
+            this.btnFilterPlaced.Size = new System.Drawing.Size(47, 20);
             this.btnFilterPlaced.TabIndex = 2;
             this.btnFilterPlaced.Values.Text = "挂单";
             // 
             // btnFilterAll
             // 
             this.btnFilterAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnFilterAll.Location = new System.Drawing.Point(3, 194);
+            this.btnFilterAll.Location = new System.Drawing.Point(3, 192);
             this.btnFilterAll.Name = "btnFilterAll";
-            this.btnFilterAll.Size = new System.Drawing.Size(63, 18);
+            this.btnFilterAll.Size = new System.Drawing.Size(60, 20);
             this.btnFilterAll.TabIndex = 1;
             this.btnFilterAll.Values.Text = "全部单";
             // 
@@ -121,6 +123,15 @@
             this.orderGrid.RowTemplate.Height = 23;
             this.orderGrid.Size = new System.Drawing.Size(838, 188);
             this.orderGrid.TabIndex = 0;
+            // 
+            // btnReserve
+            // 
+            this.btnReserve.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnReserve.Location = new System.Drawing.Point(454, 191);
+            this.btnReserve.Name = "btnReserve";
+            this.btnReserve.Size = new System.Drawing.Size(64, 25);
+            this.btnReserve.TabIndex = 7;
+            this.btnReserve.Values.Text = "反 转";
             // 
             // ctOrderView
             // 
@@ -148,6 +159,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView orderGrid;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnCancelAll;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnCancelOrder;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnReserve;
 
     }
 }

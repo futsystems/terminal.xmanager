@@ -378,6 +378,19 @@ namespace TradingLib.MoniterControl
                 return false;
             return true;
         }
+
+        public static ArrayList GetExchangeList()
+        {
+            ArrayList list = new ArrayList();
+            foreach (var exchange in CoreService.BasicInfoTracker.Exchanges)
+            {
+                ValueObject<string> vo0 = new ValueObject<string>();
+                vo0.Name = exchange.Title;
+                vo0.Value =exchange.EXCode;
+                list.Add(vo0);
+            }
+            return list;
+        }
         /// <summary>
         /// 获得时区列表
         /// </summary>
