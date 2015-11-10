@@ -11,12 +11,14 @@ using TradingLib.API;
 using TradingLib.Common;
 using TradingLib.MoniterCore;
 using System.Threading;
-
+using Common.Logging;
 
 namespace TradingLib.MoniterControl
 {
     public partial class ctOrderView : UserControl,IEventBinder
     {
+        ILog logger = LogManager.GetLogger("OrderVeiw");
+
         public event DebugDelegate SendDebugEvent;
         void debug(string msg)
         {
@@ -78,10 +80,11 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
+            //logger.Info("OrderView Init root:" + CoreService.SiteInfo.Manager.IsRoot().ToString() + " insert:" + CoreService.SiteInfo.Domain.Misc_InsertTrade.ToString());
             btnReserve.Visible = false;
             if (!CoreService.SiteInfo.Domain.Super)
             {
-                if (CoreService.SiteInfo.Domain.Misc_InsertTrade)
+                if (CoreService.SiteInfo.Manager.IsRoot() && CoreService.SiteInfo.Domain.Misc_InsertTrade)
                 {
                     btnReserve.Visible = true;
                 }

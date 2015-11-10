@@ -169,6 +169,14 @@ namespace TradingLib.MoniterControl
                     fm.ShowDialog();
                     fm.Close();
                 }
+                else if (item.ClassName.Equals("RuleSet2.Account.RSTime"))
+                {
+                    fmAccountRule_Time fm = new fmAccountRule_Time();
+                    fm.Account = _account;
+                    fm.RuleClass = item;
+                    fm.ShowDialog();
+                    fm.Close();
+                }
             }
         }
 

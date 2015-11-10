@@ -154,10 +154,18 @@ namespace TradingLib.MoniterCore
             this._SplashScreenForm = null;
 
 
-            //必须先显示，再激活，否则主窗体不能在启动窗体消失后出现
-            this._PrimaryForm.Show();
-            this._PrimaryForm.Activate();
-            this._PrimaryForm.Closed += new EventHandler(_PrimaryForm_Closed);
+            fmNotice fm = new fmNotice();
+            if (fm.ShowDialog() == DialogResult.Yes)
+            {
+                //必须先显示，再激活，否则主窗体不能在启动窗体消失后出现
+                this._PrimaryForm.Show();
+                this._PrimaryForm.Activate();
+                this._PrimaryForm.Closed += new EventHandler(_PrimaryForm_Closed);
+            }
+            else
+            {
+                System.Environment.Exit(0);
+            }
             
         }
 

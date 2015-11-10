@@ -378,6 +378,12 @@
     <Compile Include="Forms\Account\RiskRule\fm\fmAccountRule_EquityByCredit.Designer.cs">
       <DependentUpon>fmAccountRule_EquityByCredit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Account\RiskRule\fm\fmAccountRule_Time.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Account\RiskRule\fm\fmAccountRule_Time.Designer.cs">
+      <DependentUpon>fmAccountRule_Time.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Basic\CommissionMargin\fmCommission.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -898,6 +904,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\RiskRule\fm\fmAccountRule_EquityByCredit.resx">
       <DependentUpon>fmAccountRule_EquityByCredit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Account\RiskRule\fm\fmAccountRule_Time.resx">
+      <DependentUpon>fmAccountRule_Time.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Basic\CommissionMargin\fmCommission.resx">
       <DependentUpon>fmCommission.cs</DependentUpon>
