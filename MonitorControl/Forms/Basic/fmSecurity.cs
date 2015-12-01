@@ -118,6 +118,7 @@ namespace TradingLib.MoniterControl
 
                     gt.Rows[i][TRADEABLE] = sec.Tradeable ? 1 : -1;
                     gt.Rows[i][TRADEABLETITLE] = GetTradeableTitle(sec.Tradeable);
+                    gt.Rows[i][DATAFEED] = sec.DataFeed;
                 }
                 else
                 {
@@ -174,6 +175,7 @@ namespace TradingLib.MoniterControl
 
                         gt.Rows[i][TRADEABLE] = sec.Tradeable ? 1 : -1;
                         gt.Rows[i][TRADEABLETITLE] = GetTradeableTitle(sec.Tradeable);
+                        gt.Rows[i][DATAFEED] = sec.DataFeed;
                     }
 
 
@@ -205,7 +207,7 @@ namespace TradingLib.MoniterControl
         const string MARKETTIME = "交易时间段";
         const string TRADEABLE = "TRADEABLE";
         const string TRADEABLETITLE = "允许交易";
-
+        const string DATAFEED = "行情源";
         #endregion
 
         DataTable gt = new DataTable();
@@ -261,6 +263,7 @@ namespace TradingLib.MoniterControl
             
             gt.Columns.Add(TRADEABLE);
             gt.Columns.Add(TRADEABLETITLE);
+            gt.Columns.Add(DATAFEED);
         }
 
         /// <summary>

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btnReserve = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnCancelAll = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnCancelOrder = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnFilterCancelError = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
@@ -36,7 +37,6 @@
             this.btnFilterPlaced = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             this.btnFilterAll = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             this.orderGrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.btnReserve = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.orderGrid)).BeginInit();
@@ -57,6 +57,15 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(838, 219);
             this.kryptonPanel1.TabIndex = 1;
+            // 
+            // btnReserve
+            // 
+            this.btnReserve.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnReserve.Location = new System.Drawing.Point(454, 191);
+            this.btnReserve.Name = "btnReserve";
+            this.btnReserve.Size = new System.Drawing.Size(64, 25);
+            this.btnReserve.TabIndex = 7;
+            this.btnReserve.Values.Text = "测 试";
             // 
             // btnCancelAll
             // 
@@ -123,15 +132,6 @@
             this.orderGrid.RowTemplate.Height = 23;
             this.orderGrid.Size = new System.Drawing.Size(838, 188);
             this.orderGrid.TabIndex = 0;
-            // 
-            // btnReserve
-            // 
-            this.btnReserve.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnReserve.Location = new System.Drawing.Point(454, 191);
-            this.btnReserve.Name = "btnReserve";
-            this.btnReserve.Size = new System.Drawing.Size(64, 25);
-            this.btnReserve.TabIndex = 7;
-            this.btnReserve.Values.Text = "反 转";
             // 
             // ctOrderView
             // 

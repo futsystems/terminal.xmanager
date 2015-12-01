@@ -153,10 +153,10 @@ namespace TradingLib.MoniterControl
                 gt.Rows[i][DATETIME] = Util.ToDateTime(trans.DateTime);
                 gt.Rows[i][ACCOUNT] = trans.Account;
                 gt.Rows[i][MGRFK] = trans.mgr_fk;
-                gt.Rows[i][OPERATION] = trans.Amount > 0 ? "入金" : "出金";
-                gt.Rows[i][TYPE] = Util.GetEnumDescription(trans.Equity_Type);
+                gt.Rows[i][OPERATION] = trans.TxnType == QSEnumCashOperation.Deposit?"入金" : "出金";
+                gt.Rows[i][TYPE] = Util.GetEnumDescription(trans.EquityType);
                 gt.Rows[i][AMOUNT] = Math.Abs(trans.Amount);
-                gt.Rows[i][REF] = trans.TransRef;
+                gt.Rows[i][REF] = trans.TxnRef;
 
             }
         }

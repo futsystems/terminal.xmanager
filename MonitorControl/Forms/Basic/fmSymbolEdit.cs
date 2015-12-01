@@ -22,14 +22,15 @@ namespace TradingLib.MoniterControl
             MoniterHelper.AdapterToIDataSource(cbexchange).BindDataSource(CoreService.BasicInfoTracker.GetExchangeCombList());
             MoniterHelper.AdapterToIDataSource(cboptionside).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumOptionSide>());
             MoniterHelper.AdapterToIDataSource(cbexpiremonth).BindDataSource(CoreService.BasicInfoTracker.GetExpireMonth());
-            //MoniterHelper.AdapterToIDataSource(cbCurrency).BindDataSource(MoniterHelper.GetEnumValueObjects<CurrencyType>());
+            MoniterHelper.AdapterToIDataSource(cbSymbolType).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumSymbolType>());
+            
             entrycommission.Value = -1;
             exitcommission.Value = -1;
             margin.Value = -1;
-            extramargin.Value = -1;
-            maintancemargin.Value = -1;
+            //extramargin.Value = -1;
+            //maintancemargin.Value = -1;
             gp_option.Visible = false;// Globals.UIAccess.sectype_option;
-            gp_lotto.Visible = false;// Globals.UIAccess.sectype_lotto;
+            //gp_lotto.Visible = false;// Globals.UIAccess.sectype_lotto;
             _loaded = true;
             //cbCurrency.SelectedIndex = 1;
             WireEvent();
@@ -38,8 +39,7 @@ namespace TradingLib.MoniterControl
 
         private void SymbolEditForm_Load(object sender, EventArgs e)
         {
-            OnCBExchangeChanged();
-            OnCBSecurityChanged();
+
         }
 
 
@@ -82,12 +82,14 @@ namespace TradingLib.MoniterControl
                 cbsecurity.SelectedValue = _symbol.SecurityFamily != null ? (_symbol.SecurityFamily as SecurityFamilyImpl).ID : 0;
                 cbsecurity.Enabled = false;
                 symbol.Text = _symbol.Symbol;
-                //Globals.Debug("set symbol:" + _symbol.Symbol);
+                
                 symbol.Enabled = false;
 
+                //绑定月份
                 MoniterHelper.AdapterToIDataSource(cbexpiremonth).BindDataSource(CoreService.BasicInfoTracker.GetExpireMonth());
-                cbexpiremonth.SelectedValue = (int)_symbol.ExpireDate / 100;//_symbol.ExpireMonth;
+                cbexpiremonth.SelectedValue = (int)_symbol.ExpireDate / 100;
                 cbexpiremonth.Enabled = false;
+                
 
                 //cbCurrency.SelectedValue = _symbol.Currency;
 
@@ -104,19 +106,23 @@ namespace TradingLib.MoniterControl
                 }
                 cboptionside.Enabled = false;
                 strike.Enabled = false;
-                cblottolevel.Enabled = false;
-                cbulsymbol.Enabled = false;
+                //cblottolevel.Enabled = false;
+                //cbulsymbol.Enabled = false;
 
                 this.entrycommission.Value = _symbol._entrycommission;
                 this.exitcommission.Value = _symbol._exitcommission;
                 this.margin.Value = _symbol._margin;
-                this.extramargin.Value = _symbol._extramargin;
-                this.maintancemargin.Value = _symbol._maintancemargin;
+                //this.extramargin.Value = _symbol._extramargin;
+                //this.maintancemargin.Value = _symbol._maintancemargin;
 
                 this.tradeable.Checked = _symbol.Tradeable;
-                //this.tradeable.Text = this.tradeable.Checked ? "可交易" : "不可交易";
+                
                 this.expiredate.Value = (_symbol.ExpireDate == 0 ? DateTime.Now:Util.ToDateTime(_symbol.ExpireDate,0));
-
+                cbSymbolType.Enabled = false;
+                if (_symbol.SymbolType == QSEnumSymbolType.MonthContinuous)
+                {
+                    this.expiredate.Enabled = false;
+                }
             }
         }
 
@@ -129,32 +135,43 @@ namespace TradingLib.MoniterControl
                 _symbol.EntryCommission = entrycommission.Value;
                 _symbol.ExitCommission = exitcommission.Value;
                 _symbol.Margin = margin.Value;
-                _symbol.ExtraMargin = extramargin.Value;
-                _symbol.MaintanceMargin = maintancemargin.Value;
+                //_symbol.ExtraMargin = extramargin.Value;
+                //_symbol.MaintanceMargin = maintancemargin.Value;
                 _symbol.Tradeable = tradeable.Checked;
                 _symbol.ExpireDate = Util.ToTLDate(this.expiredate.Value);
-                //MessageBox.Show("it is here");
+                _symbol.SymbolType = (QSEnumSymbolType)cbSymbolType.SelectedValue;
+
                 CoreService.TLClient.ReqUpdateSymbol(_symbol);
             }
             else
             {
-                SymbolImpl target = new SymbolImpl();
-
-                target.Symbol = symbol.Text;
-
-                //_symbol.Currency = (CurrencyType)cbCurrency.SelectedValue;
-                target.EntryCommission = entrycommission.Value;
-                target.ExitCommission = exitcommission.Value;
-                target.Margin = margin.Value;
-                target.ExtraMargin = extramargin.Value;
-                target.MaintanceMargin = maintancemargin.Value;
-                target.ExpireDate = Util.ToTLDate(this.expiredate.Value);
-                //MessageBox.Show("expire:" + target.ExpireDate.ToString());
                 SecurityFamilyImpl sec = CurrentSecurity;
                 if (sec == null)
                 {
                     MoniterHelper.WindowMessage("请选择品种!");
                     return;
+                }
+
+
+                SymbolImpl target = new SymbolImpl();
+
+                target.Symbol = symbol.Text;
+                target.SymbolType = (QSEnumSymbolType)cbSymbolType.SelectedValue; 
+
+                target.EntryCommission = entrycommission.Value;
+                target.ExitCommission = exitcommission.Value;
+                target.Margin = margin.Value;
+                //标准合约设定到期日
+                if (target.SymbolType == QSEnumSymbolType.Standard)
+                {
+                    int fullmonth = (int)cbexpiremonth.SelectedValue;
+                    target.Month = MoniterHelper.GetMonth(fullmonth);
+                    target.ExpireDate = Util.ToTLDate(this.expiredate.Value);
+                }
+                else
+                {
+                    target.Month = (string)cbexpiremonth.SelectedValue;
+                    target.ExpireDate = 0;
                 }
 
                 target.security_fk = sec.ID;
@@ -230,55 +247,47 @@ namespace TradingLib.MoniterControl
             cbexchange.SelectedIndexChanged += new EventHandler(cbexchange_SelectedIndexChanged);
             cbsecurity.SelectedIndexChanged += new EventHandler(cbsecurity_SelectedIndexChanged);
             cbexpiremonth.SelectedIndexChanged += new EventHandler(cbexpiremonth_SelectedIndexChanged);
-            
+            cbSymbolType.SelectedIndexChanged += new EventHandler(cbSymbolType_SelectedIndexChanged);
             btnSubmit.Click +=new EventHandler(btnSubmit_Click);
         }
+
+        
 
  
 
 
 
         /// <summary>
-        /// 选择交易所 动态更新品种列表
+        /// 交易所变动
+        /// 动态更新品种列表
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void cbexchange_SelectedIndexChanged(object sender, EventArgs e)
         {
-            OnCBExchangeChanged();
-        }
-
-        void OnCBExchangeChanged()
-        {
             if (!_loaded) return;
             int exid = (int)cbexchange.SelectedValue;
-
             MoniterHelper.AdapterToIDataSource(cbsecurity).BindDataSource(CoreService.BasicInfoTracker.GetSecurityCombListViaExchange(exid));
 
-            OnCBExpiremonth();
+            GenSymbolName();
         }
 
+
         /// <summary>
-        /// 选择品种
+        /// 品种变化后需要修改界面参数可见部分
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void cbsecurity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            OnCBSecurityChanged();
-        }
-
-        void OnCBSecurityChanged()
-        {
             if (!_loaded) return;
             try
             {
                 SecurityFamilyImpl sec = CurrentSecurity;
-
                 cboptionside.Enabled = false;
                 strike.Enabled = false;
-                cbulsymbol.Enabled = false;
-                cblottolevel.Enabled = false;
+                //cbulsymbol.Enabled = false;
+                //cblottolevel.Enabled = false;
 
                 if (sec == null) return;
                 switch (sec.Type)
@@ -290,8 +299,8 @@ namespace TradingLib.MoniterControl
                         strike.Enabled = true;
                         break;
                     case SecurityType.INNOV://异化合约
-                        cbulsymbol.Enabled = true;
-                        cblottolevel.Enabled = true;
+                        //cbulsymbol.Enabled = true;
+                        //cblottolevel.Enabled = true;
                         break;
                     default:
                         cboptionside.SelectedValue = QSEnumOptionSide.NULL;
@@ -300,20 +309,22 @@ namespace TradingLib.MoniterControl
                         break;
 
                 }
-                OnCBExpiremonth();
             }
             catch (Exception ex)
             {
                 //Globals.Debug("error securitychanged:" + ex.ToString());
             }
+
+            GenSymbolName();
         }
 
+        /// <summary>
+        /// 合约月份变化
+        /// 更新过期日期
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbexpiremonth_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            OnCBExpiremonth();
-        }
-
-        void OnCBExpiremonth()
         {
             if (!_loaded) return;
             try
@@ -321,10 +332,73 @@ namespace TradingLib.MoniterControl
                 int month = (int)cbexpiremonth.SelectedValue;
                 SecurityFamilyImpl sec = CurrentSecurity;
                 if (sec == null) return;
+                //如果是标准合约则更新过期日期
+                QSEnumSymbolType symboltype = (QSEnumSymbolType)cbSymbolType.SelectedValue;
+                if (symboltype == QSEnumSymbolType.Standard)
+                {
+                    this.expiredate.Value = Util.ToDateTime(month * 100 + 30, 0);
+                }
 
-                symbol.Text = MoniterHelper.GenSymbol(sec, month);
-                //MessageBox.Show(month.ToString());
-                this.expiredate.Value = Util.ToDateTime(month * 100 + 30, 0);
+            }
+            catch (Exception ex)
+            {
+                //Globals.Debug("error expiremonth:" + ex.ToString());
+            }
+
+            GenSymbolName();
+        }
+
+
+        void cbSymbolType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            QSEnumSymbolType symboltype = (QSEnumSymbolType)cbSymbolType.SelectedValue;
+            switch (symboltype)
+            { 
+                case QSEnumSymbolType.Standard:
+                    expiredate.Enabled = true;
+                    MoniterHelper.AdapterToIDataSource(cbexpiremonth).BindDataSource(CoreService.BasicInfoTracker.GetExpireMonth());
+           
+                    break;
+                case QSEnumSymbolType.MonthContinuous:
+                    expiredate.Enabled = false;
+                    MoniterHelper.AdapterToIDataSource(cbexpiremonth).BindDataSource(MoniterHelper.GenExpireMonthWithOutYear());
+           
+                    break;
+                default:
+                    break;
+            }
+
+            GenSymbolName();
+        }
+
+        void GenSymbolName()
+        {
+            if (!_loaded) return;
+            try
+            {
+                SecurityFamilyImpl sec = CurrentSecurity;
+                if (sec == null) return;
+
+                QSEnumSymbolType symboltype = (QSEnumSymbolType)cbSymbolType.SelectedValue;
+                switch(symboltype)
+                {
+                    case QSEnumSymbolType.Standard:
+                        {
+                            int month = (int)cbexpiremonth.SelectedValue;
+                            symbol.Text = MoniterHelper.GenSymbol(sec, month);
+                            break;
+                        }
+                    case QSEnumSymbolType.MonthContinuous:
+                        {
+                            string month = (string)cbexpiremonth.SelectedValue;
+                            symbol.Text = MoniterHelper.GenSymbolMonthContinuous(sec.Code, month);
+                            this.expiredate.Value = DateTime.MaxValue;
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            
 
             }
             catch (Exception ex)
@@ -332,6 +406,7 @@ namespace TradingLib.MoniterControl
                 //Globals.Debug("error expiremonth:" + ex.ToString());
             }
         }
+
 
 
 

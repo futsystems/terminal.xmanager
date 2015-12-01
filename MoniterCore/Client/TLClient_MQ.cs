@@ -916,7 +916,7 @@ namespace TradingLib.MoniterCore
         public void Unsubscribe()
         {
             //告诉服务端清除数据
-            UnregisterSymbolsRequest req = RequestTemplate<UnregisterSymbolsRequest>.CliSendRequest(0);
+            UnregisterSymbolTickRequest req = RequestTemplate<UnregisterSymbolTickRequest>.CliSendRequest(0);
             TLSend(req);
             UnsubscribeAll_sub();
 

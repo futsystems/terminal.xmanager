@@ -241,6 +241,8 @@ namespace TradingLib.MoniterCore
             return list;
         }
 
+        
+
         /// <summary>
         /// 返回manger选择项
         /// 用于创建用户

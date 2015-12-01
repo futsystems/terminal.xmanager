@@ -241,6 +241,19 @@ namespace TradingLib.MoniterControl
             return list;
         }
 
+        public static ArrayList GenExpireMonthWithOutYear()
+        {
+            ArrayList list = new ArrayList();
+            for (int i = 1; i <= 12; i++)
+            {
+                ValueObject<string> vo = new ValueObject<string>();
+                vo.Name = string.Format("{0:00}", i);
+                vo.Value = string.Format("{0:00}", i);
+                list.Add(vo);
+            }
+            return list;
+        }
+
 
         /// <summary>
         /// 通过PriceTick得到数字显示格式
@@ -465,6 +478,30 @@ namespace TradingLib.MoniterControl
             string yearstr = month.ToString().Substring(3,1);
             return string.Format("{0}{1}{2}", sec.Code, GetMonthCode(monthstr), yearstr);
         }
+
+
+        /// <summary>
+        /// 生成月连续合约
+        /// [SecCode][Month]
+        /// </summary>
+        /// <param name="seccode"></param>
+        /// <param name="month"></param>
+        /// <returns></returns>
+        public static string GenSymbolMonthContinuous(string seccode, string month)
+        {
+            return string.Format("{0}{1}", seccode, month);
+        }
+
+        /// <summary>
+        /// 201501 获得01作为Month
+        /// </summary>
+        /// <param name="month"></param>
+        /// <returns></returns>
+        public static string GetMonth(int month)
+        {
+            return month.ToString().Substring(4);
+        }
+
 
         static string GetMonthCode(string month)
         {

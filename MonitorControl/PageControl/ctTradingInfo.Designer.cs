@@ -72,7 +72,7 @@
             this.kryptonPage1.LastVisibleSet = true;
             this.kryptonPage1.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage1.Name = "kryptonPage1";
-            this.kryptonPage1.Size = new System.Drawing.Size(820, 359);
+            this.kryptonPage1.Size = new System.Drawing.Size(820, 357);
             this.kryptonPage1.Text = "持 仓";
             this.kryptonPage1.ToolTipTitle = "Page ToolTip";
             this.kryptonPage1.UniqueName = "B6362063223E49E221847AF2AE1AB0DB";
@@ -85,7 +85,7 @@
             this.ctPositionView1.Name = "ctPositionView1";
             this.ctPositionView1.OrderTracker = null;
             this.ctPositionView1.PositionTracker = null;
-            this.ctPositionView1.Size = new System.Drawing.Size(820, 359);
+            this.ctPositionView1.Size = new System.Drawing.Size(820, 357);
             this.ctPositionView1.TabIndex = 0;
             // 
             // kryptonPage2
@@ -96,7 +96,7 @@
             this.kryptonPage2.LastVisibleSet = true;
             this.kryptonPage2.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage2.Name = "kryptonPage2";
-            this.kryptonPage2.Size = new System.Drawing.Size(795, 382);
+            this.kryptonPage2.Size = new System.Drawing.Size(820, 357);
             this.kryptonPage2.Text = "委 托";
             this.kryptonPage2.ToolTipTitle = "Page ToolTip";
             this.kryptonPage2.UniqueName = "EA05F9BF9E0C443A4C9443BDC9B6198C";
@@ -108,7 +108,7 @@
             this.ctOrderView1.Location = new System.Drawing.Point(0, 0);
             this.ctOrderView1.Name = "ctOrderView1";
             this.ctOrderView1.OrderTracker = null;
-            this.ctOrderView1.Size = new System.Drawing.Size(795, 382);
+            this.ctOrderView1.Size = new System.Drawing.Size(820, 357);
             this.ctOrderView1.TabIndex = 0;
             // 
             // kryptonPage3

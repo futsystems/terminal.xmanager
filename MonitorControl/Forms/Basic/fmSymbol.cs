@@ -21,7 +21,6 @@ namespace TradingLib.MoniterControl
             InitTable();
             BindToTable();
 
-            //MoniterHelper.AdapterToIDataSource(cbsecurity).BindDataSource(MoniterHelper.GetEnumValueObjects<SecurityType>(true));
             MoniterHelper.AdapterToIDataSource(cbsecurity).BindDataSource(CoreService.BasicInfoTracker.GetSecurityCombListViaExchange(0, SecurityType.FUT, true));
             MoniterHelper.AdapterToIDataSource(cbtradeable).BindDataSource(MoniterHelper.GetTradeableCBList(true));
             MoniterHelper.AdapterToIDataSource(cbexchange).BindDataSource(CoreService.BasicInfoTracker.GetExchangeCombList(true));
@@ -107,9 +106,11 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][UNDERLAYINGSYMBOLID] = sym.underlayingsymbol_fk;
                     gt.Rows[i][UNDERLAYINGSYMBOL] = sym.UnderlayingSymbol != null ? sym.UnderlayingSymbol.Symbol : "无";
                     //gt.Rows[i][EXPIREMONTH] = sym.ExpireMonth;
+                    gt.Rows[i][MONTH] = sym.Month;
                     gt.Rows[i][EXPIREDATE] = sym.ExpireDate;
                     gt.Rows[i][TRADEABLE] = sym.Tradeable;
                     gt.Rows[i][TRADEABLETITLE] = GetTradeableTitle(sym.Tradeable);
+                    gt.Rows[i][SYMBOLTYPE] = Util.GetEnumDescription(sym.SymbolType);
 
                 }
                 else
@@ -133,10 +134,11 @@ namespace TradingLib.MoniterControl
 
                     gt.Rows[i][UNDERLAYINGSYMBOLID] = sym.underlayingsymbol_fk;
                     gt.Rows[i][UNDERLAYINGSYMBOL] = sym.UnderlayingSymbol != null ? sym.UnderlayingSymbol.Symbol : "无";
-                    //gt.Rows[i][EXPIREMONTH] = sym.ExpireMonth;
+                    gt.Rows[i][MONTH] = sym.Month;
                     gt.Rows[i][EXPIREDATE] = sym.ExpireDate;
                     gt.Rows[i][TRADEABLE] = sym.Tradeable;
                     gt.Rows[i][TRADEABLETITLE] = GetTradeableTitle(sym.Tradeable);
+                    gt.Rows[i][SYMBOLTYPE] = Util.GetEnumDescription(sym.SymbolType);
                 }
             }
         }
@@ -163,10 +165,12 @@ namespace TradingLib.MoniterControl
         const string UNDERLAYING = "异化底层证券";
         const string UNDERLAYINGSYMBOLID = "UnderLayingSymbolID";
         const string UNDERLAYINGSYMBOL = "底层证券";
-        const string EXPIREMONTH = "到期月份";
+        const string MONTH = "月份";
         const string EXPIREDATE = "到期日";
         const string TRADEABLE = "TRADEABLE";
         const string TRADEABLETITLE = "允许交易";
+        const string SYMBOLTYPE = "类别";
+        
 
 
         #endregion
@@ -215,10 +219,12 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(UNDERLAYING);//
             gt.Columns.Add(UNDERLAYINGSYMBOLID);//
             gt.Columns.Add(UNDERLAYINGSYMBOL);//
-            //gt.Columns.Add(EXPIREMONTH);
+            gt.Columns.Add(MONTH);
             gt.Columns.Add(EXPIREDATE);
             gt.Columns.Add(TRADEABLE);
             gt.Columns.Add(TRADEABLETITLE);
+            gt.Columns.Add(SYMBOLTYPE);
+
         }
 
         /// <summary>

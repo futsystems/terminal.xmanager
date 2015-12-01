@@ -32,20 +32,20 @@
             this.kryptonNavigator1 = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
             this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btnDelOrderRule = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.btnAddOrderRule = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.orderRuleClassList = new ComponentFactory.Krypton.Toolkit.KryptonListBox();
             this.orderRuleItemList = new ComponentFactory.Krypton.Toolkit.KryptonListBox();
             this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btnDelAccountRule = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnAddAccountRule = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel12 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.accountRuleClassList = new ComponentFactory.Krypton.Toolkit.KryptonListBox();
             this.accountRuleItemList = new ComponentFactory.Krypton.Toolkit.KryptonListBox();
-            this.btnAddAccountRule = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btnDelAccountRule = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btnDelOrderRule = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btnAddOrderRule = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
@@ -86,7 +86,7 @@
             this.kryptonNavigator1.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
             this.kryptonPage1,
             this.kryptonPage2});
-            this.kryptonNavigator1.SelectedIndex = 1;
+            this.kryptonNavigator1.SelectedIndex = 0;
             this.kryptonNavigator1.Size = new System.Drawing.Size(407, 391);
             this.kryptonNavigator1.TabIndex = 0;
             this.kryptonNavigator1.Text = "kryptonNavigator1";
@@ -118,6 +118,14 @@
             this.kryptonPanel2.Size = new System.Drawing.Size(405, 364);
             this.kryptonPanel2.TabIndex = 0;
             // 
+            // btnDelOrderRule
+            // 
+            this.btnDelOrderRule.Location = new System.Drawing.Point(327, 332);
+            this.btnDelOrderRule.Name = "btnDelOrderRule";
+            this.btnDelOrderRule.Size = new System.Drawing.Size(70, 25);
+            this.btnDelOrderRule.TabIndex = 13;
+            this.btnDelOrderRule.Values.Text = "删 除";
+            // 
             // kryptonLabel3
             // 
             this.kryptonLabel3.Location = new System.Drawing.Point(5, 183);
@@ -125,6 +133,14 @@
             this.kryptonLabel3.Size = new System.Drawing.Size(63, 20);
             this.kryptonLabel3.TabIndex = 9;
             this.kryptonLabel3.Values.Text = "当前规则:";
+            // 
+            // btnAddOrderRule
+            // 
+            this.btnAddOrderRule.Location = new System.Drawing.Point(327, 153);
+            this.btnAddOrderRule.Name = "btnAddOrderRule";
+            this.btnAddOrderRule.Size = new System.Drawing.Size(70, 25);
+            this.btnAddOrderRule.TabIndex = 12;
+            this.btnAddOrderRule.Values.Text = "添 加";
             // 
             // kryptonLabel2
             // 
@@ -179,6 +195,22 @@
             this.kryptonPanel3.Size = new System.Drawing.Size(405, 364);
             this.kryptonPanel3.TabIndex = 1;
             // 
+            // btnDelAccountRule
+            // 
+            this.btnDelAccountRule.Location = new System.Drawing.Point(327, 332);
+            this.btnDelAccountRule.Name = "btnDelAccountRule";
+            this.btnDelAccountRule.Size = new System.Drawing.Size(70, 25);
+            this.btnDelAccountRule.TabIndex = 11;
+            this.btnDelAccountRule.Values.Text = "删 除";
+            // 
+            // btnAddAccountRule
+            // 
+            this.btnAddAccountRule.Location = new System.Drawing.Point(327, 153);
+            this.btnAddAccountRule.Name = "btnAddAccountRule";
+            this.btnAddAccountRule.Size = new System.Drawing.Size(70, 25);
+            this.btnAddAccountRule.TabIndex = 10;
+            this.btnAddAccountRule.Values.Text = "添 加";
+            // 
             // kryptonLabel1
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(3, 3);
@@ -212,38 +244,6 @@
             this.accountRuleItemList.Name = "accountRuleItemList";
             this.accountRuleItemList.Size = new System.Drawing.Size(392, 120);
             this.accountRuleItemList.TabIndex = 6;
-            // 
-            // btnAddAccountRule
-            // 
-            this.btnAddAccountRule.Location = new System.Drawing.Point(327, 153);
-            this.btnAddAccountRule.Name = "btnAddAccountRule";
-            this.btnAddAccountRule.Size = new System.Drawing.Size(70, 25);
-            this.btnAddAccountRule.TabIndex = 10;
-            this.btnAddAccountRule.Values.Text = "添 加";
-            // 
-            // btnDelAccountRule
-            // 
-            this.btnDelAccountRule.Location = new System.Drawing.Point(327, 332);
-            this.btnDelAccountRule.Name = "btnDelAccountRule";
-            this.btnDelAccountRule.Size = new System.Drawing.Size(70, 25);
-            this.btnDelAccountRule.TabIndex = 11;
-            this.btnDelAccountRule.Values.Text = "删 除";
-            // 
-            // btnDelOrderRule
-            // 
-            this.btnDelOrderRule.Location = new System.Drawing.Point(327, 332);
-            this.btnDelOrderRule.Name = "btnDelOrderRule";
-            this.btnDelOrderRule.Size = new System.Drawing.Size(70, 25);
-            this.btnDelOrderRule.TabIndex = 13;
-            this.btnDelOrderRule.Values.Text = "删 除";
-            // 
-            // btnAddOrderRule
-            // 
-            this.btnAddOrderRule.Location = new System.Drawing.Point(327, 153);
-            this.btnAddOrderRule.Name = "btnAddOrderRule";
-            this.btnAddOrderRule.Size = new System.Drawing.Size(70, 25);
-            this.btnAddOrderRule.TabIndex = 12;
-            this.btnAddOrderRule.Values.Text = "添 加";
             // 
             // fmEditRiskRule
             // 

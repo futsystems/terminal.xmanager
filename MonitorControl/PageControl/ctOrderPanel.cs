@@ -53,10 +53,11 @@ namespace TradingLib.MoniterControl
             //MoniterHelper.AdapterToIDataSource(cbordertype).BindDataSource(MoniterHelper.GetOrderTypeCBList());
             //Globals.Debug("~~~~~~~~~~~~~~~~~~~~~~~~~~ order sender insert:" + Globals.Domain.Misc_InsertTrade.ToString() + " is root:" + Globals.Manager.IsRoot());
             //如果不是超级域 则需要按设置来判断是否显示调试插入按钮
-            if (!CoreService.SiteInfo.Domain.Super)
-            {
-                btnInsertTrade.Visible = CoreService.SiteInfo.Domain.Misc_InsertTrade && CoreService.SiteInfo.Manager.IsRoot();
-            }
+            btnInsertTrade.Visible = false;
+            //if (!CoreService.SiteInfo.Domain.Super)
+            //{
+            //    btnInsertTrade.Visible = CoreService.SiteInfo.Domain.Misc_InsertTrade && CoreService.SiteInfo.Manager.IsRoot();
+            //}
             if (CoreService.BasicInfoTracker.Symbols.Count() > 0)
             {
                 MoniterHelper.AdapterToIDataSource(cbSymbolList).BindDataSource(GetSymbolCombList());

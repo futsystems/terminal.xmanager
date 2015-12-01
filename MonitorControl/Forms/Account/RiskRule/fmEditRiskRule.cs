@@ -35,11 +35,23 @@ namespace TradingLib.MoniterControl
             accountRuleItemList.ContextMenuStrip = new ContextMenuStrip();
             accountRuleItemList.ContextMenuStrip.Items.Add("删除强平规则", null, new EventHandler(DelAccountRule_Click));//0
 
+            orderRuleClassList.ContextMenuStrip = new ContextMenuStrip();
+            orderRuleClassList.ContextMenuStrip.Items.Add("添加委托规则", null, new EventHandler(AddOrderRule_Click));
+
+            orderRuleItemList.ContextMenuStrip = new ContextMenuStrip();
+            orderRuleItemList.ContextMenuStrip.Items.Add("删除委托规则", null, new EventHandler(DelOrderRule_Click));
 
             btnAddAccountRule.Click += new EventHandler(btnAddAccountRule_Click);
             btnDelAccountRule.Click += new EventHandler(btnDelAccountRule_Click);
+
+            btnAddOrderRule.Click += new EventHandler(btnAddOrderRule_Click);
+            btnDelOrderRule.Click += new EventHandler(btnDelOrderRule_Click);
             CoreService.EventCore.RegIEventHandler(this);
         }
+
+
+
+        
 
       
 
@@ -112,6 +124,7 @@ namespace TradingLib.MoniterControl
 
 
 
+        #region 帐户规则
         void btnDelAccountRule_Click(object sender, EventArgs e)
         {
             DelAccountRule();
@@ -132,8 +145,15 @@ namespace TradingLib.MoniterControl
             AddAccountRule();
         }
 
+        void DelAccountRule_Click(object sender, EventArgs e)
+        {
+            DelAccountRule();
+        }
+
+
         void AddAccountRule()
         {
+
             if (accountRuleClassList.SelectedItems.Count > 0)
             {
                 RuleClassItem item = ((RuleClassItem)accountRuleClassList.SelectedValue);
@@ -182,10 +202,7 @@ namespace TradingLib.MoniterControl
 
 
 
-        void DelAccountRule_Click(object sender, EventArgs e)
-        {
-            DelAccountRule();
-        }
+
 
         void DelAccountRule()
         {
@@ -200,7 +217,58 @@ namespace TradingLib.MoniterControl
             }  
         }
 
+        #endregion
 
+
+        void btnAddOrderRule_Click(object sender, EventArgs e)
+        {
+            AddOrderRule();
+        }
+
+        void btnDelOrderRule_Click(object sender, EventArgs e)
+        {
+            DelOrderRule();
+        }
+
+        void AddOrderRule_Click(object sender, EventArgs e)
+        {
+            AddOrderRule();
+        }
+        
+        void DelOrderRule_Click(object sender, EventArgs e)
+        {
+            DelOrderRule();
+        }
+
+        void AddOrderRule()
+        {
+            if (orderRuleClassList.SelectedItems.Count > 0)
+            { 
+                RuleClassItem item = ((RuleClassItem)orderRuleClassList.SelectedValue);
+                
+                if (item.ClassName.Equals("RuleSet2.Order.RSSecurityFilter"))
+                {
+                    fmOrderRule_SecFilter fm = new fmOrderRule_SecFilter();
+                    fm.Account = _account;
+                    fm.RuleClass = item;
+                    fm.ShowDialog();
+                    fm.Close();
+                }
+            }
+        }
+
+        void DelOrderRule()
+        {
+            if (orderRuleItemList.SelectedItems.Count>0)
+            {
+                RuleItem item = (RuleItem)orderRuleItemList.SelectedValue;
+                if (MoniterHelper.WindowConfirm("确认删除风控项:" + item.RuleDescription) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    orderRuleItemList.SelectedItem = null;
+                    CoreService.TLClient.ReqDelRuleItem(item);
+                }
+            }  
+        }
 
 
         #region 帐户规则

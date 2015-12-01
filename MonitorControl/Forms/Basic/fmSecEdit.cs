@@ -25,6 +25,8 @@ namespace TradingLib.MoniterControl
             MoniterHelper.AdapterToIDataSource(underlay).BindDataSource(CoreService.BasicInfoTracker.GetSecurityCombList(true));
             MoniterHelper.AdapterToIDataSource(markettime).BindDataSource(CoreService.BasicInfoTracker.GetMarketTimeCombList());
             MoniterHelper.AdapterToIDataSource(cbCurrency).BindDataSource(MoniterHelper.GetEnumValueObjects<CurrencyType>());
+            MoniterHelper.AdapterToIDataSource(cbDatafeed).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumDataFeedTypes>());
+            
             cbCurrency.SelectedIndex = 0;
             this.Load += new EventHandler(fmSecEdit_Load);
             
@@ -47,6 +49,7 @@ namespace TradingLib.MoniterControl
                 multiple.Enabled = false;
                 pricetick.Enabled = false;
                 cbCurrency.Enabled = false;
+                cbDatafeed.Visible = false;
             }
         }
 
@@ -83,7 +86,7 @@ namespace TradingLib.MoniterControl
                 underlay.SelectedValue = _sec.underlaying_fk;
                 markettime.SelectedValue = _sec.mkttime_fk;
                 tradeable.Checked = _sec.Tradeable;
-
+                cbDatafeed.SelectedValue = _sec.DataFeed;
             }
         }
 
@@ -109,7 +112,7 @@ namespace TradingLib.MoniterControl
                 _sec.underlaying_fk = (int)underlay.SelectedValue;
                 _sec.mkttime_fk = (int)markettime.SelectedValue;
                 _sec.Tradeable = tradeable.Checked;
-
+                _sec.DataFeed = (QSEnumDataFeedTypes)cbDatafeed.SelectedValue;
                 CoreService.TLClient.ReqUpdateSecurity(_sec);
             }
             else
@@ -134,7 +137,7 @@ namespace TradingLib.MoniterControl
                 target.underlaying_fk = (int)underlay.SelectedValue;
                 target.mkttime_fk = (int)markettime.SelectedValue;
                 target.Tradeable = tradeable.Checked;
-
+                target.DataFeed = (QSEnumDataFeedTypes)cbDatafeed.SelectedValue;
                 CoreService.TLClient.ReqUpdateSecurity(target);
             }
             this.Close();

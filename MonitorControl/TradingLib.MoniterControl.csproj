@@ -384,6 +384,12 @@
     <Compile Include="Forms\Account\RiskRule\fm\fmAccountRule_Time.Designer.cs">
       <DependentUpon>fmAccountRule_Time.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Account\RiskRule\fm\fmOrderRule_SecFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Account\RiskRule\fm\fmOrderRule_SecFilter.Designer.cs">
+      <DependentUpon>fmOrderRule_SecFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Basic\CommissionMargin\fmCommission.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -504,10 +510,10 @@
     <Compile Include="Forms\Domain\fmDomainInfo.Designer.cs">
       <DependentUpon>fmDomainInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmLoginInfo.cs">
+    <Compile Include="PageControl\fmLoginInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\fmLoginInfo.Designer.cs">
+    <Compile Include="PageControl\fmLoginInfo.Designer.cs">
       <DependentUpon>fmLoginInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Follow\fmFollowItemView.cs">
@@ -908,6 +914,9 @@
     <EmbeddedResource Include="Forms\Account\RiskRule\fm\fmAccountRule_Time.resx">
       <DependentUpon>fmAccountRule_Time.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Account\RiskRule\fm\fmOrderRule_SecFilter.resx">
+      <DependentUpon>fmOrderRule_SecFilter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Basic\CommissionMargin\fmCommission.resx">
       <DependentUpon>fmCommission.cs</DependentUpon>
     </EmbeddedResource>
@@ -968,7 +977,7 @@
     <EmbeddedResource Include="Forms\Domain\fmDomainInfo.resx">
       <DependentUpon>fmDomainInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmLoginInfo.resx">
+    <EmbeddedResource Include="PageControl\fmLoginInfo.resx">
       <DependentUpon>fmLoginInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Follow\fmFollowItemView.resx">
