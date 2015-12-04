@@ -127,6 +127,7 @@ namespace TradingLib.MoniterControl
         const string ACCOUNT = "交易帐户";
         const string FORCECLOSE = "强平";
         const string FORCEREASON = "风控信息";
+        const string RAWDATETIME = "DATETIME";
 
         DataTable tb = new DataTable();
         ConcurrentDictionary<long, int> orderidxmap = new ConcurrentDictionary<long, int>();
@@ -170,6 +171,7 @@ namespace TradingLib.MoniterControl
 
                         tb.Rows[i][ID] = o.id;
                         tb.Rows[i][DATETIME] = Util.ToDateTime(o.Date, o.Time).ToString("HH:mm:ss");
+                        tb.Rows[i][RAWDATETIME] = Util.ToTLDateTime(o.Date, o.Time);
                         tb.Rows[i][SYMBOL] = o.Symbol;
                         tb.Rows[i][DIRECTION] = o.Side ? "1" : "-1";
                         tb.Rows[i][OPERATION] = o.Side ? "买入" : "   卖出";
@@ -265,6 +267,7 @@ namespace TradingLib.MoniterControl
             
             
             tb.Columns.Add(ACCOUNT);
+            tb.Columns.Add(RAWDATETIME);
         }
         /// <summary>
         /// 绑定数据表格到grid
@@ -273,13 +276,14 @@ namespace TradingLib.MoniterControl
         {
             ComponentFactory.Krypton.Toolkit.KryptonDataGridView grid = orderGrid;
             datasource.DataSource = tb;
-            datasource.Sort = DATETIME+ " DESC";
+            datasource.Sort = RAWDATETIME + " DESC";
             grid.DataSource = datasource;
 
             grid.Columns[DIRECTION].Visible = false;
             grid.Columns[STATUS].Visible = false;
             grid.Columns[ID].Visible = false;
             grid.Columns[ORDERREF].Visible = false;
+            grid.Columns[RAWDATETIME].Visible = false;
 
             ResetColumeSize();
            

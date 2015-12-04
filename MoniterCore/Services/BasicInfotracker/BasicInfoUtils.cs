@@ -234,7 +234,7 @@ namespace TradingLib.MoniterCore
             for (int i = 0; i < 12; i++)
             {
                 ValueObject<int> vo = new ValueObject<int>();
-                vo.Name = lastday.AddMonths(i).ToString("yyyyMM");
+                vo.Name = lastday.AddMonths(i).ToString("yyyyMM");//201501
                 vo.Value = Convert.ToInt32(vo.Name);
                 list.Add(vo);
             }

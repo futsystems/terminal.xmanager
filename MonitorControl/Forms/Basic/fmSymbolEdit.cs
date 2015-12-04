@@ -165,7 +165,14 @@ namespace TradingLib.MoniterControl
                 if (target.SymbolType == QSEnumSymbolType.Standard)
                 {
                     int fullmonth = (int)cbexpiremonth.SelectedValue;
+                    DateTime dt = GetExpireDateTime(fullmonth);
+
                     target.Month = MoniterHelper.GetMonth(fullmonth);
+                    if (this.expiredate.Value < dt.FirstDayOfMonth() || this.expiredate.Value > dt.LastDayOfMonth())
+                    {
+                        MoniterHelper.WindowMessage("到期日选择不正确");
+                        return;
+                    }
                     target.ExpireDate = Util.ToTLDate(this.expiredate.Value);
                 }
                 else
@@ -319,6 +326,20 @@ namespace TradingLib.MoniterControl
         }
 
         /// <summary>
+        /// 通过201501来获得到期月初时间
+        /// </summary>
+        /// <param name="expire"></param>
+        /// <returns></returns>
+        DateTime GetExpireDateTime(int expire)
+        {
+            //month 201602
+            int year = expire / 100;
+            int month = expire - year * 100;
+            //获得某个月最后一天
+            DateTime tmp = new DateTime(year, month, 1, 0, 0, 0);
+            return tmp;
+        }
+        /// <summary>
         /// 合约月份变化
         /// 更新过期日期
         /// </summary>
@@ -329,14 +350,16 @@ namespace TradingLib.MoniterControl
             if (!_loaded) return;
             try
             {
-                int month = (int)cbexpiremonth.SelectedValue;
+                int expire = (int)cbexpiremonth.SelectedValue;
                 SecurityFamilyImpl sec = CurrentSecurity;
                 if (sec == null) return;
                 //如果是标准合约则更新过期日期
                 QSEnumSymbolType symboltype = (QSEnumSymbolType)cbSymbolType.SelectedValue;
+                
+                //MessageBox.Show("year:" + year.ToString() + " month:" + m.ToString());
                 if (symboltype == QSEnumSymbolType.Standard)
                 {
-                    this.expiredate.Value = Util.ToDateTime(month * 100 + 30, 0);
+                    this.expiredate.Value = GetExpireDateTime(expire).LastDayOfMonth();
                 }
 
             }

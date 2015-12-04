@@ -85,6 +85,7 @@ namespace TradingLib.MoniterControl
                 //tradeGrid.Refresh();
                 tb.Rows[i][ID] = t.id;
                 tb.Rows[i][DATETIME] = Util.ToDateTime(t.xDate, t.xTime).ToString("HH:mm:ss");
+                tb.Rows[i][RAWDATETIME] = Util.ToTLDateTime(t.xDate, t.xTime);
                 tb.Rows[i][SYMBOL] = t.Symbol;
                 tb.Rows[i][SIDE] = (t.Side ? "买入" : "   卖出");
                 tb.Rows[i][SIZE] = Math.Abs(t.xSize);
@@ -154,6 +155,7 @@ namespace TradingLib.MoniterControl
         const string FILLID = "成交编号";
         const string EXCHANGE = "交易所";
         const string ORDERSYSID = "报单编号";
+        const string RAWDATETIME = "DATETIME";
 
         DataTable tb = new DataTable();
 
@@ -200,6 +202,7 @@ namespace TradingLib.MoniterControl
             
             tb.Columns.Add(ACCOUNT);
             tb.Columns.Add(ID);
+            tb.Columns.Add(RAWDATETIME);
         }
 
         BindingSource datasource = new BindingSource();
@@ -211,17 +214,18 @@ namespace TradingLib.MoniterControl
             ComponentFactory.Krypton.Toolkit.KryptonDataGridView grid = tradeGrid;
 
             datasource.DataSource = tb;
-            datasource.Sort = DATETIME + " DESC";
+            datasource.Sort = RAWDATETIME + " DESC";
             grid.DataSource = datasource;
 
             grid.Columns[ID].Visible = false;
+            grid.Columns[RAWDATETIME].Visible = false;
 
             for (int i = 0; i < tb.Columns.Count; i++)
             {
                 grid.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
 
-            //grid.Columns[ACCOUNT].IsVisible = false;
+            
         }
 
         void ResetColumSize()
