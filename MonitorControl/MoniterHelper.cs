@@ -255,23 +255,6 @@ namespace TradingLib.MoniterControl
         }
 
 
-        /// <summary>
-        /// 通过PriceTick得到数字显示格式
-        /// </summary>
-        /// <param name="pricetick"></param>
-        /// <returns></returns>
-
-        public static string GetPriceTickFormat(decimal pricetick)
-        {
-            //1 0.2
-            string[] p = pricetick.ToString().Split('.');
-            if (p.Length <= 1)
-                return "{0:F0}";
-            else
-                return "{0:F" + p[1].ToCharArray().Length.ToString() + "}";
-        }
-
-
         public static ArrayList GetOffsetCBList()
         {
             ArrayList list = new ArrayList();

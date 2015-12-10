@@ -19,13 +19,6 @@ namespace TradingLib.MoniterControl
     {
         ILog logger = LogManager.GetLogger("OrderVeiw");
 
-        public event DebugDelegate SendDebugEvent;
-        void debug(string msg)
-        {
-            if (SendDebugEvent != null)
-                SendDebugEvent(msg);
-        }
-
         //属性获得和设置
         [DefaultValue(true)]
         bool _enableoperation = true;
@@ -43,28 +36,11 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        public event LongDelegate SendOrderCancel;
-        string _defaultformat = "{0:F1}";
         /// <summary>
-        /// 查询某个合约用于
+        /// 取消委托事件
         /// </summary>
-        public event FindSymbolDel FindSecurityEvent;
-        Symbol findSecurity(string symbol)
-        {
-            if (FindSecurityEvent != null)
-                return FindSecurityEvent(symbol);
-            else
-                return null;
-        }
+        public event LongDelegate SendOrderCancel;
 
-        string getDisplayFormat(string symbol)
-        {
-            Symbol sec = findSecurity(symbol);
-            if (sec == null)
-                return _defaultformat;
-            else
-                return MoniterHelper.GetPriceTickFormat(sec.SecurityFamily.PriceTick);
-        }
 
         public ctOrderView()
         {
@@ -80,7 +56,6 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            //logger.Info("OrderView Init root:" + CoreService.SiteInfo.Manager.IsRoot().ToString() + " insert:" + CoreService.SiteInfo.Domain.Misc_InsertTrade.ToString());
             btnReserve.Visible = false;
             if (!CoreService.SiteInfo.Domain.Super)
             {
@@ -100,6 +75,7 @@ namespace TradingLib.MoniterControl
         
         }
 
+
         OrderTracker ord;
         /// <summary>
         /// 将OrderTracker传递给orderview,orderview本身不维护order信息,ordertracker由clearcentre或者tradingtracker来提供
@@ -107,29 +83,6 @@ namespace TradingLib.MoniterControl
         public OrderTracker OrderTracker { get { return ord; } set { ord = value; } }
 
 
-
-        const string ID = "委托编号";
-        const string DATETIME = "报单时间";
-        const string SYMBOL = "合约";
-        const string DIRECTION = "方向";
-        const string OPERATION = "买卖";
-        const string OFFSETFLAG = "开平";
-        const string SIZE = "未成交";
-        const string TOTALSIZE = "报单量";
-        const string PRICE = "报单价格";
-        const string FILLED = "已成交";
-        const string STATUS = "挂单状态";
-        const string STATUSSTR = "报单状态";
-        const string COMMENT = "详细状态";
-        const string ORDERREF = "本地编号";
-        const string EXCHORDERID = "报单编号";
-        const string EXCHANGE = "交易所";
-        const string ACCOUNT = "交易帐户";
-        const string FORCECLOSE = "强平";
-        const string FORCEREASON = "风控信息";
-        const string RAWDATETIME = "DATETIME";
-
-        DataTable tb = new DataTable();
         ConcurrentDictionary<long, int> orderidxmap = new ConcurrentDictionary<long, int>();
         int OrderID2Idx(long id)
         {
@@ -140,22 +93,21 @@ namespace TradingLib.MoniterControl
             }
             return -1;
         }
+
         string GetOrderPrice(Order o)
         {
             if (o.isLimit)
             {
-                return "限价:" + Util.FormatDecimal(o.LimitPrice, Util.GetPriceTickFormat(o.oSymbol.SecurityFamily.PriceTick));
+                return "限价:" + o.LimitPrice.ToFormatStr(o.oSymbol.SecurityFamily.GetPriceFormat());
             }
             else
             {
                 return "市价";
             }
-           // return o.oSymbol.FormatPrice(o.LimitPrice);
         }
 
         public void GotOrder(Order o)
         {
-            //debug("order view got order:" + o.ToString());
             if (InvokeRequired)
                 Invoke(new OrderDelegate(GotOrder), new object[] { o });
             else
@@ -187,9 +139,8 @@ namespace TradingLib.MoniterControl
                         tb.Rows[i][EXCHORDERID] = o.OrderSysID;
                         tb.Rows[i][ACCOUNT] = o.Account;
                         tb.Rows[i][COMMENT] = o.Comment;
-                        tb.Rows[i][FORCECLOSE] = o.ForceClose?"强平":"";
+                        tb.Rows[i][FORCECLOSE] = o.ForceClose ? "强平" : "";
                         tb.Rows[i][FORCEREASON] = o.ForceCloseReason;
-                        //num.Text = orderGrid.RowCount.ToString();
                     }
                     else
                     {
@@ -207,14 +158,34 @@ namespace TradingLib.MoniterControl
                 }
                 catch (Exception ex)
                 {
-                    debug("OrderView got order error:" + ex.ToString());
+                    logger.Error("Got Order Error:" + ex.ToString());
                 }
             }
-            //debug("xxxxxxxxxxxxx got order");
-        
         }
 
+        #region 表格
+        const string ID = "委托编号";
+        const string DATETIME = "报单时间";
+        const string SYMBOL = "合约";
+        const string DIRECTION = "方向";
+        const string OPERATION = "买卖";
+        const string OFFSETFLAG = "开平";
+        const string SIZE = "未成交";
+        const string TOTALSIZE = "报单量";
+        const string PRICE = "报单价格";
+        const string FILLED = "已成交";
+        const string STATUS = "挂单状态";
+        const string STATUSSTR = "报单状态";
+        const string COMMENT = "详细状态";
+        const string ORDERREF = "本地编号";
+        const string EXCHORDERID = "报单编号";
+        const string EXCHANGE = "交易所";
+        const string ACCOUNT = "交易帐户";
+        const string FORCECLOSE = "强平";
+        const string FORCEREASON = "风控信息";
+        const string RAWDATETIME = "DATETIME";
 
+        DataTable tb = new DataTable();
         BindingSource datasource = new BindingSource();
         /// <summary>
         /// 设定表格控件的属性
@@ -319,6 +290,7 @@ namespace TradingLib.MoniterControl
                 grid.Columns[FORCEREASON].Visible = true;
             }
         }
+        #endregion
 
 
         void WireEvent()
@@ -416,13 +388,11 @@ namespace TradingLib.MoniterControl
             long oid = SelectedOrderID;
             if (oid == -1)
             {
-                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请选择要撤销的委托");
+                MoniterHelper.WindowMessage("请选择要撤销的委托");
             }
             else
             {
                 Order o = ord.SentOrder(oid);//[oid];
-
-                MessageBox.Show("orderid:" + oid +" order status:"+o.Status);
                 if (ord.isPending(oid))
                 {
                     if (SendOrderCancel != null)
@@ -430,20 +400,23 @@ namespace TradingLib.MoniterControl
                 }
                 else
                 {
-                    ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("该委托无法撤销");
+                    MoniterHelper.WindowMessage("该委托无法撤销");
                 }
             }
         }
 
         private void btnCancelAll_Click(object sender, EventArgs e)
         {
-            foreach (Order o in ord)
+            if (MoniterHelper.WindowConfirm("确认撤掉所有委托?") == DialogResult.Yes)
             {
-                if (ord.isPending(o.id))
+                foreach (Order o in ord)
                 {
-                    Thread.Sleep(5);
-                    if (SendOrderCancel != null)
-                        SendOrderCancel(o.id);
+                    if (ord.isPending(o.id))
+                    {
+                        Thread.Sleep(5);
+                        if (SendOrderCancel != null)
+                            SendOrderCancel(o.id);
+                    }
                 }
             }
         }

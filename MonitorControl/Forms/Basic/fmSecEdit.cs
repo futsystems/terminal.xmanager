@@ -46,7 +46,7 @@ namespace TradingLib.MoniterControl
                 name.Enabled = false;
                 exchange.Enabled = false;
                 markettime.Enabled = false;
-                multiple.Enabled = false;
+                //multiple.Enabled = false;
                 pricetick.Enabled = false;
                 cbCurrency.Enabled = false;
                 cbDatafeed.Visible = false;

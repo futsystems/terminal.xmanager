@@ -41,8 +41,12 @@ namespace TradingLib.MoniterControl
                 settlecentrestatus.Text = s.IsSettleNormal ? "正常" : "异常";
                 ccstatus.Text = GetClearCentreStatus(s.ClearCentreStatus);
 
-                clearcentrestatus.Text = GetClearCentreStatus(s.ClearCentreStatus);//? "开启" : "关闭";
+                unsettledacctordernum.Text = s.UnsettledAcctOrderNumOfPreSettleday.ToString();
+                unsettledbrokerordernum.Text = s.UnsettledBrokerOrderNumOfPreSettleday.ToString();
+                totalordernum.Text = GetClearCentreStatus(s.ClearCentreStatus);//? "开启" : "关闭";
                 totalaccountnum.Text = s.TotalAccountNum.ToString();
+                totalordernum.Text = s.TotalOrderNum.ToString();
+                totaltradenum.Text = s.TotalTradeNum.ToString();
                 
             }
         }

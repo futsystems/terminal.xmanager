@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using TradingLib.API;
 using TradingLib.Common;
 using TradingLib.MoniterCore;
+using Common.Logging;
 
 
 namespace TradingLib.MoniterControl
@@ -19,7 +20,8 @@ namespace TradingLib.MoniterControl
     {
         string _defaultformat = "{0:F1}";
 
-        BindingSource datasource = new BindingSource();
+        ILog logger = LogManager.GetLogger("ctPositionView");
+
         //持仓记录器 客户端是通过TradingTracker组件来记录order position记录的,服务端我们需要自己内建一个positiontracker用于记录相关信息
         LSPositionTracker pt;
         public LSPositionTracker PositionTracker { get { return pt; } set { pt = value; } }
@@ -31,9 +33,6 @@ namespace TradingLib.MoniterControl
         //委托事务辅助,用于执行反手等功能
         OrderTransactionHelper _ordTransHelper;
 
-
-        //事件
-        public event DebugDelegate SendDebugEvent;//日志对外输出时间
         public event OrderDelegate SendOrderEvent;//发送委托
         public event LongDelegate SendCancelEvent;//取消委托
 
@@ -66,115 +65,7 @@ namespace TradingLib.MoniterControl
             }
         }
 
-
-        Dictionary<string, string> secFromatMap = new Dictionary<string, string>();
-        //通过symbil获得对应的价格显示格式
-        string getDisplayFormat(Symbol sym)
-        {
-            if (sym == null)
-                return _defaultformat;
-            if (secFromatMap.Keys.Contains(sym.Symbol))
-                return secFromatMap[sym.Symbol];
-           
-            else
-            {
-                string f = MoniterHelper.GetPriceTickFormat(sym.SecurityFamily.PriceTick);
-                secFromatMap.Add(sym.Symbol, f);
-                return f;
-            }
-        }
-
-        string getDisplayFormat(string sym)
-        {
-            if (secFromatMap.Keys.Contains(sym))
-                return secFromatMap[sym];
-            return _defaultformat; 
-        }
-
-        int getMultiple(Symbol sym)
-        {
-            if (sym == null)
-                return 1;
-            else
-                return sym.Multiple;
-        }
-
-        void SendOrder(Order o)
-        {
-            if (SendOrderEvent != null)
-                SendOrderEvent(o);
-        }
-
-        void CancelOrder(long oid)
-        {
-            if (SendCancelEvent != null)
-                SendCancelEvent(oid);
-        }
-
-        /// <summary>
-        /// 平仓
-        /// </summary>
-        /// <param name="pos"></param>
-        void FlatPosition(Position pos)
-        {
-            if (pos == null || pos.isFlat) return;
-            bool side = pos.isLong ? true : false;
-
-            //上期所需要区分平今和平昨 需要按照昨仓和今仓分开提交委托
-            if (pos.oSymbol.SecurityFamily.Exchange.EXCode.Equals("SHFE"))
-            {
-                int voltd = pos.PositionDetailTodayNew.Sum(p => p.Volume);//今日持仓
-                int volyd = pos.PositionDetailYdNew.Sum(p => p.Volume);//昨日持仓
-                //MessageBox.Show("posyd:" + volyd.ToString() + " voltd:" + voltd.ToString());
-                if (volyd != 0)
-                {
-                    Order oyd = new OrderImpl(pos.Symbol, volyd *(side?1:-1)* -1);
-                    oyd.OffsetFlag = QSEnumOffsetFlag.CLOSE;
-                    SendOrder(oyd);
-                }
-                if (voltd != 0)
-                {
-                    Order otd = new OrderImpl(pos.Symbol, voltd * (side ? 1 : -1) * -1);
-                    otd.OffsetFlag = QSEnumOffsetFlag.CLOSETODAY;
-                    SendOrder(otd);
-                }
-            }
-            else
-            {
-                Order o = new MarketOrderFlat(pos);
-                o.OffsetFlag = QSEnumOffsetFlag.CLOSE;
-                SendOrder(o);
-                debug("全平仓位:" + pos.Symbol);
-            }
-        }
-        void debug(string msg)
-        {
-            if (SendDebugEvent != null)
-                SendDebugEvent(msg);
-        }
-
-
-
-
-        const string SYMBOL = "合约";
-        const string SIDE = "方向";
-        const string DIRECTION = "买卖";
-        const string SIZE = "总持仓";
-        const string YDSIZE = "昨仓";
-        const string CANFLATSIZE = "可平量";//用于计算当前限价委托可以挂单数量
-        const string LASTPRICE = "最新";//最新成交价
-        const string AVGPRICE = "持仓均价";
-        const string UNREALIZEDPL = "持仓盈亏";
-        const string UNREALIZEDPLPOINT = "点数(持)";
-        const string REALIZEDPL = "平仓盈亏";
-        const string REALIZEDPLPOINT = "点数(平)";
-        const string ACCOUNT = "交易帐户";
-        const string PROFITTARGET = "止盈";
-        const string STOPLOSS = "止损";
-        const string KEY = "编号";
-
-        DataTable gt = new DataTable();
-
+        
 
         public ctPositionView()
         {
@@ -183,9 +74,11 @@ namespace TradingLib.MoniterControl
             SetPreferences();
             InitTable();
             BindToTable();
+        }
 
-            
-           
+        private void ctPositionView_Load(object sender, EventArgs e)
+        {
+            WireEvent();
         }
 
 
@@ -242,7 +135,7 @@ namespace TradingLib.MoniterControl
             }
             else
             {
-                return string.Format(getDisplayFormat(pos.Symbol), price);
+                return string.Format(pos.oSymbol.SecurityFamily.GetPriceFormat(), price);
             }
 
         }
@@ -250,15 +143,7 @@ namespace TradingLib.MoniterControl
         #endregion
 
 
-        //合约所对应的table id key为 account - symbol
-        ConcurrentDictionary<string, int> symRowMap = new ConcurrentDictionary<string, int>();
-        //通过account-symbol获得对应的tableid
-        int positionidx(string acc_sym)
-        {
-            if (symRowMap.Keys.Contains(acc_sym))
-                return symRowMap[acc_sym];
-            return -1;
-        }
+        
 
 
         //获得某个持仓的可平数量
@@ -267,31 +152,113 @@ namespace TradingLib.MoniterControl
             return pos.isFlat ? 0 : (pos.UnsignedSize - _ot.GetPendingExitSize(pos.Symbol,pos.DirectionType== QSEnumPositionDirectionType.Long?true:false));
         }
 
-        //往datatable中插入一行记录
-        int InsertNewRow(Position pos,bool positionside)
+
+        //持仓key与rowid map
+        ConcurrentDictionary<string, int> posRowMap = new ConcurrentDictionary<string, int>();
+        int PositionRowIdx(string poskey)
         {
+            if (posRowMap.Keys.Contains(poskey))
+                return posRowMap[poskey];
+            return -1;
+        }
+
+        //往datatable中插入一行记录
+        int InsertNewRow(Position pos)
+        {
+            bool side = true;
+            if (pos.DirectionType == QSEnumPositionDirectionType.Long)
+            {
+                side = true;
+            }
+            else if (pos.DirectionType == QSEnumPositionDirectionType.Short)
+            {
+                side = false;
+            }
+            else
+            {
+                return -1;
+            }
+
             string account = pos.Account;
             string symbol = pos.Symbol;
             gt.Rows.Add(symbol);
             int i = gt.Rows.Count - 1;//得到新建的Row号
             //如果不存在,则我们将该account-symbol对插入映射列表我们的键用的是account_symbol配对
-            string key = pos.GetKey(positionside);
-            gt.Rows[i][SIDE] = positionside;
-            gt.Rows[i][DIRECTION] = positionside ? "买" : "卖";
+            string key = pos.GetPositionKey();
+            gt.Rows[i][SIDE] = side;
+            gt.Rows[i][DIRECTION] = side ? "买" : "卖";
             gt.Rows[i][KEY] = key;
             gt.Rows[i][ACCOUNT] = pos.Account;
 
-            debug("new row inserted,account-symbol-side:" + key);
-            if (!symRowMap.ContainsKey(key))
-                symRowMap.TryAdd(key, i);
+            //debug("new row inserted,account-symbol-side:" + key);
+            if (!posRowMap.ContainsKey(key))
+                posRowMap.TryAdd(key, i);
             //同时为该key准备positoinoffsetarg
-            lossOffsetMap[key] = new PositionOffsetArg(account, symbol,positionside, QSEnumPositionOffsetDirection.LOSS);
-            profitOffsetMap[key] = new PositionOffsetArg(account, symbol, positionside, QSEnumPositionOffsetDirection.PROFIT);
+            lossOffsetMap[key] = new PositionOffsetArg(account, symbol, side, QSEnumPositionOffsetDirection.LOSS);
+            profitOffsetMap[key] = new PositionOffsetArg(account, symbol, side, QSEnumPositionOffsetDirection.PROFIT);
 
             return i;
         }
 
         #region 辅助功能函数
+        /// <summary>
+        /// 发送委托
+        /// </summary>
+        /// <param name="o"></param>
+        void SendOrder(Order o)
+        {
+            if (SendOrderEvent != null)
+                SendOrderEvent(o);
+        }
+
+        /// <summary>
+        /// 撤单
+        /// </summary>
+        /// <param name="oid"></param>
+        void CancelOrder(long oid)
+        {
+            if (SendCancelEvent != null)
+                SendCancelEvent(oid);
+        }
+
+        /// <summary>
+        /// 平仓
+        /// </summary>
+        /// <param name="pos"></param>
+        void FlatPosition(Position pos)
+        {
+            if (pos == null || pos.isFlat) return;
+            bool side = pos.isLong ? true : false;
+
+            //上期所需要区分平今和平昨 需要按照昨仓和今仓分开提交委托
+            if (pos.oSymbol.SecurityFamily.Exchange.EXCode.Equals("SHFE"))
+            {
+                int voltd = pos.PositionDetailTodayNew.Sum(p => p.Volume);//今日持仓
+                int volyd = pos.PositionDetailYdNew.Sum(p => p.Volume);//昨日持仓
+                //MessageBox.Show("posyd:" + volyd.ToString() + " voltd:" + voltd.ToString());
+                if (volyd != 0)
+                {
+                    Order oyd = new OrderImpl(pos.Symbol, volyd * (side ? 1 : -1) * -1);
+                    oyd.OffsetFlag = QSEnumOffsetFlag.CLOSE;
+                    SendOrder(oyd);
+                }
+                if (voltd != 0)
+                {
+                    Order otd = new OrderImpl(pos.Symbol, voltd * (side ? 1 : -1) * -1);
+                    otd.OffsetFlag = QSEnumOffsetFlag.CLOSETODAY;
+                    SendOrder(otd);
+                }
+            }
+            else
+            {
+                Order o = new MarketOrderFlat(pos);
+                o.OffsetFlag = QSEnumOffsetFlag.CLOSE;
+                SendOrder(o);
+            }
+        }
+
+
+
         //获得当前选中持仓
         Position CurrentPositoin
         {
@@ -304,9 +271,9 @@ namespace TradingLib.MoniterControl
                     string account = positiongrid[ACCOUNT, row].Value.ToString();
                     string sym = positiongrid[SYMBOL, row].Value.ToString();
                     bool side = bool.Parse(positiongrid[SIDE, row].Value.ToString());
-                    debug("sym:" + sym + " account:" + account + " side:" + side.ToString());
+                    //debug("sym:" + sym + " account:" + account + " side:" + side.ToString());
                     Position pos = pt[sym, account, side];
-                    debug("Pos:" + pos.ToString());
+                    //debug("Pos:" + pos.ToString());
                     return pos;
                 }
                 else
@@ -359,45 +326,43 @@ namespace TradingLib.MoniterControl
         //获得昨日隔夜持仓，作为基数累加后得到当前持仓数据
         public void GotPosition(Position pos)
         {
-
             if (InvokeRequired)
             {
-                try
-                {
-                    Invoke(new PositionDelegate(GotPosition), new object[] { pos });
-                }
-                catch (Exception ex)
-                { }
+                Invoke(new PositionDelegate(GotPosition), new object[] { pos });
             }
             else
             {
-
-                int posidx = positionidx(pos.GetKey(pos.isLong));//通过position key 获得对应的idx
-                string _fromat = getDisplayFormat(pos.oSymbol);
-                if ((posidx > -1) && (posidx < gt.Rows.Count))//idx存在
+                try
                 {
-                    int size = pos.Size;
-                    gt.Rows[posidx][SIZE] = Math.Abs(size);
-                    gt.Rows[posidx][YDSIZE] = pos.PositionDetailYdNew.Sum(p => p.Volume); 
-                    gt.Rows[posidx][CANFLATSIZE] = getCanFlatSize(pos);
-                    gt.Rows[posidx][AVGPRICE] = string.Format(getDisplayFormat(pos.oSymbol), pos.AvgPrice);
-                    gt.Rows[posidx][REALIZEDPL] = Util.FormatDecimal(pos.ClosedPL * getMultiple(pos.oSymbol));
-                    gt.Rows[posidx][REALIZEDPLPOINT] = string.Format(getDisplayFormat(pos.oSymbol), pos.ClosedPL);
-                    //num.Text = positiongrid.RowCount.ToString();
+                    int posidx = PositionRowIdx(pos.GetPositionKey());
+                    string _fromat = pos.oSymbol.SecurityFamily.GetPriceFormat();
+                    if ((posidx > -1) && (posidx < gt.Rows.Count))//idx存在
+                    {
+                        int size = pos.Size;
+                        gt.Rows[posidx][SIZE] = Math.Abs(size);
+                        gt.Rows[posidx][YDSIZE] = pos.PositionDetailYdNew.Sum(p => p.Volume);
+                        gt.Rows[posidx][CANFLATSIZE] = getCanFlatSize(pos);
+                        gt.Rows[posidx][AVGPRICE] = pos.AvgPrice.ToFormatStr(_fromat);
+                        gt.Rows[posidx][REALIZEDPL] = (pos.ClosedPL * pos.oSymbol.Multiple).ToFormatStr();
+                        gt.Rows[posidx][REALIZEDPLPOINT] = pos.ClosedPL.ToFormatStr(_fromat);
+                    }
+                    else//idx不存在
+                    {
+                        //如果不存在,则我们将该account-symbol对插入映射列表我们的键用的是account_symbol配对
+                        int i = InsertNewRow(pos);
+                        if (i < 0) return;
+                        int size = pos.Size;
+                        gt.Rows[i][SIZE] = Math.Abs(size);
+                        gt.Rows[i][YDSIZE] = pos.PositionDetailYdNew.Sum(p => p.Volume);
+                        gt.Rows[i][CANFLATSIZE] = getCanFlatSize(pos);
+                        gt.Rows[i][AVGPRICE] = pos.AvgPrice.ToFormatStr(_fromat);
+                        gt.Rows[i][REALIZEDPL] = Util.FormatDecimal(pos.ClosedPL * pos.oSymbol.Multiple);
+                        gt.Rows[i][REALIZEDPLPOINT] = pos.ClosedPL.ToFormatStr(_fromat);
+                    }
                 }
-                else//idx不存在
+                catch (Exception ex)
                 {
-                    //如果不存在,则我们将该account-symbol对插入映射列表我们的键用的是account_symbol配对
-                    int i = InsertNewRow(pos, pos.isLong);
-                    int size = pos.Size;
-                    gt.Rows[i][SIZE] = Math.Abs(size);
-                    gt.Rows[i][YDSIZE] = pos.PositionDetailYdNew.Sum(p => p.Volume); 
-                    gt.Rows[i][CANFLATSIZE] = getCanFlatSize(pos);
-                    gt.Rows[i][AVGPRICE] = string.Format(getDisplayFormat(pos.oSymbol), pos.AvgPrice);
-                    gt.Rows[i][REALIZEDPL] = Util.FormatDecimal(pos.ClosedPL * getMultiple(pos.oSymbol));
-                    gt.Rows[i][REALIZEDPLPOINT] =string.Format(getDisplayFormat(pos.oSymbol), pos.ClosedPL);
-                    //num.Text = positiongrid.RowCount.ToString();
-                    
+                    logger.Error("Got Position Error:" + ex.ToString());
                 }
             }
 
@@ -413,13 +378,12 @@ namespace TradingLib.MoniterControl
             {
                 try
                 {
-                    string _fromat = getDisplayFormat(t.Symbol);
+                    Symbol sym = CoreService.BasicInfoTracker.GetSymbol(t.Symbol);
+                    if(sym == null) return;
+                    string _fromat = sym.SecurityFamily.GetPriceFormat();
                     //数据列中如果是该symbol则必须全比更新
                     for (int i = 0; i < gt.Rows.Count; i++)
                     {
-                        //便利所有合约与tick.symbol相同的行
-                        //debug("Ticktime"+t.time.ToString()+"symbol:" + gt.Rows[i][SYMBOL].ToString() + " side:" + gt.Rows[i][SIDE].ToString());
-                        //debug("row idx:" + i.ToString() + " acc:" + gt.Rows[i][ACCOUNT].ToString() + " symbol:" + gt.Rows[i][SYMBOL].ToString() + " side:" + gt.Rows[i][SIDE].ToString() + " rowsnum:" + gt.Rows.Count.ToString());
                         if (gt.Rows[i][SYMBOL].ToString() == t.Symbol)
                         {
                             //记录该仓位所属账户
@@ -429,14 +393,12 @@ namespace TradingLib.MoniterControl
                             
                             string key = pos.GetKey(posside);
                             decimal unrealizedpl = pos.UnRealizedPL;
-                            //debug("accc-symbol-side:" + key);
                             //更新最新成交价
                             if (t.isTrade)
                             {
-                                gt.Rows[i][LASTPRICE] = string.Format(getDisplayFormat(t.Symbol), t.Trade);
+                                gt.Rows[i][LASTPRICE] = t.Trade.ToFormatStr(_fromat);
                             }
                             //空仓 未平仓合约与 最新价格
-                            
                             if (pos.isFlat)
                             {
                                 gt.Rows[i][UNREALIZEDPL] = 0;
@@ -445,15 +407,15 @@ namespace TradingLib.MoniterControl
                             else
                             {
                                 //更新unrealizedpl
-                                gt.Rows[i][UNREALIZEDPL] = Util.FormatDecimal(unrealizedpl * getMultiple(pos.oSymbol));
-                                gt.Rows[i][UNREALIZEDPLPOINT] = string.Format(getDisplayFormat(pos.oSymbol), unrealizedpl);
+                                gt.Rows[i][UNREALIZEDPL] = (unrealizedpl * pos.oSymbol.Multiple).ToFormatStr();
+                                gt.Rows[i][UNREALIZEDPLPOINT] = unrealizedpl.ToFormatStr(_fromat);
                             }
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    debug("error:" + ex.ToString());
+                    logger.Error("Got Tick Error:" + ex.ToString());
                 }
         
             }
@@ -469,24 +431,25 @@ namespace TradingLib.MoniterControl
             //当有委托近来时候,我们需要重新计算我们所对应的可以平仓数量
             if (InvokeRequired)
             {
-                try
-                {
-                    Invoke(new OrderDelegate(GotOrder), new object[] { o });
-                }
-                catch (Exception ex)
-                { }
+                Invoke(new OrderDelegate(GotOrder), new object[] { o });
             }
             else
             {
-                bool posside = o.PositionSide;
-                Position pos = pt[o.Symbol, o.Account, posside];
-                //通过account_symbol键对找到对应的行
-                int posidx = positionidx(pos.GetKey(posside));
-                string _fromat = getDisplayFormat(pos.Symbol);
-                //如果持仓条目已经存在 更新可平数量 委托回报只会更新可平数量
-                if ((posidx > -1) && (posidx < gt.Rows.Count))
+                try
                 {
-                    gt.Rows[posidx][CANFLATSIZE] = getCanFlatSize(pos);
+                    bool posside = o.PositionSide;
+                    Position pos = pt[o.Symbol, o.Account, posside];
+                    int posidx = PositionRowIdx(pos.GetPositionKey());
+                    //string _fromat = getDisplayFormat(pos.Symbol);
+                    //如果持仓条目已经存在 更新可平数量 委托回报只会更新可平数量
+                    if ((posidx > -1) && (posidx < gt.Rows.Count))
+                    {
+                        gt.Rows[posidx][CANFLATSIZE] = getCanFlatSize(pos);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    logger.Error("Got Order Error:" + ex.ToString());
                 }
 
             }
@@ -501,28 +464,25 @@ namespace TradingLib.MoniterControl
             //当有委托近来时候,我们需要重新计算我们所对应的可以平仓数量
             if (InvokeRequired)
             {
-                try
-                {
-                    Invoke(new LongDelegate(GotCancel), new object[] { oid });
-                }
-                catch (Exception ex)
-                { 
-                    
-                }
+                Invoke(new LongDelegate(GotCancel), new object[] { oid });
             }
             else
             {
-                Order o = _ot.SentOrder(oid);
-                if (o == null || !o.isValid) return;
-                bool posside = o.PositionSide;
-                Position pos = pt[o.Symbol, o.Account,posside];
-                //通过account_symbol键对找到对应的行
-                int posidx = positionidx(o.Account + "_" + o.Symbol);
-                string _fromat = getDisplayFormat(pos.Symbol);
-                if ((posidx > -1) && (posidx < gt.Rows.Count))
+                try
                 {
-                    gt.Rows[posidx][CANFLATSIZE] = getCanFlatSize(pos);
-                    //updateCurrentRowPositionNum();
+                    Order o = _ot.SentOrder(oid);
+                    if (o == null || !o.isValid) return;
+                    bool posside = o.PositionSide;
+                    Position pos = pt[o.Symbol, o.Account, posside];
+                    int posidx = PositionRowIdx(pos.GetPositionKey());
+                    if ((posidx > -1) && (posidx < gt.Rows.Count))
+                    {
+                        gt.Rows[posidx][CANFLATSIZE] = getCanFlatSize(pos);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    logger.Error("Got Cancel Error:" + ex.ToString());
                 }
             }
         }
@@ -531,54 +491,77 @@ namespace TradingLib.MoniterControl
         {
             if (InvokeRequired)
             {
-                try
-                {
-                    Invoke(new FillDelegate(GotFill), new object[] { t });
-                }
-                catch (Exception ex)
-                { }
+                Invoke(new FillDelegate(GotFill), new object[] { t });
             }
             else
             {
-                
-                bool posside = t.PositionSide;//每个成交可以确定仓位操作方向比如是多头操作(买入1手开仓 卖出1手平仓) 还是空头操作(卖出1手开仓 买入1手平仓)
-                Position pos = pt[t.Symbol, t.Account, posside];//获得对应持仓数据
-                //通过account_symbol键对找到对应的行
-                string key = pos.GetKey(posside);
-                int posidx = positionidx(key);
-                if ((posidx > -1) && (posidx <gt.Rows.Count))
+                try
                 {
-                    int size = pos.Size;
-                    gt.Rows[posidx][SIZE] = Math.Abs(size);
-                    gt.Rows[posidx][YDSIZE] = pos.PositionDetailYdNew.Sum(p => p.Volume); 
-                    gt.Rows[posidx][CANFLATSIZE] = getCanFlatSize(pos);
-                    gt.Rows[posidx][AVGPRICE] = string.Format(getDisplayFormat(pos.oSymbol), pos.AvgPrice);
-                    gt.Rows[posidx][REALIZEDPL] = Util.FormatDecimal(pos.ClosedPL * getMultiple(pos.oSymbol));
-                    gt.Rows[posidx][REALIZEDPLPOINT] = string.Format(getDisplayFormat(pos.oSymbol), pos.ClosedPL);
-
-                    if (pos.isFlat)
+                    bool posside = t.PositionSide;//每个成交可以确定仓位操作方向比如是多头操作(买入1手开仓 卖出1手平仓) 还是空头操作(卖出1手开仓 买入1手平仓)
+                    Position pos = pt[t.Symbol, t.Account, posside];//获得对应持仓数据
+                    string _format = t.oSymbol.SecurityFamily.GetPriceFormat();
+                    string key = pos.GetPositionKey();
+                    int posidx = PositionRowIdx(key);
+                    if ((posidx > -1) && (posidx < gt.Rows.Count))
                     {
-                        ResetOffset(key);
+                        int size = pos.Size;
+                        gt.Rows[posidx][SIZE] = Math.Abs(size);
+                        gt.Rows[posidx][YDSIZE] = pos.PositionDetailYdNew.Sum(p => p.Volume);
+                        gt.Rows[posidx][CANFLATSIZE] = getCanFlatSize(pos);
+                        gt.Rows[posidx][AVGPRICE] = pos.AvgPrice.ToFormatStr(_format);
+                        gt.Rows[posidx][REALIZEDPL] = (pos.ClosedPL * pos.oSymbol.Multiple).ToFormatStr();
+                        gt.Rows[posidx][REALIZEDPLPOINT] = pos.ClosedPL.ToFormatStr(_format);
+
+                        if (pos.isFlat)
+                        {
+                            ResetOffset(key);
+                        }
                     }
+                    else
+                    {
+                        //如果不存在,则我们将该account-symbol对插入映射列表我们的键用的是account_symbol配对
+                        int i = InsertNewRow(pos);
+                        if (i < 0) return;
+                        int size = pos.Size;
+                        gt.Rows[i][SIZE] = Math.Abs(size);
+                        gt.Rows[i][YDSIZE] = pos.PositionDetailYdNew.Sum(p => p.Volume);
+                        gt.Rows[i][CANFLATSIZE] = getCanFlatSize(pos);
+                        gt.Rows[i][AVGPRICE] = pos.AvgPrice.ToFormatStr(_format);
+                        gt.Rows[i][REALIZEDPL] = (pos.ClosedPL * pos.oSymbol.Multiple).ToFormatStr();
+                        gt.Rows[i][REALIZEDPLPOINT] = pos.ClosedPL.ToFormatStr(_format);
+                    }
+                    _ordTransHelper.GotFill(t);
                 }
-                else
+                catch (Exception ex)
                 {
-                    //如果不存在,则我们将该account-symbol对插入映射列表我们的键用的是account_symbol配对
-                    int i = InsertNewRow(pos,posside);
-                    int size = pos.Size;
-                    gt.Rows[i][SIZE] = Math.Abs(size);
-                    gt.Rows[i][YDSIZE] = pos.PositionDetailYdNew.Sum(p => p.Volume); 
-                    gt.Rows[i][CANFLATSIZE] = getCanFlatSize(pos);
-                    gt.Rows[i][AVGPRICE] = string.Format(getDisplayFormat(pos.Symbol), pos.AvgPrice);
-                    gt.Rows[i][REALIZEDPL] = Util.FormatDecimal(pos.ClosedPL * getMultiple(pos.oSymbol));
-                    gt.Rows[i][REALIZEDPLPOINT] = string.Format(getDisplayFormat(pos.Symbol), pos.ClosedPL);
+                    logger.Error("Got Trade Error:" + ex.ToString());
                 }
-                _ordTransHelper.GotFill(t);
             }
         }
 
         #endregion
 
+
+        #region 表格
+        const string SYMBOL = "合约";
+        const string SIDE = "方向";
+        const string DIRECTION = "买卖";
+        const string SIZE = "总持仓";
+        const string YDSIZE = "昨仓";
+        const string CANFLATSIZE = "可平量";//用于计算当前限价委托可以挂单数量
+        const string LASTPRICE = "最新";//最新成交价
+        const string AVGPRICE = "持仓均价";
+        const string UNREALIZEDPL = "持仓盈亏";
+        const string UNREALIZEDPLPOINT = "点数(持)";
+        const string REALIZEDPL = "平仓盈亏";
+        const string REALIZEDPLPOINT = "点数(平)";
+        const string ACCOUNT = "交易帐户";
+        const string PROFITTARGET = "止盈";
+        const string STOPLOSS = "止损";
+        const string KEY = "编号";
+
+        BindingSource datasource = new BindingSource();
+        DataTable gt = new DataTable();
 
         /// <summary>
         /// 设定表格控件的属性
@@ -634,11 +617,8 @@ namespace TradingLib.MoniterControl
         private void BindToTable()
         {
             ComponentFactory.Krypton.Toolkit.KryptonDataGridView grid = positiongrid;
-            //grid.TableElement.BeginUpdate();             
-            //grid.MasterTemplate.Columns.Clear(); 
             datasource.DataSource = gt;
             grid.DataSource = datasource;
-            //grid.Columns[ACCOUNT].IsVisible = false;
             grid.Columns[SIDE].Visible = false;
             grid.Columns[KEY].Visible = false;
             grid.Columns[PROFITTARGET].Visible = false;
@@ -671,11 +651,10 @@ namespace TradingLib.MoniterControl
 
         }
 
+        #endregion
 
-        private void ctPositionView_Load(object sender, EventArgs e)
-        {
-            WireEvent();
-        }
+
+
 
 
 
@@ -686,9 +665,7 @@ namespace TradingLib.MoniterControl
             btnShowHold.CheckedChanged += new EventHandler(btnShowHold_CheckedChanged);
             btnFlat.Click +=new EventHandler(btnFlat_Click);
             btnFlatAll.Click +=new EventHandler(btnFlatAll_Click);
-            //btnCancel.Click +=new EventHandler(btnCancel_Click);
 
-            //positiongrid.DoubleClick +=new EventHandler(positiongrid_DoubleClick);
             positiongrid.CellFormatting += new DataGridViewCellFormattingEventHandler(positiongrid_CellFormatting);
             positiongrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(positiongrid_RowPrePaint);
             positiongrid.SizeChanged += new EventHandler(positiongrid_SizeChanged);
@@ -752,7 +729,7 @@ namespace TradingLib.MoniterControl
             }
             catch (Exception ex)
             {
-                debug("cell format error:" + ex.ToString());
+                logger.Error("Cell Format Error:" + ex.ToString());
             }
 
         }
@@ -777,39 +754,49 @@ namespace TradingLib.MoniterControl
             Position pos = CurrentPositoin;
             if (pos == null)
             {
-                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请选择持仓");
+                MoniterHelper.WindowMessage("请选择持仓");
                 return;
             }
             if (pos.isFlat)
             {
-                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("该合约没有持仓");
+                MoniterHelper.WindowMessage("该合约没有可平持仓");
                 return;
             }
-            FlatPosition(CurrentPositoin);
-            
-        }
-        //平调所有持仓
-        private void btnFlatAll_Click(object sender, EventArgs e)
-        {
-            foreach (Position pos in pt)
+            if (MoniterHelper.WindowConfirm(string.Format("确认平掉持仓:{0}", pos.GetPositionKey())) == DialogResult.Yes)
             {
                 FlatPosition(pos);
             }
         }
+
+        //平调所有持仓
+        private void btnFlatAll_Click(object sender, EventArgs e)
+        {
+            if (MoniterHelper.WindowConfirm(string.Format("确认平掉所有持仓?")) == DialogResult.Yes)
+            {
+                foreach (Position pos in pt)
+                {
+                    FlatPosition(pos);
+                }
+            }
+        }
+
         //撤单
         private void btnCancel_Click(object sender, EventArgs e)
         {
             string sym = CurrentSymbol;
             if (string.IsNullOrEmpty(sym))
             {
-                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请选中持仓");
+                MoniterHelper.WindowMessage("请选择有效持仓");
                 return;
             }
-            foreach (Order o in OrderTracker)
+            if (MoniterHelper.WindowConfirm(string.Format("确认撤掉合约:{0}下的所有待成交委托?", sym)) == DialogResult.Yes)
             {
-                if ((o.Symbol == sym) && (OrderTracker.isPending(o.id)))
+                foreach (Order o in OrderTracker)
                 {
-                    CancelOrder(o.id);
+                    if ((o.Symbol == sym) && (OrderTracker.isPending(o.id)))
+                    {
+                        CancelOrder(o.id);
+                    }
                 }
             }
         }
@@ -824,7 +811,7 @@ namespace TradingLib.MoniterControl
         public void Clear()
         {
             positiongrid.DataSource = null;
-            symRowMap.Clear();
+            posRowMap.Clear();
             gt.Rows.Clear();
             BindToTable();
         }

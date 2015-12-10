@@ -456,7 +456,7 @@ namespace TradingLib.MoniterControl
                 // SYM,LAST,TSIZE,BID,ASK,BSIZE,ASIZE,SIZES,OHLC(YEST),CHANGE
                 int i = _idxQuoteRowMap.Count;
                 //新建一行 并插入到数据结构中
-                string dispformat = MoniterHelper.GetPriceTickFormat(sec.SecurityFamily.PriceTick);
+                string dispformat = sec.SecurityFamily.GetPriceFormat();
                 QuoteRow qr = new QuoteRow(this,i,ref columns,getColumnStarX,getColumnWidth,getRowWidth,getBeginIndex, DefaultQuoteStyle,dispformat);
                 //MessageBox.Show(qr.PriceDispFormat + " " + sec.PriceTick.ToString());
                 qr.SendRowLastPriceChangedEvent += new IntDelegate(bookCellLocation);

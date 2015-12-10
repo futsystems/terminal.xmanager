@@ -31,14 +31,10 @@ namespace TradingLib.MoniterControl
         void ctTradingInfo_Load(object sender, EventArgs e)
         {
             //交易信息显示控件事件
-            ctOrderView1.SendDebugEvent += new DebugDelegate(debug);
             ctOrderView1.SendOrderCancel += new LongDelegate(CancelOrder);
 
-            ctPositionView1.SendDebugEvent += new DebugDelegate(debug);
             ctPositionView1.SendCancelEvent += new LongDelegate(CancelOrder);
             ctPositionView1.SendOrderEvent += new OrderDelegate(SendOrder);
-
-            ctTradeView1.SendDebugEvent += new DebugDelegate(debug);
 
             CoreService.EventCore.RegIEventHandler(this);
         }
@@ -46,7 +42,6 @@ namespace TradingLib.MoniterControl
         public void OnInit()
         {
             CoreService.EventAccount.OnAccountSelectedEvent += new Action<AccountLite>(OnAccountSelected);
-            //Globals.LogicEvent.GotAccountSyncEvent += new Action<AccountLite>(OnAccountSyncEvent);
             CoreService.EventIndicator.GotTickEvent += new Action<Tick>(GotTick);
             CoreService.EventIndicator.GotOrderEvent += new Action<Order>(GotOrder);
             CoreService.EventIndicator.GotFillEvent += new Action<Trade>(GotTrade);

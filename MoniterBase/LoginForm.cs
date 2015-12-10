@@ -23,6 +23,7 @@ namespace TradingLib.MoniterBase
         Starter mStart;
         public LoginForm(Starter start)
         {
+            CheckForIllegalCrossThreadCalls = false;
             logger.Debug("loginform init....");
 
             //列举所有支持的时区列表

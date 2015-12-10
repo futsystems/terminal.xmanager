@@ -34,7 +34,7 @@
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.totalaccountnum = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.clearcentrestatus = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.totalordernum = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel19 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel11 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
@@ -48,6 +48,12 @@
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.unsettledacctordernum = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel9 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.unsettledbrokerordernum = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel13 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.totaltradenum = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).BeginInit();
@@ -67,23 +73,25 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(255, 337);
+            this.kryptonPanel1.Size = new System.Drawing.Size(280, 373);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // kryptonGroupBox2
             // 
-            this.kryptonGroupBox2.Location = new System.Drawing.Point(12, 159);
+            this.kryptonGroupBox2.Location = new System.Drawing.Point(12, 204);
             this.kryptonGroupBox2.Name = "kryptonGroupBox2";
             // 
             // kryptonGroupBox2.Panel
             // 
+            this.kryptonGroupBox2.Panel.Controls.Add(this.totaltradenum);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel10);
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel6);
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel7);
             this.kryptonGroupBox2.Panel.Controls.Add(this.totalaccountnum);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.clearcentrestatus);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.totalordernum);
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel19);
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel11);
-            this.kryptonGroupBox2.Size = new System.Drawing.Size(229, 165);
+            this.kryptonGroupBox2.Size = new System.Drawing.Size(256, 165);
             this.kryptonGroupBox2.TabIndex = 1;
             this.kryptonGroupBox2.Values.Heading = "状态信息";
             // 
@@ -111,13 +119,13 @@
             this.totalaccountnum.TabIndex = 6;
             this.totalaccountnum.Values.Text = "--";
             // 
-            // clearcentrestatus
+            // totalordernum
             // 
-            this.clearcentrestatus.Location = new System.Drawing.Point(106, 58);
-            this.clearcentrestatus.Name = "clearcentrestatus";
-            this.clearcentrestatus.Size = new System.Drawing.Size(20, 20);
-            this.clearcentrestatus.TabIndex = 5;
-            this.clearcentrestatus.Values.Text = "--";
+            this.totalordernum.Location = new System.Drawing.Point(106, 58);
+            this.totalordernum.Name = "totalordernum";
+            this.totalordernum.Size = new System.Drawing.Size(20, 20);
+            this.totalordernum.TabIndex = 5;
+            this.totalordernum.Values.Text = "--";
             // 
             // kryptonLabel19
             // 
@@ -133,7 +141,7 @@
             this.kryptonLabel11.Name = "kryptonLabel11";
             this.kryptonLabel11.Size = new System.Drawing.Size(63, 20);
             this.kryptonLabel11.TabIndex = 0;
-            this.kryptonLabel11.Values.Text = "委托处理:";
+            this.kryptonLabel11.Values.Text = "委托总数:";
             // 
             // kryptonGroupBox1
             // 
@@ -142,6 +150,10 @@
             // 
             // kryptonGroupBox1.Panel
             // 
+            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel13);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.unsettledbrokerordernum);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.unsettledacctordernum);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel9);
             this.kryptonGroupBox1.Panel.Controls.Add(this.ccstatus);
             this.kryptonGroupBox1.Panel.Controls.Add(this.settlecentrestatus);
             this.kryptonGroupBox1.Panel.Controls.Add(this.nextsettletime);
@@ -152,13 +164,13 @@
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel3);
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel2);
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel1);
-            this.kryptonGroupBox1.Size = new System.Drawing.Size(229, 150);
+            this.kryptonGroupBox1.Size = new System.Drawing.Size(256, 195);
             this.kryptonGroupBox1.TabIndex = 0;
             this.kryptonGroupBox1.Values.Heading = "结算日信息";
             // 
             // ccstatus
             // 
-            this.ccstatus.Location = new System.Drawing.Point(103, 73);
+            this.ccstatus.Location = new System.Drawing.Point(140, 74);
             this.ccstatus.Name = "ccstatus";
             this.ccstatus.Size = new System.Drawing.Size(20, 20);
             this.ccstatus.TabIndex = 9;
@@ -166,7 +178,7 @@
             // 
             // settlecentrestatus
             // 
-            this.settlecentrestatus.Location = new System.Drawing.Point(103, 97);
+            this.settlecentrestatus.Location = new System.Drawing.Point(140, 98);
             this.settlecentrestatus.Name = "settlecentrestatus";
             this.settlecentrestatus.Size = new System.Drawing.Size(20, 20);
             this.settlecentrestatus.TabIndex = 8;
@@ -174,7 +186,7 @@
             // 
             // nextsettletime
             // 
-            this.nextsettletime.Location = new System.Drawing.Point(103, 49);
+            this.nextsettletime.Location = new System.Drawing.Point(140, 50);
             this.nextsettletime.Name = "nextsettletime";
             this.nextsettletime.Size = new System.Drawing.Size(20, 20);
             this.nextsettletime.TabIndex = 7;
@@ -182,7 +194,7 @@
             // 
             // currenttradingday
             // 
-            this.currenttradingday.Location = new System.Drawing.Point(103, 25);
+            this.currenttradingday.Location = new System.Drawing.Point(140, 26);
             this.currenttradingday.Name = "currenttradingday";
             this.currenttradingday.Size = new System.Drawing.Size(20, 20);
             this.currenttradingday.TabIndex = 6;
@@ -190,7 +202,7 @@
             // 
             // lastsettleday
             // 
-            this.lastsettleday.Location = new System.Drawing.Point(103, 1);
+            this.lastsettleday.Location = new System.Drawing.Point(140, 2);
             this.lastsettleday.Name = "lastsettleday";
             this.lastsettleday.Size = new System.Drawing.Size(20, 20);
             this.lastsettleday.TabIndex = 5;
@@ -198,7 +210,7 @@
             // 
             // kryptonLabel5
             // 
-            this.kryptonLabel5.Location = new System.Drawing.Point(39, 73);
+            this.kryptonLabel5.Location = new System.Drawing.Point(76, 74);
             this.kryptonLabel5.Name = "kryptonLabel5";
             this.kryptonLabel5.Size = new System.Drawing.Size(63, 20);
             this.kryptonLabel5.TabIndex = 4;
@@ -206,7 +218,7 @@
             // 
             // kryptonLabel4
             // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(39, 97);
+            this.kryptonLabel4.Location = new System.Drawing.Point(76, 98);
             this.kryptonLabel4.Name = "kryptonLabel4";
             this.kryptonLabel4.Size = new System.Drawing.Size(63, 20);
             this.kryptonLabel4.TabIndex = 3;
@@ -214,7 +226,7 @@
             // 
             // kryptonLabel3
             // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(14, 49);
+            this.kryptonLabel3.Location = new System.Drawing.Point(51, 50);
             this.kryptonLabel3.Name = "kryptonLabel3";
             this.kryptonLabel3.Size = new System.Drawing.Size(88, 20);
             this.kryptonLabel3.TabIndex = 2;
@@ -222,7 +234,7 @@
             // 
             // kryptonLabel2
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(25, 25);
+            this.kryptonLabel2.Location = new System.Drawing.Point(62, 26);
             this.kryptonLabel2.Name = "kryptonLabel2";
             this.kryptonLabel2.Size = new System.Drawing.Size(75, 20);
             this.kryptonLabel2.TabIndex = 1;
@@ -230,17 +242,65 @@
             // 
             // kryptonLabel1
             // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(25, 1);
+            this.kryptonLabel1.Location = new System.Drawing.Point(62, 2);
             this.kryptonLabel1.Name = "kryptonLabel1";
             this.kryptonLabel1.Size = new System.Drawing.Size(75, 20);
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "上个结算日:";
             // 
+            // unsettledacctordernum
+            // 
+            this.unsettledacctordernum.Location = new System.Drawing.Point(140, 123);
+            this.unsettledacctordernum.Name = "unsettledacctordernum";
+            this.unsettledacctordernum.Size = new System.Drawing.Size(20, 20);
+            this.unsettledacctordernum.TabIndex = 11;
+            this.unsettledacctordernum.Values.Text = "--";
+            // 
+            // kryptonLabel9
+            // 
+            this.kryptonLabel9.Location = new System.Drawing.Point(39, 124);
+            this.kryptonLabel9.Name = "kryptonLabel9";
+            this.kryptonLabel9.Size = new System.Drawing.Size(100, 20);
+            this.kryptonLabel9.TabIndex = 10;
+            this.kryptonLabel9.Values.Text = "上日未结算委托:";
+            // 
+            // unsettledbrokerordernum
+            // 
+            this.unsettledbrokerordernum.Location = new System.Drawing.Point(140, 149);
+            this.unsettledbrokerordernum.Name = "unsettledbrokerordernum";
+            this.unsettledbrokerordernum.Size = new System.Drawing.Size(20, 20);
+            this.unsettledbrokerordernum.TabIndex = 13;
+            this.unsettledbrokerordernum.Values.Text = "--";
+            // 
+            // kryptonLabel13
+            // 
+            this.kryptonLabel13.Location = new System.Drawing.Point(22, 148);
+            this.kryptonLabel13.Name = "kryptonLabel13";
+            this.kryptonLabel13.Size = new System.Drawing.Size(115, 20);
+            this.kryptonLabel13.TabIndex = 14;
+            this.kryptonLabel13.Values.Text = "上日未结算委托(B):";
+            // 
+            // totaltradenum
+            // 
+            this.totaltradenum.Location = new System.Drawing.Point(106, 84);
+            this.totaltradenum.Name = "totaltradenum";
+            this.totaltradenum.Size = new System.Drawing.Size(20, 20);
+            this.totaltradenum.TabIndex = 10;
+            this.totaltradenum.Values.Text = "--";
+            // 
+            // kryptonLabel10
+            // 
+            this.kryptonLabel10.Location = new System.Drawing.Point(39, 84);
+            this.kryptonLabel10.Name = "kryptonLabel10";
+            this.kryptonLabel10.Size = new System.Drawing.Size(63, 20);
+            this.kryptonLabel10.TabIndex = 9;
+            this.kryptonLabel10.Values.Text = "成交总数:";
+            // 
             // fmCoreStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(255, 337);
+            this.ClientSize = new System.Drawing.Size(280, 373);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -282,10 +342,16 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lastsettleday;
         private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox2;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel totalaccountnum;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel clearcentrestatus;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel totalordernum;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel19;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel11;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel6;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel13;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel unsettledbrokerordernum;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel unsettledacctordernum;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel9;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel totaltradenum;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel10;
     }
 }
