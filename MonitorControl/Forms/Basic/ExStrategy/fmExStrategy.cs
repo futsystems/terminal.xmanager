@@ -68,9 +68,13 @@ namespace TradingLib.MoniterControl
             _current.CreditSeparate = creditseparate.Checked;
             _current.MarginPrice = (QSEnumMarginPrice)margin.SelectedValue;
             _current.IncludeCloseProfit = includecloseprofit.Checked;
+            _current.IncludePositionProfit = includepositionprofit.Checked;
             _current.PositionLock = poslock.Checked;
             _current.EntrySlip = (int)entrySlip.Value;
             _current.ExitSlip = (int)exitSlip.Value;
+            _current.LimitCheck = limitcheck.Checked;
+            _current.Probability = (int)probability.Value;
+
             CoreService.TLClient.ReqUpdateExStrategyTemplateItem(_current);
         }
 
@@ -117,6 +121,7 @@ namespace TradingLib.MoniterControl
             {
                 kryptonGroupBox3.Visible = false;
             }
+
             CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryExStrategyTemplate", this.OnQryExStrategyTemplate);
             CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyExStrategyTemplate", this.OnNotifyExStrategyTemplate);
 
@@ -165,15 +170,24 @@ namespace TradingLib.MoniterControl
 
         void GotExStrategy(ExStrategy item)
         {
-            margin.SelectedValue = item.MarginPrice;
-            includecloseprofit.Checked = item.IncludeCloseProfit;
-            //avabilefund.SelectedValue = item.AvabileFund;
-            sidemargin.Checked = item.SideMargin;
-            creditseparate.Checked = item.CreditSeparate;
-            poslock.Checked = item.PositionLock;
-            entrySlip.Value = item.EntrySlip;
-            exitSlip.Value = item.ExitSlip;
-            _current = item;
+            if (InvokeRequired)
+            {
+                Invoke(new Action<ExStrategy>(GotExStrategy), new object[] { item });
+            }
+            else
+            {
+                margin.SelectedValue = item.MarginPrice;
+                includecloseprofit.Checked = item.IncludeCloseProfit;
+                includepositionprofit.Checked = item.IncludePositionProfit;
+                sidemargin.Checked = item.SideMargin;
+                creditseparate.Checked = item.CreditSeparate;
+                poslock.Checked = item.PositionLock;
+                entrySlip.Value = item.EntrySlip;
+                exitSlip.Value = item.ExitSlip;
+                limitcheck.Checked = item.LimitCheck;
+                probability.Value = item.Probability;
+                _current = item;
+            }
         }
 
 
@@ -198,9 +212,13 @@ namespace TradingLib.MoniterControl
                 foreach (ExStrategyTemplateSetting t in list)
                 {
                     templatemap.Add(t.ID, t);
-                    //templatelist.Items.Add(t);
                     InvokeGotExStrategyTemplate(t);
                 }
+            }
+
+            if (islast)
+            {
+                templateTree.ExpandAll();
             }
         }
 

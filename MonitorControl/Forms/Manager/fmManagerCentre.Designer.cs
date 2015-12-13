@@ -32,10 +32,11 @@
             this.lbbasemgrfk = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.mgrgrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.ctBasicMangerInfo1 = new ctBasicMangerInfo();
+            this.ctBasicMangerInfo1 = new TradingLib.MoniterControl.ctBasicMangerInfo();
             ((System.ComponentModel.ISupportInitialize)(this.lbbasemgrfk)).BeginInit();
             this.lbbasemgrfk.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).BeginInit();
             this.kryptonGroupBox1.Panel.SuspendLayout();
             this.kryptonGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mgrgrid)).BeginInit();
@@ -64,7 +65,6 @@
             this.kryptonGroupBox1.Panel.Controls.Add(this.mgrgrid);
             this.kryptonGroupBox1.Size = new System.Drawing.Size(752, 262);
             this.kryptonGroupBox1.TabIndex = 1;
-            this.kryptonGroupBox1.Text = "员工与代理";
             this.kryptonGroupBox1.Values.Heading = "员工与代理";
             // 
             // mgrgrid
@@ -74,7 +74,7 @@
             this.mgrgrid.Location = new System.Drawing.Point(0, 0);
             this.mgrgrid.Name = "mgrgrid";
             this.mgrgrid.RowTemplate.Height = 23;
-            this.mgrgrid.Size = new System.Drawing.Size(748, 240);
+            this.mgrgrid.Size = new System.Drawing.Size(748, 238);
             this.mgrgrid.TabIndex = 0;
             // 
             // ctBasicMangerInfo1
@@ -99,6 +99,7 @@
             this.Text = "柜员管理";
             ((System.ComponentModel.ISupportInitialize)(this.lbbasemgrfk)).EndInit();
             this.lbbasemgrfk.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).EndInit();
             this.kryptonGroupBox1.Panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
             this.kryptonGroupBox1.ResumeLayout(false);

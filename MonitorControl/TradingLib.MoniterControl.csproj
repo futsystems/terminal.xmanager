@@ -390,34 +390,34 @@
     <Compile Include="Forms\Account\RiskRule\fm\fmOrderRule_SecFilter.Designer.cs">
       <DependentUpon>fmOrderRule_SecFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Basic\CommissionMargin\fmCommission.cs">
+    <Compile Include="Forms\Basic\Commission\fmCommission.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Basic\CommissionMargin\fmCommission.Designer.cs">
+    <Compile Include="Forms\Basic\Commission\fmCommission.Designer.cs">
       <DependentUpon>fmCommission.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Basic\CommissionMargin\fmCommissionTemplateItemEdit.cs">
+    <Compile Include="Forms\Basic\Commission\fmCommissionTemplateItemEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Basic\CommissionMargin\fmCommissionTemplateItemEdit.Designer.cs">
+    <Compile Include="Forms\Basic\Commission\fmCommissionTemplateItemEdit.Designer.cs">
       <DependentUpon>fmCommissionTemplateItemEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Basic\CommissionMargin\fmMargin.cs">
+    <Compile Include="Forms\Basic\Margin\fmMargin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Basic\CommissionMargin\fmMargin.Designer.cs">
+    <Compile Include="Forms\Basic\Margin\fmMargin.Designer.cs">
       <DependentUpon>fmMargin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Basic\CommissionMargin\fmMarginTemplateItemEdit.cs">
+    <Compile Include="Forms\Basic\Margin\fmMarginTemplateItemEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Basic\CommissionMargin\fmMarginTemplateItemEdit.Designer.cs">
+    <Compile Include="Forms\Basic\Margin\fmMarginTemplateItemEdit.Designer.cs">
       <DependentUpon>fmMarginTemplateItemEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Basic\CommissionMargin\fmTemplateEdit.cs">
+    <Compile Include="Forms\Basic\fmTemplateEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Basic\CommissionMargin\fmTemplateEdit.Designer.cs">
+    <Compile Include="Forms\Basic\fmTemplateEdit.Designer.cs">
       <DependentUpon>fmTemplateEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Basic\ExStrategy\fmExStrategy.cs">
@@ -509,6 +509,12 @@
     </Compile>
     <Compile Include="Forms\Domain\fmDomainInfo.Designer.cs">
       <DependentUpon>fmDomainInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\System\fmDataManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\System\fmDataManager.Designer.cs">
+      <DependentUpon>fmDataManager.cs</DependentUpon>
     </Compile>
     <Compile Include="PageControl\fmLoginInfo.cs">
       <SubType>Form</SubType>
@@ -917,19 +923,19 @@
     <EmbeddedResource Include="Forms\Account\RiskRule\fm\fmOrderRule_SecFilter.resx">
       <DependentUpon>fmOrderRule_SecFilter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Basic\CommissionMargin\fmCommission.resx">
+    <EmbeddedResource Include="Forms\Basic\Commission\fmCommission.resx">
       <DependentUpon>fmCommission.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Basic\CommissionMargin\fmCommissionTemplateItemEdit.resx">
+    <EmbeddedResource Include="Forms\Basic\Commission\fmCommissionTemplateItemEdit.resx">
       <DependentUpon>fmCommissionTemplateItemEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Basic\CommissionMargin\fmMargin.resx">
+    <EmbeddedResource Include="Forms\Basic\Margin\fmMargin.resx">
       <DependentUpon>fmMargin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Basic\CommissionMargin\fmMarginTemplateItemEdit.resx">
+    <EmbeddedResource Include="Forms\Basic\Margin\fmMarginTemplateItemEdit.resx">
       <DependentUpon>fmMarginTemplateItemEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Basic\CommissionMargin\fmTemplateEdit.resx">
+    <EmbeddedResource Include="Forms\Basic\fmTemplateEdit.resx">
       <DependentUpon>fmTemplateEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Basic\ExStrategy\fmExStrategy.resx">
@@ -976,6 +982,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Domain\fmDomainInfo.resx">
       <DependentUpon>fmDomainInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\System\fmDataManager.resx">
+      <DependentUpon>fmDataManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PageControl\fmLoginInfo.resx">
       <DependentUpon>fmLoginInfo.cs</DependentUpon>
