@@ -233,6 +233,8 @@ namespace TradingLib.MoniterControl
 
             module_finservice.Checked = _domain.Module_FinService;
             module_payonline.Checked = _domain.Module_PayOnline;
+            module_slip.Checked = _domain.Module_Slip;
+
             router_live.Checked = _domain.Router_Live;
             router_sim.Checked = _domain.Router_Sim;
             splisttab.Enabled = _domain.Module_FinService;
@@ -281,6 +283,7 @@ namespace TradingLib.MoniterControl
 
                 _domain.Module_FinService = module_finservice.Checked;
                 _domain.Module_PayOnline = module_payonline.Checked;
+                _domain.Module_Slip = module_slip.Checked;
 
                 _domain.Router_Live = router_live.Checked;
                 _domain.Router_Sim = router_sim.Checked;
@@ -320,6 +323,7 @@ namespace TradingLib.MoniterControl
 
                 _domain.Module_FinService = module_finservice.Checked;
                 _domain.Module_PayOnline = module_payonline.Checked;
+                _domain.Module_Slip = module_slip.Checked;
 
                 _domain.Router_Live = router_live.Checked;
                 _domain.Router_Sim = router_sim.Checked;

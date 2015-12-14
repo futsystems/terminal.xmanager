@@ -32,6 +32,7 @@
             this.kryptonNavigator1 = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
             this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.dedicated = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.isproduction = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.datecreated = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -86,7 +87,7 @@
             this.kryptonPanel7 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.finsplist = new System.Windows.Forms.CheckedListBox();
             this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.dedicated = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.module_slip = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
@@ -184,6 +185,14 @@
             this.kryptonPanel2.Name = "kryptonPanel2";
             this.kryptonPanel2.Size = new System.Drawing.Size(429, 229);
             this.kryptonPanel2.TabIndex = 0;
+            // 
+            // dedicated
+            // 
+            this.dedicated.Location = new System.Drawing.Point(266, 193);
+            this.dedicated.Name = "dedicated";
+            this.dedicated.Size = new System.Drawing.Size(73, 20);
+            this.dedicated.TabIndex = 29;
+            this.dedicated.Values.Text = "独立部署";
             // 
             // isproduction
             // 
@@ -567,13 +576,14 @@
             this.kryptonPage4.LastVisibleSet = true;
             this.kryptonPage4.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage4.Name = "kryptonPage4";
-            this.kryptonPage4.Size = new System.Drawing.Size(429, 209);
+            this.kryptonPage4.Size = new System.Drawing.Size(429, 229);
             this.kryptonPage4.Text = "模块设置";
             this.kryptonPage4.ToolTipTitle = "Page ToolTip";
             this.kryptonPage4.UniqueName = "106522AE1E254B89D2A606033C9FF041";
             // 
             // kryptonPanel5
             // 
+            this.kryptonPanel5.Controls.Add(this.module_slip);
             this.kryptonPanel5.Controls.Add(this.module_subagent);
             this.kryptonPanel5.Controls.Add(this.module_payonline);
             this.kryptonPanel5.Controls.Add(this.module_finservice);
@@ -581,7 +591,7 @@
             this.kryptonPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel5.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel5.Name = "kryptonPanel5";
-            this.kryptonPanel5.Size = new System.Drawing.Size(429, 209);
+            this.kryptonPanel5.Size = new System.Drawing.Size(429, 229);
             this.kryptonPanel5.TabIndex = 0;
             // 
             // module_subagent
@@ -727,13 +737,13 @@
             this.btnSubmit.Values.Text = "提 交";
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
-            // dedicated
+            // module_slip
             // 
-            this.dedicated.Location = new System.Drawing.Point(266, 193);
-            this.dedicated.Name = "dedicated";
-            this.dedicated.Size = new System.Drawing.Size(73, 20);
-            this.dedicated.TabIndex = 29;
-            this.dedicated.Values.Text = "独立部署";
+            this.module_slip.Location = new System.Drawing.Point(17, 84);
+            this.module_slip.Name = "module_slip";
+            this.module_slip.Size = new System.Drawing.Size(98, 20);
+            this.module_slip.TabIndex = 4;
+            this.module_slip.Values.Text = "交易风险模块";
             // 
             // fmDomainEdit
             // 
@@ -845,5 +855,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel20;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox isproduction;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox dedicated;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox module_slip;
     }
 }

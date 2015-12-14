@@ -83,9 +83,16 @@ namespace TradingLib.MoniterControl
             this.templateTree.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
             this.templateTree.ContextMenuStrip.Items.Add("添加交易参数模板", null, new EventHandler(Add_Click));
 
+            btnAddTemplate.Click += new EventHandler(btnAddTemplate_Click);
             templateTree.NodeMouseClick += new TreeNodeMouseClickEventHandler(templateTree_NodeMouseClick);
 
             CoreService.EventCore.RegIEventHandler(this);
+        }
+
+        void btnAddTemplate_Click(object sender, EventArgs e)
+        {
+            fmTemplateEdit fm = new fmTemplateEdit(TemplateEditType.Strategy);
+            fm.ShowDialog();
         }
 
 
