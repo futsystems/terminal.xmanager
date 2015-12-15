@@ -31,6 +31,11 @@ namespace TradingLib.MoniterControl
             }
             CoreService.EventIndicator.GotTickEvent += new Action<Tick>(GotTick);
             CoreService.EventBasicInfo.OnSymbolEvent += new Action<SymbolImpl>(EventBasicInfo_OnSymbolEvent);
+
+            if (!CoreService.SiteInfo.Manager.IsRoot())
+            {
+                pageExecution.Visible = CoreService.SiteInfo.UIAccess.r_execution;
+            }
         }
 
         void EventBasicInfo_OnSymbolEvent(SymbolImpl obj)

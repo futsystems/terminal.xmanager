@@ -32,7 +32,7 @@
             this.kryptonNavigator1 = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
             this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.ctAccountInfo1 = new TradingLib.MoniterControl.ctAccountInfo();
-            this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
+            this.pageExecution = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.ctOrderPanel1 = new TradingLib.MoniterControl.ctOrderPanel();
             this.kryptonPage3 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.quoteList = new TradingLib.MoniterControl.ViewQuoteList();
@@ -42,8 +42,8 @@
             this.kryptonNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
             this.kryptonPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).BeginInit();
-            this.kryptonPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pageExecution)).BeginInit();
+            this.pageExecution.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage3)).BeginInit();
             this.kryptonPage3.SuspendLayout();
             this.SuspendLayout();
@@ -72,7 +72,7 @@
             this.kryptonNavigator1.Name = "kryptonNavigator1";
             this.kryptonNavigator1.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
             this.kryptonPage1,
-            this.kryptonPage2,
+            this.pageExecution,
             this.kryptonPage3});
             this.kryptonNavigator1.SelectedIndex = 0;
             this.kryptonNavigator1.Size = new System.Drawing.Size(435, 292);
@@ -100,25 +100,25 @@
             this.ctAccountInfo1.Size = new System.Drawing.Size(433, 265);
             this.ctAccountInfo1.TabIndex = 0;
             // 
-            // kryptonPage2
+            // pageExecution
             // 
-            this.kryptonPage2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.kryptonPage2.Controls.Add(this.ctOrderPanel1);
-            this.kryptonPage2.Flags = 65534;
-            this.kryptonPage2.LastVisibleSet = true;
-            this.kryptonPage2.MinimumSize = new System.Drawing.Size(50, 50);
-            this.kryptonPage2.Name = "kryptonPage2";
-            this.kryptonPage2.Size = new System.Drawing.Size(433, 236);
-            this.kryptonPage2.Text = "交易面板";
-            this.kryptonPage2.ToolTipTitle = "Page ToolTip";
-            this.kryptonPage2.UniqueName = "F95FF00A1AA74CFDEF923FD31568BCB5";
+            this.pageExecution.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.pageExecution.Controls.Add(this.ctOrderPanel1);
+            this.pageExecution.Flags = 65534;
+            this.pageExecution.LastVisibleSet = true;
+            this.pageExecution.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pageExecution.Name = "pageExecution";
+            this.pageExecution.Size = new System.Drawing.Size(433, 265);
+            this.pageExecution.Text = "交易面板";
+            this.pageExecution.ToolTipTitle = "Page ToolTip";
+            this.pageExecution.UniqueName = "F95FF00A1AA74CFDEF923FD31568BCB5";
             // 
             // ctOrderPanel1
             // 
             this.ctOrderPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ctOrderPanel1.Location = new System.Drawing.Point(0, 0);
             this.ctOrderPanel1.Name = "ctOrderPanel1";
-            this.ctOrderPanel1.Size = new System.Drawing.Size(433, 236);
+            this.ctOrderPanel1.Size = new System.Drawing.Size(433, 265);
             this.ctOrderPanel1.TabIndex = 0;
             // 
             // kryptonPage3
@@ -171,8 +171,8 @@
             this.kryptonNavigator1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).EndInit();
             this.kryptonPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).EndInit();
-            this.kryptonPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pageExecution)).EndInit();
+            this.pageExecution.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage3)).EndInit();
             this.kryptonPage3.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -184,7 +184,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Navigator.KryptonNavigator kryptonNavigator1;
         private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage1;
-        private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage2;
+        private ComponentFactory.Krypton.Navigator.KryptonPage pageExecution;
         private ctOrderPanel ctOrderPanel1;
         private ctAccountInfo ctAccountInfo1;
         private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage3;

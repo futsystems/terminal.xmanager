@@ -21,7 +21,6 @@ namespace TradingLib.MoniterControl
             InitializeComponent();
 
             MoniterHelper.AdapterToIDataSource(margin).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumMarginPrice>());
-            //MoniterHelper.AdapterToIDataSource(avabilefund).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumAvabileFundStrategy>());
 
             this.imageList1.Images.Add((System.Drawing.Image)Properties.Resources.folder);
             this.imageList1.Images.Add((System.Drawing.Image)Properties.Resources.folder_sel);
@@ -31,7 +30,7 @@ namespace TradingLib.MoniterControl
 
             templateTree.Nodes.Add(CreateBaseItem("交易参数模板"));
 
-            btnSubmit.Click += new EventHandler(btnSubmit_Click);
+            
             this.Load += new EventHandler(fmCommission_Load);
         }
 
@@ -48,12 +47,31 @@ namespace TradingLib.MoniterControl
         private ComponentFactory.Krypton.Toolkit.KryptonTreeNode CreateExStrategyTemplateItem(ExStrategyTemplateSetting template)
         {
             ComponentFactory.Krypton.Toolkit.KryptonTreeNode item = new ComponentFactory.Krypton.Toolkit.KryptonTreeNode();
-            item.Text = template.ToString();
+            item.Text = string.Format("{0}{1}", template.Name, template.Manager_ID != CoreService.SiteInfo.Manager.ID ? "*" : "");
             item.ImageIndex = 0;
             item.SelectedImageIndex = 1;
             item.Tag = template;
             return item;
         }
+
+
+        void fmCommission_Load(object sender, EventArgs e)
+        {
+            this.templateTree.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+            this.templateTree.ContextMenuStrip.Items.Add("添加交易参数模板", null, new EventHandler(Add_Click));
+            this.templateTree.ContextMenuStrip.Items.Add("删除交易参数模板", null, new EventHandler(Del_Click));
+
+
+            btnAddTemplate.Click += new EventHandler(btnAddTemplate_Click);
+
+            btnSubmit.Click += new EventHandler(btnSubmit_Click);
+
+            templateTree.NodeMouseClick += new TreeNodeMouseClickEventHandler(templateTree_NodeMouseClick);
+
+            CoreService.EventCore.RegIEventHandler(this);
+        }
+
+
 
         void btnSubmit_Click(object sender, EventArgs e)
         {
@@ -78,16 +96,7 @@ namespace TradingLib.MoniterControl
             CoreService.TLClient.ReqUpdateExStrategyTemplateItem(_current);
         }
 
-        void fmCommission_Load(object sender, EventArgs e)
-        {
-            this.templateTree.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
-            this.templateTree.ContextMenuStrip.Items.Add("添加交易参数模板", null, new EventHandler(Add_Click));
 
-            btnAddTemplate.Click += new EventHandler(btnAddTemplate_Click);
-            templateTree.NodeMouseClick += new TreeNodeMouseClickEventHandler(templateTree_NodeMouseClick);
-
-            CoreService.EventCore.RegIEventHandler(this);
-        }
 
         void btnAddTemplate_Click(object sender, EventArgs e)
         {
@@ -121,6 +130,22 @@ namespace TradingLib.MoniterControl
             fm.ShowDialog();
         }
 
+        void Del_Click(object sender, EventArgs e)
+        {
+            if (templateTree.SelectedNode.Parent != null)//父节点不为空 表面为二级节点
+            {
+                if (templateTree.SelectedNode.Parent.Index == 0)//父节点 index为0 表面为二级节点
+                {
+                    ExStrategyTemplateSetting t = templateTree.SelectedNode.Tag as ExStrategyTemplateSetting;
+
+                    if (MoniterHelper.WindowConfirm(string.Format("确认删除交易参数模板:{0}?", t.Name)) == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        ClearItem();
+                        CoreService.TLClient.ReqContribRequest("MgrExchServer", "DeleteExStrategyTemplate", t.ID.ToString());
+                    }
+                }
+            }
+        }
 
         public void OnInit()
         {
@@ -131,6 +156,7 @@ namespace TradingLib.MoniterControl
 
             CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryExStrategyTemplate", this.OnQryExStrategyTemplate);
             CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyExStrategyTemplate", this.OnNotifyExStrategyTemplate);
+            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyDeleteExStrategyTemplate", this.OnNotifyDelMarginTemplate);
 
             CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryExStrategyTemplateItem", this.OnQryExStrategyTemplateItem);
             CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyExStrategyTemplateItem", this.OnNotifyExStrategyTemplateItem);
@@ -141,6 +167,7 @@ namespace TradingLib.MoniterControl
         {
             CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QryExStrategyTemplate", this.OnQryExStrategyTemplate);
             CoreService.EventContrib.UnRegisterNotifyCallback("MgrExchServer", "NotifyExStrategyTemplate", this.OnNotifyExStrategyTemplate);
+            CoreService.EventContrib.UnRegisterNotifyCallback("MgrExchServer", "NotifyDeleteExStrategyTemplate", this.OnNotifyDelMarginTemplate);
 
             CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QryExStrategyTemplateItem", this.OnQryExStrategyTemplateItem);
             CoreService.EventContrib.UnRegisterNotifyCallback("MgrExchServer", "NotifyExStrategyTemplateItem", this.OnNotifyExStrategyTemplateItem);
@@ -149,11 +176,7 @@ namespace TradingLib.MoniterControl
 
         void ClearItem()
         {
-            //commissionGrid.DataSource = null;
-            //itemrowmap.Clear();
-            //itemmap.Clear();
-            //gt.Rows.Clear();
-            //BindToTable();
+            _current = null;
         }
         ExStrategy _current = null;
 
@@ -229,6 +252,21 @@ namespace TradingLib.MoniterControl
             }
         }
 
+
+        void OnNotifyDelMarginTemplate(string json)
+        {
+            ExStrategyTemplateSetting obj = MoniterHelper.ParseJsonResponse<ExStrategyTemplateSetting>(json);
+            if (obj != null)
+            {
+                ExStrategyTemplateSetting template = templateTree.SelectedNode.Tag as ExStrategyTemplateSetting;
+                if (template.ID == obj.ID)
+                {
+                    templateTree.SelectedNode.Parent.Nodes.Remove(templateTree.SelectedNode);
+                }
+            }
+        }
+
+
         void OnNotifyExStrategyTemplate(string json)
         {
             ExStrategyTemplateSetting obj = MoniterHelper.ParseJsonResponse<ExStrategyTemplateSetting>(json);
@@ -239,14 +277,13 @@ namespace TradingLib.MoniterControl
                 {
                     target.Name = obj.Name;
                     target.Description = obj.Description;
-                    //templatelist.Refresh();
                     templateTree.Refresh();
                 }
                 else
                 {
                     templatemap.Add(obj.ID, obj);
-                    //templatelist.Items.Add(obj);
                     InvokeGotExStrategyTemplate(obj);
+                    templateTree.ExpandAll();
                 }
             }
         }

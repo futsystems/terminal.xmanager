@@ -132,9 +132,7 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(HOLDNIGHT);//19
            
             
-            //代理编号
-            gt.Columns.Add(AGENTCODE);//20
-            gt.Columns.Add(AGENTMGRFK);//21
+            
 
             //----------------主帐户字段
             //主帐户
@@ -171,7 +169,10 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(EXECUTE);//3
             gt.Columns.Add(EXECUTEIMG, typeof(Image));//4
             gt.Columns.Add(CURRENCY);
-            
+
+            //代理编号
+            gt.Columns.Add(AGENTCODE);//20
+            gt.Columns.Add(AGENTMGRFK);//21
 
             gt.Columns.Add(DELETE);
             
@@ -513,7 +514,7 @@ namespace TradingLib.MoniterControl
 
                         gt.Rows[i][AGENTMGRFK] = account.MGRID;
                         ManagerSetting mgr = CoreService.BasicInfoTracker.GetManager(account.MGRID);
-                        gt.Rows[i][AGENTCODE] = mgr.Login + " - " + mgr.Name;
+                        gt.Rows[i][AGENTCODE] = string.Format("{0:d2}-{1}",mgr.ID, mgr.Login);
 
 
                         //主帐户 主帐户风控规则 主帐户连接
@@ -575,12 +576,10 @@ namespace TradingLib.MoniterControl
                         gt.Rows[r][CATEGORYSTR] = Util.GetEnumDescription(account.Category);
                         gt.Rows[r][CATEGORY] = account.Category.ToString();
                         gt.Rows[r][HOLDNIGHT] = account.IntraDay ? "禁止" : "允许";
-                        //gt.Rows[r][HOLDSIZE] = account.ho
-                        //gt.Rows[r][POSLOK] = account.PosLock ? "支持" : "不支持";
-                        //gt.Rows[r][SIDEMARGIN] = account.SideMargin ? "支持" : "不支持";
+
 
                         ManagerSetting mgr = CoreService.BasicInfoTracker.GetManager(account.MGRID);
-                        gt.Rows[r][AGENTCODE] = mgr.Login + " - " + mgr.Name;
+                        gt.Rows[r][AGENTCODE] = string.Format("{0:d2}-{1}", mgr.ID, mgr.Login);
 
                         gt.Rows[r][NAME] = account.Name;
                         gt.Rows[r][DELETE] = account.Deleted;

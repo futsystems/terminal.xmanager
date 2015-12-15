@@ -11,38 +11,19 @@ using ICSharpCode.Core;
 namespace TradingLib.MoniterBase.Command
 {
     /// <summary>
-    /// 交易时间段管理
-    /// </summary>
-    public class MarketTimeManagerCommand : AbstractMenuCommand
-    {
-        public override void Run()
-        {
-            fmMarketTime fm = new fmMarketTime();
-            fm.ShowDialog();
-            fm.Close();
-        }
-    }
-
-    /// <summary>
-    /// 交易所管理
-    /// </summary>
-    public class ExchangeManagerCommand : AbstractMenuCommand
-    {
-        public override void Run()
-        {
-            fmExchange fm = new fmExchange();
-            fm.ShowDialog();
-            fm.Close();
-        }
-    }
-
-    /// <summary>
     /// 品种管理
+    /// 权限
+    /// 分区管理员可见
     /// </summary>
     public class SecurityManagerCommand : AbstractMenuCommand
     {
         public override void Run()
         {
+            if (!CoreService.SiteInfo.Manager.IsRoot())
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
             fmSecurity fm = new fmSecurity();
             fm.ShowDialog();
             fm.Close();
@@ -52,11 +33,19 @@ namespace TradingLib.MoniterBase.Command
 
     /// <summary>
     /// 合约管理
+    /// 权限
+    /// 分区管理员可见
     /// </summary>
     public class SymbolManagerCommand : AbstractMenuCommand
     {
         public override void Run()
         {
+            if (!CoreService.SiteInfo.Manager.IsRoot())
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+
             fmSymbol fm = new fmSymbol();
             fm.ShowDialog();
             fm.Close();
@@ -66,15 +55,15 @@ namespace TradingLib.MoniterBase.Command
     /// <summary>
     /// 合约同步设置
     /// </summary>
-    public class SynSymbolManagerCommand : AbstractMenuCommand
-    {
-        public override void Run()
-        {
-            fmSyncSymbol fm = new fmSyncSymbol();
-            fm.ShowDialog();
-            fm.Close();
-        }
-    }
+    //public class SynSymbolManagerCommand : AbstractMenuCommand
+    //{
+    //    public override void Run()
+    //    {
+    //        fmSyncSymbol fm = new fmSyncSymbol();
+    //        fm.ShowDialog();
+    //        fm.Close();
+    //    }
+    //}
     /// <summary>
     /// 手续费模板设置
     /// </summary>
@@ -82,6 +71,11 @@ namespace TradingLib.MoniterBase.Command
     {
         public override void Run()
         {
+            if (!CoreService.SiteInfo.UIAccess.r_commission)
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
             fmCommission fm = new fmCommission();
             fm.ShowDialog();
             fm.Close();
@@ -95,6 +89,11 @@ namespace TradingLib.MoniterBase.Command
     {
         public override void Run()
         {
+            if (!CoreService.SiteInfo.UIAccess.r_margin)
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
             fmMargin fm = new fmMargin();
             fm.ShowDialog();
             fm.Close();
@@ -108,7 +107,53 @@ namespace TradingLib.MoniterBase.Command
     {
         public override void Run()
         {
+            if (!CoreService.SiteInfo.UIAccess.r_exstrategy)
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
             fmExStrategy fm = new fmExStrategy();
+            fm.ShowDialog();
+            fm.Close();
+        }
+    }
+
+    /// <summary>
+    /// 交易时间段管理
+    /// 权限
+    /// 超级分区可管理
+    /// </summary>
+    public class MarketTimeManagerCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            if (!CoreService.SiteInfo.Domain.Super)
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+            fmMarketTime fm = new fmMarketTime();
+            fm.ShowDialog();
+            fm.Close();
+        }
+    }
+
+    /// <summary>
+    /// 交易所管理
+    /// 权限
+    /// 超级分区可管理
+    /// </summary>
+    public class ExchangeManagerCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            if (!CoreService.SiteInfo.Domain.Super)
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+
+            fmExchange fm = new fmExchange();
             fm.ShowDialog();
             fm.Close();
         }

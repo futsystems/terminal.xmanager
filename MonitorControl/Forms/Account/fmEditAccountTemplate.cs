@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
 using System.ComponentModel;
@@ -31,22 +32,25 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            kryptonLabel15.Visible = false;
-            cbExStrategyTemplate.Visible = false;
-
-            if (CoreService.SiteInfo.Domain.Super)
-            {
-                kryptonLabel15.Visible = true;
-                cbExStrategyTemplate.Visible = true;
-            }
+            cbCommissionTemplate.Enabled = CoreService.SiteInfo.UIAccess.r_commission;
+            cbMarginTemplate.Enabled = CoreService.SiteInfo.UIAccess.r_margin;
+            cbExStrategyTemplate.Enabled = CoreService.SiteInfo.UIAccess.r_exstrategy;
 
             CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryCommissionTemplate", this.OnQryCommissionTemplate);
             CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryMarginTemplate", this.OnQryMarginTemplate);
             CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryExStrategyTemplate", this.OnQryExStrategyTemplate);
-            CoreService.TLClient.ReqQryCommissionTemplate();
-            CoreService.TLClient.ReqQryMarginTemplate();
-            CoreService.TLClient.ReqQryExStrategyTemplate();
-
+            if (CoreService.SiteInfo.UIAccess.r_commission)
+            {
+                CoreService.TLClient.ReqQryCommissionTemplate();
+            }
+            if (CoreService.SiteInfo.UIAccess.r_margin)
+            {
+                CoreService.TLClient.ReqQryMarginTemplate();
+            }
+            if (CoreService.SiteInfo.UIAccess.r_exstrategy)
+            {
+                CoreService.TLClient.ReqQryExStrategyTemplate();
+            }
 
         }
 
@@ -59,15 +63,29 @@ namespace TradingLib.MoniterControl
         }
 
         #region 响应模板查询 生成comboxlist
+        bool AnyMathItem(ComponentFactory.Krypton.Toolkit.KryptonComboBox cb, int id)
+        {
+            foreach (var item in cb.Items)
+            {
+                if (((ValueObject<int>)item).Value == id)
+                    return true;
+            }
+            return false;
+        }
+
+
         void OnQryCommissionTemplate(string json, bool islast)
         {
             CommissionTemplateSetting[] list = MoniterHelper.ParseJsonResponse<CommissionTemplateSetting[]>(json);
             if (list != null)
             {
                 MoniterHelper.AdapterToIDataSource(cbCommissionTemplate).BindDataSource(GetCommissionTemplateCBList(list));
-                cbCommissionTemplate.SelectedValue = _account.Commissin_ID;
+                int commissoinid = AnyMathItem(cbCommissionTemplate, _account.Commissin_ID) ? _account.Commissin_ID : 0;
+                cbCommissionTemplate.SelectedValue = commissoinid;
             }
         }
+
+
 
         void OnQryMarginTemplate(string json, bool islast)
         {
@@ -75,9 +93,12 @@ namespace TradingLib.MoniterControl
             if (list != null)
             {
                 MoniterHelper.AdapterToIDataSource(cbMarginTemplate).BindDataSource(GetMarginTemplateCBList(list));
-                cbMarginTemplate.SelectedValue = _account.Margin_ID;
+                int marginid = AnyMathItem(cbMarginTemplate, _account.Margin_ID) ? _account.Margin_ID : 0;
+                cbMarginTemplate.SelectedValue = marginid;
             }
         }
+
+
 
         void OnQryExStrategyTemplate(string json, bool islast)
         {
@@ -85,7 +106,8 @@ namespace TradingLib.MoniterControl
             if (list != null)
             {
                 MoniterHelper.AdapterToIDataSource(cbExStrategyTemplate).BindDataSource(GetExStrategyTemplateCBList(list));
-                cbExStrategyTemplate.SelectedValue = _account.ExStrategy_ID;
+                int strategyid = AnyMathItem(cbExStrategyTemplate, _account.ExStrategy_ID) ? _account.ExStrategy_ID : 0;
+                cbExStrategyTemplate.SelectedValue = strategyid;
             }
         }
 
@@ -100,7 +122,7 @@ namespace TradingLib.MoniterControl
             foreach (ExStrategyTemplateSetting item in items)
             {
                 ValueObject<int> vo = new ValueObject<int>();
-                vo.Name = item.Name;
+                vo.Name = string.Format("{0}{1}", item.Name, item.Manager_ID != CoreService.SiteInfo.Manager.ID ? "*" : "");
                 vo.Value = item.ID;
                 list.Add(vo);
             }
@@ -117,7 +139,7 @@ namespace TradingLib.MoniterControl
             foreach (MarginTemplateSetting item in items)
             {
                 ValueObject<int> vo = new ValueObject<int>();
-                vo.Name = item.Name;
+                vo.Name = string.Format("{0}{1}", item.Name, item.Manager_ID != CoreService.SiteInfo.Manager.ID ? "*" : "");
                 vo.Value = item.ID;
                 list.Add(vo);
             }
@@ -134,7 +156,7 @@ namespace TradingLib.MoniterControl
             foreach (CommissionTemplateSetting item in items)
             {
                 ValueObject<int> vo = new ValueObject<int>();
-                vo.Name = item.Name;
+                vo.Name = string.Format("{0}{1}", item.Name, item.Manager_ID != CoreService.SiteInfo.Manager.ID ? "*" : "");
                 vo.Value = item.ID;
                 list.Add(vo);
             }
@@ -155,20 +177,29 @@ namespace TradingLib.MoniterControl
         {
             if (MoniterHelper.WindowConfirm("确认更新帐户手续费与保证金模板?") == System.Windows.Forms.DialogResult.Yes)
             {
-                int commissionid = (int)cbCommissionTemplate.SelectedValue;
-                if (_account.Commissin_ID != commissionid)
+                if (CoreService.SiteInfo.UIAccess.r_commission)
                 {
-                    CoreService.TLClient.ReqUpdateAccountCommissionTemplate(_account.Account, commissionid);
+                    int commissionid = (int)cbCommissionTemplate.SelectedValue;
+                    if (_account.Commissin_ID != commissionid)
+                    {
+                        CoreService.TLClient.ReqUpdateAccountCommissionTemplate(_account.Account, commissionid);
+                    }
                 }
-                int marginid = (int)cbMarginTemplate.SelectedValue;
-                if (_account.Margin_ID != marginid)
+                if (CoreService.SiteInfo.UIAccess.r_margin)
                 {
-                    CoreService.TLClient.ReqUpdateAccountMarginTemplate(_account.Account, marginid);
+                    int marginid = (int)cbMarginTemplate.SelectedValue;
+                    if (_account.Margin_ID != marginid)
+                    {
+                        CoreService.TLClient.ReqUpdateAccountMarginTemplate(_account.Account, marginid);
+                    }
                 }
-                int strategyid = (int)cbExStrategyTemplate.SelectedValue;
-                if (_account.ExStrategy_ID != strategyid)
+                if (CoreService.SiteInfo.UIAccess.r_exstrategy)
                 {
-                    CoreService.TLClient.ReqUpdateAccountExStrategyTemplate(_account.Account, strategyid);
+                    int strategyid = (int)cbExStrategyTemplate.SelectedValue;
+                    if (_account.ExStrategy_ID != strategyid)
+                    {
+                        CoreService.TLClient.ReqUpdateAccountExStrategyTemplate(_account.Account, strategyid);
+                    }
                 }
                 this.Close();
             }

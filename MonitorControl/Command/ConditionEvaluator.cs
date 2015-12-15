@@ -12,6 +12,10 @@ using ICSharpCode.Core;
 //默认权限设置 然后加入自定义|| 任何一个为true就可以显示。这样可以增加自定义控制的灵活性
 namespace TradingLib.MoniterControl
 {
+
+
+
+
     /// <summary>
     /// 判断是否满足角色条件
     /// 比如某个角色才可以看到的菜单
@@ -43,11 +47,6 @@ namespace TradingLib.MoniterControl
         public bool IsValid(object caller, Condition condition)
         {
             string product = condition.Properties["product"];//对应的产品
-            //if (CoreService.SiteInfo == null)
-            //{
-            //    MoniterHelper.WindowMessage("系统初始化异常,请重新登入");
-            //    return false;
-            //}
             //所有产品
             if (String.Compare(product, "all", true) == 0 || product.Equals("*"))
             {
@@ -66,6 +65,72 @@ namespace TradingLib.MoniterControl
             return false;
         }
     }
+
+    /// <summary>
+    /// 判定系统模块条件
+    /// 代理模块,跟单模块等
+    /// 根据模块开启显示的菜单或内容
+    /// </summary>
+    public class ModuleStateConditionEvaluator : IConditionEvaluator
+    {
+        public bool IsValid(object caller, Condition condition)
+        {
+            string module = condition.Properties["module"];//对应的产品
+            module = module.ToUpper();
+            switch (module)
+            { 
+                case "AGENT":
+                    return CoreService.SiteInfo.Domain.Module_Agent;
+                default:
+                    return false;
+            }
+
+        }
+    }
+
+    /// <summary>
+    /// 权限检查
+    /// </summary>
+    public class PermissionStateConditionEvaluator : IConditionEvaluator
+    {
+        public bool IsValid(object caller, Condition condition)
+        {
+            //管理员默认拥有所有权限
+            if (CoreService.SiteInfo.Manager.IsRoot()) return true;
+
+            string module = condition.Properties["permission"];//对应的产品
+            module = module.ToUpper();
+            switch (module)
+            {
+                case "ACCOUNT_ADD":
+                    return CoreService.SiteInfo.UIAccess.r_account_add;
+                case "ACCOUNT_DEL":
+                    return CoreService.SiteInfo.UIAccess.r_account_del;
+                case "ACCOUNT_EXECUTION":
+                    return CoreService.SiteInfo.UIAccess.r_execution;
+                case "BLOCK":
+                    return CoreService.SiteInfo.UIAccess.r_block;
+                case "CASHOP":
+                    return CoreService.SiteInfo.UIAccess.r_cashop;
+                case "RISKRULE":
+                    return CoreService.SiteInfo.UIAccess.r_riskrule;
+                case "COMMISSION":
+                    return CoreService.SiteInfo.UIAccess.r_commission;
+                case "MARGIN":
+                    return CoreService.SiteInfo.UIAccess.r_margin;
+                case "EXSTRATEGY":
+                    return CoreService.SiteInfo.UIAccess.r_exstrategy;
+                case "ACCOUNT_INFO":
+                    return CoreService.SiteInfo.UIAccess.r_account_info;
+                
+                default:
+                    return false;
+            }
+
+        }
+    }
+
+
 
     /// <summary>
     /// 判断是单独部署还是托管分区

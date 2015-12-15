@@ -18,8 +18,8 @@ namespace TradingLib.MoniterControl
         public fmManagerEdit()
         {
             InitializeComponent();
-
             MoniterHelper.AdapterToIDataSource(type).BindDataSource(MoniterHelper.GetManagerTypeCBList());
+            this.type.Enabled = false;
         }
 
 
@@ -29,50 +29,27 @@ namespace TradingLib.MoniterControl
         public void SetManger(ManagerSetting mgr)
         {
             _manger = mgr;
-            this.Text = " 编辑管理员:" + _manger.Name;
-            this.id.Text = _manger.ID.ToString();
-            this.mgr_fk.Text = _manger.mgr_fk.ToString();
+            this.Text = string.Format("编辑管理员:{0}({1})-{2} 分区:{3}",_manger.Login,_manger.Name,_manger.ID,_manger.domain_id);
             this.login.Text = _manger.Login;
             this.name.Text = _manger.Name;
             this.mobile.Text = _manger.Mobile;
             this.qq.Text = _manger.QQ;
             this.acclimit.Value = _manger.AccLimit;
-            this.type.Enabled = false;
+            this.agentlimit.Value = _manger.AgentLimit;
+            
             this.login.Enabled = false;
             this.acclimit.Enabled = false;
+            this.agentlimit.Enabled = false;
 
             //如果是代理商则可以修改帐户数量限制 同时设定限制为自己的限制 给代理的客户数量不能超过过自己的限制
             if (_manger.Type == QSEnumManagerType.AGENT)
             {
                 this.acclimit.Enabled = true;
                 this.acclimit.Maximum = CoreService.SiteInfo.Manager.AccLimit;
+                this.agentlimit.Enabled = true;
+                this.agentlimit.Maximum = CoreService.SiteInfo.Manager.AgentLimit;
             }
         }
-        //public Manager Manager
-        //{
-        //    set
-        //    {
-        //        _manger = value;
-        //        this.Text = " 编辑管理员:" + manger.Name;
-        //        this.id.Text = manger.ID.ToString();
-        //        this.mgr_fk.Text = manger.mgr_fk.ToString();
-        //        this.login.Text = manger.Login;
-        //        this.name.Text = manger.Name;
-        //        this.mobile.Text = manger.Mobile;
-        //        this.qq.Text = manger.QQ;
-        //        this.acclimit.Value = manger.AccLimit;
-        //        this.type.Enabled = false;
-        //        this.login.Enabled = false;
-        //        this.acclimit.Enabled = false;
-
-        //        //如果是代理商则可以修改帐户数量限制 同时设定限制为自己的限制 给代理的客户数量不能超过过自己的限制
-        //        if (manger.Type == QSEnumManagerType.AGENT)
-        //        {
-        //            this.acclimit.Enabled = true;
-        //            this.acclimit.Maximum = Globals.Manager.AccLimit;
-        //        }
-        //    }
-        //}
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
@@ -105,6 +82,8 @@ namespace TradingLib.MoniterControl
                 m.Mobile = this.mobile.Text;
                 m.QQ = this.qq.Text;
                 m.AccLimit = (int)this.acclimit.Value;
+                m.AgentLimit = (int)this.agentlimit.Value;
+
                 if (CoreService.SiteInfo.Manager.Type == QSEnumManagerType.ROOT)
                 {
                     if (m.Type == QSEnumManagerType.AGENT)//如果添加代理则mgr_fk=0
@@ -132,9 +111,8 @@ namespace TradingLib.MoniterControl
                 if (_manger.Type == QSEnumManagerType.AGENT)
                 {
                     _manger.AccLimit = (int)this.acclimit.Value;
+                    _manger.AgentLimit = (int)this.agentlimit.Value;
                 }
-
-                //MessageBox.Show("manager id:" + _manger.ID.ToString());
                 if (MoniterHelper.WindowConfirm("确认更新管理员信息?") == System.Windows.Forms.DialogResult.Yes)
                 {
                     CoreService.TLClient.ReqUpdateManager(_manger);

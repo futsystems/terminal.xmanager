@@ -19,14 +19,5 @@ namespace TradingLib.MoniterBase.Command
         }
     }
 
-    public class DomainInfoCommand : AbstractMenuCommand
-    {
-        public override void Run()
-        {
-            fmDomainInfo fm = new fmDomainInfo();
-            fm.SetDomain(CoreService.SiteInfo.Domain);
-            fm.ShowDialog();
-            fm.Close();
-        }
-    }
+    
 }

@@ -6,7 +6,7 @@ using TradingLib.API;
 using TradingLib.Common;
 
 
-namespace TradingLib.MoniterControl
+namespace TradingLib.MoniterCore
 {
     public static class ManagerUtils
     {

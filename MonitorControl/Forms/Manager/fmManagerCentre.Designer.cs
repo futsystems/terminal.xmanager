@@ -65,7 +65,7 @@
             this.kryptonGroupBox1.Panel.Controls.Add(this.mgrgrid);
             this.kryptonGroupBox1.Size = new System.Drawing.Size(752, 262);
             this.kryptonGroupBox1.TabIndex = 1;
-            this.kryptonGroupBox1.Values.Heading = "员工与代理";
+            this.kryptonGroupBox1.Values.Heading = "柜员列表";
             // 
             // mgrgrid
             // 
@@ -91,10 +91,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(752, 366);
             this.Controls.Add(this.lbbasemgrfk);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "fmManagerCentre";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "柜员管理";
             ((System.ComponentModel.ISupportInitialize)(this.lbbasemgrfk)).EndInit();

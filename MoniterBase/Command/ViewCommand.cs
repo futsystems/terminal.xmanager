@@ -37,6 +37,8 @@ namespace TradingLib.MoniterBase.Command
             ctFunctionPanel functoinPanel = new ctFunctionPanel();
             functoinPanel.Dock = DockStyle.Fill;
             workbench.AppendControl(functoinPanel);
+            //functoinPanel.Visible = CoreService.SiteInfo.UIAccess.r_execution;
+
 
             //ctFollowCentre followMoniter = new ctFollowCentre();
             //followMoniter.Dock = DockStyle.Fill;

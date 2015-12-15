@@ -18,7 +18,7 @@ namespace TradingLib.MoniterCore
         {
             logger.Info("请求查询权限模板列表");
 
-            this.ReqContribRequest("MgrExchServer", "QueryPermmissionTemplateList", "");
+            this.ReqContribRequest("MgrExchServer", "QueryPermmissionTemplate", "");
         }
 
 

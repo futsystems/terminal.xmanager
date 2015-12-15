@@ -32,16 +32,7 @@ namespace TradingLib.MoniterControl
 
             if(CoreService.TLClient.ServerVersion.ProductType == QSEnumProductType.CounterSystem)
             {
-                //只有管理员可以查看路由类别
-                accountgrid.Columns[ROUTEIMG].Visible = CoreService.SiteInfo.Manager.IsRoot();
-                //管理员可以查看帐户类别
-                accountgrid.Columns[CATEGORYSTR].Visible = CoreService.SiteInfo.Manager.IsRoot();
-
-                //如果有实盘交易权限则可以查看路由组
-                accountgrid.Columns[ROUTERGROUPSTR].Visible = CoreService.SiteInfo.Domain.Router_Live && CoreService.SiteInfo.Manager.IsRoot();
-
-
-                accountgrid.Columns[MAINACCOUNT].Visible = false;
+               
 
 
                 ////只有管理员可以修改路由组和删除交易帐户
@@ -78,9 +69,19 @@ namespace TradingLib.MoniterControl
 
             if (CoreService.SiteInfo.ProductType == QSEnumProductType.CounterSystem)
             {
-                accountgrid.Columns[CATEGORYSTR].Visible = false;
-                accountgrid.Columns[AGENTCODE].Visible = false;
+                //只有管理员可以查看路由类别
+                accountgrid.Columns[ROUTEIMG].Visible = CoreService.SiteInfo.Manager.IsRoot();
+                //管理员可以查看帐户类别
+                accountgrid.Columns[CATEGORYSTR].Visible = CoreService.SiteInfo.Manager.IsRoot();
 
+                //如果有实盘交易权限则可以查看路由组
+                accountgrid.Columns[ROUTERGROUPSTR].Visible = CoreService.SiteInfo.Manager.IsRoot();
+
+
+                accountgrid.Columns[MAINACCOUNT].Visible = false;
+
+
+                accountgrid.Columns[CATEGORYSTR].Visible = false;
                 accountgrid.Columns[MAINACCOUNT].Visible = false;
                 accountgrid.Columns[MAINACCTRISKRULE].Visible = false;
                 accountgrid.Columns[MACTCONNIMG].Visible = false;
@@ -97,7 +98,6 @@ namespace TradingLib.MoniterControl
         public void OnDisposed()
         {
             //帐户事件
-
             CoreService.EventAccount.OnNewAccountEvent -= new Action<AccountLite>(GotAccount);
             CoreService.EventAccount.OnInfoLiteEvent -= new Action<AccountInfoLite>(GotAccountInfoLite);
             CoreService.EventAccount.OnAccountChangedEvent -= new Action<AccountLite>(GotAccountChanged);

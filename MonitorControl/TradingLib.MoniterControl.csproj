@@ -94,6 +94,12 @@
     <Compile Include="Base\ctRouterGroupList.Designer.cs">
       <DependentUpon>ctRouterGroupList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\ctTLPermissionEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Base\ctTLPermissionEdit.designer.cs">
+      <DependentUpon>ctTLPermissionEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\Follow\ctFollowItemList.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -510,6 +516,24 @@
     <Compile Include="Forms\Domain\fmDomainInfo.Designer.cs">
       <DependentUpon>fmDomainInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Manager\fmManagerPermission.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Manager\fmManagerPermission.Designer.cs">
+      <DependentUpon>fmManagerPermission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Manager\fmPermissionTemplate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Manager\fmPermissionTemplate.Designer.cs">
+      <DependentUpon>fmPermissionTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Manager\fmPermissionTemplateEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Manager\fmPermissionTemplateEdit.Designer.cs">
+      <DependentUpon>fmPermissionTemplateEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\System\fmDataManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -760,7 +784,6 @@
     </Compile>
     <Compile Include="UIConstant.cs" />
     <Compile Include="Utils\BasicInfoTrackerUtil.cs" />
-    <Compile Include="Utils\ManagerUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Base\ctBasicMangerInfo.resx">
@@ -777,6 +800,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\ctRouterGroupList.resx">
       <DependentUpon>ctRouterGroupList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\ctTLPermissionEdit.resx">
+      <DependentUpon>ctTLPermissionEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Base\Follow\ctFollowItemList.resx">
       <DependentUpon>ctFollowItemList.cs</DependentUpon>
@@ -982,6 +1008,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Domain\fmDomainInfo.resx">
       <DependentUpon>fmDomainInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Manager\fmManagerPermission.resx">
+      <DependentUpon>fmManagerPermission.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Manager\fmPermissionTemplate.resx">
+      <DependentUpon>fmPermissionTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Manager\fmPermissionTemplateEdit.resx">
+      <DependentUpon>fmPermissionTemplateEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\System\fmDataManager.resx">
       <DependentUpon>fmDataManager.cs</DependentUpon>

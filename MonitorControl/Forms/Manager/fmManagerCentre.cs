@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using TradingLib.API;
 using TradingLib.Common;
 using TradingLib.MoniterCore;
-using TradingLib.MoniterCore;
+
 
 namespace TradingLib.MoniterControl
 {
@@ -22,23 +22,14 @@ namespace TradingLib.MoniterControl
             InitTable();
             BindToTable();
 
-
-            
-
             this.Load += new EventHandler(fmManagerCentre_Load);
-            
-
+           
         }
 
         void fmManagerCentre_Load(object sender, EventArgs e)
         {
-            CoreService.EventCore.RegIEventHandler(this);
-            this.FormClosing += new FormClosingEventHandler(fmManagerCentre_FormClosing);
             this.mgrgrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(mgrgrid_RowPrePaint);
-            foreach (ManagerSetting m in CoreService.BasicInfoTracker.Managers)
-            {
-                this.GotManager(m);
-            }
+            CoreService.EventCore.RegIEventHandler(this);
         }
 
         public void OnInit()
@@ -46,10 +37,19 @@ namespace TradingLib.MoniterControl
 
             CoreService.EventBasicInfo.OnManagerEvent += new Action<ManagerSetting>(GotManager);
 
+            //分区管理员可以查询柜员密码和设置柜员权限
             if (!CoreService.SiteInfo.Manager.IsRoot())
             {
+                mgrgrid.ContextMenuStrip.Items[5].Visible = false;
                 mgrgrid.ContextMenuStrip.Items[6].Visible = false;
+                mgrgrid.ContextMenuStrip.Items[7].Visible = false;
             }
+
+            foreach (ManagerSetting m in CoreService.BasicInfoTracker.Managers)
+            {
+                this.GotManager(m);
+            }
+
         }
 
         public void OnDisposed()
@@ -63,7 +63,6 @@ namespace TradingLib.MoniterControl
 
         void AddManager_Click(object sender, EventArgs e)
         {
-            //Globals.Debug("manger type:" + Globals.Manager.Type.ToString());
             if (!CoreService.SiteInfo.Manager.RightAddManager())
             {
                 MoniterHelper.WindowMessage("没有添加柜员的权限");
@@ -172,101 +171,25 @@ namespace TradingLib.MoniterControl
             
         }
 
-
-        #region 显示字段
-
-        const string ID = "全局ID";
-        const string LOGIN = "登入名";
-        const string MGRTYPE = "MGRTYPE";
-        const string MGRTYPESTR = "管理员类型";
-        const string NAME = "姓名";
-        const string MOBILE = "手机";
-        const string QQ = "QQ号码";
-        const string ACCNUMLIMIT = "帐户数量限制";
-
-        const string MGRFK = "管理域ID";
-        const string STATUS = "状态";
-
-        #endregion
-
-        DataTable gt = new DataTable();
-        BindingSource datasource = new BindingSource();
-
-        /// <summary>
-        /// 设定表格控件的属性
-        /// </summary>
-        private void SetPreferences()
+        void SetPermission_Click(object sender, EventArgs e)
         {
-            ComponentFactory.Krypton.Toolkit.KryptonDataGridView grid = mgrgrid;
+            ManagerSetting manager = CoreService.BasicInfoTracker.GetManager(CurrentManagerID);
+            if (manager == null)
+            {
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请选择管理员");
+                return;
+            }
 
-            grid.AllowUserToAddRows = false;
-            grid.AllowUserToDeleteRows = false;
-            grid.AllowUserToResizeRows = false;
-            grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            grid.ColumnHeadersHeight = 25;
-            grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            grid.ReadOnly = true;
-            grid.RowHeadersVisible = false;
-            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            grid.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
+            fmManagerPermission fm = new fmManagerPermission();
 
-            grid.StateCommon.Background.Color1 = Color.WhiteSmoke;
-            grid.StateCommon.Background.Color2 = Color.WhiteSmoke;
-
-
-            grid.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
-
-            grid.ContextMenuStrip.Items.Add("添加", null, new EventHandler(AddManager_Click));
-            grid.ContextMenuStrip.Items.Add("编辑", null, new EventHandler(EditManager_Click));
-            grid.ContextMenuStrip.Items.Add(new System.Windows.Forms.ToolStripSeparator());
-            grid.ContextMenuStrip.Items.Add("激活管理员", null, new EventHandler(ActiveManager_Click));
-            grid.ContextMenuStrip.Items.Add("冻结管理员", null, new EventHandler(InactiveManager_Click));
-            grid.ContextMenuStrip.Items.Add(new System.Windows.Forms.ToolStripSeparator());
-            grid.ContextMenuStrip.Items.Add("查看柜员密码", null, new EventHandler(QryManagerPass_Click));
-
+            fm.SetManager(manager);
+            fm.ShowDialog();
+            fm.Close();
+            
         }
 
-        //初始化Account显示空格
-        private void InitTable()
-        {
-            gt.Columns.Add(ID);//
-            gt.Columns.Add(LOGIN);//
-            gt.Columns.Add(MGRTYPE);//
-            gt.Columns.Add(MGRTYPESTR);
-            gt.Columns.Add(NAME);//
-            gt.Columns.Add(MOBILE);//
-            gt.Columns.Add(QQ);//
-            gt.Columns.Add(ACCNUMLIMIT);//
-            gt.Columns.Add(MGRFK);//
-
-            gt.Columns.Add(STATUS,typeof(Image));//
-        }
-
-        /// <summary>
-        /// 绑定数据表格到grid
-        /// </summary>
-        private void BindToTable()
-        {
-            ComponentFactory.Krypton.Toolkit.KryptonDataGridView grid = mgrgrid;
-
-
-            datasource.DataSource = gt;
-            //datasource.Filter=""
-            grid.DataSource = datasource;
-            datasource.Sort = ID + " ASC";
-
-            grid.Columns[MGRTYPE].Visible = false;
-            grid.Columns[ID].Visible = false;
-        }
-
-        private void fmManagerCentre_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            e.Cancel = true;
-            this.Hide();
-        }
 
         Dictionary<int, int> mgridmap = new Dictionary<int, int>();
-
         int MangerIdx(int id)
         {
             int rowid = -1;
@@ -305,6 +228,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][MOBILE] = manger.Mobile;
                     gt.Rows[i][QQ] = manger.QQ;
                     gt.Rows[i][ACCNUMLIMIT] = manger.Type == QSEnumManagerType.AGENT ? manger.AccLimit.ToString() : "";
+                    gt.Rows[i][AGENTLIMIT] = manger.Type == QSEnumManagerType.AGENT ? manger.AgentLimit.ToString() : "";
                     gt.Rows[i][MGRFK] = manger.mgr_fk;
 
                     gt.Rows[i][STATUS] = getStatusImage(manger.Active);
@@ -321,12 +245,107 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][NAME] = manger.Name;
                     gt.Rows[i][MOBILE] = manger.Mobile;
                     gt.Rows[i][QQ] = manger.QQ;
-                    gt.Rows[i][ACCNUMLIMIT] = manger.AccLimit;
+                    gt.Rows[i][ACCNUMLIMIT] = manger.Type == QSEnumManagerType.AGENT ? manger.AccLimit.ToString() : "";
+                    gt.Rows[i][AGENTLIMIT] = manger.Type == QSEnumManagerType.AGENT ? manger.AgentLimit.ToString() : "";
                     gt.Rows[i][MGRFK] = manger.mgr_fk;
                     gt.Rows[i][STATUS] = getStatusImage(manger.Active);
 
                 }
             }
         }
+
+
+        #region 表格
+
+        const string ID = "全局ID";
+        const string LOGIN = "登入名";
+        const string MGRTYPE = "MGRTYPE";
+        const string MGRTYPESTR = "管理员类型";
+        const string NAME = "姓名";
+        const string MOBILE = "手机";
+        const string QQ = "QQ号码";
+        const string ACCNUMLIMIT = "帐户数量";
+        const string AGENTLIMIT = "代理数量";
+
+        const string MGRFK = "管理域ID";
+        const string STATUS = "状态";
+
+        
+
+        DataTable gt = new DataTable();
+        BindingSource datasource = new BindingSource();
+
+        /// <summary>
+        /// 设定表格控件的属性
+        /// </summary>
+        private void SetPreferences()
+        {
+            ComponentFactory.Krypton.Toolkit.KryptonDataGridView grid = mgrgrid;
+
+            grid.AllowUserToAddRows = false;
+            grid.AllowUserToDeleteRows = false;
+            grid.AllowUserToResizeRows = false;
+            grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            grid.ColumnHeadersHeight = 25;
+            grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            grid.ReadOnly = true;
+            grid.RowHeadersVisible = false;
+            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grid.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
+
+            grid.StateCommon.Background.Color1 = Color.WhiteSmoke;
+            grid.StateCommon.Background.Color2 = Color.WhiteSmoke;
+
+
+            grid.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+
+            grid.ContextMenuStrip.Items.Add("添加", null, new EventHandler(AddManager_Click));
+            grid.ContextMenuStrip.Items.Add("编辑", null, new EventHandler(EditManager_Click));
+            grid.ContextMenuStrip.Items.Add(new System.Windows.Forms.ToolStripSeparator());
+            grid.ContextMenuStrip.Items.Add("激活管理员", null, new EventHandler(ActiveManager_Click));
+            grid.ContextMenuStrip.Items.Add("冻结管理员", null, new EventHandler(InactiveManager_Click));
+            grid.ContextMenuStrip.Items.Add(new System.Windows.Forms.ToolStripSeparator());
+            grid.ContextMenuStrip.Items.Add("查看柜员密码", null, new EventHandler(QryManagerPass_Click));
+            grid.ContextMenuStrip.Items.Add("设置权限", null, new EventHandler(SetPermission_Click));
+
+        }
+
+        //初始化Account显示空格
+        private void InitTable()
+        {
+            gt.Columns.Add(ID);//
+            gt.Columns.Add(LOGIN);//
+            gt.Columns.Add(MGRTYPE);//
+            gt.Columns.Add(MGRTYPESTR);
+            gt.Columns.Add(NAME);//
+            gt.Columns.Add(MOBILE);//
+            gt.Columns.Add(QQ);//
+            gt.Columns.Add(ACCNUMLIMIT);//
+            gt.Columns.Add(AGENTLIMIT);
+            gt.Columns.Add(MGRFK);//
+            gt.Columns.Add(STATUS,typeof(Image));//
+        }
+
+        /// <summary>
+        /// 绑定数据表格到grid
+        /// </summary>
+        private void BindToTable()
+        {
+            ComponentFactory.Krypton.Toolkit.KryptonDataGridView grid = mgrgrid;
+
+
+            datasource.DataSource = gt;
+            //datasource.Filter=""
+            grid.DataSource = datasource;
+            datasource.Sort = ID + " ASC";
+
+            grid.Columns[MGRTYPE].Visible = false;
+            grid.Columns[ID].Visible = false;
+        }
+
+
+        #endregion
+
+
     }
 }

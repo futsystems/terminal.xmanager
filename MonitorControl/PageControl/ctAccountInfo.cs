@@ -60,6 +60,14 @@ namespace TradingLib.MoniterControl
         public void OnInit()
         {
             CoreService.EventContrib.RegisterCallback("MsgExch", "QrySessionInfo", OnSessionInfo);
+            //只有管理员可以查看成交方式
+            if (!CoreService.SiteInfo.Manager.IsRoot())
+            {
+                PanelRouter.Visible = false;
+                btnExecute.Visible = CoreService.SiteInfo.UIAccess.r_block;
+                btnUpdateInterday.Visible = CoreService.SiteInfo.UIAccess.r_account_interday;
+                cbHoldNight.Enabled = CoreService.SiteInfo.UIAccess.r_account_interday;
+            }
         }
 
         public void OnDisposed()

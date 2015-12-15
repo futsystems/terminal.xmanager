@@ -254,6 +254,7 @@ namespace TradingLib.MoniterControl
 
             grid.Columns[UNDERLAYINGSYMBOL].Visible = false;
             grid.Columns[UNDERLAYING].Visible = false;
+
             
         }
 

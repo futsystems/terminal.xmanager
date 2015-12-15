@@ -289,6 +289,12 @@ namespace TradingLib.MoniterControl
 
             grid.Columns[EXTRAMARGIN].Visible = false;
             grid.Columns[MAINTANCEMARGIN].Visible = false;
+
+            if (!CoreService.SiteInfo.Domain.Super)
+            {
+                grid.Columns[DATAFEED].Visible = false;
+            }
+            
         }
 
 

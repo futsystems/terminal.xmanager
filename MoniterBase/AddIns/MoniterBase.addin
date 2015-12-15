@@ -21,6 +21,7 @@
       <ConditionEvaluator name="ProductState" class="TradingLib.MoniterControl.ProductStateConditionEvaluator"/>
       <ConditionEvaluator name="RoleState" class="TradingLib.MoniterControl.RoleStateConditionEvaluator"/>
       <ConditionEvaluator name="DeployState" class="TradingLib.MoniterControl.DeployStateConditionEvaluator"/>
+      <ConditionEvaluator name="ModuleState" class="TradingLib.MoniterControl.ModuleStateConditionEvaluator"/>
     </Import>
 	</Runtime>
 
@@ -46,15 +47,18 @@
       <Include id = "Account" path = "/Workspace/MainAccount-Vendor"/>
     </MenuItem>
 
-    <Condition name="DeployState" deploy="s">
+    
       <Condition name="ProductState" product="counter">
+        <Condition name="ModuleState" module="agent">
         <MenuItem id = "Manager"
                   type = "Menu"
                   label = "柜员管理">
           <Include id = "Manager" path = "/Workspace/MgrManager"/>
         </MenuItem>
+        </Condition>
       </Condition>
 
+    <Condition name="DeployState" deploy="s">
       <Condition name="ProductState" product="counter">
         <MenuItem id = "Tools"
                   type = "Menu"
@@ -62,6 +66,7 @@
           <Include id = "Tools" path = "/Workspace/MgrTools"/>
         </MenuItem>
       </Condition>
+      
     </Condition>
 
     <Condition name="ProductState" product="*">
@@ -126,24 +131,27 @@
                 class = "TradingLib.MoniterBase.Command.DefaultConnectorManagerCommand"/>
       <MenuItem id = "Separator1" type = "Separator"/>
     </ComplexCondition>
-    
+
+    <Condition name="RoleState" role="root" >
     <MenuItem id = "SystemStatusCommand"
               label = "系统状态"
               shortcut = "Control|S"
               class = "TradingLib.MoniterBase.Command.SystemStatusCommand"/>
-
+    </Condition>
+    
     <Condition name="DeployState" deploy="s">
       <MenuItem id = "TaskLogManagerCommand"
                 label = "任务日志"
                 class = "TradingLib.MoniterBase.Command.TaskLogManagerCommand"/>      
     </Condition>
 
+    <Condition name="RoleState" role="root" >
     <MenuItem id = "DomainInfoCommand"
                 label = "授权信息"
                 class = "TradingLib.MoniterBase.Command.DomainInfoCommand"/>
+      <MenuItem id = "Separator1" type = "Separator"/>
+    </Condition>
     
-
-    <MenuItem id = "Separator1" type = "Separator"/>
     
     
     
@@ -170,6 +178,7 @@
               
   <!--交易管理菜单-->
   <Path name = "/Workspace/BasicInfoManager">
+    <Condition name="RoleState" role="root" >
       <MenuItem id = "SecurityManagerCommand"
               label = "品种数据"
               class = "TradingLib.MoniterBase.Command.SecurityManagerCommand"/>
@@ -184,21 +193,26 @@
     
     
       <MenuItem id = "Separator1" type = "Separator"/>
-    
+    </Condition>
+
+    <Condition name="PermissionState" permission="commission" >
       <MenuItem id = "CommissionTemplateCommand"
               label = "手续费模板管理"
               class = "TradingLib.MoniterBase.Command.CommissionTemplateCommand"/>
-    
-    
+    </Condition>
+
+    <Condition name="PermissionState" permission="margin" >
       <MenuItem id = "MarginTemplateCommand"
               label = "保证金模板管理"
               class = "TradingLib.MoniterBase.Command.MarginTemplateCommand"/>
-   
-      <MenuItem id = "Separator1" type = "Separator"/>
+    </Condition>
 
+    <Condition name="PermissionState" permission="exstrategy" >
+      <MenuItem id = "Separator1" type = "Separator"/>
       <MenuItem id = "ExStrategyTemplateCommand"
               label = "交易参数管理"
               class = "TradingLib.MoniterBase.Command.ExStrategyTemplateCommand"/>
+    </Condition>
 
 
     <!--超级管理员可见菜单-->
@@ -232,17 +246,16 @@
               shortcut = "Control|M"
               class = "TradingLib.MoniterBase.Command.ManagerConnectorCommand"/>
     </ComplexCondition>
-    
-    <ComplexCondition>
-      <And>
-        <Condition name="ProductState" product="c" />
-        <Condition name="RoleState" role="root" />
-      </And>
+
+    <!-- 分账户柜台系统-->
+    <Condition name="ProductState" product="counter" >
+      <Condition name="PermissionState" permission="account_add" >
       <MenuItem id = "AddFAccountCommand"
               label = "添加交易帐户"
                 shortcut = "Control|A"
               class = "TradingLib.MoniterBase.Command.AddFAccountCommand"/>
-
+      </Condition>
+      <Condition name="RoleState" role="root" >
       <MenuItem id = "Separator1" type = "Separator"/>
       <MenuItem id = "MainAccount-Vendor"
               label = "主帐户管理"
@@ -252,7 +265,8 @@
               label = "主帐户组管理"
               shortcut = "Control|R"
               class = "TradingLib.MoniterBase.Command.RouterGroupCommand"/>
-    </ComplexCondition>
+        </Condition>
+      </Condition>
   </Path>
 
 
@@ -261,6 +275,12 @@
     <MenuItem id = "ManagerCommand"
             label = "柜员管理"
             class = "TradingLib.MoniterBase.Command.ManagerCommand"/>
+    <Condition name="RoleState" role="root" >
+    <MenuItem id = "Separator1" type = "Separator"/>
+    <MenuItem id = "PermissionTemplateCommand"
+            label = "权限模板管理"
+            class = "TradingLib.MoniterBase.Command.AgentPermissionTemplateCommand"/>
+    </Condition>
 
   </Path>
   
@@ -274,31 +294,19 @@
               label = "手工结算"
               class = "TradingLib.MoniterBase.Command.SettleManagerCommand"/>
     </Condition>
-
   </Path>
   
   <!--历史记录查询-->
   <Path name = "/Workspace/HisQryManager">
-    <Condition name="ProductState" product="c">
       <MenuItem id = "QryHistTradingInfoCommand"
               label = "交易记录"
               class = "TradingLib.MoniterBase.Command.QryHistTradingInfoCommand"/>
-    </Condition>
-
     <MenuItem id = "QrySettlementCommand"
             label = "结算单"
             class = "TradingLib.MoniterBase.Command.QrySettlementCommand"/>
-
-    <ComplexCondition>
-      <And>
-        <Condition name="ProductState" product="*" />
-        <Condition name="RoleState" role="Root" />
-      </And>
       <MenuItem id = "QryHistCashTransCommand"
             label = "出入金记录"
             class = "TradingLib.MoniterBase.Command.QryHistCashTransCommand"/>
-    </ComplexCondition>
-    
   </Path>
 
   <!--财务管理-->
@@ -327,13 +335,14 @@
   <!--工具栏-->
   <Path name = "/Workbench/Toolbar">
 
-    
-    <ToolbarItem id = "ViewAccount"
-		             tooltip = "添加子账户"
-		             icon = "Icons.AccountAdd"
-		             class = "TradingLib.MoniterBase.Command.AddFAccountCommand"/>
+    <Condition name="PermissionState" permission="account_add" >
+      <ToolbarItem id = "ViewAccount"
+		               tooltip = "添加子账户"
+		               icon = "Icons.AccountAdd"
+		               class = "TradingLib.MoniterBase.Command.AddFAccountCommand"/>
 
-    <ToolbarItem id = "ViewSeparator" type = "Separator"/>
+      <ToolbarItem id = "ViewSeparator" type = "Separator"/>
+    </Condition>
     
     <ToolbarItem id = "ViewAccount"
 		             tooltip = "查看帐户列表"

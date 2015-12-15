@@ -47,7 +47,7 @@ namespace TradingLib.MoniterControl
         private ComponentFactory.Krypton.Toolkit.KryptonTreeNode CreateMarginTemplateItem(MarginTemplateSetting template)
         {
             ComponentFactory.Krypton.Toolkit.KryptonTreeNode item = new ComponentFactory.Krypton.Toolkit.KryptonTreeNode();
-            item.Text = template.ToString();
+            item.Text = string.Format("{0}{1}", template.Name, template.Manager_ID != CoreService.SiteInfo.Manager.ID ? "*" : "");
             item.ImageIndex = 0;
             item.SelectedImageIndex = 1;
             item.Tag = template;

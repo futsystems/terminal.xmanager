@@ -89,6 +89,11 @@ namespace TradingLib.MoniterControl
             }
             if (CoreService.SiteInfo.ProductType == QSEnumProductType.CounterSystem)
             {
+                if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.UIAccess.r_cashop)
+                {
+                    MoniterHelper.WindowMessage("无权限");
+                    return;
+                }
                 fmCashOperationCounter fm = new fmCashOperationCounter();
                 fm.SetAccount(account);
                 fm.ShowDialog();
@@ -111,6 +116,13 @@ namespace TradingLib.MoniterControl
                 return;
             }
 
+            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.UIAccess.r_block)
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+
+
             if (MoniterHelper.WindowConfirm(string.Format("确认激活交易帐户:{0}?", account.Account)) == System.Windows.Forms.DialogResult.Yes)
             {
                 CoreService.TLClient.ReqUpdateAccountExecute(account.Account,true);
@@ -130,6 +142,12 @@ namespace TradingLib.MoniterControl
             AccountLite account = null;
             if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
             {
+                return;
+            }
+
+            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.UIAccess.r_block)
+            {
+                MoniterHelper.WindowMessage("无权限");
                 return;
             }
 
@@ -157,6 +175,11 @@ namespace TradingLib.MoniterControl
             {
                 return;
             }
+            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.UIAccess.r_account_info)
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
 
             fmChangePassword fm = new fmChangePassword();
             fm.SetAccount(account.Account);
@@ -178,6 +201,13 @@ namespace TradingLib.MoniterControl
             {
                 return;
             }
+
+            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.UIAccess.r_account_info)
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+
             fmChangeInvestor fm = new fmChangeInvestor();
             fm.SetAccount(account);
             fm.ShowDialog();
@@ -197,6 +227,14 @@ namespace TradingLib.MoniterControl
             {
                 return;
             }
+
+            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.UIAccess.r_account_info)
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+
+
             fmEditAccount fm = new fmEditAccount();
             fm.SetAccount(account);
             fm.ShowDialog();
@@ -233,6 +271,14 @@ namespace TradingLib.MoniterControl
             {
                 return;
             }
+
+            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.UIAccess.r_riskrule)
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+
+
             fmEditRiskRule fm = new fmEditRiskRule();
             fm.SetAccount(account);
             fm.ShowDialog();
@@ -330,6 +376,14 @@ namespace TradingLib.MoniterControl
                 MoniterHelper.WindowMessage("请选择交易帐户");
                 return;
             }
+
+            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.UIAccess.r_account_del)
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+
+
             if (MoniterHelper.WindowConfirm("确认删除交易帐户?") == System.Windows.Forms.DialogResult.Yes)
             {
                 CoreService.TLClient.ReqDelAccount(acct.Account);
@@ -444,7 +498,7 @@ namespace TradingLib.MoniterControl
     }
 
     /// <summary>
-    /// 过来交易帐户
+    /// 过滤交易帐户
     /// </summary>
     public class FilterAccountCommand : AbstractMenuCommand
     {

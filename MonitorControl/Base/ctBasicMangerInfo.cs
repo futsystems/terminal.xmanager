@@ -18,12 +18,12 @@ namespace TradingLib.MoniterControl
         public ctBasicMangerInfo()
         {
             InitializeComponent();
-            this.btnChangePass.Click +=new EventHandler(btnChangePass_Click);
+            CoreService.EventCore.RegIEventHandler(this);
         }
 
         public void OnInit()
         {
-            InitAgentList();
+            InitManagerInfo();
         }
 
         public void OnDisposed()
@@ -31,7 +31,7 @@ namespace TradingLib.MoniterControl
             
         }
 
-        void InitAgentList()
+        void InitManagerInfo()
         {
             lbbasemgrfk.Text = CoreService.SiteInfo.BaseMGRFK.ToString();
             lblogin.Text = CoreService.SiteInfo.ContractorInfo.LoginID;
@@ -41,18 +41,6 @@ namespace TradingLib.MoniterControl
             lbrole.Text = Util.GetEnumDescription(CoreService.SiteInfo.Manager.Type);
         }
 
-        /// <summary>
-        /// 响应环境初始化完成事件 用于在环境初始化之前创立的空间获得对应的基础数据
-        /// </summary>
-        public void OnInitFinished()
-        {
-            InitAgentList();
-        }
 
-        private void btnChangePass_Click(object sender, EventArgs e)
-        {
-            fmChangePasswordAgent fm = new fmChangePasswordAgent();
-            fm.ShowDialog();
-        }
     }
 }

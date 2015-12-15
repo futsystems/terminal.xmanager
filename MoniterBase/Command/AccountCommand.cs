@@ -10,6 +10,25 @@ using ICSharpCode.Core;
 
 namespace TradingLib.MoniterBase.Command
 {
+
+    /// <summary>
+    /// 添加交易帐户
+    /// </summary>
+    public class AddFAccountCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.UIAccess.r_account_add)
+            {
+                MoniterHelper.WindowMessage("无权添加分账户");
+                return;
+            }
+            fmEditAccount fm = new fmEditAccount();
+            fm.ShowDialog();
+            fm.Close();
+        }
+    }
+
     /// <summary>
     /// 交易通道管理
     /// </summary>
@@ -17,6 +36,11 @@ namespace TradingLib.MoniterBase.Command
     {
         public override void Run()
         {
+            if (!CoreService.SiteInfo.Manager.IsRoot())
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
             fmConnectorManager fm = new fmConnectorManager();
             fm.ShowDialog();
             fm.Close();
@@ -27,6 +51,12 @@ namespace TradingLib.MoniterBase.Command
     {
         public override void Run()
         {
+            if (!CoreService.SiteInfo.Manager.IsRoot())
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+
             fmRouterGroup fm = new fmRouterGroup();
             fm.ShowDialog();
             fm.Close();
@@ -47,17 +77,6 @@ namespace TradingLib.MoniterBase.Command
         }
     }
 
-    /// <summary>
-    /// 添加交易帐户
-    /// </summary>
-    public class AddFAccountCommand : AbstractMenuCommand
-    {
-        public override void Run()
-        {
-            fmEditAccount fm = new fmEditAccount();
-            fm.ShowDialog();
-            fm.Close();
-        }
-    }
+
 
 }

@@ -50,6 +50,7 @@ namespace TradingLib.MoniterControl
                 pricetick.Enabled = false;
                 cbCurrency.Enabled = false;
                 cbDatafeed.Visible = false;
+                kryptonLabel4.Visible = false;
             }
         }
 

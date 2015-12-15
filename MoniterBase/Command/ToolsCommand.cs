@@ -17,6 +17,12 @@ namespace TradingLib.MoniterBase.Command
     {
         public override void Run()
         {
+            if (!CoreService.SiteInfo.Domain.Super)
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+
             fmSettleManager fm = new fmSettleManager();
             fm.ShowDialog();
             fm.Close();
@@ -27,10 +33,12 @@ namespace TradingLib.MoniterBase.Command
     {
         public override void Run()
         {
-            //if (MoniterHelper.WindowConfirm("确认转储所有已结算交易记录?") == System.Windows.Forms.DialogResult.Yes)
-            //{
-            //    CoreService.TLClient.ReqContribRequest("SettleCentre", "ReqDumpSettledData", "");
-            //}
+            if (!CoreService.SiteInfo.Domain.Super)
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+
             fmDataManager fm = new fmDataManager();
             fm.ShowDialog();
             fm.Close();

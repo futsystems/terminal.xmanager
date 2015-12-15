@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btnAddTemplate = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonGroupBox3 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.probability = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
@@ -55,7 +56,6 @@
             this.sidemargin = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.btnAddTemplate = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3)).BeginInit();
@@ -86,6 +86,14 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(519, 420);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // btnAddTemplate
+            // 
+            this.btnAddTemplate.Location = new System.Drawing.Point(70, 392);
+            this.btnAddTemplate.Name = "btnAddTemplate";
+            this.btnAddTemplate.Size = new System.Drawing.Size(90, 25);
+            this.btnAddTemplate.TabIndex = 20;
+            this.btnAddTemplate.Values.Text = "添加模板";
             // 
             // kryptonGroupBox3
             // 
@@ -316,14 +324,6 @@
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // btnAddTemplate
-            // 
-            this.btnAddTemplate.Location = new System.Drawing.Point(70, 392);
-            this.btnAddTemplate.Name = "btnAddTemplate";
-            this.btnAddTemplate.Size = new System.Drawing.Size(90, 25);
-            this.btnAddTemplate.TabIndex = 20;
-            this.btnAddTemplate.Values.Text = "添加模板";
             // 
             // fmExStrategy
             // 

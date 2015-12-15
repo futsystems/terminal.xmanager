@@ -41,7 +41,7 @@ namespace TradingLib.MoniterControl
                 ctRouterGroupList1.Enabled = false;
 
                 //如果代理不允许添加模拟帐号
-                if (!CoreService.SiteInfo.UIAccess.r_simacc)
+                //if (!CoreService.SiteInfo.UIAccess.r_simacc)
                 {
                     ctAccountType1.Enabled = false;
                     //如果没有实盘交易 则默认添加模拟帐户 且界面隐藏

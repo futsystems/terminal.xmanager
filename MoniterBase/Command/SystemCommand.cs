@@ -32,18 +32,7 @@ namespace TradingLib.MoniterBase.Command
 
 
 
-    /// <summary>
-    /// 底层交易接口管理
-    /// </summary>
-    public class InterfaceManagerCommand : AbstractMenuCommand
-    {
-        public override void Run()
-        {
-            fmInterface fm = new fmInterface();
-            fm.ShowDialog();
-            fm.Close();
-        }
-    }
+
 
     /// <summary>
     /// 默认通道管理
@@ -52,9 +41,19 @@ namespace TradingLib.MoniterBase.Command
     {
         public override void Run()
         {
-            fmDefaultConnector fm = new fmDefaultConnector();
-            fm.ShowDialog();
-            fm.Close();
+            //超级分区或者独立分区的root可执行
+            if ((CoreService.SiteInfo.Domain.Super || CoreService.SiteInfo.Domain.Dedicated) && CoreService.SiteInfo.Manager.IsRoot())
+            {
+                fmDefaultConnector fm = new fmDefaultConnector();
+                fm.ShowDialog();
+                fm.Close();
+            }
+            else
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+            
         }
     }
 
@@ -65,6 +64,12 @@ namespace TradingLib.MoniterBase.Command
     {
         public override void Run()
         {
+            //root可查看
+            if (!CoreService.SiteInfo.Manager.IsRoot())
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
             fmCoreStatus fm = new fmCoreStatus();
             fm.ShowDialog();
             fm.Close();
@@ -78,24 +83,38 @@ namespace TradingLib.MoniterBase.Command
     {
         public override void Run()
         {
+            //超级分区可查看
+            if (!CoreService.SiteInfo.Domain.Super)
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+
             fmTaskMoniter fm = new fmTaskMoniter();
             fm.ShowDialog();
             fm.Close();
         }
     }
 
-    /// <summary>
-    /// 托管分区管理
-    /// </summary>
-    public class HostedManagerCommand : AbstractMenuCommand
+    public class DomainInfoCommand : AbstractMenuCommand
     {
         public override void Run()
         {
-            fmDomain fm = new fmDomain();
+            //root可查看
+            if (!CoreService.SiteInfo.Manager.IsRoot())
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+
+            fmDomainInfo fm = new fmDomainInfo();
+            fm.SetDomain(CoreService.SiteInfo.Domain);
             fm.ShowDialog();
             fm.Close();
         }
     }
+
+
 
     /// <summary>
     /// 修改管理员密码
@@ -119,6 +138,45 @@ namespace TradingLib.MoniterBase.Command
                 Workbench workbench = (Workbench)this.Owner;
                 workbench.Close();
             }
+        }
+    }
+
+
+    /// <summary>
+    /// 底层交易接口管理
+    /// </summary>
+    public class InterfaceManagerCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            if (!CoreService.SiteInfo.Domain.Super)
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+
+            fmInterface fm = new fmInterface();
+            fm.ShowDialog();
+            fm.Close();
+        }
+    }
+
+    /// <summary>
+    /// 托管分区管理
+    /// </summary>
+    public class HostedManagerCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            if (!CoreService.SiteInfo.Domain.Super)
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+
+            fmDomain fm = new fmDomain();
+            fm.ShowDialog();
+            fm.Close();
         }
     }
 
