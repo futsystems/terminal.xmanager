@@ -217,14 +217,16 @@
 
     <!--超级管理员可见菜单-->
     <Condition name="DeployState" deploy="s">
-      <MenuItem id = "Separator1" type = "Separator"/>
-      <MenuItem id = "MarketTimeManagerCommand"
-              label = "交易时间段"
-              class = "TradingLib.MoniterBase.Command.MarketTimeManagerCommand"/>
+      <Condition name="RoleState" role="root" >
+        <MenuItem id = "Separator1" type = "Separator"/>
+        <MenuItem id = "MarketTimeManagerCommand"
+                label = "交易时间段"
+                class = "TradingLib.MoniterBase.Command.MarketTimeManagerCommand"/>
       
-      <MenuItem id = "ExchangeManagerCommand"
-              label = "交易所"
-              class = "TradingLib.MoniterBase.Command.ExchangeManagerCommand"/>
+        <MenuItem id = "ExchangeManagerCommand"
+                label = "交易所"
+                class = "TradingLib.MoniterBase.Command.ExchangeManagerCommand"/>
+      </Condition>
     </Condition>
     
   </Path>

@@ -33,7 +33,7 @@ namespace TradingLib.MoniterControl
                     continue;
                 }
                 ValueObject<int> vo1 = new ValueObject<int>();
-                vo1.Name = m.Name + " - " + m.mgr_fk;
+                vo1.Name = string.Format("{0:d2}-{1}", m.ID, m.Login);
                 vo1.Value = m.mgr_fk;
                 list.Add(vo1);
 

@@ -75,18 +75,18 @@ namespace TradingLib.MoniterControl
             kryptonGroupBox1.Visible = false;
             kryptonGroupBox2.Visible = false;
             kryptonGroupBox3.Visible = false;
-            btnSubmit.Location = new Point(215,109);
-            this.Height = 175;
+            btnSubmit.Location = new Point(215,135);
+            this.Height = 195;
         }
 
         void BigView()
         {
-            this.Height = 590;
+            this.Height = 610;
             lbNotice.Visible = true;
             kryptonGroupBox1.Visible = true;
             kryptonGroupBox2.Visible = true;
             kryptonGroupBox3.Visible = true;
-            btnSubmit.Location = new Point(215, 525);
+            btnSubmit.Location = new Point(215, 545);
         }
         void btnFillInfo_CheckedChanged(object sender, EventArgs e)
         {
@@ -171,17 +171,7 @@ namespace TradingLib.MoniterControl
             createion.RouterType = QSEnumOrderTransferType.SIM;
             createion.Profile = profile;
             createion.Currency = (CurrencyType)cbCurrency.SelectedValue;
-
-            //if (createion.Category == QSEnumAccountCategory.SUBACCOUNT)
-            //{
-            //    createion.RouterType = QSEnumOrderTransferType.LIVE;
-            //}
-            //else
-            //{
-            //    createion.RouterType = QSEnumOrderTransferType.SIM;
-            //}
-
-            
+            createion.BaseManagerID = ctAgentList1.CurrentAgentFK;
 
             //这里加入数据验证和检查
             if (_account == null)

@@ -35,7 +35,9 @@ namespace TradingLib.MoniterControl
         }
 
 
-        //属性获得和设置
+        /// <summary>
+        /// 是否允许选择
+        /// </summary>
         [DefaultValue(true)]
         bool _enableselected = true;
         public bool EnableSelected
@@ -66,15 +68,16 @@ namespace TradingLib.MoniterControl
             set
             {
                 _enableany = value;
-
                 if (CoreService.BasicInfoTracker.Initialized)
                 {
                     ReloadList();
                 }
-                //agent.Enabled = _enableselected;
             }
         }
 
+        /// <summary>
+        /// 是否默认选中当前管理员
+        /// </summary>
         [DefaultValue(true)]
         bool _defaultbasemgr = true;
         public bool EnableDefaultBaseMGR
@@ -97,17 +100,14 @@ namespace TradingLib.MoniterControl
         public ctAgentList()
         {
             InitializeComponent();
-
-            
             this.Load += new EventHandler(ctAgentList_Load);
+            CoreService.EventCore.RegIEventHandler(this);
         }
 
 
 
         void ctAgentList_Load(object sender, EventArgs e)
         {
-
-            CoreService.EventCore.RegIEventHandler(this);
             if (!_enableselected)
             {
                 agent.Enabled = false;
