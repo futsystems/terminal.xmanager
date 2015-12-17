@@ -36,6 +36,8 @@ namespace TradingLib.MoniterControl
         {
 
             CoreService.EventBasicInfo.OnManagerEvent += new Action<ManagerSetting>(GotManager);
+            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyManagerDelete", OnNotifyManagerDelete);
+
 
             //分区管理员可以查询柜员密码和设置柜员权限
             if (!CoreService.SiteInfo.Manager.IsRoot())
@@ -43,6 +45,7 @@ namespace TradingLib.MoniterControl
                 mgrgrid.ContextMenuStrip.Items[5].Visible = false;
                 mgrgrid.ContextMenuStrip.Items[6].Visible = false;
                 mgrgrid.ContextMenuStrip.Items[7].Visible = false;
+                mgrgrid.ContextMenuStrip.Items[8].Visible = false;
             }
 
             foreach (ManagerSetting m in CoreService.BasicInfoTracker.Managers)
@@ -150,7 +153,25 @@ namespace TradingLib.MoniterControl
 
         }
 
+        void DelManager_Click(object sender, EventArgs e)
+        {
+            ManagerSetting manger = CoreService.BasicInfoTracker.GetManager(CurrentManagerID);
+            if (manger == null)
+            {
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请选择管理员");
+                return;
+            }
+            if (manger.Type == QSEnumManagerType.ROOT)
+            {
+                MoniterHelper.WindowMessage("管理员不允许删除!");
+                return;
+            }
 
+            if (MoniterHelper.WindowConfirm(string.Format("确认删除管理员:{0}?", manger.Login)) == System.Windows.Forms.DialogResult.Yes)
+            {
+                CoreService.TLClient.ReqDelManager(manger.ID);
+            }
+        }
         /// <summary>
         /// 查询域RootPass
         /// </summary>
@@ -203,7 +224,31 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        public void GotManager(ManagerSetting manger)
+        void OnNotifyManagerDelete(string json)
+        {
+            ManagerSetting mgr = MoniterUtil.ParseJsonResponse<ManagerSetting>(json);
+            if (mgr != null)
+            {
+                OnManagerDelete(mgr);
+            }
+        }
+
+        void OnManagerDelete(ManagerSetting manager)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action<ManagerSetting>(OnManagerDelete), new object[] { manager });
+            }
+            else
+            {
+                int r = MangerIdx(manager.ID);
+                if (r > 0)
+                {
+                    gt.Rows[r][DELETE] = true;
+                }
+            }
+        }
+        void GotManager(ManagerSetting manger)
         {
             //如果获得的ManagerID和登入回报的ID一致 则表明该Manger是自己 在列表中不显示
             if (manger.ID.Equals(CoreService.SiteInfo.MGRID)) return;
@@ -230,8 +275,8 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][ACCNUMLIMIT] = manger.Type == QSEnumManagerType.AGENT ? manger.AccLimit.ToString() : "";
                     gt.Rows[i][AGENTLIMIT] = manger.Type == QSEnumManagerType.AGENT ? manger.AgentLimit.ToString() : "";
                     gt.Rows[i][MGRFK] = manger.mgr_fk;
-
                     gt.Rows[i][STATUS] = getStatusImage(manger.Active);
+                    gt.Rows[i][DELETE] = false;
                     mgridmap.Add(manger.ID, i);//记录全局ID和table序号的映射
 
                 }
@@ -260,16 +305,16 @@ namespace TradingLib.MoniterControl
         const string ID = "全局ID";
         const string LOGIN = "登入名";
         const string MGRTYPE = "MGRTYPE";
-        const string MGRTYPESTR = "管理员类型";
+        const string MGRTYPESTR = "柜员类型";
         const string NAME = "姓名";
         const string MOBILE = "手机";
         const string QQ = "QQ号码";
         const string ACCNUMLIMIT = "帐户数量";
         const string AGENTLIMIT = "代理数量";
 
-        const string MGRFK = "管理域ID";
+        const string MGRFK = "域ID";
         const string STATUS = "状态";
-
+        const string DELETE = "删除";
         
 
         DataTable gt = new DataTable();
@@ -305,6 +350,7 @@ namespace TradingLib.MoniterControl
             grid.ContextMenuStrip.Items.Add("激活管理员", null, new EventHandler(ActiveManager_Click));
             grid.ContextMenuStrip.Items.Add("冻结管理员", null, new EventHandler(InactiveManager_Click));
             grid.ContextMenuStrip.Items.Add(new System.Windows.Forms.ToolStripSeparator());
+            grid.ContextMenuStrip.Items.Add("删除管理员", null, new EventHandler(DelManager_Click));
             grid.ContextMenuStrip.Items.Add("查看柜员密码", null, new EventHandler(QryManagerPass_Click));
             grid.ContextMenuStrip.Items.Add("设置权限", null, new EventHandler(SetPermission_Click));
 
@@ -324,6 +370,7 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(AGENTLIMIT);
             gt.Columns.Add(MGRFK);//
             gt.Columns.Add(STATUS,typeof(Image));//
+            gt.Columns.Add(DELETE);
         }
 
         /// <summary>
@@ -338,9 +385,12 @@ namespace TradingLib.MoniterControl
             //datasource.Filter=""
             grid.DataSource = datasource;
             datasource.Sort = ID + " ASC";
+            datasource.Filter = DELETE + " ='false'";
 
             grid.Columns[MGRTYPE].Visible = false;
             grid.Columns[ID].Visible = false;
+            grid.Columns[DELETE].Visible = false;
+            grid.Columns[QQ].Visible = false;
         }
 
 

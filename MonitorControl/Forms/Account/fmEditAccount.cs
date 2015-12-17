@@ -142,7 +142,7 @@ namespace TradingLib.MoniterControl
             account.Enabled = false;
             cbAccountType.Enabled = false;
             cbCurrency.Enabled = false;
-
+            ctAgentList1.Enabled = false;
             //设置可以修改扩展信息
             btnFillInfo.Checked = true;
             cbCurrency.SelectedValue = acc.Currency;

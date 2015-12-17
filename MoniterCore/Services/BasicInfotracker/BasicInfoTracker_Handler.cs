@@ -283,12 +283,28 @@ namespace TradingLib.MoniterCore
             }
         }
 
-        void OnNotifyManager(string json)
+        void OnNotifyManagerUpdate(string json)
         {
             ManagerSetting mgr = MoniterUtil.ParseJsonResponse<ManagerSetting>(json);
             if (mgr != null)
             {
                 this.GotManager(mgr);
+            }
+        }
+
+        /// <summary>
+        /// 响应管理员删除回报 删除本地内存中的管理员数据
+        /// </summary>
+        /// <param name="json"></param>
+        void OnNotifyManagerDelete(string json)
+        {
+            ManagerSetting mgr = MoniterUtil.ParseJsonResponse<ManagerSetting>(json);
+            if (mgr != null)
+            {
+                if (managermap.Keys.Contains(mgr.ID))
+                {
+                    managermap.Remove(mgr.ID);
+                }
             }
         }
         #region 路由组

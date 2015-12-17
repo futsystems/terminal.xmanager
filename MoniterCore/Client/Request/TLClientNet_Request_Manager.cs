@@ -28,6 +28,11 @@ namespace TradingLib.MoniterCore
             this.ReqContribRequest("MgrExchServer", "InactiveManager", mgrid.ToString());
         }
 
+
+        public void ReqDelManager(int mgrid)
+        {
+            this.ReqContribRequest("MgrExchServer", "DeleteManager", mgrid.ToString());
+        }
         /// <summary>
         /// 修改管理员密码
         /// </summary>

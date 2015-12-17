@@ -25,7 +25,8 @@ namespace TradingLib.MoniterCore
 
             CoreService.EventContrib.RegisterCallback("RiskCentre", "QryRuleSet", OnQryRuleSet);
             CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryManager", OnQryManager);
-            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyManagerUpdate",OnNotifyManager);
+            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyManagerUpdate",OnNotifyManagerUpdate);
+            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyManagerDelete", OnNotifyManagerDelete);
 
             CoreService.EventContrib.RegisterCallback("ConnectorManager", "QryRouterGroup", OnQryRouterGroup);
             CoreService.EventContrib.RegisterNotifyCallback("ConnectorManager", "NotifyRouterGroup", OnNotifyRouterGroup);

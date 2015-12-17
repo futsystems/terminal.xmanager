@@ -56,7 +56,7 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(753, 98);
+            this.kryptonPanel1.Size = new System.Drawing.Size(753, 77);
             this.kryptonPanel1.TabIndex = 1;
             // 
             // kryptonGroupBox1
@@ -79,13 +79,13 @@
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel10);
             this.kryptonGroupBox1.Panel.Controls.Add(this.lbbasemgrfk);
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel12);
-            this.kryptonGroupBox1.Size = new System.Drawing.Size(753, 98);
+            this.kryptonGroupBox1.Size = new System.Drawing.Size(753, 77);
             this.kryptonGroupBox1.TabIndex = 1;
             this.kryptonGroupBox1.Values.Heading = "当前柜员信息";
             // 
             // lbqq
             // 
-            this.lbqq.Location = new System.Drawing.Point(403, 52);
+            this.lbqq.Location = new System.Drawing.Point(610, 28);
             this.lbqq.Name = "lbqq";
             this.lbqq.Size = new System.Drawing.Size(20, 20);
             this.lbqq.TabIndex = 11;
@@ -93,7 +93,7 @@
             // 
             // lbmobile
             // 
-            this.lbmobile.Location = new System.Drawing.Point(254, 52);
+            this.lbmobile.Location = new System.Drawing.Point(474, 28);
             this.lbmobile.Name = "lbmobile";
             this.lbmobile.Size = new System.Drawing.Size(20, 20);
             this.lbmobile.TabIndex = 10;
@@ -101,7 +101,7 @@
             // 
             // lbrole
             // 
-            this.lbrole.Location = new System.Drawing.Point(254, 28);
+            this.lbrole.Location = new System.Drawing.Point(223, 28);
             this.lbrole.Name = "lbrole";
             this.lbrole.Size = new System.Drawing.Size(20, 20);
             this.lbrole.TabIndex = 9;
@@ -109,7 +109,7 @@
             // 
             // lbname
             // 
-            this.lbname.Location = new System.Drawing.Point(84, 52);
+            this.lbname.Location = new System.Drawing.Point(349, 28);
             this.lbname.Name = "lbname";
             this.lbname.Size = new System.Drawing.Size(20, 20);
             this.lbname.TabIndex = 8;
@@ -125,7 +125,7 @@
             // 
             // kryptonLabel6
             // 
-            this.kryptonLabel6.Location = new System.Drawing.Point(364, 52);
+            this.kryptonLabel6.Location = new System.Drawing.Point(571, 28);
             this.kryptonLabel6.Name = "kryptonLabel6";
             this.kryptonLabel6.Size = new System.Drawing.Size(32, 20);
             this.kryptonLabel6.TabIndex = 6;
@@ -133,7 +133,7 @@
             // 
             // kryptonLabel7
             // 
-            this.kryptonLabel7.Location = new System.Drawing.Point(207, 52);
+            this.kryptonLabel7.Location = new System.Drawing.Point(427, 28);
             this.kryptonLabel7.Name = "kryptonLabel7";
             this.kryptonLabel7.Size = new System.Drawing.Size(38, 20);
             this.kryptonLabel7.TabIndex = 5;
@@ -141,7 +141,7 @@
             // 
             // kryptonLabel8
             // 
-            this.kryptonLabel8.Location = new System.Drawing.Point(37, 52);
+            this.kryptonLabel8.Location = new System.Drawing.Point(302, 28);
             this.kryptonLabel8.Name = "kryptonLabel8";
             this.kryptonLabel8.Size = new System.Drawing.Size(38, 20);
             this.kryptonLabel8.TabIndex = 4;
@@ -149,7 +149,7 @@
             // 
             // kryptonLabel9
             // 
-            this.kryptonLabel9.Location = new System.Drawing.Point(207, 28);
+            this.kryptonLabel9.Location = new System.Drawing.Point(176, 28);
             this.kryptonLabel9.Name = "kryptonLabel9";
             this.kryptonLabel9.Size = new System.Drawing.Size(38, 20);
             this.kryptonLabel9.TabIndex = 3;
@@ -186,7 +186,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.kryptonPanel1);
             this.Name = "ctBasicMangerInfo";
-            this.Size = new System.Drawing.Size(753, 98);
+            this.Size = new System.Drawing.Size(753, 77);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).EndInit();

@@ -387,8 +387,8 @@ namespace TradingLib.MoniterControl
             if (MoniterHelper.WindowConfirm("确认删除交易帐户?") == System.Windows.Forms.DialogResult.Yes)
             {
                 CoreService.TLClient.ReqDelAccount(acct.Account);
-                acct.Deleted = true;//修改删除标识
-                accountMoniter.GotAccountChanged(acct);
+                //acct.Deleted = true;//修改删除标识
+                //accountMoniter.GotAccountChanged(acct);
                 
                 //RefreshAccountQuery();//刷新表格
 

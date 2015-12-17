@@ -40,11 +40,11 @@ namespace TradingLib.MoniterBase
                 //独立部署
                 if (CoreService.SiteInfo.Domain.Dedicated)
                 {
-                    this.Text = string.Format("{0}(独立部署)-{1}", GetProductName(CoreService.SiteInfo.ProductType), CoreService.SiteInfo.Domain.Name);
+                    this.Text = string.Format("{0}(独立部署)-{1} {2}-{3}", GetProductName(CoreService.SiteInfo.ProductType), CoreService.SiteInfo.Domain.Name,CoreService.SiteInfo.Manager.Login, Util.GetEnumDescription(CoreService.SiteInfo.Manager.Type));
                 }
                 else
                 {
-                    this.Text = string.Format("{0}(云平台)-{1}【{2}】", GetProductName(CoreService.SiteInfo.ProductType), CoreService.SiteInfo.Domain.Name, CoreService.SiteInfo.Domain.IsProduction ? "运营" : "测试");
+                    this.Text = string.Format("{0}(云平台)-{1} 【{2}】 {3}-{4}", GetProductName(CoreService.SiteInfo.ProductType), CoreService.SiteInfo.Domain.Name, CoreService.SiteInfo.Domain.IsProduction ? "运营" : "测试", CoreService.SiteInfo.Manager.Login, Util.GetEnumDescription(CoreService.SiteInfo.Manager.Type));
                 }
             }
             else
