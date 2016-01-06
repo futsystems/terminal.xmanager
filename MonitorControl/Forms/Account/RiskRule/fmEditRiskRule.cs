@@ -197,6 +197,14 @@ namespace TradingLib.MoniterControl
                     fm.ShowDialog();
                     fm.Close();
                 }
+                else if (item.ClassName.Equals("RuleSet2.Account.RSMaxChange"))
+                {
+                    fmAccountRule_MaxChange fm = new fmAccountRule_MaxChange();
+                    fm.Account = _account;
+                    fm.RuleClass = item;
+                    fm.ShowDialog();
+                    fm.Close();
+                }
             }
         }
 

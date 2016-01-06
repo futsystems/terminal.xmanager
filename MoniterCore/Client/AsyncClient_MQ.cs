@@ -346,7 +346,7 @@ namespace TradingLib.MoniterCore
                         {
                             string symbol = p[0];
                             string tickcontent = p[1];
-
+                            
                             handleMessage(MessageTypes.TICKNOTIFY, tickcontent);
                         }
                         else if (p[0] == "TICKHEARTBEAT")

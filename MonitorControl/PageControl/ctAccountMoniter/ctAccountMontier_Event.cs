@@ -128,7 +128,7 @@ namespace TradingLib.MoniterControl
 
             if (DateTime.Now.Subtract(_lastresumetime).TotalSeconds <= 1)
             {
-                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请不要频繁请求帐户日内数据");
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请稍后再请求帐户日内数据");
                 return;
             }
             _lastresumetime = DateTime.Now;

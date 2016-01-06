@@ -84,7 +84,7 @@ namespace TradingLib.MoniterControl
             else
             {
                 //只处理期货品种
-                if (sec.Type != SecurityType.FUT) return;
+                //if (sec.Type != SecurityType.FUT) return;
 
                 int r = SecurityFamilyIdx(sec.ID);
                 if (r == -1)

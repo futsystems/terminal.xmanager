@@ -20,7 +20,7 @@ namespace TradingLib.MoniterControl
             InitializeComponent();
 
             //MoniterHelper.AdapterToIDataSource(currency).BindDataSource(MoniterHelper.GetEnumValueObjects<CurrencyType>());
-            //MoniterHelper.AdapterToIDataSource(securitytype).BindDataSource(MoniterHelper.GetEnumValueObjects<SecurityType>());
+            MoniterHelper.AdapterToIDataSource(cbsectype).BindDataSource(MoniterHelper.GetEnumValueObjects<SecurityType>());
             MoniterHelper.AdapterToIDataSource(exchange).BindDataSource(CoreService.BasicInfoTracker.GetExchangeCombList());
             MoniterHelper.AdapterToIDataSource(underlay).BindDataSource(CoreService.BasicInfoTracker.GetSecurityCombList(true));
             MoniterHelper.AdapterToIDataSource(markettime).BindDataSource(CoreService.BasicInfoTracker.GetMarketTimeCombList());
@@ -28,6 +28,7 @@ namespace TradingLib.MoniterControl
             MoniterHelper.AdapterToIDataSource(cbDatafeed).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumDataFeedTypes>());
             
             cbCurrency.SelectedIndex = 0;
+            cbsectype.SelectedIndex = 1;
             this.Load += new EventHandler(fmSecEdit_Load);
             
         }
@@ -46,7 +47,7 @@ namespace TradingLib.MoniterControl
                 name.Enabled = false;
                 exchange.Enabled = false;
                 markettime.Enabled = false;
-                //multiple.Enabled = false;
+                cbsectype.Enabled = false;
                 pricetick.Enabled = false;
                 cbCurrency.Enabled = false;
                 cbDatafeed.Visible = false;
@@ -88,6 +89,7 @@ namespace TradingLib.MoniterControl
                 markettime.SelectedValue = _sec.mkttime_fk;
                 tradeable.Checked = _sec.Tradeable;
                 cbDatafeed.SelectedValue = _sec.DataFeed;
+                cbsectype.SelectedValue = _sec.Type;
             }
         }
 
@@ -100,7 +102,7 @@ namespace TradingLib.MoniterControl
                 _sec.Code = code.Text;
                 _sec.Name = name.Text;
                 _sec.Currency = (CurrencyType)cbCurrency.SelectedValue;
-                _sec.Type = SecurityType.FUT;// (SecurityType)securitytype.SelectedValue;
+                _sec.Type =(SecurityType)cbsectype.SelectedValue;
 
                 _sec.Multiple = (int)multiple.Value;
                 _sec.PriceTick = pricetick.Value;
@@ -124,7 +126,7 @@ namespace TradingLib.MoniterControl
                 target.Code = code.Text;
                 target.Name = name.Text;
                 target.Currency = (CurrencyType)cbCurrency.SelectedValue;
-                target.Type = SecurityType.FUT;// (SecurityType)securitytype.SelectedValue;
+                target.Type = (SecurityType)cbsectype.SelectedValue;
 
                 target.Multiple = (int)multiple.Value;
                 target.PriceTick = pricetick.Value;

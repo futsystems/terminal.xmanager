@@ -81,6 +81,7 @@ namespace TradingLib.MoniterControl
                 MoniterHelper.AdapterToIDataSource(cbsecurity).BindDataSource(CoreService.BasicInfoTracker.GetSecurityCombListViaExchange(exid));
                 cbsecurity.SelectedValue = _symbol.SecurityFamily != null ? (_symbol.SecurityFamily as SecurityFamilyImpl).ID : 0;
                 cbsecurity.Enabled = false;
+
                 symbol.Text = _symbol.Symbol;
                 
                 symbol.Enabled = false;
@@ -299,15 +300,16 @@ namespace TradingLib.MoniterControl
                 if (sec == null) return;
                 switch (sec.Type)
                 {
+                    case SecurityType.IDX:
+                        cbexpiremonth.Enabled = false;
+                        expiredate.Enabled = false;
+                        break;
+
                     case SecurityType.OPT:
                         cboptionside.SelectedValue = QSEnumOptionSide.CALL;
                         cboptionside.Enabled = true;
                         strike.Value = 0;
                         strike.Enabled = true;
-                        break;
-                    case SecurityType.INNOV://异化合约
-                        //cbulsymbol.Enabled = true;
-                        //cblottolevel.Enabled = true;
                         break;
                     default:
                         cboptionside.SelectedValue = QSEnumOptionSide.NULL;
