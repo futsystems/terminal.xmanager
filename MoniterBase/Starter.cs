@@ -18,12 +18,12 @@ namespace TradingLib.MoniterBase
     public class Starter : SplashScreenApplicationContext
     {
         LoginForm _loginform;
-        Workbench _workbench;
-        //System.Windows.Forms.Form mainfm;
-        //用于调用升级逻辑,然后再显示启动窗口与主窗口
+        /// <summary>
+        /// 检查自动更新
+        /// </summary>
+        /// <returns></returns>
         protected override bool OnUpdate()
         {
-            //LogService.Info("check update information.............");
             //没有更新我们返回false 程序正常运行
             Updater update = new Updater();
             if (update.Detect())
@@ -38,8 +38,12 @@ namespace TradingLib.MoniterBase
 
         }
 
+        /// <summary>
+        /// 创建登入窗口
+        /// </summary>
         protected override void OnCreateSplashScreenForm()
         {
+            //初始化全局服务
             InitCSharpCode();
 
             _loginform = new LoginForm(this);
@@ -52,17 +56,25 @@ namespace TradingLib.MoniterBase
         {
             
         }
+
+        /// <summary>
+        /// 创建主窗体
+        /// </summary>
         protected override void OnCreateMainForm()
         {
             //在线程中创建主窗体,防止登入界面卡顿
             new Thread(delegate()
             {
-                InitWorkbench();
-                //_workbench = new Workbench();
+                
+                LoggingService.Info("Initializing Workbench...");
+                // Workbench is our class from the base project, this method creates an instance
+                // of the main form.
+                Workbench.InitializeWorkbench();
                 this.PrimaryForm = Workbench.Instance;
 
                 //主窗体初始化完毕后 开启登入按钮
                 _loginform.EnableLogin();
+
             }).Start();
         }
 
@@ -127,18 +139,9 @@ namespace TradingLib.MoniterBase
             // creates the AddIn tree. It also automatically runs the commands in
             // "/Workspace/Autostart"
             coreStartup.RunInitialization();
-        }
-        void InitWorkbench()
-        {
 
-
-            LoggingService.Info("Initializing Workbench...");
-            // Workbench is our class from the base project, this method creates an instance
-            // of the main form.
-            //Workbench.InitializeWorkbench();
-            Workbench.InitializeWorkbench();
-            
         }
+
         protected override void SetSeconds()
         {
             this.SecondsShow = 60 * 60;//启动窗体显示的时间(秒)

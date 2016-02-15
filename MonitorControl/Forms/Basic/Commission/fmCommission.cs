@@ -109,6 +109,7 @@ namespace TradingLib.MoniterControl
             
         }
 
+        bool _onqry = false;
         void tempateTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
@@ -120,8 +121,16 @@ namespace TradingLib.MoniterControl
                     CommissionTemplateSetting t = e.Node.Tag as CommissionTemplateSetting;
                     if (t != null)
                     {
-                        ClearItem();
-                        CoreService.TLClient.ReqQryCommissionTemplateItem(t.ID);
+                        if (!_onqry)
+                        {
+                            _onqry = true;
+                            ClearItem();
+                            CoreService.TLClient.ReqQryCommissionTemplateItem(t.ID);
+                        }
+                        else
+                        {
+                            MoniterHelper.WindowMessage("正在查询中 请稍后");
+                        }
                     }
                 }
             }
@@ -308,6 +317,10 @@ namespace TradingLib.MoniterControl
             if (obj != null)
             {
                 GotCommissionTemplateItem(obj);
+            }
+            if (islast)
+            {
+                _onqry = false;
             }
         }
 

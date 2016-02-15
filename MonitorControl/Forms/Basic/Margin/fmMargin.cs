@@ -73,7 +73,7 @@ namespace TradingLib.MoniterControl
             fmTemplateEdit fm = new fmTemplateEdit(TemplateEditType.Margin);
             fm.ShowDialog();
         }
-
+        bool _onqry = false;
         void templateTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
@@ -85,8 +85,16 @@ namespace TradingLib.MoniterControl
                     MarginTemplateSetting t = e.Node.Tag as MarginTemplateSetting;
                     if (t != null)
                     {
-                        ClearItem();
-                        CoreService.TLClient.ReqQryMarginTemplateItem(t.ID);
+                        if (!_onqry)
+                        {
+                            _onqry = true;
+                            ClearItem();
+                            CoreService.TLClient.ReqQryMarginTemplateItem(t.ID);
+                        }
+                        else
+                        {
+                            MoniterHelper.WindowMessage("正在查询中 请稍后");
+                        }
                     }
                 }
             }
@@ -263,6 +271,10 @@ namespace TradingLib.MoniterControl
             if (obj != null)
             {
                     GotCommissionTemplateItem(obj);
+            }
+            if(islast)
+            {
+               _onqry = false;
             }
         }
 

@@ -65,10 +65,15 @@ namespace TradingLib.MoniterCore
         {
             if (Account.Account != f.Account) return;
             LogService.Debug("got trade notify:" + f.GetTradeDetail());
-            OrderTracker.GotFill(f);
-            PositionTracker.GotFill(f);
-            TradeTracker.Add(f);
-            CoreService.EventIndicator.FireFill(f);
+            bool accept = false;
+            PositionTracker.GotFill(f, out accept);
+            if (accept)
+            {
+                OrderTracker.GotFill(f);
+
+                TradeTracker.Add(f);
+                CoreService.EventIndicator.FireFill(f);
+            }
         }
 
         public void GotTick(Tick k)

@@ -23,26 +23,27 @@ namespace TradingLib.MoniterBase
         Starter mStart;
         public LoginForm(Starter start)
         {
+            //允许线程间调用控件属性 否则无法本地调试
             CheckForIllegalCrossThreadCalls = false;
             logger.Debug("loginform init....");
-
-            //列举所有支持的时区列表
-
-            //System.Collections.ObjectModel.ReadOnlyCollection<TimeZoneInfo> lst = TimeZoneInfo.GetSystemTimeZones();
-            //foreach (TimeZoneInfo tzi in lst)
-            //{
-            //    logger.Debug(tzi.Id+" "+tzi.DisplayName);
-            //}
-
 
             InitializeComponent();
             
             ConfigFile config = ConfigFile.GetConfigFile("moniter.cfg");
             mStart = start;
+
+            //初始状态设置
+            this.AcceptButton = btnLogin;
             btnLogin.Enabled = false;
 
-            //CoreService.BasicInfoTracker.Symbols.
+            //设置登入窗口图片
+            System.Drawing.Bitmap img = ResourceService.GetBitmap("LoginBanner_JR");
+            if(img!= null)
+            {
+                imageheader.Image = img;
+            }
 
+            //加载服务端IP地址
             string[] addresses = config["Servers"].AsString().Split(',');
             foreach (string s in addresses)
             {
@@ -51,6 +52,7 @@ namespace TradingLib.MoniterBase
                 servers.Items.Add(s);
             }
             servers.SelectedIndex = 0;
+            //如果只有一个服务端地址 则影藏地址选择列表
             if (addresses.Length == 1)
             {
                 servers.Visible = false;
@@ -72,6 +74,8 @@ namespace TradingLib.MoniterBase
                 password.Text = PropertyService.Get<string>("password", "");
             }
 
+            
+
             InitBW();
             
             WireEvent();
@@ -89,15 +93,52 @@ namespace TradingLib.MoniterBase
             CoreService.EventCore.OnInitializeStatusEvent += new Action<string>(EventCore_OnInitializeStatusEvent);
             CoreService.EventCore.OnInitializedEvent += new VoidDelegate(EventCore_OnInitializedEvent);
 
-            this.AcceptButton = btnLogin;
+            
         }
 
+        #region 事件响应
+        /// <summary>
+        /// 退出按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnExit_LinkClicked(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
+        }
+
+        /// <summary>
+        /// 登入按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            SaveLoginConfig();
+            new Thread(delegate()
+            {
+                Connect();
+            }).Start();
+            
+
+        }
+
+        /// <summary>
+        /// 窗体关闭
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveLoginConfig();
             System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
+        #endregion
 
+
+        /// <summary>
+        /// 按设置保存用户名和密码
+        /// </summary>
         void SaveLoginConfig()
         {
             bool rbuser = ckremberuser.Checked;
@@ -110,9 +151,10 @@ namespace TradingLib.MoniterBase
 
         }
 
-
-
-
+        /// <summary>
+        /// 显示登入过程信息
+        /// </summary>
+        /// <param name="msg"></param>
         public void ShowLoginStatus(string msg)
         {
             if (InvokeRequired)
@@ -133,18 +175,22 @@ namespace TradingLib.MoniterBase
 
         bool _connectstart = false;
         DateTime _connecttime = DateTime.Now;
+
         /// <summary>
         /// 执行连接请求
         /// 连接动作
         /// </summary>
         void Connect()
         {
-            string address = servers.SelectedItem.ToString();
+            //禁止登入按钮操作
+            this.btnLogin.Enabled = false;
 
+            string address = servers.SelectedItem.ToString();
             //登入过程开始
             _connectstart = true;
             _connecttime = DateTime.Now;
 
+            //初始化Client并启动
             CoreService.InitClient(address, 6670);
             CoreService.TLClient.Start();
         }
@@ -152,13 +198,15 @@ namespace TradingLib.MoniterBase
 
         bool _loginstart = false;
         DateTime _logintime = DateTime.Now;
+
         /// <summary>
         /// 响应连接事件 请求登入
         /// </summary>
         void EventCore_OnConnectedEvent()
         {
-            _connected = true;
             ShowLoginStatus("服务端连接成功,请求登入");
+
+            _connected = true;
 
             _loginstart = true;
             _logintime = DateTime.Now;
@@ -188,6 +236,7 @@ namespace TradingLib.MoniterBase
             {
                 ShowLoginStatus("登入失败:" + response.RspInfo.ErrorMessage);
                 _loggedin = false;
+                //重置
                 Reset();
             }
         }
@@ -221,27 +270,6 @@ namespace TradingLib.MoniterBase
             _loggedin = false;
         }
 
-
-        
-
-        private void btnExit_LinkClicked(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.GetCurrentProcess().Kill();
-        }
-
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-            
-            logger.Info("登入-------------------");
-            SaveLoginConfig();
-            new Thread(delegate()
-            {
-                Connect();
-            }).Start();
-            this.btnLogin.Enabled = false;
-           
-        }
-        
 
         
         public void EnableLogin()
@@ -278,6 +306,7 @@ namespace TradingLib.MoniterBase
                 //lbLoginStatus.Text = "请登入";
             }).Start();
         }
+
         #region 线程内处理消息并触发显示
         /// <summary>
         /// 登入窗口建立线程循环检查全局变量
@@ -285,7 +314,6 @@ namespace TradingLib.MoniterBase
         /// 如果登入窗口的线程检测到该信息,则执行弹窗提醒或者是进入主界面
         /// </summary>
         private System.ComponentModel.BackgroundWorker bg;
-        //private PopMessage pmsg = new PopMessage();
         private void bgDoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             while (true)
@@ -333,12 +361,6 @@ namespace TradingLib.MoniterBase
             //bg.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(bg_ProgressChanged);
             bg.RunWorkerAsync();
         }
-        //显示服务端返回过来的信息窗口
-        //private void bg_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
-        //{
-        //    //MessageBox.Show(Globals.LoginStatus.InitMessage);
-        //    //fmConfirm.Show(Globals.LoginStatus.InitMessage);
-        //}
         #endregion
 
 

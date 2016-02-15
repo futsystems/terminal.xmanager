@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <Resources Extension=".resources">
   <Resource Name="Icons.16x16.DeleteIcon" Type="System.Drawing.Bitmap" FileName="" Value="" />
+  <Resource Name="Icons.AccountAdd" Type="System.Drawing.Bitmap" FileName="" Value="" />
   <Resource Name="Icons.Cut" Type="System.Drawing.Bitmap" FileName="" Value="" />
   <Resource Name="Icons.New" Type="System.Drawing.Bitmap" FileName="" Value="" />
   <Resource Name="Icons.Save" Type="System.Drawing.Bitmap" FileName="" Value="" />
@@ -17,5 +18,5 @@
   <Resource Name="Icons.ViewReset" Type="System.Drawing.Bitmap" FileName="" Value="" />
   <Resource Name="Icons.ViewQuote" Type="System.Drawing.Bitmap" FileName="" Value="" />
   <Resource Name="Icons.Preview" Type="System.Drawing.Bitmap" FileName="" Value="" />
-  <Resource Name="Icons.AccountAdd" Type="System.Drawing.Bitmap" FileName="D:\worktable\Futs.Moniter\XConsole\Resource\AccountAdd_02_24.png" Value="" />
+  <Resource Name="LoginBanner_JR" Type="System.Drawing.Bitmap" FileName="D:\worktable\Futs.Moniter\XConsole\Resource\images\LoginBanner_JR_S.jpg" Value="" />
 </Resources>
