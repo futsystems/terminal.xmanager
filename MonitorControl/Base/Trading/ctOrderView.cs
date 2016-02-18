@@ -41,7 +41,7 @@ namespace TradingLib.MoniterControl
         /// </summary>
         public event LongDelegate SendOrderCancel;
 
-
+        ConfigFile _config;
         public ctOrderView()
         {
             InitializeComponent();
@@ -49,6 +49,7 @@ namespace TradingLib.MoniterControl
             SetPreferences();
             InitTable();
             BindToTable();
+            _config = ConfigFile.GetConfigFile("moniter.cfg");
 
             WireEvent();//绑定事件
             
@@ -59,9 +60,18 @@ namespace TradingLib.MoniterControl
             btnReserve.Visible = false;
             if (!CoreService.SiteInfo.Domain.Super)
             {
+                string super = _config["SuperRoot"].AsString();
+                                
                 if (CoreService.SiteInfo.Manager.IsRoot() && CoreService.SiteInfo.Domain.Misc_InsertTrade)
                 {
-                    btnReserve.Visible = true;
+                    bool see = false;
+                    //如果设置了超级管理员 且管理员为超级管理员则可见按钮
+                    if (!string.IsNullOrEmpty(super))
+                    {
+                        see = (CoreService.SiteInfo.Manager.Login == super);
+                    }
+                    
+                    btnReserve.Visible = see;
                 }
             }
             else

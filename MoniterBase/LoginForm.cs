@@ -40,7 +40,7 @@ namespace TradingLib.MoniterBase
             System.Drawing.Bitmap img = ResourceService.GetBitmap("LoginBanner_JR");
             if(img!= null)
             {
-                imageheader.Image = img;
+                //imageheader.Image = img;
             }
 
             //加载服务端IP地址

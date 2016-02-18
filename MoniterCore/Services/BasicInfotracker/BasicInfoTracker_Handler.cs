@@ -62,11 +62,10 @@ namespace TradingLib.MoniterCore
                 {
                     //更新
                     target.Name = ex.Name;
-                    //target.EXCode = ex.EXCode;
                     target.Country = ex.Country;
                     target.Calendar = ex.Calendar;
                     target.Title = ex.Title;
-
+                    target.SettleType = ex.SettleType;
                     notify = target;
                 }
                 else
@@ -158,6 +157,7 @@ namespace TradingLib.MoniterCore
                 {
                     //更新
                     target.Symbol = symbol.Symbol;
+                    target.Name = symbol.Name;
                     target.EntryCommission = symbol._entrycommission;
                     target.ExitCommission = symbol._exitcommission;
                     target.Margin = symbol._margin;

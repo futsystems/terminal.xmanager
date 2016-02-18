@@ -136,21 +136,21 @@ namespace TradingLib.MoniterCore
             }
             foreach (Exchange ex in info.Exchanges)
             {
-                if (ex.EXCode.Equals("INNOVEX"))
-                {
-                    //if (!Globals.UIAccess.sectype_lotto)
-                        continue;
-                }
-                if (ex.EXCode.Equals("SSE"))
-                {
-                    //if (!Globals.UIAccess.sectype_stock)
-                        continue;
-                }
-                if (ex.EXCode.Equals("SZSE"))
-                {
-                    //if (!Globals.UIAccess.sectype_stock)
-                        continue;
-                }
+                //if (ex.EXCode.Equals("INNOVEX"))
+                //{
+                //    //if (!Globals.UIAccess.sectype_lotto)
+                //        continue;
+                //}
+                //if (ex.EXCode.Equals("SSE"))
+                //{
+                //    //if (!Globals.UIAccess.sectype_stock)
+                //        continue;
+                //}
+                //if (ex.EXCode.Equals("SZSE"))
+                //{
+                //    //if (!Globals.UIAccess.sectype_stock)
+                //        continue;
+                //}
                 ValueObject<int> vo = new ValueObject<int>();
                 vo.Name = ex.Name;
                 vo.Value = ex.ID;

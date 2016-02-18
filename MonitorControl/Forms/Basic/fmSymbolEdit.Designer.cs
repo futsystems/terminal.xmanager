@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.cbSymbolType = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.expiredate = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -54,10 +56,12 @@
             this.cbexchange = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.symbol = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.cbSymbolType = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.symbol_input = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.lbSymbolName = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.symName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbSymbolType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gp_option)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gp_option.Panel)).BeginInit();
             this.gp_option.Panel.SuspendLayout();
@@ -70,11 +74,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.cbexpiremonth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbsecurity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbexchange)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbSymbolType)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.symName);
+            this.kryptonPanel1.Controls.Add(this.lbSymbolName);
+            this.kryptonPanel1.Controls.Add(this.symbol_input);
             this.kryptonPanel1.Controls.Add(this.cbSymbolType);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel10);
             this.kryptonPanel1.Controls.Add(this.expiredate);
@@ -95,6 +101,22 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(362, 555);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // cbSymbolType
+            // 
+            this.cbSymbolType.DropDownWidth = 187;
+            this.cbSymbolType.Location = new System.Drawing.Point(115, 152);
+            this.cbSymbolType.Name = "cbSymbolType";
+            this.cbSymbolType.Size = new System.Drawing.Size(137, 21);
+            this.cbSymbolType.TabIndex = 15;
+            // 
+            // kryptonLabel10
+            // 
+            this.kryptonLabel10.Location = new System.Drawing.Point(63, 153);
+            this.kryptonLabel10.Name = "kryptonLabel10";
+            this.kryptonLabel10.Size = new System.Drawing.Size(38, 20);
+            this.kryptonLabel10.TabIndex = 14;
+            this.kryptonLabel10.Values.Text = "类别:";
             // 
             // expiredate
             // 
@@ -364,21 +386,27 @@
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "合约:";
             // 
-            // kryptonLabel10
+            // symbol_input
             // 
-            this.kryptonLabel10.Location = new System.Drawing.Point(63, 153);
-            this.kryptonLabel10.Name = "kryptonLabel10";
-            this.kryptonLabel10.Size = new System.Drawing.Size(38, 20);
-            this.kryptonLabel10.TabIndex = 14;
-            this.kryptonLabel10.Values.Text = "类别:";
+            this.symbol_input.Location = new System.Drawing.Point(115, 21);
+            this.symbol_input.Name = "symbol_input";
+            this.symbol_input.Size = new System.Drawing.Size(93, 20);
+            this.symbol_input.TabIndex = 16;
             // 
-            // cbSymbolType
+            // lbSymbolName
             // 
-            this.cbSymbolType.DropDownWidth = 187;
-            this.cbSymbolType.Location = new System.Drawing.Point(115, 152);
-            this.cbSymbolType.Name = "cbSymbolType";
-            this.cbSymbolType.Size = new System.Drawing.Size(137, 21);
-            this.cbSymbolType.TabIndex = 15;
+            this.lbSymbolName.Location = new System.Drawing.Point(214, 21);
+            this.lbSymbolName.Name = "lbSymbolName";
+            this.lbSymbolName.Size = new System.Drawing.Size(38, 20);
+            this.lbSymbolName.TabIndex = 17;
+            this.lbSymbolName.Values.Text = "名称:";
+            // 
+            // symName
+            // 
+            this.symName.Location = new System.Drawing.Point(254, 21);
+            this.symName.Name = "symName";
+            this.symName.Size = new System.Drawing.Size(93, 20);
+            this.symName.TabIndex = 18;
             // 
             // fmSymbolEdit
             // 
@@ -396,6 +424,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbSymbolType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gp_option.Panel)).EndInit();
             this.gp_option.Panel.ResumeLayout(false);
             this.gp_option.Panel.PerformLayout();
@@ -410,7 +439,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.cbexpiremonth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbsecurity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbexchange)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbSymbolType)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -445,5 +473,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker expiredate;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox cbSymbolType;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel10;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox symbol_input;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox symName;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lbSymbolName;
     }
 }

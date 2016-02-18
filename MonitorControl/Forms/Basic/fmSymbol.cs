@@ -67,6 +67,32 @@ namespace TradingLib.MoniterControl
             return tradeable ? "是" : "否";
         }
 
+
+        string GetMonth(SymbolImpl sym)
+        {
+            switch (sym.SecurityFamily.Type)
+            { 
+                case SecurityType.FUT:
+                    return sym.Month;
+                case SecurityType.STK:
+                    return "";
+                default:
+                    return "";
+            }
+        }
+
+        string GetExpireDate(SymbolImpl sym)
+        {
+            switch (sym.SecurityFamily.Type)
+            {
+                case SecurityType.FUT:
+                    return sym.ExpireDate.ToString();
+                case SecurityType.STK:
+                    return "";
+                default:
+                    return "";
+            }
+        }
         delegate void SymbolImplDel(SymbolImpl sym);
         void InvokeGotSymbol(SymbolImpl sym)
         {
@@ -106,8 +132,8 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][UNDERLAYINGSYMBOLID] = sym.underlayingsymbol_fk;
                     gt.Rows[i][UNDERLAYINGSYMBOL] = sym.UnderlayingSymbol != null ? sym.UnderlayingSymbol.Symbol : "无";
                     //gt.Rows[i][EXPIREMONTH] = sym.ExpireMonth;
-                    gt.Rows[i][MONTH] = sym.Month;
-                    gt.Rows[i][EXPIREDATE] = sym.ExpireDate;
+                    gt.Rows[i][MONTH] = GetMonth(sym);//sym.Month;
+                    gt.Rows[i][EXPIREDATE] = GetExpireDate(sym);//sym.ExpireDate;
                     gt.Rows[i][TRADEABLE] = sym.Tradeable;
                     gt.Rows[i][TRADEABLETITLE] = GetTradeableTitle(sym.Tradeable);
                     gt.Rows[i][SYMBOLTYPE] = Util.GetEnumDescription(sym.SymbolType);
@@ -134,8 +160,8 @@ namespace TradingLib.MoniterControl
 
                     gt.Rows[i][UNDERLAYINGSYMBOLID] = sym.underlayingsymbol_fk;
                     gt.Rows[i][UNDERLAYINGSYMBOL] = sym.UnderlayingSymbol != null ? sym.UnderlayingSymbol.Symbol : "无";
-                    gt.Rows[i][MONTH] = sym.Month;
-                    gt.Rows[i][EXPIREDATE] = sym.ExpireDate;
+                    gt.Rows[i][MONTH] = GetMonth(sym);//sym.Month;
+                    gt.Rows[i][EXPIREDATE] = GetExpireDate(sym);//sym.ExpireDate;
                     gt.Rows[i][TRADEABLE] = sym.Tradeable;
                     gt.Rows[i][TRADEABLETITLE] = GetTradeableTitle(sym.Tradeable);
                     gt.Rows[i][SYMBOLTYPE] = Util.GetEnumDescription(sym.SymbolType);

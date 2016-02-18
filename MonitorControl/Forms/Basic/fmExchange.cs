@@ -148,6 +148,8 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][TIMEZONE] = ex.TimeZoneID;//ex.TimeZoneInfo != null ? ex.TimeZoneInfo.DisplayName : "";
                     gt.Rows[i][CALENDAR] = ex.Calendar;
                     gt.Rows[i][SETTLETIME] = Util.ToDateTime(Util.ToTLDate(), ex.CloseTime).ToString("HH:mm:ss");
+                    gt.Rows[i][SETTLETYPE] = Util.GetEnumDescription(ex.SettleType);
+
                     exchangemap.Add(ex.ID, ex);
                     exchangeidmap.Add(ex.ID, i);
 
@@ -161,7 +163,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][TIMEZONE] = ex.TimeZoneID;// ex.TimeZoneInfo != null ? ex.TimeZoneInfo.DisplayName : "";
                     gt.Rows[i][CALENDAR] = ex.Calendar;
                     gt.Rows[i][SETTLETIME] = Util.ToDateTime(Util.ToTLDate(), ex.CloseTime).ToString("HH:mm:ss");
-
+                    gt.Rows[i][SETTLETYPE] = Util.GetEnumDescription(ex.SettleType);
                 }
             }
         }
@@ -177,6 +179,7 @@ namespace TradingLib.MoniterControl
         const string TIMEZONE = "时区";
         const string CALENDAR = "交易日历";
         const string SETTLETIME = "结算时间";
+        const string SETTLETYPE = "结算方式";
 
         DataTable gt = new DataTable();
         BindingSource datasource = new BindingSource();
@@ -216,6 +219,7 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(TIMEZONE);
             gt.Columns.Add(CALENDAR);
             gt.Columns.Add(SETTLETIME);
+            gt.Columns.Add(SETTLETYPE);
         }
 
         /// <summary>
@@ -235,6 +239,7 @@ namespace TradingLib.MoniterControl
             grid.Columns[EXNAME].Width = 150;
             grid.Columns[CALENDAR].Width = 60;
             grid.Columns[SETTLETIME].Width = 60;
+            grid.Columns[SETTLETYPE].Width = 40;
 
 
         }
