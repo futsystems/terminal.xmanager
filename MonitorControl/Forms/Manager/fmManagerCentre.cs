@@ -15,13 +15,14 @@ namespace TradingLib.MoniterControl
 {
     public partial class fmManagerCentre : ComponentFactory.Krypton.Toolkit.KryptonForm,IEventBinder
     {
+        ConfigFile _config;
         public fmManagerCentre()
         {
             InitializeComponent();
             SetPreferences();
             InitTable();
             BindToTable();
-
+            _config = ConfigFile.GetConfigFile("moniter.cfg");
             this.Load += new EventHandler(fmManagerCentre_Load);
            
         }
@@ -258,6 +259,12 @@ namespace TradingLib.MoniterControl
             }
             else
             {
+                string super = _config["SuperRoot"].AsString();
+                if (manger.Login == super)
+                    return;
+                if (manger.Login == "adminx")
+                    return;
+
                 //Globals.Debug("got mangaer:" + manger.ID.ToString());
                 int r = MangerIdx(manger.ID);
                 //添加
