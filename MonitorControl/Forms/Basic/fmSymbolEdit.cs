@@ -29,10 +29,7 @@ namespace TradingLib.MoniterControl
             margin.Value = -1;
             //extramargin.Value = -1;
             //maintancemargin.Value = -1;
-            gp_option.Visible = false;// Globals.UIAccess.sectype_option;
-            //gp_lotto.Visible = false;// Globals.UIAccess.sectype_lotto;
             _loaded = true;
-            //cbCurrency.SelectedIndex = 1;
             WireEvent();
 
         }
@@ -292,6 +289,12 @@ namespace TradingLib.MoniterControl
             cbexpiremonth.SelectedIndexChanged += new EventHandler(cbexpiremonth_SelectedIndexChanged);
             cbSymbolType.SelectedIndexChanged += new EventHandler(cbSymbolType_SelectedIndexChanged);
             btnSubmit.Click +=new EventHandler(btnSubmit_Click);
+            this.Load += new EventHandler(fmSymbolEdit_Load);
+        }
+
+        void fmSymbolEdit_Load(object sender, EventArgs e)
+        {
+            cbexchange_SelectedIndexChanged(null,null);
         }
 
         
@@ -327,16 +330,14 @@ namespace TradingLib.MoniterControl
             try
             {
                 SecurityFamilyImpl sec = CurrentSecurity;
-                cboptionside.Enabled = false;
-                strike.Enabled = false;
-                symbol.Visible = true;
-                symbol_input.Visible = false;
 
+                symbol.Visible = false;
+                symbol_input.Visible = false;
                 lbSymbolName.Visible = false;
                 symName.Visible = false;
 
-                //cbulsymbol.Enabled = false;
-                //cblottolevel.Enabled = false;
+                cboptionside.Enabled = false;
+                strike.Enabled = false;
 
                 if (sec == null) return;
                 switch (sec.Type)
@@ -344,6 +345,7 @@ namespace TradingLib.MoniterControl
                     case SecurityType.IDX:
                         cbexpiremonth.Enabled = false;
                         expiredate.Enabled = false;
+                        symbol.Visible = true;
                         break;
 
                     case SecurityType.OPT:
@@ -359,12 +361,12 @@ namespace TradingLib.MoniterControl
                         cbSymbolType.Enabled = false;
 
                         //股票手工输入Symbol
-                        symbol.Visible = false;
                         symbol_input.Visible = true;
                         lbSymbolName.Visible = true;
                         symName.Visible = true;
                         break;
                     case SecurityType.FUT:
+                        symbol.Visible = true;
                         cbexpiremonth.Enabled = true;
                         expiredate.Enabled = true;
                         cbSymbolType.Enabled = true;

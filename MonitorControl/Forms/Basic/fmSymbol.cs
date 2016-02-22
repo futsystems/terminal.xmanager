@@ -93,6 +93,18 @@ namespace TradingLib.MoniterControl
                     return "";
             }
         }
+        string GetMargin(SymbolImpl sym)
+        {
+            switch (sym.SecurityFamily.Type)
+            {
+                case SecurityType.FUT:
+                    return sym.Margin.ToString();
+                case SecurityType.STK:
+                    return "";
+                default:
+                    return "";
+            }
+        }
         delegate void SymbolImplDel(SymbolImpl sym);
         void InvokeGotSymbol(SymbolImpl sym)
         {
@@ -114,9 +126,10 @@ namespace TradingLib.MoniterControl
                     symbolidxmap.Add(sym.ID, i);
 
                     gt.Rows[i][SYMBOL] = sym.Symbol;
+                    gt.Rows[i][NAME] = sym.GetName();
                     gt.Rows[i][ENTRYCOMMISSION] = sym.EntryCommission;
                     gt.Rows[i][EXITCOMMISSION] = sym.ExitCommission;
-                    gt.Rows[i][MARGIN] = sym.Margin;
+                    gt.Rows[i][MARGIN] = GetMargin(sym);
                     gt.Rows[i][EXTRAMARGIN] = sym.ExtraMargin;
                     gt.Rows[i][MAINTANCEMARGIN] = sym.MaintanceMargin;
 
@@ -131,7 +144,6 @@ namespace TradingLib.MoniterControl
 
                     gt.Rows[i][UNDERLAYINGSYMBOLID] = sym.underlayingsymbol_fk;
                     gt.Rows[i][UNDERLAYINGSYMBOL] = sym.UnderlayingSymbol != null ? sym.UnderlayingSymbol.Symbol : "无";
-                    //gt.Rows[i][EXPIREMONTH] = sym.ExpireMonth;
                     gt.Rows[i][MONTH] = GetMonth(sym);//sym.Month;
                     gt.Rows[i][EXPIREDATE] = GetExpireDate(sym);//sym.ExpireDate;
                     gt.Rows[i][TRADEABLE] = sym.Tradeable;
@@ -143,9 +155,10 @@ namespace TradingLib.MoniterControl
                 {
                     int i = r;
                     gt.Rows[i][SYMBOL] = sym.Symbol;
+                    gt.Rows[i][NAME] = sym.GetName();
                     gt.Rows[i][ENTRYCOMMISSION] = sym.EntryCommission;
                     gt.Rows[i][EXITCOMMISSION] = sym.ExitCommission;
-                    gt.Rows[i][MARGIN] = sym.Margin;
+                    gt.Rows[i][MARGIN] = GetMargin(sym);
                     gt.Rows[i][EXTRAMARGIN] = sym.ExtraMargin;
                     gt.Rows[i][MAINTANCEMARGIN] = sym.MaintanceMargin;
 
@@ -176,7 +189,7 @@ namespace TradingLib.MoniterControl
 
         const string ID = "全局ID";
         const string SYMBOL = "合约";
-
+        const string NAME = "名称";
         const string ENTRYCOMMISSION = "开仓手续费";
         const string EXITCOMMISSION = "平仓手续费";
         const string MARGIN = "保证金";
@@ -231,6 +244,7 @@ namespace TradingLib.MoniterControl
         {
             gt.Columns.Add(ID);//
             gt.Columns.Add(SYMBOL);//
+            gt.Columns.Add(NAME);
             gt.Columns.Add(ENTRYCOMMISSION);//
             gt.Columns.Add(EXITCOMMISSION);//
             gt.Columns.Add(MARGIN);//

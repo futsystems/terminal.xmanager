@@ -34,25 +34,41 @@
         {
             this.components = new System.ComponentModel.Container();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btnAddTemplate = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.tempateTree = new ComponentFactory.Krypton.Toolkit.KryptonTreeView();
             this.commissionGrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.btnAddTemplate = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonNavigator1 = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
+            this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
+            this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.commissionGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
+            this.kryptonNavigator1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
+            this.kryptonPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonNavigator1);
             this.kryptonPanel1.Controls.Add(this.btnAddTemplate);
             this.kryptonPanel1.Controls.Add(this.tempateTree);
-            this.kryptonPanel1.Controls.Add(this.commissionGrid);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(844, 476);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // btnAddTemplate
+            // 
+            this.btnAddTemplate.Location = new System.Drawing.Point(64, 448);
+            this.btnAddTemplate.Name = "btnAddTemplate";
+            this.btnAddTemplate.Size = new System.Drawing.Size(90, 25);
+            this.btnAddTemplate.TabIndex = 6;
+            this.btnAddTemplate.Values.Text = "添加模板";
             // 
             // tempateTree
             // 
@@ -63,14 +79,12 @@
             // 
             // commissionGrid
             // 
-            this.commissionGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.commissionGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.commissionGrid.Location = new System.Drawing.Point(160, 0);
+            this.commissionGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.commissionGrid.Location = new System.Drawing.Point(0, 0);
             this.commissionGrid.Name = "commissionGrid";
             this.commissionGrid.RowTemplate.Height = 23;
-            this.commissionGrid.Size = new System.Drawing.Size(684, 476);
+            this.commissionGrid.Size = new System.Drawing.Size(685, 449);
             this.commissionGrid.TabIndex = 1;
             // 
             // imageList1
@@ -79,13 +93,42 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // btnAddTemplate
+            // kryptonNavigator1
             // 
-            this.btnAddTemplate.Location = new System.Drawing.Point(64, 448);
-            this.btnAddTemplate.Name = "btnAddTemplate";
-            this.btnAddTemplate.Size = new System.Drawing.Size(90, 25);
-            this.btnAddTemplate.TabIndex = 6;
-            this.btnAddTemplate.Values.Text = "添加模板";
+            this.kryptonNavigator1.Location = new System.Drawing.Point(157, 0);
+            this.kryptonNavigator1.Name = "kryptonNavigator1";
+            this.kryptonNavigator1.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
+            this.kryptonPage1,
+            this.kryptonPage2});
+            this.kryptonNavigator1.SelectedIndex = 0;
+            this.kryptonNavigator1.Size = new System.Drawing.Size(687, 476);
+            this.kryptonNavigator1.TabIndex = 7;
+            this.kryptonNavigator1.Text = "kryptonNavigator1";
+            // 
+            // kryptonPage1
+            // 
+            this.kryptonPage1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.kryptonPage1.Controls.Add(this.commissionGrid);
+            this.kryptonPage1.Flags = 65534;
+            this.kryptonPage1.LastVisibleSet = true;
+            this.kryptonPage1.MinimumSize = new System.Drawing.Size(50, 50);
+            this.kryptonPage1.Name = "kryptonPage1";
+            this.kryptonPage1.Size = new System.Drawing.Size(685, 449);
+            this.kryptonPage1.Text = "期货";
+            this.kryptonPage1.ToolTipTitle = "Page ToolTip";
+            this.kryptonPage1.UniqueName = "3FEF1C9217EF4FB587A6FD0DAB11A827";
+            // 
+            // kryptonPage2
+            // 
+            this.kryptonPage2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.kryptonPage2.Flags = 65534;
+            this.kryptonPage2.LastVisibleSet = true;
+            this.kryptonPage2.MinimumSize = new System.Drawing.Size(50, 50);
+            this.kryptonPage2.Name = "kryptonPage2";
+            this.kryptonPage2.Size = new System.Drawing.Size(685, 449);
+            this.kryptonPage2.Text = "股票";
+            this.kryptonPage2.ToolTipTitle = "Page ToolTip";
+            this.kryptonPage2.UniqueName = "331AACAF16C2494A4B83F286B4B154D1";
             // 
             // fmCommission
             // 
@@ -102,6 +145,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.commissionGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).EndInit();
+            this.kryptonNavigator1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).EndInit();
+            this.kryptonPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -113,5 +161,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTreeView tempateTree;
         private System.Windows.Forms.ImageList imageList1;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnAddTemplate;
+        private ComponentFactory.Krypton.Navigator.KryptonNavigator kryptonNavigator1;
+        private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage1;
+        private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage2;
     }
 }

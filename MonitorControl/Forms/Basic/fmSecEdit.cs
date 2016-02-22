@@ -18,8 +18,6 @@ namespace TradingLib.MoniterControl
         public fmSecEdit()
         {
             InitializeComponent();
-
-            //MoniterHelper.AdapterToIDataSource(currency).BindDataSource(MoniterHelper.GetEnumValueObjects<CurrencyType>());
             MoniterHelper.AdapterToIDataSource(cbsectype).BindDataSource(MoniterHelper.GetEnumValueObjects<SecurityType>());
             MoniterHelper.AdapterToIDataSource(exchange).BindDataSource(CoreService.BasicInfoTracker.GetExchangeCombList());
             MoniterHelper.AdapterToIDataSource(underlay).BindDataSource(CoreService.BasicInfoTracker.GetSecurityCombList(true));
