@@ -221,6 +221,15 @@ namespace TradingLib.MoniterControl
             {
                 byvolume.Checked = true;
             }
+            switch (_item.SecurityType)
+            { 
+                case SecurityType.STK:
+                    kryptonLabel3.Visible = false;
+                    month.Visible = false;
+                    break;
+                default:
+                    break;
+            }
             PrepareInput();
         }
     }
