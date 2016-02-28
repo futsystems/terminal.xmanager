@@ -22,8 +22,7 @@ namespace TradingLib.MoniterControl
             cbside.Items.Add("卖出");
             cbside.SelectedIndex = 0;
 
-            cboffsetflag.Items.Add("开仓");
-            //cboffsetflag.Items.Add("平仓");
+            cboffsetflag.Items.Add("开仓");;
             cboffsetflag.SelectedIndex = 0;
 
             timestr.Text = DateTime.Now.ToString("HH:mm:ss");
