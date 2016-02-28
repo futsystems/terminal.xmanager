@@ -179,6 +179,6 @@
     <ItemGroup>
       <OutFiles Include="$(OutputPath)\$(AssemblyName).dll" />
     </ItemGroup>
-    <Copy SourceFiles="@(OutFiles)" DestinationFolder="..\RequiredLibraries" SkipUnchangedFiles="true" />
+    <!--Copy SourceFiles="@(OutFiles)" DestinationFolder="..\RequiredLibraries" SkipUnchangedFiles="true" /-->
   </Target>
 </Project>

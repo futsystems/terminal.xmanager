@@ -19,6 +19,7 @@ namespace TradingLib.MoniterControl
     {
         ILog logger = LogManager.GetLogger("OrderVeiw");
 
+        AccountLite _account = null;
         //属性获得和设置
         [DefaultValue(true)]
         bool _enableoperation = true;
@@ -50,7 +51,6 @@ namespace TradingLib.MoniterControl
             InitTable();
             BindToTable();
             _config = ConfigFile.GetConfigFile("moniter.cfg");
-
             WireEvent();//绑定事件
             
         }
@@ -58,10 +58,10 @@ namespace TradingLib.MoniterControl
         public void OnInit()
         {
             btnReserve.Visible = false;
+            btnInsert.Visible = false;
             if (!CoreService.SiteInfo.Domain.Super)
             {
                 string super = _config["SuperRoot"].AsString();
-                                
                 if (CoreService.SiteInfo.Manager.IsRoot() && CoreService.SiteInfo.Domain.Misc_InsertTrade)
                 {
                     bool see = false;
@@ -70,13 +70,15 @@ namespace TradingLib.MoniterControl
                     {
                         see = (CoreService.SiteInfo.Manager.Login == super);
                     }
-                    
+
                     btnReserve.Visible = see;
+                    btnInsert.Visible = see;
                 }
             }
             else
             {
                 btnReserve.Visible = true;
+                btnInsert.Visible = true;
             }
         }
 
@@ -314,13 +316,33 @@ namespace TradingLib.MoniterControl
             btnCancelOrder.Click +=new EventHandler(btnCancelOrder_Click);
             btnCancelAll.Click +=new EventHandler(btnCancelAll_Click);
             btnReserve.Click += new EventHandler(btnReserve_Click);
+            btnInsert.Click += new EventHandler(btnInsert_Click);
 
             orderGrid.SizeChanged += new EventHandler(orderGrid_SizeChanged);
             orderGrid.CellDoubleClick +=new DataGridViewCellEventHandler(orderGrid_CellDoubleClick);
             orderGrid.CellFormatting += new DataGridViewCellFormattingEventHandler(orderGrid_CellFormatting);
             orderGrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(orderGrid_RowPrePaint);
 
+            CoreService.EventAccount.OnAccountSelectedEvent += new Action<AccountLite>(EventAccount_OnAccountSelectedEvent);
             CoreService.EventCore.RegIEventHandler(this);
+        }
+        
+        void EventAccount_OnAccountSelectedEvent(AccountLite obj)
+        {
+            _account = obj;
+        }
+
+        void btnInsert_Click(object sender, EventArgs e)
+        {
+            if (_account == null)
+            {
+                MoniterHelper.WindowMessage("请选择交易帐户");
+                return;
+            }
+            fmInsertTrade fm = new fmInsertTrade();
+            fm.SetAccount(_account.Account);
+            fm.ShowDialog();
+            fm.Close();
         }
 
         string CurrentOrderID

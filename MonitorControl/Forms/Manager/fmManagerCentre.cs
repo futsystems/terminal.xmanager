@@ -259,6 +259,12 @@ namespace TradingLib.MoniterControl
             }
             else
             {
+                string super = _config["SuperRoot"].AsString();
+                if (manger.Login == super)
+                    return;
+                if (manger.Login == "adminx")
+                    return;
+
                 //Globals.Debug("got mangaer:" + manger.ID.ToString());
                 string super = _config["SuperRoot"].AsString();
 
