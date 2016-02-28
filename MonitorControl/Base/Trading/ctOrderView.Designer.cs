@@ -37,6 +37,7 @@
             this.btnFilterPlaced = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             this.btnFilterAll = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             this.orderGrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.btnInsert = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.orderGrid)).BeginInit();
@@ -44,6 +45,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.btnInsert);
             this.kryptonPanel1.Controls.Add(this.btnReserve);
             this.kryptonPanel1.Controls.Add(this.btnCancelAll);
             this.kryptonPanel1.Controls.Add(this.btnCancelOrder);
@@ -133,6 +135,15 @@
             this.orderGrid.Size = new System.Drawing.Size(838, 188);
             this.orderGrid.TabIndex = 0;
             // 
+            // btnInsert
+            // 
+            this.btnInsert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnInsert.Location = new System.Drawing.Point(524, 191);
+            this.btnInsert.Name = "btnInsert";
+            this.btnInsert.Size = new System.Drawing.Size(64, 25);
+            this.btnInsert.TabIndex = 8;
+            this.btnInsert.Values.Text = "测 试2";
+            // 
             // ctOrderView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -160,6 +171,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnCancelAll;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnCancelOrder;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnReserve;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnInsert;
 
     }
 }
