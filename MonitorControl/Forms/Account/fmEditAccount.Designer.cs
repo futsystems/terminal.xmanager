@@ -113,6 +113,7 @@
             // cbCurrency
             // 
             this.cbCurrency.DropDownWidth = 181;
+            this.cbCurrency.Enabled = false;
             this.cbCurrency.Location = new System.Drawing.Point(105, 64);
             this.cbCurrency.Name = "cbCurrency";
             this.cbCurrency.Size = new System.Drawing.Size(181, 21);

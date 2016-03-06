@@ -40,11 +40,11 @@ namespace TradingLib.MoniterBase
                 //独立部署
                 if (CoreService.SiteInfo.Domain.Dedicated)
                 {
-                    this.Text = string.Format("{0}(独立部署)-{1} {2}-{3}", GetProductName(CoreService.SiteInfo.ProductType), CoreService.SiteInfo.Domain.Name,CoreService.SiteInfo.Manager.Login, Util.GetEnumDescription(CoreService.SiteInfo.Manager.Type));
+                    this.Text = string.Format("{0}-{1} {2}-{3}", GetProductName(CoreService.SiteInfo.ProductType),"",CoreService.SiteInfo.Manager.Login, Util.GetEnumDescription(CoreService.SiteInfo.Manager.Type));
                 }
                 else
                 {
-                    this.Text = string.Format("{0}(云平台)-{1} 【{2}】 {3}-{4}", GetProductName(CoreService.SiteInfo.ProductType), CoreService.SiteInfo.Domain.Name, CoreService.SiteInfo.Domain.IsProduction ? "运营" : "测试", CoreService.SiteInfo.Manager.Login, Util.GetEnumDescription(CoreService.SiteInfo.Manager.Type));
+                    this.Text = string.Format("{0}-{1}{2}{3}-{4}", GetProductName(CoreService.SiteInfo.ProductType), "","", CoreService.SiteInfo.Manager.Login, Util.GetEnumDescription(CoreService.SiteInfo.Manager.Type));
                 }
             }
             else
@@ -53,7 +53,9 @@ namespace TradingLib.MoniterBase
             }
 
             //设置部署编号
-            lbDeployID.Text = string.Format("{0}-{1}.{2}.{3}-{4}", CoreService.TLClient.ServerVersion.DeployID, CoreService.TLClient.ServerVersion.Major, CoreService.TLClient.ServerVersion.Minor, CoreService.TLClient.ServerVersion.Fix, CoreService.TLClient.ServerVersion.Date);
+            lbDeployID.Text = "";//string.Format("{0}-{1}.{2}.{3}-{4}", CoreService.TLClient.ServerVersion.DeployID, CoreService.TLClient.ServerVersion.Major, CoreService.TLClient.ServerVersion.Minor, CoreService.TLClient.ServerVersion.Fix, CoreService.TLClient.ServerVersion.Date);
+
+            lbDeployID.Visible = false;
 
             if (!CoreService.SiteInfo.Domain.Super)
             {
@@ -187,7 +189,7 @@ namespace TradingLib.MoniterBase
             switch (type)
             { 
                 case QSEnumProductType.CounterSystem:
-                    return "巨融柜台系统";
+                    return "分帐户柜台系统";
                 case QSEnumProductType.VendorMoniter:
                     return "主帐户监控系统";
                 default:
@@ -228,8 +230,8 @@ namespace TradingLib.MoniterBase
             //this.mainContainer.Panel2.Controls.Add()
 
             this.bottomContainer.Panel2MinSize = 270;
-            this.bottomContainer.SplitterDistance = this.Width - 430;
-            this.mainContainer.SplitterDistance = this.Height-380;
+            this.bottomContainer.SplitterDistance = this.Width - 0;
+            this.mainContainer.SplitterDistance = this.Height-0;
             //SplitContainer s1 = new SplitContainer();
             //s1.SplitterDistance
 
@@ -264,7 +266,7 @@ namespace TradingLib.MoniterBase
 
 
             toolbar = ToolbarService.CreateToolStrip(this, "/Workbench/Toolbar");
-            this.Controls.Add(toolbar);
+            //this.Controls.Add(toolbar);
             this.Controls.Add(menu);
 
             status = new StatusStrip();
@@ -284,7 +286,7 @@ namespace TradingLib.MoniterBase
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(59, 17);
-            this.toolStripStatusLabel1.Text = "部署编号:";
+            this.toolStripStatusLabel1.Text = "";
             // 
             // lbDeployID
             // 
@@ -401,7 +403,7 @@ namespace TradingLib.MoniterBase
             //this.mainContainer.Panel2Collapsed = false;
             //this.mainContainer.Panel2.Height = (int)(this.Size.Height / 4);
             //this.bottomContainer.Panel2.Width = 250;
-            this.bottomContainer.SplitterDistance = this.Width -  430;
+            this.bottomContainer.SplitterDistance = this.Width -  630;
             this.mainContainer.SplitterDistance = this.Height - 380;
             this.ExpandBottom();
 

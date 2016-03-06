@@ -28,13 +28,14 @@ namespace TradingLib.MoniterBase
             Updater update = new Updater();
             if (update.Detect())
             {
-                update.Update("XManager.exe", true);
+                update.Update("Moniter.exe", true);
                 return true;
             }
             else
             {
                 return false;
             }
+            //return false;
 
         }
 

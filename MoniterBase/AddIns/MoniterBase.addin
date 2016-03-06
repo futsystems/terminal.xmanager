@@ -86,14 +86,14 @@
         </MenuItem>
       </Condition>
     </Condition>
-    
 
-    <MenuItem id = "Help"
+
+    <!--MenuItem id = "Help"
 		          type = "Menu"
 				  shortcut = "Alt|H"
 		          label = "帮助">
       <Include id = "HelpCentre" path = "/Workbench/HelpCentre"/>
-    </MenuItem>
+    </MenuItem-->
   </Path>
 
   <!--工具栏-->

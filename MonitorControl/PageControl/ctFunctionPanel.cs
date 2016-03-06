@@ -27,20 +27,21 @@ namespace TradingLib.MoniterControl
         {
             foreach (Symbol s in CoreService.BasicInfoTracker.GetSymbolTradable())
             {
-                quoteList.addSecurity(s);
+                //quoteList.addSecurity(s);
+                //quotemoniter
             }
             CoreService.EventIndicator.GotTickEvent += new Action<Tick>(GotTick);
             CoreService.EventBasicInfo.OnSymbolEvent += new Action<SymbolImpl>(EventBasicInfo_OnSymbolEvent);
 
             if (!CoreService.SiteInfo.Manager.IsRoot())
             {
-                pageExecution.Visible = CoreService.SiteInfo.UIAccess.r_execution;
+                //pageExecution.Visible = CoreService.SiteInfo.UIAccess.r_execution;
             }
         }
 
         void EventBasicInfo_OnSymbolEvent(SymbolImpl obj)
         {
-            quoteList.addSecurity(obj);
+            //uoteList.addSecurity(obj);
         }
 
         public void OnDisposed()
@@ -50,7 +51,7 @@ namespace TradingLib.MoniterControl
 
         void GotTick(Tick k)
         {
-            quoteList.GotTick(k);
+            //quoteList.GotTick(k);
         }
     }
 

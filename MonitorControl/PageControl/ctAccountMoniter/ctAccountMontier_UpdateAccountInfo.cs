@@ -22,9 +22,9 @@ namespace TradingLib.MoniterControl
     {
         #region 表格
 
-        const string ACCOUNT = "帐户编号";
+        const string ACCOUNT = "账户";
         const string ROUTE = "RouteType";
-        const string ROUTEIMG = "成交";
+        const string ROUTEIMG = "路由";
 
         const string EXECUTE = "ExecuteStatus";
         const string EXECUTEIMG = "状态";
@@ -36,7 +36,7 @@ namespace TradingLib.MoniterControl
 
         const string LASTEQUITY = "昨日权益";
         const string NOWEQUITY = "当前权益";
-        const string CREDIT = "优先资金";
+        const string CREDIT = "信用额度";
         const string TOTALEQUITY = "总权益";
 
         const string MARGIN = "保证金";
@@ -62,14 +62,14 @@ namespace TradingLib.MoniterControl
         const string AGENTMGRFK = "AGENTMGRFK";
 
 
-        const string NAME = "客户姓名";
+        const string NAME = "姓名";
 
         const string MACTCONNSTATUS = "监控状态标识";//主帐户是否处于连接状态
         const string MACTCONNIMG = "连接";//主帐户连接状态图像
 
         const string DELETE = "DELETE";
         const string ROUTERGROUP = "Group";
-        const string ROUTERGROUPSTR = "主帐户组";
+        const string ROUTERGROUPSTR = "路由组";
         const string MAINACCOUNT = "主帐户";
         const string MAINACCOUNTBINDED = "主帐户是否绑定";
         const string MAINACCTRISKRULE = "强平规则";
@@ -113,6 +113,16 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(ACCOUNT);//0
             gt.Columns.Add(NAME);//1
 
+
+            gt.Columns.Add(ROUTE);//1
+            gt.Columns.Add(ROUTEIMG, typeof(Image));//2
+
+            //交易权限
+            gt.Columns.Add(EXECUTE);//3
+            gt.Columns.Add(EXECUTEIMG, typeof(Image));//4
+            gt.Columns.Add(LOGINSTATUS);//6
+            gt.Columns.Add(LOGINSTATUSIMG, typeof(Image));//7
+
             gt.Columns.Add(LASTEQUITY);//2
             gt.Columns.Add(NOWEQUITY);//3
             gt.Columns.Add(CREDIT);//4
@@ -147,16 +157,12 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(MACTCONNIMG, typeof(Image));
 
 
-            //---------------分帐户字段
-            gt.Columns.Add(ROUTERGROUP);
-            gt.Columns.Add(ROUTERGROUPSTR);
+            
 
-            gt.Columns.Add(LOGINSTATUS);//6
-            gt.Columns.Add(LOGINSTATUSIMG, typeof(Image));//7
+            
             //gt.Columns.Add(ADDRESS);//8
 
-            gt.Columns.Add(ROUTE);//1
-            gt.Columns.Add(ROUTEIMG, typeof(Image));//2
+            
 
             
 
@@ -165,14 +171,16 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(WARN);
             gt.Columns.Add(WARNSTR);
 
-            //交易权限
-            gt.Columns.Add(EXECUTE);//3
-            gt.Columns.Add(EXECUTEIMG, typeof(Image));//4
+            
             gt.Columns.Add(CURRENCY);
 
             //代理编号
             gt.Columns.Add(AGENTCODE);//20
             gt.Columns.Add(AGENTMGRFK);//21
+
+            //---------------分帐户字段
+            gt.Columns.Add(ROUTERGROUP);
+            gt.Columns.Add(ROUTERGROUPSTR);
 
             gt.Columns.Add(DELETE);
             
@@ -198,14 +206,15 @@ namespace TradingLib.MoniterControl
             accountgrid.Columns[LOGINSTATUS].Visible = false;
             accountgrid.Columns[ROUTE].Visible = false;
             accountgrid.Columns[ROUTERGROUP].Visible = false;
-
+            accountgrid.Columns[TOTALEQUITY].Visible = false;
 
             accountgrid.Columns[WARN].Visible = false;
             //accountgrid.Columns[WARNSTR].Visible = false;
 
             accountgrid.Columns[EXECUTE].Visible = false;
             accountgrid.Columns[DELETE].Visible = false;
-
+            accountgrid.Columns[CURRENCY].Visible = false;
+            accountgrid.Columns[WARNSTR].Visible = false;
 
             
             for (int i = 0; i < gt.Columns.Count; i++)
