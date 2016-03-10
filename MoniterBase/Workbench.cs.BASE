@@ -53,8 +53,7 @@ namespace TradingLib.MoniterBase
             }
 
             //设置部署编号
-            lbDeployID.Text = string.Empty;// string.Format("{0}-{1}.{2}.{3}-{4}", CoreService.TLClient.ServerVersion.DeployID, CoreService.TLClient.ServerVersion.Major, CoreService.TLClient.ServerVersion.Minor, CoreService.TLClient.ServerVersion.Fix, CoreService.TLClient.ServerVersion.Date);
-            lbDeployID.Visible = false;
+            lbDeployID.Text = string.Format("{0}-{1}.{2}.{3}-{4}", CoreService.TLClient.ServerVersion.DeployID, CoreService.TLClient.ServerVersion.Major, CoreService.TLClient.ServerVersion.Minor, CoreService.TLClient.ServerVersion.Fix, CoreService.TLClient.ServerVersion.Date);
 
             if (!CoreService.SiteInfo.Domain.Super)
             {
@@ -188,7 +187,7 @@ namespace TradingLib.MoniterBase
             switch (type)
             { 
                 case QSEnumProductType.CounterSystem:
-                    return "资管柜台系统";
+                    return "巨融柜台系统";
                 case QSEnumProductType.VendorMoniter:
                     return "主帐户监控系统";
                 default:
@@ -272,7 +271,6 @@ namespace TradingLib.MoniterBase
             status.RenderMode = ToolStripRenderMode.ManagerRenderMode;
 
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel1.Visible = false;
             this.lbDeployID = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lbExpireMessage = new System.Windows.Forms.ToolStripStatusLabel();
