@@ -187,7 +187,7 @@ namespace TradingLib.MoniterBase
             switch (type)
             { 
                 case QSEnumProductType.CounterSystem:
-                    return "巨融柜台系统";
+                    return "资管柜台系统";
                 case QSEnumProductType.VendorMoniter:
                     return "主帐户监控系统";
                 default:

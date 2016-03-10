@@ -111,6 +111,7 @@
     <Compile Include="Client\TLClientNet_PacketHandler_Contrib.cs" />
     <Compile Include="Common\HandlerInfo.cs" />
     <Compile Include="Common\SplashScreenApplication.cs" />
+    <Compile Include="Constant.cs" />
     <Compile Include="fmNotice.cs">
       <SubType>Form</SubType>
     </Compile>
