@@ -81,6 +81,7 @@ namespace TradingLib.MoniterControl
                 pricetick.Value = _sec.PriceTick;
                 entrycommission.Value = _sec.EntryCommission;
                 exitcommission.Value = _sec.ExitCommission;
+                exitcommissiontoday.Value = _sec.ExitCommissionToday;
                 margin.Value = _sec.Margin;
                 extramargin.Value = _sec.ExtraMargin;
                 maintancemargin.Value = _sec.MaintanceMargin;
@@ -108,6 +109,8 @@ namespace TradingLib.MoniterControl
                 _sec.PriceTick = pricetick.Value;
                 _sec.EntryCommission = entrycommission.Value;
                 _sec.ExitCommission = exitcommission.Value;
+                _sec.ExitCommissionToday = exitcommissiontoday.Value;
+
                 _sec.Margin = margin.Value;
                 _sec.ExtraMargin = extramargin.Value;
                 _sec.MaintanceMargin = maintancemargin.Value;
@@ -132,6 +135,8 @@ namespace TradingLib.MoniterControl
                 target.PriceTick = pricetick.Value;
                 target.EntryCommission = entrycommission.Value;
                 target.ExitCommission = exitcommission.Value;
+                target.ExitCommissionToday = exitcommissiontoday.Value;
+
                 target.Margin = margin.Value;
                 target.ExtraMargin = extramargin.Value;
                 target.MaintanceMargin = maintancemargin.Value;

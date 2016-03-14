@@ -161,7 +161,7 @@ namespace TradingLib.MoniterControl
                         tb.Rows[i][STATUS] = o.Status;
                         tb.Rows[i][STATUSSTR] = Util.GetEnumDescription(o.Status);
                         tb.Rows[i][ORDERREF] = o.OrderRef;
-                        tb.Rows[i][EXCHANGE] = o.Exchange;
+                        tb.Rows[i][EXCHANGE] = CoreService.BasicInfoTracker.GetExchangeName(o.Exchange);
                         tb.Rows[i][EXCHORDERID] = o.OrderSysID;
                         tb.Rows[i][COMMENT] = o.Comment;
                         tb.Rows[i][FORCECLOSE] = o.ForceClose ? "强平" : "";

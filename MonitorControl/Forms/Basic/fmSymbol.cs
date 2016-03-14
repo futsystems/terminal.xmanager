@@ -90,6 +90,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][SYMBOL] = sym.Symbol;
                     gt.Rows[i][ENTRYCOMMISSION] = sym.EntryCommission;
                     gt.Rows[i][EXITCOMMISSION] = sym.ExitCommission;
+                    gt.Rows[i][EXITCOMMISSIONTODAY] = sym.ExitCommissionToday;
                     gt.Rows[i][MARGIN] = sym.Margin;
                     gt.Rows[i][EXTRAMARGIN] = sym.ExtraMargin;
                     gt.Rows[i][MAINTANCEMARGIN] = sym.MaintanceMargin;
@@ -119,6 +120,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][SYMBOL] = sym.Symbol;
                     gt.Rows[i][ENTRYCOMMISSION] = sym.EntryCommission;
                     gt.Rows[i][EXITCOMMISSION] = sym.ExitCommission;
+                    gt.Rows[i][EXITCOMMISSIONTODAY] = sym.ExitCommissionToday;
                     gt.Rows[i][MARGIN] = sym.Margin;
                     gt.Rows[i][EXTRAMARGIN] = sym.ExtraMargin;
                     gt.Rows[i][MAINTANCEMARGIN] = sym.MaintanceMargin;
@@ -153,6 +155,7 @@ namespace TradingLib.MoniterControl
 
         const string ENTRYCOMMISSION = "开仓手续费";
         const string EXITCOMMISSION = "平仓手续费";
+        const string EXITCOMMISSIONTODAY = "平今手续费";
         const string MARGIN = "保证金";
         const string EXTRAMARGIN = "额外保证金";
         const string MAINTANCEMARGIN = "过夜保证金";
@@ -207,6 +210,7 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(SYMBOL);//
             gt.Columns.Add(ENTRYCOMMISSION);//
             gt.Columns.Add(EXITCOMMISSION);//
+            gt.Columns.Add(EXITCOMMISSIONTODAY);
             gt.Columns.Add(MARGIN);//
             gt.Columns.Add(EXTRAMARGIN);//
             gt.Columns.Add(MAINTANCEMARGIN);//

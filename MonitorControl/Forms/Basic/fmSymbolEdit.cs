@@ -112,6 +112,8 @@ namespace TradingLib.MoniterControl
 
                 this.entrycommission.Value = _symbol._entrycommission;
                 this.exitcommission.Value = _symbol._exitcommission;
+                this.exitcommissiontoday.Value = _symbol._exitcommissiontoday;
+
                 this.margin.Value = _symbol._margin;
                 //this.extramargin.Value = _symbol._extramargin;
                 //this.maintancemargin.Value = _symbol._maintancemargin;
@@ -135,6 +137,7 @@ namespace TradingLib.MoniterControl
                 //_symbol.Currency = (CurrencyType)cbCurrency.SelectedValue;
                 _symbol.EntryCommission = entrycommission.Value;
                 _symbol.ExitCommission = exitcommission.Value;
+                _symbol.ExitCommissionToday = exitcommissiontoday.Value;
                 _symbol.Margin = margin.Value;
                 //_symbol.ExtraMargin = extramargin.Value;
                 //_symbol.MaintanceMargin = maintancemargin.Value;
@@ -161,6 +164,7 @@ namespace TradingLib.MoniterControl
 
                 target.EntryCommission = entrycommission.Value;
                 target.ExitCommission = exitcommission.Value;
+                target.ExitCommissionToday = exitcommissiontoday.Value;
                 target.Margin = margin.Value;
                 //标准合约设定到期日
                 if (target.SymbolType == QSEnumSymbolType.Standard)
