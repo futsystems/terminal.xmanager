@@ -46,7 +46,7 @@ namespace TradingLib.MoniterControl
             account.Text = f.Account;
             settleday.Text = f.Settleday.ToString();
             type.Text = Util.GetEnumDescription(f.FeeType);
-            amount.Text = Util.FormatDecimal(f.Amount);
+            amount.Text = f.Amount.ToFormatStr();
             collectstatus.Text = f.Collected ? "已扣费" : "未扣费";
             comment.Text = f.Comment;
             error.Text = f.Error;

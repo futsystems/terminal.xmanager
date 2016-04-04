@@ -126,24 +126,24 @@ namespace TradingLib.MoniterControl
         }
         private void equity_ValueChanged(object sender, EventArgs e)
         {
-            lbFlat.Text = Util.FormatDecimal((equity.Value * flatlevel.Value / 100));
-            lbWarn.Text = Util.FormatDecimal((equity.Value * warnlevel.Value / 100));
-            lbNight.Text = Util.FormatDecimal((equity.Value * nighthold.Value));
+            lbFlat.Text = ((equity.Value * flatlevel.Value / 100)).ToFormatStr();
+            lbWarn.Text = ((equity.Value * warnlevel.Value / 100)).ToFormatStr();
+            lbNight.Text = ((equity.Value * nighthold.Value)).ToFormatStr();
         }
 
         private void flatlevel_ValueChanged(object sender, EventArgs e)
         {
-            lbFlat.Text = Util.FormatDecimal((equity.Value * flatlevel.Value / 100));
+            lbFlat.Text = ((equity.Value * flatlevel.Value / 100)).ToFormatStr();
         }
 
         private void warnlevel_ValueChanged(object sender, EventArgs e)
         {
-            lbWarn.Text = Util.FormatDecimal((equity.Value * warnlevel.Value / 100));
+            lbWarn.Text = ((equity.Value * warnlevel.Value / 100)).ToFormatStr();
         }
 
         private void nighthold_ValueChanged(object sender, EventArgs e)
         {
-            lbNight.Text = Util.FormatDecimal((equity.Value * nighthold.Value));
+            lbNight.Text = ((equity.Value * nighthold.Value)).ToFormatStr();
         }
     }
 }

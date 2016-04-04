@@ -356,7 +356,7 @@ namespace TradingLib.MoniterControl
                         gt.Rows[i][YDSIZE] = pos.PositionDetailYdNew.Sum(p => p.Volume);
                         gt.Rows[i][CANFLATSIZE] = getCanFlatSize(pos);
                         gt.Rows[i][AVGPRICE] = pos.AvgPrice.ToFormatStr(_fromat);
-                        gt.Rows[i][REALIZEDPL] = Util.FormatDecimal(pos.ClosedPL * pos.oSymbol.Multiple);
+                        gt.Rows[i][REALIZEDPL] = (pos.ClosedPL * pos.oSymbol.Multiple).ToFormatStr();
                         gt.Rows[i][REALIZEDPLPOINT] = pos.ClosedPL.ToFormatStr(_fromat);
                     }
                 }

@@ -266,12 +266,12 @@ namespace TradingLib.MoniterControl
                     return;
 
                 //Globals.Debug("got mangaer:" + manger.ID.ToString());
-                string super = _config["SuperRoot"].AsString();
+                //string super = _config["SuperRoot"].AsString();
 
-                if (manger.Login == super)
-                    return;
-                if (manger.Login == "adminx")
-                    return;
+                //if (manger.Login == super)
+                //    return;
+                //if (manger.Login == "adminx")
+                //    return;
                 int r = MangerIdx(manger.ID);
                 //添加
                 if (r == -1)

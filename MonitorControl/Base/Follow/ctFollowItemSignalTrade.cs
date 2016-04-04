@@ -33,7 +33,7 @@ namespace TradingLib.MoniterControl
                 side.StateCommon.ShortText.Color1 = signal.Side ? UIConstant.LongSideColor : UIConstant.ShortSideColor;
                 symbol.Text = signal.Symbol;
                 size.Text = signal.Size.ToString();
-                price.Text = Util.FormatDecimal(signal.Price);
+                price.Text = signal.Price.ToFormatStr();
             }
         }
     }

@@ -23,7 +23,7 @@ namespace TradingLib.MoniterControl
         public void SetSettlementPrice(MarketData price)
         {
             _price = price;
-            lbPrice.Text = Util.FormatDecimal(price.Settlement);
+            lbPrice.Text = price.Settlement.ToFormatStr();
             lbSettleday.Text = price.SettleDay.ToString();
             lbSymbol.Text = price.Symbol;
 

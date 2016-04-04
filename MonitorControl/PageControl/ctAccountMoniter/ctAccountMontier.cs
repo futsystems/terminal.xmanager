@@ -108,7 +108,7 @@ namespace TradingLib.MoniterControl
         private string _format = "{0:F2}";
         private string decDisp(decimal d)
         {
-            return Util.FormatDecimal(d, _format);
+            return d.ToFormatStr(_format);
         }
 
         public event DebugDelegate SendDebugEvent;

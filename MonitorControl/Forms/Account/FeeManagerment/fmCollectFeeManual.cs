@@ -51,7 +51,7 @@ namespace TradingLib.MoniterControl
             account.Text = f.Account;
             settleday.Text = f.Settleday.ToString();
             type.Text = Util.GetEnumDescription(f.FeeType);
-            amount.Text = Util.FormatDecimal(f.Amount);
+            amount.Text = f.Amount.ToFormatStr();
             if (f.Collected)
             {
                 btnSubmit.Enabled = false;

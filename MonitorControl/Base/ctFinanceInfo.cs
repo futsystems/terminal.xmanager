@@ -104,22 +104,22 @@ namespace TradingLib.MoniterControl
             {
                 _info = info;
                 account.Text = info.Account;
-                lastequtiy.Text = Util.FormatDecimal(info.LastEquity);
-                realizedpl.Text = Util.FormatDecimal(info.RealizedPL);
-                unrealizedpl.Text = Util.FormatDecimal(info.UnRealizedPL);
-                commission.Text = Util.FormatDecimal(info.Commission);
-                netprofit.Text = Util.FormatDecimal(info.Profit);
-                cashin.Text = Util.FormatDecimal(info.CashIn);
-                cashout.Text = Util.FormatDecimal(info.CashOut);
-                nowequity.Text = Util.FormatDecimal(info.NowEquity);
-                margin.Text = Util.FormatDecimal(info.Margin);
-                marginfrozen.Text = Util.FormatDecimal(info.MarginFrozen);
-                staticEquity.Text = Util.FormatDecimal(info.LastEquity + info.CashIn - info.CashOut);
-                lastcredit.Text = Util.FormatDecimal(info.LastCredit);
-                creditcashin.Text = Util.FormatDecimal(info.CreditCashIn);
-                creditcashout.Text = Util.FormatDecimal(info.CreditCashOut);
-                credit.Text = Util.FormatDecimal(info.Credit);
-                totalEquity.Text = Util.FormatDecimal(info.Credit + info.NowEquity);
+                lastequtiy.Text = info.LastEquity.ToFormatStr();
+                realizedpl.Text = info.RealizedPL.ToFormatStr();
+                unrealizedpl.Text = info.UnRealizedPL.ToFormatStr();
+                commission.Text = info.Commission.ToFormatStr();
+                netprofit.Text = info.Profit.ToFormatStr();
+                cashin.Text = info.CashIn.ToFormatStr();
+                cashout.Text = info.CashOut.ToFormatStr();
+                nowequity.Text = info.NowEquity.ToFormatStr();
+                margin.Text = info.Margin.ToFormatStr();
+                marginfrozen.Text = info.MarginFrozen.ToFormatStr();
+                staticEquity.Text = (info.LastEquity + info.CashIn - info.CashOut).ToFormatStr();
+                lastcredit.Text = info.LastCredit.ToFormatStr();
+                creditcashin.Text = info.CreditCashIn.ToFormatStr();
+                creditcashout.Text = info.CreditCashOut.ToFormatStr();
+                credit.Text = info.Credit.ToFormatStr();
+                totalEquity.Text = (info.Credit + info.NowEquity).ToFormatStr();
             }
         }
 

@@ -272,7 +272,7 @@ namespace TradingLib.MoniterControl
             //按利息收取
             if (ServiceType == QSEnumFinServiceType.Interest)
             {
-                return string.Format("{0}以{1}{2}收取利息,金额:{3}", Util.GetEnumDescription(ChargeFreq), Util.FormatDecimal(cbChargeValue.Value), Util.GetEnumDescription(InterestType), Util.FormatDecimal(GetChargeValue()));
+                return string.Format("{0}以{1}{2}收取利息,金额:{3}", Util.GetEnumDescription(ChargeFreq), cbChargeValue.Value.ToFormatStr(), Util.GetEnumDescription(InterestType), GetChargeValue().ToFormatStr());
             }
             return "未设置";
         }
@@ -281,7 +281,7 @@ namespace TradingLib.MoniterControl
         public void SetAccount(AccountLite account)
         {
             _account = account;
-            this.Text = string.Format("配资服务设置 帐户[{0}] 优先资金:{1}万", _account.Account, Util.FormatDecimal(_account.Credit/10000));
+            this.Text = string.Format("配资服务设置 帐户[{0}] 优先资金:{1}万", _account.Account, (_account.Credit / 10000).ToFormatStr());
         }
 
 

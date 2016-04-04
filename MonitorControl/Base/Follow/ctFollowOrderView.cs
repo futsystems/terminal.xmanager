@@ -47,7 +47,7 @@ namespace TradingLib.MoniterControl
                 side.StateCommon.ShortText.Color1 = order.Side ? UIConstant.LongSideColor : UIConstant.ShortSideColor;
                 sizeinfo.Text = string.Format("{0}/{1}", order.SentSize, order.FillSize);
                 //fillsize.Text = order.FillSize.ToString();
-                price.Text = Util.FormatDecimal(order.Price);
+                price.Text = order.Price.ToFormatStr();
 
                 foreach (var f in order.Trades)
                 {

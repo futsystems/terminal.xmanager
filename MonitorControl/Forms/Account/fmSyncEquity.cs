@@ -51,7 +51,7 @@ namespace TradingLib.MoniterControl
 
         void CalValue()
         {
-            targetEquit.Text = Util.FormatDecimal(_mainAcctStaticEquity - targetCredit.Value);
+            targetEquit.Text = (_mainAcctStaticEquity - targetCredit.Value).ToFormatStr();
         }
 
         //AccountLite _account;
@@ -59,15 +59,15 @@ namespace TradingLib.MoniterControl
         public void SetAccountInfo(AccountInfo info)
         {
             _info = info;
-            lbEquity.Text = Util.FormatDecimal(_info.LastEquity + _info.CashIn - _info.CashOut);
-            lbCredit.Text = Util.FormatDecimal(_info.LastCredit + _info.CreditCashIn - _info.CreditCashOut);
+            lbEquity.Text = (_info.LastEquity + _info.CashIn - _info.CashOut).ToFormatStr();
+            lbCredit.Text = (_info.LastCredit + _info.CreditCashIn - _info.CreditCashOut).ToFormatStr();
         }
 
         decimal _mainAcctStaticEquity = 0;
         public void SetStaticEquity(decimal staticequity)
         {
             _mainAcctStaticEquity = staticequity;
-            lbMainAcctStaticEquity.Text = Util.FormatDecimal(_mainAcctStaticEquity);
+            lbMainAcctStaticEquity.Text = (_mainAcctStaticEquity).ToFormatStr();
             targetCredit.Maximum = _mainAcctStaticEquity;
         }
 

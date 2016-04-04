@@ -45,16 +45,16 @@ namespace TradingLib.MoniterControl
             decimal closeprofit = decimal.Parse(data["CloseProfit"].ToString());
             decimal positionprofit = decimal.Parse(data["PositionProfit"].ToString());
 
-            lbPreBalance.Text = Util.FormatDecimal(lastequity);
-            lbDeposit.Text = Util.FormatDecimal(deposit);
-            lbWithDraw.Text = Util.FormatDecimal(withdraw);
-            lbCommission.Text = Util.FormatDecimal(commission);
-            lbCloseProfit.Text = Util.FormatDecimal(closeprofit);
-            lbPositionProfit.Text = Util.FormatDecimal(positionprofit);
-            lbNowEquity.Text = Util.FormatDecimal(lastequity + deposit - withdraw + closeprofit + positionprofit - commission);
+            lbPreBalance.Text = lastequity.ToFormatStr();
+            lbDeposit.Text = deposit.ToFormatStr();
+            lbWithDraw.Text = withdraw.ToFormatStr();
+            lbCommission.Text = commission.ToFormatStr();
+            lbCloseProfit.Text = closeprofit.ToFormatStr();
+            lbPositionProfit.Text = positionprofit.ToFormatStr();
+            lbNowEquity.Text = (lastequity + deposit - withdraw + closeprofit + positionprofit - commission).ToFormatStr();
             _mainstaticequity = lastequity + deposit - withdraw;
-            lbStaticEquity.Text = Util.FormatDecimal(_mainstaticequity);
-            lbProfit.Text = Util.FormatDecimal(closeprofit + positionprofit - commission);
+            lbStaticEquity.Text = (_mainstaticequity).ToFormatStr();
+            lbProfit.Text = (closeprofit + positionprofit - commission).ToFormatStr();
         }
 
         void btnWithdraw_Click(object sender, EventArgs e)

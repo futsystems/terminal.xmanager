@@ -793,6 +793,7 @@ namespace TradingLib.MoniterCore
         {
             debug(PROGRAME + ":×¢²áµ½·þÎñ¶Ë...");
             RegisterClientRequest req = RequestTemplate<RegisterClientRequest>.CliSendRequest(requestid++);
+            req.VersionToken = "Mars";
             TLSend(req);
         }
         /// <summary>
