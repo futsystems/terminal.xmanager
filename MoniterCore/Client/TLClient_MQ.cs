@@ -456,7 +456,7 @@ namespace TradingLib.MoniterCore
                     //实例化asyncClient并绑定对已的函数
                     _mqcli = new AsyncClient(avabileip[providerindex], port, true);
                     _mqcli.SendDebugEvent += new DebugDelegate(msgdebug);
-                    _mqcli.SendTLMessage += new TradingLib.API.HandleTLMessageClient(handle);
+                    _mqcli.SendTLMessage += new Action<Message>(handle);
                     //开始启动连接
                     _mqcli.Start();
                     updateheartbeat();
@@ -1035,7 +1035,7 @@ namespace TradingLib.MoniterCore
         {
             _connect = false;
             _mqcli.SendDebugEvent -= new DebugDelegate(msgdebug);
-            _mqcli.SendTLMessage -= new TradingLib.API.HandleTLMessageClient(handle);
+            _mqcli.SendTLMessage -= new Action<Message>(handle);
             _mqcli = null;//将_mqcli至null 内存才会被回收
 
             if (OnDisconnectEvent != null)
@@ -1079,14 +1079,14 @@ namespace TradingLib.MoniterCore
         #endregion
 
         //消息处理逻辑
-        void handle(MessageTypes type, string msg)
+        void handle(Message msg)
         {
             //if (type != MessageTypes.TICKHEARTBEAT && type != MessageTypes.MGRACCOUNTINFOLITENOTIFY && type != MessageTypes.TICKNOTIFY)
             //{
 
             //    debug("raw message type:" + type.ToString() + " message:" + msg, QSEnumDebugLevel.INFO);
             //}
-            IPacket packet = PacketHelper.CliRecvResponse(type, msg);
+            IPacket packet = PacketHelper.CliRecvResponse(msg);
             switch (packet.Type)
             {
                
@@ -1094,13 +1094,13 @@ namespace TradingLib.MoniterCore
                     Tick t;
                     try
                     {
-                        t = TickImpl.Deserialize(msg);
+                        t = TickImpl.Deserialize(msg.Content);
                     }
                     catch (Exception ex)
                     {
                         _tickerrors++;
                         debug("Error processing tick: " + msg);
-                        debug("TickErrors: " + _tickerrors +" tickfields:"+msg.Split(',').Length.ToString());
+                        debug("TickErrors: " + _tickerrors +" tickfields:"+msg.Content.Split(',').Length.ToString());
                         debug("Error: " + ex.Message + ex.StackTrace);
                         break;
                     }

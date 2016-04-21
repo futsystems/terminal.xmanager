@@ -26,6 +26,7 @@ namespace TradingLib.MoniterControl
             
             entrycommission.Value = -1;
             exitcommission.Value = -1;
+            exitcommissiontoday.Value = -1;
             margin.Value = -1;
             //extramargin.Value = -1;
             //maintancemargin.Value = -1;
@@ -139,6 +140,7 @@ namespace TradingLib.MoniterControl
 
                 this.entrycommission.Value = _symbol._entrycommission;
                 this.exitcommission.Value = _symbol._exitcommission;
+                this.exitcommissiontoday.Value = _symbol._exitcommissiontoday;
                 this.margin.Value = _symbol._margin;
                 this.tradeable.Checked = _symbol.Tradeable;
                 
@@ -153,6 +155,7 @@ namespace TradingLib.MoniterControl
             {
                 _symbol.EntryCommission = entrycommission.Value;
                 _symbol.ExitCommission = exitcommission.Value;
+                _symbol.ExitCommissionToday = exitcommissiontoday.Value;
                 _symbol.Margin = margin.Value;
                 //_symbol.ExtraMargin = extramargin.Value;
                 //_symbol.MaintanceMargin = maintancemargin.Value;
@@ -189,6 +192,7 @@ namespace TradingLib.MoniterControl
 
                 target.EntryCommission = entrycommission.Value;
                 target.ExitCommission = exitcommission.Value;
+                target.ExitCommissionToday = exitcommissiontoday.Value;
                 target.Margin = margin.Value;
 
                 target.security_fk = sec.ID;

@@ -21,7 +21,7 @@ namespace TradingLib.MoniterCore
 
         const string PROGRAME = "AsyncClient";
         public event DebugDelegate SendDebugEvent;
-        public event HandleTLMessageClient SendTLMessage;
+        public event Action<Message> SendTLMessage;
         //public event TickDelegate GotTick;
 
         /// <summary>
@@ -29,10 +29,10 @@ namespace TradingLib.MoniterCore
         /// </summary>
         /// <param name="type"></param>
         /// <param name="msg"></param>
-        private void handleMessage(MessageTypes type, string msg)
+        private void handleMessage(Message msg)
         {
             if (SendTLMessage != null)
-                SendTLMessage(type, msg);
+                SendTLMessage(msg);
 
         }
 
@@ -239,7 +239,7 @@ namespace TradingLib.MoniterCore
                         {
                             NetMQMessage zmsg = e.Socket.ReceiveMessage(timeout);
                             Message msg = Message.gotmessage(zmsg.Last.Buffer);
-                            handleMessage(msg.Type, msg.Content);
+                            handleMessage(msg);
                         }
                     };
 
@@ -346,12 +346,22 @@ namespace TradingLib.MoniterCore
                         {
                             string symbol = p[0];
                             string tickcontent = p[1];
-                            
-                            handleMessage(MessageTypes.TICKNOTIFY, tickcontent);
+                            Message msg = new Message()
+                            {
+                                Type = MessageTypes.TICKNOTIFY,
+                                Content = tickcontent,
+                            };
+
+                            handleMessage(msg);
                         }
                         else if (p[0] == "TICKHEARTBEAT")
                         {
-                            handleMessage(MessageTypes.TICKHEARTBEAT, "TICKHEARTBEAT");
+                            Message msg = new Message()
+                            {
+                                Type = MessageTypes.TICKHEARTBEAT,
+                                Content = "TICKHEARTBEAT",
+                            };
+                            handleMessage(msg);
                         }
                     };
 
@@ -474,7 +484,7 @@ namespace TradingLib.MoniterCore
                         NetMQMessage msg = requester.ReceiveMessage(new TimeSpan(0, 0, 2));
 
                         TradingLib.Common.Message message = TradingLib.Common.Message.gotmessage(msg.Last.Buffer);
-                        br= ResponseTemplate<BrokerNameResponse>.CliRecvResponse(message.Content);
+                        br= ResponseTemplate<BrokerNameResponse>.CliRecvResponse(message);
                         debug("response:" + br.ToString());
                         
                     };
