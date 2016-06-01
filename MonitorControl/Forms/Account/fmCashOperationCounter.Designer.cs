@@ -157,7 +157,7 @@
             this.cashop_amount.DecimalPlaces = 2;
             this.cashop_amount.Location = new System.Drawing.Point(77, 6);
             this.cashop_amount.Maximum = new decimal(new int[] {
-            10000000,
+            100000000,
             0,
             0,
             0});

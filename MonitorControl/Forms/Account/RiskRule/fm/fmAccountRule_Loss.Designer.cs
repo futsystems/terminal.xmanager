@@ -63,7 +63,7 @@
             // 
             this.lbDesp.Location = new System.Drawing.Point(12, 73);
             this.lbDesp.Name = "lbDesp";
-            this.lbDesp.Size = new System.Drawing.Size(19, 18);
+            this.lbDesp.Size = new System.Drawing.Size(20, 20);
             this.lbDesp.TabIndex = 9;
             this.lbDesp.Values.Text = "--";
             // 
@@ -86,14 +86,14 @@
             0,
             0});
             this.loss_warn.Name = "loss_warn";
-            this.loss_warn.Size = new System.Drawing.Size(99, 20);
+            this.loss_warn.Size = new System.Drawing.Size(99, 22);
             this.loss_warn.TabIndex = 7;
             // 
             // kryptonLabel4
             // 
             this.kryptonLabel4.Location = new System.Drawing.Point(255, 36);
             this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(38, 18);
+            this.kryptonLabel4.Size = new System.Drawing.Size(35, 20);
             this.kryptonLabel4.TabIndex = 6;
             this.kryptonLabel4.Values.Text = "报警";
             // 
@@ -101,7 +101,7 @@
             // 
             this.kryptonLabel5.Location = new System.Drawing.Point(115, 36);
             this.kryptonLabel5.Name = "kryptonLabel5";
-            this.kryptonLabel5.Size = new System.Drawing.Size(38, 18);
+            this.kryptonLabel5.Size = new System.Drawing.Size(35, 20);
             this.kryptonLabel5.TabIndex = 5;
             this.kryptonLabel5.Values.Text = "大于";
             // 
@@ -110,19 +110,19 @@
             this.loss_flat.DecimalPlaces = 2;
             this.loss_flat.Location = new System.Drawing.Point(150, 10);
             this.loss_flat.Maximum = new decimal(new int[] {
-            10000000,
+            100000000,
             0,
             0,
             0});
             this.loss_flat.Name = "loss_flat";
-            this.loss_flat.Size = new System.Drawing.Size(99, 20);
+            this.loss_flat.Size = new System.Drawing.Size(99, 22);
             this.loss_flat.TabIndex = 4;
             // 
             // kryptonLabel3
             // 
             this.kryptonLabel3.Location = new System.Drawing.Point(255, 12);
             this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(133, 18);
+            this.kryptonLabel3.Size = new System.Drawing.Size(123, 20);
             this.kryptonLabel3.TabIndex = 3;
             this.kryptonLabel3.Values.Text = "强平持仓并冻结帐户";
             // 
@@ -130,7 +130,7 @@
             // 
             this.kryptonLabel2.Location = new System.Drawing.Point(115, 12);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(38, 18);
+            this.kryptonLabel2.Size = new System.Drawing.Size(35, 20);
             this.kryptonLabel2.TabIndex = 1;
             this.kryptonLabel2.Values.Text = "大于";
             // 
@@ -138,7 +138,7 @@
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(12, 12);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(106, 18);
+            this.kryptonLabel1.Size = new System.Drawing.Size(98, 20);
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "当交易帐户亏损";
             // 
