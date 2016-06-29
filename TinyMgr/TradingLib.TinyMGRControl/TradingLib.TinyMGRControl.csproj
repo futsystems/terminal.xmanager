@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7B799544-5328-4741-81D9-D730BFAA9C44}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TradingLib.TinnyMGRControl</RootNamespace>
+    <AssemblyName>TradingLib.TinnyMGRControl</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Futs.base\lib\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Futs.base\lib\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Toolkit, Version=4.4.0.0, Culture=neutral, PublicKeyToken=dc91bbef911870e2, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TradingLib.API">
+      <HintPath>..\..\..\Futs.base\lib\TradingLib\TradingLib.API.dll</HintPath>
+    </Reference>
+    <Reference Include="TradingLib.Common">
+      <HintPath>..\..\..\Futs.base\lib\TradingLib\TradingLib.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="TradingLib.Mixins">
+      <HintPath>..\..\..\Futs.base\lib\TradingLib\TradingLib.Mixins.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Basic\ctAccountMoniter\AccountDataSource.cs" />
+    <Compile Include="Basic\ctAccountMoniter\ctAccountMontier.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Basic\ctAccountMoniter\ctAccountMontier.designer.cs">
+      <DependentUpon>ctAccountMontier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Basic\ctAccountMoniter\ctAccountMontier_.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Basic\ctAccountMoniter\ctAccountMontier_DyanmicWatchAccounts.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Basic\ctAccountMoniter\ctAccountMontier_Event.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Basic\ctAccountMoniter\ctAccountMontier_FilterAccountList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Basic\ctAccountMoniter\ctAccountMontier_OnInit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Basic\ctAccountMoniter\ctAccountMontier_OnXXXXX.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Basic\ctAccountMoniter\ctAccountMontier_UpdateAccountInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Basic\ctSecurity.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Basic\ctSecurity.designer.cs">
+      <DependentUpon>ctSecurity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Basic\ctSymbol.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Basic\ctSymbol.designer.cs">
+      <DependentUpon>ctSymbol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MoniterHelper.cs" />
+    <Compile Include="pgBasicInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pgBasicInfo.designer.cs">
+      <DependentUpon>pgBasicInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="UIConstant.cs" />
+    <Compile Include="UserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl1.Designer.cs">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Basic\ctAccountMoniter\ctAccountMontier.resx">
+      <DependentUpon>ctAccountMontier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Basic\ctSecurity.resx">
+      <DependentUpon>ctSecurity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Basic\ctSymbol.resx">
+      <DependentUpon>ctSymbol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pgBasicInfo.resx">
+      <DependentUpon>pgBasicInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl1.resx">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\MoniterCore\TradingLib.MoniterCore.csproj">
+      <Project>{AA41EFFA-887D-4C4D-8BE4-91B08C98FF42}</Project>
+      <Name>TradingLib.MoniterCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
