@@ -12,7 +12,7 @@ namespace TradingLib.MoniterCore
     {
         public void ReqQryHistOrders(string account, int settleday)
         {
-            MGRQryOrderRequest request = RequestTemplate<MGRQryOrderRequest>.CliSendRequest(requestid++);
+            MGRQryOrderRequest request = RequestTemplate<MGRQryOrderRequest>.CliSendRequest(++requestid);
             request.TradingAccount = account;
             request.Settleday = settleday;
 
@@ -22,7 +22,7 @@ namespace TradingLib.MoniterCore
 
         public void ReqQryHistTrades(string account, int settleday)
         {
-            MGRQryTradeRequest request = RequestTemplate<MGRQryTradeRequest>.CliSendRequest(requestid++);
+            MGRQryTradeRequest request = RequestTemplate<MGRQryTradeRequest>.CliSendRequest(++requestid);
             request.TradingAccount = account;
             request.Settleday = settleday;
 
@@ -31,7 +31,7 @@ namespace TradingLib.MoniterCore
 
         public void ReqQryHistPosition(string account, int settleday)
         {
-            MGRQryPositionRequest request = RequestTemplate<MGRQryPositionRequest>.CliSendRequest(requestid++);
+            MGRQryPositionRequest request = RequestTemplate<MGRQryPositionRequest>.CliSendRequest(++requestid);
             request.TradingAccount = account;
             request.Settleday = settleday;
 
@@ -40,7 +40,7 @@ namespace TradingLib.MoniterCore
 
         public void ReqQryHistCashTransaction(string account, int settleday)
         {
-            MGRQryCashRequest request = RequestTemplate<MGRQryCashRequest>.CliSendRequest(requestid++);
+            MGRQryCashRequest request = RequestTemplate<MGRQryCashRequest>.CliSendRequest(++requestid);
             request.TradingAccount = account;
             request.Settleday = settleday;
 
@@ -49,7 +49,7 @@ namespace TradingLib.MoniterCore
 
         public void ReqQryHistSettlement(string account, int settleday)
         {
-            MGRQrySettleRequest request = RequestTemplate<MGRQrySettleRequest>.CliSendRequest(requestid++);
+            MGRQrySettleRequest request = RequestTemplate<MGRQrySettleRequest>.CliSendRequest(++requestid);
             request.TradingAccount = account;
             request.Settleday = settleday;
 

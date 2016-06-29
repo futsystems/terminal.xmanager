@@ -522,6 +522,12 @@
     <Compile Include="Forms\Domain\fmDomainInfo.Designer.cs">
       <DependentUpon>fmDomainInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Basic\fmImportStk.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Basic\fmImportStk.Designer.cs">
+      <DependentUpon>fmImportStk.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Manager\fmManagerPermission.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1017,6 +1023,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Domain\fmDomainInfo.resx">
       <DependentUpon>fmDomainInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Basic\fmImportStk.resx">
+      <DependentUpon>fmImportStk.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Manager\fmManagerPermission.resx">
       <DependentUpon>fmManagerPermission.cs</DependentUpon>

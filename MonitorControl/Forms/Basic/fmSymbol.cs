@@ -439,6 +439,14 @@ namespace TradingLib.MoniterControl
             btnAddSymbol.Click +=new EventHandler(btnAddSymbol_Click);
             btnSyncSymbols.Click +=new EventHandler(btnSyncSymbols_Click);
             btnDisableAll.Click += new EventHandler(btnDisableAll_Click);
+            btnImportStk.Click += new EventHandler(btnImportStk_Click);
+        }
+
+        void btnImportStk_Click(object sender, EventArgs e)
+        {
+            fmImportStk fm = new fmImportStk();
+            fm.ShowDialog();
+            fm.Close();
         }
        
 

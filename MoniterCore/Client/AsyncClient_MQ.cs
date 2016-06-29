@@ -226,6 +226,9 @@ namespace TradingLib.MoniterCore
             {
                 using (_client = _mctx.CreateDealerSocket())
                 {
+                    _client.Options.SendHighWatermark = 1000000;
+                    _client.Options.ReceiveHighWatermark = 1000000;
+
                     _identity = System.Guid.NewGuid().ToString();
                     _client.Options.Identity = Encoding.UTF8.GetBytes(_identity);
                     string cstr = "tcp://" + _serverip.ToString() + ":" + Port.ToString();

@@ -45,7 +45,7 @@ namespace TradingLib.MoniterCore
         public void ReqQryExchange()
         {
             logger.Info("请求查询交易所列表");
-            MGRQryExchangeRequuest request = RequestTemplate<MGRQryExchangeRequuest>.CliSendRequest(requestid++);
+            MGRQryExchangeRequuest request = RequestTemplate<MGRQryExchangeRequuest>.CliSendRequest(++requestid);
 
             SendPacket(request);
         }
@@ -53,7 +53,7 @@ namespace TradingLib.MoniterCore
         public void ReqUpdateExchange(Exchange ex)
         {
             logger.Info("请求更新交易所");
-            MGRUpdateExchangeRequest request = RequestTemplate<MGRUpdateExchangeRequest>.CliSendRequest(requestid++);
+            MGRUpdateExchangeRequest request = RequestTemplate<MGRUpdateExchangeRequest>.CliSendRequest(++requestid);
             request.Exchange = ex;
 
             SendPacket(request);
@@ -63,7 +63,7 @@ namespace TradingLib.MoniterCore
         public void ReqQryMarketTime()
         {
             logger.Info("请求查询市场时间列表");
-            MGRQryMarketTimeRequest request = RequestTemplate<MGRQryMarketTimeRequest>.CliSendRequest(requestid++);
+            MGRQryMarketTimeRequest request = RequestTemplate<MGRQryMarketTimeRequest>.CliSendRequest(++requestid);
 
             SendPacket(request);
         }
@@ -71,7 +71,7 @@ namespace TradingLib.MoniterCore
         public void ReqUpdateMarketTime(MarketTime mt)
         {
             logger.Info("请求更新交易时间段");
-            MGRUpdateMarketTimeRequest request = RequestTemplate<MGRUpdateMarketTimeRequest>.CliSendRequest(requestid++);
+            MGRUpdateMarketTimeRequest request = RequestTemplate<MGRUpdateMarketTimeRequest>.CliSendRequest(++requestid);
             request.MarketTime = mt;
 
             SendPacket(request);
@@ -79,14 +79,14 @@ namespace TradingLib.MoniterCore
         public void ReqQrySecurity()
         {
             logger.Info("请求查询品种列表");
-            MGRQrySecurityRequest request = RequestTemplate<MGRQrySecurityRequest>.CliSendRequest(requestid++);
+            MGRQrySecurityRequest request = RequestTemplate<MGRQrySecurityRequest>.CliSendRequest(++requestid);
 
             SendPacket(request);
         }
         public void ReqUpdateSecurity(SecurityFamilyImpl sec)
         {
             logger.Info("请求更新品种信息");
-            MGRUpdateSecurityRequest request = RequestTemplate<MGRUpdateSecurityRequest>.CliSendRequest(requestid++);
+            MGRUpdateSecurityRequest request = RequestTemplate<MGRUpdateSecurityRequest>.CliSendRequest(++requestid);
             request.SecurityFaimly = sec;
 
             SendPacket(request);
@@ -95,7 +95,7 @@ namespace TradingLib.MoniterCore
         //public void ReqAddSecurity(SecurityFamilyImpl sec)
         //{
         //    logger.Info("请求添加品种信息");
-        //    MGRReqAddSecurityRequest request = RequestTemplate<MGRReqAddSecurityRequest>.CliSendRequest(requestid++);
+        //    MGRReqAddSecurityRequest request = RequestTemplate<MGRReqAddSecurityRequest>.CliSendRequest(++requestid);
         //    request.SecurityFaimly = sec;
 
         //    SendPacket(request);
@@ -104,24 +104,25 @@ namespace TradingLib.MoniterCore
         public void ReqQrySymbol()
         {
             logger.Info("请求查询合约列表");
-            MGRQrySymbolRequest request = RequestTemplate<MGRQrySymbolRequest>.CliSendRequest(requestid++);
+            MGRQrySymbolRequest request = RequestTemplate<MGRQrySymbolRequest>.CliSendRequest(++requestid);
 
             SendPacket(request);
         }
 
-        public void ReqUpdateSymbol(SymbolImpl sym)
+        public int ReqUpdateSymbol(SymbolImpl sym)
         {
             logger.Info("请求更新合约");
-            MGRUpdateSymbolRequest request = RequestTemplate<MGRUpdateSymbolRequest>.CliSendRequest(requestid++);
+            MGRUpdateSymbolRequest request = RequestTemplate<MGRUpdateSymbolRequest>.CliSendRequest(++requestid);
             request.Symbol = sym;
 
             SendPacket(request);
+            return requestid;
         }
 
         //public void ReqUpdateSymbol(SymbolImpl sym)
         //{
         //    logger.Info("请求更新合约");
-        //    MGRUpdateSymbolRequest request = RequestTemplate<MGRUpdateSymbolRequest>.CliSendRequest(requestid++);
+        //    MGRUpdateSymbolRequest request = RequestTemplate<MGRUpdateSymbolRequest>.CliSendRequest(++requestid);
         //    request.Symbol = sym;
 
         //    SendPacket(request);

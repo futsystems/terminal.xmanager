@@ -792,7 +792,7 @@ namespace TradingLib.MoniterCore
         void Register()
         {
             debug(PROGRAME + ":注册到服务端...");
-            RegisterClientRequest req = RequestTemplate<RegisterClientRequest>.CliSendRequest(requestid++);
+            RegisterClientRequest req = RequestTemplate<RegisterClientRequest>.CliSendRequest(++requestid);
             req.VersionToken = "Mars";
             TLSend(req);
         }
@@ -803,7 +803,7 @@ namespace TradingLib.MoniterCore
         {
             debug(PROGRAME + ":请求服务端功能列表...");
             _rfl.Clear();
-            FeatureRequest request = RequestTemplate<FeatureRequest>.CliSendRequest(requestid++);
+            FeatureRequest request = RequestTemplate<FeatureRequest>.CliSendRequest(++requestid);
             TLSend(request);
         }
 
@@ -813,7 +813,7 @@ namespace TradingLib.MoniterCore
         void ReqServerVersion()
         {
             debug(PROGRAME + ":请求服务端版本...");
-            VersionRequest request = RequestTemplate<VersionRequest>.CliSendRequest(requestid++);
+            VersionRequest request = RequestTemplate<VersionRequest>.CliSendRequest(++requestid);
             request.ClientVersion = "2.0";
             request.DeviceType = "PC";
             TLSend(request);

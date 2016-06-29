@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmSymbol));
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.cbsecurity = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.btnDisableAll = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnAddSymbol = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnSyncSymbols = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -38,18 +40,18 @@
             this.cbtradeable = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.cbexchange = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.symgrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.cbsecurity = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.btnImportStk = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbsecurity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbtradeable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbexchange)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.symgrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbsecurity)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.btnImportStk);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
             this.kryptonPanel1.Controls.Add(this.cbsecurity);
             this.kryptonPanel1.Controls.Add(this.btnDisableAll);
@@ -65,6 +67,22 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(844, 416);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // kryptonLabel1
+            // 
+            this.kryptonLabel1.Location = new System.Drawing.Point(213, 8);
+            this.kryptonLabel1.Name = "kryptonLabel1";
+            this.kryptonLabel1.Size = new System.Drawing.Size(38, 20);
+            this.kryptonLabel1.TabIndex = 17;
+            this.kryptonLabel1.Values.Text = "品种:";
+            // 
+            // cbsecurity
+            // 
+            this.cbsecurity.DropDownWidth = 121;
+            this.cbsecurity.Location = new System.Drawing.Point(260, 5);
+            this.cbsecurity.Name = "cbsecurity";
+            this.cbsecurity.Size = new System.Drawing.Size(90, 21);
+            this.cbsecurity.TabIndex = 16;
             // 
             // btnDisableAll
             // 
@@ -94,7 +112,7 @@
             // 
             this.kryptonLabel3.Location = new System.Drawing.Point(370, 8);
             this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(82, 18);
+            this.kryptonLabel3.Size = new System.Drawing.Size(75, 20);
             this.kryptonLabel3.TabIndex = 12;
             this.kryptonLabel3.Values.Text = "是否可交易:";
             // 
@@ -102,7 +120,7 @@
             // 
             this.kryptonLabel2.Location = new System.Drawing.Point(5, 8);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(55, 18);
+            this.kryptonLabel2.Size = new System.Drawing.Size(51, 20);
             this.kryptonLabel2.TabIndex = 11;
             this.kryptonLabel2.Values.Text = "交易所:";
             // 
@@ -124,9 +142,9 @@
             // 
             // symgrid
             // 
-            this.symgrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.symgrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.symgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.symgrid.Location = new System.Drawing.Point(0, 35);
             this.symgrid.Name = "symgrid";
@@ -134,21 +152,13 @@
             this.symgrid.Size = new System.Drawing.Size(844, 350);
             this.symgrid.TabIndex = 0;
             // 
-            // kryptonLabel1
+            // btnImportStk
             // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(213, 8);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(41, 18);
-            this.kryptonLabel1.TabIndex = 17;
-            this.kryptonLabel1.Values.Text = "品种:";
-            // 
-            // cbsecurity
-            // 
-            this.cbsecurity.DropDownWidth = 121;
-            this.cbsecurity.Location = new System.Drawing.Point(260, 5);
-            this.cbsecurity.Name = "cbsecurity";
-            this.cbsecurity.Size = new System.Drawing.Size(90, 21);
-            this.cbsecurity.TabIndex = 16;
+            this.btnImportStk.Location = new System.Drawing.Point(415, 388);
+            this.btnImportStk.Name = "btnImportStk";
+            this.btnImportStk.Size = new System.Drawing.Size(90, 25);
+            this.btnImportStk.TabIndex = 18;
+            this.btnImportStk.Values.Text = "导入股票列表";
             // 
             // fmSymbol
             // 
@@ -166,10 +176,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbsecurity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbtradeable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbexchange)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.symgrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbsecurity)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -187,5 +197,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnDisableAll;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox cbsecurity;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnImportStk;
     }
 }

@@ -18,9 +18,9 @@ namespace TradingLib.MoniterCore
         /// <param name="pass"></param>
         public void ReqLogin(string loginid, string pass)
         {
-            //MGRLoginRequest request = RequestTemplate<MGRLoginRequest>.CliSendRequest(requestid++);
+            //MGRLoginRequest request = RequestTemplate<MGRLoginRequest>.CliSendRequest(++requestid);
             logger.Info(string.Format("请求登入,{0} {1}", loginid, pass));
-            LoginRequest request = RequestTemplate<LoginRequest>.CliSendRequest(requestid++);
+            LoginRequest request = RequestTemplate<LoginRequest>.CliSendRequest(++requestid);
             request.LoginID = loginid;
             request.Passwd = pass;
             
@@ -34,7 +34,7 @@ namespace TradingLib.MoniterCore
             Func<LocationInfo> proc = ((AsyncResult)async).AsyncDelegate as Func<LocationInfo>;
             LocationInfo info = proc.EndInvoke(async);
             //InvokeGotGLocation(location);
-            UpdateLocationInfoRequest request = RequestTemplate<UpdateLocationInfoRequest>.CliSendRequest(requestid++);
+            UpdateLocationInfoRequest request = RequestTemplate<UpdateLocationInfoRequest>.CliSendRequest(++requestid);
             request.LocationInfo = info;
             SendPacket(request);
         }
@@ -60,7 +60,7 @@ namespace TradingLib.MoniterCore
         /// <param name="order"></param>
         public void ReqOrderInsert(Order order)
         {
-            OrderInsertRequest request = RequestTemplate<OrderInsertRequest>.CliSendRequest(requestid++);
+            OrderInsertRequest request = RequestTemplate<OrderInsertRequest>.CliSendRequest(++requestid);
             request.Order = order;
 
             SendPacket(request);
@@ -72,7 +72,7 @@ namespace TradingLib.MoniterCore
         /// <param name="action"></param>
         public void ReqOrderAction(OrderAction action)
         {
-            OrderActionRequest requets = RequestTemplate<OrderActionRequest>.CliSendRequest(requestid++);
+            OrderActionRequest requets = RequestTemplate<OrderActionRequest>.CliSendRequest(++requestid);
             requets.OrderAction = action;
 
             SendPacket(requets);
@@ -145,7 +145,7 @@ namespace TradingLib.MoniterCore
         public void ReqContribRequest(string module, string cmd, string args)
         {
             logger.Info("请求扩展命令,module:" + module + " cmd:" + cmd + " args:" + args);
-            MGRContribRequest request = RequestTemplate<MGRContribRequest>.CliSendRequest(requestid++);
+            MGRContribRequest request = RequestTemplate<MGRContribRequest>.CliSendRequest(++requestid);
             request.ModuleID = module;
             request.CMDStr = cmd;
             request.Parameters = args;
@@ -170,7 +170,7 @@ namespace TradingLib.MoniterCore
         public void ReqInsertTrade(Trade f)
         {
             logger.Info("请求插入成交");
-            MGRReqInsertTradeRequest request = RequestTemplate<MGRReqInsertTradeRequest>.CliSendRequest(requestid++);
+            MGRReqInsertTradeRequest request = RequestTemplate<MGRReqInsertTradeRequest>.CliSendRequest(++requestid);
             request.TradeToSend = f;
             SendPacket(request);
 
