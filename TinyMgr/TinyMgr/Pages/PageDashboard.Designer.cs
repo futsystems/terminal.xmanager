@@ -35,10 +35,10 @@
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(28, 13);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(212, 35);
+            this.kryptonLabel1.Size = new System.Drawing.Size(299, 35);
             this.kryptonLabel1.StateCommon.ShortText.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "欢迎使用资管系统";
+            this.kryptonLabel1.Values.Text = "欢迎使用资管系统-管理端";
             // 
             // PageDashboard
             // 

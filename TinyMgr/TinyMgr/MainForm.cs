@@ -89,8 +89,14 @@ namespace TinyMgr
         /// </summary>
         void InitMenu()
         {
+            btnHome.Click += new EventHandler(btnHome_Click);
             btnSymbol.Click += new EventHandler(btnSymbol_Click);
 
+        }
+
+        void btnHome_Click(object sender, EventArgs e)
+        {
+            ShowPage(PageTypes.PAGE_DASHBOARD);
         }
 
         void btnSymbol_Click(object sender, EventArgs e)
