@@ -1,4 +1,4 @@
-﻿namespace TradingLib.TinnyMGRControl
+﻿namespace TradingLib.TinyMGRControl
 {
     partial class UserControl1
     {

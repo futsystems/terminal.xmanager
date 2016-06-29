@@ -58,20 +58,20 @@ namespace TradingLib.TinyMGRControl
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        //public static IDataSource AdapterToIDataSource(object obj)
-        //{
-        //    if (obj is KryptonComboBox)
-        //        return new KryptonComboBox2IDataSource(obj as KryptonComboBox);
-        //    else if (obj is KryptonListBox)
-        //        return new KryptonListBox2IDataSource(obj as KryptonListBox);
-        //    else if (obj is ListBox)
-        //        return new ListBox2IDataSource(obj as ListBox);
-        //    else if (obj is ComboBox)
-        //        return new ComboBox2IDataSource(obj as ComboBox);
-        //    else if (obj is CheckedListBox)
-        //        return new CheckedListBox2IDataSource(obj as CheckedListBox);
-        //    return new Invalid2IDataSource(); ;
-        //}
+        public static IDataSource AdapterToIDataSource(object obj)
+        {
+            if (obj is KryptonComboBox)
+                return new KryptonComboBox2IDataSource(obj as KryptonComboBox);
+            else if (obj is KryptonListBox)
+                return new KryptonListBox2IDataSource(obj as KryptonListBox);
+            else if (obj is ListBox)
+                return new ListBox2IDataSource(obj as ListBox);
+            else if (obj is ComboBox)
+                return new ComboBox2IDataSource(obj as ComboBox);
+            else if (obj is CheckedListBox)
+                return new CheckedListBox2IDataSource(obj as CheckedListBox);
+            return new Invalid2IDataSource(); ;
+        }
 
         public static System.Windows.Forms.DialogResult WindowConfirm(string message, string title = "确认操作")
         {

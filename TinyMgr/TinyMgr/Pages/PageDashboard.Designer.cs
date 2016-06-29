@@ -1,6 +1,6 @@
 ﻿namespace TinyMgr
 {
-    partial class PageSTKSymbol
+    partial class PageDashboard
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,30 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ctSymbol1 = new TradingLib.TinyMGRControl.ctSTKSymbol();
+            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.SuspendLayout();
             // 
-            // ctSymbol1
+            // kryptonLabel1
             // 
-            this.ctSymbol1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctSymbol1.Location = new System.Drawing.Point(0, 0);
-            this.ctSymbol1.Name = "ctSymbol1";
-            this.ctSymbol1.Size = new System.Drawing.Size(827, 437);
-            this.ctSymbol1.TabIndex = 0;
+            this.kryptonLabel1.Location = new System.Drawing.Point(28, 13);
+            this.kryptonLabel1.Name = "kryptonLabel1";
+            this.kryptonLabel1.Size = new System.Drawing.Size(212, 35);
+            this.kryptonLabel1.StateCommon.ShortText.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.kryptonLabel1.TabIndex = 0;
+            this.kryptonLabel1.Values.Text = "欢迎使用资管系统";
             // 
-            // PageSymbol
+            // PageDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.ctSymbol1);
-            this.Name = "PageSymbol";
-            this.Size = new System.Drawing.Size(827, 437);
+            this.Controls.Add(this.kryptonLabel1);
+            this.Name = "PageDashboard";
+            this.Size = new System.Drawing.Size(716, 345);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private TradingLib.TinyMGRControl.ctSTKSymbol ctSymbol1;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
     }
 }

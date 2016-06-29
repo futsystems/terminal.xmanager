@@ -8,8 +8,8 @@
     <ProjectGuid>{7B799544-5328-4741-81D9-D730BFAA9C44}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TradingLib.TinnyMGRControl</RootNamespace>
-    <AssemblyName>TradingLib.TinnyMGRControl</AssemblyName>
+    <RootNamespace>TradingLib.TinyMGRControl</RootNamespace>
+    <AssemblyName>TradingLib.TinyMGRControl</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -99,6 +99,8 @@
     <Compile Include="Basic\ctSTKSymbol.designer.cs">
       <DependentUpon>ctSTKSymbol.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataSourceAdapter.cs" />
+    <Compile Include="IPage.cs" />
     <Compile Include="MoniterHelper.cs" />
     <Compile Include="pgBasicInfo.cs">
       <SubType>UserControl</SubType>

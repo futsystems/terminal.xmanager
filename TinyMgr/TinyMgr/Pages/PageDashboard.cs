@@ -6,12 +6,16 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using TradingLib.TinyMGRControl;
 
-namespace TradingLib.TinyMGRControl
+namespace TinyMgr
 {
-    public partial class UserControl1 : UserControl
+    public partial class PageDashboard : UserControl,IPage
     {
-        public UserControl1()
+        string _pageName = PageTypes.PAGE_DASHBOARD;
+        public string PageName { get { return _pageName; } }
+
+        public PageDashboard()
         {
             InitializeComponent();
         }
