@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace TradingLib.TinyMGRControl
 {
-    public partial class ctSymbol : UserControl
+    public partial class ctSTKSymbol : UserControl
     {
-        public ctSymbol()
+        public ctSTKSymbol()
         {
             InitializeComponent();
 

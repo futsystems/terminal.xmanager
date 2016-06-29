@@ -32,7 +32,7 @@
             this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.ctSecurity1 = new TradingLib.TinyMGRControl.ctSecurity();
             this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.ctSymbol1 = new TradingLib.TinyMGRControl.ctSymbol();
+            this.ctSymbol1 = new TradingLib.TinyMGRControl.ctSTKSymbol();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
             this.kryptonNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
@@ -123,6 +123,6 @@
         private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage1;
         private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage2;
         private TradingLib.TinyMGRControl.ctSecurity ctSecurity1;
-        private TradingLib.TinyMGRControl.ctSymbol ctSymbol1;
+        private TradingLib.TinyMGRControl.ctSTKSymbol ctSymbol1;
     }
 }

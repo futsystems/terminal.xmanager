@@ -93,11 +93,11 @@
     <Compile Include="Basic\ctSecurity.designer.cs">
       <DependentUpon>ctSecurity.cs</DependentUpon>
     </Compile>
-    <Compile Include="Basic\ctSymbol.cs">
+    <Compile Include="Basic\ctSTKSymbol.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Basic\ctSymbol.designer.cs">
-      <DependentUpon>ctSymbol.cs</DependentUpon>
+    <Compile Include="Basic\ctSTKSymbol.designer.cs">
+      <DependentUpon>ctSTKSymbol.cs</DependentUpon>
     </Compile>
     <Compile Include="MoniterHelper.cs" />
     <Compile Include="pgBasicInfo.cs">
@@ -128,8 +128,8 @@
     <EmbeddedResource Include="Basic\ctSecurity.resx">
       <DependentUpon>ctSecurity.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Basic\ctSymbol.resx">
-      <DependentUpon>ctSymbol.cs</DependentUpon>
+    <EmbeddedResource Include="Basic\ctSTKSymbol.resx">
+      <DependentUpon>ctSTKSymbol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pgBasicInfo.resx">
       <DependentUpon>pgBasicInfo.cs</DependentUpon>

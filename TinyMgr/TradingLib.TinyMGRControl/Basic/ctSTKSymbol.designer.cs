@@ -1,6 +1,6 @@
 ﻿namespace TradingLib.TinyMGRControl
 {
-    partial class ctSymbol
+    partial class ctSTKSymbol
     {
         /// <summary> 
         /// 必需的设计器变量。
