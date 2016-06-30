@@ -41,7 +41,7 @@ namespace TinyMgr
             ctOrderViewSTK1.Clear();
             _lastqrytime = DateTime.Now;
             btnQry.Enabled = false;
-            _qryid = CoreService.TLClient.ReqQryHistOrders(account.Text, 20160602);
+            _qryid = CoreService.TLClient.ReqQryHistOrders(account.Text, Util.ToTLDate(start.Value), Util.ToTLDate(end.Value));
         }
 
         void EventQuery_OnRspMGRQryOrderResponse(Order arg1, RspInfo arg2, int arg3, bool arg4)

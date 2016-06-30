@@ -112,7 +112,7 @@ namespace TradingLib.MoniterControl
                 {
                     ctHistOrder1.GotHistOrder(o);
                 }
-                CoreService.TLClient.ReqQryHistTrades(account.Text, Settleday);
+                CoreService.TLClient.ReqQryHistTrades(account.Text, Settleday,Settleday);
             }
             else
             {
@@ -168,7 +168,7 @@ namespace TradingLib.MoniterControl
             ctHistOrder1.Clear();
             ctHistTrade1.Clear();
             ctHistPosition1.Clear();
-            CoreService.TLClient.ReqQryHistOrders(account.Text, Settleday);
+            CoreService.TLClient.ReqQryHistOrders(account.Text, Settleday,Settleday);
         }
 
         int Settleday

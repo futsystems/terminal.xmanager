@@ -34,9 +34,9 @@
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.start = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.ctOrderViewSTK1 = new TradingLib.TinyMGRControl.ctOrderViewSTK();
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.account = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.ctOrderViewSTK1 = new TradingLib.TinyMGRControl.ctOrderViewSTK();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -95,17 +95,6 @@
             this.kryptonLabel1.TabIndex = 6;
             this.kryptonLabel1.Values.Text = "起";
             // 
-            // ctOrderViewSTK1
-            // 
-            this.ctOrderViewSTK1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ctOrderViewSTK1.Location = new System.Drawing.Point(0, 30);
-            this.ctOrderViewSTK1.Name = "ctOrderViewSTK1";
-            this.ctOrderViewSTK1.RealView = true;
-            this.ctOrderViewSTK1.Size = new System.Drawing.Size(711, 373);
-            this.ctOrderViewSTK1.TabIndex = 11;
-            // 
             // kryptonLabel3
             // 
             this.kryptonLabel3.Location = new System.Drawing.Point(3, 3);
@@ -121,6 +110,17 @@
             this.account.Size = new System.Drawing.Size(123, 20);
             this.account.TabIndex = 13;
             this.account.Text = "8500008";
+            // 
+            // ctOrderViewSTK1
+            // 
+            this.ctOrderViewSTK1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ctOrderViewSTK1.Location = new System.Drawing.Point(0, 30);
+            this.ctOrderViewSTK1.Name = "ctOrderViewSTK1";
+            this.ctOrderViewSTK1.RealView = false;
+            this.ctOrderViewSTK1.Size = new System.Drawing.Size(711, 373);
+            this.ctOrderViewSTK1.TabIndex = 11;
             // 
             // ctQueryOrder
             // 

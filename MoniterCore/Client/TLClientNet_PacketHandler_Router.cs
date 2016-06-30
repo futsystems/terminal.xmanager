@@ -256,6 +256,7 @@ namespace TradingLib.MoniterCore
                 //    CliOnMGRystemStatus(packet as RspMGRQrySystemStatusResponse);
                 //    break;
 
+                #region 查询历史交易记录
                 case MessageTypes.MGRORDERRESPONSE://查询委托回报
                     CliOnMGROrderResponse(packet as RspMGRQryOrderResponse);
                     break;
@@ -271,6 +272,9 @@ namespace TradingLib.MoniterCore
                 case MessageTypes.MGRSETTLEMENTRESPONSE://查询结算单回报
                     CliOnMGRSettlementResponse(packet as RspMGRQrySettleResponse);
                     break;
+                #endregion
+
+
                 //case MessageTypes.MGRCHANGEACCOUNTPASSRESPONSE://修改密码回报
                 //    CliOnMGRChangePassResponse(packet as RspMGRChangeAccountPassResponse);
                 //    break;

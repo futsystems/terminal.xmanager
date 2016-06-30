@@ -26,18 +26,30 @@ namespace TradingLib.MoniterCore
         void CliOnMGRTradeResponse(RspMGRQryTradeResponse response)
         {
             CoreService.EventIndicator.FireHistTradeEvent(response.TradeToSend, response.IsLast);
+            Trade f = response.TradeToSend;
+            if (f != null)
+            {
+                f.oSymbol = CoreService.BasicInfoTracker.GetSymbol(f.Symbol);
+            }
+            CoreService.EventQuery.FireRspMGRQryFillResponse(f, response.RspInfo, response.RequestID, response.IsLast);
+            
         }
 
 
         void CliOnMGRPositionResponse(RspMGRQryPositionResponse response)
         {
             CoreService.EventIndicator.FireHistPositionEvent(response.PostionToSend, response.IsLast);
+            PositionDetail pd = response.PostionToSend;
+            if (pd != null)
+            {
+                pd.oSymbol = CoreService.BasicInfoTracker.GetSymbol(pd.Symbol);
+            }
+            CoreService.EventQuery.FireRspMGRQryPositionResponse(pd, response.RspInfo, response.RequestID, response.IsLast);
         }
 
         void CliOnMGRCashTransactionResponse(RspMGRQryCashResponse response)
         {
-            logger.Info("got cashtransaction response:" + response.ToString());
-            //this.handler.OnMGRCashTransactionResponse(response.CashTransToSend, response.IsLast);
+            CoreService.EventQuery.FireRspMGRQryCashTxnResponse(response.CashTransToSend, response.RspInfo, response.RequestID, response.IsLast);
         }
 
         void CliOnMGRSettlementResponse(RspMGRQrySettleResponse response)
