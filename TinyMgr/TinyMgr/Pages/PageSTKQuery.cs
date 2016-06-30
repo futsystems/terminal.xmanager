@@ -6,12 +6,17 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using TradingLib.TinyMGRControl;
 
-namespace TradingLib.TinyMGRControl
+
+namespace TinyMgr
 {
-    public partial class pgBasicInfo : UserControl
+    public partial class PageSTKQuery : UserControl,IPage
     {
-        public pgBasicInfo()
+
+        string _pageName = PageTypes.PAGE_STK_SYMBOLS;
+        public string PageName { get { return _pageName; } }
+        public PageSTKQuery()
         {
             InitializeComponent();
         }

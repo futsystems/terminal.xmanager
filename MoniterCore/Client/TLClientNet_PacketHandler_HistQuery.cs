@@ -14,6 +14,13 @@ namespace TradingLib.MoniterCore
         void CliOnMGROrderResponse(RspMGRQryOrderResponse response)
         {
             CoreService.EventIndicator.FireHistOrderEvent(response.OrderToSend, response.IsLast);
+
+            Order o = response.OrderToSend;
+            if (o != null)
+            {
+                o.oSymbol = CoreService.BasicInfoTracker.GetSymbol(o.Symbol);
+            }
+            CoreService.EventQuery.FireRspMGRQryOrderResponse(o, response.RspInfo, response.RequestID, response.IsLast);
         }
 
         void CliOnMGRTradeResponse(RspMGRQryTradeResponse response)

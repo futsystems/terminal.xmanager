@@ -99,28 +99,41 @@
     <Compile Include="Basic\ctSTKSymbol.designer.cs">
       <DependentUpon>ctSTKSymbol.cs</DependentUpon>
     </Compile>
+    <Compile Include="Control\ctDeliveryViewSTK.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ctDeliveryViewSTK.designer.cs">
+      <DependentUpon>ctDeliveryViewSTK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ctOrderViewSTK.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ctOrderViewSTK.designer.cs">
+      <DependentUpon>ctOrderViewSTK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ctPositionViewSTK.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ctPositionViewSTK.designer.cs">
+      <DependentUpon>ctPositionViewSTK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ctTradeViewSTK.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ctTradeViewSTK.designer.cs">
+      <DependentUpon>ctTradeViewSTK.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataSourceAdapter.cs" />
     <Compile Include="IPage.cs" />
     <Compile Include="MoniterHelper.cs" />
-    <Compile Include="pgBasicInfo.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="pgBasicInfo.designer.cs">
-      <DependentUpon>pgBasicInfo.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="UIConstant.cs" />
-    <Compile Include="UserControl1.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControl1.Designer.cs">
-      <DependentUpon>UserControl1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
@@ -133,16 +146,22 @@
     <EmbeddedResource Include="Basic\ctSTKSymbol.resx">
       <DependentUpon>ctSTKSymbol.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="pgBasicInfo.resx">
-      <DependentUpon>pgBasicInfo.cs</DependentUpon>
+    <EmbeddedResource Include="Control\ctDeliveryViewSTK.resx">
+      <DependentUpon>ctDeliveryViewSTK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ctOrderViewSTK.resx">
+      <DependentUpon>ctOrderViewSTK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ctPositionViewSTK.resx">
+      <DependentUpon>ctPositionViewSTK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ctTradeViewSTK.resx">
+      <DependentUpon>ctTradeViewSTK.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControl1.resx">
-      <DependentUpon>UserControl1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

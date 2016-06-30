@@ -255,6 +255,7 @@ namespace TradingLib.MoniterCore
                 //case MessageTypes.MGRSYSTEMSTATUSRESPONSE://查询系统状态回报
                 //    CliOnMGRystemStatus(packet as RspMGRQrySystemStatusResponse);
                 //    break;
+
                 case MessageTypes.MGRORDERRESPONSE://查询委托回报
                     CliOnMGROrderResponse(packet as RspMGRQryOrderResponse);
                     break;
@@ -287,42 +288,12 @@ namespace TradingLib.MoniterCore
                 //    break;
 
 
-                #region 查询
-                //case MessageTypes.ORDERRESPONSE://查询委托回报
-                //    CliOnRspQryOrderResponse(packet as RspQryOrderResponse);
-                //    break;
-                //case MessageTypes.TRADERESPONSE://查询成交回报
-                //    CliOnRspQryTradeResponse(packet as RspQryTradeResponse);
-                //    break;
-                //case MessageTypes.POSITIONRESPONSE://查询持仓回报
-                //    CliOnRspQryPositionResponse(packet as RspQryPositionResponse);
-                //    break;
-
-                //case MessageTypes.ACCOUNTINFORESPONSE://帐户信息回报
-                //    CliOnRspQryAccountInfoResponse(packet as RspQryAccountInfoResponse);
-                //    break;
-                //case MessageTypes.INVESTORRESPONSE:
-                //    CliOnRspQryInvestorResponse(packet as RspQryInvestorResponse);
-                //    break;
-
-                //case MessageTypes.MAXORDERVOLRESPONSE: //最大可开数量回报
-                //    CliOnMaxOrderVol(packet as RspQryMaxOrderVolResponse);
-                //    break;
-                //case MessageTypes.SETTLEINFOCONFIRMRESPONSE://结算确认回报
-                //    CliOnSettleInfoConfirm(packet as RspQrySettleInfoConfirmResponse);
-                //    break;
-
-                //case MessageTypes.SETTLEINFORESPONSE://结算信息会回报
-                //    CliOnSettleInfo(packet as RspQrySettleInfoResponse);
-                //    break;
-
                 case MessageTypes.MGRCONTRIBRESPONSE://管理扩展回报
                     CliOnMGRContribResponse(packet as RspMGRContribResponse);
                     break;
                 case MessageTypes.MGRCONTRIBRNOTIFY://管理扩展通知
                     CliOnMGRContribNotify(packet as NotifyMGRContribNotify);
                     break;
-                #endregion
 
                 default:
                     logger.Error("Packet Handler Not Set, Packet:" + packet.ToString());

@@ -1,6 +1,6 @@
 ﻿namespace TradingLib.TinyMGRControl
 {
-    partial class pgBasicInfo
+    partial class ctOrderViewSTK
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,18 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.orderGrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.orderGrid)).BeginInit();
             this.SuspendLayout();
             // 
-            // pgBasicInfo
+            // orderGrid
+            // 
+            this.orderGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.orderGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.orderGrid.Location = new System.Drawing.Point(0, 0);
+            this.orderGrid.Name = "orderGrid";
+            this.orderGrid.RowTemplate.Height = 23;
+            this.orderGrid.Size = new System.Drawing.Size(657, 250);
+            this.orderGrid.TabIndex = 0;
+            // 
+            // ctOrderViewSTK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "pgBasicInfo";
-            this.Size = new System.Drawing.Size(715, 384);
+            this.Controls.Add(this.orderGrid);
+            this.Name = "ctOrderViewSTK";
+            this.Size = new System.Drawing.Size(657, 250);
+            ((System.ComponentModel.ISupportInitialize)(this.orderGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView orderGrid;
+
+
     }
 }

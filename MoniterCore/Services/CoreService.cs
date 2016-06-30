@@ -53,20 +53,37 @@ namespace TradingLib.MoniterCore
             }
         }
 
-        EventUI _eventUI = null;
+        EventOther _eventOther = null;
         /// <summary>
         /// 界面事件汇聚器
         /// </summary>
-        public static EventUI EventUI
+        public static EventOther EventOther
         {
             get
             {
-                if (defaultinstance._eventUI == null)
-                    defaultinstance._eventUI = new EventUI();
-                return defaultinstance._eventUI;
+                if (defaultinstance._eventOther == null)
+                    defaultinstance._eventOther = new EventOther();
+                return defaultinstance._eventOther;
             }
         }
 
+
+        EventQuery _eventQuery = null;
+        /// <summary>
+        /// 查询事件汇聚
+        /// </summary>
+        public static EventQuery EventQuery
+        {
+            get
+            {
+                if (defaultinstance._eventQuery == null)
+                    defaultinstance._eventQuery = new EventQuery();
+                return defaultinstance._eventQuery;
+            }
+        }
+
+
+    
         EventBasicInfo _eventBasicInfo = null;
         /// <summary>
         /// 基础数据事件集合

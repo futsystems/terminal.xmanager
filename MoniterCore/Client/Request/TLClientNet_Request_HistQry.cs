@@ -10,44 +10,48 @@ namespace TradingLib.MoniterCore
 {
     public partial class TLClientNet
     {
-        public void ReqQryHistOrders(string account, int settleday)
+        public int ReqQryHistOrders(string account, int settleday)
         {
             MGRQryOrderRequest request = RequestTemplate<MGRQryOrderRequest>.CliSendRequest(++requestid);
             request.TradingAccount = account;
             request.Settleday = settleday;
 
             SendPacket(request);
+            return requestid;
 
         }
 
-        public void ReqQryHistTrades(string account, int settleday)
+        public int ReqQryHistTrades(string account, int settleday)
         {
             MGRQryTradeRequest request = RequestTemplate<MGRQryTradeRequest>.CliSendRequest(++requestid);
             request.TradingAccount = account;
             request.Settleday = settleday;
 
             SendPacket(request);
+            return requestid;
         }
 
-        public void ReqQryHistPosition(string account, int settleday)
+        public int ReqQryHistPosition(string account, int settleday)
         {
             MGRQryPositionRequest request = RequestTemplate<MGRQryPositionRequest>.CliSendRequest(++requestid);
             request.TradingAccount = account;
             request.Settleday = settleday;
 
             SendPacket(request);
+            return requestid;
         }
 
-        public void ReqQryHistCashTransaction(string account, int settleday)
+        public int ReqQryHistCashTransaction(string account, int settleday)
         {
             MGRQryCashRequest request = RequestTemplate<MGRQryCashRequest>.CliSendRequest(++requestid);
             request.TradingAccount = account;
             request.Settleday = settleday;
 
             SendPacket(request);
+            return requestid;
         }
 
-        public void ReqQryHistSettlement(string account, int settleday)
+        public int ReqQryHistSettlement(string account, int settleday)
         {
             MGRQrySettleRequest request = RequestTemplate<MGRQrySettleRequest>.CliSendRequest(++requestid);
             request.TradingAccount = account;
@@ -55,6 +59,7 @@ namespace TradingLib.MoniterCore
 
             SendPacket(request);
 
+            return requestid;
         }
       
     }

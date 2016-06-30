@@ -34,12 +34,12 @@ namespace TradingLib.MoniterControl
 
             btnInsertTrade.Click += new EventHandler(btnInsertTrade_Click);
             this.SendOrderEvent += new OrderDelegate(SendOrderOut);
-            CoreService.EventUI.OnSymbolSelectedEvent += new Action<Symbol>(EventUI_OnSymbolSelectedEvent);
+            CoreService.EventOther.OnSymbolSelectedEvent += new Action<Object,Symbol>(EventUI_OnSymbolSelectedEvent);
 
             CoreService.EventCore.RegIEventHandler(this);
         }
 
-        void EventUI_OnSymbolSelectedEvent(Symbol obj)
+        void EventUI_OnSymbolSelectedEvent(Object obj,Symbol sym)
         {
             this.cbSymbolList.SelectedValue = obj;
         }
