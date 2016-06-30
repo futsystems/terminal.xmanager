@@ -77,11 +77,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Control\ctQueryDeliverys.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ctQueryDeliverys.Designer.cs">
+      <DependentUpon>ctQueryDeliverys.cs</DependentUpon>
+    </Compile>
     <Compile Include="Control\ctQueryOrder.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Control\ctQueryOrder.Designer.cs">
       <DependentUpon>ctQueryOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ctQueryTrades.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ctQueryTrades.Designer.cs">
+      <DependentUpon>ctQueryTrades.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ctQueryTxn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ctQueryTxn.Designer.cs">
+      <DependentUpon>ctQueryTxn.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -129,8 +147,17 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Starter.cs" />
+    <EmbeddedResource Include="Control\ctQueryDeliverys.resx">
+      <DependentUpon>ctQueryDeliverys.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Control\ctQueryOrder.resx">
       <DependentUpon>ctQueryOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ctQueryTrades.resx">
+      <DependentUpon>ctQueryTrades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ctQueryTxn.resx">
+      <DependentUpon>ctQueryTxn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

@@ -102,6 +102,12 @@
     <Compile Include="Basic\ctSTKSymbol.designer.cs">
       <DependentUpon>ctSTKSymbol.cs</DependentUpon>
     </Compile>
+    <Compile Include="Control\ctCashTxnView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ctCashTxnView.Designer.cs">
+      <DependentUpon>ctCashTxnView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Control\ctDeliveryViewSTK.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -148,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Basic\ctSTKSymbol.resx">
       <DependentUpon>ctSTKSymbol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ctCashTxnView.resx">
+      <DependentUpon>ctCashTxnView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Control\ctDeliveryViewSTK.resx">
       <DependentUpon>ctDeliveryViewSTK.cs</DependentUpon>

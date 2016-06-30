@@ -18,6 +18,9 @@ namespace TradingLib.TinyMGRControl
 {
     public class MoniterHelper
     {
+
+
+
         
         /// <summary>
         /// 通过底层Client发送一个请求
