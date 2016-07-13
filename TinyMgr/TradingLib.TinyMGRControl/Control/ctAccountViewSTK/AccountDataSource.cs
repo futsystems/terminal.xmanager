@@ -7,7 +7,7 @@ using TradingLib.API;
 using TradingLib.Common;
 
 
-namespace FutsMoniter.Controls
+namespace TradingLib.TinyMGRControl
 {
     public class AccountDataSource
     {

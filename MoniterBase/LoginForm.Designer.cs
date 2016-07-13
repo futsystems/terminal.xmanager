@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.imageheader = new System.Windows.Forms.PictureBox();
             this.label0 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.label1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -37,14 +38,14 @@
             this.servers = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.btnLogin = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.ckremberuser = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
-            this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette();
-            this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager();
+            this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
+            this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lbLoginStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.ckremberpass = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.btnExit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.imageheader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.servers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
@@ -72,7 +73,7 @@
             // 
             this.label0.Location = new System.Drawing.Point(62, 20);
             this.label0.Name = "label0";
-            this.label0.Size = new System.Drawing.Size(63, 22);
+            this.label0.Size = new System.Drawing.Size(63, 20);
             this.label0.TabIndex = 20;
             this.label0.Values.Text = "柜台地址:";
             // 
@@ -80,7 +81,7 @@
             // 
             this.label1.Location = new System.Drawing.Point(62, 52);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 22);
+            this.label1.Size = new System.Drawing.Size(63, 20);
             this.label1.TabIndex = 21;
             this.label1.Values.Text = "柜员代码:";
             // 
@@ -88,7 +89,7 @@
             // 
             this.label2.Location = new System.Drawing.Point(62, 85);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 22);
+            this.label2.Size = new System.Drawing.Size(63, 20);
             this.label2.TabIndex = 22;
             this.label2.Values.Text = "柜员密码:";
             // 
@@ -128,13 +129,14 @@
             // 
             this.ckremberuser.Location = new System.Drawing.Point(289, 53);
             this.ckremberuser.Name = "ckremberuser";
-            this.ckremberuser.Size = new System.Drawing.Size(73, 22);
+            this.ckremberuser.Size = new System.Drawing.Size(73, 20);
             this.ckremberuser.TabIndex = 28;
             this.ckremberuser.Values.Text = "记住代码";
             // 
             // kryptonManager1
             // 
-            this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.ProfessionalOffice2003;
+            this.kryptonManager1.GlobalPalette = this.kryptonPalette1;
+            this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Custom;
             // 
             // kryptonPanel1
             // 
@@ -157,7 +159,7 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.statusStrip1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lbLoginStatus});
             this.statusStrip1.Location = new System.Drawing.Point(0, 164);
@@ -170,14 +172,14 @@
             // lbLoginStatus
             // 
             this.lbLoginStatus.Name = "lbLoginStatus";
-            this.lbLoginStatus.Size = new System.Drawing.Size(17, 17);
+            this.lbLoginStatus.Size = new System.Drawing.Size(18, 17);
             this.lbLoginStatus.Text = "--";
             // 
             // ckremberpass
             // 
             this.ckremberpass.Location = new System.Drawing.Point(289, 85);
             this.ckremberpass.Name = "ckremberpass";
-            this.ckremberpass.Size = new System.Drawing.Size(73, 22);
+            this.ckremberpass.Size = new System.Drawing.Size(73, 20);
             this.ckremberpass.TabIndex = 33;
             this.ckremberpass.Values.Text = "记住密码";
             // 

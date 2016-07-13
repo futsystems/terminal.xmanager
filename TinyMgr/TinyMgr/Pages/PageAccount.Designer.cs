@@ -1,6 +1,6 @@
 ﻿namespace TinyMgr
 {
-    partial class PageDashboard
+    partial class PageAccount
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,32 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.SuspendLayout();
             // 
-            // kryptonLabel1
-            // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(28, 13);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(299, 33);
-            this.kryptonLabel1.StateCommon.ShortText.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "欢迎使用资管系统-管理端";
-            // 
-            // PageDashboard
+            // PageAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.kryptonLabel1);
-            this.Name = "PageDashboard";
-            this.Size = new System.Drawing.Size(716, 345);
+            this.Name = "PageAccount";
+            this.Size = new System.Drawing.Size(782, 459);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
     }
 }

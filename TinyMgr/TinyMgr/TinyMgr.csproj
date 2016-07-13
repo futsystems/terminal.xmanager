@@ -38,21 +38,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ant.Component">
-      <HintPath>..\..\..\Futs.base\lib\update\Ant.Component.dll</HintPath>
+      <HintPath>..\..\..\..\Futs.base\lib\update\Ant.Component.dll</HintPath>
     </Reference>
     <Reference Include="Beetle">
-      <HintPath>..\..\..\Futs.base\lib\update\Beetle.dll</HintPath>
+      <HintPath>..\..\..\..\Futs.base\lib\update\Beetle.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Futs.base\lib\Common.Logging.dll</HintPath>
+    <Reference Include="Common.Logging">
+      <HintPath>..\..\..\..\Futs.base\lib\Common.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Futs.base\lib\Common.Logging.Core.dll</HintPath>
+    <Reference Include="Common.Logging.Core">
+      <HintPath>..\..\..\..\Futs.base\lib\Common.Logging.Core.dll</HintPath>
     </Reference>
     <Reference Include="ComponentFactory.Krypton.Navigator, Version=4.4.0.0, Culture=neutral, PublicKeyToken=dc91bbef911870e2" />
-    <Reference Include="ComponentFactory.Krypton.Toolkit, Version=4.4.0.0, Culture=neutral, PublicKeyToken=dc91bbef911870e2" />
+    <Reference Include="ComponentFactory.Krypton.Toolkit, Version=4.4.0.0, Culture=neutral, PublicKeyToken=dc91bbef911870e2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Futs.base\lib\kypton\ComponentFactory.Krypton.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="NodaTime">
       <HintPath>..\..\..\..\Futs.base\lib\NodaTime.dll</HintPath>
     </Reference>
@@ -113,6 +114,12 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PageAccount.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\PageAccount.Designer.cs">
+      <DependentUpon>PageAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PageDashboard.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -164,6 +171,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\PageAccount.resx">
+      <DependentUpon>PageAccount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\PageDashboard.resx">
       <DependentUpon>PageDashboard.cs</DependentUpon>

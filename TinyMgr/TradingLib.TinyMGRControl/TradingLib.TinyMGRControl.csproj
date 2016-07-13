@@ -33,13 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Futs.base\lib\Common.Logging.dll</HintPath>
+    <Reference Include="Common.Logging">
+      <HintPath>..\..\..\..\Futs.base\lib\Common.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Futs.base\lib\Common.Logging.Core.dll</HintPath>
+    <Reference Include="Common.Logging.Core">
+      <HintPath>..\..\..\..\Futs.base\lib\Common.Logging.Core.dll</HintPath>
     </Reference>
     <Reference Include="ComponentFactory.Krypton.Toolkit, Version=4.4.0.0, Culture=neutral, PublicKeyToken=dc91bbef911870e2, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -62,32 +60,32 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Basic\ctAccountMoniter\AccountDataSource.cs" />
-    <Compile Include="Basic\ctAccountMoniter\ctAccountMontier.cs">
+    <Compile Include="Control\ctAccountViewSTK\AccountDataSource.cs" />
+    <Compile Include="Control\ctAccountViewSTK\ctAccountMontier.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Basic\ctAccountMoniter\ctAccountMontier.designer.cs">
+    <Compile Include="Control\ctAccountViewSTK\ctAccountMontier.designer.cs">
       <DependentUpon>ctAccountMontier.cs</DependentUpon>
     </Compile>
-    <Compile Include="Basic\ctAccountMoniter\ctAccountMontier_.cs">
+    <Compile Include="Control\ctAccountViewSTK\ctAccountMontier_.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Basic\ctAccountMoniter\ctAccountMontier_DyanmicWatchAccounts.cs">
+    <Compile Include="Control\ctAccountViewSTK\ctAccountMontier_DyanmicWatchAccounts.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Basic\ctAccountMoniter\ctAccountMontier_Event.cs">
+    <Compile Include="Control\ctAccountViewSTK\ctAccountMontier_Event.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Basic\ctAccountMoniter\ctAccountMontier_FilterAccountList.cs">
+    <Compile Include="Control\ctAccountViewSTK\ctAccountMontier_FilterAccountList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Basic\ctAccountMoniter\ctAccountMontier_OnInit.cs">
+    <Compile Include="Control\ctAccountViewSTK\ctAccountMontier_OnInit.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Basic\ctAccountMoniter\ctAccountMontier_OnXXXXX.cs">
+    <Compile Include="Control\ctAccountViewSTK\ctAccountMontier_OnXXXXX.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Basic\ctAccountMoniter\ctAccountMontier_UpdateAccountInfo.cs">
+    <Compile Include="Control\ctAccountViewSTK\ctAccountMontier_UpdateAccountInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Basic\ctSecurity.cs">
@@ -146,7 +144,7 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Basic\ctAccountMoniter\ctAccountMontier.resx">
+    <EmbeddedResource Include="Control\ctAccountViewSTK\ctAccountMontier.resx">
       <DependentUpon>ctAccountMontier.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Basic\ctSecurity.resx">
@@ -182,6 +180,7 @@
       <Name>TradingLib.MoniterCore</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
