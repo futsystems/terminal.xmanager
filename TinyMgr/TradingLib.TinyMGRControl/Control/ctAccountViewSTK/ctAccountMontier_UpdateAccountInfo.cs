@@ -30,7 +30,7 @@ namespace TradingLib.TinyMGRControl
 
         const string LOGINSTATUS = "LoginStatus";
         const string LOGINSTATUSIMG = "登入";
-        //const string ADDRESS = "地址";
+        const string ADDRESS = "信息";
 
         const string LASTEQUITY = "昨日余额";
         const string BUYAMOUNT = "买入额";
@@ -46,21 +46,11 @@ namespace TradingLib.TinyMGRControl
         const string TOTALLIQUIDATION = "总资产";
         const string UNREALIZEDPL = "浮动盈亏";
         
-        const string AGENTCODE = "代理编号";
-        const string AGENTMGRFK = "AGENTMGRFK";
-
         const string WARN = "警告";
         const string WARNSTR = "警告消息";
 
 
         const string DELETE = "DELETE";
-
-        //const string ROUTERGROUP = "Group";
-        //const string ROUTERGROUPSTR = "路由组";
-
-
-        
-
 
         DataTable gt = new DataTable();
         BindingSource datasource = new BindingSource();
@@ -96,31 +86,24 @@ namespace TradingLib.TinyMGRControl
             
             gt.Columns.Add(ACCOUNT);//0
             gt.Columns.Add(NAME);//1
-
-            //交易权限
-            gt.Columns.Add(EXECUTE);//3
-            gt.Columns.Add(EXECUTEIMG, typeof(Image));//4
-            gt.Columns.Add(LOGINSTATUS);//6
-            gt.Columns.Add(LOGINSTATUSIMG, typeof(Image));//7
-
-
-            gt.Columns.Add(CREDIT);//7
-
-            gt.Columns.Add(LASTEQUITY);//2
-            gt.Columns.Add(BUYAMOUNT);//3
-            gt.Columns.Add(SELLAMOUNT);//4
-            gt.Columns.Add(COMMISSION);//5
-            gt.Columns.Add(FROZENMARGIN);//6
+            gt.Columns.Add(CREDIT);//2
+            gt.Columns.Add(LASTEQUITY);//3
+            gt.Columns.Add(BUYAMOUNT);//4
+            gt.Columns.Add(SELLAMOUNT);//5
+            gt.Columns.Add(COMMISSION);//6
+            gt.Columns.Add(FROZENMARGIN);//7
             gt.Columns.Add(NOWEQUITY);//8
-
             gt.Columns.Add(TOTALEQUITY);//9
             gt.Columns.Add(MARKETVALUE);//10
             gt.Columns.Add(TOTALLIQUIDATION);//11
-            gt.Columns.Add(UNREALIZEDPL);//
+            gt.Columns.Add(UNREALIZEDPL);//12
 
-            //代理编号
-            gt.Columns.Add(AGENTCODE);//20
-            gt.Columns.Add(AGENTMGRFK);//21
+            gt.Columns.Add(EXECUTE);//13
+            gt.Columns.Add(EXECUTEIMG, typeof(Image));//14
+            gt.Columns.Add(LOGINSTATUS);//15
+            gt.Columns.Add(LOGINSTATUSIMG, typeof(Image));//16
+            gt.Columns.Add(ADDRESS);//17
+
 
             //警告信息
             gt.Columns.Add(WARN);
@@ -140,16 +123,14 @@ namespace TradingLib.TinyMGRControl
             datasource.Sort = ACCOUNT + " ASC";
             accountgrid.DataSource = datasource;
 
-            accountgrid.Columns[AGENTMGRFK].Visible = false;
-
-
             accountgrid.Columns[LOGINSTATUS].Visible = false;
+            accountgrid.Columns[EXECUTE].Visible = false;
+
             accountgrid.Columns[TOTALEQUITY].Visible = false;
 
-            accountgrid.Columns[WARN].Visible = false;
-            accountgrid.Columns[EXECUTE].Visible = false;
             accountgrid.Columns[DELETE].Visible = false;
 
+            accountgrid.Columns[WARN].Visible = false;
             accountgrid.Columns[WARNSTR].Visible = false;
 
             
@@ -161,13 +142,19 @@ namespace TradingLib.TinyMGRControl
 
 
 
+        /// <summary>
+        /// 调整表格 单元格宽度
+        /// </summary>
         private void CounterMoniterWidth()
         {
             accountgrid.Columns[ACCOUNT].Width = 100;
             accountgrid.Columns[NAME].Width = 80;
-            accountgrid.Columns[EXECUTEIMG].Width = 30;
+            accountgrid.Columns[EXECUTEIMG].Width = 35;
+            accountgrid.Columns[LOGINSTATUSIMG].Width = 35;
+            accountgrid.Columns[ADDRESS].Width = 150;
           
         }
+
 
         private void accountgrid_SizeChanged_FixWidth(object sender, EventArgs e)
         {
@@ -268,6 +255,7 @@ namespace TradingLib.TinyMGRControl
             }
         }
 
+
         #region 根据账户属性获得对应的string 或者 image
         Image getRouteStatusImage(QSEnumOrderTransferType type)
         {
@@ -322,13 +310,11 @@ namespace TradingLib.TinyMGRControl
         {
             while (_accountgo)
             {
-               // Globals.Debug("got account in cache*************************");
                 try
                 {
                     //更新账户主体信息
                     while (accountcache.hasItems)
                     {
-                       // Globals.Debug("got account in cache*************************");
                         AccountLite account = accountcache.Read();
                         InvokeGotAccount(account);
                         UpdateAccountNum();
@@ -337,22 +323,22 @@ namespace TradingLib.TinyMGRControl
                         {
                             GridChanged();
                         }
-                        Thread.Sleep(1);
+                        Thread.Sleep(10);
                     }
                     //更新账户登入 或者 注销 状态
                     while (!accountcache.hasItems && sessionupdatecache.hasItems)
                     {
                         NotifyMGRSessionUpdateNotify notify = sessionupdatecache.Read();
                         InvokeGotMGRSessionUpdate(notify);
-                        Thread.Sleep(20);
+                        Thread.Sleep(10);
                     }
                     //更新账户盘中动态财务信息
                     while (!accountcache.hasItems && accountinfocache.hasItems)
                     {
-                        //Globals.Debug("got account in cache*************************");
                         InvokeGotAccountInfoLite(accountinfocache.Read());
-                        Thread.Sleep(1);
+                        Thread.Sleep(10);
                     }
+
                     //设置观察帐户列表
                     SwtWathAccounts();
 
@@ -415,18 +401,7 @@ namespace TradingLib.TinyMGRControl
 
                         gt.Rows[i][ACCOUNT] = account.Account;
                         gt.Rows[i][NAME] = account.Name;
-
                         gt.Rows[i][LASTEQUITY] = decDisp(account.LastEquity);
-                        gt.Rows[i][NOWEQUITY] = decDisp(account.NowEquity);
-                        gt.Rows[i][CREDIT] = decDisp(account.Credit);
-                        //gt.Rows[i][TOTALEQUITY] = decDisp(account.NowEquity + account.Credit);
-
-
-
-                        gt.Rows[i][AGENTMGRFK] = account.MGRID;
-                        ManagerSetting mgr = CoreService.BasicInfoTracker.GetManager(account.MGRID);
-                        gt.Rows[i][AGENTCODE] = string.Format("{0:d2}-{1}",mgr.ID, mgr.Login);
-
 
                         gt.Rows[i][LOGINSTATUS] = getLoginStatus(account.IsLogin);
                         gt.Rows[i][LOGINSTATUSIMG] = getLoginStatusImage(account.IsLogin);
@@ -434,10 +409,10 @@ namespace TradingLib.TinyMGRControl
                         gt.Rows[i][EXECUTE] = getExecuteStatus(account.Execute);
                         gt.Rows[i][EXECUTEIMG] = getExecuteStatusImage(account.Execute);
 
-                        gt.Rows[i][DELETE] = account.Deleted;
-                        
                         gt.Rows[i][WARN] = account.IsWarn;
                         gt.Rows[i][WARNSTR] = account.WarnMessage;
+                        gt.Rows[i][DELETE] = account.Deleted;
+
 
                         accountmap.TryAdd(account.Account, account);
                         accountrowmap.TryAdd(account.Account, i);
@@ -447,30 +422,25 @@ namespace TradingLib.TinyMGRControl
                     {
                         accountmap[account.Account] = account;//直接更新帐户对象 这里并没有通过字段进行修改原始对象
 
+                        gt.Rows[r][NAME] = account.Name;
                         gt.Rows[r][LASTEQUITY] = decDisp(account.LastEquity);
-                        //gt.Rows[i][NOWEQUITY] = decDisp(account.NowEquity);
-                        //gt.Rows[i][CREDIT] = decDisp(account.Credit);
-                        //gt.Rows[i][TOTALEQUITY] = decDisp(account.NowEquity + account.Credit);
 
+                        gt.Rows[r][LOGINSTATUS] = getLoginStatus(account.IsLogin);
+                        gt.Rows[r][LOGINSTATUSIMG] = getLoginStatusImage(account.IsLogin);
 
                         gt.Rows[r][EXECUTE] = getExecuteStatus(account.Execute);
                         gt.Rows[r][EXECUTEIMG] = getExecuteStatusImage(account.Execute);
-                        ManagerSetting mgr = CoreService.BasicInfoTracker.GetManager(account.MGRID);
-                        gt.Rows[r][AGENTCODE] = string.Format("{0:d2}-{1}", mgr.ID, mgr.Login);
-
-                        gt.Rows[r][NAME] = account.Name;
-                        gt.Rows[r][DELETE] = account.Deleted;
-                        
-
 
                         bool oldwarn = bool.Parse(gt.Rows[r][WARN].ToString());
                         gt.Rows[r][WARN] = account.IsWarn;
                         gt.Rows[r][WARNSTR] = account.WarnMessage;
+
                         if (oldwarn && !account.IsWarn)
                         {
                             AccountWarnOff(account.Account);
                         }
 
+                        gt.Rows[r][DELETE] = account.Deleted;
                         //如果删除帐户 则需要刷新帐户列表 防止没有任何选中帐户
                         if (account.Deleted)
                         {
@@ -495,35 +465,31 @@ namespace TradingLib.TinyMGRControl
         /// 服务端推送的帐户实时财务数据
         /// </summary>
         /// <param name="account"></param>
-        delegate void IAccountInfoLiteDel(AccountInfoLite account);
         void InvokeGotAccountInfoLite(AccountInfoLite account)
         {
             if (InvokeRequired)
             {
-                Invoke(new IAccountInfoLiteDel(InvokeGotAccountInfoLite), new object[] { account });
+                Invoke(new Action<AccountInfoLite>(InvokeGotAccountInfoLite), new object[] { account });
             }
             else
             {
                 string acc = account.Account;
                 int r = accountIdx(acc);
-                //Globals.Debug("account idx:" + r);
                 if (r == -1)
                     return;
                 else
                 {
-                    //Globals.Debug("account:"+account.Account + "now:" + decDisp(account.NowEquity) + " margin:" + decDisp(account.Margin));
-                    gt.Rows[r][NOWEQUITY] = decDisp(account.NowEquity);
-                    gt.Rows[r][CREDIT] = decDisp(account.Credit);
-                    gt.Rows[r][TOTALEQUITY] = decDisp(account.NowEquity + account.Credit);
+                    
+                    gt.Rows[r][CREDIT] = account.Credit.ToFormatStr();
                     gt.Rows[r][BUYAMOUNT] = account.StkBuyAmount.ToFormatStr();
                     gt.Rows[r][SELLAMOUNT] = account.StkSellAmount.ToFormatStr();
                     gt.Rows[r][COMMISSION] = account.StkCommission.ToFormatStr();
                     gt.Rows[r][FROZENMARGIN] = account.StkMoneyFronzen.ToFormatStr();
-
+                    gt.Rows[r][NOWEQUITY] = account.NowEquity.ToFormatStr();
+                    gt.Rows[r][TOTALEQUITY] = decDisp(account.NowEquity + account.Credit);
                     gt.Rows[r][MARKETVALUE] = account.StkPositoinValue.ToFormatStr();
-                    gt.Rows[r][UNREALIZEDPL] = (account.StkPositoinValue - account.StkPositionCost).ToFormatStr();
-
                     gt.Rows[r][TOTALLIQUIDATION] = (account.StkPositoinValue + account.NowEquity).ToFormatStr();
+                    gt.Rows[r][UNREALIZEDPL] = (account.StkPositoinValue - account.StkPositionCost).ToFormatStr();
                 }
             }
         }
@@ -567,27 +533,32 @@ namespace TradingLib.TinyMGRControl
 
         private void accountgrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            //if (e.ColumnIndex == 8 || e.ColumnIndex == 9 || e.ColumnIndex == 11)
-            //{
-            //    e.CellStyle.Font =  UIConstant.BoldFont;
-            //    decimal v = 0;
-            //    decimal.TryParse(e.Value.ToString(), out v);
-            //    if (v > 0)
-            //    {
-            //        e.CellStyle.ForeColor = UIConstant.LongSideColor;
-            //    }
-            //    else if (v < 0)
-            //    {
-            //        e.CellStyle.ForeColor = UIConstant.ShortSideColor;
-            //    }
-            //    else if (v == 0)
-            //    {
-            //        e.CellStyle.ForeColor = System.Drawing.Color.Black;
-                    
-            //    }
+            try
+            {
+                if (e.ColumnIndex == 12)
+                {
+                    e.CellStyle.Font = UIConstant.BoldFont;
+                    decimal v = 0;
+                    decimal.TryParse(e.Value.ToString(), out v);
+                    if (v > 0)
+                    {
+                        e.CellStyle.ForeColor = UIConstant.LongSideColor;
+                    }
+                    else if (v < 0)
+                    {
+                        e.CellStyle.ForeColor = UIConstant.ShortSideColor;
+                    }
+                    else if (v == 0)
+                    {
+                        e.CellStyle.ForeColor = System.Drawing.Color.Black;
 
-
-            //}
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error("CellFormat Error:" + ex.ToString());
+            }
         }
 
         void accountgrid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)

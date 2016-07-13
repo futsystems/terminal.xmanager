@@ -12,20 +12,26 @@ using TradingLib.API;
 using TradingLib.Common;
 using TradingLib.MoniterCore;
 
+using Common.Logging;
+
+
 
 
 namespace TradingLib.TinyMGRControl
 {
-    [MoniterControlAttr("AccountMoniter","分帐户列表",EnumControlLocation.TopPanel)]
-    public partial class ctAccountMontier : UserControl, IEventBinder, IMoniterControl
+    public partial class ctAccountMontier : UserControl, IEventBinder
     {
-
+        ILog logger = null;
+        
         const string PROGRAME = "AccountMontier";
         public ctAccountMontier()
         {
             try
             {
                 InitializeComponent();
+
+                logger = LogManager.GetLogger("AccountView");
+
                 
                 this.Load += new EventHandler(ctAccountMontier_Load);
             }
