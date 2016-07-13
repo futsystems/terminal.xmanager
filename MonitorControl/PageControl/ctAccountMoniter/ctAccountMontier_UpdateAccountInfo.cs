@@ -660,7 +660,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[r][FROZENMARGIN] = decDisp(account.ForzenMargin);
                     gt.Rows[r][REALIZEDPL] = decDisp(account.RealizedPL);
                     gt.Rows[r][UNREALIZEDPL] = decDisp(account.UnRealizedPL);
-                    gt.Rows[r][STKMARKETVALIE] = decDisp(account.SecurityMarketValue);
+                    gt.Rows[r][STKMARKETVALIE] = decDisp(account.StkPositoinValue);
                     gt.Rows[r][COMMISSION] = decDisp(account.Commission);
                     gt.Rows[r][PROFIT] = decDisp(account.Profit);
                     //gt.Rows[r][PROFITLOSSIMG] = getProfitLossImage(account.Profit);

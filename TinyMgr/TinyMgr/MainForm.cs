@@ -36,6 +36,8 @@ namespace TinyMgr
             pagemap.Add(PageTypes.PAGE_DASHBOARD, new PageDashboard());
             pagemap.Add(PageTypes.PAGE_STK_SYMBOLS, new PageSTKSymbol());
             pagemap.Add(PageTypes.PAGE_QUERY, new PageSTKQuery());
+            pagemap.Add(PageTypes.PAGE_ACCOUNT, new PageAccount());
+
 
             foreach (var page in pagemap.Values)
             {
@@ -93,8 +95,15 @@ namespace TinyMgr
             btnHome.Click += new EventHandler(btnHome_Click);
             btnSymbol.Click += new EventHandler(btnSymbol_Click);
 
+            btnAccount.Click += new EventHandler(btnAccount_Click);
             btnQuery.Click += new EventHandler(btnQuery_Click);
 
+
+        }
+
+        void btnAccount_Click(object sender, EventArgs e)
+        {
+            ShowPage(PageTypes.PAGE_ACCOUNT);
         }
 
         void btnQuery_Click(object sender, EventArgs e)

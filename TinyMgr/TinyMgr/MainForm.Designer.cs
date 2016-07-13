@@ -35,7 +35,7 @@
             this.btnHome = new System.Windows.Forms.ToolStripButton();
             this.btnSymbol = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.btnAccount = new System.Windows.Forms.ToolStripButton();
             this.btnQuery = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
@@ -73,7 +73,7 @@
             this.btnHome,
             this.btnSymbol,
             this.toolStripButton2,
-            this.toolStripButton3,
+            this.btnAccount,
             this.btnQuery});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -115,16 +115,16 @@
             this.toolStripButton2.Size = new System.Drawing.Size(40, 40);
             this.toolStripButton2.Text = "模板";
             // 
-            // toolStripButton3
+            // btnAccount
             // 
-            this.toolStripButton3.AutoSize = false;
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(40, 40);
-            this.toolStripButton3.Text = "帐户";
+            this.btnAccount.AutoSize = false;
+            this.btnAccount.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnAccount.Image = ((System.Drawing.Image)(resources.GetObject("btnAccount.Image")));
+            this.btnAccount.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnAccount.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAccount.Name = "btnAccount";
+            this.btnAccount.Size = new System.Drawing.Size(40, 40);
+            this.btnAccount.Text = "帐户";
             // 
             // btnQuery
             // 
@@ -173,7 +173,7 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripButton btnSymbol;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripButton btnAccount;
         private System.Windows.Forms.ToolStripButton btnQuery;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
         private System.Windows.Forms.ToolStripButton btnHome;

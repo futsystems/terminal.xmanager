@@ -49,7 +49,10 @@
     <Reference Include="Common.Logging.Core">
       <HintPath>..\..\..\..\Futs.base\lib\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="ComponentFactory.Krypton.Navigator, Version=4.4.0.0, Culture=neutral, PublicKeyToken=dc91bbef911870e2" />
+    <Reference Include="ComponentFactory.Krypton.Navigator, Version=4.4.0.0, Culture=neutral, PublicKeyToken=dc91bbef911870e2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Futs.base\lib\kypton\ComponentFactory.Krypton.Navigator.dll</HintPath>
+    </Reference>
     <Reference Include="ComponentFactory.Krypton.Toolkit, Version=4.4.0.0, Culture=neutral, PublicKeyToken=dc91bbef911870e2, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Futs.base\lib\kypton\ComponentFactory.Krypton.Toolkit.dll</HintPath>

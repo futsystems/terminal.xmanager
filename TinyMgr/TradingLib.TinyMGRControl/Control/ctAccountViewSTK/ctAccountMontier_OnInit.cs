@@ -49,45 +49,9 @@ namespace TradingLib.TinyMGRControl
 
 
             }
-            //主帐户监控
-            if (CoreService.SiteInfo.ProductType == QSEnumProductType.VendorMoniter)
-            {
-                
-                accountgrid.Columns[CATEGORYSTR].Visible = false;
-                accountgrid.Columns[AGENTCODE].Visible = false;
 
-
-                accountgrid.Columns[LOGINSTATUSIMG].Visible = false;//登入标识
-                //accountgrid.Columns[ADDRESS].Visible = false;//终端地址
-
-                accountgrid.Columns[ROUTEIMG].Visible = false;
-                accountgrid.Columns[ROUTERGROUPSTR].Visible = false;
-
-                //调整宽度
-                VendorMoniterWidth();
-            }
-
-            if (CoreService.SiteInfo.ProductType == QSEnumProductType.CounterSystem)
-            {
-                //只有管理员可以查看路由类别
-                accountgrid.Columns[ROUTEIMG].Visible = CoreService.SiteInfo.Manager.IsRoot();
-                //管理员可以查看帐户类别
-                accountgrid.Columns[CATEGORYSTR].Visible = CoreService.SiteInfo.Manager.IsRoot();
-
-                //如果有实盘交易权限则可以查看路由组
-                accountgrid.Columns[ROUTERGROUPSTR].Visible = CoreService.SiteInfo.Manager.IsRoot();
-
-
-                accountgrid.Columns[MAINACCOUNT].Visible = false;
-
-
-                accountgrid.Columns[CATEGORYSTR].Visible = false;
-                accountgrid.Columns[MAINACCOUNT].Visible = false;
-                accountgrid.Columns[MAINACCTRISKRULE].Visible = false;
-                accountgrid.Columns[MACTCONNIMG].Visible = false;
-
-                CounterMoniterWidth();
-            }
+             CounterMoniterWidth();
+            
 
             //根据产品类别来调整界面
 

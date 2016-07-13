@@ -23,59 +23,43 @@ namespace TradingLib.TinyMGRControl
         #region 表格
 
         const string ACCOUNT = "账户";
-        const string ROUTE = "RouteType";
-        const string ROUTEIMG = "路由";
+        const string NAME = "姓名";
 
         const string EXECUTE = "ExecuteStatus";
         const string EXECUTEIMG = "状态";
-        //const string PROFITLOSSIMG = "盈/亏";
 
         const string LOGINSTATUS = "LoginStatus";
         const string LOGINSTATUSIMG = "登入";
         //const string ADDRESS = "地址";
 
-        const string LASTEQUITY = "昨日权益";
-        const string NOWEQUITY = "当前权益";
+        const string LASTEQUITY = "昨日余额";
+        const string BUYAMOUNT = "买入额";
+        const string SELLAMOUNT = "卖出额";
+        const string COMMISSION = "手续费"; 
+        const string FROZENMARGIN = "冻结资金";
+        const string NOWEQUITY = "当前余额";
         const string CREDIT = "信用额度";
+
         const string TOTALEQUITY = "总权益";
 
-        const string MARGIN = "保证金";
-        const string FROZENMARGIN = "冻结保证金";
-        const string CASH = "可用资金";
-        const string BUYPOWER = "购买力";
-        const string REALIZEDPL = "平仓盈亏";
+        const string MARKETVALUE = "证券市值";//TotalLiquidation
+        const string TOTALLIQUIDATION = "总资产";
         const string UNREALIZEDPL = "浮动盈亏";
-        const string COMMISSION = "手续费";
-        const string PROFIT = "净利";
-        const string HOLDSIZE = "持仓";
-
-
-        const string CATEGORYSTR = "帐户类型";
-        const string CATEGORY = "CATEGORY";
-        const string RACEENTRYTIME = "参赛日期";
-        const string RACEID = "比赛编号";
-        const string RACESTATUS = "比赛状态";
-
-        const string HOLDNIGHT = "隔夜";
         
         const string AGENTCODE = "代理编号";
         const string AGENTMGRFK = "AGENTMGRFK";
 
-
-        const string NAME = "姓名";
-
-        const string MACTCONNSTATUS = "监控状态标识";//主帐户是否处于连接状态
-        const string MACTCONNIMG = "连接";//主帐户连接状态图像
-
-        const string DELETE = "DELETE";
-        const string ROUTERGROUP = "Group";
-        const string ROUTERGROUPSTR = "路由组";
-        const string MAINACCOUNT = "主帐户";
-        const string MAINACCOUNTBINDED = "主帐户是否绑定";
-        const string MAINACCTRISKRULE = "强平规则";
         const string WARN = "警告";
         const string WARNSTR = "警告消息";
-        const string CURRENCY = "货币";
+
+
+        const string DELETE = "DELETE";
+
+        //const string ROUTERGROUP = "Group";
+        //const string ROUTERGROUPSTR = "路由组";
+
+
+        
 
 
         DataTable gt = new DataTable();
@@ -113,74 +97,34 @@ namespace TradingLib.TinyMGRControl
             gt.Columns.Add(ACCOUNT);//0
             gt.Columns.Add(NAME);//1
 
-
-            gt.Columns.Add(ROUTE);//1
-            gt.Columns.Add(ROUTEIMG, typeof(Image));//2
-
             //交易权限
             gt.Columns.Add(EXECUTE);//3
             gt.Columns.Add(EXECUTEIMG, typeof(Image));//4
             gt.Columns.Add(LOGINSTATUS);//6
             gt.Columns.Add(LOGINSTATUSIMG, typeof(Image));//7
 
+
+            gt.Columns.Add(CREDIT);//7
+
             gt.Columns.Add(LASTEQUITY);//2
-            gt.Columns.Add(NOWEQUITY);//3
-            gt.Columns.Add(CREDIT);//4
-            gt.Columns.Add(TOTALEQUITY);//5
-            gt.Columns.Add(MARGIN);//6
-            gt.Columns.Add(FROZENMARGIN);//7
-            gt.Columns.Add(REALIZEDPL);//8
-            gt.Columns.Add(UNREALIZEDPL);//9
-            gt.Columns.Add(COMMISSION);//10
-            gt.Columns.Add(PROFIT);//11
-            gt.Columns.Add(HOLDSIZE);//
-            //帐户类别
-            gt.Columns.Add(CATEGORY);//18
-            gt.Columns.Add(CATEGORYSTR);
+            gt.Columns.Add(BUYAMOUNT);//3
+            gt.Columns.Add(SELLAMOUNT);//4
+            gt.Columns.Add(COMMISSION);//5
+            gt.Columns.Add(FROZENMARGIN);//6
+            gt.Columns.Add(NOWEQUITY);//8
 
-            //日内属性
-            gt.Columns.Add(HOLDNIGHT);//19
-           
-            
-            
-
-            //----------------主帐户字段
-            //主帐户
-            gt.Columns.Add(MAINACCOUNT);//
-            gt.Columns.Add(MAINACCOUNTBINDED);//是否绑定
-
-            //主帐户强平规则
-            gt.Columns.Add(MAINACCTRISKRULE);
-
-            //主帐户连接
-            gt.Columns.Add(MACTCONNSTATUS);
-            gt.Columns.Add(MACTCONNIMG, typeof(Image));
-
-
-            
-
-            
-            //gt.Columns.Add(ADDRESS);//8
-
-            
-
-            
-
-
-            //警告信息
-            gt.Columns.Add(WARN);
-            gt.Columns.Add(WARNSTR);
-
-            
-            gt.Columns.Add(CURRENCY);
+            gt.Columns.Add(TOTALEQUITY);//9
+            gt.Columns.Add(MARKETVALUE);//10
+            gt.Columns.Add(TOTALLIQUIDATION);//11
+            gt.Columns.Add(UNREALIZEDPL);//
 
             //代理编号
             gt.Columns.Add(AGENTCODE);//20
             gt.Columns.Add(AGENTMGRFK);//21
 
-            //---------------分帐户字段
-            gt.Columns.Add(ROUTERGROUP);
-            gt.Columns.Add(ROUTERGROUPSTR);
+            //警告信息
+            gt.Columns.Add(WARN);
+            gt.Columns.Add(WARNSTR);
 
             gt.Columns.Add(DELETE);
             
@@ -196,24 +140,16 @@ namespace TradingLib.TinyMGRControl
             datasource.Sort = ACCOUNT + " ASC";
             accountgrid.DataSource = datasource;
 
-            accountgrid.Columns[CATEGORY].Visible = false;
             accountgrid.Columns[AGENTMGRFK].Visible = false;
-
-            accountgrid.Columns[MAINACCOUNTBINDED].Visible = false;
-            accountgrid.Columns[MACTCONNSTATUS].Visible = false;
 
 
             accountgrid.Columns[LOGINSTATUS].Visible = false;
-            accountgrid.Columns[ROUTE].Visible = false;
-            accountgrid.Columns[ROUTERGROUP].Visible = false;
             accountgrid.Columns[TOTALEQUITY].Visible = false;
 
             accountgrid.Columns[WARN].Visible = false;
-            //accountgrid.Columns[WARNSTR].Visible = false;
-
             accountgrid.Columns[EXECUTE].Visible = false;
             accountgrid.Columns[DELETE].Visible = false;
-            accountgrid.Columns[CURRENCY].Visible = false;
+
             accountgrid.Columns[WARNSTR].Visible = false;
 
             
@@ -223,44 +159,20 @@ namespace TradingLib.TinyMGRControl
             }
         }
 
-        private void VendorMoniterWidth()
-        {
 
-            accountgrid.Columns[ACCOUNT].Width = 100;
-            accountgrid.Columns[NAME].Width = 80;
-            accountgrid.Columns[EXECUTEIMG].Width = 30;
-
-            
-            accountgrid.Columns[HOLDNIGHT].Width = 50;
-            accountgrid.Columns[MAINACCOUNT].Width = 140;
-            accountgrid.Columns[MACTCONNIMG].Width = 50;
-            accountgrid.Columns[EXECUTEIMG].Width = 50;
-            accountgrid.Columns[MAINACCTRISKRULE].Width = 120;
-        }
 
         private void CounterMoniterWidth()
         {
             accountgrid.Columns[ACCOUNT].Width = 100;
             accountgrid.Columns[NAME].Width = 80;
             accountgrid.Columns[EXECUTEIMG].Width = 30;
-            accountgrid.Columns[HOLDSIZE].Width = 40;
-
-            accountgrid.Columns[HOLDNIGHT].Width = 50;
-
-            accountgrid.Columns[ROUTEIMG].Width = 50;
-            accountgrid.Columns[LOGINSTATUSIMG].Width = 50;
-            accountgrid.Columns[EXECUTEIMG].Width = 50;
-            accountgrid.Columns[CURRENCY].Width = 50;
+          
         }
 
         private void accountgrid_SizeChanged_FixWidth(object sender, EventArgs e)
         {
             if (CoreService.BasicInfoTracker.Initialized)
             {
-                if (CoreService.SiteInfo.ProductType == QSEnumProductType.VendorMoniter)
-                {
-                    VendorMoniterWidth();
-                }
                 if (CoreService.SiteInfo.ProductType == QSEnumProductType.CounterSystem)
                 {
                     CounterMoniterWidth();
@@ -507,53 +419,17 @@ namespace TradingLib.TinyMGRControl
                         gt.Rows[i][LASTEQUITY] = decDisp(account.LastEquity);
                         gt.Rows[i][NOWEQUITY] = decDisp(account.NowEquity);
                         gt.Rows[i][CREDIT] = decDisp(account.Credit);
-                        gt.Rows[i][TOTALEQUITY] = decDisp(account.NowEquity + account.Credit);
+                        //gt.Rows[i][TOTALEQUITY] = decDisp(account.NowEquity + account.Credit);
 
-                        gt.Rows[i][MARGIN] = decDisp(0);
-                        gt.Rows[i][FROZENMARGIN] = decDisp(0);
-                        gt.Rows[i][REALIZEDPL] = decDisp(0);
-                        gt.Rows[i][UNREALIZEDPL] = decDisp(0);
-                        gt.Rows[i][COMMISSION] = decDisp(0);
-                        gt.Rows[i][PROFIT] = decDisp(0);
-                        gt.Rows[i][HOLDSIZE] = 0;
-                        gt.Rows[i][CATEGORY] = account.Category.ToString();
-                        gt.Rows[i][CATEGORYSTR] = Util.GetEnumDescription(account.Category);
 
-                        gt.Rows[i][HOLDNIGHT] = account.IntraDay ? "禁止" : "允许";
 
                         gt.Rows[i][AGENTMGRFK] = account.MGRID;
                         ManagerSetting mgr = CoreService.BasicInfoTracker.GetManager(account.MGRID);
                         gt.Rows[i][AGENTCODE] = string.Format("{0:d2}-{1}",mgr.ID, mgr.Login);
 
 
-                        //主帐户 主帐户风控规则 主帐户连接
-                        if (CoreService.SiteInfo.ProductType == QSEnumProductType.VendorMoniter)
-                        {
-                            gt.Rows[i][MAINACCOUNT] = account.ConnectorToken;
-                            gt.Rows[i][MAINACCOUNTBINDED] = !string.IsNullOrEmpty(account.ConnectorToken);
-
-                            gt.Rows[i][MAINACCTRISKRULE] = account.MAcctRiskRule;
-
-                            gt.Rows[i][MACTCONNSTATUS] = account.MAcctConnected;
-                            gt.Rows[i][MACTCONNIMG] = getMAcctConnectImg(account.MAcctConnected);
-                            
-                        }
-
-                        //分帐户登入 路由组 路由标识
-                        if (CoreService.SiteInfo.ProductType == QSEnumProductType.CounterSystem)
-                        {
-                            gt.Rows[i][LOGINSTATUS] = getLoginStatus(account.IsLogin);
-                            gt.Rows[i][LOGINSTATUSIMG] = getLoginStatusImage(account.IsLogin);
-
-                            gt.Rows[i][ROUTE] = account.OrderRouteType.ToString();
-                            gt.Rows[i][ROUTEIMG] = getRouteStatusImage(account.OrderRouteType);
-
-                            gt.Rows[i][ROUTERGROUP] = account.RG_ID;
-                            RouterGroupSetting rg = CoreService.BasicInfoTracker.GetRouterGroup(account.RG_ID);
-                            gt.Rows[i][ROUTERGROUPSTR] = rg != null ? rg.Name : "";
-
-                        }
-
+                        gt.Rows[i][LOGINSTATUS] = getLoginStatus(account.IsLogin);
+                        gt.Rows[i][LOGINSTATUSIMG] = getLoginStatusImage(account.IsLogin);
                         
                         gt.Rows[i][EXECUTE] = getExecuteStatus(account.Execute);
                         gt.Rows[i][EXECUTEIMG] = getExecuteStatusImage(account.Execute);
@@ -562,8 +438,6 @@ namespace TradingLib.TinyMGRControl
                         
                         gt.Rows[i][WARN] = account.IsWarn;
                         gt.Rows[i][WARNSTR] = account.WarnMessage;
-                        gt.Rows[i][CURRENCY] = Util.GetEnumDescription(account.Currency);
-
 
                         accountmap.TryAdd(account.Account, account);
                         accountrowmap.TryAdd(account.Account, i);
@@ -578,37 +452,16 @@ namespace TradingLib.TinyMGRControl
                         //gt.Rows[i][CREDIT] = decDisp(account.Credit);
                         //gt.Rows[i][TOTALEQUITY] = decDisp(account.NowEquity + account.Credit);
 
-                        gt.Rows[r][ROUTE] = account.OrderRouteType.ToString();
-                        gt.Rows[r][ROUTEIMG] = getRouteStatusImage(account.OrderRouteType);
+
                         gt.Rows[r][EXECUTE] = getExecuteStatus(account.Execute);
                         gt.Rows[r][EXECUTEIMG] = getExecuteStatusImage(account.Execute);
-                        gt.Rows[r][CATEGORYSTR] = Util.GetEnumDescription(account.Category);
-                        gt.Rows[r][CATEGORY] = account.Category.ToString();
-                        gt.Rows[r][HOLDNIGHT] = account.IntraDay ? "禁止" : "允许";
-
-
                         ManagerSetting mgr = CoreService.BasicInfoTracker.GetManager(account.MGRID);
                         gt.Rows[r][AGENTCODE] = string.Format("{0:d2}-{1}", mgr.ID, mgr.Login);
 
                         gt.Rows[r][NAME] = account.Name;
                         gt.Rows[r][DELETE] = account.Deleted;
                         
-                        gt.Rows[r][CURRENCY] = Util.GetEnumDescription(account.Currency);
 
-
-                        gt.Rows[r][ROUTERGROUP] = account.RG_ID;
-                        RouterGroupSetting rg = CoreService.BasicInfoTracker.GetRouterGroup(account.RG_ID);
-                        gt.Rows[r][ROUTERGROUPSTR] = rg != null ? rg.Name : "";
-
-                        if (CoreService.TLClient.ServerVersion.ProductType == QSEnumProductType.VendorMoniter)
-                        {
-                            gt.Rows[r][MAINACCOUNT] = account.ConnectorToken;
-                            gt.Rows[r][MAINACCOUNTBINDED] = !string.IsNullOrEmpty(account.ConnectorToken);
-
-                            gt.Rows[r][MACTCONNSTATUS] = account.MAcctConnected;
-                            gt.Rows[r][MACTCONNIMG] = getMAcctConnectImg(account.MAcctConnected);
-                            gt.Rows[r][MAINACCTRISKRULE] = account.MAcctRiskRule;
-                        }
 
                         bool oldwarn = bool.Parse(gt.Rows[r][WARN].ToString());
                         gt.Rows[r][WARN] = account.IsWarn;
@@ -662,14 +515,15 @@ namespace TradingLib.TinyMGRControl
                     gt.Rows[r][NOWEQUITY] = decDisp(account.NowEquity);
                     gt.Rows[r][CREDIT] = decDisp(account.Credit);
                     gt.Rows[r][TOTALEQUITY] = decDisp(account.NowEquity + account.Credit);
-                    gt.Rows[r][MARGIN] = decDisp(account.Margin);
-                    gt.Rows[r][FROZENMARGIN] = decDisp(account.ForzenMargin);
-                    gt.Rows[r][REALIZEDPL] = decDisp(account.RealizedPL);
-                    gt.Rows[r][UNREALIZEDPL] = decDisp(account.UnRealizedPL);
-                    gt.Rows[r][COMMISSION] = decDisp(account.Commission);
-                    gt.Rows[r][PROFIT] = decDisp(account.Profit);
-                    //gt.Rows[r][PROFITLOSSIMG] = getProfitLossImage(account.Profit);
-                    gt.Rows[r][HOLDSIZE] = account.TotalPositionSize;
+                    gt.Rows[r][BUYAMOUNT] = account.StkBuyAmount.ToFormatStr();
+                    gt.Rows[r][SELLAMOUNT] = account.StkSellAmount.ToFormatStr();
+                    gt.Rows[r][COMMISSION] = account.StkCommission.ToFormatStr();
+                    gt.Rows[r][FROZENMARGIN] = account.StkMoneyFronzen.ToFormatStr();
+
+                    gt.Rows[r][MARKETVALUE] = account.StkPositoinValue.ToFormatStr();
+                    gt.Rows[r][UNREALIZEDPL] = (account.StkPositoinValue - account.StkPositionCost).ToFormatStr();
+
+                    gt.Rows[r][TOTALLIQUIDATION] = (account.StkPositoinValue + account.NowEquity).ToFormatStr();
                 }
             }
         }
@@ -713,27 +567,27 @@ namespace TradingLib.TinyMGRControl
 
         private void accountgrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 8 || e.ColumnIndex == 9 || e.ColumnIndex == 11)
-            {
-                e.CellStyle.Font =  UIConstant.BoldFont;
-                decimal v = 0;
-                decimal.TryParse(e.Value.ToString(), out v);
-                if (v > 0)
-                {
-                    e.CellStyle.ForeColor = UIConstant.LongSideColor;
-                }
-                else if (v < 0)
-                {
-                    e.CellStyle.ForeColor = UIConstant.ShortSideColor;
-                }
-                else if (v == 0)
-                {
-                    e.CellStyle.ForeColor = System.Drawing.Color.Black;
+            //if (e.ColumnIndex == 8 || e.ColumnIndex == 9 || e.ColumnIndex == 11)
+            //{
+            //    e.CellStyle.Font =  UIConstant.BoldFont;
+            //    decimal v = 0;
+            //    decimal.TryParse(e.Value.ToString(), out v);
+            //    if (v > 0)
+            //    {
+            //        e.CellStyle.ForeColor = UIConstant.LongSideColor;
+            //    }
+            //    else if (v < 0)
+            //    {
+            //        e.CellStyle.ForeColor = UIConstant.ShortSideColor;
+            //    }
+            //    else if (v == 0)
+            //    {
+            //        e.CellStyle.ForeColor = System.Drawing.Color.Black;
                     
-                }
+            //    }
 
 
-            }
+            //}
         }
 
         void accountgrid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
