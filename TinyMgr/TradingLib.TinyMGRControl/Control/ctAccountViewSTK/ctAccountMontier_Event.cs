@@ -18,6 +18,7 @@ namespace TradingLib.TinyMGRControl
         }
 
 
+        int _mouseRowIdx = -1;
         void accountgrid_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
@@ -40,7 +41,8 @@ namespace TradingLib.TinyMGRControl
                         accountgrid.ClearSelection();
                         accountgrid.Rows[e.RowIndex].Selected = true;
                     }
-                    
+
+                    _mouseRowIdx = e.RowIndex;//设定当前选中行号
                     //显示到当前光标位置
                     CreateMenu().Show(Cursor.Position);
 
@@ -52,22 +54,36 @@ namespace TradingLib.TinyMGRControl
         ContextMenuStrip CreateMenu()
         {
             ContextMenuStrip tmp = new ContextMenuStrip();
-            tmp.Items.Add("修改账户",null, EditAccount);
+            tmp.Items.Add("修改账户", null, EditAccount_Click);
 
             return tmp;
         }
 
-        void EditAccount(object sender, EventArgs e)
+        /// <summary>
+        /// 编辑某个交易帐号
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void EditAccount_Click(object sender, EventArgs e)
         {
-            fmEditAccount fm = new fmEditAccount();
-            fm.ShowDialog();
-            fm.Close();
+            AccountLite account = GetAccount(CurrentAccount);
+            if (account != null)
+            {
+                fmEditAccount fm = new fmEditAccount();
+                fm.SetAccount(account);
+                fm.ShowDialog();
+                fm.Close();
+            }
+            else
+            {
+                MoniterHelper.WindowMessage("请选择需要编辑的交易帐户！");
+            }
         }
 
 
         void ClearTerminal_Click(object sender, EventArgs e)
         {
-            AccountLite account = GetVisibleAccount(CurrentAccount);
+            AccountLite account = GetAccount(CurrentAccount);
             if (account != null)
             {
                 if (MoniterHelper.WindowConfirm(string.Format("确认注销交易帐户[{0}]的所有登入交易终端?", account.Account)) == DialogResult.Yes)
@@ -85,25 +101,7 @@ namespace TradingLib.TinyMGRControl
 
 
 
-        /// <summary>
-        /// 编辑某个交易帐号
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void EditAccount_Click(object sender, EventArgs e)
-        {
-            AccountLite account = GetVisibleAccount(CurrentAccount);
-            if (account != null)
-            {
-                //fmAccountConfig fm = new fmAccountConfig();
-                //fm.SetAccount(account);
-                //fm.ShowDialog();
-            }
-            else
-            {
-                MoniterHelper.WindowMessage("请选择需要编辑的交易帐户！");
-            }
-        }
+       
 
     
         

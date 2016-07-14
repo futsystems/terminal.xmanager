@@ -33,7 +33,7 @@
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lbCurrentPass = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.newPassword = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.newpass = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.btnChangePassword = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -59,7 +59,7 @@
             // kryptonGroupBox1.Panel
             // 
             this.kryptonGroupBox1.Panel.Controls.Add(this.btnChangePassword);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.newPassword);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.newpass);
             this.kryptonGroupBox1.Panel.Controls.Add(this.lbCurrentPass);
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel2);
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel1);
@@ -91,12 +91,12 @@
             this.lbCurrentPass.TabIndex = 2;
             this.lbCurrentPass.Values.Text = "--";
             // 
-            // newPassword
+            // newpass
             // 
-            this.newPassword.Location = new System.Drawing.Point(76, 39);
-            this.newPassword.Name = "newPassword";
-            this.newPassword.Size = new System.Drawing.Size(106, 20);
-            this.newPassword.TabIndex = 3;
+            this.newpass.Location = new System.Drawing.Point(76, 39);
+            this.newpass.Name = "newpass";
+            this.newpass.Size = new System.Drawing.Size(106, 20);
+            this.newpass.TabIndex = 3;
             // 
             // btnChangePassword
             // 
@@ -133,7 +133,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbCurrentPass;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox newPassword;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox newpass;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnChangePassword;
     }
 }

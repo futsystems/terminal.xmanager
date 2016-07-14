@@ -213,12 +213,18 @@ namespace TradingLib.TinyMGRControl
 
 
 
-        //通过行号得该行的Security
-        AccountLite GetVisibleAccount(string account)
+        /// <summary>
+        /// 通过交易账户 获得Account
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
+        AccountLite GetAccount(string account)
         {
-            //MessageBox.Show("account:" + account + " haveaccount:" + HaveAccount(account).ToString());
-            if (HaveAccount(account))
-                return accountmap[account];
+            AccountLite target = null;
+            if (accountmap.TryGetValue(account, out target))
+            {
+                return target;
+            }
             return null;
         }
         #endregion

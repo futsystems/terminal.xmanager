@@ -30,7 +30,42 @@ namespace TradingLib.TinyMGRControl
             BindToTable();
 
             this.positionGrid.SizeChanged += new EventHandler(positionGrid_SizeChanged);
+            this.positionGrid.CellFormatting += new DataGridViewCellFormattingEventHandler(positionGrid_CellFormatting);
             this.Load += new EventHandler(ctPositionViewSTK_Load);
+        }
+
+        void positionGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            try
+            {
+                if (e.ColumnIndex == 11 || e.ColumnIndex ==12)
+                {
+
+                    e.CellStyle.Font = UIConstant.BoldFont;
+                    decimal v = 0;
+                    decimal.TryParse(e.Value.ToString(), out v);
+
+                    if (v > 0)
+                    {
+                        e.CellStyle.ForeColor = UIConstant.LongSideColor;
+                    }
+                    else if (v < 0)
+                    {
+                        e.CellStyle.ForeColor = UIConstant.ShortSideColor;
+                    }
+                    else if (v == 0)
+                    {
+                        e.CellStyle.ForeColor = System.Drawing.Color.Black;
+
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                logger.Error("cell format error:" + ex.ToString());
+            }
         }
 
         void positionGrid_SizeChanged(object sender, EventArgs e)
@@ -54,6 +89,8 @@ namespace TradingLib.TinyMGRControl
                 }
 
                 positionGrid.Click += new EventHandler(positionGrid_Click);
+
+                ResetColumeSize();
             }
             catch (Exception ex)
             { 
@@ -357,7 +394,7 @@ namespace TradingLib.TinyMGRControl
 
         const string POSITIONPROFIT = "盈亏";
         const string AVGPRICE = "成本价";
-        const string POSITIONPROFITPECT = "%";
+        const string POSITIONPROFITPECT = "百分比";
         const string LASTPRICE="市价";
         const string MARKETVALUE = "市值";
         const string EXCHANGE = "交易市场";
@@ -392,22 +429,24 @@ namespace TradingLib.TinyMGRControl
         /// </summary>
         private void InitTable()
         {
-            tb.Columns.Add(POSKEY);
-            tb.Columns.Add(ACCOUNT);
-            tb.Columns.Add(SIDE);
+            tb.Columns.Add(POSKEY);//0
+            tb.Columns.Add(ACCOUNT);//1
+            tb.Columns.Add(SIDE);//2
 
-            tb.Columns.Add(SYMBOL);
-            tb.Columns.Add(SYMBOLNAME);
-            tb.Columns.Add(TOTALSIZE);
-            tb.Columns.Add(AVABILESIZE);
-            tb.Columns.Add(FRONZENSIZE);
+            tb.Columns.Add(SYMBOL);//3
+            tb.Columns.Add(SYMBOLNAME);//4
+            tb.Columns.Add(TOTALSIZE);//5
+            tb.Columns.Add(AVABILESIZE);//6
+            tb.Columns.Add(FRONZENSIZE);//7
 
-            tb.Columns.Add(POSITIONPROFIT);
-            tb.Columns.Add(AVGPRICE);
-            tb.Columns.Add(POSITIONPROFITPECT);
-            tb.Columns.Add(LASTPRICE);
-            tb.Columns.Add(MARKETVALUE);
-            tb.Columns.Add(EXCHANGE);
+            
+            tb.Columns.Add(AVGPRICE);//8
+            tb.Columns.Add(LASTPRICE);//9
+            tb.Columns.Add(MARKETVALUE);//10
+            tb.Columns.Add(POSITIONPROFIT);//11
+            tb.Columns.Add(POSITIONPROFITPECT);//12
+            
+            tb.Columns.Add(EXCHANGE);//13
 
         }
 
@@ -424,7 +463,7 @@ namespace TradingLib.TinyMGRControl
             grid.Columns[POSITIONPROFIT].Width = 80;
             grid.Columns[AVGPRICE].Width = 60;
             grid.Columns[LASTPRICE].Width = 60;
-            grid.Columns[POSITIONPROFITPECT].Width = 40;
+            grid.Columns[POSITIONPROFITPECT].Width = 60;
             grid.Columns[MARKETVALUE].Width = 100;
 
 
