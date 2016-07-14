@@ -357,7 +357,7 @@ namespace TradingLib.TinyMGRControl
 
         const string POSITIONPROFIT = "盈亏";
         const string AVGPRICE = "成本价";
-        const string POSITIONPROFITPECT = "盈亏比例(%)";
+        const string POSITIONPROFITPECT = "%";
         const string LASTPRICE="市价";
         const string MARKETVALUE = "市值";
         const string EXCHANGE = "交易市场";
@@ -422,10 +422,10 @@ namespace TradingLib.TinyMGRControl
             grid.Columns[FRONZENSIZE].Width = 60;
 
             grid.Columns[POSITIONPROFIT].Width = 80;
-            grid.Columns[AVGPRICE].Width = 80;
-            grid.Columns[LASTPRICE].Width = 80;
-            grid.Columns[POSITIONPROFITPECT].Width = 80;
-            grid.Columns[MARKETVALUE].Width = 120;
+            grid.Columns[AVGPRICE].Width = 60;
+            grid.Columns[LASTPRICE].Width = 60;
+            grid.Columns[POSITIONPROFITPECT].Width = 40;
+            grid.Columns[MARKETVALUE].Width = 100;
 
 
 

@@ -91,7 +91,6 @@ namespace TradingLib.MoniterControl
             if (MoniterHelper.WindowConfirm("确认添加交易帐号?") == System.Windows.Forms.DialogResult.Yes)
             {
                 CoreService.TLClient.ReqAddAccount(acccat, accid, pass, mgrid, 0,grid);
-                this.Close();
             }
         }
     }

@@ -59,7 +59,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Futs.base\lib\TradingLib\TradingLib.Mixins.dll</HintPath>
     </Reference>
-    <Reference Include="TradingLib.TinyMGRControl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Control\ctAccountViewSTK\AccountDataSource.cs" />
@@ -139,6 +138,18 @@
       <DependentUpon>ctTradingInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="DataSourceAdapter.cs" />
+    <Compile Include="Forms\fmAddAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmAddAccount.Designer.cs">
+      <DependentUpon>fmAddAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmEditAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmEditAccount.Designer.cs">
+      <DependentUpon>fmEditAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="IPage.cs" />
     <Compile Include="MoniterHelper.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -178,6 +189,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Control\ctTradingInfo.resx">
       <DependentUpon>ctTradingInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmAddAccount.resx">
+      <DependentUpon>fmAddAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmEditAccount.resx">
+      <DependentUpon>fmEditAccount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

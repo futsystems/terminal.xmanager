@@ -15,11 +15,54 @@ namespace TradingLib.TinyMGRControl
         void InitMenu()
         {
             //accountgrid.ContextMenuStrip = MenuService.CreateContextMenu(this, "/AccountList/ContextMenu");
-            
-        
         }
 
 
+        void accountgrid_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                
+                accountgrid.ContextMenuStrip = CreateMenu();
+                accountgrid.ContextMenuStrip.Show(e.Location);
+            }
+        }
+
+        void accountgrid_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                if (e.RowIndex >= 0)
+                {
+                    //设置选中
+                    if (accountgrid.Rows[e.RowIndex].Selected == false)
+                    {
+                        accountgrid.ClearSelection();
+                        accountgrid.Rows[e.RowIndex].Selected = true;
+                    }
+                    
+                    //显示到当前光标位置
+                    CreateMenu().Show(Cursor.Position);
+
+                }
+            }
+        }
+
+
+        ContextMenuStrip CreateMenu()
+        {
+            ContextMenuStrip tmp = new ContextMenuStrip();
+            tmp.Items.Add("修改账户",null, EditAccount);
+
+            return tmp;
+        }
+
+        void EditAccount(object sender, EventArgs e)
+        {
+            fmEditAccount fm = new fmEditAccount();
+            fm.ShowDialog();
+            fm.Close();
+        }
 
 
         void ClearTerminal_Click(object sender, EventArgs e)
@@ -63,28 +106,7 @@ namespace TradingLib.TinyMGRControl
         }
 
     
-        /// <summary>
-        /// 查询历史记录
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void QryHist_Click(object sender, EventArgs e)
-        {
-            AccountLite account = GetVisibleAccount(CurrentAccount);
-            if (account != null)
-            {
-                //if (QryAccountHistEvent != null)
-                //    QryAccountHistEvent(account);
-                //fmHistQuery fm = new fmHistQuery();
-                //fm.SetAccount(account.Account);
-                //fm.Show();
-
-            }
-            else
-            {
-                MoniterHelper.WindowMessage("请选择需要查询的交易帐户！");
-            }
-        }
+        
 
         /// <summary>
         /// 添加交易帐户
@@ -93,9 +115,9 @@ namespace TradingLib.TinyMGRControl
         /// <param name="e"></param>
         private void btnAddAccount_Click(object sender, EventArgs e)
         {
-            //fmAddAccount fm = new fmAddAccount();
-            //fm.TopMost = true;
-            //fm.ShowDialog();
+            fmAddAccount fm = new fmAddAccount();
+            fm.ShowDialog();
+            fm.Close();
         }
 
 
@@ -139,6 +161,7 @@ namespace TradingLib.TinyMGRControl
                 //设定当前选中帐号
                 accountselected = accountlite;
 
+                lbAccountSelected.Text = accountlite.Account;
                 //触发事件中继的帐户选择事件
                 CoreService.EventAccount.FireAccountSelectedEvent(accountlite);
             }

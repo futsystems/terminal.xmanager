@@ -98,14 +98,21 @@ namespace TradingLib.TinyMGRControl
             accountgrid.Scroll +=new ScrollEventHandler(accountgrid_Scroll);//滚轮滚动
             accountgrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(accountgrid_RowPrePaint);
 
+            //accountgrid.MouseClick += new MouseEventHandler(accountgrid_MouseClick);
+            accountgrid.CellMouseDown += new DataGridViewCellMouseEventHandler(accountgrid_CellMouseDown);
             //响应过滤参数变更事件
             //ControlService.OnFilterArgsChangeEvent += new VoidDelegate(RefreshAccountQuery);
 
             //绑定事件
-            //btnAddAccount.Click += new EventHandler(btnAddAccount_Click);
+            btnAddAccount.Click +=new EventHandler(btnAddAccount_Click);
+            
 
             CoreService.EventCore.RegIEventHandler(this);
         }
+
+
+
+
 
 
 
