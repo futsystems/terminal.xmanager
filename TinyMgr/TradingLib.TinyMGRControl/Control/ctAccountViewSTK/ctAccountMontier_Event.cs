@@ -54,10 +54,110 @@ namespace TradingLib.TinyMGRControl
         ContextMenuStrip CreateMenu()
         {
             ContextMenuStrip tmp = new ContextMenuStrip();
-            tmp.Items.Add("修改账户", null, EditAccount_Click);
+            AccountLite account = GetAccount(CurrentAccount);
+            if (account != null)
+            {
+                
+                if (account.Execute)
+                {
+                    tmp.Items.Add("冻结账户", null, InActiveAccount_Click);
+                }
+                else
+                {
+                    tmp.Items.Add("激活账户", null, ActiveAccount_Click);
+                }
+                
+
+                tmp.Items.Add(new ToolStripSeparator());
+                tmp.Items.Add("出入金", null, CashOperation_Click);
+                tmp.Items.Add("修改账户", null, EditAccount_Click);
+
+                tmp.Items.Add(new ToolStripSeparator());
+                tmp.Items.Add("删除账户", null, DelAccount_Click);
+
+            }
 
             return tmp;
         }
+
+        /// <summary>
+        /// 出入金操作
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void CashOperation_Click(object sender, EventArgs e)
+        {
+             AccountLite account = GetAccount(CurrentAccount);
+             if (account != null)
+             {
+                 fmCashOperation fm = new fmCashOperation();
+                 fm.SetAccount(account);
+                 fm.ShowDialog();
+                 fm.Close();
+             }
+        }
+
+        /// <summary>
+        /// 删除账户
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void DelAccount_Click(object sender, EventArgs e)
+        {
+             AccountLite account = GetAccount(CurrentAccount);
+             if (account != null)
+             {
+
+                 if (MoniterHelper.WindowConfirm("确认删除交易帐户?") == System.Windows.Forms.DialogResult.Yes)
+                 {
+                     CoreService.TLClient.ReqDelAccount(account.Account);
+
+                 }
+             }
+             else
+             {
+                 MoniterHelper.WindowMessage("请选择需要编辑的交易帐户！");
+             }
+        }
+
+        /// <summary>
+        /// 冻结账户
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void InActiveAccount_Click(object sender, EventArgs e)
+        {
+            AccountLite account = GetAccount(CurrentAccount);
+            if (account != null)
+            {
+
+                CoreService.TLClient.ReqUpdateAccountExecute(account.Account, false);
+            }
+            else
+            {
+                MoniterHelper.WindowMessage("请选择需要编辑的交易帐户！");
+            }
+        }
+
+        /// <summary>
+        /// 激活账户
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void ActiveAccount_Click(object sender, EventArgs e)
+        {
+            AccountLite account = GetAccount(CurrentAccount);
+            if (account != null)
+            {
+
+                CoreService.TLClient.ReqUpdateAccountExecute(account.Account, true);
+            }
+            else
+            {
+                MoniterHelper.WindowMessage("请选择需要编辑的交易帐户！");
+            }
+        }
+
 
         /// <summary>
         /// 编辑某个交易帐号

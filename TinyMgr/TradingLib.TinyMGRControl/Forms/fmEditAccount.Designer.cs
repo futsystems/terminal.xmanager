@@ -30,20 +30,32 @@
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.lbCurrentPass = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.newpass = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.btnChangePassword = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.newpass = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.lbCurrentPass = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonGroupBox2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.name = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.idcard = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.mobile = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.btnUpdateProfile = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
             this.kryptonGroupBox1.Panel.SuspendLayout();
             this.kryptonGroupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).BeginInit();
+            this.kryptonGroupBox2.Panel.SuspendLayout();
+            this.kryptonGroupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonGroupBox2);
             this.kryptonPanel1.Controls.Add(this.kryptonGroupBox1);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
@@ -63,25 +75,24 @@
             this.kryptonGroupBox1.Panel.Controls.Add(this.lbCurrentPass);
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel2);
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel1);
-            this.kryptonGroupBox1.Size = new System.Drawing.Size(283, 155);
+            this.kryptonGroupBox1.Size = new System.Drawing.Size(283, 135);
             this.kryptonGroupBox1.TabIndex = 0;
             this.kryptonGroupBox1.Values.Heading = "交易密码";
             // 
-            // kryptonLabel1
+            // btnChangePassword
             // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(7, 13);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(63, 20);
-            this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "当前密码:";
+            this.btnChangePassword.Location = new System.Drawing.Point(138, 74);
+            this.btnChangePassword.Name = "btnChangePassword";
+            this.btnChangePassword.Size = new System.Drawing.Size(90, 25);
+            this.btnChangePassword.TabIndex = 4;
+            this.btnChangePassword.Values.Text = "修改密码";
             // 
-            // kryptonLabel2
+            // newpass
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(7, 39);
-            this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(63, 20);
-            this.kryptonLabel2.TabIndex = 1;
-            this.kryptonLabel2.Values.Text = "修改密码:";
+            this.newpass.Location = new System.Drawing.Point(76, 39);
+            this.newpass.Name = "newpass";
+            this.newpass.Size = new System.Drawing.Size(106, 20);
+            this.newpass.TabIndex = 3;
             // 
             // lbCurrentPass
             // 
@@ -91,20 +102,92 @@
             this.lbCurrentPass.TabIndex = 2;
             this.lbCurrentPass.Values.Text = "--";
             // 
-            // newpass
+            // kryptonLabel2
             // 
-            this.newpass.Location = new System.Drawing.Point(76, 39);
-            this.newpass.Name = "newpass";
-            this.newpass.Size = new System.Drawing.Size(106, 20);
-            this.newpass.TabIndex = 3;
+            this.kryptonLabel2.Location = new System.Drawing.Point(7, 39);
+            this.kryptonLabel2.Name = "kryptonLabel2";
+            this.kryptonLabel2.Size = new System.Drawing.Size(63, 20);
+            this.kryptonLabel2.TabIndex = 1;
+            this.kryptonLabel2.Values.Text = "修改密码:";
             // 
-            // btnChangePassword
+            // kryptonLabel1
             // 
-            this.btnChangePassword.Location = new System.Drawing.Point(147, 81);
-            this.btnChangePassword.Name = "btnChangePassword";
-            this.btnChangePassword.Size = new System.Drawing.Size(90, 25);
-            this.btnChangePassword.TabIndex = 4;
-            this.btnChangePassword.Values.Text = "修改密码";
+            this.kryptonLabel1.Location = new System.Drawing.Point(7, 13);
+            this.kryptonLabel1.Name = "kryptonLabel1";
+            this.kryptonLabel1.Size = new System.Drawing.Size(63, 20);
+            this.kryptonLabel1.TabIndex = 0;
+            this.kryptonLabel1.Values.Text = "当前密码:";
+            // 
+            // kryptonGroupBox2
+            // 
+            this.kryptonGroupBox2.Location = new System.Drawing.Point(3, 144);
+            this.kryptonGroupBox2.Name = "kryptonGroupBox2";
+            // 
+            // kryptonGroupBox2.Panel
+            // 
+            this.kryptonGroupBox2.Panel.Controls.Add(this.btnUpdateProfile);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.mobile);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel5);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.idcard);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel4);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.name);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel3);
+            this.kryptonGroupBox2.Size = new System.Drawing.Size(283, 166);
+            this.kryptonGroupBox2.TabIndex = 1;
+            this.kryptonGroupBox2.Values.Heading = "投资者信息";
+            // 
+            // kryptonLabel3
+            // 
+            this.kryptonLabel3.Location = new System.Drawing.Point(32, 12);
+            this.kryptonLabel3.Name = "kryptonLabel3";
+            this.kryptonLabel3.Size = new System.Drawing.Size(38, 20);
+            this.kryptonLabel3.TabIndex = 5;
+            this.kryptonLabel3.Values.Text = "姓名:";
+            // 
+            // name
+            // 
+            this.name.Location = new System.Drawing.Point(76, 12);
+            this.name.Name = "name";
+            this.name.Size = new System.Drawing.Size(106, 20);
+            this.name.TabIndex = 6;
+            // 
+            // kryptonLabel4
+            // 
+            this.kryptonLabel4.Location = new System.Drawing.Point(7, 38);
+            this.kryptonLabel4.Name = "kryptonLabel4";
+            this.kryptonLabel4.Size = new System.Drawing.Size(63, 20);
+            this.kryptonLabel4.TabIndex = 7;
+            this.kryptonLabel4.Values.Text = "证件号码:";
+            // 
+            // idcard
+            // 
+            this.idcard.Location = new System.Drawing.Point(76, 38);
+            this.idcard.Name = "idcard";
+            this.idcard.Size = new System.Drawing.Size(152, 20);
+            this.idcard.TabIndex = 8;
+            // 
+            // kryptonLabel5
+            // 
+            this.kryptonLabel5.Location = new System.Drawing.Point(7, 64);
+            this.kryptonLabel5.Name = "kryptonLabel5";
+            this.kryptonLabel5.Size = new System.Drawing.Size(63, 20);
+            this.kryptonLabel5.TabIndex = 9;
+            this.kryptonLabel5.Values.Text = "手机号码:";
+            // 
+            // mobile
+            // 
+            this.mobile.Location = new System.Drawing.Point(76, 64);
+            this.mobile.Name = "mobile";
+            this.mobile.Size = new System.Drawing.Size(152, 20);
+            this.mobile.TabIndex = 10;
+            // 
+            // btnUpdateProfile
+            // 
+            this.btnUpdateProfile.Location = new System.Drawing.Point(117, 101);
+            this.btnUpdateProfile.Name = "btnUpdateProfile";
+            this.btnUpdateProfile.Size = new System.Drawing.Size(111, 25);
+            this.btnUpdateProfile.TabIndex = 5;
+            this.btnUpdateProfile.Values.Text = "修改投资者信息";
             // 
             // fmEditAccount
             // 
@@ -122,6 +205,10 @@
             this.kryptonGroupBox1.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
             this.kryptonGroupBox1.ResumeLayout(false);
+            this.kryptonGroupBox2.Panel.ResumeLayout(false);
+            this.kryptonGroupBox2.Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).EndInit();
+            this.kryptonGroupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -135,5 +222,13 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbCurrentPass;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox newpass;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnChangePassword;
+        private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox2;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox name;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox idcard;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox mobile;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnUpdateProfile;
     }
 }
