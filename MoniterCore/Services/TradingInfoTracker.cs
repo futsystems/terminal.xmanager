@@ -35,8 +35,16 @@ namespace TradingLib.MoniterCore
         public AccountLite Account { get; set; }
         QSEnumInfoTrackerStatus status = QSEnumInfoTrackerStatus.UNKNOWN;
         public QSEnumInfoTrackerStatus Status { get { return status; } }
+
+        /// <summary>
+        /// 行情快照维护器
+        /// </summary>
+        public TickTracker TickTracker { get; set; }
+
+
         public TradingInfoTracker()
         {
+            TickTracker = new TickTracker();
             OrderTracker = new OrderTracker();
             PositionTracker = new LSPositionTracker("");
             HoldPositionTracker = new LSPositionTracker("");
@@ -78,6 +86,7 @@ namespace TradingLib.MoniterCore
 
         public void GotTick(Tick k)
         {
+            TickTracker.GotTick(k);
             PositionTracker.GotTick(k);
             CoreService.EventIndicator.FireTick(k);
         }

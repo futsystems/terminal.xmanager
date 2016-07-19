@@ -30,12 +30,12 @@
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.symbol = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonNumericUpDown1 = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
-            this.kryptonNumericUpDown2 = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
-            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.size = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
+            this.price = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
+            this.symbol_name = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
@@ -46,12 +46,12 @@
             // 
             this.kryptonPanel1.Controls.Add(this.kryptonButton2);
             this.kryptonPanel1.Controls.Add(this.kryptonButton1);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel4);
-            this.kryptonPanel1.Controls.Add(this.kryptonNumericUpDown2);
-            this.kryptonPanel1.Controls.Add(this.kryptonNumericUpDown1);
+            this.kryptonPanel1.Controls.Add(this.symbol_name);
+            this.kryptonPanel1.Controls.Add(this.price);
+            this.kryptonPanel1.Controls.Add(this.size);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel3);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
-            this.kryptonPanel1.Controls.Add(this.kryptonTextBox1);
+            this.kryptonPanel1.Controls.Add(this.symbol);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
@@ -67,12 +67,12 @@
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "代 码:";
             // 
-            // kryptonTextBox1
+            // symbol
             // 
-            this.kryptonTextBox1.Location = new System.Drawing.Point(70, 13);
-            this.kryptonTextBox1.Name = "kryptonTextBox1";
-            this.kryptonTextBox1.Size = new System.Drawing.Size(128, 20);
-            this.kryptonTextBox1.TabIndex = 1;
+            this.symbol.Location = new System.Drawing.Point(70, 13);
+            this.symbol.Name = "symbol";
+            this.symbol.Size = new System.Drawing.Size(128, 20);
+            this.symbol.TabIndex = 1;
             // 
             // kryptonLabel2
             // 
@@ -90,38 +90,48 @@
             this.kryptonLabel3.TabIndex = 3;
             this.kryptonLabel3.Values.Text = "价 格:";
             // 
-            // kryptonNumericUpDown1
+            // size
             // 
-            this.kryptonNumericUpDown1.Location = new System.Drawing.Point(70, 63);
-            this.kryptonNumericUpDown1.Maximum = new decimal(new int[] {
+            this.size.Location = new System.Drawing.Point(70, 63);
+            this.size.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
-            this.kryptonNumericUpDown1.Name = "kryptonNumericUpDown1";
-            this.kryptonNumericUpDown1.Size = new System.Drawing.Size(128, 22);
-            this.kryptonNumericUpDown1.TabIndex = 4;
+            this.size.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.size.Name = "size";
+            this.size.Size = new System.Drawing.Size(128, 22);
+            this.size.TabIndex = 4;
+            this.size.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
-            // kryptonNumericUpDown2
+            // price
             // 
-            this.kryptonNumericUpDown2.DecimalPlaces = 2;
-            this.kryptonNumericUpDown2.Location = new System.Drawing.Point(70, 91);
-            this.kryptonNumericUpDown2.Maximum = new decimal(new int[] {
+            this.price.DecimalPlaces = 2;
+            this.price.Location = new System.Drawing.Point(70, 91);
+            this.price.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
-            this.kryptonNumericUpDown2.Name = "kryptonNumericUpDown2";
-            this.kryptonNumericUpDown2.Size = new System.Drawing.Size(128, 22);
-            this.kryptonNumericUpDown2.TabIndex = 5;
+            this.price.Name = "price";
+            this.price.Size = new System.Drawing.Size(128, 22);
+            this.price.TabIndex = 5;
             // 
-            // kryptonLabel4
+            // symbol_name
             // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(70, 37);
-            this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(20, 20);
-            this.kryptonLabel4.TabIndex = 6;
-            this.kryptonLabel4.Values.Text = "--";
+            this.symbol_name.Location = new System.Drawing.Point(70, 37);
+            this.symbol_name.Name = "symbol_name";
+            this.symbol_name.Size = new System.Drawing.Size(20, 20);
+            this.symbol_name.TabIndex = 6;
+            this.symbol_name.Values.Text = "--";
             // 
             // kryptonButton1
             // 
@@ -159,12 +169,12 @@
 
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox kryptonTextBox1;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox symbol;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
-        private ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown kryptonNumericUpDown2;
-        private ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown kryptonNumericUpDown1;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
+        private ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown price;
+        private ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown size;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel symbol_name;
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton2;
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
     }
