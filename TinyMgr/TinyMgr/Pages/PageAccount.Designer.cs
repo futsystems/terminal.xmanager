@@ -30,18 +30,15 @@
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
-            this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.ctAccountMontier1 = new TradingLib.TinyMGRControl.ctAccountMontier();
             this.ctTradingInfo1 = new TradingLib.TinyMGRControl.ctTradingInfo();
+            this.ctOrderSentderSTK1 = new TradingLib.TinyMGRControl.Control.ctOrderSentderSTK();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             this.kryptonSplitContainer1.Panel1.SuspendLayout();
             this.kryptonSplitContainer1.Panel2.SuspendLayout();
             this.kryptonSplitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2)).BeginInit();
-            this.kryptonSplitContainer2.Panel1.SuspendLayout();
-            this.kryptonSplitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
@@ -67,24 +64,11 @@
             // 
             // kryptonSplitContainer1.Panel2
             // 
-            this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonSplitContainer2);
+            this.kryptonSplitContainer1.Panel2.Controls.Add(this.ctOrderSentderSTK1);
+            this.kryptonSplitContainer1.Panel2.Controls.Add(this.ctTradingInfo1);
             this.kryptonSplitContainer1.Size = new System.Drawing.Size(782, 459);
-            this.kryptonSplitContainer1.SplitterDistance = 274;
+            this.kryptonSplitContainer1.SplitterDistance = 219;
             this.kryptonSplitContainer1.TabIndex = 0;
-            // 
-            // kryptonSplitContainer2
-            // 
-            this.kryptonSplitContainer2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.kryptonSplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonSplitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.kryptonSplitContainer2.Name = "kryptonSplitContainer2";
-            // 
-            // kryptonSplitContainer2.Panel1
-            // 
-            this.kryptonSplitContainer2.Panel1.Controls.Add(this.ctTradingInfo1);
-            this.kryptonSplitContainer2.Size = new System.Drawing.Size(782, 180);
-            this.kryptonSplitContainer2.SplitterDistance = 514;
-            this.kryptonSplitContainer2.TabIndex = 0;
             // 
             // ctAccountMontier1
             // 
@@ -93,16 +77,26 @@
             this.ctAccountMontier1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ctAccountMontier1.Location = new System.Drawing.Point(0, 0);
             this.ctAccountMontier1.Name = "ctAccountMontier1";
-            this.ctAccountMontier1.Size = new System.Drawing.Size(782, 274);
+            this.ctAccountMontier1.Size = new System.Drawing.Size(782, 219);
             this.ctAccountMontier1.TabIndex = 0;
             // 
             // ctTradingInfo1
             // 
-            this.ctTradingInfo1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctTradingInfo1.Location = new System.Drawing.Point(0, 0);
+            this.ctTradingInfo1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ctTradingInfo1.Location = new System.Drawing.Point(8, 8);
             this.ctTradingInfo1.Name = "ctTradingInfo1";
-            this.ctTradingInfo1.Size = new System.Drawing.Size(514, 180);
-            this.ctTradingInfo1.TabIndex = 0;
+            this.ctTradingInfo1.Size = new System.Drawing.Size(548, 224);
+            this.ctTradingInfo1.TabIndex = 1;
+            // 
+            // ctOrderSentderSTK1
+            // 
+            this.ctOrderSentderSTK1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ctOrderSentderSTK1.Location = new System.Drawing.Point(562, 3);
+            this.ctOrderSentderSTK1.Name = "ctOrderSentderSTK1";
+            this.ctOrderSentderSTK1.Size = new System.Drawing.Size(217, 192);
+            this.ctOrderSentderSTK1.TabIndex = 2;
             // 
             // PageAccount
             // 
@@ -117,9 +111,6 @@
             this.kryptonSplitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).EndInit();
             this.kryptonSplitContainer1.ResumeLayout(false);
-            this.kryptonSplitContainer2.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2)).EndInit();
-            this.kryptonSplitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -129,7 +120,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer1;
         private TradingLib.TinyMGRControl.ctAccountMontier ctAccountMontier1;
-        private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer2;
         private TradingLib.TinyMGRControl.ctTradingInfo ctTradingInfo1;
+        private TradingLib.TinyMGRControl.Control.ctOrderSentderSTK ctOrderSentderSTK1;
     }
 }

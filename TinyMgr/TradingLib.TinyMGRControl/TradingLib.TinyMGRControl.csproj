@@ -113,6 +113,12 @@
     <Compile Include="Control\ctDeliveryViewSTK.designer.cs">
       <DependentUpon>ctDeliveryViewSTK.cs</DependentUpon>
     </Compile>
+    <Compile Include="Control\ctOrderSentderSTK.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ctOrderSentderSTK.Designer.cs">
+      <DependentUpon>ctOrderSentderSTK.cs</DependentUpon>
+    </Compile>
     <Compile Include="Control\ctOrderViewSTK.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -183,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Control\ctDeliveryViewSTK.resx">
       <DependentUpon>ctDeliveryViewSTK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ctOrderSentderSTK.resx">
+      <DependentUpon>ctOrderSentderSTK.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Control\ctOrderViewSTK.resx">
       <DependentUpon>ctOrderViewSTK.cs</DependentUpon>
