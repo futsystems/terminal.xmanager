@@ -58,12 +58,12 @@ namespace TradingLib.MoniterCore
         /// 发送委托
         /// </summary>
         /// <param name="order"></param>
-        public void ReqOrderInsert(Order order)
+        public int ReqOrderInsert(Order order)
         {
             OrderInsertRequest request = RequestTemplate<OrderInsertRequest>.CliSendRequest(++requestid);
             request.Order = order;
-
             SendPacket(request);
+            return requestid;
         }
 
         /// <summary>

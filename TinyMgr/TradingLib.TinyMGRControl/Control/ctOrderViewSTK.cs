@@ -39,9 +39,50 @@ namespace TradingLib.TinyMGRControl
             //    CoreService.EventCore.RegIEventHandler(this);
             //    CoreService.EventIndicator.GotOrderEvent += new Action<Order>(GotOrder);
             //}
+            this.orderGrid.DoubleClick += new EventHandler(orderGrid_DoubleClick);
             this.orderGrid.CellFormatting += new DataGridViewCellFormattingEventHandler(orderGrid_CellFormatting);
             this.orderGrid.SizeChanged += new EventHandler(orderGrid_SizeChanged);
             this.Load += new EventHandler(ctOrderViewSTK_Load);
+        }
+
+        long SelectedOrderID
+        {
+            get
+            {
+                int row = (orderGrid.SelectedRows.Count > 0 ? orderGrid.SelectedRows[0].Index : -1);
+                return long.Parse(orderGrid[ID, row].Value.ToString());
+            }
+        }
+
+
+        void orderGrid_DoubleClick(object sender, EventArgs e)
+        {
+            long oid = SelectedOrderID;
+            if (oid == -1)
+            {
+                MoniterHelper.WindowMessage("请选择要撤销的委托");
+            }
+            else
+            {
+                Order order = CoreService.TradingInfoTracker.OrderTracker.SentOrder(oid);
+                if (order == null)
+                {
+                    fmMessage.Show("错误", "委托不存在");
+                    return;
+                }
+                if (!order.IsPending())
+                {
+                    fmMessage.Show("错误", "委托无法撤销");
+                    return;
+                }
+                OrderAction oa = new OrderActionImpl();
+                oa.Account = order.Account;
+                oa.ActionFlag = QSEnumOrderActionFlag.Delete;
+                oa.OrderID = order.id;
+
+                CoreService.TLClient.ReqOrderAction(oa);
+               
+            }
         }
 
         void orderGrid_SizeChanged(object sender, EventArgs e)

@@ -18,6 +18,7 @@ namespace TradingLib.TinyMGRControl.Control
     {
         ILog logger = LogManager.GetLogger("ctOrderSentderSTK");
 
+        AccountLite _account = null;
         public ctOrderSentderSTK()
         {
             InitializeComponent();
@@ -29,8 +30,71 @@ namespace TradingLib.TinyMGRControl.Control
         void WireEvent()
         {
             CoreService.EventOther.OnSymbolSelectedEvent += new Action<object, Symbol>(EventOther_OnSymbolSelectedEvent);
-           
+            CoreService.EventAccount.OnAccountSelectedEvent += new Action<AccountLite>(EventAccount_OnAccountSelectedEvent);
+            btnBuy.Click += new EventHandler(btnBuy_Click);
+            btnSell.Click += new EventHandler(btnSell_Click);
             this.symbol.TextChanged += new EventHandler(symbol_TextChanged);
+        }
+
+        void EventAccount_OnAccountSelectedEvent(AccountLite obj)
+        {
+            _account = obj;
+        }
+
+        void btnSell_Click(object sender, EventArgs e)
+        {
+            SendOrder(false);
+        }
+
+        void btnBuy_Click(object sender, EventArgs e)
+        {
+            SendOrder(true);
+        }
+
+        int _orderInesertId = 0;
+        void SendOrder(bool side)
+        {
+            if (_symbol == null)
+            {
+
+                fmMessage.Show("委托参数错误", "请输入交易股票代码");
+                return;
+            }
+            if (size.Value == 0)
+            {
+                fmMessage.Show("委托参数错误", "请输入交易股票数量");
+                return;
+            }
+
+            if (_account == null)
+            {
+                fmMessage.Show("委托参数错误", "请选择交易账户");
+                return;
+            }
+
+            Order order = new OrderImpl();
+            order.Account = _account.Account;
+            order.Symbol = _symbol.Symbol;
+            order.Size = Math.Abs((int)size.Value);
+            order.Side = side;
+            order.LimitPrice = price.Value;
+
+            if (side)
+            {
+                order.OffsetFlag = QSEnumOffsetFlag.OPEN;
+            }
+            else
+            {
+                order.OffsetFlag = QSEnumOffsetFlag.CLOSE;
+            }
+
+            string msg = "以价格:{0} {1}{2}股票:{3}".Put(order.LimitPrice.ToFormatStr(), order.Side ? "买入" : "卖出", order.UnsignedSize, _symbol.GetName());
+            if (fmConfirm.Show("确认提交委托?", msg) == DialogResult.Yes)
+            {
+                _orderInesertId = CoreService.TLClient.ReqOrderInsert(order);
+            }
+
+
         }
 
         Symbol _symbol = null;
