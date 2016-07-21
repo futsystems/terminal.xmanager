@@ -105,10 +105,17 @@ namespace TradingLib.TinyMGRControl
 
             //绑定事件
             btnAddAccount.Click +=new EventHandler(btnAddAccount_Click);
+
+
+            //检索事件
+            accLogin.CheckedChanged+=new EventHandler(accLogin_CheckedChanged);
+            acctfilter.TextChanged += new EventHandler(acctfilter_TextChanged);
             
 
             CoreService.EventCore.RegIEventHandler(this);
         }
+
+       
 
 
 

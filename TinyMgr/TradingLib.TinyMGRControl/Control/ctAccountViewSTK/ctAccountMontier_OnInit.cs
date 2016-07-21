@@ -19,8 +19,7 @@ namespace TradingLib.TinyMGRControl
             {
                 InvokeGotAccount(account);
             }
-            //更新帐户数目
-            UpdateAccountNum();
+           
 
             //帐户事件
 

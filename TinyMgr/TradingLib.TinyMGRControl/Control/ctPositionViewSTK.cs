@@ -90,7 +90,7 @@ namespace TradingLib.TinyMGRControl
 
                 positionGrid.Click += new EventHandler(positionGrid_Click);
 
-                ResetColumeSize();
+                //ResetColumeSize();
             }
             catch (Exception ex)
             { 

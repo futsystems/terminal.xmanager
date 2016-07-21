@@ -30,10 +30,10 @@
         {
             this.kryptonNavigator1 = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
             this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.kryptonPage3 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.ctPositionViewSTK1 = new TradingLib.TinyMGRControl.ctPositionViewSTK();
+            this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.ctOrderViewSTK1 = new TradingLib.TinyMGRControl.ctOrderViewSTK();
+            this.kryptonPage3 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.ctTradeViewSTK1 = new TradingLib.TinyMGRControl.ctTradeViewSTK();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
             this.kryptonNavigator1.SuspendLayout();
@@ -57,7 +57,7 @@
             this.kryptonPage1,
             this.kryptonPage2,
             this.kryptonPage3});
-            this.kryptonNavigator1.SelectedIndex = 2;
+            this.kryptonNavigator1.SelectedIndex = 0;
             this.kryptonNavigator1.Size = new System.Drawing.Size(645, 339);
             this.kryptonNavigator1.TabIndex = 0;
             this.kryptonNavigator1.Text = "kryptonNavigator1";
@@ -75,6 +75,15 @@
             this.kryptonPage1.ToolTipTitle = "Page ToolTip";
             this.kryptonPage1.UniqueName = "A9CB1A7E1B7D4F275D927E6CAF3B99FC";
             // 
+            // ctPositionViewSTK1
+            // 
+            this.ctPositionViewSTK1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctPositionViewSTK1.Location = new System.Drawing.Point(0, 0);
+            this.ctPositionViewSTK1.Name = "ctPositionViewSTK1";
+            this.ctPositionViewSTK1.RealView = true;
+            this.ctPositionViewSTK1.Size = new System.Drawing.Size(643, 312);
+            this.ctPositionViewSTK1.TabIndex = 0;
+            // 
             // kryptonPage2
             // 
             this.kryptonPage2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
@@ -88,6 +97,15 @@
             this.kryptonPage2.ToolTipTitle = "Page ToolTip";
             this.kryptonPage2.UniqueName = "6FCEE9EC2C894807AAB29DFE43DE5172";
             // 
+            // ctOrderViewSTK1
+            // 
+            this.ctOrderViewSTK1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctOrderViewSTK1.Location = new System.Drawing.Point(0, 0);
+            this.ctOrderViewSTK1.Name = "ctOrderViewSTK1";
+            this.ctOrderViewSTK1.RealView = true;
+            this.ctOrderViewSTK1.Size = new System.Drawing.Size(643, 312);
+            this.ctOrderViewSTK1.TabIndex = 0;
+            // 
             // kryptonPage3
             // 
             this.kryptonPage3.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
@@ -100,24 +118,6 @@
             this.kryptonPage3.Text = "成 交";
             this.kryptonPage3.ToolTipTitle = "Page ToolTip";
             this.kryptonPage3.UniqueName = "85DD81BEFA41415786AEEBA9F37055B2";
-            // 
-            // ctPositionViewSTK1
-            // 
-            this.ctPositionViewSTK1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctPositionViewSTK1.Location = new System.Drawing.Point(0, 0);
-            this.ctPositionViewSTK1.Name = "ctPositionViewSTK1";
-            this.ctPositionViewSTK1.RealView = true;
-            this.ctPositionViewSTK1.Size = new System.Drawing.Size(643, 312);
-            this.ctPositionViewSTK1.TabIndex = 0;
-            // 
-            // ctOrderViewSTK1
-            // 
-            this.ctOrderViewSTK1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctOrderViewSTK1.Location = new System.Drawing.Point(0, 0);
-            this.ctOrderViewSTK1.Name = "ctOrderViewSTK1";
-            this.ctOrderViewSTK1.RealView = true;
-            this.ctOrderViewSTK1.Size = new System.Drawing.Size(643, 312);
-            this.ctOrderViewSTK1.TabIndex = 0;
             // 
             // ctTradeViewSTK1
             // 
