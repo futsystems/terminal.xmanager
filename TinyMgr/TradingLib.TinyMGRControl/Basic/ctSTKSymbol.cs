@@ -43,6 +43,8 @@ namespace TradingLib.TinyMGRControl
             //MoniterHelper.AdapterToIDataSource(cbtradeable).BindDataSource(MoniterHelper.GetTradeableCBList(true));
             MoniterHelper.AdapterToIDataSource(cbexchange).BindDataSource(CoreService.BasicInfoTracker.GetExchangeCombList(true));
 
+            cbexchange.SelectedIndex = 0;
+
             CoreService.EventBasicInfo.OnSymbolEvent += new Action<SymbolImpl>(InvokeGotSymbol);
         }
         public void OnDisposed()
@@ -56,9 +58,107 @@ namespace TradingLib.TinyMGRControl
 
             cbsecurity.SelectedIndexChanged += new EventHandler(cbsecurity_SelectedIndexChanged);
             cbexchange.SelectedIndexChanged += new EventHandler(cbexchange_SelectedIndexChanged);
+            cbInActive.CheckedChanged += new EventHandler(cbInActive_CheckedChanged);
             //cbtradeable.SelectedIndexChanged += new EventHandler(cbtradeable_SelectedIndexChanged);
+            symGrid.CellMouseDown += new DataGridViewCellMouseEventHandler(symGrid_CellMouseDown);
 
         }
+
+        void cbInActive_CheckedChanged(object sender, EventArgs e)
+        {
+            this.RefreshSecurityQuery();
+        }
+
+        int _mouseRowIdx = -1;
+        void symGrid_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                if (e.RowIndex >= 0)
+                {
+                    //设置选中
+                    if (symGrid.Rows[e.RowIndex].Selected == false)
+                    {
+                        symGrid.ClearSelection();
+                        symGrid.Rows[e.RowIndex].Selected = true;
+                    }
+
+                    _mouseRowIdx = e.RowIndex;//设定当前选中行号
+                    //显示到当前光标位置
+                    CreateMenu().Show(Cursor.Position);
+
+                }
+            }
+        }
+
+        //得到当前选择的交易帐户
+        public string CurrentSymbol
+        {
+            get
+            {
+                int row = (symGrid.SelectedRows.Count > 0 ? symGrid.SelectedRows[0].Index : -1);
+                return row == -1 ? string.Empty : (symGrid[SYMBOL, row].Value.ToString());
+            }
+        }
+
+        ContextMenuStrip CreateMenu()
+        {
+            ContextMenuStrip tmp = new ContextMenuStrip();
+            SymbolImpl sym = CoreService.BasicInfoTracker.GetSymbol(CurrentSymbol);
+            if (sym != null)
+            {
+
+                if (sym.Tradeable)
+                {
+                    tmp.Items.Add("禁止交易", null, InActiveSymbol_Click);
+                }
+                else
+                {
+                    tmp.Items.Add("允许交易", null, ActiveSymbol_Click);
+                }
+            }
+            return tmp;
+        }
+
+        /// <summary>
+        /// 冻结合约
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void InActiveSymbol_Click(object sender, EventArgs e)
+        {
+            SymbolImpl sym = CoreService.BasicInfoTracker.GetSymbol(CurrentSymbol);
+            if (sym != null)
+            {
+                sym.Tradeable = false;
+                CoreService.TLClient.ReqUpdateSymbol(sym);
+            }
+            else
+            {
+                MoniterHelper.WindowMessage("请选择需要编辑的合约！");
+            }
+        }
+
+        /// <summary>
+        /// 冻结合约
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void ActiveSymbol_Click(object sender, EventArgs e)
+        {
+            SymbolImpl sym = CoreService.BasicInfoTracker.GetSymbol(CurrentSymbol);
+            if (sym != null)
+            {
+                sym.Tradeable = true;
+                CoreService.TLClient.ReqUpdateSymbol(sym);
+            }
+            else
+            {
+                MoniterHelper.WindowMessage("请选择需要编辑的合约！");
+            }
+        }
+
+
         private void cbsecurity_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.RefreshSecurityQuery();
@@ -114,6 +214,8 @@ namespace TradingLib.TinyMGRControl
             //    strFilter = string.Format(strFilter + " and " + SECID + " = '{0}'", cbsecurity.SelectedValue);
             //}
 
+            //增加是否可交易过滤
+            strFilter = string.Format(strFilter + " and " + TRADEABLE + " = '{0}'", !cbInActive.Checked);
 
             //通过交易标识过滤
             //if (cbtradeable.SelectedIndex != 0)
@@ -303,6 +405,10 @@ namespace TradingLib.TinyMGRControl
             grid.Columns[EXCHANGEID].Visible = false;
 
             grid.Columns[TRADEABLE].Visible = false;
+
+            grid.Columns[MARGIN].Visible = false;
+            grid.Columns[ENTRYCOMMISSION].Visible = false;
+            grid.Columns[EXITCOMMISSION].Visible = false;
 
             //grid.Columns[EXTRAMARGIN].Visible = false;
             //grid.Columns[MAINTANCEMARGIN].Visible = false;
