@@ -205,6 +205,14 @@ namespace TradingLib.MoniterControl
                     fm.ShowDialog();
                     fm.Close();
                 }
+                else if (item.ClassName.Equals("RuleSet2.Account.RSHoldRatio"))
+                {
+                    fmAccountRule_HoldRatio fm = new fmAccountRule_HoldRatio();
+                    fm.Account = _account;
+                    fm.RuleClass = item;
+                    fm.ShowDialog();
+                    fm.Close();
+                }
             }
         }
 

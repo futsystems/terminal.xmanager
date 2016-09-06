@@ -7,6 +7,7 @@ namespace TradingLib.MoniterControl
 {
     internal class QuoteListConst
     {
+        public const string SYMBOLNAME = "名称";
         public  const string SYMBOL = "合约";
         public  const string LAST = "最新";
         public  const string LASTSIZE = "现手";

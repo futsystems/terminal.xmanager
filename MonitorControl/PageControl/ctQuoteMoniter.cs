@@ -69,10 +69,10 @@ namespace TradingLib.MoniterControl
             //    }
             //}
 
-            quote_cffex.SymbolSelectedEvent += new SymbolDelegate(SelectSymbol);
-            quote_czce.SymbolSelectedEvent += new SymbolDelegate(SelectSymbol);
-            quote_dce.SymbolSelectedEvent += new SymbolDelegate(SelectSymbol);
-            quote_shfe.SymbolSelectedEvent += new SymbolDelegate(SelectSymbol);
+            quote_cffex.SymbolSelectedEvent += new Action<Symbol>(SelectSymbol);
+            quote_czce.SymbolSelectedEvent += new Action<Symbol>(SelectSymbol);
+            quote_dce.SymbolSelectedEvent += new Action<Symbol>(SelectSymbol);
+            quote_shfe.SymbolSelectedEvent += new Action<Symbol>(SelectSymbol);
 
             //初始化合约列表
             foreach (Symbol s in CoreService.BasicInfoTracker.GetSymbolTradable())
@@ -82,7 +82,7 @@ namespace TradingLib.MoniterControl
                 ViewQuoteList vq = GetViewQuote(s);
                 if (vq != null)
                 {
-                    vq.addSecurity(s);
+                    vq.AddSymbol(s);
                 }
             }
             //响应行情回报行情
@@ -118,7 +118,7 @@ namespace TradingLib.MoniterControl
                 foreach (Symbol s in CoreService.BasicInfoTracker.GetSymbolTradable().Where(s => s.SecurityFamily.Code.Equals(sec.Code)))
                 {
                     //Globals.Debug("添加合约:" + s.Symbol);
-                    vq.addSecurity(s);
+                    vq.AddSymbol(s);
                 }
             }
             else//如果不可交易 则删除所有报价列表的合约
@@ -128,7 +128,7 @@ namespace TradingLib.MoniterControl
                 foreach (Symbol sym in syms)
                 {
                     //Globals.Debug("删除合约:" + sym.Symbol);
-                    vq.delSecurity(sym);
+                    vq.RemoveSymbol(sym);
                 }
             }
         }
@@ -139,7 +139,7 @@ namespace TradingLib.MoniterControl
                 ViewQuoteList vq = GetViewQuote(symbol);
                 if (vq != null)
                 {
-                    vq.addSecurity(symbol);
+                    vq.AddSymbol(symbol);
                 }
             }
             else
@@ -147,7 +147,7 @@ namespace TradingLib.MoniterControl
                 ViewQuoteList vq = GetViewQuote(symbol);
                 if (vq != null)
                 {
-                    vq.delSecurity(symbol);
+                    vq.RemoveSymbol(symbol);
                 }
             }
         }

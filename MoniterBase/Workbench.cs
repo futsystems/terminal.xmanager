@@ -53,8 +53,7 @@ namespace TradingLib.MoniterBase
             }
 
             //设置部署编号
-            lbDeployID.Text = string.Empty;// string.Format("{0}-{1}.{2}.{3}-{4}", CoreService.TLClient.ServerVersion.DeployID, CoreService.TLClient.ServerVersion.Major, CoreService.TLClient.ServerVersion.Minor, CoreService.TLClient.ServerVersion.Fix, CoreService.TLClient.ServerVersion.Date);
-            lbDeployID.Visible = false;
+            lbDeployID.Text = string.Format("{0}-{1}.{2}.{3}-{4}[旗舰版]", CoreService.TLClient.ServerVersion.DeployID, CoreService.TLClient.ServerVersion.Major+1, CoreService.TLClient.ServerVersion.Minor, CoreService.TLClient.ServerVersion.Fix, CoreService.TLClient.ServerVersion.Date);
 
             if (!CoreService.SiteInfo.Domain.Super)
             {
@@ -403,8 +402,8 @@ namespace TradingLib.MoniterBase
             //this.mainContainer.Panel2Collapsed = false;
             //this.mainContainer.Panel2.Height = (int)(this.Size.Height / 4);
             //this.bottomContainer.Panel2.Width = 250;
-            this.bottomContainer.SplitterDistance = this.Width -  430;
-            this.mainContainer.SplitterDistance = this.Height - 380;
+            this.bottomContainer.SplitterDistance = this.Width -  580;//修改右侧功能面板宽度
+            this.mainContainer.SplitterDistance = this.Height - 480;//修改下部面板高度
             this.ExpandBottom();
 
             //显示默认控件

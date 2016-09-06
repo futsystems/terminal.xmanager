@@ -206,7 +206,7 @@
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Blue;
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "系统登入";
+            this.Text = "系统登入 V3";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.imageheader)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.servers)).EndInit();

@@ -27,7 +27,7 @@ namespace TradingLib.MoniterControl
         {
             foreach (Symbol s in CoreService.BasicInfoTracker.GetSymbolTradable())
             {
-                quoteList.addSecurity(s);
+                quoteList.AddSymbol(s);
             }
             CoreService.EventIndicator.GotTickEvent += new Action<Tick>(GotTick);
             CoreService.EventBasicInfo.OnSymbolEvent += new Action<SymbolImpl>(EventBasicInfo_OnSymbolEvent);
@@ -40,7 +40,7 @@ namespace TradingLib.MoniterControl
 
         void EventBasicInfo_OnSymbolEvent(SymbolImpl obj)
         {
-            quoteList.addSecurity(obj);
+            quoteList.AddSymbol(obj);
         }
 
         public void OnDisposed()
