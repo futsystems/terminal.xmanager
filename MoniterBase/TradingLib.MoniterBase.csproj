@@ -144,6 +144,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Resources\登入条框背景.png" />
     <None Include="Resource\online.png" />
     <None Include="Resource\offline.png" />
   </ItemGroup>
