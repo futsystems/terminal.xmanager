@@ -41,7 +41,7 @@ namespace TradingLib.MoniterControl
             foreach (var exchange in CoreService.BasicInfoTracker.Exchanges)
             {
                 this.AddExchange(exchange);
-                IEnumerable<Symbol> symbols = CoreService.BasicInfoTracker.Symbols.Where(sym => sym.SecurityFamily.Exchange.EXCode == exchange.EXCode).OrderBy(sym => sym.Symbol);
+                IEnumerable<Symbol> symbols = CoreService.BasicInfoTracker.Symbols.Where(sym => sym.SecurityFamily.Exchange.EXCode == exchange.EXCode && sym.IsTradeable).OrderBy(sym => sym.Symbol);
                 this.AddSymbols(exchange, symbols);
             }
 

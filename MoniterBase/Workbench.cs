@@ -102,10 +102,6 @@ namespace TradingLib.MoniterBase
             // restore form location from last session
             //FormLocationHelper.Apply(this, "StartupFormPosition", true);
 
-            
-
-            
-
             // Use the Idle event to update the status of menu and toolbar items.
             Application.Idle += OnApplicationIdle;
             this.Load += new EventHandler(Workbench_Load);
@@ -235,6 +231,7 @@ namespace TradingLib.MoniterBase
 
             
         }
+
         #region 控件
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lbDeployID;
@@ -266,6 +263,9 @@ namespace TradingLib.MoniterBase
             toolbar = ToolbarService.CreateToolStrip(this, "/Workbench/Toolbar");
             this.Controls.Add(toolbar);
             this.Controls.Add(menu);
+
+            //this.IntToolBarItem();
+            
 
             status = new StatusStrip();
             status.RenderMode = ToolStripRenderMode.ManagerRenderMode;
@@ -356,6 +356,21 @@ namespace TradingLib.MoniterBase
             this.status.Text = "statusStrip1";
 
             this.Controls.Add(status);
+        }
+
+
+        void IntToolBarItem()
+        {
+            ComponentFactory.Krypton.Toolkit.KryptonLabel lbSearch = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            lbSearch.Text = "帐号";
+            ToolStripControlHost hlbSearch = new ToolStripControlHost(lbSearch);
+            toolbar.Items.Add(hlbSearch);
+
+            ComponentFactory.Krypton.Toolkit.KryptonTextBox search = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            ToolStripControlHost hSearch = new ToolStripControlHost(search);
+            hSearch.AutoSize = false;
+
+            toolbar.Items.Add(hSearch);
         }
 
         #endregion
