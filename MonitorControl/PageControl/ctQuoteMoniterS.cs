@@ -325,9 +325,17 @@ namespace TradingLib.MoniterControl
         }
         public void GotTick(Symbol symbol, Tick k)
         {
-            ViewQuoteList target = GetQuoteList(symbol.Exchange);
-            if (target != null)
-                target.GotTick(k);
+            //try
+            {
+                if (symbol == null || k == null) return;
+                ViewQuoteList target = GetQuoteList(symbol.Exchange);
+                if (target != null)
+                    target.GotTick(k);
+            }
+            //catch (Exception ex)
+            {
+                //logger.Info(ex);
+            }
         }
     }
 }

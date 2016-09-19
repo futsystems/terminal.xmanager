@@ -334,14 +334,14 @@ namespace TradingLib.MoniterBase
                 }
 
                 //5秒内没有登入回报
-                if (_loginstart && (DateTime.Now - _logintime).TotalSeconds > 5 && (!_gotloginrep))
+                if (_loginstart && (DateTime.Now - _logintime).TotalSeconds > 10 && (!_gotloginrep))
                 {
                     logger.Info("登入服务器超过5秒没有连接事件回报");
                     ShowLoginStatus("登入超时,无法登入到服务器");
                     Reset();
                     this.EnableLogin();
                 }
-                if (_qrybasicinfo && (DateTime.Now - qrybasicinfoTime).TotalSeconds > 10 && (!initsuccess))
+                if (_qrybasicinfo && (DateTime.Now - qrybasicinfoTime).TotalSeconds > 30 && (!initsuccess))
                 {
                     logger.Info("获取基础数据超过10秒没有成功");
                     ShowLoginStatus("获取基础数据失败,请重新登入");
