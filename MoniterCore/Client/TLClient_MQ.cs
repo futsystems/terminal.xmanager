@@ -1094,7 +1094,7 @@ namespace TradingLib.MoniterCore
                     Tick t;
                     try
                     {
-                        t = TickImpl.Deserialize(msg.Content);
+                        t = TickImpl.Deserialize2(msg.Content);
                     }
                     catch (Exception ex)
                     {
