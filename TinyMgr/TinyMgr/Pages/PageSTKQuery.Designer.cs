@@ -31,13 +31,14 @@
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonNavigator1 = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
             this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.ctQueryOrder1 = new TinyMgr.ctQueryOrder();
             this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.ctQueryTrades1 = new TinyMgr.ctQueryTrades();
             this.kryptonPage3 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.ctQueryDeliverys1 = new TinyMgr.ctQueryDeliverys();
             this.kryptonPage4 = new ComponentFactory.Krypton.Navigator.KryptonPage();
+            this.ctQueryOrder1 = new TinyMgr.ctQueryOrder();
+            this.ctQueryTrades1 = new TinyMgr.ctQueryTrades();
+            this.ctQueryDeliverys1 = new TinyMgr.ctQueryDeliverys();
             this.ctQueryTxn1 = new TinyMgr.ctQueryTxn();
+            this.kryptonPage6 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
@@ -50,6 +51,7 @@
             this.kryptonPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage4)).BeginInit();
             this.kryptonPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage6)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPanel1
@@ -73,8 +75,9 @@
             this.kryptonPage1,
             this.kryptonPage2,
             this.kryptonPage3,
-            this.kryptonPage4});
-            this.kryptonNavigator1.SelectedIndex = 3;
+            this.kryptonPage4,
+            this.kryptonPage6});
+            this.kryptonNavigator1.SelectedIndex = 4;
             this.kryptonNavigator1.Size = new System.Drawing.Size(819, 459);
             this.kryptonNavigator1.TabIndex = 0;
             this.kryptonNavigator1.Text = "kryptonNavigator1";
@@ -92,14 +95,6 @@
             this.kryptonPage1.ToolTipTitle = "Page ToolTip";
             this.kryptonPage1.UniqueName = "566C3F87647242509C864E82CA3DB6AB";
             // 
-            // ctQueryOrder1
-            // 
-            this.ctQueryOrder1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctQueryOrder1.Location = new System.Drawing.Point(0, 0);
-            this.ctQueryOrder1.Name = "ctQueryOrder1";
-            this.ctQueryOrder1.Size = new System.Drawing.Size(817, 432);
-            this.ctQueryOrder1.TabIndex = 0;
-            // 
             // kryptonPage2
             // 
             this.kryptonPage2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
@@ -112,14 +107,6 @@
             this.kryptonPage2.Text = "成交";
             this.kryptonPage2.ToolTipTitle = "Page ToolTip";
             this.kryptonPage2.UniqueName = "5C0BD0DC57F2453C17977CC53260DA18";
-            // 
-            // ctQueryTrades1
-            // 
-            this.ctQueryTrades1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctQueryTrades1.Location = new System.Drawing.Point(0, 0);
-            this.ctQueryTrades1.Name = "ctQueryTrades1";
-            this.ctQueryTrades1.Size = new System.Drawing.Size(817, 432);
-            this.ctQueryTrades1.TabIndex = 0;
             // 
             // kryptonPage3
             // 
@@ -134,14 +121,6 @@
             this.kryptonPage3.ToolTipTitle = "Page ToolTip";
             this.kryptonPage3.UniqueName = "3095DC68108348BD358488EFBAC4DF85";
             // 
-            // ctQueryDeliverys1
-            // 
-            this.ctQueryDeliverys1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctQueryDeliverys1.Location = new System.Drawing.Point(0, 0);
-            this.ctQueryDeliverys1.Name = "ctQueryDeliverys1";
-            this.ctQueryDeliverys1.Size = new System.Drawing.Size(817, 432);
-            this.ctQueryDeliverys1.TabIndex = 0;
-            // 
             // kryptonPage4
             // 
             this.kryptonPage4.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
@@ -155,6 +134,30 @@
             this.kryptonPage4.ToolTipTitle = "Page ToolTip";
             this.kryptonPage4.UniqueName = "576168345D094B89DEADAF32DE1CEDA9";
             // 
+            // ctQueryOrder1
+            // 
+            this.ctQueryOrder1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctQueryOrder1.Location = new System.Drawing.Point(0, 0);
+            this.ctQueryOrder1.Name = "ctQueryOrder1";
+            this.ctQueryOrder1.Size = new System.Drawing.Size(817, 432);
+            this.ctQueryOrder1.TabIndex = 0;
+            // 
+            // ctQueryTrades1
+            // 
+            this.ctQueryTrades1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctQueryTrades1.Location = new System.Drawing.Point(0, 0);
+            this.ctQueryTrades1.Name = "ctQueryTrades1";
+            this.ctQueryTrades1.Size = new System.Drawing.Size(817, 432);
+            this.ctQueryTrades1.TabIndex = 0;
+            // 
+            // ctQueryDeliverys1
+            // 
+            this.ctQueryDeliverys1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctQueryDeliverys1.Location = new System.Drawing.Point(0, 0);
+            this.ctQueryDeliverys1.Name = "ctQueryDeliverys1";
+            this.ctQueryDeliverys1.Size = new System.Drawing.Size(817, 432);
+            this.ctQueryDeliverys1.TabIndex = 0;
+            // 
             // ctQueryTxn1
             // 
             this.ctQueryTxn1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -162,6 +165,18 @@
             this.ctQueryTxn1.Name = "ctQueryTxn1";
             this.ctQueryTxn1.Size = new System.Drawing.Size(817, 432);
             this.ctQueryTxn1.TabIndex = 0;
+            // 
+            // kryptonPage6
+            // 
+            this.kryptonPage6.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.kryptonPage6.Flags = 65534;
+            this.kryptonPage6.LastVisibleSet = true;
+            this.kryptonPage6.MinimumSize = new System.Drawing.Size(50, 50);
+            this.kryptonPage6.Name = "kryptonPage6";
+            this.kryptonPage6.Size = new System.Drawing.Size(817, 432);
+            this.kryptonPage6.Text = "账户资产报表";
+            this.kryptonPage6.ToolTipTitle = "Page ToolTip";
+            this.kryptonPage6.UniqueName = "6B86922B3DB54E5FEAA2528A7DD94A0A";
             // 
             // PageSTKQuery
             // 
@@ -182,6 +197,7 @@
             this.kryptonPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage4)).EndInit();
             this.kryptonPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage6)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -198,5 +214,6 @@
         private ctQueryTrades ctQueryTrades1;
         private ctQueryDeliverys ctQueryDeliverys1;
         private ctQueryTxn ctQueryTxn1;
+        private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage6;
     }
 }
