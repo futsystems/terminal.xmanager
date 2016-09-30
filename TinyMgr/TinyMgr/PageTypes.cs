@@ -28,5 +28,11 @@ namespace TinyMgr
         /// 交易账户查看页面
         /// </summary>
         public static string PAGE_ACCOUNT = "STK_Account";
+
+
+        /// <summary>
+        /// 模板配置页面
+        /// </summary>
+        public static string PAGE_TEMPLATE = "STK_Template";
     }
 }

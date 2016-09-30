@@ -57,6 +57,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Basic\ctSTKCommissionTemplate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Basic\ctSTKCommissionTemplate.Designer.cs">
+      <DependentUpon>ctSTKCommissionTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Basic\fmEditAccountTemplate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Basic\fmEditAccountTemplate.Designer.cs">
+      <DependentUpon>fmEditAccountTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Basic\fmTemplateEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Basic\fmTemplateEdit.Designer.cs">
+      <DependentUpon>fmTemplateEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Control\ctAccountViewSTK\AccountDataSource.cs" />
     <Compile Include="Control\ctAccountViewSTK\ctAccountMontier.cs">
       <SubType>UserControl</SubType>
@@ -183,6 +201,15 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Basic\ctSTKCommissionTemplate.resx">
+      <DependentUpon>ctSTKCommissionTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Basic\fmEditAccountTemplate.resx">
+      <DependentUpon>fmEditAccountTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Basic\fmTemplateEdit.resx">
+      <DependentUpon>fmTemplateEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Control\ctAccountViewSTK\ctAccountMontier.resx">
       <DependentUpon>ctAccountMontier.cs</DependentUpon>
     </EmbeddedResource>

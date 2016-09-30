@@ -132,7 +132,7 @@ namespace TradingLib.TinyMGRControl.Control
             if (_inputControlAdjuestd) return;
             symbol_name.Text = _symbol.GetName();
 
-            Tick k = CoreService.TradingInfoTracker.TickTracker[_symbol.Symbol];
+            Tick k = CoreService.TradingInfoTracker.TickTracker[_symbol.Exchange,_symbol.Symbol];
             if (k != null)
             {
                 price.Maximum = k.UpperLimit;

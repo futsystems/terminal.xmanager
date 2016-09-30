@@ -34,7 +34,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnHome = new System.Windows.Forms.ToolStripButton();
             this.btnSymbol = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.btnTemplate = new System.Windows.Forms.ToolStripButton();
             this.btnAccount = new System.Windows.Forms.ToolStripButton();
             this.btnQuery = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -72,7 +72,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnHome,
             this.btnSymbol,
-            this.toolStripButton2,
+            this.btnTemplate,
             this.btnAccount,
             this.btnQuery});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
@@ -91,7 +91,7 @@
             this.btnHome.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(40, 40);
-            this.btnHome.Text = "数据";
+            this.btnHome.Text = "首页";
             // 
             // btnSymbol
             // 
@@ -104,16 +104,16 @@
             this.btnSymbol.Size = new System.Drawing.Size(40, 40);
             this.btnSymbol.Text = "数据";
             // 
-            // toolStripButton2
+            // btnTemplate
             // 
-            this.toolStripButton2.AutoSize = false;
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(40, 40);
-            this.toolStripButton2.Text = "模板";
+            this.btnTemplate.AutoSize = false;
+            this.btnTemplate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTemplate.Image = ((System.Drawing.Image)(resources.GetObject("btnTemplate.Image")));
+            this.btnTemplate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnTemplate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTemplate.Name = "btnTemplate";
+            this.btnTemplate.Size = new System.Drawing.Size(40, 40);
+            this.btnTemplate.Text = "模板";
             // 
             // btnAccount
             // 
@@ -172,7 +172,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripButton btnSymbol;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton btnTemplate;
         private System.Windows.Forms.ToolStripButton btnAccount;
         private System.Windows.Forms.ToolStripButton btnQuery;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;

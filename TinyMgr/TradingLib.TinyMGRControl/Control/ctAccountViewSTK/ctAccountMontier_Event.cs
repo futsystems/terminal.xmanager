@@ -71,7 +71,8 @@ namespace TradingLib.TinyMGRControl
                 tmp.Items.Add(new ToolStripSeparator());
                 tmp.Items.Add("出入金", null, CashOperation_Click);
                 tmp.Items.Add("修改账户", null, EditAccount_Click);
-
+                tmp.Items.Add(new ToolStripSeparator());
+                tmp.Items.Add("绑定费率模板", null, BindCommission_Click);
                 tmp.Items.Add(new ToolStripSeparator());
                 tmp.Items.Add("删除账户", null, DelAccount_Click);
 
@@ -80,6 +81,17 @@ namespace TradingLib.TinyMGRControl
             return tmp;
         }
 
+        void BindCommission_Click(object sender, EventArgs e)
+        { 
+             AccountLite account = GetAccount(CurrentAccount);
+             if (account != null)
+             {
+                 fmBindAccountCommissionTemplate fm = new fmBindAccountCommissionTemplate();
+                 fm.SetAccount(account);
+                 fm.ShowDialog();
+                 fm.Close();
+             }
+        }
         /// <summary>
         /// 出入金操作
         /// </summary>

@@ -141,6 +141,12 @@
     <Compile Include="Pages\PageSTKSymbol.Designer.cs">
       <DependentUpon>PageSTKSymbol.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PageSTKTemplate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\PageSTKTemplate.Designer.cs">
+      <DependentUpon>PageSTKTemplate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pages\pgBasicInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -186,6 +192,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\PageSTKSymbol.resx">
       <DependentUpon>PageSTKSymbol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\PageSTKTemplate.resx">
+      <DependentUpon>PageSTKTemplate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\pgAccount.resx">
       <DependentUpon>pgAccount.cs</DependentUpon>
