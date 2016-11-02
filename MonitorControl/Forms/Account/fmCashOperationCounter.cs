@@ -43,8 +43,8 @@ namespace TradingLib.MoniterControl
             CurrencyType currency = (CurrencyType)cbCurrency.SelectedValue;
             if (_account.Currency != currency)
             {
-                amount = Math.Round(amount * _account.GetExchangeRate(currency));
-                amount2 = amount2 * -1;
+                amount = Math.Round(amount * _account.GetExchangeRate(currency),2);
+                amount2 = amount * -1;
                 QSEnumEquityType type = (QSEnumEquityType)cbEquityTypeList.SelectedValue;
                 if (MoniterHelper.WindowConfirm("确认向帐户[" + _account.Account + "] 出金:" + amount.ToString() + _account.Currency.ToString() + "(" + cashop_amount.Value.ToChineseStr() + ")") == System.Windows.Forms.DialogResult.Yes)
                 {
@@ -77,8 +77,8 @@ namespace TradingLib.MoniterControl
             CurrencyType currency = (CurrencyType)cbCurrency.SelectedValue;
             if (_account.Currency != currency)
             {
-                amount = Math.Round(amount * _account.GetExchangeRate(currency));
-                amount2 = amount2 * 1;
+                amount = Math.Round(amount * _account.GetExchangeRate(currency), 2); ;
+                amount2 = amount * 1;
                 QSEnumEquityType type = (QSEnumEquityType)cbEquityTypeList.SelectedValue;
                 if (MoniterHelper.WindowConfirm("确认向帐户[" + _account.Account + "] 入金:" + amount.ToString() + _account.Currency.ToString() + "(" + cashop_amount.Value.ToChineseStr() + ")") == System.Windows.Forms.DialogResult.Yes)
                 {
