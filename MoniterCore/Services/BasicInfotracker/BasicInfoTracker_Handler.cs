@@ -197,12 +197,36 @@ namespace TradingLib.MoniterCore
             }
             if (islast && !_initialized)
             {
-                Status("合约查询完毕,查询委托风控规则");
-                CoreService.TLClient.ReqQryRuleSet();;
+                Status("合约查询完毕,查询汇率信息");
+                CoreService.TLClient.ReqQryExchangeRate();
             }
 
         }
 
+        public void GotExchangeRate(ExchangeRate rate,bool isLast)
+        {
+            if (rate != null)
+            {
+                ExchangeRate target = null;
+                if (exchangeRateaIDMap.TryGetValue(rate.ID, out target))
+                {
+                    target.AskRate = rate.AskRate;
+                    target.IntermediateRate = rate.IntermediateRate;
+                    target.BidRate = rate.BidRate;
+                    target.UpdateTime = rate.UpdateTime;
+                }
+                else
+                {
+                    exchangeRateaIDMap.Add(rate.ID, rate);
+                    exchangeRateCurrencyMap[rate.Currency] = rate;
+                }
+            }
+            if (isLast && !_initialized)
+            {
+                Status("汇率查询完毕,查询委托风控规则");
+                CoreService.TLClient.ReqQryRuleSet();
+            }
+        }
         
 
         void OnQryRuleSet(string json, bool islast)

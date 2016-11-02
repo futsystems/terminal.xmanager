@@ -33,9 +33,9 @@
             this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.ctAccountInfo1 = new TradingLib.MoniterControl.ctAccountInfo();
             this.pageExecution = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.ctOrderPanel1 = new TradingLib.MoniterControl.ctOrderPanel();
-            this.kryptonPage3 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.quoteList = new TradingLib.MoniterControl.ViewQuoteList();
+            this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.ctOrderSenderM1 = new TradingLib.MoniterControl.ctOrderSenderM();
+            this.ctQuoteMoniterS1 = new TradingLib.MoniterControl.ctQuoteMoniterS();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
@@ -44,8 +44,8 @@
             this.kryptonPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pageExecution)).BeginInit();
             this.pageExecution.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage3)).BeginInit();
-            this.kryptonPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
+            this.kryptonPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
@@ -54,7 +54,7 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(435, 292);
+            this.kryptonPanel1.Size = new System.Drawing.Size(589, 362);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // kryptonNavigator1
@@ -72,10 +72,9 @@
             this.kryptonNavigator1.Name = "kryptonNavigator1";
             this.kryptonNavigator1.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
             this.kryptonPage1,
-            this.pageExecution,
-            this.kryptonPage3});
-            this.kryptonNavigator1.SelectedIndex = 0;
-            this.kryptonNavigator1.Size = new System.Drawing.Size(435, 292);
+            this.pageExecution});
+            this.kryptonNavigator1.SelectedIndex = 1;
+            this.kryptonNavigator1.Size = new System.Drawing.Size(589, 362);
             this.kryptonNavigator1.TabIndex = 0;
             this.kryptonNavigator1.Text = "kryptonNavigator1";
             // 
@@ -103,60 +102,44 @@
             // pageExecution
             // 
             this.pageExecution.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.pageExecution.Controls.Add(this.ctOrderPanel1);
+            this.pageExecution.Controls.Add(this.kryptonPanel2);
             this.pageExecution.Flags = 65534;
             this.pageExecution.LastVisibleSet = true;
             this.pageExecution.MinimumSize = new System.Drawing.Size(50, 50);
             this.pageExecution.Name = "pageExecution";
-            this.pageExecution.Size = new System.Drawing.Size(433, 265);
+            this.pageExecution.Size = new System.Drawing.Size(587, 335);
             this.pageExecution.Text = "交易面板";
             this.pageExecution.ToolTipTitle = "Page ToolTip";
             this.pageExecution.UniqueName = "F95FF00A1AA74CFDEF923FD31568BCB5";
             // 
-            // ctOrderPanel1
+            // kryptonPanel2
             // 
-            this.ctOrderPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctOrderPanel1.Location = new System.Drawing.Point(0, 0);
-            this.ctOrderPanel1.Name = "ctOrderPanel1";
-            this.ctOrderPanel1.Size = new System.Drawing.Size(433, 265);
-            this.ctOrderPanel1.TabIndex = 0;
+            this.kryptonPanel2.Controls.Add(this.ctQuoteMoniterS1);
+            this.kryptonPanel2.Controls.Add(this.ctOrderSenderM1);
+            this.kryptonPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonPanel2.Location = new System.Drawing.Point(0, 0);
+            this.kryptonPanel2.Name = "kryptonPanel2";
+            this.kryptonPanel2.Size = new System.Drawing.Size(587, 335);
+            this.kryptonPanel2.TabIndex = 0;
             // 
-            // kryptonPage3
+            // ctOrderSenderM1
             // 
-            this.kryptonPage3.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.kryptonPage3.Controls.Add(this.quoteList);
-            this.kryptonPage3.Flags = 65534;
-            this.kryptonPage3.LastVisibleSet = true;
-            this.kryptonPage3.MinimumSize = new System.Drawing.Size(50, 50);
-            this.kryptonPage3.Name = "kryptonPage3";
-            this.kryptonPage3.Size = new System.Drawing.Size(433, 236);
-            this.kryptonPage3.Text = "行情列表";
-            this.kryptonPage3.ToolTipTitle = "Page ToolTip";
-            this.kryptonPage3.UniqueName = "3E83B9F032594BD04C9CEAEE33D42AF6";
+            this.ctOrderSenderM1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ctOrderSenderM1.Location = new System.Drawing.Point(0, 271);
+            this.ctOrderSenderM1.Name = "ctOrderSenderM1";
+            this.ctOrderSenderM1.Size = new System.Drawing.Size(588, 65);
+            this.ctOrderSenderM1.TabIndex = 0;
             // 
-            // quoteList
+            // ctQuoteMoniterS1
             // 
-            this.quoteList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.quoteList.DNColor = System.Drawing.Color.Green;
-            this.quoteList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.quoteList.HeaderBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.quoteList.HeaderFont = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.quoteList.HeaderFontColor = System.Drawing.Color.Turquoise;
-            this.quoteList.Location = new System.Drawing.Point(0, 0);
-            this.quoteList.MenuEnable = false;
-            this.quoteList.Name = "quoteList";
-            this.quoteList.QuoteBackColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.quoteList.QuoteBackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.quoteList.QuoteFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            this.quoteList.QuoteViewWidth = 1030;
-            this.quoteList.SelectedQuoteRow = -1;
-            this.quoteList.Size = new System.Drawing.Size(433, 236);
-            this.quoteList.SymbolFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            this.quoteList.SymbolFontColor = System.Drawing.Color.Green;
-            this.quoteList.TabIndex = 3;
-            this.quoteList.TableLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.quoteList.Text = "viewQuoteList4";
-            this.quoteList.UPColor = System.Drawing.Color.Red;
+            this.ctQuoteMoniterS1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ctQuoteMoniterS1.Location = new System.Drawing.Point(0, 0);
+            this.ctQuoteMoniterS1.Name = "ctQuoteMoniterS1";
+            this.ctQuoteMoniterS1.Size = new System.Drawing.Size(588, 265);
+            this.ctQuoteMoniterS1.TabIndex = 1;
             // 
             // ctFunctionPanel
             // 
@@ -164,7 +147,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.kryptonPanel1);
             this.Name = "ctFunctionPanel";
-            this.Size = new System.Drawing.Size(435, 292);
+            this.Size = new System.Drawing.Size(589, 362);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).EndInit();
@@ -173,8 +156,8 @@
             this.kryptonPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pageExecution)).EndInit();
             this.pageExecution.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage3)).EndInit();
-            this.kryptonPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).EndInit();
+            this.kryptonPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -185,9 +168,9 @@
         private ComponentFactory.Krypton.Navigator.KryptonNavigator kryptonNavigator1;
         private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage1;
         private ComponentFactory.Krypton.Navigator.KryptonPage pageExecution;
-        private ctOrderPanel ctOrderPanel1;
         private ctAccountInfo ctAccountInfo1;
-        private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage3;
-        private ViewQuoteList quoteList;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel2;
+        private ctQuoteMoniterS ctQuoteMoniterS1;
+        private ctOrderSenderM ctOrderSenderM1;
     }
 }

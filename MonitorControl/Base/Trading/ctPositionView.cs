@@ -239,12 +239,14 @@ namespace TradingLib.MoniterControl
                 if (volyd != 0)
                 {
                     Order oyd = new OrderImpl(pos.Symbol, volyd * (side ? 1 : -1) * -1);
+                    oyd.Exchange = pos.oSymbol.Exchange;
                     oyd.OffsetFlag = QSEnumOffsetFlag.CLOSE;
                     SendOrder(oyd);
                 }
                 if (voltd != 0)
                 {
                     Order otd = new OrderImpl(pos.Symbol, voltd * (side ? 1 : -1) * -1);
+                    otd.Exchange = pos.oSymbol.Exchange;
                     otd.OffsetFlag = QSEnumOffsetFlag.CLOSETODAY;
                     SendOrder(otd);
                 }
@@ -252,6 +254,7 @@ namespace TradingLib.MoniterControl
             else
             {
                 Order o = new MarketOrderFlat(pos);
+                o.Exchange = pos.oSymbol.Exchange;
                 o.OffsetFlag = QSEnumOffsetFlag.CLOSE;
                 SendOrder(o);
             }
@@ -336,6 +339,7 @@ namespace TradingLib.MoniterControl
                 {
                     int posidx = PositionRowIdx(pos.GetPositionKey());
                     string _fromat = pos.oSymbol.SecurityFamily.GetPriceFormat();
+                    AccountLite account = CoreService.BasicInfoTracker.GetAccount(pos.Account);
                     if ((posidx > -1) && (posidx < gt.Rows.Count))//idx存在
                     {
                         int size = pos.Size;
@@ -345,6 +349,7 @@ namespace TradingLib.MoniterControl
                         gt.Rows[posidx][AVGPRICE] = pos.AvgPrice.ToFormatStr(_fromat);
                         gt.Rows[posidx][REALIZEDPL] = (pos.ClosedPL * pos.oSymbol.Multiple).ToFormatStr();
                         gt.Rows[posidx][REALIZEDPLPOINT] = pos.ClosedPL.ToFormatStr(_fromat);
+                        gt.Rows[posidx][REALIZEDPLACCTCURRENCY] = account != null ? ((pos.ClosedPL * pos.oSymbol.Multiple) * account.GetExchangeRate(pos.oSymbol.SecurityFamily.Currency)).ToFormatStr() :"";
                     }
                     else//idx不存在
                     {
@@ -358,6 +363,7 @@ namespace TradingLib.MoniterControl
                         gt.Rows[i][AVGPRICE] = pos.AvgPrice.ToFormatStr(_fromat);
                         gt.Rows[i][REALIZEDPL] = (pos.ClosedPL * pos.oSymbol.Multiple).ToFormatStr();
                         gt.Rows[i][REALIZEDPLPOINT] = pos.ClosedPL.ToFormatStr(_fromat);
+                        gt.Rows[i][REALIZEDPLACCTCURRENCY] = account != null ? ((pos.ClosedPL * pos.oSymbol.Multiple) * account.GetExchangeRate(pos.oSymbol.SecurityFamily.Currency)).ToFormatStr() : "";
                     }
                 }
                 catch (Exception ex)
@@ -378,10 +384,12 @@ namespace TradingLib.MoniterControl
             {
                 try
                 {
+                    if (t.UpdateType != "X" && t.UpdateType != "S") return;
                     Symbol sym = CoreService.BasicInfoTracker.GetSymbol(t.Symbol);
                     if(sym == null) return;
                     string _fromat = sym.SecurityFamily.GetPriceFormat();
                     //数据列中如果是该symbol则必须全比更新
+
                     for (int i = 0; i < gt.Rows.Count; i++)
                     {
                         if (gt.Rows[i][SYMBOL].ToString() == t.Symbol)
@@ -390,7 +398,7 @@ namespace TradingLib.MoniterControl
                             string acc = gt.Rows[i][ACCOUNT].ToString();
                             bool posside = bool.Parse(gt.Rows[i][SIDE].ToString());
                             Position pos = pt[t.Symbol, acc, posside];
-                            
+                            AccountLite account = CoreService.BasicInfoTracker.GetAccount(pos.Account);
                             string key = pos.GetKey(posside);
                             decimal unrealizedpl = pos.UnRealizedPL;
                             //更新最新成交价
@@ -403,12 +411,14 @@ namespace TradingLib.MoniterControl
                             {
                                 gt.Rows[i][UNREALIZEDPL] = 0;
                                 gt.Rows[i][UNREALIZEDPLPOINT] = 0;
+                                gt.Rows[i][UNREALIZEDPLACCTCURRENCY] = 0;
                             }
                             else
                             {
                                 //更新unrealizedpl
                                 gt.Rows[i][UNREALIZEDPL] = (unrealizedpl * pos.oSymbol.Multiple).ToFormatStr();
                                 gt.Rows[i][UNREALIZEDPLPOINT] = unrealizedpl.ToFormatStr(_fromat);
+                                gt.Rows[i][UNREALIZEDPLACCTCURRENCY] = account != null ? ((unrealizedpl * pos.oSymbol.Multiple) * account.GetExchangeRate(pos.oSymbol.SecurityFamily.Currency)).ToFormatStr() : "";
                             }
                         }
                     }
@@ -502,6 +512,8 @@ namespace TradingLib.MoniterControl
                     string _format = t.oSymbol.SecurityFamily.GetPriceFormat();
                     string key = pos.GetPositionKey();
                     int posidx = PositionRowIdx(key);
+                    AccountLite account = CoreService.BasicInfoTracker.GetAccount(pos.Account);
+
                     if ((posidx > -1) && (posidx < gt.Rows.Count))
                     {
                         int size = pos.Size;
@@ -511,7 +523,8 @@ namespace TradingLib.MoniterControl
                         gt.Rows[posidx][AVGPRICE] = pos.AvgPrice.ToFormatStr(_format);
                         gt.Rows[posidx][REALIZEDPL] = (pos.ClosedPL * pos.oSymbol.Multiple).ToFormatStr();
                         gt.Rows[posidx][REALIZEDPLPOINT] = pos.ClosedPL.ToFormatStr(_format);
-
+                        gt.Rows[posidx][REALIZEDPLACCTCURRENCY] = account != null ? ((pos.ClosedPL * pos.oSymbol.Multiple) * account.GetExchangeRate(pos.oSymbol.SecurityFamily.Currency)).ToFormatStr() : "";
+                         
                         if (pos.isFlat)
                         {
                             ResetOffset(key);
@@ -529,6 +542,8 @@ namespace TradingLib.MoniterControl
                         gt.Rows[i][AVGPRICE] = pos.AvgPrice.ToFormatStr(_format);
                         gt.Rows[i][REALIZEDPL] = (pos.ClosedPL * pos.oSymbol.Multiple).ToFormatStr();
                         gt.Rows[i][REALIZEDPLPOINT] = pos.ClosedPL.ToFormatStr(_format);
+                        gt.Rows[i][REALIZEDPLACCTCURRENCY] = account != null ? ((pos.ClosedPL * pos.oSymbol.Multiple) * account.GetExchangeRate(pos.oSymbol.SecurityFamily.Currency)).ToFormatStr() : "";
+                           
                     }
                     _ordTransHelper.GotFill(t);
                 }
@@ -553,8 +568,10 @@ namespace TradingLib.MoniterControl
         const string AVGPRICE = "持仓均价";
         const string UNREALIZEDPL = "持仓盈亏";
         const string UNREALIZEDPLPOINT = "点数(持)";
+        const string UNREALIZEDPLACCTCURRENCY = "持盈(基币)";
         const string REALIZEDPL = "平仓盈亏";
         const string REALIZEDPLPOINT = "点数(平)";
+        const string REALIZEDPLACCTCURRENCY = "平盈(基币)";
         const string ACCOUNT = "交易帐户";
         const string PROFITTARGET = "止盈";
         const string STOPLOSS = "止损";
@@ -600,8 +617,10 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(LASTPRICE);//6
             gt.Columns.Add(AVGPRICE);//7
             gt.Columns.Add(UNREALIZEDPL);//8
+            gt.Columns.Add(UNREALIZEDPLACCTCURRENCY);
             gt.Columns.Add(UNREALIZEDPLPOINT);//9
             gt.Columns.Add(REALIZEDPL);//10
+            gt.Columns.Add(REALIZEDPLACCTCURRENCY);//
             gt.Columns.Add(REALIZEDPLPOINT);//11
             
             gt.Columns.Add(PROFITTARGET);
@@ -645,8 +664,10 @@ namespace TradingLib.MoniterControl
             grid.Columns[AVGPRICE].Width =80;
 
             grid.Columns[UNREALIZEDPL].Width = 80;
+            grid.Columns[UNREALIZEDPLACCTCURRENCY].Width = 90;
             grid.Columns[UNREALIZEDPLPOINT].Width = 60;
             grid.Columns[REALIZEDPL].Width = 80;
+            grid.Columns[REALIZEDPLACCTCURRENCY].Width = 90;
             grid.Columns[REALIZEDPLPOINT].Width = 60;
 
         }
@@ -705,7 +726,7 @@ namespace TradingLib.MoniterControl
                     }
                 }
 
-                if (e.ColumnIndex == 8 || e.ColumnIndex == 9 || e.ColumnIndex == 10 || e.ColumnIndex == 11)
+                if (e.ColumnIndex == 8 || e.ColumnIndex == 9 || e.ColumnIndex == 10 || e.ColumnIndex == 11 || e.ColumnIndex == 12 || e.ColumnIndex == 13)
                 {
 
                     decimal v = 0;

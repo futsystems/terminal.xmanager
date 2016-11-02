@@ -233,6 +233,9 @@ namespace TradingLib.MoniterCore
                 case MessageTypes.MGRSYMBOLRESPONSE://合约回报
                     CliOnMGRQrySymbol(packet as RspMGRQrySymbolResponse);
                     break;
+                case MessageTypes.MGRQRYEXCHANGERATERESPONSE://汇率信息汇报啊
+                    CliOnMGRQryExchageRate(packet as RspMGRQryExchangeRateResponse);
+                    break;
                 case MessageTypes.MGRUPDATESYMBOLRESPONSE://合约更新回报
                     CliOnMGRUpdateSymbol(packet as RspMGRUpdateSymbolResponse);
                     break;

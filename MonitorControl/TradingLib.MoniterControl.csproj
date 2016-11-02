@@ -144,6 +144,7 @@
     <Compile Include="Base\Trading\ctPositionView.Designer.cs">
       <DependentUpon>ctPositionView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\Trading\ctQuoteView\EnumQuoteType.cs" />
     <Compile Include="Base\Trading\ctQuoteView\QuoteCell.cs" />
     <Compile Include="Base\Trading\ctQuoteView\QuoteListConst.cs" />
     <Compile Include="Base\Trading\ctQuoteView\QuoteRow.cs" />
@@ -547,6 +548,24 @@
     </Compile>
     <Compile Include="Forms\System\fmDataManager.Designer.cs">
       <DependentUpon>fmDataManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\System\fmExchangeRate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\System\fmExchangeRate.designer.cs">
+      <DependentUpon>fmExchangeRate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\System\fmExchangeRateEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\System\fmExchangeRateEdit.designer.cs">
+      <DependentUpon>fmExchangeRateEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PageControl\ctQuoteMoniterS.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PageControl\ctQuoteMoniterS.designer.cs">
+      <DependentUpon>ctQuoteMoniterS.cs</DependentUpon>
     </Compile>
     <Compile Include="PageControl\fmLoginInfo.cs">
       <SubType>Form</SubType>
@@ -1034,6 +1053,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\System\fmDataManager.resx">
       <DependentUpon>fmDataManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\System\fmExchangeRate.resx">
+      <DependentUpon>fmExchangeRate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\System\fmExchangeRateEdit.resx">
+      <DependentUpon>fmExchangeRateEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PageControl\ctQuoteMoniterS.resx">
+      <DependentUpon>ctQuoteMoniterS.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PageControl\fmLoginInfo.resx">
       <DependentUpon>fmLoginInfo.cs</DependentUpon>

@@ -77,6 +77,7 @@
     <Compile Include="Client\PacketHandler\TLClientNet_Request_.cs" />
     <Compile Include="Client\PacketHandler\TLClientNet_Rule.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_SettleManager.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_ExchangeRate.cs" />
     <Compile Include="Client\TLClientNet_PacketHandler_HistQuery.cs" />
     <Compile Include="Client\TLClientNet_PacketHandler_Login.cs" />
     <Compile Include="Client\TLClientNet_PacketHandler_Account.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Services\CoreService.cs" />
     <Compile Include="Services\Event\EventOther.cs" />
     <Compile Include="Services\Event\EventQuery.cs" />
+    <Compile Include="Services\Event\EventUI.cs" />
     <Compile Include="Services\LoggingService.cs" />
     <Compile Include="Services\SiteInfo.cs" />
     <Compile Include="Services\TradingInfoTracker.cs" />

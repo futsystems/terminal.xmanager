@@ -5,9 +5,13 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Text;
+using System.Linq;
 using System.Windows.Forms;
 using TradingLib.API;
 using TradingLib.Common;
+//using TradingLib.TraderCore;
+using TradingLib.MoniterCore;
+using Common.Logging;
 
 namespace TradingLib.MoniterControl
 {
@@ -15,8 +19,9 @@ namespace TradingLib.MoniterControl
     public delegate int IntRetIntDel(int idx);
     public delegate int RetIntDel();
 
-    public partial class ViewQuoteList :Control
+    public partial class ViewQuoteList :System.Windows.Forms.Control
     {
+        ILog logger = LogManager.GetLogger("ViewQuoteList");
         //控件事件
         //public event SecurityDelegate EOpenChart;
 
@@ -25,13 +30,22 @@ namespace TradingLib.MoniterControl
         /// <summary>
         /// 双击合约时触发选择了某个合约
         /// </summary>
-        public event SymbolDelegate SymbolSelectedEvent;
+        public event Action<Symbol> SymbolSelectedEvent;
 
-        private event TickDelegate spillTick;//QuoateView中小的下单窗口更新tick的event
+        /// <summary>
+        /// 捕捉到控件上左右移动事件
+        /// </summary>
+        public event Action<PreviewKeyDownEventArgs> RightLeftMoveEvent;
+
+        /// <summary>
+        /// 报价单 小下单面板行情事件
+        /// </summary>
+        private event TickDelegate spillTick;
 
         public event OrderDelegate SendOrderEvent;//发送Order
         public event SymbolDelegate SendOpenTimeSalesEvent;//打开盘口窗口
-        public event SymbolDelegate SendOpenChartEvent;//打开图标窗口
+
+        public event Action<Symbol> OpenKChartEvent;//打开图标窗口
 
         RingBuffer<int> cellLocations = new RingBuffer<int>(1000);//用于记录闪动的最新价格位置
         System.Threading.Timer _timer;
@@ -41,7 +55,8 @@ namespace TradingLib.MoniterControl
             if (SendDebugEvent != null)
                 SendDebugEvent(msg);
         }
-        
+
+        #region 属性
         //属性获得和设置
         [DefaultValue("Aqua")]
         Color _UPColor = Color.Red;
@@ -128,13 +143,13 @@ namespace TradingLib.MoniterControl
             set
             {
                 _quoteFont = value;
-                _cellstyle.Font = value;
+                _cellstyle.QuoteFont = value;
                 Invalidate();
             }
         }
 
-        [DefaultValue("Arial, 10.5pt, style=Bold")]
-        Font _symbolFont = new Font("Aria", 10, FontStyle.Bold);
+        [DefaultValue("Arial, 10.5pt")]
+        Font _symbolFont = new Font("Aria", 10);
         public Font SymbolFont
         {
             get
@@ -159,6 +174,20 @@ namespace TradingLib.MoniterControl
             {
                 _symbolFontColor = value;
                 Invalidate();
+            }
+        }
+
+        [DefaultValue("Blue")]
+        Color _selectedColor = Color.Blue;
+        public Color SelectedColor
+        {
+            get
+            {
+                return _selectedColor;
+            }
+            set
+            {
+                _selectedColor = value;
             }
         }
 
@@ -228,10 +257,24 @@ namespace TradingLib.MoniterControl
             set
             {
                 _showmenu = value;
+                if (_showmenu)
+                {
+                    initMenu();
+                }
+
             }
         }
 
-        
+        [DefaultValue("CNQUOTE")]
+        EnumQuoteType _quoteType = EnumQuoteType.CNQUOTE;
+        public EnumQuoteType QuoteType
+        {
+            get { return _quoteType; }
+            set { _quoteType = value; }
+        }
+
+        #endregion
+
         //初始
         CellStyle _cellstyle;
         public CellStyle DefaultCellStyle { get { return _cellstyle; } }
@@ -244,40 +287,87 @@ namespace TradingLib.MoniterControl
             InitializeComponent();
             this.DoubleBuffered = true;
             //设置单元格样式
-            _cellstyle = new CellStyle(QuoteBackColor1, Color.Red, QuoteFont,TableLineColor);
-            _quotestyle = new QuoteStyle(QuoteBackColor1, QuoteBackColor2, QuoteFont,TableLineColor,UPColor,DNColor,HeaderHeight, RowHeight);
+            _cellstyle = new CellStyle(QuoteBackColor1, Color.Red, QuoteFont,SymbolFont,TableLineColor);
+            _quotestyle = new QuoteStyle(QuoteBackColor1, QuoteBackColor2, QuoteFont,SymbolFont,TableLineColor,UPColor,DNColor,HeaderHeight, RowHeight);
 
-            _timer = new System.Threading.Timer(changecolor, null, 800, 1500);
+            _timer = new System.Threading.Timer(ChangeColorBack, null, 800, 1500);
            
+            
             this.MouseMove +=new MouseEventHandler(ViewQuoteList_MouseMove);
             this.MouseDown += new MouseEventHandler(ViewQuoteList_MouseDown);
             this.MouseUp += new MouseEventHandler(ViewQuoteList_MouseUp);
             this.MouseWheel += new MouseEventHandler(ViewQuoteList_MouseWheel);
-            
+            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(ViewQuoteList_MouseDoubleClick);
+            this.MouseClick += new MouseEventHandler(ViewQuoteList_MouseClick);
 
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(ViewQuoteList_KeyUp);
+            
+            
+            
+            this.PreviewKeyDown += new PreviewKeyDownEventHandler(ViewQuoteList_PreviewKeyDown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(ViewQuoteList_KeyDown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(ViewQuoteList_KeyPress);
-            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(ViewQuoteList_MouseDoubleClick);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(ViewQuoteList_KeyUp);
+
+            this.SizeChanged += new EventHandler(ViewQuoteList_SizeChanged);
+
             //初始化右键菜单
             if(MenuEnable)
                 initMenu();
             //计算列起点 总宽等参数
             columnWidthChanged();
+
+            
+        }
+
+        /// <summary>
+        /// 尺寸变化重新计算开始与结束行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void ViewQuoteList_SizeChanged(object sender, EventArgs e)
+        {
+            UpdateBeginEndIdx();
         }
 
         
-        //将最新成交价闪亮的单元格改回原来的颜色
-        private void changecolor(object obj)
+        void ViewQuoteList_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            logger.Info("PreviewKeyDown:" + e.KeyCode.ToString());
+            switch(e.KeyCode)
+            {
+                case Keys.Up:
+                    this.RowUp();
+                    break;
+                case Keys.Down:
+                    this.RowDown();
+                    break;
+                case Keys.Left:
+                case Keys.Right:
+                    {
+                        if (RightLeftMoveEvent != null)
+                        {
+                            RightLeftMoveEvent(e);
+                        }
+                        break;
+                    }
+                default:
+                    break;
+            }
+        }
+
+
+       
+        /// <summary>
+        /// 定时将闪亮的单元格 改回原来的颜色
+        /// </summary>
+        /// <param name="obj"></param>
+        private void ChangeColorBack(object obj)
         {
             try
             {
-                //debug("改变颜色");
                 while (cellLocations.hasItems)
                 {
-                    //debug("改回原来颜色");
                     int r = cellLocations.Read();
-
                     if (r % 2 == 0)
                     {
                         this[r][QuoteListConst.LAST].CellStyle.BackColor = QuoteBackColor1;
@@ -291,21 +381,13 @@ namespace TradingLib.MoniterControl
                 }
             }
             catch (Exception ex)
-            { debug(ex.ToString()); }
+            {
+                logger.Error("ChangeColorBack Error:" + ex.ToString());
+            }
             
         }
 
-        //增加一个合约集合,通过该函数将一个basket与一个view进行绑定
-        public void SetBasket(SymbolBasket b)
-        {
-            //debug("addbasket is called");
-            foreach (Symbol s in b)
-            {
-                //debug("symbol's Full Name:" + s.FullName);
-                addSecurity(s);
-            }
-            //subscribe();
-        }
+
 
         #region 计算我们需要显示的行
         //关于绘图:如果不指定更新区域 Invalidate 会更新所有区域,这样会造成更新某个单元各 却需要更新所有的单元格 使得运行起来很不经济
@@ -316,7 +398,7 @@ namespace TradingLib.MoniterControl
         {
             Graphics g = e.Graphics;
             //绘制表头
-            paintHeader(e);
+            PaintHeader(e);
             //绘制我们需要显示的数据行
             //debug("begin:" + _beginIdx.ToString() + " end:" + _endIdx.ToString());
             try
@@ -332,8 +414,12 @@ namespace TradingLib.MoniterControl
             
             }
         }
-        //绘制标题行
-        void paintHeader(PaintEventArgs e)
+
+        /// <summary>
+        /// 绘制标题行
+        /// </summary>
+        /// <param name="e"></param>
+        void PaintHeader(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
 
@@ -341,12 +427,12 @@ namespace TradingLib.MoniterControl
             {
                 for (int i = 0; i < columns.Length; i++)
                 {
-                    PointF cellLocation = new PointF(getColumnStarX(i), 0);
-                    RectangleF cellRect = new RectangleF(cellLocation.X, cellLocation.Y, getColumnWidth(i), DefaultQuoteStyle.HeaderHeight);
+                    PointF cellLocation = new PointF(GetColumnStarX(i), 0);
+                    RectangleF cellRect = new RectangleF(cellLocation.X, cellLocation.Y, GetColumnWidth(i), DefaultQuoteStyle.HeaderHeight);
                     g.FillRectangle(new SolidBrush(HeaderBackColor), cellRect);
                     //绘制方形区域边界
                     //绘制单元格
-                    g.DrawRectangle(DefaultQuoteStyle.LinePen, getColumnStarX(i), 0, getColumnWidth(i), DefaultQuoteStyle.HeaderHeight);
+                    g.DrawRectangle(DefaultQuoteStyle.LinePen, GetColumnStarX(i), 0, GetColumnWidth(i), DefaultQuoteStyle.HeaderHeight);
                     //矩形区域的定义是由左上角的坐标进行定义的,当要输出文字的时候从左上角坐标 + 本行高度度 - 实际输出文字的高度 + 文字距离下界具体
                     g.DrawString(columns[i], HeaderFont, new SolidBrush(HeaderFontColor), cellRect.X, cellRect.Y + DefaultQuoteStyle.HeaderHeight - HeaderFont.Height);//-DefaultQuoteStyle.HeaderHeightHeaderHeight);
                 }
@@ -357,9 +443,9 @@ namespace TradingLib.MoniterControl
         /// <summary>
         /// 更新我们需要显示的起点idx与终点idx 这个运算不需要每次都调用当移动光标使得显示的行改变的时候才需要进行
         /// </summary>
-        void updateBeginEndIdx()
+        void UpdateBeginEndIdx()
         {
-            int[] ids = getRowsStartEndToShow();
+            int[] ids = CalcRowsBeginEndIdx();
             //debug("caculate:" + _beginIdx.ToString() + "|" + _endIdx.ToString());
             int oldbegin = _beginIdx;
             _beginIdx = ids[0];
@@ -368,29 +454,38 @@ namespace TradingLib.MoniterControl
             if (oldbegin != _beginIdx)
                 this.ResetAllRect();
         }
-        //计算当前控件高度可以显示的行数
-        int calRowsCanShow()
+
+        /// <summary>
+        /// 计算控件显示报价行的开始与结束序号
+        /// </summary>
+        /// <returns></returns>
+        int[] CalcRowsBeginEndIdx()
         {
-            int i = ClientSize.Height;
-            //得到可以显示的行数
-            int rnum = Convert.ToInt16((i - DefaultQuoteStyle.HeaderHeight) / DefaultQuoteStyle.RowHeight);
-            //debug("可以显示:"+rnum.ToString());
-            return rnum;
-        }
-        //根据我们选择的row来去定我们需要显示哪些行
-        int[] getRowsStartEndToShow()
-        {   
-            int rows = calRowsCanShow();//计算我们显示的总行数
+            int rows = CalcRowsCanShow();//计算我们显示的总行数
             //当选择的行小于我们可以显示的行 则我们显示可以显示的行数与总行数中最小的一个数字
             if (SelectedQuoteRow + 1 <= rows)
-                return new int[] { 0, Math.Min(rows-1, Count - 1)};
+                return new int[] { 0, Math.Min(rows - 1, Count - 1) };
             else
             {   //如果大于可以显示的行了 则我们需要移动表格,把起点与终点都同步向上移动
                 //selectedrows会对行数进行变化,当移动到没有足够的行的时候它会自己跳到首行进行显示
-                return new int[] { 0 + (SelectedQuoteRow - rows+1), rows + (SelectedQuoteRow - rows+1)-1 };
-
+                return new int[] { 0 + (SelectedQuoteRow - rows + 1), rows + (SelectedQuoteRow - rows + 1) - 1 };
             }
         }
+
+
+        /// <summary>
+        /// 计算当前控件高度可以显示的报价行数
+        /// </summary>
+        /// <returns></returns>
+        int CalcRowsCanShow()
+        {
+            int i = ClientSize.Height;
+            //得到可以显示的行数
+            int rnum = Convert.ToInt32((i - DefaultQuoteStyle.HeaderHeight) / DefaultQuoteStyle.RowHeight);
+            //debug("可以显示:"+rnum.ToString());
+            return rnum;
+        }
+        
         #endregion
 
         //记录rowid与对应的quoteRow的映射
@@ -398,6 +493,12 @@ namespace TradingLib.MoniterControl
         Dictionary<int, QuoteRow> _idxQuoteRowMap = new Dictionary<int, QuoteRow>();
         //记录symbol代码与对应ID的映射
         Dictionary<string, int> _symbolIdxMap = new Dictionary<string, int>();
+        
+        /// <summary>
+        /// 合约symbol
+        /// </summary>
+        ConcurrentDictionary<string, Symbol> symmap = new ConcurrentDictionary<string, Symbol>();
+
         //symbol到本地idx的转换
         int symbol2idx(string symbol)
         {
@@ -418,13 +519,13 @@ namespace TradingLib.MoniterControl
         //通过symbol得到quoterow
         public QuoteRow this[string symbol] { get { return this[symbol2idx(symbol)]; } }
 
-        //记录quoteview所监听的证券列表
-        //List<Symbol> mb = new List<Symbol>();
-        ConcurrentDictionary<string, Symbol> symmap = new ConcurrentDictionary<string, Symbol>();
-        //加入一个证券
-
-        //记录改变颜色的最新价格的行号
-        void bookCellLocation(int val)
+        
+        /// <summary>
+        /// 记录改变最新价颜色的行号
+        /// 定时器会将颜色修改会原来的标准颜色
+        /// </summary>
+        /// <param name="val"></param>
+        internal void BookLocation(int val)
         {
             cellLocations.Write(val);
         }
@@ -434,38 +535,51 @@ namespace TradingLib.MoniterControl
         /// </summary>
         public IEnumerable<Symbol> Symbols { get { return symmap.Values; } }
 
+
+        #region 添加 删除合约
         /// <summary>
         /// 增加一个合约到显示列表
         /// </summary>
         /// <param name="sec"></param>
-        public void addSecurity(Symbol sec)
+        public void AddSymbol(Symbol symbol)
         {
-            debug("add symbol:"+sec.Symbol);
-            //MessageBox.Show("Symbol:"+sec.Symbol + " "+sec.PriceTick.ToString() +" "+ sec.Currency.ToString());
-            string sym = sec.Symbol;//得到该security的symbol代号
+           
+            string sym = symbol.Symbol;
             //1.检查是否存在该symbol,如果存在则直接返回
-            if (symmap.ContainsKey(sec.Symbol)) return;
-            //如果baskect中没有该symbol,我们将其加入
-            symmap.TryAdd(sec.Symbol,sec);//basket.add默认有完备性检查
+            if (symmap.ContainsKey(symbol.Symbol)) return;
+
             //2.如果没有该symbol则进行数据项目的增加
+            symmap.TryAdd(symbol.Symbol, symbol);
             try
             {
 
-                debug("security:" + sym + "pricetick" + sec.SecurityFamily.PriceTick.ToString());
+                debug("security:" + sym + "pricetick" + symbol.SecurityFamily.PriceTick.ToString());
                 //1.在DataGrid中增加新的一行数据
-                // SYM,LAST,TSIZE,BID,ASK,BSIZE,ASIZE,SIZES,OHLC(YEST),CHANGE
+               
                 int i = _idxQuoteRowMap.Count;
-                //新建一行 并插入到数据结构中
-                string dispformat = sec.SecurityFamily.GetPriceFormat();
-                QuoteRow qr = new QuoteRow(this,i,ref columns,getColumnStarX,getColumnWidth,getRowWidth,getBeginIndex, DefaultQuoteStyle,dispformat);
-                //MessageBox.Show(qr.PriceDispFormat + " " + sec.PriceTick.ToString());
-                qr.SendRowLastPriceChangedEvent += new IntDelegate(bookCellLocation);
+                QuoteRow qr = new QuoteRow(this,i, symbol, _quoteType);
                 qr.SendDebutEvent +=new DebugDelegate(debug);
-                qr[QuoteListConst.SYMBOL].symbol = sym;
+
                 _symbolIdxMap.Add(sym, i);
                 _idxQuoteRowMap.Add(i, qr);
                 //更新当前的序号
                 _endIdx = Count - 1;
+
+
+
+                //如果当前没有默认选中某行 则选中第一行
+                if (_selectedRow == -1)
+                {
+                    SelectRow(0);
+                }
+                //int rows = CalcRowsCanShow();//计算我们显示的总行数
+                ////当选择的行小于我们可以显示的行 则我们显示可以显示的行数与总行数中最小的一个数字
+                //if (_selectedRow + 1 <= rows)
+                //    _endIdx = Math.Min(rows - 1, Count - 1);
+                //logger.Info("max rows:{0} endidx:{1}".Put(rows, _endIdx));
+                //计算显示的起始行数
+                //UpdateBeginEndIdx();
+
                 //重新绘制窗口的某个特定部分
                 Invalidate(qr.Rect);   
             }
@@ -474,46 +588,66 @@ namespace TradingLib.MoniterControl
                 debug(ex.ToString());
             }
         }
-
-        public void delSecurity(Symbol sec)
+        
+        /// <summary>
+        /// 删除某个合约
+        /// </summary>
+        /// <param name="sec"></param>
+        public void RemoveSymbol(Symbol symbol)
         {
-            string sym = sec.Symbol;//得到该security的symbol代号
+            string sym = symbol.Symbol;//得到该security的symbol代号
             //1.检查是否存在该symbol,如果存在则直接返回
             if (!symmap.Keys.Contains(sym)) return;
             //如果baskect中没有该symbol,我们将其加入
             Symbol symout=null;
-            symmap.TryRemove(sym, out symout);//basket.add默认有完备性检查
+            symmap.TryRemove(sym, out symout);
             int rid;
-            if(!_symbolIdxMap.TryGetValue(sym,out rid)) return;
-            int rnum = _idxQuoteRowMap.Count;
+            
+            //如果symbolIdx没有找到Symbol对应的行号 则直接返回
+            if (!_symbolIdxMap.TryGetValue(sym, out rid))
+            {
+                return;
+            }
+            int rnum = this.Count;
+
             //将删除的该symbol对应的id所映射的QuoteRow删除,同时将它后面的id的往前提1
-            //debug("原有数据:"+rnum.ToString()+"行");
-            //debug("删除第:"+rid.ToString()+"行");
+            //将rid对应行的QuoteRow设置成下一行的数据
             for (int i = rid; i < rnum-1; i++)
             {
                
-                QuoteRow qr = _idxQuoteRowMap[i + 1];
+                QuoteRow qr = _idxQuoteRowMap[i + 1];//获得下一行QuoteRow
                 qr.RowID = i;
-                _symbolIdxMap[qr[0].symbol] = i;
+                _symbolIdxMap[qr.Symbol.Symbol] = i;
                 _idxQuoteRowMap[i] = qr;
                 //debug("第" + i.ToString() + "行数据设定为:" + (i + 1).ToString() + " " + qr[0].symbol);
                 //修改quoterow内部的与序号相关的参数
 
             }
-            //if (rid == rnum)
-            //{ 
-                
-            //}
 
             _idxQuoteRowMap.Remove(rnum-1);
             _symbolIdxMap.Remove(sym);
             //debug("剩下数据" + _symbolIdxMap.Count.ToString() + "行");
-            
+
+            UpdateBeginEndIdx();
             this.ResetAllRect();
-            updateBeginEndIdx();
             Invalidate();
   
         }
+
+        /// <summary>
+        /// 添加一组合约
+        /// 外部排序后添加对应的合约
+        /// </summary>
+        /// <param name="b"></param>
+        public void AddSymbols(IEnumerable<Symbol> symbols)
+        {
+            foreach (Symbol s in symbols)
+            {
+                AddSymbol(s);
+            }
+        }
+        #endregion
+
 
         //报价表总行数
         public int Count { get { return _idxQuoteRowMap.Count; } }
@@ -524,15 +658,16 @@ namespace TradingLib.MoniterControl
             if ((idx == -1) || (idx > Count)) return;
             if (spillTick != null)
                 spillTick(k);
-            this[idx].GotTick(k);
-            //Invalidate();   
+            this[idx].GotTick(k); 
         }
 
         #region 表宽,表名
+
+        internal string[] Columns { get { return columns; } }
         //设定列的表头名称
-        string[] columns = new string[] { QuoteListConst.SYMBOL, QuoteListConst.LAST, QuoteListConst.LASTSIZE, QuoteListConst.ASKSIZE, QuoteListConst.ASK, QuoteListConst.BID, QuoteListConst.BIDSIZE, QuoteListConst.VOL, QuoteListConst.CHANGE, QuoteListConst.OI, QuoteListConst.OICHANGE, QuoteListConst.SETTLEMENT, QuoteListConst.OPEN, QuoteListConst.HIGH, QuoteListConst.LOW, QuoteListConst.LASTSETTLEMENT };
+        private string[] columns = new string[] { QuoteListConst.SYMBOLNAME, QuoteListConst.LAST, QuoteListConst.LASTSIZE, QuoteListConst.BIDSIZE, QuoteListConst.ASKSIZE, QuoteListConst.BID,QuoteListConst.ASK, QuoteListConst.VOL,QuoteListConst.OI, QuoteListConst.CHANGE, QuoteListConst.OICHANGE, QuoteListConst.SETTLEMENT, QuoteListConst.OPEN, QuoteListConst.HIGH, QuoteListConst.LOW, QuoteListConst.LASTSETTLEMENT };
         //设定每列的宽度
-        int[] columnWidth = new int[] { 80,70,40,40,70,70,40,80,40,80,70,70,70,70,70,70};
+        int[] columnWidth = new int[] { 100, 70, 40, 40, 40, 70, 70, 80, 80, 70, 70, 70, 70, 70, 70, 70 };
         //记录每行的起点X值
         int[] columnStartX;
         
@@ -541,38 +676,38 @@ namespace TradingLib.MoniterControl
         public int QuoteViewWidth { get { return totalWidth; } set { totalWidth = value; } }
 
         //获得某个序号列的起点
-        private int getColumnStarX(int i)
+        internal int GetColumnStarX(int i)
         {
             return columnStartX[i];
         }
         //获得某个序号列的宽度
-        private int getColumnWidth(int i)
+        internal int GetColumnWidth(int i)
         {
             return columnWidth[i];
         }
         //获得行总宽
-        private int getRowWidth()
+        internal int GetRowWidth()
         {
             return totalWidth;
         }
         //开始显示的序号
-        private int getBeginIndex()
+        internal int GetBeginIndex()
         {
             return _beginIdx;
         }
 
         //计算行总宽
-        void genColunmTotalWidth()
+        void CalcColunmTotalWidth()
         {
-            int w = 0;
-            for (int i = 0; i < columnWidth.Length; i++)
-            {
-                w += columnWidth[i];
-            }
-            totalWidth = w;
+            //int w = 0;
+            //for (int i = 0; i < columnWidth.Length; i++)
+            //{
+            //    w += columnWidth[i];
+            //}
+            totalWidth = columnWidth.Sum();
         }
         //根据列宽重新计算列的起点
-        void genColunmStartX()
+        void CalcColunmStartX()
         {
             columnStartX = new int[columnWidth.Length];
             for (int i = 0; i < columnWidth.Length; i++)
@@ -592,20 +727,23 @@ namespace TradingLib.MoniterControl
             foreach (QuoteRow qr in _idxQuoteRowMap.Values)
             {
                 qr.ResetRowRect();
-                qr.ResetCellRect();
             }
         }
         //当列宽发生变化时候,我们需要重新计算更新列的起点 以及 总宽等数据编译QuoteRow cell进行调用
         void columnWidthChanged()
         {
-            genColunmStartX();
-            genColunmTotalWidth();
+            CalcColunmTotalWidth();
+            CalcColunmStartX();
             ResetAllRect();
         }
-        
-        //标题高度
+
+        /// <summary>
+        /// 标题高度
+        /// </summary>
         private int HeaderHeight { get { return _headFont.Height + 4; } }
-        //行高度
+        /// <summary>
+        /// 报价行高度
+        /// </summary>
         private int RowHeight { get { return _symbolFont.Height + 4; } }
 
         #endregion
@@ -632,58 +770,30 @@ namespace TradingLib.MoniterControl
         {
             try
             {
-                //int xlineID=-1;
                 int ylineID;
-                //if (xtable != null)
+                //判断鼠标在x y的那条线
+                ylineID = MouseIInYLineIdentity(e);
+                if (CanChangeMoveState)
                 {
-                    //debug("x:" + e.X.ToString() + " y:" + e.Y.ToString());
-                    //判断鼠标在x y的那条线
-                    ylineID = MouseIInYLineIdentity(e);
-                    //debug(ylineID.ToString());
-                    //如果鼠标在表格区域内
-                    /*
-                    if (!true)
+                    if (ylineID != -1)
                     {
-                        //如果可以拖动
-                        if (CanChangeMoveState)
-                        {
-                            //鼠标变成箭头
-                            this.Cursor = Cursors.Arrow;
-                        }
-                        else
-                        {
-                            if (!CanChangeMoveState && CanMoveColumnWidth && CurrentMoveYLIneID != -1)
-                            {
-                               // DrawChangeColWidthLine(e, ylineID);
-                            }
-                        }
+                        //记录当前列序号
+                        CurrentMoveYLIneID = ylineID;
+                        this.Cursor = Cursors.SizeWE;//更改鼠标
+                        CanMoveColumnWidth = true;//打开移动列开关 可以移动列
                     }
                     else
-                    {*/
-                    if (CanChangeMoveState)
                     {
-                        if (ylineID != -1)
-                        {
-                            //记录当前列序号
-                            CurrentMoveYLIneID = ylineID;
-                            this.Cursor = Cursors.SizeWE;//更改鼠标
-                            //CanMoveRowHight = false;
-                            CanMoveColumnWidth = true;//打开移动列开关 可以移动列
-                        }
-                        else
-                        {
-                            this.Cursor = Cursors.Arrow;
-                            CanMoveColumnWidth = false;
-                            //CanMoveRowHight = false;
-                        }
+                        this.Cursor = Cursors.Arrow;
+                        CanMoveColumnWidth = false;
                     }
-                    if (!CanChangeMoveState && CanMoveColumnWidth && CurrentMoveYLIneID != -1)
-                    {
-                        //debug("start moving");
-                        MoveChangeColWidthLine(e, ylineID);
-                    }
-                    //}
                 }
+
+                if (!CanChangeMoveState && CanMoveColumnWidth && CurrentMoveYLIneID != -1)
+                {
+                    MoveChangeColWidthLine(e, ylineID);
+                }
+                
             }
             catch (Exception ex)
             {
@@ -693,6 +803,17 @@ namespace TradingLib.MoniterControl
 
         int _selectedRow=-1;
         public int SelectedQuoteRow { get { return _selectedRow; } set { _selectedRow = value; } }
+
+        /// <summary>
+        /// 当前选中的合约
+        /// </summary>
+        public Symbol SelectedSymbol
+        {
+            get
+            {
+                return CurrentSymbol;
+            }
+        }
         /// <summary>
         /// 鼠标点击事件处理
         /// </summary>
@@ -715,14 +836,7 @@ namespace TradingLib.MoniterControl
                         //debug("click row:" + mouseX2RowID(e).ToString());
                         //当我们不处于选择状态我们单击 选择某行报价
                         int i = mouseX2RowID(e);
-                        try
-                        {
-                            SelectRow(i);
-                        }
-                        catch (Exception ex)
-                        {
-
-                        }
+                        SelectRow(i);
                     }
                 }
                 if (e.Button == MouseButtons.Right)
@@ -733,9 +847,10 @@ namespace TradingLib.MoniterControl
             }
             catch (Exception ex)
             {
-                debug("quotelist mouse down error");
+                logger.Error("MouseDown Error:" + ex.ToString());
             }
         }
+
         /// <summary>
         /// 选中某个行，高亮显示该报价行
         /// </summary>
@@ -743,8 +858,8 @@ namespace TradingLib.MoniterControl
         void SelectRow(int i)
         {
             //debug("选择行:"+i.ToString());
-            if (i < 0) i = Count - 1;
-            if (i > (Count - 1)) i = 0;//如果选择的行数超过当前显示的总行数,则返回到第一行
+            if (i < 0) i =  Count - 1;//如果选择的行小于0 则返回最后一行
+            if (i > (Count - 1)) i = 0;//如果选择的行 超过当总行数,则返回到第一行
             int old = SelectedQuoteRow;
             if (i != old)//两次选择的行步一致
             {
@@ -753,27 +868,54 @@ namespace TradingLib.MoniterControl
                 ResetRowBackColor(old);//将原来的行改成原来的样式
                 SelectedQuoteRow = i;//保存我们选定的行
             }
-            
         }
+
+        void ViewQuoteList_MouseClick(object sender, MouseEventArgs e)
+        {
+            Symbol symbol = GetVisibleSecurity(SelectedQuoteRow);
+            if (SymbolSelectedEvent != null)
+            {
+                SymbolSelectedEvent(symbol);
+            }
+            CoreService.EventUI.FireSymbolselectedEvent(symbol);
+            debug("Symbol:" + symbol.ToString() + " Selected");
+        }
+
         //触发选择某个symbol的事件
         void ViewQuoteList_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            
-            //debug("selected :" + SelectedQuoteRow.ToString());
-            Symbol sec = GetVisibleSecurity(SelectedQuoteRow);
+            Symbol symbol = GetVisibleSecurity(SelectedQuoteRow);
             if (SymbolSelectedEvent != null)
-                SymbolSelectedEvent(sec);
-            debug("Symbol:" + sec.ToString() + " Selected");
+            {
+                SymbolSelectedEvent(symbol);
+            }
+            CoreService.EventUI.FireSymbolselectedEvent(symbol);
+            debug("Symbol:" + symbol.ToString() + " Selected");
         }
+
 
         //获得某个行的security
         Symbol GetVisibleSecurity(int row)
         {
             if ((row < 0) || (row >= Count)) return new SymbolImpl();
-            string sym = this[row][QuoteListConst.SYMBOL].symbol;
-            Symbol s = null;
-            symmap.TryGetValue(sym, out s);
-            return s;
+            return this[row].Symbol;
+        }
+
+        Symbol CurrentSymbol
+        { 
+            get
+            {
+                if (_selectedRow > 0 && _selectedRow < this.Count)
+                {
+                    return this[_selectedRow].Symbol;
+                }
+                if (this.Count > 0)
+                {
+                    return this[0].Symbol;
+                }
+                return null;
+            }
+        
         }
 
         //将某行颜色重置
@@ -790,17 +932,19 @@ namespace TradingLib.MoniterControl
                 Invalidate(this[rid].Rect);
             }
         }
+
         //更改某行颜色
         void ChangeRowBackColor(int rid)
         {
             //if (rid == SelectedQuoteRow) return;
             for (int i = 0; i < columns.Length; i++)
             {
-                this[rid][i].CellStyle.BackColor = Color.Blue;
-                this[rid][i].CellStyle.LineColor = Color.Blue;
+                this[rid][i].CellStyle.BackColor = this.SelectedColor;
+                this[rid][i].CellStyle.LineColor = this.SelectedColor;
             }
             Invalidate(this[rid].Rect);
         }
+
         void ViewQuoteList_MouseUp(object sender, MouseEventArgs e)
         {
 
@@ -809,7 +953,6 @@ namespace TradingLib.MoniterControl
                 if (CanMoveColumnWidth)
                 {
                     ChangeColWidth();
-
                 }
             }
             CanChangeMoveState = true;
@@ -828,7 +971,6 @@ namespace TradingLib.MoniterControl
                 columnWidth[CurrentMoveYLIneID - 1] = columnWidth[CurrentMoveYLIneID - 1] + CurrentYLineMoveWidth;
                 columnWidthChanged();
                 this.Refresh();
-                //Invalidate();
             }
             catch (Exception ex)
             {
@@ -846,15 +988,21 @@ namespace TradingLib.MoniterControl
             //鼠标Y位置扣除标题高度/行高 就得到对应的行数 需要加上我们的起始现实序号
             return Convert.ToInt16((e.Y - DefaultQuoteStyle.HeaderHeight) / DefaultQuoteStyle.RowHeight) + _beginIdx;
         }
+        /// <summary>
+        /// 判断鼠标当前所在列
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
         private int MouseIInYLineIdentity(MouseEventArgs e)
         {
-            
-            for(int i=0;i<columnStartX.Length;i++)
+            if (e.Y > 0 && e.Y < this.HeaderHeight)
             {
-
-                if (e.X > columnStartX[i] - 1 && e.X < columnStartX[i] + 1)
+                for (int i = 0; i < columnStartX.Length; i++)
                 {
-                    return i;
+                    if (e.X > columnStartX[i] - 3 && e.X < columnStartX[i] + 3)
+                    {
+                        return i;
+                    }
                 }
             }
             return -1;
@@ -877,6 +1025,7 @@ namespace TradingLib.MoniterControl
         }
         private int _mouseX;
         private int _mouseY;
+
         /// <summary>
         /// 滚动鼠标轮 上下移动选行光标
         /// </summary>
@@ -884,11 +1033,10 @@ namespace TradingLib.MoniterControl
         /// <param name="e"></param>
         void ViewQuoteList_MouseWheel(object sender, MouseEventArgs e)
         {
-            //debug("转动:" + e.Delta.ToString());
             if (e.Delta > 0)
-                RowUpside();
+                RowUp();
             else
-                RowDownside();
+                RowDown();
         }
 
         #endregion
@@ -899,7 +1047,7 @@ namespace TradingLib.MoniterControl
         private void initMenu()
         {
             _cmenu =new ContextMenuStrip();
-            _cmenu.Items.Add("K线图", null, new EventHandler(rightchart));
+            _cmenu.Items.Add("K线图", null, new EventHandler(menuOpenKChart));
             _cmenu.Items.Add("分时数据", null, new EventHandler(rightTimeSales));
             _cmenu.Items.Add("下单板", null, new EventHandler(rightticket));
 
@@ -917,18 +1065,15 @@ namespace TradingLib.MoniterControl
             if (SendOpenTimeSalesEvent != null)
                 SendOpenTimeSalesEvent(sec);
         }
-        void rightchart(object sender, EventArgs e)
+        void menuOpenKChart(object sender, EventArgs e)
         {
-            openChart();
-        }
-        void openChart()
-        {
-            Symbol sec = GetVisibleSecurity(SelectedQuoteRow);
+            Symbol symbol = GetVisibleSecurity(_selectedRow);
             //if (!sec.isValid)
             //    return;
-            if (SendOpenChartEvent != null)
-                SendOpenChartEvent(sec);
+            if (OpenKChartEvent != null)
+                OpenKChartEvent(symbol);
         }
+
 
         //简易下单
         void rightticket(object sender, EventArgs e)
@@ -974,61 +1119,75 @@ namespace TradingLib.MoniterControl
 
         void ViewQuoteList_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            debug("key is down:"+e.KeyCode.ToString());
-            if ((e.KeyCode == Keys.Q) || (e.KeyCode == Keys.Return))//Q打开K线图//回车打开k线
-                openChart();
-            if (e.KeyCode == Keys.W)//W打开盘口
-                openTimeSales();
-            if (e.KeyCode == Keys.E)//E打开小下单面板
-                openTicket();
-            
-            //throw new NotImplementedException();
-            if (e.KeyCode == Keys.Up)
-                debug("upkey");
-            if (e.KeyCode == Keys.Down)
-                debug("dnkey");
+
+            try
+            {
+                logger.Info(string.Format("KeyDown:{0}",e.KeyCode));
+
+                if (e.KeyCode == Keys.Return)//Q打开K线图//回车打开k线
+                {
+                    Symbol symbol = CurrentSymbol;
+
+                    //logger.Info("Open Chart Symbol:{0}".Put(symbol != null ? symbol.Symbol : "null"));
+                    menuOpenKChart(null, null);
+                }
+
+                if (e.KeyCode == Keys.W)//W打开盘口
+                    openTimeSales();
+                if (e.KeyCode == Keys.E)//E打开小下单面板
+                    openTicket();
+
+               
+            }
+            catch (Exception ex)
+            { 
+                
+            }
+
         }
 
         void ViewQuoteList_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
         {
-          
+            //MessageBox.Show("xx");
+            logger.Info("KeyPress:" + e.KeyChar);
         }
         /// <summary>
         /// 上移行
         /// </summary>
-        void RowUpside()
+        public void RowUp()
         {
             int rid = SelectedQuoteRow -1;
             SelectRow(rid);
             if (rid > _endIdx || rid < _beginIdx)
             {
-                updateBeginEndIdx();
+                UpdateBeginEndIdx();
                 Invalidate();
             }
         }
         /// <summary>
         /// 下移行
         /// </summary>
-        void RowDownside()
+        public void RowDown()
         {
             int rid = SelectedQuoteRow + 1;
             SelectRow(rid);//选择某行带有更新该行显示的语句
+            //logger.Info("begin:{0} end:{1}".Put(_beginIdx, _endIdx));
             if (rid > _endIdx || rid < _beginIdx)//当选择的行超出我们显示的start end区间之后我们需要重新计算对应的起始
             {
-                updateBeginEndIdx();
+                UpdateBeginEndIdx();
                 Invalidate();
             }
         }
         void ViewQuoteList_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Up)
-            {
-                RowUpside();
-            }
-            if (e.KeyCode == Keys.Down)
-            {
-                RowDownside();
-            }
+            //if (e.KeyCode == Keys.Up)
+            //{
+            //    RowUpside();
+            //}
+            //if (e.KeyCode == Keys.Down)
+            //{
+            //    RowDownside();
+            //}
             
         }
 

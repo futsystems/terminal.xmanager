@@ -76,7 +76,7 @@ namespace TradingLib.MoniterControl
         const string MAINACCTRISKRULE = "强平规则";
         const string WARN = "警告";
         const string WARNSTR = "警告消息";
-        const string CURRENCY = "货币";
+        const string CURRENCY = "基币";
 
 
         DataTable gt = new DataTable();

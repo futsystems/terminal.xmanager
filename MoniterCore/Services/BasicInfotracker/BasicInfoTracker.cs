@@ -61,6 +61,12 @@ namespace TradingLib.MoniterCore
         /// </summary>
         Dictionary<string, SymbolImpl> symbolnammap = new Dictionary<string, SymbolImpl>();
 
+
+        Dictionary<int, ExchangeRate> exchangeRateaIDMap = new Dictionary<int, ExchangeRate>();
+        /// <summary>
+        /// 汇率信息map
+        /// </summary>
+        Dictionary<CurrencyType, ExchangeRate> exchangeRateCurrencyMap = new Dictionary<CurrencyType, ExchangeRate>();
         /// <summary>
         /// 主管理员map
         /// </summary>

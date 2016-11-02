@@ -242,5 +242,25 @@ namespace TradingLib.MoniterCore
             return null;
         }
 
+
+        /// <summary>
+        /// 所有汇率数据
+        /// </summary>
+        public IEnumerable<ExchangeRate> ExchangeRates { get { return exchangeRateCurrencyMap.Values; } }
+
+        /// <summary>
+        /// 返回某个币种的汇率
+        /// </summary>
+        /// <param name="currency"></param>
+        /// <returns></returns>
+        public ExchangeRate GetExchangeRate(CurrencyType currency)
+        {
+            ExchangeRate target = null;
+            if (exchangeRateCurrencyMap.TryGetValue(currency, out target))
+            {
+                return target;
+            }
+            return null;
+        }
     }
 }

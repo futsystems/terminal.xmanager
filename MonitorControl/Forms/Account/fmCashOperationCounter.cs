@@ -18,7 +18,7 @@ namespace TradingLib.MoniterControl
         {
             InitializeComponent();
             MoniterHelper.AdapterToIDataSource(cbEquityTypeList).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumEquityType>());
-
+            MoniterHelper.AdapterToIDataSource(cbCurrency).BindDataSource(MoniterHelper.GetEnumValueObjects<CurrencyType>());
             this.Load += new EventHandler(fmCashOperationCounter_Load);
         }
 
@@ -40,11 +40,24 @@ namespace TradingLib.MoniterControl
             string cashoptitle = string.Empty;
 
             decimal amount2 = amount * -1;
-
-            QSEnumEquityType type = (QSEnumEquityType)cbEquityTypeList.SelectedValue;
-            if (MoniterHelper.WindowConfirm("确认向帐户[" + _account.Account + "] 出金" + amount.ToString()) == System.Windows.Forms.DialogResult.Yes)
+            CurrencyType currency = (CurrencyType)cbCurrency.SelectedValue;
+            if (_account.Currency != currency)
             {
-                CoreService.TLClient.ReqCashOperation(_account.Account, amount2, type, "", comment,false);
+                amount = Math.Round(amount * _account.GetExchangeRate(currency));
+                amount2 = amount2 * -1;
+                QSEnumEquityType type = (QSEnumEquityType)cbEquityTypeList.SelectedValue;
+                if (MoniterHelper.WindowConfirm("确认向帐户[" + _account.Account + "] 出金:" + amount.ToString() + _account.Currency.ToString() + "(" + cashop_amount.Value.ToChineseStr() + ")") == System.Windows.Forms.DialogResult.Yes)
+                {
+                    CoreService.TLClient.ReqCashOperation(_account.Account, amount2, type, "", comment, false);
+                }
+            }
+            else
+            {
+                QSEnumEquityType type = (QSEnumEquityType)cbEquityTypeList.SelectedValue;
+                if (MoniterHelper.WindowConfirm("确认向帐户[" + _account.Account + "] 出金:" + amount.ToString() + _account.Currency.ToString() + "(" + cashop_amount.Value.ToChineseStr() + ")") == System.Windows.Forms.DialogResult.Yes)
+                {
+                    CoreService.TLClient.ReqCashOperation(_account.Account, amount2, type, "", comment, false);
+                }
             }
         }
 
@@ -61,10 +74,24 @@ namespace TradingLib.MoniterControl
 
             decimal amount2 = amount * 1;
 
-            QSEnumEquityType type = (QSEnumEquityType)cbEquityTypeList.SelectedValue;
-            if (MoniterHelper.WindowConfirm("确认向帐户[" + _account.Account + "] " + cashoptitle + " " + amount.ToString()) == System.Windows.Forms.DialogResult.Yes)
+            CurrencyType currency = (CurrencyType)cbCurrency.SelectedValue;
+            if (_account.Currency != currency)
             {
-                CoreService.TLClient.ReqCashOperation(_account.Account, amount2, type, "", comment,false);
+                amount = Math.Round(amount * _account.GetExchangeRate(currency));
+                amount2 = amount2 * 1;
+                QSEnumEquityType type = (QSEnumEquityType)cbEquityTypeList.SelectedValue;
+                if (MoniterHelper.WindowConfirm("确认向帐户[" + _account.Account + "] 入金:" + amount.ToString() + _account.Currency.ToString() + "(" + cashop_amount.Value.ToChineseStr() + ")") == System.Windows.Forms.DialogResult.Yes)
+                {
+                    CoreService.TLClient.ReqCashOperation(_account.Account, amount2, type, "", comment, false);
+                }
+            }
+            else
+            {
+                QSEnumEquityType type = (QSEnumEquityType)cbEquityTypeList.SelectedValue;
+                if (MoniterHelper.WindowConfirm("确认向帐户[" + _account.Account + "] 入金:" + amount.ToString() + _account.Currency.ToString() + "(" + cashop_amount.Value.ToChineseStr() + ")") == System.Windows.Forms.DialogResult.Yes)
+                {
+                    CoreService.TLClient.ReqCashOperation(_account.Account, amount2, type, "", comment, false);
+                }
             }
         }
 

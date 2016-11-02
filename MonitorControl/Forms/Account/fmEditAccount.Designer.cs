@@ -107,7 +107,7 @@
             this.ctAgentList1.EnableSelf = true;
             this.ctAgentList1.Location = new System.Drawing.Point(40, 87);
             this.ctAgentList1.Name = "ctAgentList1";
-            this.ctAgentList1.Size = new System.Drawing.Size(211, 21);
+            this.ctAgentList1.Size = new System.Drawing.Size(151, 21);
             this.ctAgentList1.TabIndex = 23;
             // 
             // cbCurrency
@@ -115,7 +115,7 @@
             this.cbCurrency.DropDownWidth = 181;
             this.cbCurrency.Location = new System.Drawing.Point(105, 64);
             this.cbCurrency.Name = "cbCurrency";
-            this.cbCurrency.Size = new System.Drawing.Size(181, 21);
+            this.cbCurrency.Size = new System.Drawing.Size(86, 21);
             this.cbCurrency.TabIndex = 22;
             // 
             // kryptonLabel10
@@ -124,7 +124,7 @@
             this.kryptonLabel10.Name = "kryptonLabel10";
             this.kryptonLabel10.Size = new System.Drawing.Size(38, 20);
             this.kryptonLabel10.TabIndex = 21;
-            this.kryptonLabel10.Values.Text = "货币:";
+            this.kryptonLabel10.Values.Text = "基币:";
             // 
             // lbNotice
             // 

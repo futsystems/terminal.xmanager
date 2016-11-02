@@ -57,6 +57,12 @@ namespace TradingLib.MoniterCore
             CoreService.BasicInfoTracker.GotSymbol(response.Symbol, response.IsLast);
         }
 
+        void CliOnMGRQryExchageRate(RspMGRQryExchangeRateResponse response)
+        {
+            logger.Debug("got exchange rate response:" + response.ToString());
+            CoreService.BasicInfoTracker.GotExchangeRate(response.ExchangeRate, response.IsLast);
+        }
+
 
     }
 }

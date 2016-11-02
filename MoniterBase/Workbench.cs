@@ -187,7 +187,7 @@ namespace TradingLib.MoniterBase
             switch (type)
             { 
                 case QSEnumProductType.CounterSystem:
-                    return "巨融柜台系统";
+                    return "资管柜台系统";
                 case QSEnumProductType.VendorMoniter:
                     return "主帐户监控系统";
                 default:
@@ -401,8 +401,8 @@ namespace TradingLib.MoniterBase
             //this.mainContainer.Panel2Collapsed = false;
             //this.mainContainer.Panel2.Height = (int)(this.Size.Height / 4);
             //this.bottomContainer.Panel2.Width = 250;
-            this.bottomContainer.SplitterDistance = this.Width -  430;
-            this.mainContainer.SplitterDistance = this.Height - 380;
+            this.bottomContainer.SplitterDistance = this.Width -  580;
+            this.mainContainer.SplitterDistance = this.Height - 480;
             this.ExpandBottom();
 
             //显示默认控件

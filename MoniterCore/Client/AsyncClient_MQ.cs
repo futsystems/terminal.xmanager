@@ -344,28 +344,47 @@ namespace TradingLib.MoniterCore
                     subscriber.ReceiveReady += (s, e) =>
                     {
                         string tickstr = subscriber.ReceiveString(Encoding.UTF8);
-                        string[] p = tickstr.Split('^');
-                        if (p.Length == 2)
+                        if (!string.IsNullOrEmpty(tickstr))// && tickstr!="H,")
                         {
-                            string symbol = p[0];
-                            string tickcontent = p[1];
-                            Message msg = new Message()
+                            if (tickstr == "H,")
                             {
-                                Type = MessageTypes.TICKNOTIFY,
-                                Content = tickcontent,
-                            };
+                                Message msg = new Message();
+                                msg.Type = MessageTypes.TICKHEARTBEAT;
+                                msg.Content = "H,";
+                                handleMessage(msg);
+                            }
+                            else
+                            {
+                                Message msg = new Message();
+                                msg.Type = MessageTypes.TICKNOTIFY;
+                                msg.Content = tickstr;
 
-                            handleMessage(msg);
+                                handleMessage(msg);
+                            }
                         }
-                        else if (p[0] == "TICKHEARTBEAT")
-                        {
-                            Message msg = new Message()
-                            {
-                                Type = MessageTypes.TICKHEARTBEAT,
-                                Content = "TICKHEARTBEAT",
-                            };
-                            handleMessage(msg);
-                        }
+
+                        //string[] p = tickstr.Split('^');
+                        //if (p.Length == 2)
+                        //{
+                        //    string symbol = p[0];
+                        //    string tickcontent = p[1];
+                        //    Message msg = new Message()
+                        //    {
+                        //        Type = MessageTypes.TICKNOTIFY,
+                        //        Content = tickcontent,
+                        //    };
+
+                        //    handleMessage(msg);
+                        //}
+                        //else if (p[0] == "TICKHEARTBEAT")
+                        //{
+                        //    Message msg = new Message()
+                        //    {
+                        //        Type = MessageTypes.TICKHEARTBEAT,
+                        //        Content = "TICKHEARTBEAT",
+                        //    };
+                        //    handleMessage(msg);
+                        //}
                     };
 
                     using (var poller = new Poller())

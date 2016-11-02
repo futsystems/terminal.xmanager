@@ -295,6 +295,9 @@
       <MenuItem id = "SettleManagerCommand"
               label = "手工结算"
               class = "TradingLib.MoniterBase.Command.SettleManagerCommand"/>
+      <MenuItem id = "ExchangeRateCommand"
+              label = "汇率管理"
+              class = "TradingLib.MoniterBase.Command.ExchangeRateCommand"/>
     </Condition>
   </Path>
   

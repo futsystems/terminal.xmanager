@@ -103,7 +103,9 @@ namespace TradingLib.MoniterControl
             else
             {
                 _info = info;
-                account.Text = info.Account;
+                var a = CoreService.BasicInfoTracker.GetAccount(info.Account);
+                account.Text = info.Account;//string.Format("{0}({1})", info.Account, a != null ? a.Currency.ToString() : "");
+                currency.Text = a != null ? a.Currency.ToString() : "";
                 lastequtiy.Text = info.LastEquity.ToFormatStr();
                 realizedpl.Text = info.RealizedPL.ToFormatStr();
                 unrealizedpl.Text = info.UnRealizedPL.ToFormatStr();

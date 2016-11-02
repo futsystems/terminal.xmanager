@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.imageheader = new System.Windows.Forms.PictureBox();
             this.label0 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.label1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.label2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -45,33 +44,19 @@
             this.lbLoginStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.ckremberpass = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.btnExit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.imageheader = new System.Windows.Forms.PictureBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.imageheader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.servers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imageheader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
-            // imageheader
-            // 
-            this.imageheader.BackColor = System.Drawing.Color.White;
-            this.imageheader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.imageheader.ErrorImage = null;
-            this.imageheader.InitialImage = null;
-            this.imageheader.Location = new System.Drawing.Point(0, 0);
-            this.imageheader.Name = "imageheader";
-            this.imageheader.Size = new System.Drawing.Size(400, 68);
-            this.imageheader.TabIndex = 0;
-            this.imageheader.TabStop = false;
-            this.imageheader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.imageheader_MouseDown);
-            this.imageheader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.imageheader_MouseMove);
-            this.imageheader.MouseUp += new System.Windows.Forms.MouseEventHandler(this.imageheader_MouseUp);
-            // 
             // label0
             // 
-            this.label0.Location = new System.Drawing.Point(62, 20);
+            this.label0.Location = new System.Drawing.Point(59, 17);
             this.label0.Name = "label0";
             this.label0.Size = new System.Drawing.Size(63, 20);
             this.label0.TabIndex = 20;
@@ -79,7 +64,7 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(62, 52);
+            this.label1.Location = new System.Drawing.Point(59, 49);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 20);
             this.label1.TabIndex = 21;
@@ -87,7 +72,7 @@
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(62, 85);
+            this.label2.Location = new System.Drawing.Point(59, 82);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 20);
             this.label2.TabIndex = 22;
@@ -95,14 +80,14 @@
             // 
             // username
             // 
-            this.username.Location = new System.Drawing.Point(137, 49);
+            this.username.Location = new System.Drawing.Point(134, 46);
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(147, 20);
             this.username.TabIndex = 23;
             // 
             // password
             // 
-            this.password.Location = new System.Drawing.Point(137, 82);
+            this.password.Location = new System.Drawing.Point(134, 79);
             this.password.Name = "password";
             this.password.PasswordChar = '#';
             this.password.Size = new System.Drawing.Size(147, 20);
@@ -111,7 +96,7 @@
             // servers
             // 
             this.servers.DropDownWidth = 121;
-            this.servers.Location = new System.Drawing.Point(137, 17);
+            this.servers.Location = new System.Drawing.Point(134, 14);
             this.servers.Name = "servers";
             this.servers.Size = new System.Drawing.Size(147, 21);
             this.servers.TabIndex = 25;
@@ -119,7 +104,7 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(137, 110);
+            this.btnLogin.Location = new System.Drawing.Point(134, 107);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(60, 31);
             this.btnLogin.TabIndex = 27;
@@ -127,7 +112,7 @@
             // 
             // ckremberuser
             // 
-            this.ckremberuser.Location = new System.Drawing.Point(289, 53);
+            this.ckremberuser.Location = new System.Drawing.Point(286, 50);
             this.ckremberuser.Name = "ckremberuser";
             this.ckremberuser.Size = new System.Drawing.Size(73, 20);
             this.ckremberuser.TabIndex = 28;
@@ -152,32 +137,32 @@
             this.kryptonPanel1.Controls.Add(this.btnLogin);
             this.kryptonPanel1.Controls.Add(this.servers);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 68);
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 97);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(400, 186);
+            this.kryptonPanel1.Size = new System.Drawing.Size(401, 171);
             this.kryptonPanel1.TabIndex = 33;
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
+            this.statusStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lbLoginStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 164);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 149);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
-            this.statusStrip1.Size = new System.Drawing.Size(400, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(401, 22);
             this.statusStrip1.TabIndex = 35;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // lbLoginStatus
             // 
             this.lbLoginStatus.Name = "lbLoginStatus";
-            this.lbLoginStatus.Size = new System.Drawing.Size(18, 17);
+            this.lbLoginStatus.Size = new System.Drawing.Size(17, 17);
             this.lbLoginStatus.Text = "--";
             // 
             // ckremberpass
             // 
-            this.ckremberpass.Location = new System.Drawing.Point(289, 85);
+            this.ckremberpass.Location = new System.Drawing.Point(286, 82);
             this.ckremberpass.Name = "ckremberpass";
             this.ckremberpass.Size = new System.Drawing.Size(73, 20);
             this.ckremberpass.TabIndex = 33;
@@ -185,17 +170,33 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(224, 110);
+            this.btnExit.Location = new System.Drawing.Point(221, 107);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(60, 31);
             this.btnExit.TabIndex = 32;
             this.btnExit.Values.Text = "退 出";
             // 
+            // imageheader
+            // 
+            this.imageheader.BackColor = System.Drawing.Color.White;
+            this.imageheader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.imageheader.ErrorImage = null;
+            this.imageheader.Image = global::TradingLib.MoniterBase.Properties.Resources.login_bg;
+            this.imageheader.InitialImage = null;
+            this.imageheader.Location = new System.Drawing.Point(0, 0);
+            this.imageheader.Name = "imageheader";
+            this.imageheader.Size = new System.Drawing.Size(401, 97);
+            this.imageheader.TabIndex = 0;
+            this.imageheader.TabStop = false;
+            this.imageheader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.imageheader_MouseDown);
+            this.imageheader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.imageheader_MouseMove);
+            this.imageheader.MouseUp += new System.Windows.Forms.MouseEventHandler(this.imageheader_MouseUp);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(400, 254);
+            this.ClientSize = new System.Drawing.Size(401, 268);
             this.Controls.Add(this.kryptonPanel1);
             this.Controls.Add(this.imageheader);
             this.DoubleBuffered = true;
@@ -206,15 +207,15 @@
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Blue;
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "系统登入";
+            this.Text = "V3";
             this.TopMost = true;
-            ((System.ComponentModel.ISupportInitialize)(this.imageheader)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.servers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imageheader)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 

@@ -45,6 +45,22 @@ namespace TradingLib.MoniterBase.Command
         }
     }
 
+    public class ExchangeRateCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            if (!CoreService.SiteInfo.Manager.IsRoot())
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+            fmExchangeRate fm = new fmExchangeRate();
+            fm.ShowDialog();
+            fm.Close();
+        }
+    }
+
+
     public class FeeManagerCommand : AbstractMenuCommand
     {
         public override void Run()

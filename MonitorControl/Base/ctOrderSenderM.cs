@@ -29,7 +29,7 @@ namespace TradingLib.MoniterControl
         {
             btnBuy.Click += new EventHandler(btnBuy_Click);
             btnSell.Click += new EventHandler(btnSell_Click);
-            btnInsertTrade.Click += new EventHandler(btnInsertTrade_Click);
+            //btnInsertTrade.Click += new EventHandler(btnInsertTrade_Click);
             this.SendOrderEvent += new OrderDelegate(SendOrderOut);
             CoreService.EventCore.RegIEventHandler(this);
         }
@@ -38,15 +38,20 @@ namespace TradingLib.MoniterControl
         {
             //btnInsertTrade.Visible = Globals.UIAccess.fun_tab_placeorder_insert;
             CoreService.EventAccount.OnAccountSelectedEvent += new Action<AccountLite>(OnAccountSelected);
-
+            CoreService.EventUI.OnSymbolSelectedEvent += new Action<Symbol>(EventUI_OnSymbolSelectedEvent);
             MoniterHelper.AdapterToIDataSource(cboffsetflag).BindDataSource(MoniterHelper.GetOffsetCBList());
             MoniterHelper.AdapterToIDataSource(cbordertype).BindDataSource(MoniterHelper.GetOrderTypeCBList());
             //Globals.Debug("~~~~~~~~~~~~~~~~~~~~~~~~~~ order sender insert:" + Globals.Domain.Misc_InsertTrade.ToString() + " is root:" + Globals.Manager.IsRoot());
             //如果不是超级域 则需要按设置来判断是否显示调试插入按钮
             if (!CoreService.SiteInfo.Domain.Super)
             {
-                btnInsertTrade.Visible = CoreService.SiteInfo.Domain.Misc_InsertTrade && CoreService.SiteInfo.Manager.IsRoot();
+                //btnInsertTrade.Visible = CoreService.SiteInfo.Domain.Misc_InsertTrade && CoreService.SiteInfo.Manager.IsRoot();
             }
+        }
+
+        void EventUI_OnSymbolSelectedEvent(Symbol obj)
+        {
+            SetSymbol(obj);
         }
 
         
@@ -134,8 +139,10 @@ namespace TradingLib.MoniterControl
             if (!validPrice()) return;
 
             //生成对应的委托
-            Order work = new OrderImpl(_symbol.Symbol, 0);
+            Order work = new OrderImpl();
             work.Account = _account.Account;
+            work.Exchange = _symbol.Exchange;
+            work.Symbol = _symbol.Symbol;
             work.LocalSymbol = _symbol.Symbol;
             work.Side = f;
             work.Size = Math.Abs((int)size.Value);
