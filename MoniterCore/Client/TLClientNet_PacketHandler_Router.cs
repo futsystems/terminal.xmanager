@@ -239,7 +239,9 @@ namespace TradingLib.MoniterCore
                 case MessageTypes.MGRUPDATESYMBOLRESPONSE://合约更新回报
                     CliOnMGRUpdateSymbol(packet as RspMGRUpdateSymbolResponse);
                     break;
-                
+                case MessageTypes.MGRQRYTICKSNAPSHOTRESPONSE://行情快照更新
+                    CliOnMGRQryTickSnapshot(packet as RspMGRQryTickSnapShotResponse);
+                    break;
 
                 case MessageTypes.MGRRULECLASSRESPONSE://风控规则回报
                     //CliOnMGRRuleClass(packet as RspMGRQryRuleSetResponse);

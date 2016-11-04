@@ -123,8 +123,9 @@ namespace TradingLib.MoniterCore
 
         void connecton_OnTick(Tick t)
         {
-            CoreService.TradingInfoTracker.GotTick(t);
-            CoreService.EventIndicator.FireTick(t);
+            CoreService.BasicInfoTracker.GotTick(t);//更新快照
+            CoreService.TradingInfoTracker.GotTick(t);//驱动交易数据更新
+            CoreService.EventIndicator.FireTick(t);//触发Tick事件
         }
 
 

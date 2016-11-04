@@ -299,10 +299,18 @@ namespace TradingLib.MoniterControl
         {
 
             if (symbol == null || k == null) return;
-            ViewQuoteList target = GetQuoteList(symbol.Exchange);
-            if (target != null)
-                target.GotTick(k);
             
+            //快照 成交 盘口 统计数据更新
+            if (k.UpdateType == "S" || k.UpdateType == "X" || k.UpdateType == "Q" || k.UpdateType == "F")
+            {
+                ViewQuoteList target = GetQuoteList(symbol.Exchange);
+                Tick snapshot = CoreService.BasicInfoTracker.GetTickSnapshot(k.Exchange, k.Symbol);
+                if (target != null && snapshot!= null)
+                {
+
+                    target.GotTick(snapshot);
+                }
+            }
         }
     }
 }

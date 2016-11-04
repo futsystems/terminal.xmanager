@@ -361,9 +361,33 @@ namespace TradingLib.MoniterControl
                         gt.Rows[i][YDSIZE] = pos.PositionDetailYdNew.Sum(p => p.Volume);
                         gt.Rows[i][CANFLATSIZE] = getCanFlatSize(pos);
                         gt.Rows[i][AVGPRICE] = pos.AvgPrice.ToFormatStr(_fromat);
+
+                        Tick k = CoreService.BasicInfoTracker.GetTickSnapshot(pos.oSymbol.Exchange, pos.oSymbol.Symbol);
+                        if (k != null)
+                        {
+                            gt.Rows[i][LASTPRICE] = k.Trade.ToFormatStr(_fromat);
+                            //空仓 未平仓合约与 最新价格
+                            if (pos.isFlat)
+                            {
+                                gt.Rows[i][UNREALIZEDPL] = 0;
+                                gt.Rows[i][UNREALIZEDPLPOINT] = 0;
+                                gt.Rows[i][UNREALIZEDPLACCTCURRENCY] = 0;
+                            }
+                            else
+                            {
+                                decimal unrealizedpl = pos.UnRealizedPL;
+                                //更新unrealizedpl
+                                gt.Rows[i][UNREALIZEDPL] = (unrealizedpl * pos.oSymbol.Multiple).ToFormatStr();
+                                gt.Rows[i][UNREALIZEDPLPOINT] = unrealizedpl.ToFormatStr(_fromat);
+                                gt.Rows[i][UNREALIZEDPLACCTCURRENCY] = account != null ? ((unrealizedpl * pos.oSymbol.Multiple) * account.GetExchangeRate(pos.oSymbol.SecurityFamily.Currency)).ToFormatStr() : "";
+                            }
+
+                        }
+
                         gt.Rows[i][REALIZEDPL] = (pos.ClosedPL * pos.oSymbol.Multiple).ToFormatStr();
                         gt.Rows[i][REALIZEDPLPOINT] = pos.ClosedPL.ToFormatStr(_fromat);
                         gt.Rows[i][REALIZEDPLACCTCURRENCY] = account != null ? ((pos.ClosedPL * pos.oSymbol.Multiple) * account.GetExchangeRate(pos.oSymbol.SecurityFamily.Currency)).ToFormatStr() : "";
+                        
                     }
                 }
                 catch (Exception ex)

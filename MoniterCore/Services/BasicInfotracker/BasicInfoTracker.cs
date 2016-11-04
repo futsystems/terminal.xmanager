@@ -95,6 +95,10 @@ namespace TradingLib.MoniterCore
         Dictionary<string, AccountLite> accountmap = new Dictionary<string, AccountLite>();
 
 
+        /// <summary>
+        /// 行情快照维护器
+        /// </summary>
+        TickTracker ticktracker = new TickTracker();
 
     }
 }

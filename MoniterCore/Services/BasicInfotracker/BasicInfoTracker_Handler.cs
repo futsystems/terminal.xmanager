@@ -424,6 +424,9 @@ namespace TradingLib.MoniterCore
                 logger.Info("    RouterGroup num:" + this.RouterGroups.Count().ToString());
                 logger.Info("        Account num:" + this.Accounts.Count().ToString());
 
+                //查询行情快照
+                CoreService.TLClient.ReqQryTickSnapshot();
+
                 CoreService.TLClient.StartTick();
                 //触发数据初始化完成事件
                 CoreService.EventCore.FireInitializedEvent();

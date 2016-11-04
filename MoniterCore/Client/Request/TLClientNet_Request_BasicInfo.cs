@@ -118,15 +118,21 @@ namespace TradingLib.MoniterCore
             SendPacket(request);
             return requestid;
         }
-
-        //public void ReqUpdateSymbol(SymbolImpl sym)
-        //{
-        //    logger.Info("请求更新合约");
-        //    MGRUpdateSymbolRequest request = RequestTemplate<MGRUpdateSymbolRequest>.CliSendRequest(++requestid);
-        //    request.Symbol = sym;
-
-        //    SendPacket(request);
-        //}
+        /// <summary>
+        /// 请求查询合约快照
+        /// </summary>
+        /// <param name="exchange"></param>
+        /// <param name="symbol"></param>
+        /// <returns></returns>
+        public int ReqQryTickSnapshot(string exchange ="", string symbol = "")
+        {
+            logger.Info(string.Format("QryTickSnapshot Exchange:{0} Symbol:{1}", exchange, symbol));
+            MGRQryTickSnapShotRequest request = RequestTemplate<MGRQryTickSnapShotRequest>.CliSendRequest(++requestid);
+            request.Exchange = exchange;
+            request.Symbol = symbol;
+            SendPacket(request);
+            return requestid;
+        }
         #endregion
     }
 }

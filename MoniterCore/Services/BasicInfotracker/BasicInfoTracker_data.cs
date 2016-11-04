@@ -262,5 +262,23 @@ namespace TradingLib.MoniterCore
             }
             return null;
         }
+
+
+        /// <summary>
+        /// 获得实时行情数据
+        /// 更新本地快照数据
+        /// </summary>
+        /// <param name="k"></param>
+        public void GotTick(Tick k)
+        {
+            ticktracker.GotTick(k);
+        }
+
+        public IEnumerable<Tick> TickSnapshots { get { return ticktracker.TickSnapshots; } }
+
+        public Tick GetTickSnapshot(string exchange, string symbol)
+        {
+            return ticktracker[exchange, symbol];
+        }
     }
 }

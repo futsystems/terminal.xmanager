@@ -158,7 +158,7 @@ namespace TradingLib.MoniterControl
             this[QuoteListConst.OICHANGE].Value = k.OpenInterest != 0 ? (k.OpenInterest - k.PreOpenInterest) : 0;
 
             this[QuoteListConst.SETTLEMENT].Value = _quoteType == EnumQuoteType.CNQUOTE ? k.Settlement :0;
-            this[QuoteListConst.LASTSETTLEMENT].Value = _quoteType == EnumQuoteType.CNQUOTE ? k.PreSettlement : k.PreClose;
+            this[QuoteListConst.LASTSETTLEMENT].Value =  k.PreSettlement;//EnumQuoteType.CNQUOTE ? k.PreSettlement : k.PreClose;
 
 
             if (k.Open != this[QuoteListConst.OPEN].Value)

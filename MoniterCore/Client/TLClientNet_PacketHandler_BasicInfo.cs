@@ -63,6 +63,14 @@ namespace TradingLib.MoniterCore
             CoreService.BasicInfoTracker.GotExchangeRate(response.ExchangeRate, response.IsLast);
         }
 
+        void CliOnMGRQryTickSnapshot(RspMGRQryTickSnapShotResponse response)
+        {
+            logger.Debug("got Tick snapshot:" + requestid.ToString());
+            if(response.Tick!=null)
+            {
+                CoreService.BasicInfoTracker.GotTick(response.Tick);
+            }
+        }
 
     }
 }
