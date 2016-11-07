@@ -219,7 +219,7 @@ namespace TradingLib.MoniterControl
             quote.MenuEnable = true;
             quote.OpenKChartEvent += new Action<Symbol>(OnOpenKChartEvent);
             quote.RightLeftMoveEvent += new Action<PreviewKeyDownEventArgs>(OnRightLeftMoveEvent);
-
+           
             ComponentFactory.Krypton.Navigator.KryptonPage page = new ComponentFactory.Krypton.Navigator.KryptonPage(ex.Title);
             page.Tag = ex;
             

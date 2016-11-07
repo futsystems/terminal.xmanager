@@ -30,7 +30,9 @@ namespace TradingLib.MoniterCore
 
             CoreService.EventContrib.RegisterCallback("ConnectorManager", "QryRouterGroup", OnQryRouterGroup);
             CoreService.EventContrib.RegisterNotifyCallback("ConnectorManager", "NotifyRouterGroup", OnNotifyRouterGroup);
-            
+
+            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyExchangeRateUpdate", this.OnNotifyExchangeRate);
+        
             //RegisterCallback("MgrExchServer", "NotifyDomain", OnNotifyDomain);
             
 

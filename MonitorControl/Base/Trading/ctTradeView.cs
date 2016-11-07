@@ -54,6 +54,7 @@ namespace TradingLib.MoniterControl
             else
             {
                 DataRow r = tb.Rows.Add(t.id);
+                AccountLite account = CoreService.BasicInfoTracker.GetAccount(t.Account);
                 int i = tb.Rows.Count - 1;
                 tb.Rows[i][ID] = t.id;
                 tb.Rows[i][DATETIME] = Util.ToDateTime(t.xDate, t.xTime).ToString("HH:mm:ss");
@@ -62,7 +63,7 @@ namespace TradingLib.MoniterControl
                 tb.Rows[i][SIDE] = (t.Side ? "买入" : "   卖出");
                 tb.Rows[i][SIZE] = Math.Abs(t.xSize);
                 tb.Rows[i][PRICE] = string.Format(t.oSymbol.SecurityFamily.GetPriceFormat(), t.xPrice);
-                tb.Rows[i][COMMISSION] = string.Format(_defaultformat, t.Commission);
+                tb.Rows[i][COMMISSION] = string.Format(_defaultformat, t.GetCommission());
                 tb.Rows[i][OPERATION] = Util.GetEnumDescription(t.OffsetFlag);
                 tb.Rows[i][ACCOUNT] = t.Account;
                 tb.Rows[i][PROFIT] = string.Format(_defaultformat,t.Profit);
@@ -74,7 +75,12 @@ namespace TradingLib.MoniterControl
                 {
                     tb.Rows[i][FILLID] = t.TradeID;
                 }
-                
+
+                if (account != null)
+                {
+                    tb.Rows[i][COMMISSIONACCTCURRENCY] = string.Format(_defaultformat, t.GetCommission() * account.GetExchangeRate(t.oSymbol.SecurityFamily.Currency));
+                    tb.Rows[i][PROFITACCTCURRENCY] = string.Format(_defaultformat, t.Profit * account.GetExchangeRate(t.oSymbol.SecurityFamily.Currency));
+                }
 
                 tb.Rows[i][EXCHANGE] = CoreService.BasicInfoTracker.GetExchangeName(t.Exchange);
                 tb.Rows[i][ORDERSYSID] = t.OrderSysID;
@@ -98,9 +104,11 @@ namespace TradingLib.MoniterControl
         const string SIZE = "成交手数";
         const string PRICE = "成交价格";
         const string COMMISSION = "手续费";
+        const string COMMISSIONACCTCURRENCY = "C(基币)";
         const string OPERATION = "开平";
         const string ACCOUNT = "交易帐户";
         const string PROFIT = "盈亏";
+        const string PROFITACCTCURRENCY = "P(基币)";
         const string FILLID = "成交编号";
         const string EXCHANGE = "交易所";
         const string ORDERSYSID = "报单编号";
@@ -145,9 +153,9 @@ namespace TradingLib.MoniterControl
             tb.Columns.Add(ORDERSYSID);
             tb.Columns.Add(EXCHANGE);
             tb.Columns.Add(COMMISSION);
-            
-            
+            tb.Columns.Add(COMMISSIONACCTCURRENCY);
             tb.Columns.Add(PROFIT);
+            tb.Columns.Add(PROFITACCTCURRENCY);
             
             tb.Columns.Add(ACCOUNT);
             tb.Columns.Add(ID);

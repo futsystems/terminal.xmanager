@@ -45,7 +45,7 @@ namespace TradingLib.MoniterControl
         const string BUYPOWER = "购买力";
         const string REALIZEDPL = "平仓盈亏";
         const string UNREALIZEDPL = "浮动盈亏";
-        const string STKMARKETVALIE = "证券市值";
+        //const string STKMARKETVALIE = "证券市值";
         const string COMMISSION = "手续费";
         const string PROFIT = "净利";
         const string HOLDSIZE = "持仓";
@@ -122,7 +122,7 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(FROZENMARGIN);//7
             gt.Columns.Add(REALIZEDPL);//8
             gt.Columns.Add(UNREALIZEDPL);//9
-            gt.Columns.Add(STKMARKETVALIE);//
+            //gt.Columns.Add(STKMARKETVALIE);//
             gt.Columns.Add(COMMISSION);//10
             gt.Columns.Add(PROFIT);//11
             gt.Columns.Add(HOLDSIZE);//
@@ -506,7 +506,7 @@ namespace TradingLib.MoniterControl
                         gt.Rows[i][FROZENMARGIN] = decDisp(0);
                         gt.Rows[i][REALIZEDPL] = decDisp(0);
                         gt.Rows[i][UNREALIZEDPL] = decDisp(0);
-                        gt.Rows[i][STKMARKETVALIE] = decDisp(0);
+                        //gt.Rows[i][STKMARKETVALIE] = decDisp(0);
                         gt.Rows[i][COMMISSION] = decDisp(0);
                         gt.Rows[i][PROFIT] = decDisp(0);
                         gt.Rows[i][HOLDSIZE] = 0;
@@ -660,7 +660,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[r][FROZENMARGIN] = decDisp(account.ForzenMargin);
                     gt.Rows[r][REALIZEDPL] = decDisp(account.RealizedPL);
                     gt.Rows[r][UNREALIZEDPL] = decDisp(account.UnRealizedPL);
-                    gt.Rows[r][STKMARKETVALIE] = decDisp(account.StkPositoinValue);
+                    //gt.Rows[r][STKMARKETVALIE] = decDisp(account.StkPositoinValue);
                     gt.Rows[r][COMMISSION] = decDisp(account.Commission);
                     gt.Rows[r][PROFIT] = decDisp(account.Profit);
                     //gt.Rows[r][PROFITLOSSIMG] = getProfitLossImage(account.Profit);

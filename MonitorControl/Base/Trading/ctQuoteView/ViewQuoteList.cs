@@ -316,7 +316,6 @@ namespace TradingLib.MoniterControl
             //计算列起点 总宽等参数
             columnWidthChanged();
 
-            
         }
 
         /// <summary>
@@ -327,6 +326,7 @@ namespace TradingLib.MoniterControl
         void ViewQuoteList_SizeChanged(object sender, EventArgs e)
         {
             UpdateBeginEndIdx();
+            this.Invalidate();
         }
 
         

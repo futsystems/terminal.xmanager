@@ -386,7 +386,16 @@ namespace TradingLib.MoniterCore
         #endregion
 
 
-
+        #region 汇率更新
+        void OnNotifyExchangeRate(string json)
+        {
+            ExchangeRate obj = MoniterUtil.ParseJsonResponse<ExchangeRate>(json);
+            if (obj != null)
+            {
+                this.GotExchangeRate(obj,true);
+            }
+        }
+        #endregion
 
 
 
