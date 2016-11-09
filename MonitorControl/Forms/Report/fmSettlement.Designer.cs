@@ -51,24 +51,24 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(794, 476);
+            this.kryptonPanel1.Size = new System.Drawing.Size(895, 476);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // settlebox
             // 
-            this.settlebox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.settlebox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.settlebox.Location = new System.Drawing.Point(0, 0);
             this.settlebox.Name = "settlebox";
-            this.settlebox.Size = new System.Drawing.Size(794, 440);
+            this.settlebox.Size = new System.Drawing.Size(895, 440);
             this.settlebox.TabIndex = 11;
             this.settlebox.Text = "";
             // 
             // btnQryHist
             // 
             this.btnQryHist.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnQryHist.Location = new System.Drawing.Point(722, 444);
+            this.btnQryHist.Location = new System.Drawing.Point(823, 444);
             this.btnQryHist.Name = "btnQryHist";
             this.btnQryHist.Size = new System.Drawing.Size(60, 25);
             this.btnQryHist.TabIndex = 10;
@@ -78,34 +78,34 @@
             // settleday
             // 
             this.settleday.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.settleday.Location = new System.Drawing.Point(556, 444);
+            this.settleday.Location = new System.Drawing.Point(657, 444);
             this.settleday.Name = "settleday";
-            this.settleday.Size = new System.Drawing.Size(147, 20);
+            this.settleday.Size = new System.Drawing.Size(147, 21);
             this.settleday.TabIndex = 9;
             // 
             // kryptonLabel2
             // 
             this.kryptonLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonLabel2.Location = new System.Drawing.Point(495, 446);
+            this.kryptonLabel2.Location = new System.Drawing.Point(600, 444);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(55, 18);
+            this.kryptonLabel2.Size = new System.Drawing.Size(51, 20);
             this.kryptonLabel2.TabIndex = 8;
             this.kryptonLabel2.Values.Text = "结算日:";
             // 
             // account
             // 
             this.account.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.account.Location = new System.Drawing.Point(353, 442);
+            this.account.Location = new System.Drawing.Point(454, 442);
             this.account.Name = "account";
-            this.account.Size = new System.Drawing.Size(126, 21);
+            this.account.Size = new System.Drawing.Size(126, 20);
             this.account.TabIndex = 7;
             // 
             // kryptonLabel1
             // 
             this.kryptonLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonLabel1.Location = new System.Drawing.Point(279, 446);
+            this.kryptonLabel1.Location = new System.Drawing.Point(385, 444);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(68, 18);
+            this.kryptonLabel1.Size = new System.Drawing.Size(63, 20);
             this.kryptonLabel1.TabIndex = 6;
             this.kryptonLabel1.Values.Text = "交易帐户:";
             // 
@@ -113,7 +113,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(794, 476);
+            this.ClientSize = new System.Drawing.Size(895, 476);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
