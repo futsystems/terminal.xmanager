@@ -19,6 +19,7 @@ namespace TradingLib.MoniterBase
 {
     public partial class LoginForm : ComponentFactory.Krypton.Toolkit.KryptonForm
     {
+
         ILog logger = LogManager.GetLogger("LoginForm");
         Starter mStart;
         public LoginForm(Starter start)
@@ -74,6 +75,9 @@ namespace TradingLib.MoniterBase
                 password.Text = PropertyService.Get<string>("password", "");
             }
 
+
+            this.Text = string.Format("{0}资管柜台系统", Global.IsOEM ? "" : "巨融");
+            
             
 
             InitBW();

@@ -235,6 +235,9 @@ namespace TradingLib.MoniterControl
             module_payonline.Checked = _domain.Module_PayOnline;
             module_slip.Checked = _domain.Module_Slip;
 
+            cfg_GrossPositioin.Checked = _domain.Cfg_GrossPosition;
+            cfg_MaxMarginSide.Checked = _domain.Cfg_MaxMarginSide;
+
             router_live.Checked = _domain.Router_Live;
             router_sim.Checked = _domain.Router_Sim;
             splisttab.Enabled = _domain.Module_FinService;
@@ -292,6 +295,8 @@ namespace TradingLib.MoniterControl
                 _domain.DiscountNum = (int)discountNum.Value; 
                 _domain.IsProduction = isproduction.Checked;
                 _domain.Dedicated = dedicated.Checked;
+                _domain.Cfg_MaxMarginSide = cfg_MaxMarginSide.Checked;
+                _domain.Cfg_GrossPosition = cfg_GrossPositioin.Checked;
 
                 if (MoniterHelper.WindowConfirm("确认更新分区设置?") == System.Windows.Forms.DialogResult.Yes)
                 {
@@ -332,6 +337,9 @@ namespace TradingLib.MoniterControl
                 _domain.DiscountNum = (int)discountNum.Value;
                 _domain.IsProduction = isproduction.Checked;
                 _domain.Dedicated = dedicated.Checked;
+
+                _domain.Cfg_MaxMarginSide = cfg_MaxMarginSide.Checked;
+                _domain.Cfg_GrossPosition = cfg_GrossPositioin.Checked;
 
                 if ( (!_domain.Router_Live)&& (!_domain.Router_Sim))
                 {

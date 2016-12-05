@@ -72,6 +72,7 @@
             this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonPage4 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonPanel5 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.module_slip = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.module_subagent = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.module_payonline = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.module_finservice = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -87,7 +88,8 @@
             this.kryptonPanel7 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.finsplist = new System.Windows.Forms.CheckedListBox();
             this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.module_slip = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.cfg_MaxMarginSide = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.cfg_GrossPositioin = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
@@ -144,7 +146,7 @@
             this.kryptonPage5,
             this.intfaceTab,
             this.splisttab});
-            this.kryptonNavigator1.SelectedIndex = 0;
+            this.kryptonNavigator1.SelectedIndex = 2;
             this.kryptonNavigator1.Size = new System.Drawing.Size(431, 256);
             this.kryptonNavigator1.TabIndex = 15;
             this.kryptonNavigator1.Text = "kryptonNavigator1";
@@ -577,12 +579,14 @@
             this.kryptonPage4.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage4.Name = "kryptonPage4";
             this.kryptonPage4.Size = new System.Drawing.Size(429, 229);
-            this.kryptonPage4.Text = "模块设置";
+            this.kryptonPage4.Text = "模块与参数";
             this.kryptonPage4.ToolTipTitle = "Page ToolTip";
             this.kryptonPage4.UniqueName = "106522AE1E254B89D2A606033C9FF041";
             // 
             // kryptonPanel5
             // 
+            this.kryptonPanel5.Controls.Add(this.cfg_GrossPositioin);
+            this.kryptonPanel5.Controls.Add(this.cfg_MaxMarginSide);
             this.kryptonPanel5.Controls.Add(this.module_slip);
             this.kryptonPanel5.Controls.Add(this.module_subagent);
             this.kryptonPanel5.Controls.Add(this.module_payonline);
@@ -593,6 +597,14 @@
             this.kryptonPanel5.Name = "kryptonPanel5";
             this.kryptonPanel5.Size = new System.Drawing.Size(429, 229);
             this.kryptonPanel5.TabIndex = 0;
+            // 
+            // module_slip
+            // 
+            this.module_slip.Location = new System.Drawing.Point(17, 84);
+            this.module_slip.Name = "module_slip";
+            this.module_slip.Size = new System.Drawing.Size(98, 20);
+            this.module_slip.TabIndex = 4;
+            this.module_slip.Values.Text = "交易风险模块";
             // 
             // module_subagent
             // 
@@ -737,13 +749,21 @@
             this.btnSubmit.Values.Text = "提 交";
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
-            // module_slip
+            // cfg_MaxMarginSide
             // 
-            this.module_slip.Location = new System.Drawing.Point(17, 84);
-            this.module_slip.Name = "module_slip";
-            this.module_slip.Size = new System.Drawing.Size(98, 20);
-            this.module_slip.TabIndex = 4;
-            this.module_slip.Values.Text = "交易风险模块";
+            this.cfg_MaxMarginSide.Location = new System.Drawing.Point(17, 117);
+            this.cfg_MaxMarginSide.Name = "cfg_MaxMarginSide";
+            this.cfg_MaxMarginSide.Size = new System.Drawing.Size(73, 20);
+            this.cfg_MaxMarginSide.TabIndex = 5;
+            this.cfg_MaxMarginSide.Values.Text = "单向大边";
+            // 
+            // cfg_GrossPositioin
+            // 
+            this.cfg_GrossPositioin.Location = new System.Drawing.Point(107, 117);
+            this.cfg_GrossPositioin.Name = "cfg_GrossPositioin";
+            this.cfg_GrossPositioin.Size = new System.Drawing.Size(73, 20);
+            this.cfg_GrossPositioin.TabIndex = 6;
+            this.cfg_GrossPositioin.Values.Text = "支持锁仓";
             // 
             // fmDomainEdit
             // 
@@ -856,5 +876,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox isproduction;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox dedicated;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox module_slip;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox cfg_MaxMarginSide;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox cfg_GrossPositioin;
     }
 }
