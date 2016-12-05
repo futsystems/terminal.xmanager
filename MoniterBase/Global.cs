@@ -7,6 +7,6 @@ namespace TradingLib.MoniterBase
 {
     public class Global
     {
-        public static bool IsOEM = true;
+        public static bool IsOEM = false;
     }
 }
