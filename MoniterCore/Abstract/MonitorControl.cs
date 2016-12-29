@@ -75,10 +75,10 @@ namespace TradingLib.MoniterCore
         /// </summary>
         /// <param name="message"></param>
         /// <param name="level"></param>
-        protected void Log(string message, QSEnumDebugLevel level)
-        {
-            Util.Log(new LogItem(message, level, this.GetType().Name));
-        }
+        //protected void Log(string message, QSEnumDebugLevel level)
+        //{
+        //    Util.Log(new LogItem(message, level, this.GetType().Name));
+        //}
 
 
 

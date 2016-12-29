@@ -46,6 +46,8 @@
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.exitcommissiontoday = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
+            this.kryptonLabel11 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel13 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.tradeable = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.exitcommission = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
@@ -59,8 +61,6 @@
             this.cbexchange = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.symbol = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.exitcommissiontoday = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
-            this.kryptonLabel11 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbSymbolType)).BeginInit();
@@ -263,6 +263,37 @@
             this.kryptonGroupBox1.TabIndex = 5;
             this.kryptonGroupBox1.Values.Heading = "基础设置";
             // 
+            // exitcommissiontoday
+            // 
+            this.exitcommissiontoday.DecimalPlaces = 6;
+            this.exitcommissiontoday.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            393216});
+            this.exitcommissiontoday.Location = new System.Drawing.Point(101, 55);
+            this.exitcommissiontoday.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.exitcommissiontoday.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.exitcommissiontoday.Name = "exitcommissiontoday";
+            this.exitcommissiontoday.Size = new System.Drawing.Size(137, 22);
+            this.exitcommissiontoday.TabIndex = 39;
+            // 
+            // kryptonLabel11
+            // 
+            this.kryptonLabel11.Location = new System.Drawing.Point(13, 57);
+            this.kryptonLabel11.Name = "kryptonLabel11";
+            this.kryptonLabel11.Size = new System.Drawing.Size(75, 20);
+            this.kryptonLabel11.TabIndex = 38;
+            this.kryptonLabel11.Values.Text = "平今手续费:";
+            // 
             // kryptonLabel13
             // 
             this.kryptonLabel13.Location = new System.Drawing.Point(244, 3);
@@ -336,7 +367,7 @@
             262144});
             this.margin.Location = new System.Drawing.Point(101, 83);
             this.margin.Maximum = new decimal(new int[] {
-            10000,
+            1000000,
             0,
             0,
             0});
@@ -411,37 +442,6 @@
             this.kryptonLabel1.Size = new System.Drawing.Size(38, 20);
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "合约:";
-            // 
-            // exitcommissiontoday
-            // 
-            this.exitcommissiontoday.DecimalPlaces = 6;
-            this.exitcommissiontoday.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            393216});
-            this.exitcommissiontoday.Location = new System.Drawing.Point(101, 55);
-            this.exitcommissiontoday.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.exitcommissiontoday.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-            this.exitcommissiontoday.Name = "exitcommissiontoday";
-            this.exitcommissiontoday.Size = new System.Drawing.Size(137, 22);
-            this.exitcommissiontoday.TabIndex = 39;
-            // 
-            // kryptonLabel11
-            // 
-            this.kryptonLabel11.Location = new System.Drawing.Point(13, 57);
-            this.kryptonLabel11.Name = "kryptonLabel11";
-            this.kryptonLabel11.Size = new System.Drawing.Size(75, 20);
-            this.kryptonLabel11.TabIndex = 38;
-            this.kryptonLabel11.Values.Text = "平今手续费:";
             // 
             // fmSymbolEdit
             // 

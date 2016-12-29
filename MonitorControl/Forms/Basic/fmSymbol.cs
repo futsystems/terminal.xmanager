@@ -411,7 +411,7 @@ namespace TradingLib.MoniterControl
                 btnDisableAll.Visible = false;
                 btnAddSymbol.Visible = false;
                 btnSyncSymbols.Visible = false;
-
+                btnImportStk.Visible = false;
                 if (CoreService.SiteInfo.Manager.IsRoot())
                 {
                     btnSyncSymbols.Visible = CoreService.BasicInfoTracker.Symbols.Count() == 0;

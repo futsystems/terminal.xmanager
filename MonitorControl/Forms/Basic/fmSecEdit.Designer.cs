@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.pannel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.exitcommisiontoday = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
+            this.kryptonLabel16 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel15 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cbsectype = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.cbDatafeed = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
@@ -62,8 +64,6 @@
             this.name = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.code = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.exitcommisiontoday = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
-            this.kryptonLabel16 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pannel)).BeginInit();
             this.pannel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbsectype)).BeginInit();
@@ -114,6 +114,32 @@
             this.pannel.Name = "pannel";
             this.pannel.Size = new System.Drawing.Size(280, 418);
             this.pannel.TabIndex = 0;
+            // 
+            // exitcommisiontoday
+            // 
+            this.exitcommisiontoday.DecimalPlaces = 6;
+            this.exitcommisiontoday.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            393216});
+            this.exitcommisiontoday.Location = new System.Drawing.Point(115, 295);
+            this.exitcommisiontoday.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.exitcommisiontoday.Name = "exitcommisiontoday";
+            this.exitcommisiontoday.Size = new System.Drawing.Size(116, 22);
+            this.exitcommisiontoday.TabIndex = 38;
+            // 
+            // kryptonLabel16
+            // 
+            this.kryptonLabel16.Location = new System.Drawing.Point(27, 297);
+            this.kryptonLabel16.Name = "kryptonLabel16";
+            this.kryptonLabel16.Size = new System.Drawing.Size(75, 20);
+            this.kryptonLabel16.TabIndex = 37;
+            this.kryptonLabel16.Values.Text = "平今手续费:";
             // 
             // kryptonLabel15
             // 
@@ -367,7 +393,7 @@
             262144});
             this.margin.Location = new System.Drawing.Point(115, 218);
             this.margin.Maximum = new decimal(new int[] {
-            10000,
+            1000000,
             0,
             0,
             0});
@@ -452,32 +478,6 @@
             this.kryptonLabel1.Size = new System.Drawing.Size(63, 20);
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "品种编号:";
-            // 
-            // exitcommisiontoday
-            // 
-            this.exitcommisiontoday.DecimalPlaces = 6;
-            this.exitcommisiontoday.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            393216});
-            this.exitcommisiontoday.Location = new System.Drawing.Point(115, 295);
-            this.exitcommisiontoday.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.exitcommisiontoday.Name = "exitcommisiontoday";
-            this.exitcommisiontoday.Size = new System.Drawing.Size(116, 22);
-            this.exitcommisiontoday.TabIndex = 38;
-            // 
-            // kryptonLabel16
-            // 
-            this.kryptonLabel16.Location = new System.Drawing.Point(27, 297);
-            this.kryptonLabel16.Name = "kryptonLabel16";
-            this.kryptonLabel16.Size = new System.Drawing.Size(75, 20);
-            this.kryptonLabel16.TabIndex = 37;
-            this.kryptonLabel16.Values.Text = "平今手续费:";
             // 
             // fmSecEdit
             // 
