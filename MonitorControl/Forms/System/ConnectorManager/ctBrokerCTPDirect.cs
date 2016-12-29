@@ -40,8 +40,6 @@ namespace TradingLib.MoniterControl
             username.Text = cfg.usrinfo_userid;
             pass.Text = cfg.usrinfo_password;
             uf1.Text = cfg.usrinfo_field1;
-
-            //this.Text = string.Format("编辑主帐户[{0}-{1}]", cfg.ID, cfg.Token);
         }
 
         public void GetConnectorConfig(ref ConnectorConfig cfg)

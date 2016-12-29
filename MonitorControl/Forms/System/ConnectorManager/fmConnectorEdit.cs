@@ -50,7 +50,14 @@ namespace TradingLib.MoniterControl
             token.TextChanged += new EventHandler(token_TextChanged);
 
             cbinterfacelist.SelectedIndexChanged += new EventHandler(cbinterfacelist_SelectedIndexChanged);
-            LoadInputControl(1);
+            if (this.IsAddMode)
+            {
+                LoadInputControl(1);
+            }
+            else
+            {
+                LoadInputControl(_cfg.interface_fk);
+            }
         }
 
         void token_TextChanged(object sender, EventArgs e)
@@ -159,6 +166,16 @@ namespace TradingLib.MoniterControl
                             connCtrl.IDChanged += new Action(connCtrl_IDChanged);
                         }
                         break;
+                    case 8:
+                        {
+                            ctBrokerESunnyDirect input = new ctBrokerESunnyDirect();
+                            holder.Controls.Add(input);
+                            input.Dock = DockStyle.Fill;
+                            connCtrl = input;
+                            connCtrl.IDChanged += new Action(connCtrl_IDChanged);
+                        }
+                        break;
+                        
                     default:
                         break;
                 }

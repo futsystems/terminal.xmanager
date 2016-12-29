@@ -135,7 +135,7 @@
             this.kryptonLabel12.Name = "kryptonLabel12";
             this.kryptonLabel12.Size = new System.Drawing.Size(63, 20);
             this.kryptonLabel12.TabIndex = 7;
-            this.kryptonLabel12.Values.Text = "交易协议:";
+            this.kryptonLabel12.Values.Text = "交易接口:";
             // 
             // token
             // 

@@ -39,9 +39,8 @@ namespace TradingLib.MoniterControl
             port.Text = cfg.srvinfo_port.ToString();
             username.Text = cfg.usrinfo_userid;
             pass.Text = cfg.usrinfo_password;
-            uf1.Text = cfg.usrinfo_field1;
-
-            //this.Text = string.Format("编辑主帐户[{0}-{1}]", cfg.ID, cfg.Token);
+            srvinfo_field1.Text = cfg.srvinfo_field1;
+            srvinfo_field2.Text = cfg.srvinfo_field2;
         }
 
         public void GetConnectorConfig(ref ConnectorConfig cfg)
@@ -50,7 +49,8 @@ namespace TradingLib.MoniterControl
             cfg.srvinfo_port = int.Parse(port.Text);
             cfg.usrinfo_userid = username.Text;
             cfg.usrinfo_password = pass.Text;
-            cfg.usrinfo_field1 = uf1.Text;//BroekrID
+            cfg.srvinfo_field1 = srvinfo_field1.Text;
+            cfg.srvinfo_field2 = srvinfo_field2.Text;
 
         }
 

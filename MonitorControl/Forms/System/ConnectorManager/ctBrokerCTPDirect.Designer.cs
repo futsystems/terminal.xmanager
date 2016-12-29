@@ -63,11 +63,11 @@
             // 
             // kryptonLabel1
             // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(10, 3);
+            this.kryptonLabel1.Location = new System.Drawing.Point(25, 3);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(63, 20);
+            this.kryptonLabel1.Size = new System.Drawing.Size(48, 20);
             this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "交易前置:";
+            this.kryptonLabel1.Values.Text = "前置IP:";
             // 
             // kryptonLabel2
             // 
