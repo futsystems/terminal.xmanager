@@ -97,6 +97,7 @@ namespace TradingLib.MoniterControl
             return null;
 
         }
+
         public ArrayList GetInterfaceCBList()
         {
             ArrayList list = new ArrayList();
@@ -434,13 +435,13 @@ namespace TradingLib.MoniterControl
         const string SRV1 = "参数1";
         const string SRV2 = "参数2";
         const string SRV3 = "参数3";
-        const string USERID = "交易帐号";
+        const string USERID = "登入ID";
         const string PASSWORD = "密码";
         const string USR1 = "参数1/U";
         const string USR2 = "参数2/U";
         const string INTERFACE = "接口";
         const string TOKEN = "主帐户编号";
-        const string NAME = "投资者姓名";
+        const string NAME = "名称";
         //const string VENDORACCOUNT = "实盘帐户";
         const string ISBINDED = "Binded";
         const string CONSTATUS = "status";
@@ -500,99 +501,8 @@ namespace TradingLib.MoniterControl
             {
                 routergridmenu.Items[0].Visible = true;
                 routergridmenu.Items[1].Visible = false;
-                //routergridmenu.Items[2].Visible = false;
-                //routergridmenu.Items[3].Visible = false;
-                //routergridmenu.Items[4].Visible = false;
-
                 return routergridmenu;
             }
-            //int r = ConnectorIdx(cfg.ID);
-            ////根据当天通道状态 选择性显示启动或者停止
-            //QSEnumConnectorStatus status = (QSEnumConnectorStatus)Enum.Parse(typeof(QSEnumConnectorStatus), gt.Rows[r][CONSTATUS].ToString());
-            //switch (status)
-            //{
-            //    case QSEnumConnectorStatus.Start:
-            //        {
-            //            routergridmenu.Items[3].Enabled = false;
-            //            routergridmenu.Items[4].Enabled = true;
-            //            break;
-            //        }
-            //    case QSEnumConnectorStatus.Stop:
-            //        {
-            //            routergridmenu.Items[3].Enabled = true;
-            //            routergridmenu.Items[4].Enabled = false;
-            //            break;
-            //        }
-            //    default:
-            //        {
-            //            routergridmenu.Items[3].Enabled = false;
-            //            routergridmenu.Items[4].Enabled = false;
-            //            break;
-            //        }
-            //}
-            ////int r = ConnectorIdx(cfg.ID);
-            ////if (r >= 0)
-            ////{
-            ////    bool isvendorbinded = false;
-            ////    //需要绑定Vendor
-            ////    if (cfg.NeedVendor)
-            ////    {
-            ////        isvendorbinded = bool.Parse(gt.Rows[r][ISBINDED].ToString());
-            ////        routergridmenu.Items[3].Visible = true;
-            ////        routergridmenu.Items[4].Visible = true;
-            ////        if (isvendorbinded)
-            ////        {
-            ////            routergridmenu.Items[3].Enabled = false;
-            ////            routergridmenu.Items[4].Enabled = true;
-            ////        }
-            ////        else
-            ////        {
-            ////            routergridmenu.Items[3].Enabled = true;
-            ////            routergridmenu.Items[4].Enabled = false;
-            ////        }
-
-            ////    }
-            ////    else
-            ////    {
-            ////        routergridmenu.Items[3].Visible = false;
-            ////        routergridmenu.Items[4].Visible = false;
-            ////    }
-
-            ////    //如果不需要绑定Vendor或则已经绑定了Vendor
-            ////    if (isvendorbinded || !cfg.NeedVendor)
-            ////    {
-            ////        routergridmenu.Items[6].Enabled = true;
-            ////        routergridmenu.Items[7].Enabled = true;
-            ////        //根据当天通道状态 选择性显示启动或者停止
-            ////        QSEnumConnectorStatus status = (QSEnumConnectorStatus)Enum.Parse(typeof(QSEnumConnectorStatus), gt.Rows[r][CONSTATUS].ToString());
-            ////        switch (status)
-            ////        {
-            ////            case QSEnumConnectorStatus.Start:
-            ////                {
-            ////                    routergridmenu.Items[6].Enabled = false;
-            ////                    break;
-            ////                }
-            ////            case QSEnumConnectorStatus.Stop:
-            ////                {
-            ////                    routergridmenu.Items[7].Enabled = false;
-            ////                    break;
-            ////                }
-            ////            default:
-            ////                {
-            ////                    routergridmenu.Items[6].Enabled = false;
-            ////                    routergridmenu.Items[7].Enabled = false;
-            ////                    break;
-            ////                }
-            ////        }
-            ////    }
-            ////    else
-            ////    {   //如果通道没有绑定 则启动停止不可用
-            ////        routergridmenu.Items[6].Enabled = false;
-            ////        routergridmenu.Items[7].Enabled = false;
-            ////    }
-            ////}
-
-
             return routergridmenu;
         }
 
@@ -652,11 +562,6 @@ namespace TradingLib.MoniterControl
             grid.Columns[CONSTATUSIMG].Width = 40;
         }
 
-
-
-
-
-
         #endregion
 
         /// <summary>
@@ -691,89 +596,5 @@ namespace TradingLib.MoniterControl
                 ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请选择需要编辑的通道");
             }
         }
-
-        ///// <summary>
-        ///// 添加通道
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //void BindConnector_Click(object sender, EventArgs e)
-        //{
-        //    //ConnectorConfig cfg = CurrentConnectorConfig;
-        //    //if (cfg == null)
-        //    //{
-        //    //    ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请选择通道");
-        //    //}
-        //    //ArrayList list = GetVendorCBList();
-        //    //if (list.Count == 0)
-        //    //{
-        //    //    ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("没有未绑定的帐户");
-        //    //}
-        //    //else
-        //    //{
-        //    //    fmVendorSelect fm = new fmVendorSelect();
-        //    //    fm.SetConnectorConfig(cfg);
-
-
-        //    //    fm.SetVendorCBList(list);
-        //    //    fm.Show();
-        //    //}
-        //}
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //void UnBindConnector_Click(object sender, EventArgs e)
-        //{
-        //    ConnectorConfig cfg = CurrentConnectorConfig;
-        //    if (cfg == null)
-        //    {
-        //        ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请选择通道");
-        //    }
-        //    if (fmConfirm.Show(string.Format("确认解绑:{0}", cfg.Token)) == System.Windows.Forms.DialogResult.Yes)
-        //    {
-        //        Globals.TLClient.ReqUnBindVendor(cfg.ID);
-        //    }
-        //}
-
-        ///// <summary>
-        ///// 启动通道
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //void StartConnector_Click(object sender, EventArgs e)
-        //{
-        //    ConnectorConfig cfg = CurrentConnectorConfig;
-        //    if (cfg == null)
-        //    {
-        //        ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请选择通道");
-        //    }
-
-        //    if (fmConfirm.Show(string.Format("确认启动通道:{0}", cfg.Token)) == System.Windows.Forms.DialogResult.Yes)
-        //    {
-        //        Globals.TLClient.ReqStartConnector(cfg.ID);
-        //    }
-        //}
-
-        ///// <summary>
-        ///// 停止通道
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //void StopConnector_Click(object sender, EventArgs e)
-        //{
-        //    ConnectorConfig cfg = CurrentConnectorConfig;
-        //    if (cfg == null)
-        //    {
-        //        ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请选择通道");
-        //    }
-
-        //    if (fmConfirm.Show(string.Format("确认停止通道:{0}", cfg.Token)) == System.Windows.Forms.DialogResult.Yes)
-        //    {
-        //        Globals.TLClient.ReqStopConnector(cfg.ID);
-        //    }
-        //}
     }
 }

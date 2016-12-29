@@ -549,6 +549,19 @@
     <Compile Include="Forms\Manager\fmPermissionTemplateEdit.Designer.cs">
       <DependentUpon>fmPermissionTemplateEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\System\ConnectorManager\ctBrokerCTPDirect.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\System\ConnectorManager\ctBrokerCTPDirect.Designer.cs">
+      <DependentUpon>ctBrokerCTPDirect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\System\ConnectorManager\IConnectorControl.cs" />
+    <Compile Include="Forms\System\ConnectorManager\ctBrokerESunnyDirect.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\System\ConnectorManager\ctBrokerESunnyDirect.Designer.cs">
+      <DependentUpon>ctBrokerESunnyDirect.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\System\fmDataManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1059,6 +1072,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Manager\fmPermissionTemplateEdit.resx">
       <DependentUpon>fmPermissionTemplateEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\System\ConnectorManager\ctBrokerCTPDirect.resx">
+      <DependentUpon>ctBrokerCTPDirect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\System\ConnectorManager\ctBrokerESunnyDirect.resx">
+      <DependentUpon>ctBrokerESunnyDirect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\System\fmDataManager.resx">
       <DependentUpon>fmDataManager.cs</DependentUpon>

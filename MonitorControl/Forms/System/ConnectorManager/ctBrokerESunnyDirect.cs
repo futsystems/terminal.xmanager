@@ -12,10 +12,10 @@ using TradingLib.Common;
 
 namespace TradingLib.MoniterControl
 {
-    public partial class ctBrokerCTPDirect : UserControl,IConnectorControl
+    public partial class ctBrokerESunnyDirect : UserControl,IConnectorControl
     {
         ConnectorConfig _cfg;
-        public ctBrokerCTPDirect()
+        public ctBrokerESunnyDirect()
         {
             InitializeComponent();
             this.Load += new EventHandler(ctBrokerCTPDirect_Load);
@@ -79,6 +79,6 @@ namespace TradingLib.MoniterControl
 
         public event Action IDChanged = delegate { };
 
-        public string Prefix { get { return "CTP"; } }
+        public string Prefix { get { return "ES"; } }
     }
 }

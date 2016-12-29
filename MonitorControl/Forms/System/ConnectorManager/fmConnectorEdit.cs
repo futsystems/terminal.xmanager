@@ -18,6 +18,8 @@ namespace TradingLib.MoniterControl
 {
     public partial class fmConnectorEdit : ComponentFactory.Krypton.Toolkit.KryptonForm, IEventBinder
     {
+        IConnectorControl connCtrl = null;
+
         public fmConnectorEdit()
         {
             InitializeComponent();
@@ -26,6 +28,7 @@ namespace TradingLib.MoniterControl
 
             this.Load += new EventHandler(fmConnectorEdit_Load);
             tokenvalid.Visible = false;
+
         }
         public void OnInit()
         {
@@ -36,6 +39,39 @@ namespace TradingLib.MoniterControl
         public void OnDisposed()
         {
             CoreService.EventContrib.UnRegisterCallback("ConnectorManager", "QryTokenValid", this.OnQryTokenValid);
+        }
+
+        
+
+        void fmConnectorEdit_Load(object sender, EventArgs e)
+        {
+            CoreService.EventCore.RegIEventHandler(this);
+            token.Leave += new EventHandler(token_Leave);
+            token.TextChanged += new EventHandler(token_TextChanged);
+
+            cbinterfacelist.SelectedIndexChanged += new EventHandler(cbinterfacelist_SelectedIndexChanged);
+            LoadInputControl(1);
+        }
+
+        void token_TextChanged(object sender, EventArgs e)
+        {
+            if (this.IsAddMode)
+            {
+                if (string.IsNullOrEmpty(token.Text)) return;
+                tokenvalid.Text = "...";
+                tokenvalid.Visible = true;
+                CoreService.TLClient.ReqQryTokenValid(token.Text);
+            }
+        }
+        void token_Leave(object sender, EventArgs e)
+        {
+            if (this.IsAddMode)
+            {
+                if (string.IsNullOrEmpty(token.Text)) return;
+                tokenvalid.Text = "...";
+                tokenvalid.Visible = true;
+                CoreService.TLClient.ReqQryTokenValid(token.Text);
+            }
         }
 
         void OnQryTokenValid(string json, bool islast)
@@ -53,106 +89,97 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        void fmConnectorEdit_Load(object sender, EventArgs e)
-        {
-            CoreService.EventCore.RegIEventHandler(this);
-            token.Leave += new EventHandler(token_Leave);
-            token.TextChanged += new EventHandler(token_TextChanged);
-
-            name.Leave += new EventHandler(name_Leave);
-            username.Leave += new EventHandler(username_Leave);
-            cbinterfacelist.SelectedIndexChanged += new EventHandler(cbinterfacelist_SelectedIndexChanged);
-        }
-
-        void token_TextChanged(object sender, EventArgs e)
-        {
-            if (isadd)
-            {
-                tokenvalid.Text = "...";
-                tokenvalid.Visible = true;
-                CoreService.TLClient.ReqQryTokenValid(token.Text);
-            }
-        }
 
         void cbinterfacelist_SelectedIndexChanged(object sender, EventArgs e)
         {
+            LoadInputControl((int)cbinterfacelist.SelectedValue);
+            if (connCtrl == null) return;
             this.token.Text = GenToken();
         }
 
-        void username_Leave(object sender, EventArgs e)
-        {
-            this.token.Text = GenToken();
-        }
-
-        void name_Leave(object sender, EventArgs e)
+        void connCtrl_IDChanged()
         {
             this.token.Text = GenToken();
         }
 
         string GenToken()
         {
-            return string.Format("{0}-{1}-{2}",ChinSpell.GetChinSpell(name.Text),username.Text,cbinterfacelist.SelectedIndex);
-        
+            //分区-接口类型前缀-账户ID
+            return string.Format("{0}-{1}-{2}",CoreService.SiteInfo.Domain.ID,connCtrl.Prefix, connCtrl.ID);
         }
 
-        void token_Leave(object sender, EventArgs e)
-        {
-            if (isadd)
-            {
-                tokenvalid.Text = "...";
-                tokenvalid.Visible = true;
-                CoreService.TLClient.ReqQryTokenValid(token.Text);
-            }
-        }
+        
 
         public void SetInterfaceCBList(ArrayList list)
         {
             MoniterHelper.AdapterToIDataSource(cbinterfacelist).BindDataSource(list);
         }
-        bool isadd = true;
+
+        bool IsAddMode { get { return _cfg == null; } }
         ConnectorConfig _cfg;
         public void SetConnectorConfig(ConnectorConfig cfg)
         {
             _cfg = cfg;
-            //id.Text = cfg.ID.ToString();
             token.Text = cfg.Token;
-            address.Text = cfg.srvinfo_ipaddress;
-            port.Text = cfg.srvinfo_port.ToString();
-            //srvf1.Text = cfg.srvinfo_field1;
-            //srvf2.Text = cfg.srvinfo_field2;
-            //srvf3.Text = cfg.srvinfo_field3;
-            username.Text = cfg.usrinfo_userid;
-            pass.Text = cfg.usrinfo_password;
-            uf1.Text = cfg.usrinfo_field1;
-            uf2.Text = cfg.usrinfo_field2;
-            cbinterfacelist.SelectedValue = cfg.interface_fk;
             name.Text = cfg.Name;
-            this.Text = string.Format("编辑主帐户[{0}-{1}]",cfg.ID, cfg.Token);
+            this.Text = string.Format("编辑主帐户[{0}-{1}]", cfg.ID, cfg.Token);
 
+            cbinterfacelist.SelectedValue = cfg.interface_fk;
+            LoadInputControl(cfg.interface_fk);
+            
             token.Enabled = false;
             cbinterfacelist.Enabled = false;
-
-            isadd = false;
             btnSubmit.Enabled = true;
 
         }
 
+        /// <summary>
+        /// 加载接口设置面板
+        /// 不同的接口接口参数不同
+        /// </summary>
+        /// <param name="interfaceId"></param>
+        void LoadInputControl(int interfaceId)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action<int>(LoadInputControl), new object[] { interfaceId });
+            }
+            else
+            {
+                connCtrl = null;
+                holder.Controls.Clear();
+                switch (interfaceId)
+                {
+                    case 1:
+                        {
+                            ctBrokerCTPDirect input = new ctBrokerCTPDirect();
+                            holder.Controls.Add(input);
+                            input.Dock = DockStyle.Fill;
+                            connCtrl = input;
+                            connCtrl.IDChanged += new Action(connCtrl_IDChanged);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                LoadConfig();
+            }
+        }
+
+        void LoadConfig()
+        {
+            if (connCtrl != null && _cfg != null)
+                connCtrl.SetConnectorConfig(_cfg);
+        }
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            //if (!InputReg.ConnectorToken.IsMatch(token.Text))
-            //{
-            //    ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("主帐户编号只允许使用字母和数字");
-            //    return;
-            //}
-            if (!InputReg.ServerPort.IsMatch(port.Text))
+            if (connCtrl == null)
             {
-                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请输入正确的交易端口");
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("交易接口设置异常");
                 return;
             }
-            System.Net.IPAddress outip;
-            if (!System.Net.IPAddress.TryParse(address.Text, out outip))
+            if (!connCtrl.Valid())
             {
-                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请输入有效的IP地址");
                 return;
             }
             if (string.IsNullOrEmpty(name.Text))
@@ -160,23 +187,17 @@ namespace TradingLib.MoniterControl
                 ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请输入主帐户名称");
                 return;
             }
+            
             //新增
             if (_cfg == null)
             {
                 ConnectorConfig cfg = new ConnectorConfig();
                 cfg.interface_fk = int.Parse(cbinterfacelist.SelectedValue.ToString());
                 cfg.Name = name.Text;
-                cfg.srvinfo_ipaddress = address.Text;
-                cfg.srvinfo_port = int.Parse(port.Text);
-                //cfg.srvinfo_field1 = srvf1.Text;
-                //cfg.srvinfo_field2 = srvf2.Text;
-                //cfg.srvinfo_field3 = srvf3.Text;
-
-                cfg.usrinfo_userid = username.Text;
-                cfg.usrinfo_password = pass.Text;
-                cfg.usrinfo_field1 = uf1.Text;
-                cfg.usrinfo_field2 = uf2.Text;
                 cfg.Token = token.Text;
+
+                connCtrl.GetConnectorConfig(ref cfg);
+
                 if (MoniterHelper.WindowConfirm("确认添加主帐户?") == System.Windows.Forms.DialogResult.Yes)
                 {
                     CoreService.TLClient.ReqUpdateConnectorConfig(TradingLib.Mixins.Json.JsonMapper.ToJson(cfg));
@@ -185,18 +206,12 @@ namespace TradingLib.MoniterControl
             }
             else
             {
-                _cfg.srvinfo_ipaddress = address.Text;
-                _cfg.srvinfo_port = int.Parse(port.Text);
-                //_cfg.srvinfo_field1 = srvf1.Text;
-                //_cfg.srvinfo_field2 = srvf2.Text;
-                //_cfg.srvinfo_field3 = srvf3.Text;
-
-                _cfg.usrinfo_userid = username.Text;
-                _cfg.usrinfo_password = pass.Text;
-                _cfg.usrinfo_field1 = uf1.Text;
-                _cfg.usrinfo_field2 = uf2.Text;
+                
                 _cfg.Name = name.Text;
                 _cfg.NeedVendor = true;
+
+                connCtrl.GetConnectorConfig(ref _cfg);
+
                 if (MoniterHelper.WindowConfirm("确认修改主帐户?") == System.Windows.Forms.DialogResult.Yes)
                 {
                     CoreService.TLClient.ReqUpdateConnectorConfig(TradingLib.Mixins.Json.JsonMapper.ToJson(_cfg));
