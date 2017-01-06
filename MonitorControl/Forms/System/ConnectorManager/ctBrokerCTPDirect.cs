@@ -18,10 +18,10 @@ namespace TradingLib.MoniterControl
         public ctBrokerCTPDirect()
         {
             InitializeComponent();
-            this.Load += new EventHandler(ctBrokerCTPDirect_Load);
+            this.Load += new EventHandler(OnLoad);
         }
 
-        void ctBrokerCTPDirect_Load(object sender, EventArgs e)
+        void OnLoad(object sender, EventArgs e)
         {
             username.Leave += new EventHandler(username_Leave);
         }

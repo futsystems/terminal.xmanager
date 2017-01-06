@@ -79,8 +79,31 @@ namespace TradingLib.MoniterBase
             {
                 imgLink.Image = (Image)Properties.Resources.online;
             }
-            //CoreService.TLClient.
+            //超管查看结算状态
+            if (CoreService.SiteInfo.Domain.Super)
+            {
+                CoreService.EventContrib.RegisterCallback("MgrExchServer", "QrySystemStatus", this.OnQrySystemStatus);
+                CoreService.TLClient.ReqQrySystemStatus();
+            }
         }
+
+        void OnQrySystemStatus(string json, bool islast)
+        {
+            if (this.InvokeRequired)
+            {
+                Invoke(new Action<string, bool>(OnQrySystemStatus), new object[] { json, islast });
+            }
+            else
+            {
+                SystemStatus status = MoniterHelper.ParseJsonResponse<SystemStatus>(json);
+                if (status != null)
+                {
+                    //GotSystemStatus(status);
+                    lbSettleStatus.Text = string.Format("{0}- O:{1} T:{2} E:{3}", status.LastSettleday, status.UnsettledAcctOrderNumOfPreSettleday, status.UnsettledAcctTradeNumOfPreSettleday, status.UnsettledExchangeSettlementNumOfPreSettleday);
+                }
+            }
+        }
+
 
         public void OnDisposed()
         { 
@@ -239,6 +262,7 @@ namespace TradingLib.MoniterBase
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lbDeployID;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel lbSettleStatus;
         private System.Windows.Forms.ToolStripStatusLabel lbExpireMessage;
         private System.Windows.Forms.ToolStripStatusLabel lbSpring;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
@@ -273,6 +297,8 @@ namespace TradingLib.MoniterBase
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lbDeployID = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lbSettleStatus = new System.Windows.Forms.ToolStripStatusLabel();
+
             this.lbExpireMessage = new System.Windows.Forms.ToolStripStatusLabel();
             this.lbSpring = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -301,6 +327,13 @@ namespace TradingLib.MoniterBase
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(18, 17);
             this.toolStripStatusLabel2.Text = "--";
             this.toolStripStatusLabel2.Visible = false;
+
+            // 
+            // lbSettleStatus
+            // 
+            this.lbSettleStatus.Name = "lbSettleStatus";
+            this.lbSettleStatus.Size = new System.Drawing.Size(18, 17);
+            this.lbSettleStatus.Text = "";
             // 
             // lbExpireMessage
             // 
@@ -344,6 +377,7 @@ namespace TradingLib.MoniterBase
             this.toolStripStatusLabel1,
             this.lbDeployID,
             this.toolStripStatusLabel2,
+            this.lbSettleStatus,
             this.lbExpireMessage,
             this.lbSpring,
             this.toolStripStatusLabel3,

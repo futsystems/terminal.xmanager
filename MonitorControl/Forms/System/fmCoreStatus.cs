@@ -39,11 +39,11 @@ namespace TradingLib.MoniterControl
                 currenttradingday.Text = s.Tradingday.ToString();
                 nextsettletime.Text = Util.ToDateTime(s.NextSettleTime).ToString("yyyyMMdd HH:mm:ss");
                 settlecentrestatus.Text = s.IsSettleNormal ? "正常" : "异常";
-                ccstatus.Text = GetClearCentreStatus(s.ClearCentreStatus);
+                ccstatus.Text = s.IsClearCentreLive ? "开启" : "关闭";
 
                 unsettledacctordernum.Text = s.UnsettledAcctOrderNumOfPreSettleday.ToString();
                 unsettledbrokerordernum.Text = s.UnsettledBrokerOrderNumOfPreSettleday.ToString();
-                totalordernum.Text = GetClearCentreStatus(s.ClearCentreStatus);//? "开启" : "关闭";
+                //totalordernum.Text = GetClearCentreStatus(s.ClearCentreStatus);//? "开启" : "关闭";
                 totalaccountnum.Text = s.TotalAccountNum.ToString();
                 totalordernum.Text = s.TotalOrderNum.ToString();
                 totaltradenum.Text = s.TotalTradeNum.ToString();
@@ -51,18 +51,18 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        string GetClearCentreStatus(QSEnumClearCentreStatus status)
-        {
-            if (status == QSEnumClearCentreStatus.CCOPEN)
-            {
-                return "是";
-            }
-            if (status == QSEnumClearCentreStatus.CCCLOSE)
-            {
-                return "否";
-            }
-            return Util.GetEnumDescription(status);
-        }
+        //string GetClearCentreStatus(QSEnumClearCentreStatus status)
+        //{
+        //    if (status == QSEnumClearCentreStatus.CCOPEN)
+        //    {
+        //        return "是";
+        //    }
+        //    if (status == QSEnumClearCentreStatus.CCCLOSE)
+        //    {
+        //        return "否";
+        //    }
+        //    return Util.GetEnumDescription(status);
+        //}
 
         public void OnInit()
         {

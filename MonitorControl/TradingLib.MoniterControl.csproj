@@ -562,6 +562,12 @@
     <Compile Include="Forms\System\ConnectorManager\ctBrokerESunnyDirect.Designer.cs">
       <DependentUpon>ctBrokerESunnyDirect.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\System\ConnectorManager\ctBrokerIBDirect.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\System\ConnectorManager\ctBrokerIBDirect.Designer.cs">
+      <DependentUpon>ctBrokerIBDirect.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\System\fmDataManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1078,6 +1084,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\System\ConnectorManager\ctBrokerESunnyDirect.resx">
       <DependentUpon>ctBrokerESunnyDirect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\System\ConnectorManager\ctBrokerIBDirect.resx">
+      <DependentUpon>ctBrokerIBDirect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\System\fmDataManager.resx">
       <DependentUpon>fmDataManager.cs</DependentUpon>

@@ -122,12 +122,12 @@
             // 
             // cbinterfacelist
             // 
+            this.cbinterfacelist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbinterfacelist.DropDownWidth = 151;
             this.cbinterfacelist.Location = new System.Drawing.Point(110, 44);
             this.cbinterfacelist.Name = "cbinterfacelist";
             this.cbinterfacelist.Size = new System.Drawing.Size(151, 21);
             this.cbinterfacelist.TabIndex = 18;
-            this.cbinterfacelist.Text = "kryptonComboBox1";
             // 
             // kryptonLabel12
             // 

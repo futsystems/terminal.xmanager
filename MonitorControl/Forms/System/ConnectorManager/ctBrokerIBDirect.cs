@@ -12,10 +12,10 @@ using TradingLib.Common;
 
 namespace TradingLib.MoniterControl
 {
-    public partial class ctBrokerESunnyDirect : UserControl,IConnectorControl
+    public partial class ctBrokerIBDirect : UserControl,IConnectorControl
     {
         ConnectorConfig _cfg;
-        public ctBrokerESunnyDirect()
+        public ctBrokerIBDirect()
         {
             InitializeComponent();
             this.Load += new EventHandler(OnLoad);
@@ -23,10 +23,16 @@ namespace TradingLib.MoniterControl
 
         void OnLoad(object sender, EventArgs e)
         {
-            username.Leave += new EventHandler(username_Leave);
+            address.Leave += new EventHandler(address_Leave);
+            uf1.Leave += new EventHandler(uf1_Leave);
         }
 
-        void username_Leave(object sender, EventArgs e)
+        void uf1_Leave(object sender, EventArgs e)
+        {
+            this.IDChanged();
+        }
+
+        void address_Leave(object sender, EventArgs e)
         {
             this.IDChanged();
         }
@@ -37,20 +43,14 @@ namespace TradingLib.MoniterControl
             _cfg = cfg;
             address.Text = cfg.srvinfo_ipaddress;
             port.Text = cfg.srvinfo_port.ToString();
-            username.Text = cfg.usrinfo_userid;
-            pass.Text = cfg.usrinfo_password;
-            srvinfo_field1.Text = cfg.srvinfo_field1;
-            srvinfo_field2.Text = cfg.srvinfo_field2;
+            uf1.Text = cfg.usrinfo_field1;
         }
 
         public void GetConnectorConfig(ref ConnectorConfig cfg)
         {
             cfg.srvinfo_ipaddress = address.Text;
             cfg.srvinfo_port = int.Parse(port.Text);
-            cfg.usrinfo_userid = username.Text;
-            cfg.usrinfo_password = pass.Text;
-            cfg.srvinfo_field1 = srvinfo_field1.Text;
-            cfg.srvinfo_field2 = srvinfo_field2.Text;
+            cfg.usrinfo_field1 = uf1.Text;
 
         }
 
@@ -75,10 +75,10 @@ namespace TradingLib.MoniterControl
 
         }
 
-        public string ID { get { return username.Text; } }
+        public string ID { get { return string.Format("{0}({1})", address.Text, uf1.Text); } }
 
         public event Action IDChanged = delegate { };
 
-        public string Prefix { get { return "ES"; } }
+        public string Prefix { get { return "IB"; } }
     }
 }
