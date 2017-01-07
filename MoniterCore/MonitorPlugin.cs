@@ -69,52 +69,52 @@ namespace TradingLib.MoniterCore
             }
             return typemap[typename];
         }
-        /// <summary>
-        /// 创建指定类型名称的MoniterControl
-        /// </summary>
-        /// <param name="typename"></param>
-        /// <returns></returns>
-        public static MoniterControl CreateMoniterControl(string typename)
-        {
-            if (!typemap.Keys.Contains(typename))
-            {
-                return null;
-            }
-            return (MoniterControl)Activator.CreateInstance(typemap[typename]);
-        }
+        ///// <summary>
+        ///// 创建指定类型名称的MoniterControl
+        ///// </summary>
+        ///// <param name="typename"></param>
+        ///// <returns></returns>
+        //public static MoniterControl CreateMoniterControl(string typename)
+        //{
+        //    if (!typemap.Keys.Contains(typename))
+        //    {
+        //        return null;
+        //    }
+        //    return (MoniterControl)Activator.CreateInstance(typemap[typename]);
+        //}
 
-        /// <summary>
-        /// 创建管理端菜单对象
-        /// </summary>
-        /// <param name="uuid"></param>
-        /// <returns></returns>
-        public static MoniterCommand CreateMoniterCommand(string uuid)
-        {
-            if (!commandMap.Keys.Contains(uuid))
-            {
-                return null;
-            }
-            return (MoniterCommand)Activator.CreateInstance(commandMap[uuid]);
-        }
+        ///// <summary>
+        ///// 创建管理端菜单对象
+        ///// </summary>
+        ///// <param name="uuid"></param>
+        ///// <returns></returns>
+        //public static MoniterCommand CreateMoniterCommand(string uuid)
+        //{
+        //    if (!commandMap.Keys.Contains(uuid))
+        //    {
+        //        return null;
+        //    }
+        //    return (MoniterCommand)Activator.CreateInstance(commandMap[uuid]);
+        //}
 
         static MoniterPlugin()
         {
             //从插件目录加载类型
             LoadMoniterTypes();
-            Util.Debug("MoniterControl list:");
+            //Util.Debug("MoniterControl list:");
             foreach (string key in typemap.Keys)
             {
-                Util.Debug("      " + key);
+                //Util.Debug("      " + key);
             }
 
             foreach (string key in commandMap.Keys)
             {
-                Util.Debug("       " + key + " " + commandMap[key].FullName);
+                //Util.Debug("       " + key + " " + commandMap[key].FullName);
             }
         }
 
 
-        static  void LoadMoniterTypes()
+        static void LoadMoniterTypes()
         {
             List<Type> monitertypes = new List<Type>();
             List<string> dllfilelist = new List<string>();
@@ -130,7 +130,7 @@ namespace TradingLib.MoniterCore
             Dictionary<Type, bool> dictionary = new Dictionary<Type, bool>();
             foreach (string dllfile in dllfilelist)
             {
-                Util.Debug("dll file:" + dllfile);
+                //Util.Debug("dll file:" + dllfile);
                 var assembly = Assembly.ReflectionOnlyLoadFrom(dllfile);
                 AssemblyName assemblyName = AssemblyName.GetAssemblyName(dllfile);
 
@@ -150,7 +150,7 @@ namespace TradingLib.MoniterCore
                 Assembly a = Assembly.Load(assemblyName);
                 foreach (Type type in assembly.GetExportedTypes())
                 {
-                    Util.Debug("type:" + type.FullName);
+                    //Util.Debug("type:" + type.FullName);
                     //bool x = type.GetInterface(typeof(IMoniterControl).FullName) != null;
                     //程序集中的type不是抽象函数并且其实现了needType接口,则标记为有效
                     //Type c = typeof(MonitorControl);
@@ -159,14 +159,14 @@ namespace TradingLib.MoniterCore
                     //bool issub3 = type.GetInterface(typeof(IMoniterControl).FullName) != null;
                     if (!type.IsAbstract && type.GetInterface(typeof(IMoniterControl).FullName) != null)
                     {
-                        
+
                         dictionary[a.GetType(type.FullName)] = true;//标记该类型被加载
                     }
 
                     //判断是否是管理端命令对象
-                    if(!type.IsAbstract && type.GetInterface(typeof(IMonterCommand).FullName) != null)
+                    if (!type.IsAbstract && type.GetInterface(typeof(IMonterCommand).FullName) != null)
                     {
-                       
+
                         //dictionary[a.GetType(type.FullName)] = true;//标记该类型被加载
                         Type target = a.GetType(type.FullName);
                         MoniterCommandAttr attr = (MoniterCommandAttr)Attribute.GetCustomAttribute(target, typeof(MoniterCommandAttr));

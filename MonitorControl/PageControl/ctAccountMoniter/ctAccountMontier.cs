@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using TradingLib.API;
 using TradingLib.Common;
 using TradingLib.MoniterCore;
-
+using Common.Logging;
 
 
 namespace TradingLib.MoniterControl
@@ -19,6 +19,7 @@ namespace TradingLib.MoniterControl
     [MoniterControlAttr("AccountMoniter","分帐户列表",EnumControlLocation.TopPanel)]
     public partial class ctAccountMontier : UserControl, IEventBinder, IMoniterControl
     {
+        ILog logger = LogManager.GetLogger("AccountMontier");
 
         const string PROGRAME = "AccountMontier";
         public ctAccountMontier()
@@ -55,7 +56,7 @@ namespace TradingLib.MoniterControl
 
         private void accountgrid_Click(object sender, EventArgs e)
         {
-            debug("grid mouse clicked...", QSEnumDebugLevel.INFO);
+            logger.Info("grid mouse clicked...");
         }
 
 
@@ -118,11 +119,11 @@ namespace TradingLib.MoniterControl
         /// </summary>
         public bool DebugEnable { get { return _debugEnable; } set { _debugEnable = value; } }
 
-        QSEnumDebugLevel _debuglevel = QSEnumDebugLevel.INFO;
+        //QSEnumDebugLevel _debuglevel = QSEnumDebugLevel.INFO;
         /// <summary>
         /// 日志输出级别
         /// </summary>
-        public QSEnumDebugLevel DebugLevel { get { return _debuglevel; } set { _debuglevel = value; } }
+       // public QSEnumDebugLevel DebugLevel { get { return _debuglevel; } set { _debuglevel = value; } }
 
         /// <summary>
         /// 判断日志级别 然后再进行输出
@@ -130,12 +131,12 @@ namespace TradingLib.MoniterControl
         /// </summary>
         /// <param name="msg"></param>
         /// <param name="level"></param>
-        protected void debug(string msg, QSEnumDebugLevel level = QSEnumDebugLevel.DEBUG)
-        {
-            //1.判断日志级别,然后调用日志输出 比如向控件或者屏幕输出显示
-            if (_debugEnable && (int)level <= (int)_debuglevel)
-                msgdebug("[" + level.ToString() + "] " + PROGRAME + ":" + msg);
-        }
+        //protected void debug(string msg, QSEnumDebugLevel level = QSEnumDebugLevel.DEBUG)
+        //{
+        //    //1.判断日志级别,然后调用日志输出 比如向控件或者屏幕输出显示
+        //    if (_debugEnable && (int)level <= (int)_debuglevel)
+        //        msgdebug("[" + level.ToString() + "] " + PROGRAME + ":" + msg);
+        //}
 
         /// <summary>
         /// 日志输出

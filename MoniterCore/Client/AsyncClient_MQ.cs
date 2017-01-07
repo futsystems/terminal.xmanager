@@ -8,6 +8,7 @@ using TradingLib.Common;
 using System.Threading;
 using System.Net;
 using TradingLib.API;
+using Common.Logging;
 
 namespace TradingLib.MoniterCore
 {
@@ -19,6 +20,7 @@ namespace TradingLib.MoniterCore
     public class AsyncClient
     {
 
+        ILog logger = LogManager.GetLogger("AsyncClient");
         const string PROGRAME = "AsyncClient";
         public event DebugDelegate SendDebugEvent;
         public event Action<Message> SendTLMessage;
@@ -44,21 +46,21 @@ namespace TradingLib.MoniterCore
                 msgdebug(msg);
         }
 
-        bool _debugEnable = true;
-        public bool DebugEnable { get { return _debugEnable; } set { _debugEnable = value; } }
-        QSEnumDebugLevel _debuglevel = QSEnumDebugLevel.DEBUG;
-        public QSEnumDebugLevel DebugLevel { get { return _debuglevel; } set { _debuglevel = value; } }
+        //bool _debugEnable = true;
+        //public bool DebugEnable { get { return _debugEnable; } set { _debugEnable = value; } }
+        // _debuglevel = QSEnumDebugLevel.DEBUG;
+        //public QSEnumDebugLevel DebugLevel { get { return _debuglevel; } set { _debuglevel = value; } }
 
         /// <summary>
         /// 判断日志级别 然后再进行输出
         /// </summary>
         /// <param name="msg"></param>
         /// <param name="level"></param>
-        protected void debug(string msg, QSEnumDebugLevel level = QSEnumDebugLevel.DEBUG)
-        {
-            if ((int)level <= (int)_debuglevel && _debugEnable)
-                msgdebug("[" + level.ToString() + "] " + msg);
-        }
+        //protected void debug(string msg, QSEnumDebugLevel level = QSEnumDebugLevel.DEBUG)
+        //{
+        //    if ((int)level <= (int)_debuglevel && _debugEnable)
+        //        msgdebug("[" + level.ToString() + "] " + msg);
+        //}
 
         private void msgdebug(string msg)
         {
@@ -111,16 +113,16 @@ namespace TradingLib.MoniterCore
         {
             try
             {
-                debug("___________________AnsyncClient Stop Thread and Socket....", QSEnumDebugLevel.INFO);
+                logger.Info("___________________AnsyncClient Stop Thread and Socket....");
                 bool a = StopRecvThread();
                 bool b = StopTickReciver();
                 bool c = StopSendThread();
-                debug("___________________Stop Task Report: " + "[MessageThread Stop]:" + a.ToString() + "  [TickThread Stop]:" + b.ToString()+"  [SendThread Stop]:" + b.ToString(), QSEnumDebugLevel.INFO);
+                logger.Info("___________________Stop Task Report: " + "[MessageThread Stop]:" + a.ToString() + "  [TickThread Stop]:" + b.ToString() + "  [SendThread Stop]:" + b.ToString());
 
             }
             catch (Exception ex)
             {
-                debug(PROGRAME + ":stop error :" + ex.ToString());
+                logger.Info(PROGRAME + ":stop error :" + ex.ToString());
             }
         }
 
@@ -165,7 +167,7 @@ namespace TradingLib.MoniterCore
             {
                 //等待1秒,当后台正式启动完毕后方可有进入下面的程序端运行
                 Thread.Sleep(500);
-                debug(PROGRAME + "#:" + _wait.ToString() + "Starting....");
+                logger.Info(PROGRAME + "#:" + _wait.ToString() + "Starting....");
             }
 
             //启动数据发送线程
@@ -194,11 +196,11 @@ namespace TradingLib.MoniterCore
         {
             if (!_started)
                 return true;
-            debug("Stop Client Message Reciving Thread....");
+            logger.Info("Stop Client Message Reciving Thread....");
             int _wait = 0;
             while (_cliThread.IsAlive && (_wait++ < 5))
             {
-                debug("#:" + _wait.ToString() + "  AsynClient is stoping...." + "MessageThread Status:" + _cliThread.IsAlive.ToString(), QSEnumDebugLevel.INFO);
+                logger.Info("#:" + _wait.ToString() + "  AsynClient is stoping...." + "MessageThread Status:" + _cliThread.IsAlive.ToString());
                 if (_msgpoller.IsStarted)//如果poller处于启动状态 则停止poller
                 {
                     //debug("stop msgpoller");
@@ -211,10 +213,10 @@ namespace TradingLib.MoniterCore
             if (!_cliThread.IsAlive)
             {
                 _cliThread = null;
-                debug("MessageThread Stopped successfull...", QSEnumDebugLevel.INFO);
+                logger.Info("MessageThread Stopped successfull...");
                 return true;
             }
-            debug("Some Error Happend In Stoping MessageThread", QSEnumDebugLevel.ERROR);
+            logger.Info("Some Error Happend In Stoping MessageThread");
             return false;
         }
 
@@ -232,7 +234,7 @@ namespace TradingLib.MoniterCore
                     _identity = System.Guid.NewGuid().ToString();
                     _client.Options.Identity = Encoding.UTF8.GetBytes(_identity);
                     string cstr = "tcp://" + _serverip.ToString() + ":" + Port.ToString();
-                    debug(PROGRAME + ":Connect to Message Server:" + cstr, QSEnumDebugLevel.INFO);
+                    logger.Info(PROGRAME + ":Connect to Message Server:" + cstr);
                     _client.Connect(cstr);
 
                     //当客户端有消息近来时,我们读取消息并调用handleMessage出来消息 
@@ -290,24 +292,24 @@ namespace TradingLib.MoniterCore
             {
                 //等待1秒,当后台正式启动完毕后方可有进入下面的程序端运行
                 Thread.Sleep(500);
-                debug(PROGRAME + "#:" + _wait.ToString() + "  AsynClient[Tick Reciver] is connecting....");
+                logger.Info(PROGRAME + "#:" + _wait.ToString() + "  AsynClient[Tick Reciver] is connecting....");
             }
             if (!_tickreceiveruning)
                 throw new QSAsyncClientError();
             else
-                debug(PROGRAME + ":[TickReciver] started successfull");
+                logger.Info(PROGRAME + ":[TickReciver] started successfull");
         }
 
         public bool StopTickReciver()
         {
             if (!_tickreceiveruning)
                 return true;
-            debug("Stop Client Tick Reciving Thread....");
+            logger.Info("Stop Client Tick Reciving Thread....");
             int _wait = 0;
             while (_tickthread.IsAlive && (_wait++ < 5))
             {
                 //等待1秒,当后台正式启动完毕后方可有进入下面的程序端运行
-                debug("#:" + _wait.ToString() + "  AsynClient[Tick Reciver] is stoping...." + "TickThread Status:" + _tickthread.IsAlive.ToString());
+                logger.Info("#:" + _wait.ToString() + "  AsynClient[Tick Reciver] is stoping...." + "TickThread Status:" + _tickthread.IsAlive.ToString());
                 if (_tickpoller.IsStarted)
                 {
                     //debug("tick poller stop");
@@ -318,10 +320,10 @@ namespace TradingLib.MoniterCore
             if (!_tickthread.IsAlive)
             {
                 _tickthread = null;
-                debug("TickThread Stopped successfull...", QSEnumDebugLevel.INFO);
+                logger.Info("TickThread Stopped successfull...");
                 return true;
             }
-            debug("Some Error Happend In Stoping TickThread", QSEnumDebugLevel.ERROR);
+            logger.Info("Some Error Happend In Stoping TickThread");
             return false;
         }
 
@@ -332,7 +334,7 @@ namespace TradingLib.MoniterCore
                 using (subscriber = context.CreateSubscriberSocket())
                 {
                     string cstr = "tcp://" + _tickip.ToString() + ":" + _tickport.ToString();
-                    debug(PROGRAME + ":Connect to TickServer :" + cstr, QSEnumDebugLevel.INFO);
+                    logger.Info(PROGRAME + ":Connect to TickServer :" + cstr);
                     subscriber.Connect(cstr);
                     SubscribeTickHeartBeat();
 
@@ -425,12 +427,12 @@ namespace TradingLib.MoniterCore
         bool StopSendThread()
         {
             if (!msggo) return true;
-            debug("Stop Client Send Thread....");
+            logger.Info("Stop Client Send Thread....");
             int _wait = 0;
             while (_msgthread.IsAlive && (_wait++ < 5))
             {
                 //等待1秒,当后台正式启动完毕后方可有进入下面的程序端运行
-                debug("#:" + _wait.ToString() + "  AsynClient[Message Sender] is stoping...." + "SenderThread Status:" + _msgthread.IsAlive.ToString());
+                logger.Info("#:" + _wait.ToString() + "  AsynClient[Message Sender] is stoping...." + "SenderThread Status:" + _msgthread.IsAlive.ToString());
                 if (_msgthread.IsAlive)
                 {
                     msggo = false;
@@ -440,10 +442,10 @@ namespace TradingLib.MoniterCore
             if (!_msgthread.IsAlive)
             {
                 _msgthread = null;
-                debug("SenderThread Stopped successfull...", QSEnumDebugLevel.INFO);
+                logger.Info("SenderThread Stopped successfull...");
                 return true;
             }
-            debug("Some Error Happend In Stoping SenderThread", QSEnumDebugLevel.ERROR);
+            logger.Info("Some Error Happend In Stoping SenderThread");
             return false;
         }
         //发送byte信息
@@ -475,7 +477,7 @@ namespace TradingLib.MoniterCore
                 }
                 catch (Exception ex)
                 {
-                    debug("client send message out error:" + ex.ToString(), QSEnumDebugLevel.ERROR);
+                    logger.Info("client send message out error:" + ex.ToString());
                 }
             }
             //debug("SendThread stop to here");
@@ -490,9 +492,9 @@ namespace TradingLib.MoniterCore
         /// <param name="port"></param>
         /// <param name="debug"></param>
         /// <returns></returns>
-        public static string HelloServer(string ip, int port, DebugDelegate debug)
+        public static string HelloServer(string ip, int port)
         {
-            debug("[AsyncClient]Start say hello to server...");
+            //("[AsyncClient]Start say hello to server...");
             using (NetMQContext context = NetMQContext.Create())
             {
                 using (NetMQSocket requester = context.CreateRequestSocket())
@@ -507,7 +509,7 @@ namespace TradingLib.MoniterCore
 
                         TradingLib.Common.Message message = TradingLib.Common.Message.gotmessage(msg.Last.Buffer);
                         br= ResponseTemplate<BrokerNameResponse>.CliRecvResponse(message);
-                        debug("response:" + br.ToString());
+                        //debug("response:" + br.ToString());
                         
                     };
 

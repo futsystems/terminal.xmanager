@@ -224,9 +224,7 @@
       <DependentUpon>ctDebug.cs</DependentUpon>
     </Compile>
     <Compile Include="DataSourceAdapter.cs" />
-    <Compile Include="DemoControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="DemoControl.cs" />
     <Compile Include="DemoControl.Designer.cs">
       <DependentUpon>DemoControl.cs</DependentUpon>
     </Compile>

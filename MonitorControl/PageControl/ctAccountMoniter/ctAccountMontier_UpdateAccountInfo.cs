@@ -443,7 +443,7 @@ namespace TradingLib.MoniterControl
                 }
                 catch (Exception ex)
                 {
-                    debug("Account信息更新错误:" + ex.ToString());
+                    logger.Error("Account信息更新错误:" + ex.ToString());
                 }
             }
         }
@@ -625,7 +625,7 @@ namespace TradingLib.MoniterControl
                 }
                 catch (Exception ex)
                 {
-                    debug("got account error:" + ex.ToString(), QSEnumDebugLevel.ERROR);
+                    logger.Error("got account error:" + ex.ToString());
                 }
             }
         }

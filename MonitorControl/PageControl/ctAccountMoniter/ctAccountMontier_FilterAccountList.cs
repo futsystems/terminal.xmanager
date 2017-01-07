@@ -161,7 +161,7 @@ namespace TradingLib.MoniterControl
             }
 
 
-            debug("strfilter:" + strFilter, QSEnumDebugLevel.INFO);
+            logger.Info("strfilter:" + strFilter);
             datasource.Filter = strFilter;
 
             //更新帐户数目

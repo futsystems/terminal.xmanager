@@ -44,7 +44,7 @@ namespace TradingLib.MoniterCore
         {
             logger.Info("TLClientNet Starting......");
             connecton = new TLClient_MQ(_servers, _port, "demo");
-            connecton.ProviderType = QSEnumProviderType.Both;
+            //connecton.ProviderType = QSEnumProviderType.Both;
             BindConnectionEvent();
 
             connecton.Start();
