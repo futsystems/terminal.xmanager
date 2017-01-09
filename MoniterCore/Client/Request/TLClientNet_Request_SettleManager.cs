@@ -15,7 +15,7 @@ namespace TradingLib.MoniterCore
         /// <param name="bank"></param>
         public void ReqDeleteSettleInfo(int settleday)
         {
-            this.ReqContribRequest("SettleCentre", "DeleteSettleInfo", TradingLib.Mixins.Json.JsonMapper.ToJson(new { settleday = settleday }));
+            this.ReqContribRequest("SettleCentre", "DeleteSettleInfo", new { settleday = settleday }.SerializeObject());
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace TradingLib.MoniterCore
         /// <param name="settleday"></param>
         public void ReqReSettle(int settleday)
         {
-            this.ReqContribRequest("SettleCentre", "ReSettle", TradingLib.Mixins.Json.JsonMapper.ToJson(new { settleday = settleday }));
+            this.ReqContribRequest("SettleCentre", "ReSettle", new { settleday = settleday }.SerializeObject());
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace TradingLib.MoniterCore
         /// <param name="exchange"></param>
         public void ReqReSettleExchange(string exchange)
         {
-            this.ReqContribRequest("SettleCentre", "ReSettleExchange", TradingLib.Mixins.Json.JsonMapper.ToJson(new { exchange = exchange }));
+            this.ReqContribRequest("SettleCentre", "ReSettleExchange", new { exchange = exchange }.SerializeObject());
         }
         /// <summary>
         /// 重新加载某个日期的交易数据
@@ -41,7 +41,7 @@ namespace TradingLib.MoniterCore
         /// <param name="settleday"></param>
         public void ReqRollBackToDay(int currentday)
         {
-            this.ReqContribRequest("SettleCentre", "RollBackToDay", TradingLib.Mixins.Json.JsonMapper.ToJson(new { currentday = currentday }));
+            this.ReqContribRequest("SettleCentre", "RollBackToDay", new { currentday = currentday }.SerializeObject());
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace TradingLib.MoniterCore
         /// <param name="currentday"></param>
         public void ReqQrySettlementPrice(int settleday)
         {
-            this.ReqContribRequest("SettleCentre", "QrySettlementPrice", TradingLib.Mixins.Json.JsonMapper.ToJson(new { settleday = settleday }));
+            this.ReqContribRequest("SettleCentre", "QrySettlementPrice", new { settleday = settleday }.SerializeObject());
         }
 
 
@@ -74,9 +74,9 @@ namespace TradingLib.MoniterCore
         /// 更新结算价格
         /// </summary>
         /// <param name="price"></param>
-        public void ReqUpdateSettlementPrice(MarketData price)
+        public void ReqUpdateSettlementPrice(SettlementPrice price)
         {
-            this.ReqContribRequest("SettleCentre", "UpdateSettlementPrice", TradingLib.Mixins.Json.JsonMapper.ToJson(price));
+            this.ReqContribRequest("SettleCentre", "UpdateSettlementPrice", price.SerializeObject());
         }
 
 
@@ -86,7 +86,7 @@ namespace TradingLib.MoniterCore
         /// <param name="data"></param>
         public void ReqFlatPositionHold(object data)
         {
-            this.ReqContribRequest("SettleCentre", "FlatPositionHold", TradingLib.Mixins.Json.JsonMapper.ToJson(data));
+            this.ReqContribRequest("SettleCentre", "FlatPositionHold", data.SerializeObject());
         }
 
         /// <summary>

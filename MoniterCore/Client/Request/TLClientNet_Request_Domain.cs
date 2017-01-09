@@ -32,7 +32,7 @@ namespace TradingLib.MoniterCore
         /// <param name="domain"></param>
         public void ReqUpdateDomain(DomainImpl domain)
         {
-            this.ReqContribRequest("MgrExchServer", "UpdateDomain", TradingLib.Mixins.Json.JsonMapper.ToJson(domain));
+            this.ReqContribRequest("MgrExchServer", "UpdateDomain", domain.SerializeObject());
         }
 
         /// <summary>

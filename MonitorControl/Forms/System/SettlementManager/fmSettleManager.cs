@@ -36,9 +36,9 @@ namespace TradingLib.MoniterControl
 
         void OnQrySettleStatus(string json,bool islast)
         {
-            var data = TradingLib.Mixins.Json.JsonMapper.ToObject(json)["Payload"];
+            //var data = TradingLib.Mixins.Json.JsonMapper.ToObject(json)["Payload"];
 
-            InvokeGotSettleStatus(data);
+            InvokeGotSettleStatus(json);
         }
 
         /// <summary>
@@ -120,14 +120,15 @@ namespace TradingLib.MoniterControl
         //    }
         //}
 
-        void InvokeGotSettleStatus(TradingLib.Mixins.Json.JsonData data)
+        void InvokeGotSettleStatus(string json)
         {
             if (InvokeRequired)
             {
-                Invoke(new Action<TradingLib.Mixins.Json.JsonData>(InvokeGotSettleStatus), new object[] { data });
+                Invoke(new Action<string>(InvokeGotSettleStatus), new object[] { json });
             }
             else
             {
+                var data = json.DeserializeObject()["Payload"];
                 lbLastSettleday.Text = data["last_settleday"].ToString();
                 lbCurrentday.Text = data["current_settleday"].ToString();
                 lbSettleMode.Text = ((QSEnumSettleMode)Enum.Parse(typeof(QSEnumSettleMode), data["settle_mode"].ToString())).ToString();

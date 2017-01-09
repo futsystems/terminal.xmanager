@@ -22,7 +22,7 @@ namespace TradingLib.MoniterCore
 
         void HandleManagerNotify(string message)
         {
-            var obj = TradingLib.Mixins.Json.JsonMapper.ToObject<ManagerNotify>(message);
+            var obj = message.DeserializeObject<ManagerNotify>();// TradingLib.Mixins.Json.JsonMapper.ToObject<ManagerNotify>(message);
             CoreService.EventCore.FireManagerNotifyEvent(obj);
         }
         ILog logger = LogManager.GetLogger("EventContrib");

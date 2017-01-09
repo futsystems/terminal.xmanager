@@ -31,7 +31,7 @@ namespace TradingLib.MoniterControl
             BindToTable();
             WireEvent();
 
-            foreach (MarketTime mt in CoreService.BasicInfoTracker.MarketTimes)
+            foreach (MarketTimeImpl mt in CoreService.BasicInfoTracker.MarketTimes)
             {
                 InvokeGotMarketTime(mt);
             }
@@ -47,7 +47,7 @@ namespace TradingLib.MoniterControl
                 return markettimemap.Count > 0;
             }
         }
-        Dictionary<int, MarketTime> markettimemap = new Dictionary<int, MarketTime>();
+        Dictionary<int, MarketTimeImpl> markettimemap = new Dictionary<int, MarketTimeImpl>();
         Dictionary<int, int> markettimeidxmap = new Dictionary<int, int>();
 
         int MarketTimeIdx(int id)
@@ -64,9 +64,9 @@ namespace TradingLib.MoniterControl
         }
 
 
-        delegate void MarketTimeDel(MarketTime mt);
+        delegate void MarketTimeDel(MarketTimeImpl mt);
 
-        void InvokeGotMarketTime(MarketTime mt)
+        void InvokeGotMarketTime(MarketTimeImpl mt)
         {
             if (InvokeRequired)
             {
@@ -184,7 +184,7 @@ namespace TradingLib.MoniterControl
         private void mtgrid_DoubleClick(object sender, EventArgs e)
         {
             fmMarketTimeInfo fm = new fmMarketTimeInfo();
-            MarketTime mt = GetVisibleMarketTime(CurrentMarketTimeID);
+            MarketTimeImpl mt = GetVisibleMarketTime(CurrentMarketTimeID);
             if (mt != null)
             {
                 fm.SetMarketTime(mt);
@@ -212,9 +212,9 @@ namespace TradingLib.MoniterControl
         }
 
         //通过行号得该行的Security
-        MarketTime GetVisibleMarketTime(int id)
+        MarketTimeImpl GetVisibleMarketTime(int id)
         {
-            MarketTime mt = null;
+            MarketTimeImpl mt = null;
             if (markettimemap.TryGetValue(id, out mt))
             {
                 return mt;

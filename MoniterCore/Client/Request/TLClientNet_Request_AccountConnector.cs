@@ -57,7 +57,7 @@ namespace TradingLib.MoniterCore
         /// <param name="pass"></param>
         public void ReqDepositMainAccount(string account, double amount, string pass)
         {
-            this.ReqContribRequest("BrokerRouterPassThrough", "MainAccountDeposit", TradingLib.Mixins.Json.JsonMapper.ToJson(new { account = account, amount = amount, pass = pass }));
+            this.ReqContribRequest("BrokerRouterPassThrough", "MainAccountDeposit", new { account = account, amount = amount, pass = pass }.SerializeObject());
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace TradingLib.MoniterCore
         /// <param name="pass"></param>
         public void ReqWithdrawMainAccount(string account, double amount, string pass)
         {
-            this.ReqContribRequest("BrokerRouterPassThrough", "MainAccountWithdraw", TradingLib.Mixins.Json.JsonMapper.ToJson(new { account = account, amount = amount, pass = pass }));
+            this.ReqContribRequest("BrokerRouterPassThrough", "MainAccountWithdraw", new { account = account, amount = amount, pass = pass }.SerializeObject());
         }
     }
 }

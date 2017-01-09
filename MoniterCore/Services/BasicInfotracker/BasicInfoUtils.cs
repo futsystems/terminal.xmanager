@@ -16,7 +16,7 @@ namespace TradingLib.MoniterCore
         public static string GetExchangeName(this BasicInfoTracker info,string exchange)
         {
             string title = exchange;
-            Exchange ex = info.Exchanges.FirstOrDefault(e => e.EXCode.Equals(exchange));
+            ExchangeImpl ex = info.Exchanges.FirstOrDefault(e => e.EXCode.Equals(exchange));
             if (ex != null)
             {
                 title = ex.Title;
@@ -88,7 +88,7 @@ namespace TradingLib.MoniterCore
                 }
                 else
                 {
-                    foreach (SecurityFamilyImpl sec in info.Securities.Where(ex => (ex != null && ((ex.Exchange as Exchange).ID == id))).ToArray())
+                    foreach (SecurityFamilyImpl sec in info.Securities.Where(ex => (ex != null && ((ex.Exchange as ExchangeImpl).ID == id))).ToArray())
                     {
                         ValueObject<int> vo = new ValueObject<int>();
                         vo.Name = sec.Code + "-" + sec.Name;
@@ -112,7 +112,7 @@ namespace TradingLib.MoniterCore
                 }
                 else
                 {
-                    foreach (SecurityFamilyImpl sec in info.Securities.Where(s => s.Type == type).Where(ex => (ex != null && ((ex.Exchange as Exchange).ID == id))).ToArray())
+                    foreach (SecurityFamilyImpl sec in info.Securities.Where(s => s.Type == type).Where(ex => (ex != null && ((ex.Exchange as ExchangeImpl).ID == id))).ToArray())
                     {
                         ValueObject<int> vo = new ValueObject<int>();
                         vo.Name = sec.Code + "-" + sec.Name;
@@ -134,7 +134,7 @@ namespace TradingLib.MoniterCore
                 vo1.Value = 0;
                 list.Add(vo1);
             }
-            foreach (Exchange ex in info.Exchanges)
+            foreach (ExchangeImpl ex in info.Exchanges)
             {
                 //if (ex.EXCode.Equals("INNOVEX"))
                 //{
@@ -169,7 +169,7 @@ namespace TradingLib.MoniterCore
                 vo1.Value = 0;
                 list.Add(vo1);
             }
-            foreach (MarketTime mt in info.MarketTimes)
+            foreach (MarketTimeImpl mt in info.MarketTimes)
             {
                 ValueObject<int> vo = new ValueObject<int>();
                 vo.Name = mt.Name;
@@ -189,7 +189,7 @@ namespace TradingLib.MoniterCore
                 vo1.Value = 0;
                 list.Add(vo1);
             }
-            foreach (Exchange ex in info.Exchanges)
+            foreach (ExchangeImpl ex in info.Exchanges)
             {
                 ValueObject<int> vo = new ValueObject<int>();
                 vo.Name = ex.Name;

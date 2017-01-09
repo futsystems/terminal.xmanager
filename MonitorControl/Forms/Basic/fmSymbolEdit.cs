@@ -72,7 +72,7 @@ namespace TradingLib.MoniterControl
                 this.Text = "编辑合约[" + _symbol.Symbol + "]";
                 //.Debug("set symbol:" + _symbol.Symbol);
                 //将symbol显示到界面 
-                int exid = _symbol.SecurityFamily != null ? (_symbol.SecurityFamily.Exchange as Exchange).ID : 0;
+                int exid = _symbol.SecurityFamily != null ? (_symbol.SecurityFamily.Exchange as ExchangeImpl).ID : 0;
                 cbexchange.SelectedValue = exid;
                 cbexchange.Enabled = false;
 

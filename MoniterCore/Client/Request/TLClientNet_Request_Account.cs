@@ -52,67 +52,67 @@ namespace TradingLib.MoniterCore
         public void ReqCashOperation(string account, decimal amount,QSEnumEquityType eq_type, string transref, string comment,bool syncmacct)
         {
             logger.Info("请求出入金操作:" + account + " amount:" + amount.ToString() + " transref:" + transref + " comment:" + comment + " syncmainacct:" + syncmacct.ToString());
-            this.ReqContribRequest("AccountManager", "AccountCashOperation", Mixins.Json.JsonMapper.ToJson(new { account = account, amount = amount, txnref = transref, comment = comment,equity_type=eq_type,sync_mainacct=syncmacct }));
+            this.ReqContribRequest("AccountManager", "AccountCashOperation", new { account = account, amount = amount, txnref = transref, comment = comment,equity_type=eq_type,sync_mainacct=syncmacct }.SerializeObject());
      
         }
 
         public void ReqUpdateAccountIntraday(string account, bool intraday)
         {
             logger.Info("请求更新帐户日内属性:" + account + " intraday:" + intraday.ToString());
-            this.ReqContribRequest("AccountManager", "UpdateAccountIntraday", Mixins.Json.JsonMapper.ToJson(new { account = account, intraday = intraday }));
+            this.ReqContribRequest("AccountManager", "UpdateAccountIntraday", new { account = account, intraday = intraday }.SerializeObject());
      
         }
 
         public void ReqUpdateAccountCategory(string account, QSEnumAccountCategory category)
         {
             logger.Info("请求更新帐户类别:" + account + " category:" + category.ToString());
-            this.ReqContribRequest("AccountManager", "UpdateAccountCategory", Mixins.Json.JsonMapper.ToJson(new { account = account, category = category }));
+            this.ReqContribRequest("AccountManager", "UpdateAccountCategory", new { account = account, category = category }.SerializeObject());
         }
 
         public void ReqUpdateRouteType(string account, QSEnumOrderTransferType routertrype)
         {
             logger.Info("请求更新路由类别:" + account + " category:" + routertrype.ToString());
-            this.ReqContribRequest("AccountManager", "UpdateRouteType", Mixins.Json.JsonMapper.ToJson(new { account = account, routertrype = routertrype }));
+            this.ReqContribRequest("AccountManager", "UpdateRouteType", new { account = account, routertrype = routertrype }.SerializeObject());
        
         }
 
         public void ReqUpdateAccountExecute(string account, bool active)
         {
             logger.Info("请求更新交易权限:" + account + " active:" + active.ToString());
-            this.ReqContribRequest("AccountManager", "UpdateAccountExecute", Mixins.Json.JsonMapper.ToJson(new { account = account, execute = active }));
+            this.ReqContribRequest("AccountManager", "UpdateAccountExecute", new { account = account, execute = active }.SerializeObject());
        
         }
 
         public void ReqUpdateAccountCurrency(string account, CurrencyType currency)
         {
             logger.Info("请求更新帐户货贝类型:" + account + " currency:" + currency.ToString());
-            this.ReqContribRequest("AccountManager", "UpdateAccountCurrency", Mixins.Json.JsonMapper.ToJson(new { account = account, currency = currency.ToString() }));
+            this.ReqContribRequest("AccountManager", "UpdateAccountCurrency",new { account = account, currency = currency.ToString() }.SerializeObject());
        
         }
         public void ReqAddAccount(QSEnumAccountCategory category, string account, string pass, int mgrid, int userid, int routergroupid)
         {
             logger.Info("请求添加交易帐号");
-            this.ReqContribRequest("AccountManager", "AddAccount", Mixins.Json.JsonMapper.ToJson(new { account = account, category = category, password = pass, user_id = userid, manager_id = mgrid, routergroup_id = routergroupid }));
+            this.ReqContribRequest("AccountManager", "AddAccount", new { account = account, category = category, password = pass, user_id = userid, manager_id = mgrid, routergroup_id = routergroupid }.SerializeObject());
         }
 
         public void ReqDelAccount(string account)
         {
             logger.Info("请求删除交易帐号");
-            this.ReqContribRequest("AccountManager", "DelAccount", Mixins.Json.JsonMapper.ToJson(new { account = account }));
+            this.ReqContribRequest("AccountManager", "DelAccount", new { account = account }.SerializeObject());
         
         }
 
         public void ReqChangeAccountPass(string account, string pass)
         {
             logger.Info("请求修改交易帐号密码");
-            this.ReqContribRequest("AccountManager", "UpdateAccountPass", Mixins.Json.JsonMapper.ToJson(new { account = account, newpass = pass }));
+            this.ReqContribRequest("AccountManager", "UpdateAccountPass", new { account = account, newpass = pass }.SerializeObject());
         
         }
 
         public void ReqChangeInverstorInfo(string account, string name, string broker, int bankfk, string bankac)
         {
             logger.Info("请求修改投资者信息");
-            this.ReqContribRequest("AccountManager", "UpdateAccountInvestor", Mixins.Json.JsonMapper.ToJson(new { account = account, name = name, broker = broker, bank_id = bankfk, bank_ac = bankac }));
+            this.ReqContribRequest("AccountManager", "UpdateAccountInvestor",new { account = account, name = name, broker = broker, bank_id = bankfk, bank_ac = bankac }.SerializeObject());
        
         }
         public void ReqUpdateAccountCommissionTemplate(string account,int templateid)

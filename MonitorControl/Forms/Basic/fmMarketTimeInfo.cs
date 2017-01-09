@@ -30,12 +30,12 @@ namespace TradingLib.MoniterControl
             //btnEdit.Click += new EventHandler(btnEdit_Click);
             btnSubmit.Click += new EventHandler(btnSubmit_Click);
 
-            CoreService.EventBasicInfo.OnMarketTimeEvent += new Action<MarketTime>(EventBasicInfo_OnMarketTimeEvent);
+            CoreService.EventBasicInfo.OnMarketTimeEvent += new Action<MarketTimeImpl>(EventBasicInfo_OnMarketTimeEvent);
 
             //timezone.SelectedIndex = 1;
         }
 
-        void EventBasicInfo_OnMarketTimeEvent(MarketTime obj)
+        void EventBasicInfo_OnMarketTimeEvent(MarketTimeImpl obj)
         {
             if (obj.ID == _mt.ID)
             {
@@ -161,9 +161,9 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        MarketTime _mt = null;
+        MarketTimeImpl _mt = null;
 
-        public void SetMarketTime(MarketTime mt)
+        public void SetMarketTime(MarketTimeImpl mt)
         {
             //清空原有数据
             rangemap.Clear();

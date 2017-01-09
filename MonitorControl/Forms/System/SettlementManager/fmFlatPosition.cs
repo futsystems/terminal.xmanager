@@ -58,7 +58,7 @@ namespace TradingLib.MoniterControl
                                 offset_flag = offsetflag.SelectedIndex ==0?2:4
                                 
                             };
-                string s = TradingLib.Mixins.Json.JsonMapper.ToJson(data);
+                //string s = TradingLib.Mixins.Json.JsonMapper.ToJson(data);
                 
                 CoreService.TLClient.ReqFlatPositionHold(data);
             }

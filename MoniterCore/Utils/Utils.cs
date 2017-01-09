@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TradingLib.Mixins.Json;
+using TradingLib.Common;
 
 namespace TradingLib.MoniterCore
 {

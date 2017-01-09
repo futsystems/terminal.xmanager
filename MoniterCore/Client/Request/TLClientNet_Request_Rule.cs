@@ -20,18 +20,18 @@ namespace TradingLib.MoniterCore
         public void ReqQryRuleItem(string account, QSEnumRuleType type)
         {
             logger.Info("请求查询帐户风控规则列表");
-            this.ReqContribRequest("RiskCentre", "QryRuleItem", Mixins.Json.JsonMapper.ToJson(new {account=account,ruletype=type }));
+            this.ReqContribRequest("RiskCentre", "QryRuleItem", new { account = account, ruletype = type }.SerializeObject());
         }
         public void ReqUpdateRuleItem(RuleItem item)
         {
             logger.Info("请求更新风控规则");
-            this.ReqContribRequest("RiskCentre", "UpdateRuleItem", Mixins.Json.JsonMapper.ToJson(item));
+            this.ReqContribRequest("RiskCentre", "UpdateRuleItem", item.SerializeObject());
         }
 
         public void ReqDelRuleItem(RuleItem item)
         {
             logger.Info("请求删除风控规则");
-            this.ReqContribRequest("RiskCentre", "DelRuleItem", Mixins.Json.JsonMapper.ToJson(item));
+            this.ReqContribRequest("RiskCentre", "DelRuleItem", item.SerializeObject());
         }
     }
 }

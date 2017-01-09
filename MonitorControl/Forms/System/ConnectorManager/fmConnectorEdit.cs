@@ -226,7 +226,7 @@ namespace TradingLib.MoniterControl
 
                 if (MoniterHelper.WindowConfirm("确认添加主帐户?") == System.Windows.Forms.DialogResult.Yes)
                 {
-                    CoreService.TLClient.ReqUpdateConnectorConfig(TradingLib.Mixins.Json.JsonMapper.ToJson(cfg));
+                    CoreService.TLClient.ReqUpdateConnectorConfig(cfg.SerializeObject());
                     this.Close();
                 }
             }
@@ -240,7 +240,7 @@ namespace TradingLib.MoniterControl
 
                 if (MoniterHelper.WindowConfirm("确认修改主帐户?") == System.Windows.Forms.DialogResult.Yes)
                 {
-                    CoreService.TLClient.ReqUpdateConnectorConfig(TradingLib.Mixins.Json.JsonMapper.ToJson(_cfg));
+                    CoreService.TLClient.ReqUpdateConnectorConfig(_cfg.SerializeObject());
                     this.Close();
                 }
 

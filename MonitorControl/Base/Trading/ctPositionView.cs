@@ -31,7 +31,7 @@ namespace TradingLib.MoniterControl
         public OrderTracker OrderTracker { get { return _ot; } set { _ot = value; } }
 
         //委托事务辅助,用于执行反手等功能
-        OrderTransactionHelper _ordTransHelper;
+        //OrderTransactionHelper _ordTransHelper;
 
         public event OrderDelegate SendOrderEvent;//发送委托
         public event LongDelegate SendCancelEvent;//取消委托
@@ -569,7 +569,7 @@ namespace TradingLib.MoniterControl
                         gt.Rows[i][REALIZEDPLACCTCURRENCY] = account != null ? ((pos.ClosedPL * pos.oSymbol.Multiple) * account.GetExchangeRate(pos.oSymbol.SecurityFamily.Currency)).ToFormatStr() : "";
                            
                     }
-                    _ordTransHelper.GotFill(t);
+                    //_ordTransHelper.GotFill(t);
                 }
                 catch (Exception ex)
                 {

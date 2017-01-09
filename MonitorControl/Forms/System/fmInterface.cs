@@ -56,7 +56,7 @@ namespace TradingLib.MoniterControl
             itface.Type = (QSEnumConnectorType)interfaceType.SelectedValue;
             itface.type_name = typename.Text;
 
-            CoreService.TLClient.ReqUpdateInterface(TradingLib.Mixins.Json.JsonMapper.ToJson(itface));
+            CoreService.TLClient.ReqUpdateInterface(itface.SerializeObject());
         }
 
         

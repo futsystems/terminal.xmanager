@@ -67,7 +67,7 @@ namespace TradingLib.MoniterCore
         /// <param name="mgr"></param>
         public void ReqUpdateManager(ManagerSetting mgr)
         {
-            this.ReqContribRequest("MgrExchServer", "UpdateManager", TradingLib.Mixins.Json.JsonMapper.ToJson(mgr));
+            this.ReqContribRequest("MgrExchServer", "UpdateManager", mgr.SerializeObject());
         }
     }
 }

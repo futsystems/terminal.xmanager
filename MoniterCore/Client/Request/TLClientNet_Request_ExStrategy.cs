@@ -26,7 +26,7 @@ namespace TradingLib.MoniterCore
         /// <param name="t"></param>
         public void ReqUpdateExStrategyTemplate(ExStrategyTemplateSetting t)
         {
-            this.ReqContribRequest("MgrExchServer", "UpdateExStrategyTemplate", TradingLib.Mixins.Json.JsonMapper.ToJson(t));
+            this.ReqContribRequest("MgrExchServer", "UpdateExStrategyTemplate", t.SerializeObject());
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace TradingLib.MoniterCore
         /// <param name="t"></param>
         public void ReqUpdateExStrategyTemplateItem(ExStrategy item)
         {
-            this.ReqContribRequest("MgrExchServer", "UpdateExStrategyTemplateItem", TradingLib.Mixins.Json.JsonMapper.ToJson(item));
+            this.ReqContribRequest("MgrExchServer", "UpdateExStrategyTemplateItem",item.SerializeObject());
         }
     }
 }

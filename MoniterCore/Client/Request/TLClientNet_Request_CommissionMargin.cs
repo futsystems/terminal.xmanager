@@ -26,7 +26,7 @@ namespace TradingLib.MoniterCore
         /// <param name="t"></param>
         public void ReqUpdateCommissionTemplate(CommissionTemplateSetting t)
         {
-            this.ReqContribRequest("MgrExchServer", "UpdateCommissionTemplate", TradingLib.Mixins.Json.JsonMapper.ToJson(t));
+            this.ReqContribRequest("MgrExchServer", "UpdateCommissionTemplate", t.SerializeObject());
         }
 
 
@@ -44,7 +44,7 @@ namespace TradingLib.MoniterCore
         /// <param name="t"></param>
         public void ReqUpdateCommissionTemplateItem(MGRCommissionTemplateItemSetting item)
         {
-            this.ReqContribRequest("MgrExchServer", "UpdateCommissionTemplateItem", TradingLib.Mixins.Json.JsonMapper.ToJson(item));
+            this.ReqContribRequest("MgrExchServer", "UpdateCommissionTemplateItem", item.SerializeObject());
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace TradingLib.MoniterCore
         /// <param name="t"></param>
         public void ReqUpdateMarginTemplate(MarginTemplateSetting t)
         {
-            this.ReqContribRequest("MgrExchServer", "UpdateMarginTemplate", TradingLib.Mixins.Json.JsonMapper.ToJson(t));
+            this.ReqContribRequest("MgrExchServer", "UpdateMarginTemplate", t.SerializeObject());
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace TradingLib.MoniterCore
         /// <param name="item"></param>
         public void ReqUpdateCommissionTemplateItem(MGRMarginTemplateItemSetting item)
         {
-            this.ReqContribRequest("MgrExchServer", "UpdateMarginTemplateItem", TradingLib.Mixins.Json.JsonMapper.ToJson(item));
+            this.ReqContribRequest("MgrExchServer", "UpdateMarginTemplateItem", item.SerializeObject());
         }
     }
 }

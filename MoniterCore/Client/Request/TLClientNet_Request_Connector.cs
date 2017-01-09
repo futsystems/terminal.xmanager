@@ -131,7 +131,7 @@ namespace TradingLib.MoniterCore
         public void ReqUpdateRouterItem(RouterItemSetting item)
         {
             logger.Info("请求更新或添加路由项目");
-            this.ReqContribRequest("ConnectorManager", "UpdateRouterItem", TradingLib.Mixins.Json.JsonMapper.ToJson(item));
+            this.ReqContribRequest("ConnectorManager", "UpdateRouterItem",item.SerializeObject());
         }
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace TradingLib.MoniterCore
         public void ReqUpdateRouterGroup(RouterGroupSetting group)
         {
             logger.Info("请求更新或添加路由组");
-            this.ReqContribRequest("ConnectorManager", "UpdateRouterGroup", TradingLib.Mixins.Json.JsonMapper.ToJson(group));
+            this.ReqContribRequest("ConnectorManager", "UpdateRouterGroup", group.SerializeObject());
         }
 
     }

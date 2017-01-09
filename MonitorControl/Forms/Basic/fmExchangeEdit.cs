@@ -48,7 +48,7 @@ namespace TradingLib.MoniterControl
             {
                 if (MoniterHelper.WindowConfirm("确认添加交易所?") == System.Windows.Forms.DialogResult.Yes)
                 {
-                    Exchange ex = new Exchange();
+                    ExchangeImpl ex = new ExchangeImpl();
                     ex.Name = this.name.Text;
                     ex.Title = this.title.Text;
                     ex.Country = (Country)this.country.SelectedValue;
@@ -123,8 +123,8 @@ namespace TradingLib.MoniterControl
         }
 
 
-        Exchange _exchange;
-        public void SetExchange(Exchange ex)
+        ExchangeImpl _exchange;
+        public void SetExchange(ExchangeImpl ex)
         {
             _exchange = ex;
             this.Text = "编辑交易所:"+ex.EXCode;

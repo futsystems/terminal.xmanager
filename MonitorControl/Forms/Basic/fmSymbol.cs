@@ -137,7 +137,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][SECID] = sym.SecurityFamily != null ?(sym.SecurityFamily as SecurityFamilyImpl).ID:0;
                     gt.Rows[i][SECCODE] = sym.SecurityFamily != null ? sym.SecurityFamily.Code : "未设置";
                     gt.Rows[i][SECTYPE] = sym.SecurityType;
-                    gt.Rows[i][EXCHANGEID] = sym.SecurityFamily != null ? (sym.SecurityFamily.Exchange as Exchange).ID : 0;
+                    gt.Rows[i][EXCHANGEID] = sym.SecurityFamily != null ? (sym.SecurityFamily.Exchange as ExchangeImpl).ID : 0;
                     gt.Rows[i][EXCHANGE] = sym.SecurityFamily != null ? sym.SecurityFamily.Exchange.Title : "未设置";
 
                     gt.Rows[i][UNDERLAYINGID] = sym.underlaying_fk;
@@ -167,7 +167,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][SECID] = sym.SecurityFamily != null ? (sym.SecurityFamily as SecurityFamilyImpl).ID : 0;
                     gt.Rows[i][SECCODE] = sym.SecurityFamily != null ? sym.SecurityFamily.Code : "未设置";
                     gt.Rows[i][SECTYPE] = sym.SecurityType;
-                    gt.Rows[i][EXCHANGEID] = sym.SecurityFamily != null ? (sym.SecurityFamily.Exchange as Exchange).ID : 0;
+                    gt.Rows[i][EXCHANGEID] = sym.SecurityFamily != null ? (sym.SecurityFamily.Exchange as ExchangeImpl).ID : 0;
                     gt.Rows[i][EXCHANGE] = sym.SecurityFamily != null ? sym.SecurityFamily.Exchange.Title : "未设置";
 
                     gt.Rows[i][UNDERLAYINGID] = sym.underlaying_fk;

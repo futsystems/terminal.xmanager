@@ -46,7 +46,7 @@ namespace TradingLib.MoniterControl
 
         void OnQryVenderFlatRule(string json,bool islast)
         {
-            var payload = MoniterHelper.ToJsonObject(json)["Payload"];
+            var payload = json.DeserializeObject()["Payload"];// MoniterHelper.ToJsonObject(json)["Payload"];
             if (payload != null)
             {
                 var _equity = decimal.Parse(payload["equity"].ToString());//初始权益

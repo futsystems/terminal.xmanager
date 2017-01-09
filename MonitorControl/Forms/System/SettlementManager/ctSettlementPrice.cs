@@ -44,7 +44,7 @@ namespace TradingLib.MoniterControl
 
         void gridSettlementPrice_DoubleClick(object sender, EventArgs e)
         {
-            MarketData price = CurrentSettlementPrice;
+            SettlementPrice price = CurrentSettlementPrice;
             if (price == null)
             {
                 MoniterHelper.WindowMessage("请选择要编辑的结算价信息");
@@ -80,14 +80,14 @@ namespace TradingLib.MoniterControl
         }
 
         //得到当前选择的行号
-        private MarketData CurrentSettlementPrice
+        private SettlementPrice CurrentSettlementPrice
         {
             get
             {
                 //gridSettlementPrice.CurrentRow.Index
                 int row = (gridSettlementPrice.SelectedRows.Count > 0 ? gridSettlementPrice.SelectedRows[0].Index : -1);
                 string symbol =  row == -1 ? string.Empty : (gridSettlementPrice[1, row].Value.ToString());
-                MarketData price = null;
+                SettlementPrice price = null;
                 if (settlementPriceMap.TryGetValue(symbol, out price))
                 {
                     return settlementPriceMap[symbol];
@@ -97,7 +97,7 @@ namespace TradingLib.MoniterControl
         }
 
 
-        private Dictionary<string, MarketData> settlementPriceMap = new Dictionary<string, MarketData>();
+        private Dictionary<string, SettlementPrice> settlementPriceMap = new Dictionary<string, SettlementPrice>();
         private Dictionary<string, int> settlementPriceRowMap = new Dictionary<string, int>();
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace TradingLib.MoniterControl
 
         void OnUpdateSettlementPrice(string json,bool islast)
         {
-            MarketData obj = MoniterHelper.ParseJsonResponse<MarketData>(json);
+            SettlementPrice obj = MoniterHelper.ParseJsonResponse<SettlementPrice>(json);
             if (obj != null)
             {
                 InvokeGotSettlementPrice(obj);
@@ -126,7 +126,7 @@ namespace TradingLib.MoniterControl
 
         void OnQrySettlementPrice(string json,bool islast)
         {
-            MarketData[] list = MoniterHelper.ParseJsonResponse<MarketData[]>(json);
+            SettlementPrice[] list = MoniterHelper.ParseJsonResponse<SettlementPrice[]>(json);
             if (list != null)
             {
                 foreach (var price in list)
@@ -136,11 +136,11 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        void InvokeGotSettlementPrice(MarketData price)
+        void InvokeGotSettlementPrice(SettlementPrice price)
         {
             if (InvokeRequired)
             {
-                Invoke(new Action<MarketData>(InvokeGotSettlementPrice), new object[] { price });
+                Invoke(new Action<SettlementPrice>(InvokeGotSettlementPrice), new object[] { price });
             }
             else
             {

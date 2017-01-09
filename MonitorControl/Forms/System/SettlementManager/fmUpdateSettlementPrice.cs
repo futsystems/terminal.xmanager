@@ -19,8 +19,8 @@ namespace TradingLib.MoniterControl
             InitializeComponent();
         }
 
-        MarketData _price;
-        public void SetSettlementPrice(MarketData price)
+        SettlementPrice _price;
+        public void SetSettlementPrice(SettlementPrice price)
         {
             _price = price;
             lbPrice.Text = price.Settlement.ToFormatStr();

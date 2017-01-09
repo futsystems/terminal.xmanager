@@ -44,11 +44,11 @@ namespace TradingLib.MoniterControl
         {
             cbConnectorList.Items.Clear();
 
-            var data = TradingLib.Mixins.Json.JsonMapper.ToObject(json)["Payload"];
+            var data = json.DeserializeObject()["Payload"];// TradingLib.Mixins.Json.JsonMapper.ToObject(json)["Payload"];
 
             ArrayList list = new ArrayList();
 
-            foreach (TradingLib.Mixins.Json.JsonData connector in data)
+            foreach (var connector in data)
             {
                 ValueObject<int> vo = new ValueObject<int>();
                 vo.Name = string.Format("{0}-{1}", connector["UserName"].ToString(), connector["LoginID"].ToString());
@@ -60,7 +60,7 @@ namespace TradingLib.MoniterControl
         }
         void OnAccountConnecorPair(string json,bool islast)
         {
-            var data = TradingLib.Mixins.Json.JsonMapper.ToObject(json)["Payload"];
+            var data = json.DeserializeObject()["Payload"];// TradingLib.Mixins.Json.JsonMapper.ToObject(json)["Payload"];
 
             string account = data["Account"].ToString();
             int connector_id = int.Parse(data["ConnectorID"].ToString());

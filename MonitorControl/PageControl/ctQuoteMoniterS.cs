@@ -17,7 +17,7 @@ namespace TradingLib.MoniterControl
 {
     public partial class ctQuoteMoniterS : UserControl,IEventBinder, IMoniterControl
     {
-        public event Action<IExchange> ExchangeChangedEvent;
+        public event Action<Exchange> ExchangeChangedEvent;
         public event Action<Symbol> OpenChartEvent;
 
         ILog logger = LogManager.GetLogger("QuoteMoniterS");
@@ -89,8 +89,8 @@ namespace TradingLib.MoniterControl
 
 
         ViewQuoteList GetSelectedQuote()
-        { 
-            IExchange exchange = navigator.SelectedPage.Tag as IExchange;
+        {
+            Exchange exchange = navigator.SelectedPage.Tag as Exchange;
             if (exchange != null)
             {
                 return GetQuoteList(exchange.EXCode);
@@ -159,7 +159,7 @@ namespace TradingLib.MoniterControl
             logger.Info("Current Page:" + navigator.SelectedPage.Name);
             if (ExchangeChangedEvent != null)
             {
-                IExchange exchange = navigator.SelectedPage.Tag as IExchange;
+                Exchange exchange = navigator.SelectedPage.Tag as Exchange;
                 if (exchange != null)
                 {
                     ExchangeChangedEvent(exchange);
@@ -169,7 +169,7 @@ namespace TradingLib.MoniterControl
 
 
         ConcurrentDictionary<string, ViewQuoteList> exchangeQuoteMap = new ConcurrentDictionary<string, ViewQuoteList>();
-        ConcurrentDictionary<string, IExchange> exchangeMap = new ConcurrentDictionary<string, IExchange>();
+        ConcurrentDictionary<string, Exchange> exchangeMap = new ConcurrentDictionary<string, Exchange>();
         ConcurrentDictionary<string, ComponentFactory.Krypton.Navigator.KryptonPage> pageMap = new ConcurrentDictionary<string, ComponentFactory.Krypton.Navigator.KryptonPage>();
 
         ViewQuoteList GetQuoteList(string exchange)
@@ -186,9 +186,9 @@ namespace TradingLib.MoniterControl
         /// <summary>
         /// 获得所有交易所
         /// </summary>
-        public IEnumerable<IExchange> Exchanges { get { return exchangeMap.Values; } }
+        public IEnumerable<Exchange> Exchanges { get { return exchangeMap.Values; } }
 
-        EnumQuoteType GetQuoteType(IExchange ex)
+        EnumQuoteType GetQuoteType(Exchange ex)
         {
             switch (ex.EXCode)
             { 
@@ -205,7 +205,7 @@ namespace TradingLib.MoniterControl
         /// 添加一个交易所
         /// </summary>
         /// <param name="ex"></param>
-        public void AddExchange(IExchange ex)
+        public void AddExchange(Exchange ex)
         {
             ViewQuoteList quote = new ViewQuoteList();
             quote.HeaderBackColor = Color.FromArgb(0, 0, 0);
@@ -270,7 +270,7 @@ namespace TradingLib.MoniterControl
         /// </summary>
         /// <param name="exchange"></param>
         /// <param name="symbols"></param>
-        public void AddSymbols(IExchange exchange, IEnumerable<Symbol> symbols)
+        public void AddSymbols(Exchange exchange, IEnumerable<Symbol> symbols)
         {
             ViewQuoteList target = GetQuoteList(exchange.EXCode);
             if (target != null)

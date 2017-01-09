@@ -5,7 +5,7 @@ using System.Text;
 using TradingLib.API;
 using TradingLib.Common;
 using TradingLib.Protocol;
-using TradingLib.Mixins.JsonObject;
+
 
 namespace TradingLib.MoniterCore
 {
@@ -16,7 +16,7 @@ namespace TradingLib.MoniterCore
 
         public void ReqUpdateRecvBank(JsonWrapperReceivableAccount bank)
         {
-            this.ReqContribRequest("MgrExchServer", "UpdateReceiveableBank",TradingLib.Mixins.Json.JsonMapper.ToJson(bank)); 
+            this.ReqContribRequest("MgrExchServer", "UpdateReceiveableBank",bank.SerializeObject()); 
         }
         /// <summary>
         /// 请求同步品种
@@ -50,7 +50,7 @@ namespace TradingLib.MoniterCore
             SendPacket(request);
         }
 
-        public void ReqUpdateExchange(Exchange ex)
+        public void ReqUpdateExchange(ExchangeImpl ex)
         {
             logger.Info("请求更新交易所");
             MGRUpdateExchangeRequest request = RequestTemplate<MGRUpdateExchangeRequest>.CliSendRequest(++requestid);
@@ -68,7 +68,7 @@ namespace TradingLib.MoniterCore
             SendPacket(request);
         }
 
-        public void ReqUpdateMarketTime(MarketTime mt)
+        public void ReqUpdateMarketTime(MarketTimeImpl mt)
         {
             logger.Info("请求更新交易时间段");
             MGRUpdateMarketTimeRequest request = RequestTemplate<MGRUpdateMarketTimeRequest>.CliSendRequest(++requestid);

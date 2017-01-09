@@ -93,7 +93,7 @@ namespace TradingLib.MoniterControl
                     sec_list = seclist.Text,
                 };
 
-                item.Value = TradingLib.Mixins.Json.JsonMapper.ToJson(args);
+                item.Value = args.SerializeObject();// TradingLib.Mixins.Json.JsonMapper.ToJson(args);
 
                 if (MoniterHelper.WindowConfirm("确添加帐户风控规则?") == System.Windows.Forms.DialogResult.Yes)
                 {

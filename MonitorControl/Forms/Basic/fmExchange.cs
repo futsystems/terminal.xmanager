@@ -34,12 +34,12 @@ namespace TradingLib.MoniterControl
             exchangegrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(exchangegrid_RowPrePaint);
             exchangegrid.DoubleClick += new EventHandler(exchangegrid_DoubleClick);
             btnAddExchange.Click += new EventHandler(btnAddExchange_Click);
-            foreach (Exchange ex in CoreService.BasicInfoTracker.Exchanges)
+            foreach (ExchangeImpl ex in CoreService.BasicInfoTracker.Exchanges)
             {
                 this.InvokeGotExchange(ex);
             }
 
-            CoreService.EventBasicInfo.OnExchangeEvent += new Action<Exchange>(EventBasicInfo_OnExchangeEvent);
+            CoreService.EventBasicInfo.OnExchangeEvent += new Action<ExchangeImpl>(EventBasicInfo_OnExchangeEvent);
         }
 
         void btnAddExchange_Click(object sender, EventArgs e)
@@ -49,7 +49,7 @@ namespace TradingLib.MoniterControl
             fm.Close();
         }
 
-        void EventBasicInfo_OnExchangeEvent(Exchange obj)
+        void EventBasicInfo_OnExchangeEvent(ExchangeImpl obj)
         {
             InvokeGotExchange(obj);
         }
@@ -75,7 +75,7 @@ namespace TradingLib.MoniterControl
 
         void exchangegrid_DoubleClick(object sender, EventArgs e)
         {
-            Exchange current = GetExchangeSelected(CurrentExchangeID);
+            ExchangeImpl current = GetExchangeSelected(CurrentExchangeID);
             if (current == null)
             {
                 MoniterHelper.WindowMessage("请选择要编辑的交易所");
@@ -95,9 +95,9 @@ namespace TradingLib.MoniterControl
         }
 
         //通过行号得该行的Security
-        Exchange GetExchangeSelected(int id)
+        ExchangeImpl GetExchangeSelected(int id)
         {
-            Exchange ex = null;
+            ExchangeImpl ex = null;
             if (exchangemap.TryGetValue(id, out ex))
             {
                 return ex;
@@ -110,7 +110,7 @@ namespace TradingLib.MoniterControl
         }
 
         Dictionary<int, int> exchangeidmap = new Dictionary<int, int>();
-        Dictionary<int, Exchange> exchangemap = new Dictionary<int, Exchange>();
+        Dictionary<int, ExchangeImpl> exchangemap = new Dictionary<int, ExchangeImpl>();
 
         int ExchangeIdx(int id)
         {
@@ -126,8 +126,8 @@ namespace TradingLib.MoniterControl
         }
 
 
-        delegate void ExchangeDel(Exchange ex);
-        void InvokeGotExchange(Exchange ex)
+        delegate void ExchangeDel(ExchangeImpl ex);
+        void InvokeGotExchange(ExchangeImpl ex)
         {
             if (InvokeRequired)
             {

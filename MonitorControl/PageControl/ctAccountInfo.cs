@@ -11,7 +11,6 @@ using TradingLib.Common;
 using TradingLib.MoniterCore;
 using System.Net;
 using System.IO;
-using TradingLib.Mixins.Json;
 using System.Runtime.Remoting.Messaging;
 
 namespace TradingLib.MoniterControl
@@ -278,7 +277,7 @@ namespace TradingLib.MoniterControl
                 using (StreamReader stream = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("GB18030")))
                 {
                     direction = stream.ReadToEnd();
-                    JsonData data = JsonMapper.ToObject(direction);
+                    var data = direction.DeserializeObject();
                     var code = int.Parse(data["code"].ToString());
                     if (code == 0)
                     {

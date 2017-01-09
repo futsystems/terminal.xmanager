@@ -28,7 +28,7 @@ namespace TradingLib.MoniterControl
                 _rate.AskRate = ask_rate.Value;
                 _rate.BidRate = bid_rate.Value;
 
-                CoreService.TLClient.ReqContribRequest("MgrExchServer", "UpdateExchangeRate", TradingLib.Mixins.Json.JsonMapper.ToJson(_rate));
+                CoreService.TLClient.ReqContribRequest("MgrExchServer", "UpdateExchangeRate", _rate);
                 this.Close();
             }
         }

@@ -157,7 +157,7 @@ namespace TradingLib.MoniterCore
         public void ReqContribRequest(string module, string cmd,object jobj)
         {
 
-            string args = TradingLib.Mixins.Json.JsonMapper.ToJson(jobj);
+            string args = jobj.SerializeObject();
             logger.Info("请求扩展命令,module:" + module + " cmd:" + cmd + " args:" + args);
             this.ReqContribRequest(module, cmd, args);
         }

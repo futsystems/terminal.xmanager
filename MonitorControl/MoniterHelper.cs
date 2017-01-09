@@ -11,7 +11,7 @@ using TradingLib.API;
 using TradingLib.Common;
 using TradingLib.MoniterCore;
 using ComponentFactory.Krypton.Toolkit;
-using TradingLib.Mixins.Json;
+
 
 
 namespace TradingLib.MoniterControl
@@ -48,10 +48,10 @@ namespace TradingLib.MoniterControl
         /// </summary>
         /// <param name="json"></param>
         /// <returns></returns>
-        public static TradingLib.Mixins.Json.JsonData ToJsonObject(string json)
-        {
-            return TradingLib.Mixins.Json.JsonMapper.ToObject(json);
-        }
+        //public static TradingLib.Mixins.Json.JsonData ToJsonObject(string json)
+        //{
+        //    return TradingLib.Mixins.Json.JsonMapper.ToObject(json);
+        //}
 
         /// <summary>
         /// 将控件适配到IDataSource用于数据的统一绑定

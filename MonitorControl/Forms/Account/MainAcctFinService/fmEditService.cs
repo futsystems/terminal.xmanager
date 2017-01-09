@@ -123,7 +123,7 @@ namespace TradingLib.MoniterControl
 
         void ReqUpdateFinService(FinServiceSetting fs)
         {
-            CoreService.TLClient.ReqContribRequest("MainAcctFinService", "UpdateFinService", TradingLib.Mixins.Json.JsonMapper.ToJson(fs));
+            CoreService.TLClient.ReqContribRequest("MainAcctFinService", "UpdateFinService", fs);
         }
 
         void ReqQryFinService(string account)
