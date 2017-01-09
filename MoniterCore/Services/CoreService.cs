@@ -235,5 +235,38 @@ namespace TradingLib.MoniterCore
             }
         }
 
+        /// <summary>
+        /// 解析服务端返回回报
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="json"></param>
+        /// <returns></returns>
+        public static T ParseJsonResponse<T>(string json)
+        {
+            JsonReply<T> reply = JsonReply.ParseReply<T>(json);
+            if (reply.Code == 0)
+            {
+                return reply.Payload;
+            }
+            else
+            {
+                return default(T);
+            }
+        }
+
+        public static Newtonsoft.Json.Linq.JToken ParseJsonResponse(string json)
+        {
+            return json.DeserializeObject()["Payload"];
+
+            //JsonReply<T> reply = JsonReply.ParseReply<T>(json);
+            //if (reply.Code == 0)
+            //{
+            //    return reply.Payload;
+            //}
+            //else
+            //{
+            //    return default(T);
+            //}
+        }
     }
 }

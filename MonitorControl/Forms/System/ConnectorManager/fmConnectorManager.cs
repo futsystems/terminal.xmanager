@@ -117,7 +117,7 @@ namespace TradingLib.MoniterControl
 
         void OnQryInterface(string jsonstr, bool islast)
         {
-            ConnectorInterface[] objs = MoniterHelper.ParseJsonResponse<ConnectorInterface[]>(jsonstr);
+            ConnectorInterface[] objs = CoreService.ParseJsonResponse<ConnectorInterface[]>(jsonstr);
             if (objs != null)
             {
                 foreach (ConnectorInterface op in objs)
@@ -149,7 +149,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyConnectorConfig(string jsonstr)
         {
-            ConnectorConfig cfg = MoniterHelper.ParseJsonResponse<ConnectorConfig>(jsonstr);
+            ConnectorConfig cfg = CoreService.ParseJsonResponse<ConnectorConfig>(jsonstr);
             if (cfg != null)
             {
                 InvokeGotConnector(cfg);
@@ -163,7 +163,7 @@ namespace TradingLib.MoniterControl
         bool _gotconnector = false;
         void OnQryConnectorConfig(string jsonstr, bool islast)
         {
-            ConnectorConfig[] objs = MoniterHelper.ParseJsonResponse<ConnectorConfig[]>(jsonstr);
+            ConnectorConfig[] objs = CoreService.ParseJsonResponse<ConnectorConfig[]>(jsonstr);
             if (objs != null)
             {
                 foreach (ConnectorConfig op in objs)
@@ -185,7 +185,7 @@ namespace TradingLib.MoniterControl
         bool _gotstatus = false;
         void OnQryConnectorStatus(string jsonstr, bool islast)
         {
-            ConnectorStatus[] objs = MoniterHelper.ParseJsonResponse<ConnectorStatus[]>(jsonstr);
+            ConnectorStatus[] objs = CoreService.ParseJsonResponse<ConnectorStatus[]>(jsonstr);
             if (objs != null)
             {
                 foreach (ConnectorStatus op in objs)
@@ -202,7 +202,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyConnectorStatus(string jsonstr)
         {
-            ConnectorStatus obj = MoniterHelper.ParseJsonResponse<ConnectorStatus>(jsonstr);
+            ConnectorStatus obj = CoreService.ParseJsonResponse<ConnectorStatus>(jsonstr);
             if (obj != null)
             {
                 InvokeGotConnectorStatus(obj);

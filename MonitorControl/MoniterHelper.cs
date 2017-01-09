@@ -18,41 +18,6 @@ namespace TradingLib.MoniterControl
 {
     public class MoniterHelper
     {
-
-        /// <summary>
-        /// 通过底层Client发送一个请求
-        /// </summary>
-        /// <param name="module"></param>
-        /// <param name="cmd"></param>
-        /// <param name="args"></param>
-        public static void Request(string module, string cmd, string args)
-        {
-            CoreService.TLClient.ReqContribRequest(module, cmd, args);
-        }
-
-
-
-        /// <summary>
-        /// 解析返回的Json数据到对象
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="json"></param>
-        /// <returns></returns>
-        public static T ParseJsonResponse<T>(string json)
-        {
-            return MoniterUtil.ParseJsonResponse<T>(json);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="json"></param>
-        /// <returns></returns>
-        //public static TradingLib.Mixins.Json.JsonData ToJsonObject(string json)
-        //{
-        //    return TradingLib.Mixins.Json.JsonMapper.ToObject(json);
-        //}
-
         /// <summary>
         /// 将控件适配到IDataSource用于数据的统一绑定
         /// </summary>

@@ -123,7 +123,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyFee(string json)
         {
-            FeeSetting f = MoniterHelper.ParseJsonResponse<FeeSetting>(json);
+            FeeSetting f = CoreService.ParseJsonResponse<FeeSetting>(json);
             if (f != null)
             {
                 InvokeGotFee(f);
@@ -132,7 +132,7 @@ namespace TradingLib.MoniterControl
 
         void OnFee(string json, bool islast)
         {
-            FeeSetting f = MoniterHelper.ParseJsonResponse<FeeSetting>(json);
+            FeeSetting f = CoreService.ParseJsonResponse<FeeSetting>(json);
             if (f != null)
             {
                 InvokeGotFee(f);

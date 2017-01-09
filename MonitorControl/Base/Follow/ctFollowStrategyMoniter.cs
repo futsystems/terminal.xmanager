@@ -134,7 +134,7 @@ namespace TradingLib.MoniterControl
 
         void OnFollowStrategyConfigNotify(string json)
         {
-            FollowStrategyConfig cfg = MoniterHelper.ParseJsonResponse<FollowStrategyConfig>(json);
+            FollowStrategyConfig cfg = CoreService.ParseJsonResponse<FollowStrategyConfig>(json);
             if (cfg != null)
             {
                 InvokeGotStrategyCfg(cfg);
@@ -143,7 +143,7 @@ namespace TradingLib.MoniterControl
 
         void OnFollowStrategyStatusNotify(string json)
         {
-            FollowStrategyStatus status = MoniterHelper.ParseJsonResponse<FollowStrategyStatus>(json);
+            FollowStrategyStatus status = CoreService.ParseJsonResponse<FollowStrategyStatus>(json);
             if (status != null)
             {
                 InvokeGotStrategyStatusNotify(status);
@@ -152,7 +152,7 @@ namespace TradingLib.MoniterControl
 
         void OnQryFollowStrategyList(string json, bool islast)
         {
-            FollowStrategyConfig cfg = MoniterHelper.ParseJsonResponse<FollowStrategyConfig>(json);
+            FollowStrategyConfig cfg = CoreService.ParseJsonResponse<FollowStrategyConfig>(json);
             if (cfg != null)
             {
                 InvokeGotStrategyCfg(cfg);

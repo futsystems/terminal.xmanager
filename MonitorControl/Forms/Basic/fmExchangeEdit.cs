@@ -78,7 +78,7 @@ namespace TradingLib.MoniterControl
         List<CalendarItem> calenarlist = new List<CalendarItem>();
         void OnQryCalendarItems(string json, bool islast)
         {
-            CalendarItem item = MoniterHelper.ParseJsonResponse<CalendarItem>(json);
+            CalendarItem item = CoreService.ParseJsonResponse<CalendarItem>(json);
             if (item != null)
             {
                 calenarlist.Add(item);

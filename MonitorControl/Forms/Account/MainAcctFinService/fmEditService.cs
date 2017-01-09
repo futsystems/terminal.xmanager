@@ -93,7 +93,7 @@ namespace TradingLib.MoniterControl
 
         void OnFinService(string json,bool islast)
         {
-            FinServiceSetting fs = MoniterHelper.ParseJsonResponse<FinServiceSetting>(json);
+            FinServiceSetting fs = CoreService.ParseJsonResponse<FinServiceSetting>(json);
             if (fs == null)
             {
                 btnDel.Enabled = false;

@@ -76,7 +76,7 @@ namespace TradingLib.MoniterControl
         }
         void OnQrySystemStatus(string json, bool islast)
         {
-            SystemStatus status = MoniterHelper.ParseJsonResponse<SystemStatus>(json);
+            SystemStatus status = CoreService.ParseJsonResponse<SystemStatus>(json);
             if (status != null)
             {
                 GotSystemStatus(status);

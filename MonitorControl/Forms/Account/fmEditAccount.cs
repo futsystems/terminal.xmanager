@@ -119,7 +119,7 @@ namespace TradingLib.MoniterControl
 
         void OnQryAccountProfile(string json, bool islast)
         {
-            AccountProfile profile = MoniterHelper.ParseJsonResponse<AccountProfile>(json);
+            AccountProfile profile = CoreService.ParseJsonResponse<AccountProfile>(json);
             if (profile != null && profile.Account.Equals(_account.Account))
             {
                 account.Text = profile.Account;

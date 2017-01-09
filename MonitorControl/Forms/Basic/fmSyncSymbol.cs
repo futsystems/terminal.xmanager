@@ -91,7 +91,7 @@ namespace TradingLib.MoniterControl
         bool _gotvendor = false;
         void OnQryVendor(string jsonstr, bool islast)
         {
-            //VendorSetting[] objs = MoniterHelper.ParseJsonResponse<VendorSetting[]>(jsonstr);
+            //VendorSetting[] objs = CoreService.ParseJsonResponse<VendorSetting[]>(jsonstr);
             //if (objs != null)
             //{
             //    MoniterHelper.AdapterToIDataSource(cbVendor).BindDataSource(GetVendorCBList(objs));

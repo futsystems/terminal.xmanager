@@ -182,7 +182,7 @@ namespace TradingLib.MoniterControl
 
         void OnQryExStrategyTemplateItem(string json, bool islast)
         {
-            ExStrategy item = MoniterHelper.ParseJsonResponse<ExStrategy>(json);
+            ExStrategy item = CoreService.ParseJsonResponse<ExStrategy>(json);
             if (item != null)
             {
                 GotExStrategy(item);
@@ -191,7 +191,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyExStrategyTemplateItem(string json)
         {
-            ExStrategy obj = MoniterHelper.ParseJsonResponse<ExStrategy>(json);
+            ExStrategy obj = CoreService.ParseJsonResponse<ExStrategy>(json);
             if (obj != null)
             {
                 GotExStrategy(obj);
@@ -236,7 +236,7 @@ namespace TradingLib.MoniterControl
         Dictionary<int, ExStrategyTemplateSetting> templatemap = new Dictionary<int, ExStrategyTemplateSetting>();
         void OnQryExStrategyTemplate(string json, bool islast)
         {
-            ExStrategyTemplateSetting[] list = MoniterHelper.ParseJsonResponse<ExStrategyTemplateSetting[]>(json);
+            ExStrategyTemplateSetting[] list = CoreService.ParseJsonResponse<ExStrategyTemplateSetting[]>(json);
             if (list != null)
             {
                 foreach (ExStrategyTemplateSetting t in list)
@@ -255,7 +255,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyDelMarginTemplate(string json)
         {
-            ExStrategyTemplateSetting obj = MoniterHelper.ParseJsonResponse<ExStrategyTemplateSetting>(json);
+            ExStrategyTemplateSetting obj = CoreService.ParseJsonResponse<ExStrategyTemplateSetting>(json);
             if (obj != null)
             {
                 ExStrategyTemplateSetting template = templateTree.SelectedNode.Tag as ExStrategyTemplateSetting;
@@ -269,7 +269,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyExStrategyTemplate(string json)
         {
-            ExStrategyTemplateSetting obj = MoniterHelper.ParseJsonResponse<ExStrategyTemplateSetting>(json);
+            ExStrategyTemplateSetting obj = CoreService.ParseJsonResponse<ExStrategyTemplateSetting>(json);
             if (obj != null)
             {
                 ExStrategyTemplateSetting target = null;

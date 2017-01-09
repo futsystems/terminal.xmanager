@@ -47,7 +47,7 @@ namespace TradingLib.MoniterControl
 
         void OnQryBank(string jsonstr, bool islast)
         {
-            JsonWrapperBank[] obj = MoniterUtil.ParseJsonResponse<JsonWrapperBank[]>(jsonstr);
+            JsonWrapperBank[] obj = CoreService.ParseJsonResponse<JsonWrapperBank[]>(jsonstr);
             if (obj != null)
             {
                 //JsonWrapperBank[] obj = TradingLib.Mixins.LitJson.JsonMapper.ToObject<JsonWrapperBank[]>(jd["Playload"].ToJson());

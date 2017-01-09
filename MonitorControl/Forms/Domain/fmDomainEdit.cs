@@ -116,7 +116,7 @@ namespace TradingLib.MoniterControl
 
         void OnQryInterface(string jsonstr ,bool islast)
         {
-            ConnectorInterface[] objs = MoniterHelper.ParseJsonResponse<ConnectorInterface[]>(jsonstr);
+            ConnectorInterface[] objs = CoreService.ParseJsonResponse<ConnectorInterface[]>(jsonstr);
             if (objs !=null)
             {
                 foreach (ConnectorInterface op in objs)
@@ -186,7 +186,7 @@ namespace TradingLib.MoniterControl
         bool _gotsplist = false;
         void OnQryFinServicePlan(string jsonstr, bool islast)
         {
-            JsonWrapperServicePlane[] objs = MoniterHelper.ParseJsonResponse<JsonWrapperServicePlane[]>(jsonstr);
+            JsonWrapperServicePlane[] objs = CoreService.ParseJsonResponse<JsonWrapperServicePlane[]>(jsonstr);
             if (objs != null)
             {
                 foreach (JsonWrapperServicePlane sp in objs)

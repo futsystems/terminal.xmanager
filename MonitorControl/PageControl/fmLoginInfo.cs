@@ -67,7 +67,7 @@ namespace TradingLib.MoniterControl
 
         void OnLoginInfo(string json, bool islast)
         {
-            LoginInfo info = MoniterHelper.ParseJsonResponse<LoginInfo>(json);
+            LoginInfo info = CoreService.ParseJsonResponse<LoginInfo>(json);
             if (json != null)
             {
                 loginname.Text = info.LoginID;

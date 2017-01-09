@@ -83,7 +83,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyAgentPermission(string jsonstr)
         {
-            UIAccess obj = MoniterHelper.ParseJsonResponse<UIAccess>(jsonstr);
+            UIAccess obj = CoreService.ParseJsonResponse<UIAccess>(jsonstr);
             if (obj != null)
             {
                 pmcurrent.Text = obj.name;
@@ -96,7 +96,7 @@ namespace TradingLib.MoniterControl
         void OnAgentPermission(string jsonstr, bool islast)
         {
 
-            UIAccess obj = MoniterHelper.ParseJsonResponse<UIAccess>(jsonstr);
+            UIAccess obj = CoreService.ParseJsonResponse<UIAccess>(jsonstr);
             if (obj != null)
             {   
                 pmcurrent.Text = obj.name;
@@ -110,7 +110,7 @@ namespace TradingLib.MoniterControl
         bool _loaded = false;
         void OnPermissionTemplate(string jsonstr, bool islast)
         {
-            UIAccess[] objs = MoniterHelper.ParseJsonResponse<UIAccess[]>(jsonstr);
+            UIAccess[] objs = CoreService.ParseJsonResponse<UIAccess[]>(jsonstr);
             if (objs!= null)
             {
                 foreach (UIAccess access in objs)

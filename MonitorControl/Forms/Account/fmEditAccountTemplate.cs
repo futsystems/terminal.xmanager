@@ -76,7 +76,7 @@ namespace TradingLib.MoniterControl
 
         void OnQryCommissionTemplate(string json, bool islast)
         {
-            CommissionTemplateSetting[] list = MoniterHelper.ParseJsonResponse<CommissionTemplateSetting[]>(json);
+            CommissionTemplateSetting[] list = CoreService.ParseJsonResponse<CommissionTemplateSetting[]>(json);
             if (list != null)
             {
                 MoniterHelper.AdapterToIDataSource(cbCommissionTemplate).BindDataSource(GetCommissionTemplateCBList(list));
@@ -89,7 +89,7 @@ namespace TradingLib.MoniterControl
 
         void OnQryMarginTemplate(string json, bool islast)
         {
-            MarginTemplateSetting[] list = MoniterHelper.ParseJsonResponse<MarginTemplateSetting[]>(json);
+            MarginTemplateSetting[] list = CoreService.ParseJsonResponse<MarginTemplateSetting[]>(json);
             if (list != null)
             {
                 MoniterHelper.AdapterToIDataSource(cbMarginTemplate).BindDataSource(GetMarginTemplateCBList(list));
@@ -102,7 +102,7 @@ namespace TradingLib.MoniterControl
 
         void OnQryExStrategyTemplate(string json, bool islast)
         {
-            ExStrategyTemplateSetting[] list = MoniterHelper.ParseJsonResponse<ExStrategyTemplateSetting[]>(json);
+            ExStrategyTemplateSetting[] list = CoreService.ParseJsonResponse<ExStrategyTemplateSetting[]>(json);
             if (list != null)
             {
                 MoniterHelper.AdapterToIDataSource(cbExStrategyTemplate).BindDataSource(GetExStrategyTemplateCBList(list));

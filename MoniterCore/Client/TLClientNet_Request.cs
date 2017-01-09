@@ -144,7 +144,7 @@ namespace TradingLib.MoniterCore
         /// <param name="args"></param>
         public void ReqContribRequest(string module, string cmd, string args)
         {
-            logger.Info("请求扩展命令,module:" + module + " cmd:" + cmd + " args:" + args);
+            logger.Info(string.Format("ContribRequest Module:{0} Cmd:{1} Args:{2}", module, cmd, args));
             MGRContribRequest request = RequestTemplate<MGRContribRequest>.CliSendRequest(++requestid);
             request.ModuleID = module;
             request.CMDStr = cmd;
@@ -156,10 +156,7 @@ namespace TradingLib.MoniterCore
 
         public void ReqContribRequest(string module, string cmd,object jobj)
         {
-
-            string args = jobj.SerializeObject();
-            logger.Info("请求扩展命令,module:" + module + " cmd:" + cmd + " args:" + args);
-            this.ReqContribRequest(module, cmd, args);
+            this.ReqContribRequest(module, cmd, jobj.SerializeObject());
         }
 
         

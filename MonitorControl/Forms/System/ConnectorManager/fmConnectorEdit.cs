@@ -83,7 +83,7 @@ namespace TradingLib.MoniterControl
 
         void OnQryTokenValid(string json, bool islast)
         {
-            bool valid = MoniterHelper.ParseJsonResponse<bool>(json);
+            bool valid = CoreService.ParseJsonResponse<bool>(json);
             if (valid)
             {
                 btnSubmit.Enabled = true;

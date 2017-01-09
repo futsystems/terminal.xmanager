@@ -77,7 +77,7 @@ namespace TradingLib.MoniterControl
         }
         void OnQryAccountInfo(string json, bool islast)
         {
-            AccountInfo obj = MoniterHelper.ParseJsonResponse<AccountInfo>(json);
+            AccountInfo obj = CoreService.ParseJsonResponse<AccountInfo>(json);
             if (obj != null)
             {
                 this.GotAccountInfo(obj);

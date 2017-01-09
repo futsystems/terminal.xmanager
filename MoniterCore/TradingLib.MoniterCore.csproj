@@ -139,7 +139,7 @@
     <Compile Include="Services\LoggingService.cs" />
     <Compile Include="Services\SiteInfo.cs" />
     <Compile Include="Services\TradingInfoTracker.cs" />
-    <Compile Include="Utils\Utils.cs" />
+    <Compile Include="Utils.cs" />
     <Compile Include="ValueObject.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +149,9 @@
     <EmbeddedResource Include="fmNotice.resx">
       <DependentUpon>fmNotice.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Utils\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -235,7 +235,7 @@ namespace TradingLib.MoniterControl
         #region ConnectorStatus
         void OnQryConnectorStatus(string jsonstr, bool islast)
         {
-            ConnectorStatus[] objs = MoniterHelper.ParseJsonResponse<ConnectorStatus[]>(jsonstr);
+            ConnectorStatus[] objs = CoreService.ParseJsonResponse<ConnectorStatus[]>(jsonstr);
             if (objs != null)
             {
                 foreach (ConnectorStatus op in objs)
@@ -252,7 +252,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyConnectorStatus(string jsonstr)
         {
-            ConnectorStatus obj = MoniterHelper.ParseJsonResponse<ConnectorStatus>(jsonstr);
+            ConnectorStatus obj = CoreService.ParseJsonResponse<ConnectorStatus>(jsonstr);
             if (obj != null)
             {
                 InvokeGotConnectorStatus(obj);
@@ -307,7 +307,7 @@ namespace TradingLib.MoniterControl
         Dictionary<int, ConnectorConfig> configmap = new Dictionary<int, ConnectorConfig>();
         void OnQryConnectorConfig(string json,bool islast)
         {
-            ConnectorConfig[] objs = MoniterHelper.ParseJsonResponse<ConnectorConfig[]>(json);
+            ConnectorConfig[] objs = CoreService.ParseJsonResponse<ConnectorConfig[]>(json);
             if (objs != null)
             {
                 foreach (ConnectorConfig op in objs)
@@ -356,7 +356,7 @@ namespace TradingLib.MoniterControl
         Dictionary<int, RouterGroupSetting> rgmap = new Dictionary<int, RouterGroupSetting>();
         void OnNotifyRouterGroup(string json)
         {
-            RouterGroupSetting obj = MoniterHelper.ParseJsonResponse<RouterGroupSetting>(json);
+            RouterGroupSetting obj = CoreService.ParseJsonResponse<RouterGroupSetting>(json);
             if (obj != null)
             {
                 RouterGroupSetting target = null;
@@ -376,7 +376,7 @@ namespace TradingLib.MoniterControl
 
         void OnQryRouterGroup(string json, bool islast)
         {
-            RouterGroupSetting[] list = MoniterHelper.ParseJsonResponse<RouterGroupSetting[]>(json);
+            RouterGroupSetting[] list = CoreService.ParseJsonResponse<RouterGroupSetting[]>(json);
             if (list != null)
             {
                 foreach (RouterGroupSetting t in list)
@@ -408,7 +408,7 @@ namespace TradingLib.MoniterControl
         #region RouterItem
         void OnQryRouterItem(string json, bool islast)
         {
-            RouterItemSetting[] list = MoniterHelper.ParseJsonResponse<RouterItemSetting[]>(json);
+            RouterItemSetting[] list = CoreService.ParseJsonResponse<RouterItemSetting[]>(json);
             if (list != null)
             {
                 foreach (RouterItemSetting t in list)
@@ -426,7 +426,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyRouterItem(string json)
         {
-            RouterItemSetting obj = MoniterHelper.ParseJsonResponse<RouterItemSetting>(json);
+            RouterItemSetting obj = CoreService.ParseJsonResponse<RouterItemSetting>(json);
             if (obj != null)
             {
                 InvokeGotRouterItem(obj);

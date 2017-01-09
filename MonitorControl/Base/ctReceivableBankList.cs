@@ -46,7 +46,7 @@ namespace TradingLib.MoniterControl
 
         void OnQryBank(string jsonstr, bool islast)
         {
-            JsonWrapperReceivableAccount[] obj = MoniterUtil.ParseJsonResponse<JsonWrapperReceivableAccount[]>(jsonstr);
+            JsonWrapperReceivableAccount[] obj = CoreService.ParseJsonResponse<JsonWrapperReceivableAccount[]>(jsonstr);
             if (obj != null)
             {
                 //JsonWrapperReceivableAccount[] obj = TradingLib.Mixins.LitJson.JsonMapper.ToObject<JsonWrapperReceivableAccount[]>(jd["Playload"].ToJson());

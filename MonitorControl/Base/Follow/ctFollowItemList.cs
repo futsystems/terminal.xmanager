@@ -229,7 +229,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyEntryItem(string json)
         {
-            EntryFollowItemStruct item = MoniterHelper.ParseJsonResponse<EntryFollowItemStruct>(json);
+            EntryFollowItemStruct item = CoreService.ParseJsonResponse<EntryFollowItemStruct>(json);
             if (item != null)
             {
                 if (cfgSelected == null)
@@ -244,7 +244,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyExitItem(string json)
         {
-            ExitFollowItemStruct item = MoniterHelper.ParseJsonResponse<ExitFollowItemStruct>(json);
+            ExitFollowItemStruct item = CoreService.ParseJsonResponse<ExitFollowItemStruct>(json);
             if (item != null)
             {
                 if (cfgSelected == null)
@@ -258,7 +258,7 @@ namespace TradingLib.MoniterControl
 
         void OnQryEntryItemList(string json, bool islast)
         {
-            EntryFollowItemStruct item = MoniterHelper.ParseJsonResponse<EntryFollowItemStruct>(json);
+            EntryFollowItemStruct item = CoreService.ParseJsonResponse<EntryFollowItemStruct>(json);
             if (item != null)
             {
                 if (cfgSelected == null)
@@ -279,7 +279,7 @@ namespace TradingLib.MoniterControl
 
         void OnQryExitItemList(string json, bool islast)
         {
-            ExitFollowItemStruct item = MoniterHelper.ParseJsonResponse<ExitFollowItemStruct>(json);
+            ExitFollowItemStruct item = CoreService.ParseJsonResponse<ExitFollowItemStruct>(json);
             if (item != null)
             {
                 if (cfgSelected == null)

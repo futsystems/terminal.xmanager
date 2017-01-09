@@ -128,7 +128,7 @@ namespace TradingLib.MoniterControl
             }
             else
             {
-                var data = json.DeserializeObject()["Payload"];
+                var data = CoreService.ParseJsonResponse(json);// json.DeserializeObject()["Payload"];
                 lbLastSettleday.Text = data["last_settleday"].ToString();
                 lbCurrentday.Text = data["current_settleday"].ToString();
                 lbSettleMode.Text = ((QSEnumSettleMode)Enum.Parse(typeof(QSEnumSettleMode), data["settle_mode"].ToString())).ToString();

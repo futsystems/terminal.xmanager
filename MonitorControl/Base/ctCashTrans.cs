@@ -124,7 +124,7 @@ namespace TradingLib.MoniterControl
         {
             //JsonData jd = TradingLib.Mixins.LitJson.JsonMapper.ToObject(jsonstr);
             //int code = int.Parse(jd["Code"].ToString());
-            JsonWrapperCasnTrans[] obj = MoniterHelper.ParseJsonResponse<JsonWrapperCasnTrans[]>(jsonstr);
+            JsonWrapperCasnTrans[] obj = CoreService.ParseJsonResponse<JsonWrapperCasnTrans[]>(jsonstr);
             if (obj != null)
             {
                 //JsonWrapperCasnTrans[] obj = TradingLib.Mixins.LitJson.JsonMapper.ToObject<JsonWrapperCasnTrans[]>(jd["Playload"].ToJson());

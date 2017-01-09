@@ -77,7 +77,7 @@ namespace TradingLib.MoniterControl
 
         void OnSessionInfo(string json, bool islast)
         {
-            SessionInfo info = MoniterHelper.ParseJsonResponse<SessionInfo>(json);
+            SessionInfo info = CoreService.ParseJsonResponse<SessionInfo>(json);
             if (info != null)
             {
                 InvokeGotSessionInfo(info);

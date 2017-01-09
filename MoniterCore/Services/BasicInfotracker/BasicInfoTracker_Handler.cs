@@ -231,7 +231,7 @@ namespace TradingLib.MoniterCore
 
         void OnQryRuleSet(string json, bool islast)
         {
-            RuleClassItem item = MoniterUtil.ParseJsonResponse<RuleClassItem>(json);
+            RuleClassItem item = CoreService.ParseJsonResponse<RuleClassItem>(json);
 
             if (item.Type == QSEnumRuleType.OrderRule)
             {
@@ -291,7 +291,7 @@ namespace TradingLib.MoniterCore
 
         void OnQryManager(string jsonstr, bool islast)
         {
-            ManagerSetting[] mgrlist = MoniterUtil.ParseJsonResponse<ManagerSetting[]>(jsonstr);
+            ManagerSetting[] mgrlist = CoreService.ParseJsonResponse<ManagerSetting[]>(jsonstr);
             if (mgrlist != null)
             {
                 foreach (ManagerSetting mgr in mgrlist)
@@ -309,7 +309,7 @@ namespace TradingLib.MoniterCore
 
         void OnNotifyManagerUpdate(string json)
         {
-            ManagerSetting mgr = MoniterUtil.ParseJsonResponse<ManagerSetting>(json);
+            ManagerSetting mgr = CoreService.ParseJsonResponse<ManagerSetting>(json);
             if (mgr != null)
             {
                 this.GotManager(mgr);
@@ -322,7 +322,7 @@ namespace TradingLib.MoniterCore
         /// <param name="json"></param>
         void OnNotifyManagerDelete(string json)
         {
-            ManagerSetting mgr = MoniterUtil.ParseJsonResponse<ManagerSetting>(json);
+            ManagerSetting mgr = CoreService.ParseJsonResponse<ManagerSetting>(json);
             if (mgr != null)
             {
                 if (managermap.Keys.Contains(mgr.ID))
@@ -359,7 +359,7 @@ namespace TradingLib.MoniterCore
 
         void OnQryRouterGroup(string jsonstr, bool islast)
         {
-            RouterGroupSetting[] rglist = MoniterUtil.ParseJsonResponse<RouterGroupSetting[]>(jsonstr);
+            RouterGroupSetting[] rglist = CoreService.ParseJsonResponse<RouterGroupSetting[]>(jsonstr);
             if (rglist != null)
             {
                 foreach (RouterGroupSetting rg in rglist)
@@ -376,7 +376,7 @@ namespace TradingLib.MoniterCore
 
         void OnNotifyRouterGroup(string jsonstr)
         {
-            RouterGroupSetting rg = MoniterUtil.ParseJsonResponse<RouterGroupSetting>(jsonstr);
+            RouterGroupSetting rg = CoreService.ParseJsonResponse<RouterGroupSetting>(jsonstr);
             if (rg != null)
             {
                 GotRouterGroup(rg);
@@ -389,7 +389,7 @@ namespace TradingLib.MoniterCore
         #region 汇率更新
         void OnNotifyExchangeRate(string json)
         {
-            ExchangeRate obj = MoniterUtil.ParseJsonResponse<ExchangeRate>(json);
+            ExchangeRate obj = CoreService.ParseJsonResponse<ExchangeRate>(json);
             if (obj != null)
             {
                 this.GotExchangeRate(obj,true);

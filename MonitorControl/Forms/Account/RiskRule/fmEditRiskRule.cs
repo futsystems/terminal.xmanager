@@ -77,14 +77,14 @@ namespace TradingLib.MoniterControl
 
         void OnRuleItem(string json, bool islast)
         {
-            RuleItem item = MoniterHelper.ParseJsonResponse<RuleItem>(json);
+            RuleItem item = CoreService.ParseJsonResponse<RuleItem>(json);
             if (item == null) return;
             OnRuleItem(item, true);
         }
 
         void OnRuleItemDel(string json, bool islast)
         {
-            RuleItem item = MoniterHelper.ParseJsonResponse<RuleItem>(json);
+            RuleItem item = CoreService.ParseJsonResponse<RuleItem>(json);
             if (item == null) return;
 
             if (item.RuleType == QSEnumRuleType.OrderRule)
@@ -99,7 +99,7 @@ namespace TradingLib.MoniterControl
 
         void OnRuleItemUpdate(string json, bool islast)
         {
-            RuleItem item = MoniterHelper.ParseJsonResponse<RuleItem>(json);
+            RuleItem item = CoreService.ParseJsonResponse<RuleItem>(json);
             if (item == null) return;
             OnRuleItem(item, islast);
 

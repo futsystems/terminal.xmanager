@@ -267,7 +267,7 @@ namespace TradingLib.MoniterControl
 
         void OnQryMarginTemplateItem(string json, bool islast)
         {
-            MarginTemplateItemSetting obj = MoniterHelper.ParseJsonResponse<MarginTemplateItemSetting>(json);
+            MarginTemplateItemSetting obj = CoreService.ParseJsonResponse<MarginTemplateItemSetting>(json);
             if (obj != null)
             {
                     GotCommissionTemplateItem(obj);
@@ -280,7 +280,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyMarginTemplateItem(string json)
         {
-            MarginTemplateItemSetting obj = MoniterHelper.ParseJsonResponse<MarginTemplateItemSetting>(json);
+            MarginTemplateItemSetting obj = CoreService.ParseJsonResponse<MarginTemplateItemSetting>(json);
             if (obj != null)
             {
                 GotCommissionTemplateItem(obj);
@@ -326,7 +326,7 @@ namespace TradingLib.MoniterControl
         Dictionary<int, MarginTemplateSetting> templatemap = new Dictionary<int, MarginTemplateSetting>();
         void OnQryMarginTemplate(string json, bool islast)
         {
-            MarginTemplateSetting[] list = MoniterHelper.ParseJsonResponse<MarginTemplateSetting[]>(json);
+            MarginTemplateSetting[] list = CoreService.ParseJsonResponse<MarginTemplateSetting[]>(json);
             if (list != null)
             {
                 foreach (MarginTemplateSetting t in list)
@@ -355,7 +355,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyDelMarginTemplate(string json)
         {
-            MarginTemplateSetting obj = MoniterHelper.ParseJsonResponse<MarginTemplateSetting>(json);
+            MarginTemplateSetting obj = CoreService.ParseJsonResponse<MarginTemplateSetting>(json);
             if (obj != null)
             {
                 MarginTemplateSetting template = templateTree.SelectedNode.Tag as MarginTemplateSetting;
@@ -368,7 +368,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyMarginTemplate(string json)
         {
-            MarginTemplateSetting obj = MoniterHelper.ParseJsonResponse<MarginTemplateSetting>(json);
+            MarginTemplateSetting obj = CoreService.ParseJsonResponse<MarginTemplateSetting>(json);
             if (obj != null)
             {
                 MarginTemplateSetting target = null;

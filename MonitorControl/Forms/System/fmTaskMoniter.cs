@@ -89,7 +89,7 @@ namespace TradingLib.MoniterControl
 
         void OnQryLogTaskEvent(string json, bool islast)
         {
-            LogTaskEvent[] logs = MoniterHelper.ParseJsonResponse<LogTaskEvent[]>(json);
+            LogTaskEvent[] logs = CoreService.ParseJsonResponse<LogTaskEvent[]>(json);
             if (logs != null)
             {
                 foreach (LogTaskEvent log in logs)

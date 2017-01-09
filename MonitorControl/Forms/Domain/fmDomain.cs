@@ -83,7 +83,7 @@ namespace TradingLib.MoniterControl
         bool _godomain = false;
         void OnQryDomain(string jsonstr, bool islast)
         {
-            DomainImpl[] objs = MoniterHelper.ParseJsonResponse<DomainImpl[]>(jsonstr);
+            DomainImpl[] objs = CoreService.ParseJsonResponse<DomainImpl[]>(jsonstr);
             if (objs != null)
             {
                 foreach (DomainImpl op in objs.OrderBy(d=>d.ID))
@@ -101,7 +101,7 @@ namespace TradingLib.MoniterControl
         void OnNotifyDomain(string json)
         {
             logger.Debug("Got NotifyDomain:" + json);
-            DomainImpl obj = MoniterHelper.ParseJsonResponse<DomainImpl>(json);
+            DomainImpl obj = CoreService.ParseJsonResponse<DomainImpl>(json);
             if (obj != null)
             {
                 InvokeGotDomain(obj);

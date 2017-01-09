@@ -313,7 +313,7 @@ namespace TradingLib.MoniterControl
         /// <param name="json"></param>
         void OnQryCommissionTemplateItem(string json, bool islast)
         {
-            CommissionTemplateItemSetting obj = MoniterHelper.ParseJsonResponse<CommissionTemplateItemSetting>(json);
+            CommissionTemplateItemSetting obj = CoreService.ParseJsonResponse<CommissionTemplateItemSetting>(json);
             if (obj != null)
             {
                 GotCommissionTemplateItem(obj);
@@ -326,7 +326,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyCommissionTemplateItem(string json)
         {
-            CommissionTemplateItemSetting obj = MoniterHelper.ParseJsonResponse<CommissionTemplateItemSetting>(json);
+            CommissionTemplateItemSetting obj = CoreService.ParseJsonResponse<CommissionTemplateItemSetting>(json);
             if (obj != null)
             {
                 GotCommissionTemplateItem(obj);
@@ -383,7 +383,7 @@ namespace TradingLib.MoniterControl
             try
             {
                 LogService.Debug("template str:" + json);
-                CommissionTemplateSetting[] list = MoniterHelper.ParseJsonResponse<CommissionTemplateSetting[]>(json);
+                CommissionTemplateSetting[] list = CoreService.ParseJsonResponse<CommissionTemplateSetting[]>(json);
                 if (list != null)
                 {
                     foreach (CommissionTemplateSetting t in list)
@@ -420,7 +420,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyDelCommissionTemplate(string json)
         {
-            CommissionTemplateSetting obj = MoniterHelper.ParseJsonResponse<CommissionTemplateSetting>(json);
+            CommissionTemplateSetting obj = CoreService.ParseJsonResponse<CommissionTemplateSetting>(json);
             if (obj != null)
             {
                 CommissionTemplateSetting template = tempateTree.SelectedNode.Tag as CommissionTemplateSetting;
@@ -432,7 +432,7 @@ namespace TradingLib.MoniterControl
         }
         void OnNotifyCommissionTemplate(string json)
         {
-            CommissionTemplateSetting obj = MoniterHelper.ParseJsonResponse<CommissionTemplateSetting>(json);
+            CommissionTemplateSetting obj = CoreService.ParseJsonResponse<CommissionTemplateSetting>(json);
             if (obj != null)
             {
                 CommissionTemplateSetting target = null;

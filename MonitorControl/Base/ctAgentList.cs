@@ -120,7 +120,7 @@ namespace TradingLib.MoniterControl
 
         void OnManagerNotify(string jsonstr)
         {
-            Manager obj = MoniterHelper.ParseJsonResponse<Manager>(jsonstr);
+            Manager obj = CoreService.ParseJsonResponse<Manager>(jsonstr);
             if (obj != null)
             {
                 ReloadList();

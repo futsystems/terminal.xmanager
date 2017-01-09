@@ -48,7 +48,7 @@ namespace TradingLib.MoniterControl.Base.Follow
 
         void OnQrySignalconfigList(string json, bool islast)
         {
-            SignalConfig item = MoniterHelper.ParseJsonResponse<SignalConfig>(json);
+            SignalConfig item = CoreService.ParseJsonResponse<SignalConfig>(json);
             if (item != null)
             {
                 InvokeGotSignalConfig(item);

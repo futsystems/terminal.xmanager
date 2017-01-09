@@ -62,7 +62,7 @@ namespace TradingLib.MoniterControl
         }
         void OnQryFollowItemDetail(string json, bool islast)
         {
-            FollowItemDetail detail = MoniterHelper.ParseJsonResponse<FollowItemDetail>(json);
+            FollowItemDetail detail = CoreService.ParseJsonResponse<FollowItemDetail>(json);
             if (detail != null)
             {
                 GotFollowItemDetail(detail);

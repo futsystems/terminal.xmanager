@@ -227,7 +227,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyManagerDelete(string json)
         {
-            ManagerSetting mgr = MoniterUtil.ParseJsonResponse<ManagerSetting>(json);
+            ManagerSetting mgr = CoreService.ParseJsonResponse<ManagerSetting>(json);
             if (mgr != null)
             {
                 OnManagerDelete(mgr);

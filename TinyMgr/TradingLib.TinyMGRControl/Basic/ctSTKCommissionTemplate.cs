@@ -102,7 +102,7 @@ namespace TradingLib.TinyMGRControl
         
         void OnQryCommissionTemplate(string json, bool islast)
         {
-            CommissionTemplateSetting[] list = MoniterHelper.ParseJsonResponse<CommissionTemplateSetting[]>(json);
+            CommissionTemplateSetting[] list = CoreService.ParseJsonResponse<CommissionTemplateSetting[]>(json);
             if (list != null)
             {
                 foreach (CommissionTemplateSetting t in list)
@@ -113,7 +113,7 @@ namespace TradingLib.TinyMGRControl
         }
         void OnNotifyCommissionTemplate(string json)
         {
-            CommissionTemplateSetting obj = MoniterHelper.ParseJsonResponse<CommissionTemplateSetting>(json);
+            CommissionTemplateSetting obj = CoreService.ParseJsonResponse<CommissionTemplateSetting>(json);
             if (obj != null)
             {
                 InvokeGotCommissiontTemplateItem(obj);

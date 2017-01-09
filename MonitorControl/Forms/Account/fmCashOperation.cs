@@ -37,7 +37,7 @@ namespace TradingLib.MoniterControl
         decimal _mainstaticequity = 0;
         void OnAccountInfo(string json, bool islast)
         {
-            var data = json.DeserializeObject()["Payload"];// TradingLib.Mixins.Json.JsonMapper.ToObject(json)["Payload"];
+            var data = CoreService.ParseJsonResponse(json);
             decimal lastequity = decimal.Parse(data["LastEquity"].ToString());
             decimal deposit = decimal.Parse(data["Deposit"].ToString());
             decimal withdraw = decimal.Parse(data["Withdraw"].ToString());

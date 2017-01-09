@@ -84,7 +84,7 @@ namespace TradingLib.MoniterControl
 
         void OnQryPositionHold(string json,bool islast)
         {
-            PositionEx[] list = MoniterHelper.ParseJsonResponse<PositionEx[]>(json);
+            PositionEx[] list = CoreService.ParseJsonResponse<PositionEx[]>(json);
             if (list != null)
             {
                 foreach (var p in list)

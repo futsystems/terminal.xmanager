@@ -117,7 +117,7 @@ namespace TradingLib.MoniterControl
 
         void OnUpdateSettlementPrice(string json,bool islast)
         {
-            SettlementPrice obj = MoniterHelper.ParseJsonResponse<SettlementPrice>(json);
+            SettlementPrice obj = CoreService.ParseJsonResponse<SettlementPrice>(json);
             if (obj != null)
             {
                 InvokeGotSettlementPrice(obj);
@@ -126,7 +126,7 @@ namespace TradingLib.MoniterControl
 
         void OnQrySettlementPrice(string json,bool islast)
         {
-            SettlementPrice[] list = MoniterHelper.ParseJsonResponse<SettlementPrice[]>(json);
+            SettlementPrice[] list = CoreService.ParseJsonResponse<SettlementPrice[]>(json);
             if (list != null)
             {
                 foreach (var price in list)

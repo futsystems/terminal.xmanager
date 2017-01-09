@@ -44,7 +44,7 @@ namespace TradingLib.MoniterControl
         {
             cbConnectorList.Items.Clear();
 
-            var data = json.DeserializeObject()["Payload"];// TradingLib.Mixins.Json.JsonMapper.ToObject(json)["Payload"];
+            var data = CoreService.ParseJsonResponse(json);
 
             ArrayList list = new ArrayList();
 
@@ -60,7 +60,7 @@ namespace TradingLib.MoniterControl
         }
         void OnAccountConnecorPair(string json,bool islast)
         {
-            var data = json.DeserializeObject()["Payload"];// TradingLib.Mixins.Json.JsonMapper.ToObject(json)["Payload"];
+            var data = CoreService.ParseJsonResponse(json);
 
             string account = data["Account"].ToString();
             int connector_id = int.Parse(data["ConnectorID"].ToString());

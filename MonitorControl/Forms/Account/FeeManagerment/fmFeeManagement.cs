@@ -55,7 +55,7 @@ namespace TradingLib.MoniterControl
         }
         void OnStatus(string json,bool islast)
         {
-            FinServiceCentreStatus s = MoniterHelper.ParseJsonResponse<FinServiceCentreStatus>(json);
+            FinServiceCentreStatus s = CoreService.ParseJsonResponse<FinServiceCentreStatus>(json);
             if (s != null)
             {
                 InvokeGotStatus(s);

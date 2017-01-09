@@ -79,7 +79,7 @@ namespace TradingLib.MoniterControl
 
         void OnQryInterface(string jsonstr, bool islast)
         {
-            ConnectorInterface[] objs = MoniterHelper.ParseJsonResponse<ConnectorInterface[]>(jsonstr);
+            ConnectorInterface[] objs = CoreService.ParseJsonResponse<ConnectorInterface[]>(jsonstr);
             if (objs != null)
             {
                 foreach (ConnectorInterface op in objs)

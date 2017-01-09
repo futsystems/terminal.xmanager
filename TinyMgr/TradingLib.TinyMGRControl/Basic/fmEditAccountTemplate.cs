@@ -57,7 +57,7 @@ namespace TradingLib.TinyMGRControl
 
         void OnQryCommissionTemplate(string json, bool islast)
         {
-            CommissionTemplateSetting[] list = MoniterHelper.ParseJsonResponse<CommissionTemplateSetting[]>(json);
+            CommissionTemplateSetting[] list = CoreService.ParseJsonResponse<CommissionTemplateSetting[]>(json);
             if (list != null)
             {
                 MoniterHelper.AdapterToIDataSource(cbCommissionTemplate).BindDataSource(GetCommissionTemplateCBList(list));

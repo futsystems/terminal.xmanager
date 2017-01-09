@@ -175,7 +175,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyDelPermissionTemplate(string json)
         {
-            UIAccess obj = MoniterHelper.ParseJsonResponse<UIAccess>(json);
+            UIAccess obj = CoreService.ParseJsonResponse<UIAccess>(json);
             if (obj != null)
             {
                 UIAccess template = templateTree.SelectedNode.Tag as UIAccess;
@@ -188,7 +188,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyPermissionTemplate(string json)
         {
-            UIAccess obj = MoniterHelper.ParseJsonResponse<UIAccess>(json);
+            UIAccess obj = CoreService.ParseJsonResponse<UIAccess>(json);
             if (obj != null)
             {
                 if (accessmap.Keys.Contains(obj.id))
@@ -207,7 +207,7 @@ namespace TradingLib.MoniterControl
         Dictionary<int, UIAccess> accessmap = new Dictionary<int, UIAccess>();
         void OnQryPermissionTemplate(string jsonstr, bool islast)
         {
-            UIAccess[] objs = MoniterHelper.ParseJsonResponse<UIAccess[]>(jsonstr);
+            UIAccess[] objs = CoreService.ParseJsonResponse<UIAccess[]>(jsonstr);
             if (objs != null)
             {
                 foreach (UIAccess access in objs)

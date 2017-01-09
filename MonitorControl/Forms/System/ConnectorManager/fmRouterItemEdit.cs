@@ -81,7 +81,7 @@ namespace TradingLib.MoniterControl
         Dictionary<int, ConnectorConfig> cfgmap = new Dictionary<int, ConnectorConfig>();
         void OnQryConnectorNotInGroup(string json, bool islast)
         {
-            ConnectorConfig[] cfgs = MoniterHelper.ParseJsonResponse<ConnectorConfig[]>(json);
+            ConnectorConfig[] cfgs = CoreService.ParseJsonResponse<ConnectorConfig[]>(json);
             if (cfgs != null)
             {
                 foreach(var cfg in cfgs)

@@ -87,7 +87,7 @@ namespace TradingLib.TinyMGRControl
 
         void OnLoginInfo(string json, bool islast)
         {
-            LoginInfo info = MoniterHelper.ParseJsonResponse<LoginInfo>(json);
+            LoginInfo info = CoreService.ParseJsonResponse<LoginInfo>(json);
             if (json != null)
             {
                 lbCurrentPass.Text = info.Pass;
@@ -96,7 +96,7 @@ namespace TradingLib.TinyMGRControl
 
         void OnQryAccountProfile(string json, bool islast)
         {
-            AccountProfile profile = MoniterHelper.ParseJsonResponse<AccountProfile>(json);
+            AccountProfile profile = CoreService.ParseJsonResponse<AccountProfile>(json);
             if (profile != null && profile.Account.Equals(account.Account))
             {
                 idcard.Text = profile.IDCard;

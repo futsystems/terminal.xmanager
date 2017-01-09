@@ -107,7 +107,7 @@ namespace TradingLib.MoniterControl
 
         void OnQrySignalconfigList(string json, bool islast)
         {
-            SignalConfig item = MoniterHelper.ParseJsonResponse<SignalConfig>(json);
+            SignalConfig item = CoreService.ParseJsonResponse<SignalConfig>(json);
             if (item != null)
             {
                 //跟单信号列表中不包含的信号才在可用信号列表中显示
@@ -140,7 +140,7 @@ namespace TradingLib.MoniterControl
 
         void OnQryStrategySignalList(string json, bool islast)
         {
-            SignalConfig item = MoniterHelper.ParseJsonResponse<SignalConfig>(json);
+            SignalConfig item = CoreService.ParseJsonResponse<SignalConfig>(json);
             if (item != null)
             {
                 InvokeGotStrategySignalConfig(item);

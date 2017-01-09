@@ -65,7 +65,7 @@ namespace TradingLib.MoniterControl
 
         void OnQryAvabileStrategyAccount(string json,bool last)
         {
-            string[] accounts = MoniterHelper.ParseJsonResponse<string[]>(json);
+            string[] accounts = CoreService.ParseJsonResponse<string[]>(json);
             if (accounts != null)
             {
                 InvokeGotAvabileStrategyAccount(accounts);

@@ -95,7 +95,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyExchangeRate(string json)
         {
-            ExchangeRate obj = MoniterHelper.ParseJsonResponse<ExchangeRate>(json);
+            ExchangeRate obj = CoreService.ParseJsonResponse<ExchangeRate>(json);
             if (obj != null)
             {
                 InvokeGotExchangeRate(obj);   
@@ -104,7 +104,7 @@ namespace TradingLib.MoniterControl
         void OnQryExchangeRates(string json,bool islast)
         {
 
-            ExchangeRate[] obj = MoniterHelper.ParseJsonResponse<ExchangeRate[]>(json);
+            ExchangeRate[] obj = CoreService.ParseJsonResponse<ExchangeRate[]>(json);
             if (obj != null)
             {
                 foreach (var rate in obj)
