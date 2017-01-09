@@ -217,6 +217,7 @@
     <Compile Include="Command\ConditionEvaluator.cs" />
     <Compile Include="Command\FollowStrategyList.cs" />
     <Compile Include="Command\MotherAccountCommand.cs" />
+    <Compile Include="Common\ChinSpell.cs" />
     <Compile Include="Common\FilterArgs.cs" />
     <Compile Include="Common\JsonProtocolFinService.cs" />
     <Compile Include="ContribProtocol\ProtocolLogServer.cs" />

@@ -243,20 +243,22 @@ namespace TradingLib.MoniterCore
         /// <returns></returns>
         public static T ParseJsonResponse<T>(string json)
         {
-            JsonReply<T> reply = JsonReply.ParseReply<T>(json);
-            if (reply.Code == 0)
-            {
-                return reply.Payload;
-            }
-            else
-            {
-                return default(T);
-            }
+            return json.DeserializeObject<T>();
+            //JsonReply<T> reply = JsonReply.ParseReply<T>(json);
+            //if (reply.Code == 0)
+            //{
+            //    return reply.Payload;
+            //}
+            //else
+            //{
+            //    return default(T);
+            //}
         }
 
         public static Newtonsoft.Json.Linq.JToken ParseJsonResponse(string json)
         {
-            return json.DeserializeObject()["Payload"];
+            return json.DeserializeObject();
+            //return json.DeserializeObject()["Payload"];
 
             //JsonReply<T> reply = JsonReply.ParseReply<T>(json);
             //if (reply.Code == 0)
