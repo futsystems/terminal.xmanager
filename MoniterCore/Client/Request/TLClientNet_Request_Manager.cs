@@ -1,4 +1,7 @@
-﻿using System;
+﻿//Copyright 2013 by FutSystems,Inc.
+//20170112 去除字符串硬编码
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +19,7 @@ namespace TradingLib.MoniterCore
         /// <param name="mgrid"></param>
         public void ReqActiveManger(int mgrid)
         {
-            this.ReqContribRequest("MgrExchServer", "ActiveManager", mgrid.ToString());
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_MANAGER_ACTIVE, mgrid.ToString());
         }
 
         /// <summary>
@@ -25,14 +28,15 @@ namespace TradingLib.MoniterCore
         /// <param name="mgrid"></param>
         public void ReqInactiveManger(int mgrid)
         {
-            this.ReqContribRequest("MgrExchServer", "InactiveManager", mgrid.ToString());
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_MANAGER_INACTIVE, mgrid.ToString());
         }
 
 
         public void ReqDelManager(int mgrid)
         {
-            this.ReqContribRequest("MgrExchServer", "DeleteManager", mgrid.ToString());
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.DEL_MANAGER, mgrid.ToString());
         }
+
         /// <summary>
         /// 修改管理员密码
         /// </summary>
@@ -40,7 +44,7 @@ namespace TradingLib.MoniterCore
         /// <param name="pass"></param>
         public void ReqUpdatePass(string oldpass, string pass)
         {
-            this.ReqContribRequest("MgrExchServer", "UpdateManagerPass", oldpass + "," + pass); ;
+            this.ReqContribRequest(Modules.MGR_EXCH,Method_MGR_EXCH.UPDATE_MANAGER_PASS, oldpass + "," + pass); ;
         }
 
         /// <summary>
@@ -49,7 +53,7 @@ namespace TradingLib.MoniterCore
         /// <param name="domainid"></param>
         public void ReqQryManagerLoginInfo(int mgrid)
         {
-            this.ReqContribRequest("MgrExchServer", "QryManagerLoginInfo", mgrid.ToString());
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_MANAGER_LOGININFO, mgrid.ToString());
         }
 
 
@@ -58,7 +62,7 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public void ReqQryManager()
         {
-            this.ReqContribRequest("MgrExchServer", "QryManager", "");
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_MANAGER, "");
         }
 
         /// <summary>
@@ -67,7 +71,7 @@ namespace TradingLib.MoniterCore
         /// <param name="mgr"></param>
         public void ReqUpdateManager(ManagerSetting mgr)
         {
-            this.ReqContribRequest("MgrExchServer", "UpdateManager", mgr.SerializeObject());
+            this.ReqContribRequest(Modules.MGR_EXCH,Method_MGR_EXCH.UPDATE_MANAGER, mgr.SerializeObject());
         }
     }
 }

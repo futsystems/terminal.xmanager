@@ -30,7 +30,7 @@ namespace TradingLib.MoniterControl
         void fmExchangeRate_Load(object sender, EventArgs e)
         {
 
-            CoreService.TLClient.ReqContribRequest("MgrExchServer", "QryExchangeRates", "");
+            CoreService.TLClient.ReqQryExchangeRateContrib();
             rategrid.DoubleClick += new EventHandler(rategrid_DoubleClick);
         }
 
@@ -82,14 +82,14 @@ namespace TradingLib.MoniterControl
         public void OnInit()
         {
 
-            CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryExchangeRates", this.OnQryExchangeRates);
-            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyExchangeRateUpdate", this.OnNotifyExchangeRate);
+            CoreService.EventContrib.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_EXCHANGERATES, this.OnQryExchangeRates);
+            CoreService.EventContrib.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_EXCHANGERATES, this.OnNotifyExchangeRate);
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryExchangeRates", this.OnQryExchangeRates);
-            CoreService.EventContrib.UnRegisterNotifyCallback("MgrExchServer", "NotifyExchangeRateUpdate", this.OnNotifyExchangeRate);
+            CoreService.EventContrib.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_EXCHANGERATES, this.OnQryExchangeRates);
+            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_EXCHANGERATES, this.OnNotifyExchangeRate);
             
         }
 

@@ -58,35 +58,24 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("ConnectorManager", "QryConnectorConfig", this.OnQryConnectorConfig);//查询交易帐户出入金请求
-            //CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryVendor", this.OnQryVendor);
-            //CoreService.EventContrib.RegisterCallback("ConnectorManager", "QryRouterItem", this.OnQryRouterItem);
-            CoreService.EventContrib.RegisterCallback("ConnectorManager", "QryInterface", this.OnQryInterface);
-            CoreService.EventContrib.RegisterNotifyCallback("ConnectorManager", "NotifyConnectorCfg", this.OnNotifyConnectorConfig);
-            //Globals.LogicEvent.RegisterNotifyCallback("MgrExchServer", "NotifyVendor", this.OnNotifyVendorBind);
-            //Globals.LogicEvent.RegisterNotifyCallback("ConnectorManager", "NotifyVendor", this.OnNotifyVendorBind);
-            //Globals.LogicEvent.RegisterNotifyCallback("ConnectorManager", "NotifyRouterItem", this.OnNotifyRouterItem);
-            //CoreService.EventContrib.RegisterCallback("ConnectorManager", "NotifyRouterGroup", this.OnNotifyRouterGroup);
+            CoreService.EventContrib.RegisterCallback(Modules.CONN_MGR,Method_CONN_MGR.QRY_CONN_CONFIG, this.OnQryConnectorConfig);
+            CoreService.EventContrib.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_CONN_STATUS, this.OnQryConnectorStatus);
+            CoreService.EventContrib.RegisterCallback(Modules.CONN_MGR,Method_CONN_MGR.QRY_INTERFACE, this.OnQryInterface);
 
-            CoreService.EventContrib.RegisterCallback("ConnectorManager", "QryConnectorStatus", this.OnQryConnectorStatus);
-            CoreService.EventContrib.RegisterNotifyCallback("ConnectorManager", "NotifyConnectorStatus", this.OnNotifyConnectorStatus);
+            CoreService.EventContrib.RegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_CONN_CONFIG, this.OnNotifyConnectorConfig);
+            CoreService.EventContrib.RegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_CONN_STATUS, this.OnNotifyConnectorStatus);
 
             CoreService.TLClient.ReqQryInterface();
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("ConnectorManager", "QryConnectorConfig", this.OnQryConnectorConfig);//查询交易帐户出入金请求
-            //CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QryVendor", this.OnQryVendor);
-            //CoreService.EventContrib.UnRegisterCallback("ConnectorManager", "QryRouterItem", this.OnQryRouterItem);
-            CoreService.EventContrib.UnRegisterCallback("ConnectorManager", "QryInterface", this.OnQryInterface);
-            CoreService.EventContrib.UnRegisterNotifyCallback("ConnectorManager", "NotifyConnectorCfg", this.OnNotifyConnectorConfig);
-            //Globals.LogicEvent.UnRegisterNotifyCallback("MgrExchServer", "NotifyVendor", this.OnNotifyVendorBind);
-            //Globals.LogicEvent.UnRegisterNotifyCallback("ConnectorManager", "NotifyRouterItem", this.OnNotifyRouterItem);
-            //Globals.LogicEvent.UnRegisterNotifyCallback("ConnectorManager", "NotifyVendor", this.OnNotifyVendorBind);
+            CoreService.EventContrib.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_CONN_CONFIG, this.OnQryConnectorConfig);
+            CoreService.EventContrib.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_CONN_STATUS, this.OnQryConnectorStatus);
+            CoreService.EventContrib.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_INTERFACE, this.OnQryInterface);
 
-            CoreService.EventContrib.UnRegisterCallback("ConnectorManager", "QryConnectorStatus", this.OnQryConnectorStatus);
-            CoreService.EventContrib.UnRegisterNotifyCallback("ConnectorManager", "NotifyConnectorStatus", this.OnNotifyConnectorStatus);
+            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_CONN_CONFIG, this.OnNotifyConnectorConfig);
+            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_CONN_STATUS, this.OnNotifyConnectorStatus);
 
         }
 

@@ -30,13 +30,13 @@ namespace TradingLib.MoniterControl
         {
             if (_domain != null)
             {
-                CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryDomainRootLoginInfo", this.OnLoginInfo);
+                CoreService.EventContrib.RegisterCallback(Modules.MGR_EXCH,Method_MGR_EXCH.QRY_DOMAIN_LOGININFO, this.OnLoginInfo);
                 CoreService.TLClient.ReqQryDomainRootLoginInfo(_domain.ID);
             }
 
             if (_manager != null)
             {
-                CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryManagerLoginInfo", this.OnLoginInfo);
+                CoreService.EventContrib.RegisterCallback(Modules.MGR_EXCH, "QryManagerLoginInfo", this.OnLoginInfo);
                 CoreService.TLClient.ReqQryManagerLoginInfo(_manager.ID);
             }
 

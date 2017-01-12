@@ -37,7 +37,7 @@ namespace TradingLib.MoniterControl
         {
 
             CoreService.EventBasicInfo.OnManagerEvent += new Action<ManagerSetting>(GotManager);
-            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyManagerDelete", OnNotifyManagerDelete);
+            CoreService.EventContrib.RegisterNotifyCallback(Modules.MGR_EXCH,Method_MGR_EXCH.NOTIFY_MANGER_DELETE, OnNotifyManagerDelete);
 
 
             //分区管理员可以查询柜员密码和设置柜员权限

@@ -165,8 +165,7 @@ namespace TradingLib.MoniterControl
         {
             this.rgTree.NodeMouseClick += new TreeNodeMouseClickEventHandler(rgTree_NodeMouseClick);//树状节点点击
             CoreService.EventCore.RegIEventHandler(this);
-            CoreService.TLClient.ReqContribRequest("ConnectorManager", "QryConnectorConfig", "");//查询所有通道设置
-
+            CoreService.TLClient.ReqQryConnectorConfig();
             
         }
         RouterGroupSetting _current = null;
@@ -185,7 +184,7 @@ namespace TradingLib.MoniterControl
 
                         ClearItem();
                         _current = t;
-                        CoreService.TLClient.ReqContribRequest("ConnectorManager", "QryRouterItem", t.ID.ToString());
+                        CoreService.TLClient.ReqQryRouterItem(t.ID);
                     }
                 }
             }
@@ -204,31 +203,31 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("ConnectorManager", "QryConnectorConfig", this.OnQryConnectorConfig);
+            CoreService.EventContrib.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_CONN_CONFIG, this.OnQryConnectorConfig);
 
-            CoreService.EventContrib.RegisterCallback("ConnectorManager", "QryRouterGroup", this.OnQryRouterGroup);
-            CoreService.EventContrib.RegisterNotifyCallback("ConnectorManager", "NotifyRouterGroup", this.OnNotifyRouterGroup);
+            CoreService.EventContrib.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_ROUTEGROUP, this.OnQryRouterGroup);
+            CoreService.EventContrib.RegisterNotifyCallback(Modules.CONN_MGR,Method_CONN_MGR.NOTIFY_ROUTEGROUP, this.OnNotifyRouterGroup);
 
-            CoreService.EventContrib.RegisterCallback("ConnectorManager", "QryRouterItem", this.OnQryRouterItem);
-            CoreService.EventContrib.RegisterNotifyCallback("ConnectorManager", "NotifyRouterItem", this.OnNotifyRouterItem);
+            CoreService.EventContrib.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_ROUTEITEM, this.OnQryRouterItem);
+            CoreService.EventContrib.RegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_ROUTEITEM, this.OnNotifyRouterItem);
 
-            CoreService.EventContrib.RegisterCallback("ConnectorManager", "QryConnectorStatus", this.OnQryConnectorStatus);
-            CoreService.EventContrib.RegisterNotifyCallback("ConnectorManager", "NotifyConnectorStatus", this.OnNotifyConnectorStatus);
+            CoreService.EventContrib.RegisterCallback(Modules.CONN_MGR,Method_CONN_MGR.QRY_CONN_STATUS, this.OnQryConnectorStatus);
+            CoreService.EventContrib.RegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_CONN_STATUS, this.OnNotifyConnectorStatus);
 
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("ConnectorManager", "QryConnectorConfig", this.OnQryConnectorConfig);
-           
-            CoreService.EventContrib.UnRegisterCallback("ConnectorManager", "QryRouterGroup", this.OnQryRouterGroup);
-            CoreService.EventContrib.UnRegisterNotifyCallback("ConnectorManager", "NotifyRouterGroup", this.OnNotifyRouterGroup);
-            
-            CoreService.EventContrib.UnRegisterCallback("ConnectorManager", "QryRouterItem", this.OnQryRouterItem);
-            CoreService.EventContrib.UnRegisterNotifyCallback("ConnectorManager", "NotifyRouterItem", this.OnNotifyRouterItem);
+            CoreService.EventContrib.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_CONN_CONFIG, this.OnQryConnectorConfig);
 
-            CoreService.EventContrib.UnRegisterCallback("ConnectorManager", "QryConnectorStatus", this.OnQryConnectorStatus);
-            CoreService.EventContrib.UnRegisterNotifyCallback("ConnectorManager", "NotifyConnectorStatus", this.OnNotifyConnectorStatus);
+            CoreService.EventContrib.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_ROUTEGROUP, this.OnQryRouterGroup);
+            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_ROUTEGROUP, this.OnNotifyRouterGroup);
+
+            CoreService.EventContrib.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_ROUTEITEM, this.OnQryRouterItem);
+            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_ROUTEITEM, this.OnNotifyRouterItem);
+
+            CoreService.EventContrib.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_CONN_STATUS, this.OnQryConnectorStatus);
+            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_CONN_STATUS, this.OnNotifyConnectorStatus);
 
         }
 
@@ -318,7 +317,7 @@ namespace TradingLib.MoniterControl
             }
             if (islast)
             {
-                CoreService.TLClient.ReqContribRequest("ConnectorManager", "QryRouterGroup", "");//查询路由组
+                CoreService.TLClient.ReqQryRouterGroup();
             }
         }
 

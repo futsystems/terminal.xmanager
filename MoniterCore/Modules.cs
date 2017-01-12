@@ -21,7 +21,10 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public const string MGR_EXCH = "MgrExchServer";
 
-
+        /// <summary>
+        /// 通道管理模块
+        /// </summary>
+        public const string CONN_MGR = "ConnectorManager";
     }
 
 
@@ -121,6 +124,8 @@ namespace TradingLib.MoniterCore
 
     public class Method_MGR_EXCH
     {
+
+        #region 手续费 保证金 交易参数 模板
         /// <summary>
         /// 查询手续费模板
         /// </summary>
@@ -240,5 +245,182 @@ namespace TradingLib.MoniterCore
         /// 策略项通知
         /// </summary>
         public const string NOTIFY_EXSTRATEGY_ITEM = "NotifyExStrategyTemplateItem";
+
+        #endregion
+
+        #region 分区
+        /// <summary>
+        /// 查询分区
+        /// </summary>
+        public const string QRY_DOMAIN = "QryDomain";
+
+        /// <summary>
+        /// 更新分区
+        /// </summary>
+        public const string UPDATE_DOMAIN = "UpdateDomain";
+
+        /// <summary>
+        /// 分区通知
+        /// </summary>
+        public const string NOTIFY_DOMAIN = "NotifyDomain";
+        /// <summary>
+        /// 查询分区登入信息
+        /// </summary>
+        public const string QRY_DOMAIN_LOGININFO = "QryDomainRootLoginInfo";
+        #endregion
+
+        #region 汇率
+        /// <summary>
+        /// 查询汇率
+        /// </summary>
+        public const string QRY_EXCHANGERATES = "QryExchangeRates";
+        /// <summary>
+        /// 更新汇率
+        /// </summary>
+        public const string UPDATE_EXCHANGERATES = "UpdateExchangeRate";
+        /// <summary>
+        /// 汇率更新通知
+        /// </summary>
+        public const string NOTIFY_EXCHANGERATES = "NotifyExchangeRateUpdate";
+        #endregion
+
+        #region Manager
+        /// <summary>
+        /// 查询管理员
+        /// </summary>
+        public const string QRY_MANAGER = "QryManager";
+        /// <summary>
+        /// 查询管理员登入信息
+        /// </summary>
+        public const string QRY_MANAGER_LOGININFO = "QryManagerLoginInfo";
+        /// <summary>
+        /// 更新管理员
+        /// </summary>
+        public const string UPDATE_MANAGER = "UpdateManager";
+        /// <summary>
+        /// 删除管理员
+        /// </summary>
+        public const string DEL_MANAGER = "DeleteManager";
+
+        /// <summary>
+        /// 管理员删除通知
+        /// </summary>
+        public const string NOTIFY_MANGER_DELETE = "NotifyManagerDelete";
+
+        /// <summary>
+        /// 管理员更新通知
+        /// </summary>
+        public const string NOTIFY_MANAGER = "NotifyManagerUpdate";
+
+        /// <summary>
+        /// 更新管理员密码
+        /// </summary>
+        public const string UPDATE_MANAGER_PASS = "UpdateManagerPass";
+        /// <summary>
+        /// 激活管理员
+        /// </summary>
+        public const string UPDATE_MANAGER_ACTIVE = "ActiveManager";
+        /// <summary>
+        /// 冻结管理员
+        /// </summary>
+        public const string UPDATE_MANAGER_INACTIVE = "InactiveManager";
+
+
+        #endregion
+    }
+
+    public class Method_CONN_MGR
+    {
+        /// <summary>
+        /// 查询通道接口
+        /// </summary>
+        public const string QRY_INTERFACE = "QryInterface";
+
+        /// <summary>
+        /// 查询通道编号是否可用
+        /// </summary>
+        public const string QRY_TOKEN_VALID = "QryTokenValid";
+
+        /// <summary>
+        /// 启动通道
+        /// </summary>
+        public const string CONN_START = "StartConnector";
+
+        /// <summary>
+        /// 停止通道
+        /// </summary>
+        public const string CONN_STOP = "StopConnector";
+
+        /// <summary>
+        /// 查询通道状态
+        /// </summary>
+        public const string QRY_CONN_STATUS = "QryConnectorStatus";
+
+        /// <summary>
+        /// 查询默认通道状态
+        /// </summary>
+        public const string QRY_DEFAULT_CONN_STATUS = "QryDefaultConnectorStatus";
+
+        /// <summary>
+        /// 查询通道设置
+        /// </summary>
+        public const string QRY_CONN_CONFIG = "QryConnectorConfig";
+
+        /// <summary>
+        /// 查询默认通道设置
+        /// </summary>
+        public const string QRY_DEFAULT_CONN_CONFIG = "QryDefaultConnectorConfig";
+
+        /// <summary>
+        /// 更新通道设置
+        /// </summary>
+        public const string UPDATE_CONN_CONFIG = "UpdateConnectorConfig";
+
+        /// <summary>
+        /// 通道状态通知
+        /// </summary>
+        public const string NOTIFY_CONN_STATUS = "NotifyConnectorStatus";
+
+        /// <summary>
+        /// 通道设置通知
+        /// </summary>
+        public const string NOTIFY_CONN_CONFIG = "NotifyConnectorCfg";
+
+        /// <summary>
+        /// 查询路由组
+        /// </summary>
+        public const string QRY_ROUTEGROUP = "QryRouterGroup";
+
+        /// <summary>
+        /// 更新路由组
+        /// </summary>
+        public const string UPDATE_ROUTEGROUP = "UpdateRouterGroup";
+
+        /// <summary>
+        /// 路由组更新通知
+        /// </summary>
+        public const string NOTIFY_ROUTEGROUP = "NotifyRouterGroup";
+
+        /// <summary>
+        /// 查询路由项
+        /// </summary>
+        public const string QRY_ROUTEITEM = "QryRouterItem";
+
+        /// <summary>
+        /// 更新路由项
+        /// </summary>
+        public const string UPDATE_ROUTEITEM = "UpdateRouterItem";
+
+        /// <summary>
+        /// 路由项更新通知
+        /// </summary>
+        public const string NOTIFY_ROUTEITEM = "NotifyRouterItem";
+
+        /// <summary>
+        /// 查询未绑定通道
+        /// </summary>
+        public const string QRY_CONN_NOTIN_GROUP = "QryConnectorNotInGroup";
+
+
     }
 }

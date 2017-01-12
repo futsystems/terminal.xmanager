@@ -65,16 +65,13 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("ConnectorManager", "QryInterface", this.OnQryInterface);//查询交易帐户出入金请求
-            //CoreService.EventContrib.RegisterCallback("MgrExchServer", "NotifyCashOperation", this.OnNotifyCashOperation);
+            CoreService.EventContrib.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_INTERFACE, this.OnQryInterface);
             CoreService.TLClient.ReqQryInterface();
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("ConnectorManager", "QryInterface", this.OnQryInterface);//查询交易帐户出入金请求
-            //CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "NotifyCashOperation", this.OnNotifyCashOperation);
-
+            CoreService.EventContrib.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_INTERFACE, this.OnQryInterface);
         }
 
         void OnQryInterface(string jsonstr, bool islast)

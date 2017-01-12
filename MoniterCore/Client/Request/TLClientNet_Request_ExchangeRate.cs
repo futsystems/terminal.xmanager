@@ -1,4 +1,7 @@
-﻿using System;
+﻿//Copyright 2013 by FutSystems,Inc.
+//20170112 去除字符串硬编码
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +13,16 @@ namespace TradingLib.MoniterCore
 {
     public partial class TLClientNet
     {
+
+        /// <summary>
+        /// 更新汇率
+        /// </summary>
+        /// <param name="rate"></param>
+        public void ReqUpdateExchangeRate(ExchangeRate rate)
+        {
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_EXCHANGERATES, rate);
+        }
+
         /// <summary>
         /// 查询任务运行日志
         /// </summary>
@@ -20,6 +33,10 @@ namespace TradingLib.MoniterCore
             SendPacket(request);
         }
 
+        public void ReqQryExchangeRateContrib()
+        {
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_EXCHANGERATES, "");
+        }
      
     }
 }

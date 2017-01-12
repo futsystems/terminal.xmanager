@@ -68,15 +68,15 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryDomain", this.OnQryDomain);
-            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyDomain", this.OnNotifyDomain);
+            CoreService.EventContrib.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_DOMAIN, this.OnQryDomain);
+            CoreService.EventContrib.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_DOMAIN, this.OnNotifyDomain);
             CoreService.TLClient.ReqQryDomain();
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QryDomain", this.OnQryDomain);
-            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyDomain", this.OnNotifyDomain);
+            CoreService.EventContrib.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_DOMAIN, this.OnQryDomain);
+            CoreService.EventContrib.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_DOMAIN, this.OnNotifyDomain);
        
         }
 

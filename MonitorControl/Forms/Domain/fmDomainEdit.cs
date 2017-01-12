@@ -56,18 +56,18 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("ConnectorManager", "QryInterface", this.OnQryInterface);
-            CoreService.EventContrib.RegisterCallback("FinServiceCentre", "QryFinServicePlan", this.OnQryFinServicePlan);
+            CoreService.EventContrib.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_INTERFACE, this.OnQryInterface);
+            //CoreService.EventContrib.RegisterCallback("FinServiceCentre", "QryFinServicePlan", this.OnQryFinServicePlan);
             
             //请求操作可以放在OnInit调用内，这样所有回调注册或初始化操作均已经完成
             CoreService.TLClient.ReqQryInterface();
-            CoreService.TLClient.ReqQryServicePlan();
+            //CoreService.TLClient.ReqQryServicePlan();
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("ConnectorManager", "QryInterface", this.OnQryInterface);
-            CoreService.EventContrib.UnRegisterCallback("FinServiceCentre", "QryFinServicePlan", this.OnQryFinServicePlan);
+            CoreService.EventContrib.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_INTERFACE, this.OnQryInterface);
+            //CoreService.EventContrib.UnRegisterCallback("FinServiceCentre", "QryFinServicePlan", this.OnQryFinServicePlan);
         }
 
 

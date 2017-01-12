@@ -1,4 +1,7 @@
-﻿using System;
+﻿//Copyright 2013 by FutSystems,Inc.
+//20170112 去除字符串硬编码
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +18,7 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public void ReqQryDomain()
         {
-            this.ReqContribRequest("MgrExchServer", "QryDomain", "");
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_DOMAIN, "");
         }
 
         /// <summary>
@@ -24,24 +27,18 @@ namespace TradingLib.MoniterCore
         /// <param name="domainid"></param>
         public void ReqQryDomainRootLoginInfo(int domainid)
         {
-            this.ReqContribRequest("MgrExchServer", "QryDomainRootLoginInfo", domainid.ToString());
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_DOMAIN_LOGININFO, domainid.ToString());
         }
+
         /// <summary>
         /// 更新域
         /// </summary>
         /// <param name="domain"></param>
         public void ReqUpdateDomain(DomainImpl domain)
         {
-            this.ReqContribRequest("MgrExchServer", "UpdateDomain", domain.SerializeObject());
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_DOMAIN, domain);
         }
 
-        /// <summary>
-        /// 更新同步实盘帐户
-        /// </summary>
-        /// <param name="vid"></param>
-        public void ReqUpdateSyncVendor(int vid)
-        {
-            this.ReqContribRequest("MgrExchServer", "UpdateDomainCFGSyncSymbolVendor",vid.ToString());
-        }
+      
     }
 }

@@ -29,7 +29,7 @@ namespace TradingLib.MoniterCore
         /// <param name="t"></param>
         public void ReqUpdateCommissionTemplate(CommissionTemplateSetting t)
         {
-            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_COMMISSION_TEMPLATE, t.SerializeObject());
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_COMMISSION_TEMPLATE, t);
         }
 
         public void ReqDelCommissionTemplate(CommissionTemplateSetting t)
@@ -51,7 +51,7 @@ namespace TradingLib.MoniterCore
         /// <param name="t"></param>
         public void ReqUpdateCommissionTemplateItem(MGRCommissionTemplateItemSetting item)
         {
-            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_COMMISSION_ITEM, item.SerializeObject());
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_COMMISSION_ITEM, item);
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace TradingLib.MoniterCore
         /// <param name="t"></param>
         public void ReqUpdateMarginTemplate(MarginTemplateSetting t)
         {
-            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_MARGIN_TEMPLATE, t.SerializeObject());
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_MARGIN_TEMPLATE, t);
         }
 
         public void ReqDelMarginTemplate(MarginTemplateSetting t)
@@ -90,7 +90,7 @@ namespace TradingLib.MoniterCore
         /// <param name="item"></param>
         public void ReqUpdateCommissionTemplateItem(MGRMarginTemplateItemSetting item)
         {
-            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_MARGIN_ITEM, item.SerializeObject());
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_MARGIN_ITEM, item);
         }
 
 
@@ -109,7 +109,7 @@ namespace TradingLib.MoniterCore
         /// <param name="t"></param>
         public void ReqUpdateExStrategyTemplate(ExStrategyTemplateSetting t)
         {
-            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_EXSTRATEGY_TEMPLATE, t.SerializeObject());
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_EXSTRATEGY_TEMPLATE, t);
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace TradingLib.MoniterCore
         /// <param name="t"></param>
         public void ReqUpdateExStrategyTemplateItem(ExStrategy item)
         {
-            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_EXSTRATEGY_ITEM, item.SerializeObject());
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_EXSTRATEGY_ITEM, item);
         }
 
         public void ReqDelExStrategyTemplate(ExStrategyTemplateSetting t)

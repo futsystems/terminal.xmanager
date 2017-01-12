@@ -83,7 +83,7 @@
     <Compile Include="Client\TLClientNet_PacketHandler_Login.cs" />
     <Compile Include="Client\TLClientNet_PacketHandler_Account.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_Account.cs" />
-    <Compile Include="Client\Request\TLClientNet_Request_AccountConnector.cs" />
+    <Compile Include="Client\Request\old\TLClientNet_Request_AccountConnector.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_BasicInfo.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_CashOPAccount.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_CashOpAgent.cs" />
@@ -92,7 +92,7 @@
     <Compile Include="Client\Request\TLClientNet_Request_Domain.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_ExCore_Exchange.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_FinAgent.cs" />
-    <Compile Include="Client\Request\TLClientNet_Request_FinService.cs" />
+    <Compile Include="Client\Request\old\TLClientNet_Request_FinService.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_HistQry.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_log.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_Manager.cs" />

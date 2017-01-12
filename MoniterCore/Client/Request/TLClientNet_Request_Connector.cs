@@ -1,4 +1,7 @@
-﻿using System;
+﻿//Copyright 2013 by FutSystems,Inc.
+//20170112 去除字符串硬编码
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,17 +19,19 @@ namespace TradingLib.MoniterCore
         public void ReqQryInterface()
         {
             logger.Info("查询所有接口设置");
-            this.ReqContribRequest("ConnectorManager", "QryInterface", "");
+            this.ReqContribRequest(Modules.CONN_MGR,Method_CONN_MGR.QRY_INTERFACE, "");
         }
 
         /// <summary>
-        /// 查询所有通道设置
+        /// 更新接口设置
         /// </summary>
-        public void ReqQryConnectorConfig()
+        /// <param name="json"></param>
+        public void ReqUpdateInterface(string json)
         {
-            logger.Info("查询所有通道设置");
-            this.ReqContribRequest("ConnectorManager", "QryConnectorConfig", "");
+            logger.Info("请求更新或添加接口");
+            this.ReqContribRequest(Modules.CONN_MGR, "UpdateInterface", json);
         }
+
 
         /// <summary>
         /// 查询通道是否可用
@@ -35,7 +40,21 @@ namespace TradingLib.MoniterCore
         public void ReqQryTokenValid(string token)
         {
             logger.Info("查询某个通道ID是否可用");
-            this.ReqContribRequest("ConnectorManager", "QryTokenValid",token);
+            this.ReqContribRequest(Modules.CONN_MGR, Method_CONN_MGR.QRY_TOKEN_VALID, token);
+        }
+
+        public void ReqQryConnectorNotInGroup()
+        {
+            this.ReqContribRequest(Modules.CONN_MGR, Method_CONN_MGR.QRY_CONN_NOTIN_GROUP, "");
+        }
+
+        /// <summary>
+        /// 查询所有通道设置
+        /// </summary>
+        public void ReqQryConnectorConfig()
+        {
+            logger.Info("查询所有通道设置");
+            this.ReqContribRequest(Modules.CONN_MGR,Method_CONN_MGR.QRY_CONN_CONFIG, "");
         }
 
         /// <summary>
@@ -44,7 +63,7 @@ namespace TradingLib.MoniterCore
         public void ReqQryDefaultConnectorConfig()
         {
             logger.Info("查询默认通道");
-            this.ReqContribRequest("ConnectorManager", "QryDefaultConnectorConfig", "");
+            this.ReqContribRequest(Modules.CONN_MGR,Method_CONN_MGR.QRY_DEFAULT_CONN_CONFIG, "");
         }
 
         /// <summary>
@@ -53,13 +72,13 @@ namespace TradingLib.MoniterCore
         public void ReqQryConnectorStatus()
         {
             logger.Info("查询所有通道状态");
-            this.ReqContribRequest("ConnectorManager", "QryConnectorStatus", "");
+            this.ReqContribRequest(Modules.CONN_MGR,Method_CONN_MGR.QRY_CONN_STATUS, "");
         }
 
         public void ReqQryDefaultConnectorStatus()
         {
             logger.Info("查询默认通道状态");
-            this.ReqContribRequest("ConnectorManager", "QryDefaultConnectorStatus", "");
+            this.ReqContribRequest(Modules.CONN_MGR, Method_CONN_MGR.QRY_DEFAULT_CONN_STATUS, "");
         }
 
         /// <summary>
@@ -68,17 +87,9 @@ namespace TradingLib.MoniterCore
         public void ReqUpdateConnectorConfig(string json)
         {
             logger.Info("请求添加或更新通道设置");
-            this.ReqContribRequest("ConnectorManager", "UpdateConnectorConfig", json);
+            this.ReqContribRequest(Modules.CONN_MGR,Method_CONN_MGR.UPDATE_CONN_CONFIG, json);
         }
-        /// <summary>
-        /// 更新接口设置
-        /// </summary>
-        /// <param name="json"></param>
-        public void ReqUpdateInterface(string json)
-        {
-            logger.Info("请求更新或添加接口");
-            this.ReqContribRequest("ConnectorManager", "UpdateInterface", json);
-        }
+        
 
         /// <summary>
         /// 请求启动通道
@@ -87,7 +98,7 @@ namespace TradingLib.MoniterCore
         public void ReqStartConnector(int id)
         {
             logger.Info("请求启动某个通道");
-            this.ReqContribRequest("ConnectorManager", "StartConnector",id.ToString());
+            this.ReqContribRequest(Modules.CONN_MGR, Method_CONN_MGR.CONN_START, id.ToString());
         }
 
         /// <summary>
@@ -97,7 +108,7 @@ namespace TradingLib.MoniterCore
         public void ReqStopConnector(int id)
         {
             logger.Info("请求停止某个通道");
-            this.ReqContribRequest("ConnectorManager", "StopConnector", id.ToString());
+            this.ReqContribRequest(Modules.CONN_MGR, Method_CONN_MGR.CONN_STOP, id.ToString());
         }
 
 
@@ -108,7 +119,7 @@ namespace TradingLib.MoniterCore
         public void ReqQryRouterGroup()
         {
             logger.Info("请求查询路由组");
-            this.ReqContribRequest("ConnectorManager", "QryRouterGroup","");
+            this.ReqContribRequest(Modules.CONN_MGR, Method_CONN_MGR.QRY_ROUTEGROUP, "");
         }
 
 
@@ -119,7 +130,7 @@ namespace TradingLib.MoniterCore
         public void ReqQryRouterItem(int rgid)
         {
             logger.Info("请求查询某路由组内路由项");
-            this.ReqContribRequest("ConnectorManager", "QryRouterItem", rgid.ToString());
+            this.ReqContribRequest(Modules.CONN_MGR, Method_CONN_MGR.QRY_ROUTEITEM, rgid.ToString());
         }
 
         
@@ -131,7 +142,7 @@ namespace TradingLib.MoniterCore
         public void ReqUpdateRouterItem(RouterItemSetting item)
         {
             logger.Info("请求更新或添加路由项目");
-            this.ReqContribRequest("ConnectorManager", "UpdateRouterItem",item.SerializeObject());
+            this.ReqContribRequest(Modules.CONN_MGR, Method_CONN_MGR.UPDATE_ROUTEITEM, item.SerializeObject());
         }
 
         /// <summary>
@@ -141,7 +152,7 @@ namespace TradingLib.MoniterCore
         public void ReqUpdateRouterGroup(RouterGroupSetting group)
         {
             logger.Info("请求更新或添加路由组");
-            this.ReqContribRequest("ConnectorManager", "UpdateRouterGroup", group.SerializeObject());
+            this.ReqContribRequest(Modules.CONN_MGR, Method_CONN_MGR.UPDATE_ROUTEGROUP, group.SerializeObject());
         }
 
     }
