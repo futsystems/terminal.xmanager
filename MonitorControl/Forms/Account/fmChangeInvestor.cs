@@ -67,7 +67,7 @@ namespace TradingLib.MoniterControl
 
                 _bankfk = ctBankList1.BankSelected;
             }
-            CoreService.TLClient.ReqChangeInverstorInfo(_account.Account, _name, _broker, _bankfk, _bankac);
+            //CoreService.TLClient.ReqChangeInverstorInfo(_account.Account, _name, _broker, _bankfk, _bankac);
             this.Close();
         }
     }

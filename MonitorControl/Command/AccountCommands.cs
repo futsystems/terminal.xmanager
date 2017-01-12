@@ -80,13 +80,13 @@ namespace TradingLib.MoniterControl
                 return;
             }
 
-            if (CoreService.SiteInfo.ProductType == QSEnumProductType.VendorMoniter)
-            {
-                fmCashOperation fm = new fmCashOperation();
-                fm.SetAccount(account);
-                fm.ShowDialog();
-                fm.Close();
-            }
+            //if (CoreService.SiteInfo.ProductType == QSEnumProductType.VendorMoniter)
+            //{
+            //    fmCashOperation fm = new fmCashOperation();
+            //    fm.SetAccount(account);
+            //    fm.ShowDialog();
+            //    fm.Close();
+            //}
             if (CoreService.SiteInfo.ProductType == QSEnumProductType.CounterSystem)
             {
                 if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.UIAccess.r_cashop)
@@ -387,14 +387,12 @@ namespace TradingLib.MoniterControl
             if (MoniterHelper.WindowConfirm("确认删除交易帐户?") == System.Windows.Forms.DialogResult.Yes)
             {
                 CoreService.TLClient.ReqDelAccount(acct.Account);
-                //acct.Deleted = true;//修改删除标识
-                //accountMoniter.GotAccountChanged(acct);
-                
-                //RefreshAccountQuery();//刷新表格
-
             }
 
+
+
         }
+
     }
 
     /// <summary>
@@ -404,15 +402,15 @@ namespace TradingLib.MoniterControl
     {
         public override void Run()
         {
-            AccountItem account = null;
-            if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
-            {
-                return;
-            }
-            if (MoniterHelper.WindowConfirm("确认从帐户:" + account.Account + "解绑主帐户?") == System.Windows.Forms.DialogResult.Yes)
-            {
-                CoreService.TLClient.ReqDelAccountConnector(account.Account);
-            }
+            //AccountItem account = null;
+            //if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
+            //{
+            //    return;
+            //}
+            //if (MoniterHelper.WindowConfirm("确认从帐户:" + account.Account + "解绑主帐户?") == System.Windows.Forms.DialogResult.Yes)
+            //{
+            //    CoreService.TLClient.ReqDelAccountConnector(account.Account);
+            //}
         }
     }
 
@@ -423,16 +421,16 @@ namespace TradingLib.MoniterControl
     {
         public override void Run()
         {
-            AccountItem account = null;
-            if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
-            {
-                return;
-            }
+            //AccountItem account = null;
+            //if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
+            //{
+            //    return;
+            //}
 
-            fmBindConnector fm = new fmBindConnector();
-            fm.SetAccount(account);
-            fm.ShowDialog();
-            fm.Close();
+            //fmBindConnector fm = new fmBindConnector();
+            //fm.SetAccount(account);
+            //fm.ShowDialog();
+            //fm.Close();
         }
     }
 
@@ -444,15 +442,15 @@ namespace TradingLib.MoniterControl
         public override void Run()
         {
 
-            AccountItem account = null;
-            if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
-            {
-                return;
-            }
+            //AccountItem account = null;
+            //if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
+            //{
+            //    return;
+            //}
 
-            CoreService.EventAccount.FireSyncAccountEvent(account);//触发同步事件，
+            //CoreService.EventAccount.FireSyncAccountEvent(account);//触发同步事件，
 
-            CoreService.TLClient.ReqSyncData(account.Account);
+            //CoreService.TLClient.ReqSyncData(account.Account);
         }
     }
 
@@ -463,16 +461,16 @@ namespace TradingLib.MoniterControl
     {
         public override void Run()
         {
-            AccountItem account = null;
-            if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
-            {
-                return;
-            }
+            //AccountItem account = null;
+            //if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
+            //{
+            //    return;
+            //}
 
-            fmMainAccountManager fm = new fmMainAccountManager();
-            fm.SetAccount(account);
-            fm.ShowDialog();
-            fm.Close();
+            //fmMainAccountManager fm = new fmMainAccountManager();
+            //fm.SetAccount(account);
+            //fm.ShowDialog();
+            //fm.Close();
         }
     }
 

@@ -42,7 +42,7 @@ namespace TradingLib.MoniterControl
 
             if (_account != null)
             {
-                CoreService.EventContrib.RegisterCallback("AccountManager", "QryAccountLoginInfo", this.OnLoginInfo);
+                CoreService.EventContrib.RegisterCallback(Modules.ACC_MGR,Method_ACC_MGR.QRY_LOGIN_INFO, this.OnLoginInfo);
                 CoreService.TLClient.ReqQryAccountLoginInfo(_account.Account);
             }
 
@@ -61,7 +61,7 @@ namespace TradingLib.MoniterControl
 
             if (_account != null)
             {
-                CoreService.EventContrib.UnRegisterCallback("AccountManager", "QryAccountLoginInfo", this.OnLoginInfo);
+                CoreService.EventContrib.UnRegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_LOGIN_INFO, this.OnLoginInfo);
             }
         }
 

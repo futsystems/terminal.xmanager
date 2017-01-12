@@ -87,11 +87,10 @@
     <Compile Include="Client\Request\TLClientNet_Request_BasicInfo.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_CashOPAccount.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_CashOpAgent.cs" />
-    <Compile Include="Client\Request\TLClientNet_Request_CommissionMargin.cs" />
+    <Compile Include="Client\Request\TLClientNet_Request_ConfigTemplate.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_Connector.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_Domain.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_ExCore_Exchange.cs" />
-    <Compile Include="Client\Request\TLClientNet_Request_ExStrategy.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_FinAgent.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_FinService.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_HistQry.cs" />
@@ -119,6 +118,7 @@
       <DependentUpon>fmNotice.cs</DependentUpon>
     </Compile>
     <Compile Include="ManagerUtils.cs" />
+    <Compile Include="Modules.cs" />
     <Compile Include="MonitorPlugin.cs" />
     <Compile Include="PrivilegeV.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

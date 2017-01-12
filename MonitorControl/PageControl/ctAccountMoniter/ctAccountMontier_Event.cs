@@ -92,12 +92,12 @@ namespace TradingLib.MoniterControl
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnAddAccount_Click(object sender, EventArgs e)
-        {
-            fmAddAccount fm = new fmAddAccount();
-            fm.TopMost = true;
-            fm.ShowDialog();
-        }
+        //private void btnAddAccount_Click(object sender, EventArgs e)
+        //{
+        //    fmAddAccount fm = new fmAddAccount();
+        //    fm.TopMost = true;
+        //    fm.ShowDialog();
+        //}
 
 
         void QrySettlement_Click(object sender, EventArgs e)

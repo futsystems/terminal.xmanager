@@ -22,32 +22,12 @@ namespace TradingLib.MoniterControl
             UpdateAccountNum();
 
             //帐户事件
-
-            CoreService.EventAccount.OnNewAccountEvent += new Action<AccountItem>(GotAccount);
+            //CoreService.EventAccount.OnNewAccountEvent += new Action<AccountItem>(GotAccount);
             CoreService.EventAccount.OnInfoLiteEvent += new Action<AccountInfoLite>(GotAccountInfoLite);
             CoreService.EventAccount.OnAccountChangedEvent += new Action<AccountItem>(GotAccountChanged);
             CoreService.EventAccount.OnSessionUpdateEvent += new Action<NotifyMGRSessionUpdateNotify>(GotSessionUpdate);
             
 
-            if(CoreService.TLClient.ServerVersion.ProductType == QSEnumProductType.CounterSystem)
-            {
-               
-
-
-                ////只有管理员可以修改路由组和删除交易帐户
-                //if (!CoreService.SiteInfo.Manager.IsRoot())
-                //{
-                //    accountgrid.ContextMenuStrip.Items[4].Visible = false;
-
-                //    accountgrid.ContextMenuStrip.Items[8].Visible = false;
-                //    accountgrid.ContextMenuStrip.Items[9].Visible = false;
-                //    accountgrid.ContextMenuStrip.Items[11].Visible = false;
-                //    accountgrid.ContextMenuStrip.Items[12].Visible = false;
-                //}
-                //accountgrid.ContextMenuStrip.Items[10].Visible = false;
-
-
-            }
             //主帐户监控
             if (CoreService.SiteInfo.ProductType == QSEnumProductType.VendorMoniter)
             {
@@ -97,7 +77,7 @@ namespace TradingLib.MoniterControl
         public void OnDisposed()
         {
             //帐户事件
-            CoreService.EventAccount.OnNewAccountEvent -= new Action<AccountItem>(GotAccount);
+            //CoreService.EventAccount.OnNewAccountEvent -= new Action<AccountItem>(GotAccount);
             CoreService.EventAccount.OnInfoLiteEvent -= new Action<AccountInfoLite>(GotAccountInfoLite);
             CoreService.EventAccount.OnAccountChangedEvent -= new Action<AccountItem>(GotAccountChanged);
             CoreService.EventAccount.OnSessionUpdateEvent -= new Action<NotifyMGRSessionUpdateNotify>(GotSessionUpdate);

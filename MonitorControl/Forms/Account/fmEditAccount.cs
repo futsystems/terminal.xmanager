@@ -25,39 +25,6 @@ namespace TradingLib.MoniterControl
         void fmAddFinAccount_Load(object sender, EventArgs e)
         {
             btnSubmit.Click += new EventHandler(btnSubmit_Click);
-
-            //if (CoreService.SiteInfo.ProductType == QSEnumProductType.VendorMoniter)
-            //{
-
-            //    ValueObject<QSEnumAccountCategory> vo = new ValueObject<QSEnumAccountCategory>();
-            //    vo.Name = "配资帐户";
-            //    vo.Value = QSEnumAccountCategory.MONITERACCOUNT;
-
-            //    ArrayList list = new ArrayList();
-            //    list.Add(vo);
-            //    MoniterHelper.AdapterToIDataSource(cbAccountType).BindDataSource(list);
-            //    cbAccountType.SelectedIndex = 0;
-            //    cbAccountType.Enabled = false;
-            //}
-
-            //分帐户柜台系统 可以选择添加的帐户类别
-            //if (CoreService.SiteInfo.ProductType == QSEnumProductType.CounterSystem)
-            {
-
-                //ValueObject<QSEnumAccountCategory> vo1 = new ValueObject<QSEnumAccountCategory>();
-                //vo1.Name = "模拟帐户";
-                //vo1.Value = QSEnumAccountCategory.SUBACCOUNT;
-
-                //ValueObject<QSEnumAccountCategory> vo2 = new ValueObject<QSEnumAccountCategory>();
-                //vo2.Name = "实盘帐户";
-                //vo2.Value = QSEnumAccountCategory.SUBACCOUNT;
-
-                //ArrayList list = new ArrayList();
-                //list.Add(vo1);
-                //list.Add(vo2);
-
-
-            }
             btnFillInfo.CheckedChanged += new EventHandler(btnFillInfo_CheckedChanged);
             //生成帐户类型列表
             MoniterHelper.AdapterToIDataSource(cbAccountType).BindDataSource(MoniterHelper.GetAccountTypeCombList());
@@ -102,18 +69,18 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("AccountManager", "QryAccountProfile", this.OnQryAccountProfile);
+            CoreService.EventContrib.RegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_PROFILE, this.OnQryAccountProfile);
             
             //如果设定了交易帐户 则表明是编辑/查询个人信息
             if (_account != null)
             {
-                this.ReqQryAccountProfile(_account.Account);
+                CoreService.TLClient.ReqQryAccountProfile(_account.Account);
             }
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("AccountManager", "QryAccountProfile", this.OnQryAccountProfile);
+            CoreService.EventContrib.UnRegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_PROFILE, this.OnQryAccountProfile);
             
         }
 
@@ -180,13 +147,13 @@ namespace TradingLib.MoniterControl
                 {
                     if (MoniterHelper.WindowConfirm("请确认个人信息填写准确") == System.Windows.Forms.DialogResult.Yes)
                     {
-                        ReqAddAccount(createion);
+                        CoreService.TLClient.ReqAddAccount(createion);
                         this.Close();
                     }
                 }
                 else
                 {
-                    ReqAddAccount(createion);
+                    CoreService.TLClient.ReqAddAccount(createion);
                     this.Close();
                 }
             }
@@ -196,7 +163,7 @@ namespace TradingLib.MoniterControl
                 {
                     if (MoniterHelper.WindowConfirm("确认更新个人信息") == System.Windows.Forms.DialogResult.Yes)
                     {
-                        ReqUpdateAccountProfile(profile);
+                        CoreService.TLClient.ReqUpdateAccountProfile(profile);
                         this.Close();
                     }
                 }
@@ -208,40 +175,6 @@ namespace TradingLib.MoniterControl
         }
 
 
-        /// <summary>
-        /// 添加交易帐户
-        /// </summary>
-        /// <param name="createion"></param>
-        void ReqAddAccount(AccountCreation createion)
-        {
-            CoreService.TLClient.ReqContribRequest("AccountManager", "AddAccountFacde", createion);
-        }
-
-        /// <summary>
-        /// 请求添加配资客户
-        /// </summary>
-        /// <param name="profile"></param>
-        //void ReqAddFinServiceAccount(AccountProfile profile)
-        //{
-        //    CoreService.TLClient.ReqContribRequest("AccountManager", "AddFinServiceAccount", profile);
-        //}
-
-        /// <summary>
-        /// 查询个人信息
-        /// </summary>
-        /// <param name="account"></param>
-        void ReqQryAccountProfile(string account)
-        {
-            CoreService.TLClient.ReqContribRequest("AccountManager", "QryAccountProfile", account);
-        }
-
-        /// <summary>
-        /// 更新个人信息
-        /// </summary>
-        /// <param name="account"></param>
-        void ReqUpdateAccountProfile(AccountProfile profile)
-        {
-            CoreService.TLClient.ReqContribRequest("AccountManager", "UpdateAccountProfile", profile);
-        }
+       
     }
 }

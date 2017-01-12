@@ -141,7 +141,7 @@ namespace TradingLib.MoniterControl
                     if (MoniterHelper.WindowConfirm(string.Format("确认删除交易参数模板:{0}?", t.Name)) == System.Windows.Forms.DialogResult.Yes)
                     {
                         ClearItem();
-                        CoreService.TLClient.ReqContribRequest("MgrExchServer", "DeleteExStrategyTemplate", t.ID.ToString());
+                        CoreService.TLClient.ReqDelExStrategyTemplate(t);
                     }
                 }
             }
@@ -154,23 +154,23 @@ namespace TradingLib.MoniterControl
                 kryptonGroupBox3.Visible = false;
             }
 
-            CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryExStrategyTemplate", this.OnQryExStrategyTemplate);
-            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyExStrategyTemplate", this.OnNotifyExStrategyTemplate);
-            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyDeleteExStrategyTemplate", this.OnNotifyDelMarginTemplate);
+            CoreService.EventContrib.RegisterCallback(Modules.MGR_EXCH,Method_MGR_EXCH.QRY_EXSTRATEGY_TEMPLATE, this.OnQryExStrategyTemplate);
+            CoreService.EventContrib.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_EXSTRATEGY_TEMPLATE, this.OnNotifyExStrategyTemplate);
+            CoreService.EventContrib.RegisterNotifyCallback(Modules.MGR_EXCH,Method_MGR_EXCH.NOTIFY_EXSTRATEGY_TEMPLATE_DELETE, this.OnNotifyDelMarginTemplate);
 
-            CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryExStrategyTemplateItem", this.OnQryExStrategyTemplateItem);
-            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyExStrategyTemplateItem", this.OnNotifyExStrategyTemplateItem);
+            CoreService.EventContrib.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_EXSTRATEGY_ITEM, this.OnQryExStrategyTemplateItem);
+            CoreService.EventContrib.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_EXSTRATEGY_ITEM, this.OnNotifyExStrategyTemplateItem);
             CoreService.TLClient.ReqQryExStrategyTemplate();
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QryExStrategyTemplate", this.OnQryExStrategyTemplate);
-            CoreService.EventContrib.UnRegisterNotifyCallback("MgrExchServer", "NotifyExStrategyTemplate", this.OnNotifyExStrategyTemplate);
-            CoreService.EventContrib.UnRegisterNotifyCallback("MgrExchServer", "NotifyDeleteExStrategyTemplate", this.OnNotifyDelMarginTemplate);
+            CoreService.EventContrib.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_EXSTRATEGY_TEMPLATE, this.OnQryExStrategyTemplate);
+            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_EXSTRATEGY_TEMPLATE, this.OnNotifyExStrategyTemplate);
+            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_EXSTRATEGY_TEMPLATE_DELETE, this.OnNotifyDelMarginTemplate);
 
-            CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QryExStrategyTemplateItem", this.OnQryExStrategyTemplateItem);
-            CoreService.EventContrib.UnRegisterNotifyCallback("MgrExchServer", "NotifyExStrategyTemplateItem", this.OnNotifyExStrategyTemplateItem);
+            CoreService.EventContrib.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_EXSTRATEGY_ITEM, this.OnQryExStrategyTemplateItem);
+            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_EXSTRATEGY_ITEM, this.OnNotifyExStrategyTemplateItem);
         }
 
 

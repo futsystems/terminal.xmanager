@@ -190,7 +190,7 @@ namespace TradingLib.MoniterControl
                     if (MoniterHelper.WindowConfirm(string.Format("确认删除保证金模板:{0}?", t.Name)) == System.Windows.Forms.DialogResult.Yes)
                     {
                         ClearItem();
-                        CoreService.TLClient.ReqContribRequest("MgrExchServer", "DeleteMarginTemplate", t.ID.ToString());
+                        CoreService.TLClient.ReqDelMarginTemplate(t);
                     }
                 }
             }
@@ -206,23 +206,23 @@ namespace TradingLib.MoniterControl
             }
 
 
-            CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryMarginTemplate", this.OnQryMarginTemplate);
-            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyMarginTemplate", this.OnNotifyMarginTemplate);
-            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyDeleteMarginTemplate", this.OnNotifyDelMarginTemplate);
+            CoreService.EventContrib.RegisterCallback(Modules.MGR_EXCH,Method_MGR_EXCH.QRY_MARGIN_TEMPLATE, this.OnQryMarginTemplate);
+            CoreService.EventContrib.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MARGIN_TEMPLATE, this.OnNotifyMarginTemplate);
+            CoreService.EventContrib.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MARGIN_TEMPLATE_DELETE, this.OnNotifyDelMarginTemplate);
 
-
-            CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryMarginTemplateItem", this.OnQryMarginTemplateItem);
-            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyMarginTemplateItem", this.OnNotifyMarginTemplateItem);
+            CoreService.EventContrib.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_MARGIN_ITEM, this.OnQryMarginTemplateItem);
+            CoreService.EventContrib.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MARGIN_ITEM, this.OnNotifyMarginTemplateItem);
             CoreService.TLClient.ReqQryMarginTemplate();
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QryMarginTemplate", this.OnQryMarginTemplate);
-            CoreService.EventContrib.UnRegisterNotifyCallback("MgrExchServer", "NotifyMarginTemplate", this.OnNotifyMarginTemplate);
+            CoreService.EventContrib.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_MARGIN_TEMPLATE, this.OnQryMarginTemplate);
+            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MARGIN_TEMPLATE, this.OnNotifyMarginTemplate);
+            CoreService.EventContrib.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MARGIN_TEMPLATE_DELETE, this.OnNotifyDelMarginTemplate);
 
-            CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QryMarginTemplateItem", this.OnQryMarginTemplateItem);
-            CoreService.EventContrib.UnRegisterNotifyCallback("MgrExchServer", "NotifyMarginTemplateItem", this.OnNotifyMarginTemplateItem);
+            CoreService.EventContrib.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_MARGIN_ITEM, this.OnQryMarginTemplateItem);
+            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MARGIN_ITEM, this.OnNotifyMarginTemplateItem);
         }
 
         string GetChargeTypeStr(QSEnumChargeType type)

@@ -232,7 +232,8 @@ namespace TradingLib.MoniterControl
                     if (MoniterHelper.WindowConfirm(string.Format("确认删除手续费模板:{0}?", t.Name)) == System.Windows.Forms.DialogResult.Yes)
                     {
                         ClearItem();
-                        CoreService.TLClient.ReqContribRequest("MgrExchServer", "DeleteCommissionTemplate", t.ID.ToString());
+
+                        CoreService.TLClient.ReqDelCommissionTemplate(t);
                     }
 
                 }
@@ -250,23 +251,24 @@ namespace TradingLib.MoniterControl
             }
 
 
-            CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryCommissionTemplate", this.OnQryCommissionTemplate);
-            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyCommissionTemplate", this.OnNotifyCommissionTemplate);
-            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyDeleteCommissionTemplate", this.OnNotifyDelCommissionTemplate);
+            CoreService.EventContrib.RegisterCallback(Modules.MGR_EXCH,Method_MGR_EXCH.QRY_COMMISSION_TEMPLATE, this.OnQryCommissionTemplate);
+            CoreService.EventContrib.RegisterNotifyCallback(Modules.MGR_EXCH,Method_MGR_EXCH.NOTIFY_COMMISSION_TEMPLATE, this.OnNotifyCommissionTemplate);
+            CoreService.EventContrib.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_COMMISSION_TEMPLATE_DELETE, this.OnNotifyDelCommissionTemplate);
 
-            CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryCommissionTemplateItem", this.OnQryCommissionTemplateItem);
-            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyCommissionTemplateItem", this.OnNotifyCommissionTemplateItem);
+            CoreService.EventContrib.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_COMMISSION_ITEM, this.OnQryCommissionTemplateItem);
+            CoreService.EventContrib.RegisterNotifyCallback(Modules.MGR_EXCH,Method_MGR_EXCH.NOTIFY_COMMISSION_ITEM, this.OnNotifyCommissionTemplateItem);
             CoreService.TLClient.ReqQryCommissionTemplate();
         }
 
         public void OnDisposed()
         {
             LogService.Debug("disposed.....");
-            CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QryCommissionTemplate", this.OnQryCommissionTemplate);
-            CoreService.EventContrib.UnRegisterNotifyCallback("MgrExchServer", "NotifyCommissionTemplate", this.OnNotifyCommissionTemplate);
+            CoreService.EventContrib.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_COMMISSION_TEMPLATE, this.OnQryCommissionTemplate);
+            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_COMMISSION_TEMPLATE, this.OnNotifyCommissionTemplate);
+            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_COMMISSION_TEMPLATE_DELETE, this.OnNotifyDelCommissionTemplate);
 
-            CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QryCommissionTemplateItem", this.OnQryCommissionTemplateItem);
-            CoreService.EventContrib.UnRegisterNotifyCallback("MgrExchServer", "NotifyCommissionTemplateItem", this.OnNotifyCommissionTemplateItem);
+            CoreService.EventContrib.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_COMMISSION_ITEM, this.OnQryCommissionTemplateItem);
+            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_COMMISSION_ITEM, this.OnNotifyCommissionTemplateItem);
         }
 
         string GetChargeTypeStr(QSEnumChargeType type)

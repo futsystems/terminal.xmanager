@@ -92,15 +92,6 @@ namespace TradingLib.MoniterCore
             SendPacket(request);
         }
 
-        //public void ReqAddSecurity(SecurityFamilyImpl sec)
-        //{
-        //    logger.Info("请求添加品种信息");
-        //    MGRReqAddSecurityRequest request = RequestTemplate<MGRReqAddSecurityRequest>.CliSendRequest(++requestid);
-        //    request.SecurityFaimly = sec;
-
-        //    SendPacket(request);
-        //}
-
         public void ReqQrySymbol()
         {
             logger.Info("请求查询合约列表");
@@ -118,6 +109,7 @@ namespace TradingLib.MoniterCore
             SendPacket(request);
             return requestid;
         }
+
         /// <summary>
         /// 请求查询合约快照
         /// </summary>

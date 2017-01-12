@@ -398,7 +398,10 @@ namespace TradingLib.MoniterCore
         #endregion
 
 
-
+        /// <summary>
+        /// 管理端交易账户更新
+        /// </summary>
+        /// <param name="account"></param>
         internal void OnMGRAccountUpdate(AccountItem account)
         {
             //更新本地内存记录数据
@@ -409,6 +412,7 @@ namespace TradingLib.MoniterCore
 
             CoreService.EventAccount.FireAccountChangedEvent(account);
         }
+
         internal void OnMGRQryAccountList(AccountItem account, bool islast)
         {
             if (account != null)

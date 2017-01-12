@@ -347,9 +347,7 @@
     <Compile Include="Forms\Account\MainAcctFinService\fmEditService.Designer.cs">
       <DependentUpon>fmEditService.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Account\fmMainAccountManager.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\Account\fmMainAccountManager.cs" />
     <Compile Include="Forms\Account\fmMainAccountManager.Designer.cs">
       <DependentUpon>fmMainAccountManager.cs</DependentUpon>
     </Compile>

@@ -36,17 +36,17 @@ namespace TradingLib.MoniterCore
         }
 
 
-        /// <summary>
-        /// 增加交易帐户事件 服务端新增交易帐户
-        /// </summary>
-        public event Action<AccountItem> OnNewAccountEvent;
+        ///// <summary>
+        ///// 增加交易帐户事件 服务端新增交易帐户
+        ///// </summary>
+        //public event Action<AccountItem> OnNewAccountEvent;
 
-        internal void FireNewAccountEvent(AccountItem account)
-        {
-            LogService.Debug("FireNewAccountEvent");
-            if (OnNewAccountEvent != null)
-                OnNewAccountEvent(account);
-        }
+        //internal void FireNewAccountEvent(AccountItem account)
+        //{
+        //    LogService.Debug("FireNewAccountEvent");
+        //    if (OnNewAccountEvent != null)
+        //        OnNewAccountEvent(account);
+        //}
 
 
         /// <summary>
