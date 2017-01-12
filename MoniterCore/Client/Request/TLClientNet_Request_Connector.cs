@@ -26,10 +26,10 @@ namespace TradingLib.MoniterCore
         /// 更新接口设置
         /// </summary>
         /// <param name="json"></param>
-        public void ReqUpdateInterface(string json)
+        public void ReqUpdateInterface(ConnectorInterface intfac)
         {
             logger.Info("请求更新或添加接口");
-            this.ReqContribRequest(Modules.CONN_MGR, "UpdateInterface", json);
+            this.ReqContribRequest(Modules.CONN_MGR, "UpdateInterface", intfac);
         }
 
 
@@ -84,10 +84,10 @@ namespace TradingLib.MoniterCore
         /// <summary>
         /// 更新接口设置 包含新增与更新
         /// </summary>
-        public void ReqUpdateConnectorConfig(string json)
+        public void ReqUpdateConnectorConfig(ConnectorConfig cfg)
         {
             logger.Info("请求添加或更新通道设置");
-            this.ReqContribRequest(Modules.CONN_MGR,Method_CONN_MGR.UPDATE_CONN_CONFIG, json);
+            this.ReqContribRequest(Modules.CONN_MGR, Method_CONN_MGR.UPDATE_CONN_CONFIG, cfg);
         }
         
 
@@ -142,7 +142,7 @@ namespace TradingLib.MoniterCore
         public void ReqUpdateRouterItem(RouterItemSetting item)
         {
             logger.Info("请求更新或添加路由项目");
-            this.ReqContribRequest(Modules.CONN_MGR, Method_CONN_MGR.UPDATE_ROUTEITEM, item.SerializeObject());
+            this.ReqContribRequest(Modules.CONN_MGR, Method_CONN_MGR.UPDATE_ROUTEITEM, item);
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace TradingLib.MoniterCore
         public void ReqUpdateRouterGroup(RouterGroupSetting group)
         {
             logger.Info("请求更新或添加路由组");
-            this.ReqContribRequest(Modules.CONN_MGR, Method_CONN_MGR.UPDATE_ROUTEGROUP, group.SerializeObject());
+            this.ReqContribRequest(Modules.CONN_MGR, Method_CONN_MGR.UPDATE_ROUTEGROUP, group);
         }
 
     }
