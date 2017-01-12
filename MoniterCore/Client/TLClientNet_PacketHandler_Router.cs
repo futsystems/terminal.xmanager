@@ -202,9 +202,9 @@ namespace TradingLib.MoniterCore
                 case MessageTypes.MGRRESUMEACCOUNTRESPONE://管理恢复帐户日内交易数据回报
                     CliOnMGRResumeAccountResponse(packet as RspMGRResumeAccountResponse);
                     break;
-                case MessageTypes.MGRSESSIONSTATUSUPDATE://管理 交易帐户登入 退出信息更新
-                    CliOnMGRSesssionUpdate(packet as NotifyMGRSessionUpdateNotify);
-                    break;
+                //case MessageTypes.MGRSESSIONSTATUSUPDATE://管理 交易帐户登入 退出信息更新
+                //    CliOnMGRSesssionUpdate(packet as NotifyMGRSessionUpdateNotify);
+                //    break;
                 case MessageTypes.MGRACCOUNTINFORESPONSE://管理 查询交易帐户信息
                     //CliOnMGRQryAccountInfo(packet as RspMGRQryAccountInfoResponse);
                     break;

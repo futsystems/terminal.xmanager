@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
@@ -23,6 +24,9 @@ namespace TradingLib.MoniterControl
             btnExecute.Enabled = false;
             btnUpdateTransferType.Enabled = false;
             btnUpdateInterday.Enabled = false;
+            SetPreferences();
+            InitTable();
+            BindToTable();
 
             MoniterHelper.AdapterToIDataSource(cbTransferType).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumOrderTransferType>());
             MoniterHelper.AdapterToIDataSource(cbCurrnecy).BindDataSource(MoniterHelper.GetEnumValueObjects<CurrencyType>());
@@ -58,7 +62,8 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("MsgExch", "QrySessionInfo", OnSessionInfo);
+            CoreService.EventContrib.RegisterCallback(Modules.MSG_EXCH, Method_MSG_EXCH.QRY_SESSION_INFO, OnSessionInfo);
+            CoreService.EventContrib.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_SESSION_INFO, OnSessionNotify);
             //只有管理员可以查看成交方式
             if (!CoreService.SiteInfo.Manager.IsRoot())
             {
@@ -71,9 +76,22 @@ namespace TradingLib.MoniterControl
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("MsgExch", "QrySessionInfo", OnSessionInfo);
+            CoreService.EventContrib.UnRegisterCallback(Modules.MSG_EXCH, Method_MSG_EXCH.QRY_SESSION_INFO, OnSessionInfo);
+            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_SESSION_INFO, OnSessionNotify);
         }
 
+
+        void OnSessionNotify(string json)
+        {
+            SessionInfo info = CoreService.ParseJsonResponse<SessionInfo>(json);
+            if (info != null)
+            {
+                if (account != null && account.Account == info.Account)
+                {
+                    InvokeGotSessionInfo(info);
+                }
+            }
+        }
 
         void OnSessionInfo(string json, bool islast)
         {
@@ -84,6 +102,17 @@ namespace TradingLib.MoniterControl
             }
         }
 
+        ConcurrentDictionary<string, int> sessionIDMap = new ConcurrentDictionary<string, int>();
+        int SessionID2Idx(string id)
+        {
+            int idx = -1;
+            if (sessionIDMap.TryGetValue(id, out idx))
+            {
+                return idx;
+            }
+            return -1;
+        }
+        
         void InvokeGotSessionInfo(SessionInfo info)
         {
             if (InvokeRequired)
@@ -94,17 +123,32 @@ namespace TradingLib.MoniterControl
             {
                 if (!string.IsNullOrEmpty(info.ClientID))
                 {
-                    lbFront.Text = string.IsNullOrEmpty(info.FrontID) ? "直连" : info.FrontID;
-                    lbProductInfo.Text = info.ProductInfo;
-                    lbIPAddress.Text = info.IPAddress;
-                    if (!string.IsNullOrEmpty(info.IPAddress))
+                    int i = SessionID2Idx(info.ClientID);
+                    if (i == -1)
                     {
-                        string[] rec = info.IPAddress.Split(':');
-                        string ip =rec[0];
-                        //异步查询物理位置
-                        Func<string, string> del = new Func<string, string>(QryLocation);
-                        del.BeginInvoke(ip, QryLocationCallback, null);
+                        DataRow r = tb.Rows.Add(info.ClientID);
+                        i = tb.Rows.Count - 1;//得到新建的Row号
+                        sessionIDMap.TryAdd(info.ClientID, i);
+
+                        tb.Rows[i][SESSIONID] = info.ClientID;
+                        tb.Rows[i][IPADDRESS] = info.IPAddress;
+                        tb.Rows[i][TERMINAL] = info.ProductInfo;
+                        tb.Rows[i][CREATEDTIME] = info.CreatedTime.ToString("HH:mm:ss");
+                        tb.Rows[i][LOGIN] = info.Login;
                     }
+                    else
+                    {
+                        tb.Rows[i][LOGIN] = info.Login;
+                    }
+
+                    //if (!string.IsNullOrEmpty(info.IPAddress))
+                    //{
+                    //    string[] rec = info.IPAddress.Split(':');
+                    //    string ip =rec[0];
+                    //    //异步查询物理位置
+                    //    Func<string, string> del = new Func<string, string>(QryLocation);
+                    //    del.BeginInvoke(ip, QryLocationCallback, null);
+                    //}
                 }
             }
         }
@@ -119,7 +163,7 @@ namespace TradingLib.MoniterControl
             }
             else
             {
-                lbGLocation.Text = location;
+                //lbGLocation.Text = location;
             }
         }
 
@@ -244,18 +288,15 @@ namespace TradingLib.MoniterControl
 
             btnExecute.Enabled = true;
 
+            Clear();
+
             QrySessionInfo(obj.Account);
         }
 
 
         void QrySessionInfo(string account)
         {
-            lbFront.Text = "--";
-            lbProductInfo.Text = "--";
-            lbIPAddress.Text = "--";
-            lbGLocation.Text = "--";
-
-            CoreService.TLClient.ReqContribRequest("MsgExch", "QrySessionInfo", account);
+            CoreService.TLClient.ReqQrySessionInfo(account);
         }
 
 
@@ -303,5 +344,86 @@ namespace TradingLib.MoniterControl
             
         }
 
+
+        #region 表格
+        const string SESSIONID = "回话编号";
+        const string IPADDRESS = "IP地址";
+        const string TERMINAL = "终端类别";
+        const string CREATEDTIME = "建立时间";
+        const string LOGIN = "LOGIN";
+
+        DataTable tb = new DataTable();
+        BindingSource datasource = new BindingSource();
+        /// <summary>
+        /// 设定表格控件的属性
+        /// </summary>
+        private void SetPreferences()
+        {
+            ComponentFactory.Krypton.Toolkit.KryptonDataGridView grid = sessionGrid;
+
+            grid.AllowUserToAddRows = false;
+            grid.AllowUserToDeleteRows = false;
+            grid.AllowUserToResizeRows = false;
+            grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            grid.ColumnHeadersHeight = 25;
+            grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            grid.ReadOnly = true;
+            grid.RowHeadersVisible = false;
+            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grid.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
+
+            grid.StateCommon.Background.Color1 = Color.WhiteSmoke;
+            grid.StateCommon.Background.Color2 = Color.WhiteSmoke;
+        }
+        /// <summary>
+        /// 初始化数据表格
+        /// </summary>
+        private void InitTable()
+        {
+            tb.Columns.Add(SESSIONID);//0
+            tb.Columns.Add(TERMINAL);//1
+            tb.Columns.Add(IPADDRESS);//2
+            tb.Columns.Add(CREATEDTIME);
+            tb.Columns.Add(LOGIN);
+        }
+        /// <summary>
+        /// 绑定数据表格到grid
+        /// </summary>
+        private void BindToTable()
+        {
+            ComponentFactory.Krypton.Toolkit.KryptonDataGridView grid = sessionGrid;
+            datasource.DataSource = tb;
+            //datasource.Sort = RAWDATETIME + " DESC";
+            datasource.Filter = string.Format(LOGIN + " = '{0}'", true);
+            grid.DataSource = datasource;
+
+            grid.Columns[LOGIN].Visible = false;
+            //grid.Columns[STATUS].Visible = false;
+            //grid.Columns[ID].Visible = false;
+            //grid.Columns[ORDERREF].Visible = false;
+            //grid.Columns[RAWDATETIME].Visible = false;
+
+            ResetColumeSize();
+
+            for (int i = 0; i < tb.Columns.Count; i++)
+            {
+                grid.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+        }
+
+        void ResetColumeSize()
+        {
+            ComponentFactory.Krypton.Toolkit.KryptonDataGridView grid = sessionGrid;
+            
+        }
+        #endregion
+
+        public void Clear()
+        {
+            sessionGrid.DataSource = null;
+            sessionIDMap.Clear();
+            tb.Rows.Clear();
+            BindToTable();
+        }
     }
 }

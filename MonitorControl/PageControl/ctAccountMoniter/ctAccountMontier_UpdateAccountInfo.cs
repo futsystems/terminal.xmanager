@@ -420,13 +420,6 @@ namespace TradingLib.MoniterControl
                         }
                         Thread.Sleep(1);
                     }
-                    //更新账户登入 或者 注销 状态
-                    while (!accountcache.hasItems && sessionupdatecache.hasItems)
-                    {
-                        NotifyMGRSessionUpdateNotify notify = sessionupdatecache.Read();
-                        InvokeGotMGRSessionUpdate(notify);
-                        Thread.Sleep(20);
-                    }
                     //更新账户盘中动态财务信息
                     while (!accountcache.hasItems && accountinfocache.hasItems)
                     {
@@ -471,8 +464,7 @@ namespace TradingLib.MoniterControl
         const int bufferisze = 1000;
         RingBuffer<AccountItem> accountcache = new RingBuffer<AccountItem>(bufferisze);//交易帐户缓存
         RingBuffer<AccountInfoLite> accountinfocache = new RingBuffer<AccountInfoLite>(bufferisze);//交易帐户财务数据更新缓存
-        RingBuffer<NotifyMGRSessionUpdateNotify> sessionupdatecache = new RingBuffer<NotifyMGRSessionUpdateNotify>(bufferisze);//交易帐户session更新缓存
-
+       
 
         /// <summary>
         /// 当有帐户新增或者初始化时调用
@@ -604,6 +596,11 @@ namespace TradingLib.MoniterControl
                             gt.Rows[r][MAINACCTRISKRULE] = account.MAcctRiskRule;
                         }
 
+                        gt.Rows[r][LOGINSTATUS] = getLoginStatus(account.IsLogin);
+                        gt.Rows[r][LOGINSTATUSIMG] = getLoginStatusImage(account.IsLogin);
+
+
+
                         bool oldwarn = bool.Parse(gt.Rows[r][WARN].ToString());
                         gt.Rows[r][WARN] = account.IsWarn;
                         gt.Rows[r][WARNSTR] = account.WarnMessage;
@@ -669,40 +666,6 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        /// <summary>
-        /// 登入登出状态更新
-        /// </summary>
-        /// <param name="notify"></param>
-        delegate void MGRSessionUpdateDel(NotifyMGRSessionUpdateNotify notify);
-        void InvokeGotMGRSessionUpdate(NotifyMGRSessionUpdateNotify notify)
-        {
-            if (InvokeRequired)
-            {
-                Invoke(new MGRSessionUpdateDel(InvokeGotMGRSessionUpdate), new object[] { notify });
-            }
-            else
-            {
-
-                string acc = notify.TradingAccount;
-                int i = accountIdx(acc);
-                //debug("got sessionupdate info account:" + notify.TradingAccount + " status:" + notify.IsLogin.ToString() + " rindex:" + i.ToString(), QSEnumDebugLevel.INFO);
-                if (i == -1)
-                    return;
-                else
-                {
-                    gt.Rows[i][LOGINSTATUS] = getLoginStatus(notify.IsLogin);
-                    gt.Rows[i][LOGINSTATUSIMG] = getLoginStatusImage(notify.IsLogin);
-                    //if (notify.IsLogin)
-                    //{
-                    //    gt.Rows[i][ADDRESS] = notify.IPAddress;
-                    //}
-                    //else
-                    //{
-                    //    gt.Rows[i][ADDRESS] = "";
-                    //}
-                }
-            }
-        }
         #endregion
 
 

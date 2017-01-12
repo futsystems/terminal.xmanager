@@ -22,6 +22,11 @@ namespace TradingLib.MoniterCore
         public const string MGR_EXCH = "MgrExchServer";
 
         /// <summary>
+        /// 交易消息交换模块
+        /// </summary>
+        public const string MSG_EXCH = "MsgExch";
+
+        /// <summary>
         /// 通道管理模块
         /// </summary>
         public const string CONN_MGR = "ConnectorManager";
@@ -377,6 +382,11 @@ namespace TradingLib.MoniterCore
         /// 查询系统状态
         /// </summary>
         public const string QRY_SYSTEM_STATUS = "QrySystemStatus";
+
+        /// <summary>
+        /// 交易端会话信息通知
+        /// </summary>
+        public const string NOTIFY_SESSION_INFO = "SessionNotify";
         #endregion
     }
 
@@ -473,5 +483,13 @@ namespace TradingLib.MoniterCore
         public const string QRY_CONN_NOTIN_GROUP = "QryConnectorNotInGroup";
 
 
+    }
+
+    public class Method_MSG_EXCH
+    {
+        /// <summary>
+        /// 查询交易端会话信息
+        /// </summary>
+        public const string QRY_SESSION_INFO = "QrySessionInfo";
     }
 }

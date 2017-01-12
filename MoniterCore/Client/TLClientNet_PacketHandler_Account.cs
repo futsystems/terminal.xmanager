@@ -50,15 +50,15 @@ namespace TradingLib.MoniterCore
             CoreService.EventAccount.FireAccountResumeEvent(response);
         }
 
-        /// <summary>
-        /// 交易帐户登入 退出更新
-        /// </summary>
-        /// <param name="notify"></param>
-        void CliOnMGRSesssionUpdate(NotifyMGRSessionUpdateNotify notify)
-        {
-            //logger.Info("got session update notify:" + notify.ToString());
-            CoreService.EventAccount.FireSessionUpdateEvent(notify);
-        }
+        ///// <summary>
+        ///// 交易帐户登入 退出更新
+        ///// </summary>
+        ///// <param name="notify"></param>
+        //void CliOnMGRSesssionUpdate(NotifyMGRSessionUpdateNotify notify)
+        //{
+        //    //logger.Info("got session update notify:" + notify.ToString());
+        //    CoreService.EventAccount.FireSessionUpdateEvent(notify);
+        //}
 
         /// <summary>
         /// 查询交易帐户信息

@@ -25,8 +25,7 @@ namespace TradingLib.MoniterControl
             //CoreService.EventAccount.OnNewAccountEvent += new Action<AccountItem>(GotAccount);
             CoreService.EventAccount.OnInfoLiteEvent += new Action<AccountInfoLite>(GotAccountInfoLite);
             CoreService.EventAccount.OnAccountChangedEvent += new Action<AccountItem>(GotAccountChanged);
-            CoreService.EventAccount.OnSessionUpdateEvent += new Action<NotifyMGRSessionUpdateNotify>(GotSessionUpdate);
-            
+
 
             //主帐户监控
             if (CoreService.SiteInfo.ProductType == QSEnumProductType.VendorMoniter)
@@ -80,7 +79,6 @@ namespace TradingLib.MoniterControl
             //CoreService.EventAccount.OnNewAccountEvent -= new Action<AccountItem>(GotAccount);
             CoreService.EventAccount.OnInfoLiteEvent -= new Action<AccountInfoLite>(GotAccountInfoLite);
             CoreService.EventAccount.OnAccountChangedEvent -= new Action<AccountItem>(GotAccountChanged);
-            CoreService.EventAccount.OnSessionUpdateEvent -= new Action<NotifyMGRSessionUpdateNotify>(GotSessionUpdate);
         }
     }
 }

@@ -50,14 +50,5 @@ namespace TradingLib.MoniterControl
         }
 
 
-        /// <summary>
-        /// 获得客户端登入 退出状态更新
-        /// </summary>
-        /// <param name="notify"></param>
-        public void GotSessionUpdate(NotifyMGRSessionUpdateNotify notify)
-        {
-            sessionupdatecache.Write(notify);
-        }
-
     }
 }

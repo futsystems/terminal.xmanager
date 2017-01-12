@@ -179,5 +179,14 @@ namespace TradingLib.MoniterCore
         {
             this.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.UPDATE_ACC_ROUTEGROUP, account + "," + rgid.ToString());
         }
+
+        /// <summary>
+        /// 查询交易账户回话信息
+        /// </summary>
+        /// <param name="account"></param>
+        public void ReqQrySessionInfo(string account)
+        {
+            this.ReqContribRequest(Modules.MSG_EXCH, Method_MSG_EXCH.QRY_SESSION_INFO, account);
+        }
     }
 }

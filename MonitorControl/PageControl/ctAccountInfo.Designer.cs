@@ -29,40 +29,34 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.PanelRouter = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btnUpdateTransferType = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.cbTransferType = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.btnUpdateCurrency = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.cbCurrnecy = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.kryptonLabel9 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
-            this.lbGLocation = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.lbFront = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.lbIPAddress = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.lbProductInfo = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.sessionGrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.btnExecute = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btnUpdateTransferType = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnUpdateInterday = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.cbHoldNight = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
-            this.cbTransferType = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lbAccountType = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lbAccount = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.PanelRouter = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PanelRouter)).BeginInit();
+            this.PanelRouter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbTransferType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbCurrnecy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).BeginInit();
             this.kryptonGroupBox1.Panel.SuspendLayout();
             this.kryptonGroupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbTransferType)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PanelRouter)).BeginInit();
-            this.PanelRouter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sessionGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPanel1
@@ -83,8 +77,42 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(391, 281);
+            this.kryptonPanel1.Size = new System.Drawing.Size(439, 281);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // PanelRouter
+            // 
+            this.PanelRouter.Controls.Add(this.btnUpdateTransferType);
+            this.PanelRouter.Controls.Add(this.kryptonLabel8);
+            this.PanelRouter.Controls.Add(this.cbTransferType);
+            this.PanelRouter.Location = new System.Drawing.Point(6, 92);
+            this.PanelRouter.Name = "PanelRouter";
+            this.PanelRouter.Size = new System.Drawing.Size(357, 28);
+            this.PanelRouter.TabIndex = 19;
+            // 
+            // btnUpdateTransferType
+            // 
+            this.btnUpdateTransferType.Location = new System.Drawing.Point(256, 0);
+            this.btnUpdateTransferType.Name = "btnUpdateTransferType";
+            this.btnUpdateTransferType.Size = new System.Drawing.Size(86, 25);
+            this.btnUpdateTransferType.TabIndex = 14;
+            this.btnUpdateTransferType.Values.Text = "更 新";
+            // 
+            // kryptonLabel8
+            // 
+            this.kryptonLabel8.Location = new System.Drawing.Point(9, 4);
+            this.kryptonLabel8.Name = "kryptonLabel8";
+            this.kryptonLabel8.Size = new System.Drawing.Size(63, 20);
+            this.kryptonLabel8.TabIndex = 10;
+            this.kryptonLabel8.Values.Text = "成交方式:";
+            // 
+            // cbTransferType
+            // 
+            this.cbTransferType.DropDownWidth = 91;
+            this.cbTransferType.Location = new System.Drawing.Point(83, 4);
+            this.cbTransferType.Name = "cbTransferType";
+            this.cbTransferType.Size = new System.Drawing.Size(91, 21);
+            this.cbTransferType.TabIndex = 11;
             // 
             // btnUpdateCurrency
             // 
@@ -115,86 +143,28 @@
             // 
             // kryptonGroupBox1
             // 
+            this.kryptonGroupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.kryptonGroupBox1.Location = new System.Drawing.Point(15, 126);
             this.kryptonGroupBox1.Name = "kryptonGroupBox1";
             // 
             // kryptonGroupBox1.Panel
             // 
-            this.kryptonGroupBox1.Panel.Controls.Add(this.lbGLocation);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel6);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel5);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.lbFront);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel2);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel3);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.lbIPAddress);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.lbProductInfo);
-            this.kryptonGroupBox1.Size = new System.Drawing.Size(333, 105);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.sessionGrid);
+            this.kryptonGroupBox1.Size = new System.Drawing.Size(421, 152);
             this.kryptonGroupBox1.TabIndex = 1;
             this.kryptonGroupBox1.Values.Heading = "终端信息";
             // 
-            // lbGLocation
+            // sessionGrid
             // 
-            this.lbGLocation.Location = new System.Drawing.Point(72, 54);
-            this.lbGLocation.Name = "lbGLocation";
-            this.lbGLocation.Size = new System.Drawing.Size(20, 20);
-            this.lbGLocation.TabIndex = 8;
-            this.lbGLocation.Values.Text = "--";
-            // 
-            // kryptonLabel6
-            // 
-            this.kryptonLabel6.Location = new System.Drawing.Point(3, 55);
-            this.kryptonLabel6.Name = "kryptonLabel6";
-            this.kryptonLabel6.Size = new System.Drawing.Size(63, 20);
-            this.kryptonLabel6.TabIndex = 7;
-            this.kryptonLabel6.Values.Text = "物理地址:";
-            // 
-            // kryptonLabel5
-            // 
-            this.kryptonLabel5.Location = new System.Drawing.Point(3, 7);
-            this.kryptonLabel5.Name = "kryptonLabel5";
-            this.kryptonLabel5.Size = new System.Drawing.Size(63, 20);
-            this.kryptonLabel5.TabIndex = 5;
-            this.kryptonLabel5.Values.Text = "交易前置:";
-            // 
-            // lbFront
-            // 
-            this.lbFront.Location = new System.Drawing.Point(72, 6);
-            this.lbFront.Name = "lbFront";
-            this.lbFront.Size = new System.Drawing.Size(20, 20);
-            this.lbFront.TabIndex = 6;
-            this.lbFront.Values.Text = "--";
-            // 
-            // kryptonLabel2
-            // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(178, 6);
-            this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(38, 20);
-            this.kryptonLabel2.TabIndex = 1;
-            this.kryptonLabel2.Values.Text = "终端:";
-            // 
-            // kryptonLabel3
-            // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(18, 31);
-            this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(48, 20);
-            this.kryptonLabel3.TabIndex = 2;
-            this.kryptonLabel3.Values.Text = "IP地址:";
-            // 
-            // lbIPAddress
-            // 
-            this.lbIPAddress.Location = new System.Drawing.Point(72, 30);
-            this.lbIPAddress.Name = "lbIPAddress";
-            this.lbIPAddress.Size = new System.Drawing.Size(20, 20);
-            this.lbIPAddress.TabIndex = 3;
-            this.lbIPAddress.Values.Text = "--";
-            // 
-            // lbProductInfo
-            // 
-            this.lbProductInfo.Location = new System.Drawing.Point(222, 6);
-            this.lbProductInfo.Name = "lbProductInfo";
-            this.lbProductInfo.Size = new System.Drawing.Size(20, 20);
-            this.lbProductInfo.TabIndex = 4;
-            this.lbProductInfo.Values.Text = "--";
+            this.sessionGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.sessionGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sessionGrid.Location = new System.Drawing.Point(0, 0);
+            this.sessionGrid.Name = "sessionGrid";
+            this.sessionGrid.RowTemplate.Height = 23;
+            this.sessionGrid.Size = new System.Drawing.Size(417, 128);
+            this.sessionGrid.TabIndex = 1;
             // 
             // btnExecute
             // 
@@ -203,14 +173,6 @@
             this.btnExecute.Size = new System.Drawing.Size(86, 43);
             this.btnExecute.TabIndex = 15;
             this.btnExecute.Values.Text = "冻 结";
-            // 
-            // btnUpdateTransferType
-            // 
-            this.btnUpdateTransferType.Location = new System.Drawing.Point(256, 0);
-            this.btnUpdateTransferType.Name = "btnUpdateTransferType";
-            this.btnUpdateTransferType.Size = new System.Drawing.Size(86, 25);
-            this.btnUpdateTransferType.TabIndex = 14;
-            this.btnUpdateTransferType.Values.Text = "更 新";
             // 
             // btnUpdateInterday
             // 
@@ -227,22 +189,6 @@
             this.cbHoldNight.Size = new System.Drawing.Size(73, 20);
             this.cbHoldNight.TabIndex = 12;
             this.cbHoldNight.Values.Text = "允许隔夜";
-            // 
-            // cbTransferType
-            // 
-            this.cbTransferType.DropDownWidth = 91;
-            this.cbTransferType.Location = new System.Drawing.Point(83, 4);
-            this.cbTransferType.Name = "cbTransferType";
-            this.cbTransferType.Size = new System.Drawing.Size(91, 21);
-            this.cbTransferType.TabIndex = 11;
-            // 
-            // kryptonLabel8
-            // 
-            this.kryptonLabel8.Location = new System.Drawing.Point(9, 4);
-            this.kryptonLabel8.Name = "kryptonLabel8";
-            this.kryptonLabel8.Size = new System.Drawing.Size(63, 20);
-            this.kryptonLabel8.TabIndex = 10;
-            this.kryptonLabel8.Values.Text = "成交方式:";
             // 
             // kryptonLabel7
             // 
@@ -284,36 +230,26 @@
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "交易帐号:";
             // 
-            // PanelRouter
-            // 
-            this.PanelRouter.Controls.Add(this.btnUpdateTransferType);
-            this.PanelRouter.Controls.Add(this.kryptonLabel8);
-            this.PanelRouter.Controls.Add(this.cbTransferType);
-            this.PanelRouter.Location = new System.Drawing.Point(6, 92);
-            this.PanelRouter.Name = "PanelRouter";
-            this.PanelRouter.Size = new System.Drawing.Size(357, 28);
-            this.PanelRouter.TabIndex = 19;
-            // 
             // ctAccountInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.kryptonPanel1);
             this.Name = "ctAccountInfo";
-            this.Size = new System.Drawing.Size(391, 281);
+            this.Size = new System.Drawing.Size(439, 281);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbCurrnecy)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).EndInit();
-            this.kryptonGroupBox1.Panel.ResumeLayout(false);
-            this.kryptonGroupBox1.Panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
-            this.kryptonGroupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.cbTransferType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PanelRouter)).EndInit();
             this.PanelRouter.ResumeLayout(false);
             this.PanelRouter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbTransferType)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbCurrnecy)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).EndInit();
+            this.kryptonGroupBox1.Panel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
+            this.kryptonGroupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.sessionGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -322,11 +258,7 @@
 
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbAccount;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel lbProductInfo;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel lbIPAddress;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbAccountType;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
@@ -337,13 +269,10 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnUpdateInterday;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnExecute;
         private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox1;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel lbFront;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel lbGLocation;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel6;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnUpdateCurrency;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox cbCurrnecy;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel9;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel PanelRouter;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView sessionGrid;
     }
 }

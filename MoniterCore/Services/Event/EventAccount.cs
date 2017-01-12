@@ -77,18 +77,6 @@ namespace TradingLib.MoniterCore
                 OnAccountChangedEvent(account);
         }
 
-
-        /// <summary>
-        /// 交易帐户登入信息事件
-        /// </summary>
-        public event Action<NotifyMGRSessionUpdateNotify> OnSessionUpdateEvent;
-        internal void FireSessionUpdateEvent(NotifyMGRSessionUpdateNotify notify)
-        {
-            LogService.Debug("FireSessionUpdateEvent");
-            if (OnSessionUpdateEvent != null)
-                OnSessionUpdateEvent(notify);
-        }
-
         /// <summary>
         /// 获得恢复交易帐号事件
         /// </summary>
