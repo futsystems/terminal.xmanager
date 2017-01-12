@@ -48,9 +48,10 @@
             // 
             // cbbank
             // 
-            this.cbbank.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbbank.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbbank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbank.DropDownWidth = 122;
             this.cbbank.Location = new System.Drawing.Point(51, 0);
             this.cbbank.Name = "cbbank";
@@ -61,7 +62,7 @@
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(0, 3);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(41, 18);
+            this.kryptonLabel1.Size = new System.Drawing.Size(38, 20);
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "银行:";
             // 

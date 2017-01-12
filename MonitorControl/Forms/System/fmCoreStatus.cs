@@ -51,28 +51,16 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        //string GetClearCentreStatus(QSEnumClearCentreStatus status)
-        //{
-        //    if (status == QSEnumClearCentreStatus.CCOPEN)
-        //    {
-        //        return "是";
-        //    }
-        //    if (status == QSEnumClearCentreStatus.CCCLOSE)
-        //    {
-        //        return "否";
-        //    }
-        //    return Util.GetEnumDescription(status);
-        //}
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("MgrExchServer", "QrySystemStatus", this.OnQrySystemStatus);
+            CoreService.EventContrib.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_SYSTEM_STATUS, this.OnQrySystemStatus);
             CoreService.TLClient.ReqQrySystemStatus();
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QrySystemStatus", this.OnQrySystemStatus);
+            CoreService.EventContrib.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_SYSTEM_STATUS, this.OnQrySystemStatus);
         }
         void OnQrySystemStatus(string json, bool islast)
         {

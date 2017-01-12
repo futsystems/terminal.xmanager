@@ -124,6 +124,28 @@ namespace TradingLib.MoniterCore
 
     public class Method_MGR_EXCH
     {
+        #region BasicInfo
+        /// <summary>
+        /// 同步品种数据
+        /// </summary>
+        public const string SYNC_SEC_INFO = "SyncSecInfo";
+
+        /// <summary>
+        /// 同步合约数据
+        /// </summary>
+        public const string SYNC_SYMBOL_INFO = "SyncSymbol";
+
+        /// <summary>
+        /// 禁止交易所有合约
+        /// </summary>
+        public const string DISABLE_ALL_SYMBOL = "DisableAllSymbols";
+
+
+        /// <summary>
+        /// 查询日历文件列表
+        /// </summary>
+        public const string QRY_CALENDAR = "QryCalendarList";
+        #endregion
 
         #region 手续费 保证金 交易参数 模板
         /// <summary>
@@ -326,6 +348,35 @@ namespace TradingLib.MoniterCore
         public const string UPDATE_MANAGER_INACTIVE = "InactiveManager";
 
 
+        #endregion
+
+        #region Other
+        
+        /// <summary>
+        /// 查询签约银行
+        /// </summary>
+        public const string QRY_CONTRACT_BANK = "QryContractBank";
+
+        /// <summary>
+        /// 查询收款银行
+        /// </summary>
+        public const string QRY_RECV_BANK = "QryReceiveableBank";
+
+        /// <summary>
+        /// 更新收款银行信息
+        /// </summary>
+        public const string UPDATE_RECV_BANK = "UpdateReceiveableBank";
+
+        /// <summary>
+        /// 收款银行通知
+        /// </summary>
+        public const string NOTIFY_RECV_BANK = "NotifyRecvBank";
+
+
+        /// <summary>
+        /// 查询系统状态
+        /// </summary>
+        public const string QRY_SYSTEM_STATUS = "QrySystemStatus";
         #endregion
     }
 

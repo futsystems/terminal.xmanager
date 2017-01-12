@@ -1,4 +1,7 @@
-﻿using System;
+﻿//Copyright 2013 by FutSystems,Inc.
+//20170112 去除字符串硬编码
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,16 +17,18 @@ namespace TradingLib.MoniterCore
        
         #region 基础数据维护
 
-        public void ReqUpdateRecvBank(JsonWrapperReceivableAccount bank)
+
+        public void ReqQryCalendar()
         {
-            this.ReqContribRequest("MgrExchServer", "UpdateReceiveableBank",bank.SerializeObject()); 
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_CALENDAR, "");
         }
+
         /// <summary>
         /// 请求同步品种
         /// </summary>
         public void ReqSyncSecurity()
         {
-            this.ReqContribRequest("MgrExchServer", "SyncSecInfo", "");
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.SYNC_SEC_INFO, "");
         }
 
         /// <summary>
@@ -31,14 +36,14 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public void ReqSyncSymbol()
         {
-            this.ReqContribRequest("MgrExchServer", "SyncSymbol", "");
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.SYNC_SYMBOL_INFO, "");
         }
         /// <summary>
         /// 请求禁止所有合约
         /// </summary>
         public void ReqDisableAllSymbols()
         {
-            this.ReqContribRequest("MgrExchServer", "DisableAllSymbols", "");
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.DISABLE_ALL_SYMBOL, "");
         }
 
 
@@ -46,7 +51,6 @@ namespace TradingLib.MoniterCore
         {
             logger.Info("请求查询交易所列表");
             MGRQryExchangeRequuest request = RequestTemplate<MGRQryExchangeRequuest>.CliSendRequest(++requestid);
-
             SendPacket(request);
         }
 
@@ -55,7 +59,6 @@ namespace TradingLib.MoniterCore
             logger.Info("请求更新交易所");
             MGRUpdateExchangeRequest request = RequestTemplate<MGRUpdateExchangeRequest>.CliSendRequest(++requestid);
             request.Exchange = ex;
-
             SendPacket(request);
 
 
@@ -64,7 +67,6 @@ namespace TradingLib.MoniterCore
         {
             logger.Info("请求查询市场时间列表");
             MGRQryMarketTimeRequest request = RequestTemplate<MGRQryMarketTimeRequest>.CliSendRequest(++requestid);
-
             SendPacket(request);
         }
 
@@ -73,14 +75,12 @@ namespace TradingLib.MoniterCore
             logger.Info("请求更新交易时间段");
             MGRUpdateMarketTimeRequest request = RequestTemplate<MGRUpdateMarketTimeRequest>.CliSendRequest(++requestid);
             request.MarketTime = mt;
-
             SendPacket(request);
         }
         public void ReqQrySecurity()
         {
             logger.Info("请求查询品种列表");
             MGRQrySecurityRequest request = RequestTemplate<MGRQrySecurityRequest>.CliSendRequest(++requestid);
-
             SendPacket(request);
         }
         public void ReqUpdateSecurity(SecurityFamilyImpl sec)
@@ -88,7 +88,6 @@ namespace TradingLib.MoniterCore
             logger.Info("请求更新品种信息");
             MGRUpdateSecurityRequest request = RequestTemplate<MGRUpdateSecurityRequest>.CliSendRequest(++requestid);
             request.SecurityFaimly = sec;
-
             SendPacket(request);
         }
 
@@ -96,7 +95,6 @@ namespace TradingLib.MoniterCore
         {
             logger.Info("请求查询合约列表");
             MGRQrySymbolRequest request = RequestTemplate<MGRQrySymbolRequest>.CliSendRequest(++requestid);
-
             SendPacket(request);
         }
 
@@ -105,7 +103,6 @@ namespace TradingLib.MoniterCore
             logger.Info("请求更新合约");
             MGRUpdateSymbolRequest request = RequestTemplate<MGRUpdateSymbolRequest>.CliSendRequest(++requestid);
             request.Symbol = sym;
-
             SendPacket(request);
             return requestid;
         }

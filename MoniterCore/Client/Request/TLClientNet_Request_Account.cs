@@ -20,7 +20,6 @@ namespace TradingLib.MoniterCore
         {
             logger.Info("查询交易帐户列表");
             MGRQryAccountRequest request = RequestTemplate<MGRQryAccountRequest>.CliSendRequest(++requestid);
-
             SendPacket(request);
 
         }
@@ -34,9 +33,7 @@ namespace TradingLib.MoniterCore
             logger.Info("请求设置观察帐户列表:" + string.Join(",", list.ToArray()));
             MGRWatchAccountRequest request = RequestTemplate<MGRWatchAccountRequest>.CliSendRequest(++requestid);
             request.Add(list);
-
             SendPacket(request);
-
         }
 
         /// <summary>
@@ -48,7 +45,6 @@ namespace TradingLib.MoniterCore
             logger.Info("请求恢复日内交易数据 Account:" + account);
             MGRResumeAccountRequest request = RequestTemplate<MGRResumeAccountRequest>.CliSendRequest(++requestid);
             request.ResumeAccount = account;
-
             SendPacket(request);
         }
 

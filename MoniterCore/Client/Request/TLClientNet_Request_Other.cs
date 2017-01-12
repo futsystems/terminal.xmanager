@@ -15,7 +15,7 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public void ReqQrySystemStatus()
         {
-            this.ReqContribRequest("MgrExchServer", "QrySystemStatus","");
+            this.ReqContribRequest(Modules.MGR_EXCH,Method_MGR_EXCH.QRY_SYSTEM_STATUS,"");
         }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public void ReqQryBank()
         {
-            this.ReqContribRequest("MgrExchServer", "QryBank", "");
+            this.ReqContribRequest(Modules.MGR_EXCH,Method_MGR_EXCH.QRY_CONTRACT_BANK, "");
         }
 
         /// <summary>
@@ -31,7 +31,17 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public void ReqQryReceiveableBank()
         {
-            this.ReqContribRequest("MgrExchServer", "QryReceiveableBank", "");
+            this.ReqContribRequest(Modules.MGR_EXCH,Method_MGR_EXCH.QRY_RECV_BANK, "");
         }
+
+        /// <summary>
+        /// 更新收款银行
+        /// </summary>
+        /// <param name="bank"></param>
+        public void ReqUpdateRecvBank(JsonWrapperReceivableAccount bank)
+        {
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_RECV_BANK, bank);
+        }
+
     }
 }

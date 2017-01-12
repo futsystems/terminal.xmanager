@@ -35,41 +35,39 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryBank", this.OnQryBank);
+            CoreService.EventContrib.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_CONTRACT_BANK, this.OnQryBank);
             CoreService.TLClient.ReqQryBank();
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QryBank", this.OnQryBank);
+            CoreService.EventContrib.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_CONTRACT_BANK, this.OnQryBank);
         }
 
 
         void OnQryBank(string jsonstr, bool islast)
         {
-            JsonWrapperBank[] obj = CoreService.ParseJsonResponse<JsonWrapperBank[]>(jsonstr);
+            ContractBank[] obj = CoreService.ParseJsonResponse<ContractBank[]>(jsonstr);
             if (obj != null)
             {
-                //JsonWrapperBank[] obj = TradingLib.Mixins.LitJson.JsonMapper.ToObject<JsonWrapperBank[]>(jd["Playload"].ToJson());
                 GotBankList(obj);
                 _gotdata = true;
             }
-            else//如果没有配资服
+            else
             {
 
             }
         }
-        delegate void del1(JsonWrapperBank[] banks);
-        void GotBankList(JsonWrapperBank[] banks)
+        void GotBankList(ContractBank[] banks)
         {
             if (InvokeRequired)
             {
-                Invoke(new del1(GotBankList), new object[] { banks });
+                Invoke(new Action<ContractBank[]>(GotBankList), new object[] { banks });
             }
             else
             {
                 ArrayList list = new ArrayList();
-                foreach (JsonWrapperBank bank in banks)
+                foreach (ContractBank bank in banks)
                 {
                     ValueObject<int> vo = new ValueObject<int>
                     {

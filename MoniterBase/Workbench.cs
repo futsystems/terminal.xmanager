@@ -82,7 +82,7 @@ namespace TradingLib.MoniterBase
             //超管查看结算状态
             if (CoreService.SiteInfo.Domain.Super)
             {
-                CoreService.EventContrib.RegisterCallback("MgrExchServer", "QrySystemStatus", this.OnQrySystemStatus);
+                CoreService.EventContrib.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_SYSTEM_STATUS, this.OnQrySystemStatus);
                 CoreService.TLClient.ReqQrySystemStatus();
             }
         }
