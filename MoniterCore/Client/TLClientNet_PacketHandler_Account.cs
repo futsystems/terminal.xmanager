@@ -17,7 +17,7 @@ namespace TradingLib.MoniterCore
         void CliOnMGRQryAccountList(RspMGRQryAccountResponse response)
         {
             //logger.Info("got mgrqryaccount response:" + response.ToString());
-            CoreService.BasicInfoTracker.OnMGRQryAccountList(response.oAccount, response.IsLast);
+            CoreService.BasicInfoTracker.OnMGRQryAccountList(response.AccountItem, response.IsLast);
            
         }
 
@@ -28,7 +28,7 @@ namespace TradingLib.MoniterCore
         void CliOnMGRAccountUpdate(NotifyMGRAccountChangeUpdateResponse notify)
         {
             //logger.Info("got account change update:" + notify.ToString());
-            CoreService.BasicInfoTracker.OnMGRAccountUpdate(notify.oAccount);
+            CoreService.BasicInfoTracker.OnMGRAccountUpdate(notify.AccountItem);
         }
 
 

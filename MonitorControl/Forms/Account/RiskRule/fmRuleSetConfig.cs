@@ -16,7 +16,7 @@ namespace TradingLib.MoniterControl
 {
     public partial class fmRuleSetConfig : ComponentFactory.Krypton.Toolkit.KryptonForm
     {
-        public AccountLite Account { get; set; }
+        public AccountItem Account { get; set; }
 
         RuleClassItem _ruleclass = null;
 

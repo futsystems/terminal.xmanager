@@ -180,7 +180,7 @@ namespace TradingLib.MoniterControl
     {
         public bool IsValid(object caller, Condition condition)
         {
-            AccountLite account = null;
+            AccountItem account = null;
             if (!AccountMoniterHelper.GetCurrentAccount(caller, out account))
             {
                 return false;
@@ -202,7 +202,7 @@ namespace TradingLib.MoniterControl
     {
         public bool IsValid(object caller, Condition condition)
         {
-            AccountLite account = null;
+            AccountItem account = null;
             if (!AccountMoniterHelper.GetCurrentAccount(caller, out account))
             {
                 return false;

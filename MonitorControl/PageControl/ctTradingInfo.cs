@@ -41,7 +41,7 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventAccount.OnAccountSelectedEvent += new Action<AccountLite>(OnAccountSelected);
+            CoreService.EventAccount.OnAccountSelectedEvent += new Action<AccountItem>(OnAccountSelected);
             CoreService.EventIndicator.GotTickEvent += new Action<Tick>(GotTick);
             CoreService.EventIndicator.GotOrderEvent += new Action<Order>(GotOrder);
             CoreService.EventIndicator.GotFillEvent += new Action<Trade>(GotTrade);
@@ -61,8 +61,8 @@ namespace TradingLib.MoniterControl
 
         public void OnDisposed()
         {
-            CoreService.EventAccount.OnAccountSelectedEvent -= new Action<AccountLite>(OnAccountSelected);
-            //Globals.LogicEvent.GotAccountSyncEvent += new Action<AccountLite>(OnAccountSyncEvent);
+            CoreService.EventAccount.OnAccountSelectedEvent -= new Action<AccountItem>(OnAccountSelected);
+            //Globals.LogicEvent.GotAccountSyncEvent += new Action<AccountItem>(OnAccountSyncEvent);
             CoreService.EventIndicator.GotTickEvent -= new Action<Tick>(GotTick);
             CoreService.EventIndicator.GotOrderEvent -= new Action<Order>(GotOrder);
             CoreService.EventIndicator.GotFillEvent -= new Action<Trade>(GotTrade);
@@ -72,8 +72,8 @@ namespace TradingLib.MoniterControl
 
 
 
-        AccountLite _account = null;
-        AccountLite CurrentAccount { get { return _account; } }
+        AccountItem _account = null;
+        AccountItem CurrentAccount { get { return _account; } }
         /// <summary>
         /// 判断是否是当前选中帐户
         /// </summary>
@@ -86,7 +86,7 @@ namespace TradingLib.MoniterControl
             return false;
         }
 
-        void OnAccountSelected(AccountLite account)
+        void OnAccountSelected(AccountItem account)
         {
             _account = account;
             //清空控件交易记录
@@ -96,7 +96,7 @@ namespace TradingLib.MoniterControl
             CoreService.TradingInfoTracker.RequetResume(account.Account);
         }
 
-        void OnAccountSyncEvent(AccountLite obj)
+        void OnAccountSyncEvent(AccountItem obj)
         {
             //如果同步交易数据的时候 当前显示的帐户与我们同步的帐户一致，则需要清空当前交易记录，否则同步后会造成重复
             if (_account.Account == obj.Account)
@@ -124,7 +124,7 @@ namespace TradingLib.MoniterControl
                 debug("resume account:" + response.ResumeAccount + " start...");
 
                 string account = response.ResumeAccount;
-                AccountLite acclit = null;
+                AccountItem acclit = null;
                 //if (accountmap.TryGetValue(account, out acclit))
                 {
 

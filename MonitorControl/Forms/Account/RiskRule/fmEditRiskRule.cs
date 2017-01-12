@@ -458,8 +458,8 @@ namespace TradingLib.MoniterControl
         #endregion
 
 
-        AccountLite _account = null;
-        public void SetAccount(AccountLite account)
+        AccountItem _account = null;
+        public void SetAccount(AccountItem account)
         {
             _account = account;
         }

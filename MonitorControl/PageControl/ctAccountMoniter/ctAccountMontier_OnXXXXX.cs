@@ -23,7 +23,7 @@ namespace TradingLib.MoniterControl
         /// 获得服务端的帐户信息
         /// </summary>
         /// <param name="account"></param>
-        void GotAccount(AccountLite account)
+        void GotAccount(AccountItem account)
         {
             if (string.IsNullOrEmpty(account.Account))
                 return;
@@ -44,7 +44,7 @@ namespace TradingLib.MoniterControl
         /// 响应帐户变动事件
         /// </summary>
         /// <param name="account"></param>
-        public void GotAccountChanged(AccountLite account)
+        public void GotAccountChanged(AccountItem account)
         {
             accountcache.Write(account);
         }

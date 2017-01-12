@@ -32,7 +32,7 @@ namespace TradingLib.MoniterCore
         public LSPositionTracker HoldPositionTracker { get; set; }
         public ThreadSafeList<Trade> TradeTracker { get; set; }
 
-        public AccountLite Account { get; set; }
+        public AccountItem Account { get; set; }
         QSEnumInfoTrackerStatus status = QSEnumInfoTrackerStatus.UNKNOWN;
         public QSEnumInfoTrackerStatus Status { get { return status; } }
 
@@ -49,7 +49,7 @@ namespace TradingLib.MoniterCore
             PositionTracker = new LSPositionTracker("");
             HoldPositionTracker = new LSPositionTracker("");
             TradeTracker = new ThreadSafeList<Trade>();
-            Account = new AccountLite();
+            Account = new AccountItem();
             
         }
 
@@ -123,7 +123,7 @@ namespace TradingLib.MoniterCore
         /// 获得服务端回报 获得开始恢复数据标记
         /// </summary>
         /// <param name="account"></param>
-        public void StartResume(AccountLite account)
+        public void StartResume(AccountItem account)
         {
             Account = account;
             status = QSEnumInfoTrackerStatus.RESUMEBEGIN;

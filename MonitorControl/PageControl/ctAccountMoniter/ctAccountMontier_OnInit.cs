@@ -14,7 +14,7 @@ namespace TradingLib.MoniterControl
         public void OnInit()
         {
             //加载帐户
-            foreach (AccountLite account in CoreService.BasicInfoTracker.Accounts)
+            foreach (AccountItem account in CoreService.BasicInfoTracker.Accounts)
             {
                 InvokeGotAccount(account);
             }
@@ -23,9 +23,9 @@ namespace TradingLib.MoniterControl
 
             //帐户事件
 
-            CoreService.EventAccount.OnNewAccountEvent += new Action<AccountLite>(GotAccount);
+            CoreService.EventAccount.OnNewAccountEvent += new Action<AccountItem>(GotAccount);
             CoreService.EventAccount.OnInfoLiteEvent += new Action<AccountInfoLite>(GotAccountInfoLite);
-            CoreService.EventAccount.OnAccountChangedEvent += new Action<AccountLite>(GotAccountChanged);
+            CoreService.EventAccount.OnAccountChangedEvent += new Action<AccountItem>(GotAccountChanged);
             CoreService.EventAccount.OnSessionUpdateEvent += new Action<NotifyMGRSessionUpdateNotify>(GotSessionUpdate);
             
 
@@ -97,9 +97,9 @@ namespace TradingLib.MoniterControl
         public void OnDisposed()
         {
             //帐户事件
-            CoreService.EventAccount.OnNewAccountEvent -= new Action<AccountLite>(GotAccount);
+            CoreService.EventAccount.OnNewAccountEvent -= new Action<AccountItem>(GotAccount);
             CoreService.EventAccount.OnInfoLiteEvent -= new Action<AccountInfoLite>(GotAccountInfoLite);
-            CoreService.EventAccount.OnAccountChangedEvent -= new Action<AccountLite>(GotAccountChanged);
+            CoreService.EventAccount.OnAccountChangedEvent -= new Action<AccountItem>(GotAccountChanged);
             CoreService.EventAccount.OnSessionUpdateEvent -= new Action<NotifyMGRSessionUpdateNotify>(GotSessionUpdate);
         }
     }

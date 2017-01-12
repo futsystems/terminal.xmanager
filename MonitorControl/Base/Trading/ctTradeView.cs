@@ -54,7 +54,7 @@ namespace TradingLib.MoniterControl
             else
             {
                 DataRow r = tb.Rows.Add(t.id);
-                AccountLite account = CoreService.BasicInfoTracker.GetAccount(t.Account);
+                AccountItem account = CoreService.BasicInfoTracker.GetAccount(t.Account);
                 int i = tb.Rows.Count - 1;
                 tb.Rows[i][ID] = t.id;
                 tb.Rows[i][DATETIME] = Util.ToDateTime(t.xDate, t.xTime).ToString("HH:mm:ss");

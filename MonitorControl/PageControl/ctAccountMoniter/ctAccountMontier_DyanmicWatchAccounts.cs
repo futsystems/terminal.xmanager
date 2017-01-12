@@ -44,7 +44,7 @@ namespace TradingLib.MoniterControl
             return accountlist;
         }
 
-        //Dictionary<int, AccountLite> watchmap = new Dictionary<int, AccountLite>();
+        //Dictionary<int, AccountItem> watchmap = new Dictionary<int, AccountItem>();
         /// <summary>
         /// 设定观察账户列表
         /// </summary>

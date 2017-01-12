@@ -22,8 +22,8 @@ namespace TradingLib.MoniterControl
             this.Load += new EventHandler(fmConnectorAccountInfo_Load);
         }
 
-        AccountLite account = null;
-        public void SetAccount(AccountLite acc)
+        AccountItem account = null;
+        public void SetAccount(AccountItem acc)
         {
             account = acc;
             this.Text = string.Format("主帐户管理【{0}】-{1}",account.ConnectorToken,acc.Account);

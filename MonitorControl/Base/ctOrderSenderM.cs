@@ -16,7 +16,7 @@ namespace TradingLib.MoniterControl
     public partial class ctOrderSenderM : UserControl,IEventBinder
     {
 
-        AccountLite _account = null;
+        AccountItem _account = null;
         Symbol _symbol = null;
         public event OrderDelegate SendOrderEvent;
         public ctOrderSenderM()
@@ -37,7 +37,7 @@ namespace TradingLib.MoniterControl
         public void OnInit()
         {
             //btnInsertTrade.Visible = Globals.UIAccess.fun_tab_placeorder_insert;
-            CoreService.EventAccount.OnAccountSelectedEvent += new Action<AccountLite>(OnAccountSelected);
+            CoreService.EventAccount.OnAccountSelectedEvent += new Action<AccountItem>(OnAccountSelected);
             CoreService.EventUI.OnSymbolSelectedEvent += new Action<Symbol>(EventUI_OnSymbolSelectedEvent);
             MoniterHelper.AdapterToIDataSource(cboffsetflag).BindDataSource(MoniterHelper.GetOffsetCBList());
             MoniterHelper.AdapterToIDataSource(cbordertype).BindDataSource(MoniterHelper.GetOrderTypeCBList());
@@ -58,11 +58,11 @@ namespace TradingLib.MoniterControl
 
         public void OnDisposed()
         {
-            CoreService.EventAccount.OnAccountSelectedEvent -= new Action<AccountLite>(OnAccountSelected);
+            CoreService.EventAccount.OnAccountSelectedEvent -= new Action<AccountItem>(OnAccountSelected);
         }
 
-        
-        void OnAccountSelected(AccountLite obj)
+
+        void OnAccountSelected(AccountItem obj)
         {
             this.SetAccount(obj);
         }
@@ -77,7 +77,7 @@ namespace TradingLib.MoniterControl
         /// 绑定帐户
         /// </summary>
         /// <param name="acc"></param>
-        void SetAccount(AccountLite acc)
+        void SetAccount(AccountItem acc)
         {
             _account = acc;
             account.Text = _account.Account;

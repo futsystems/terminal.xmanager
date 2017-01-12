@@ -13,9 +13,9 @@ namespace TradingLib.MoniterCore
         /// 交易帐户选择事件
         /// 双击某个交易帐户 出发该事件 用于通知所有监听该事件的对象
         /// </summary>
-        public event Action<AccountLite> OnAccountSelectedEvent;
+        public event Action<AccountItem> OnAccountSelectedEvent;
 
-        public void FireAccountSelectedEvent(AccountLite account)
+        public void FireAccountSelectedEvent(AccountItem account)
         {
             LogService.Debug("FireAccountSelectedEvent");
             if (OnAccountSelectedEvent != null)
@@ -26,9 +26,9 @@ namespace TradingLib.MoniterCore
         /// <summary>
         /// 交易帐户同步事件
         /// </summary>
-        public event Action<AccountLite> OnSyncAccountEvent;
+        public event Action<AccountItem> OnSyncAccountEvent;
 
-        public void FireSyncAccountEvent(AccountLite account)
+        public void FireSyncAccountEvent(AccountItem account)
         {
             LogService.Debug("FireSyncAccountEvent");
             if (OnSyncAccountEvent != null)
@@ -39,9 +39,9 @@ namespace TradingLib.MoniterCore
         /// <summary>
         /// 增加交易帐户事件 服务端新增交易帐户
         /// </summary>
-        public event Action<AccountLite> OnNewAccountEvent;
+        public event Action<AccountItem> OnNewAccountEvent;
 
-        internal void FireNewAccountEvent(AccountLite account)
+        internal void FireNewAccountEvent(AccountItem account)
         {
             LogService.Debug("FireNewAccountEvent");
             if (OnNewAccountEvent != null)
@@ -68,9 +68,9 @@ namespace TradingLib.MoniterCore
         /// <summary>
         /// 交易帐户变化事件
         /// </summary>
-        public event Action<AccountLite> OnAccountChangedEvent;
+        public event Action<AccountItem> OnAccountChangedEvent;
 
-        internal void FireAccountChangedEvent(AccountLite account)
+        internal void FireAccountChangedEvent(AccountItem account)
         {
             LogService.Debug("FireAccountChangedEvent");
             if (OnAccountChangedEvent != null)

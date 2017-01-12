@@ -87,8 +87,8 @@ namespace TradingLib.MoniterControl
             _manager = manger;
         }
 
-        AccountLite _account = null;
-        public void SetAccount(AccountLite account)
+        AccountItem _account = null;
+        public void SetAccount(AccountItem account)
         {
             _account = account;
         }

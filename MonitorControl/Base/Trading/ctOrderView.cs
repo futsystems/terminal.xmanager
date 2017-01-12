@@ -19,7 +19,7 @@ namespace TradingLib.MoniterControl
     {
         ILog logger = LogManager.GetLogger("OrderVeiw");
 
-        AccountLite _account = null;
+        AccountItem _account = null;
         //属性获得和设置
         [DefaultValue(true)]
         bool _enableoperation = true;
@@ -323,11 +323,11 @@ namespace TradingLib.MoniterControl
             orderGrid.CellFormatting += new DataGridViewCellFormattingEventHandler(orderGrid_CellFormatting);
             orderGrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(orderGrid_RowPrePaint);
 
-            CoreService.EventAccount.OnAccountSelectedEvent += new Action<AccountLite>(EventAccount_OnAccountSelectedEvent);
+            CoreService.EventAccount.OnAccountSelectedEvent += new Action<AccountItem>(EventAccount_OnAccountSelectedEvent);
             CoreService.EventCore.RegIEventHandler(this);
         }
-        
-        void EventAccount_OnAccountSelectedEvent(AccountLite obj)
+
+        void EventAccount_OnAccountSelectedEvent(AccountItem obj)
         {
             _account = obj;
         }

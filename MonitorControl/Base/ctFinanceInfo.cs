@@ -42,7 +42,7 @@ namespace TradingLib.MoniterControl
         /// 在作为帐户编辑的控件时,需要设置初始化的account
         /// </summary>
         /// <param name="acc"></param>
-        public void SetAccount(AccountLite acc)
+        public void SetAccount(AccountItem acc)
         {
             OnAccountSelected(acc);
         }
@@ -52,12 +52,12 @@ namespace TradingLib.MoniterControl
 
             CoreService.EventContrib.RegisterCallback("AccountManager", "QryAccountFinInfo", this.OnQryAccountInfo);
             CoreService.EventContrib.RegisterNotifyCallback("AccountManager", "NotifyAccountFinInfo", this.OnNotifyAccountInfo);
-            //Globals.LogicEvent.GotAccountSelectedEvent += new Action<AccountLite>(OnAccountSelected);
+            //Globals.LogicEvent.GotAccountSelectedEvent += new Action<AccountItem>(OnAccountSelected);
 
             CoreService.TLClient.ReqQryAccountFinInfo(_account.Account);
         }
 
-        void OnAccountSelected(AccountLite obj)
+        void OnAccountSelected(AccountItem obj)
         {
             _account = obj;
             account.Text = _account.Account;
@@ -67,7 +67,7 @@ namespace TradingLib.MoniterControl
         {
             CoreService.EventContrib.UnRegisterCallback("AccountManager", "QryAccountFinInfo", this.OnQryAccountInfo);
             CoreService.EventContrib.UnRegisterNotifyCallback("AccountManager", "NotifyAccountFinInfo", this.OnNotifyAccountInfo);
-            //Globals.LogicEvent.GotAccountSelectedEvent -= new Action<AccountLite>(OnAccountSelected);
+            //Globals.LogicEvent.GotAccountSelectedEvent -= new Action<AccountItem>(OnAccountSelected);
             //Globals.Debug("ctFinanceInfo disposed...");
          }
 
@@ -89,7 +89,7 @@ namespace TradingLib.MoniterControl
         }
 
 
-        AccountLite _account = null;
+        AccountItem _account = null;
 
         AccountInfo _info = null;
         public AccountInfo AccountInfo { get { return _info; } }

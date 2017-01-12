@@ -277,8 +277,8 @@ namespace TradingLib.MoniterControl
             return "未设置";
         }
 
-        AccountLite _account;
-        public void SetAccount(AccountLite account)
+        AccountItem _account;
+        public void SetAccount(AccountItem account)
         {
             _account = account;
             this.Text = string.Format("配资服务设置 帐户[{0}] 优先资金:{1}万", _account.Account, (_account.Credit / 10000).ToFormatStr());

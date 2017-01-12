@@ -399,7 +399,7 @@ namespace TradingLib.MoniterCore
 
 
 
-        internal void OnMGRAccountUpdate(AccountLite account)
+        internal void OnMGRAccountUpdate(AccountItem account)
         {
             //更新本地内存记录数据
             if (account != null)
@@ -409,7 +409,7 @@ namespace TradingLib.MoniterCore
 
             CoreService.EventAccount.FireAccountChangedEvent(account);
         }
-        internal void OnMGRQryAccountList(AccountLite account, bool islast)
+        internal void OnMGRQryAccountList(AccountItem account, bool islast)
         {
             if (account != null)
             {

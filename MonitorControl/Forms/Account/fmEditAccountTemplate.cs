@@ -166,8 +166,8 @@ namespace TradingLib.MoniterControl
 
 
 
-        AccountLite _account = null;
-        public void SetAccount(AccountLite account)
+        AccountItem _account = null;
+        public void SetAccount(AccountItem account)
         {
             _account = account;
             this.Text = string.Format("编辑帐户:{0}模板项", account.Account);

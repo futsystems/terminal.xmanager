@@ -164,12 +164,12 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        AccountLite _account = null;
+        AccountItem _account = null;
         /// <summary>
         /// 设定交易帐户
         /// </summary>
         /// <param name="account"></param>
-        public void SetAccount(AccountLite account)
+        public void SetAccount(AccountItem account)
         {
             _account = account;
             ctFinanceInfo1.SetAccount(account);

@@ -339,7 +339,7 @@ namespace TradingLib.MoniterControl
                 {
                     int posidx = PositionRowIdx(pos.GetPositionKey());
                     string _fromat = pos.oSymbol.SecurityFamily.GetPriceFormat();
-                    AccountLite account = CoreService.BasicInfoTracker.GetAccount(pos.Account);
+                    AccountItem account = CoreService.BasicInfoTracker.GetAccount(pos.Account);
                     if ((posidx > -1) && (posidx < gt.Rows.Count))//idx存在
                     {
                         int size = pos.Size;
@@ -422,7 +422,7 @@ namespace TradingLib.MoniterControl
                             string acc = gt.Rows[i][ACCOUNT].ToString();
                             bool posside = bool.Parse(gt.Rows[i][SIDE].ToString());
                             Position pos = pt[t.Symbol, acc, posside];
-                            AccountLite account = CoreService.BasicInfoTracker.GetAccount(pos.Account);
+                            AccountItem account = CoreService.BasicInfoTracker.GetAccount(pos.Account);
                             string key = pos.GetKey(posside);
                             decimal unrealizedpl = pos.UnRealizedPL;
                             //更新最新成交价
@@ -536,7 +536,7 @@ namespace TradingLib.MoniterControl
                     string _format = t.oSymbol.SecurityFamily.GetPriceFormat();
                     string key = pos.GetPositionKey();
                     int posidx = PositionRowIdx(key);
-                    AccountLite account = CoreService.BasicInfoTracker.GetAccount(pos.Account);
+                    AccountItem account = CoreService.BasicInfoTracker.GetAccount(pos.Account);
 
                     if ((posidx > -1) && (posidx < gt.Rows.Count))
                     {

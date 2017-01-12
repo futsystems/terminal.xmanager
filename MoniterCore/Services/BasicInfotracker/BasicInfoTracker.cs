@@ -94,7 +94,7 @@ namespace TradingLib.MoniterCore
         /// <summary>
         /// 交易帐户列表map
         /// </summary>
-        Dictionary<string, AccountLite> accountmap = new Dictionary<string, AccountLite>();
+        Dictionary<string, AccountItem> accountmap = new Dictionary<string, AccountItem>();
 
 
         /// <summary>

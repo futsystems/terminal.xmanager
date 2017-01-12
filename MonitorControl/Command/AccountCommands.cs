@@ -21,7 +21,7 @@ namespace TradingLib.MoniterControl
         /// <param name="obj"></param>
         /// <param name="acct"></param>
         /// <returns></returns>
-        public static bool GetCurrentAccount(object obj, out AccountLite acct)
+        public static bool GetCurrentAccount(object obj, out AccountItem acct)
         {
             acct = null;
             ctAccountMontier accountMoniter = obj as ctAccountMontier;
@@ -74,7 +74,7 @@ namespace TradingLib.MoniterControl
     {
         public override void Run()
         {
-            AccountLite account = null;
+            AccountItem account = null;
             if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
             {
                 return;
@@ -110,7 +110,7 @@ namespace TradingLib.MoniterControl
     {
         public override void Run()
         {
-            AccountLite account = null;
+            AccountItem account = null;
             if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
             {
                 return;
@@ -139,7 +139,7 @@ namespace TradingLib.MoniterControl
     {
         public override void Run()
         {
-            AccountLite account = null;
+            AccountItem account = null;
             if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
             {
                 return;
@@ -170,7 +170,7 @@ namespace TradingLib.MoniterControl
     {
         public override void Run()
         {
-            AccountLite account = null;
+            AccountItem account = null;
             if (!AccountMoniterHelper.GetCurrentAccount(this.Owner,out account))
             {
                 return;
@@ -196,7 +196,7 @@ namespace TradingLib.MoniterControl
     {
         public override void Run()
         {
-            AccountLite account = null;
+            AccountItem account = null;
             if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
             {
                 return;
@@ -222,7 +222,7 @@ namespace TradingLib.MoniterControl
     {
         public override void Run()
         {
-            AccountLite account = null;
+            AccountItem account = null;
             if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
             {
                 return;
@@ -250,7 +250,7 @@ namespace TradingLib.MoniterControl
     {
         public override void Run()
         {
-            AccountLite account = null;
+            AccountItem account = null;
             if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
             {
                 return;
@@ -266,7 +266,7 @@ namespace TradingLib.MoniterControl
     {
         public override void Run()
         {
-            AccountLite account = null;
+            AccountItem account = null;
             if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
             {
                 return;
@@ -292,7 +292,7 @@ namespace TradingLib.MoniterControl
     {
         public override void Run()
         {
-            AccountLite account = null;
+            AccountItem account = null;
             if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
             {
                 return;
@@ -311,7 +311,7 @@ namespace TradingLib.MoniterControl
     {
         public override void Run()
         {
-            AccountLite account = null;
+            AccountItem account = null;
             if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
             {
                 return;
@@ -329,7 +329,7 @@ namespace TradingLib.MoniterControl
     {
         public override void Run()
         {
-            AccountLite account = null;
+            AccountItem account = null;
             if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
             {
                 return;
@@ -348,7 +348,7 @@ namespace TradingLib.MoniterControl
     {
         public override void Run()
         {
-            AccountLite account = null;
+            AccountItem account = null;
             if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
             {
                 return;
@@ -370,7 +370,7 @@ namespace TradingLib.MoniterControl
         {
             ctAccountMontier accountMoniter = (ctAccountMontier)this.Owner;
             string account = accountMoniter.CurrentAccount;
-            AccountLite acct = CoreService.BasicInfoTracker.GetAccount(account);
+            AccountItem acct = CoreService.BasicInfoTracker.GetAccount(account);
             if (acct == null)
             {
                 MoniterHelper.WindowMessage("请选择交易帐户");
@@ -404,7 +404,7 @@ namespace TradingLib.MoniterControl
     {
         public override void Run()
         {
-            AccountLite account = null;
+            AccountItem account = null;
             if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
             {
                 return;
@@ -423,7 +423,7 @@ namespace TradingLib.MoniterControl
     {
         public override void Run()
         {
-            AccountLite account = null;
+            AccountItem account = null;
             if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
             {
                 return;
@@ -444,7 +444,7 @@ namespace TradingLib.MoniterControl
         public override void Run()
         {
 
-            AccountLite account = null;
+            AccountItem account = null;
             if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
             {
                 return;
@@ -463,7 +463,7 @@ namespace TradingLib.MoniterControl
     {
         public override void Run()
         {
-            AccountLite account = null;
+            AccountItem account = null;
             if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
             {
                 return;
@@ -484,7 +484,7 @@ namespace TradingLib.MoniterControl
     {
         public override void Run()
         {
-            AccountLite account = null;
+            AccountItem account = null;
             if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
             {
                 return;

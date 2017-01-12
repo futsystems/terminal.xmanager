@@ -19,8 +19,8 @@ namespace TradingLib.MoniterControl
         {
             InitializeComponent();
         }
-        AccountLite _account = null;
-        public void SetAccount(AccountLite acc)
+        AccountItem _account = null;
+        public void SetAccount(AccountItem acc)
         {
             _account = acc;
             account.Text = _account.Account;

@@ -219,12 +219,12 @@ namespace TradingLib.MoniterCore
 
         #endregion
 
-        public IEnumerable<AccountLite> Accounts { get { return accountmap.Values; } }
+        public IEnumerable<AccountItem> Accounts { get { return accountmap.Values; } }
 
-        public AccountLite GetAccount(string account)
+        public AccountItem GetAccount(string account)
         {
             if (string.IsNullOrEmpty(account)) return null;
-            AccountLite target = null;
+            AccountItem target = null;
             if (accountmap.TryGetValue(account, out target))
             {
                 return target;

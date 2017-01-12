@@ -25,7 +25,7 @@ namespace TradingLib.MoniterControl
 
         void ClearTerminal_Click(object sender, EventArgs e)
         {
-            AccountLite account = GetVisibleAccount(CurrentAccount);
+            AccountItem account = GetVisibleAccount(CurrentAccount);
             if (account != null)
             {
                 if (MoniterHelper.WindowConfirm(string.Format("确认注销交易帐户[{0}]的所有登入交易终端?", account.Account)) == DialogResult.Yes)
@@ -50,7 +50,7 @@ namespace TradingLib.MoniterControl
         /// <param name="e"></param>
         void EditAccount_Click(object sender, EventArgs e)
         {
-            AccountLite account = GetVisibleAccount(CurrentAccount);
+            AccountItem account = GetVisibleAccount(CurrentAccount);
             if (account != null)
             {
                 //fmAccountConfig fm = new fmAccountConfig();
@@ -71,7 +71,7 @@ namespace TradingLib.MoniterControl
         /// <param name="e"></param>
         void QryHist_Click(object sender, EventArgs e)
         {
-            AccountLite account = GetVisibleAccount(CurrentAccount);
+            AccountItem account = GetVisibleAccount(CurrentAccount);
             if (account != null)
             {
                 //if (QryAccountHistEvent != null)
@@ -102,7 +102,7 @@ namespace TradingLib.MoniterControl
 
         void QrySettlement_Click(object sender, EventArgs e)
         {
-            AccountLite account = GetVisibleAccount(CurrentAccount);
+            AccountItem account = GetVisibleAccount(CurrentAccount);
             if (account != null)
             {
                 fmSettlement fm = new fmSettlement();
@@ -133,7 +133,7 @@ namespace TradingLib.MoniterControl
             }
             _lastresumetime = DateTime.Now;
             string account = CurrentAccount;
-            AccountLite accountlite = null;
+            AccountItem accountlite = null;
 
             if (accountmap.TryGetValue(account, out accountlite))
             {

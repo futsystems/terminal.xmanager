@@ -19,7 +19,7 @@ namespace TradingLib.MoniterBase.Command
         public override void Run()
         {
             fmHistQuery fm = new fmHistQuery();
-            AccountLite account = null;
+            AccountItem account = null;
             if (AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
             {
                 fm.SetAccount(account.Account);
@@ -39,7 +39,7 @@ namespace TradingLib.MoniterBase.Command
             
 
             fmHistQueryCashTrans fm = new fmHistQueryCashTrans();
-            AccountLite account = null;
+            AccountItem account = null;
             if (AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
             {
                 fm.SetAccount(account.Account);
@@ -58,7 +58,7 @@ namespace TradingLib.MoniterBase.Command
         public override void Run()
         {
             fmSettlement fm = new fmSettlement();
-            AccountLite account = null;
+            AccountItem account = null;
             if (AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
             {
                 fm.SetAccount(account.Account);

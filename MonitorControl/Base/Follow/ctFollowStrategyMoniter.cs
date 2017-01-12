@@ -68,7 +68,7 @@ namespace TradingLib.MoniterControl
             _lastresumetime = DateTime.Now;
             string account = CurrentStrategyConfig.Account;
 
-            AccountLite accountlite = CoreService.BasicInfoTracker.GetAccount(account);
+            AccountItem accountlite = CoreService.BasicInfoTracker.GetAccount(account);
             if (accountlite != null)
             {
                 //触发事件中继的帐户选择事件

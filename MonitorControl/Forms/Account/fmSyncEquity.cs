@@ -54,7 +54,7 @@ namespace TradingLib.MoniterControl
             targetEquit.Text = (_mainAcctStaticEquity - targetCredit.Value).ToFormatStr();
         }
 
-        //AccountLite _account;
+        //AccountItem _account;
         AccountInfo _info;
         public void SetAccountInfo(AccountInfo info)
         {

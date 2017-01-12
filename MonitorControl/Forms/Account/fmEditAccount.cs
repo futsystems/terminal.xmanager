@@ -134,8 +134,8 @@ namespace TradingLib.MoniterControl
                 broker.Text = profile.Broker;
             }
         }
-        AccountLite _account=null;
-        public void SetAccount(AccountLite acc)
+        AccountItem _account = null;
+        public void SetAccount(AccountItem acc)
         {
             _account = acc;
             this.Text = string.Format("查看/编辑帐户[{0}]个人信息", _account.Account);

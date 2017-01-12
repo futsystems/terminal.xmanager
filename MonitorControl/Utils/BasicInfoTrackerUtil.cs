@@ -48,7 +48,7 @@ namespace TradingLib.MoniterControl
         /// <param name="account"></param>
         /// <param name="sec"></param>
         /// <returns></returns>
-        public static decimal GetExchangeRate(this AccountLite account, CurrencyType srcCurrency)
+        public static decimal GetExchangeRate(this AccountItem account, CurrencyType srcCurrency)
         {
             //品种货币与帐户货币一直则返回1
             if (srcCurrency == account.Currency) return 1;

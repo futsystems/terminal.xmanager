@@ -264,7 +264,7 @@ namespace TradingLib.MoniterControl
         #endregion
 
         #region 帐户内存数据结构
-        private ConcurrentDictionary<string, AccountLite> accountmap = new ConcurrentDictionary<string, AccountLite>();
+        private ConcurrentDictionary<string, AccountItem> accountmap = new ConcurrentDictionary<string, AccountItem>();
         private ConcurrentDictionary<string, int> accountrowmap = new ConcurrentDictionary<string, int>();
 
         /// <summary>
@@ -292,8 +292,8 @@ namespace TradingLib.MoniterControl
             return (accountmap.ContainsKey(account));
         }
 
-        AccountLite accountselected = null;
-        public AccountLite AccountSetlected { get { return accountselected; } }
+        AccountItem accountselected = null;
+        public AccountItem AccountSetlected { get { return accountselected; } }
 
         //得到当前选择的交易帐户
         public string CurrentAccount
@@ -308,7 +308,7 @@ namespace TradingLib.MoniterControl
 
 
         //通过行号得该行的Security
-        AccountLite GetVisibleAccount(string account)
+        AccountItem GetVisibleAccount(string account)
         {
             //MessageBox.Show("account:" + account + " haveaccount:" + HaveAccount(account).ToString());
             if (HaveAccount(account))
@@ -410,10 +410,10 @@ namespace TradingLib.MoniterControl
                     while (accountcache.hasItems)
                     {
                        // Globals.Debug("got account in cache*************************");
-                        AccountLite account = accountcache.Read();
+                        AccountItem account = accountcache.Read();
                         InvokeGotAccount(account);
                         UpdateAccountNum();
-                        //如果在初始化之后获得AccountLite信息 则表明该帐户是新增造成的 需要重新watchaccount
+                        //如果在初始化之后获得AccountItem信息 则表明该帐户是新增造成的 需要重新watchaccount
                         if (CoreService.BasicInfoTracker.Initialized)
                         {
                             GridChanged();
@@ -469,7 +469,7 @@ namespace TradingLib.MoniterControl
 
 
         const int bufferisze = 1000;
-        RingBuffer<AccountLite> accountcache = new RingBuffer<AccountLite>(bufferisze);//交易帐户缓存
+        RingBuffer<AccountItem> accountcache = new RingBuffer<AccountItem>(bufferisze);//交易帐户缓存
         RingBuffer<AccountInfoLite> accountinfocache = new RingBuffer<AccountInfoLite>(bufferisze);//交易帐户财务数据更新缓存
         RingBuffer<NotifyMGRSessionUpdateNotify> sessionupdatecache = new RingBuffer<NotifyMGRSessionUpdateNotify>(bufferisze);//交易帐户session更新缓存
 
@@ -478,11 +478,11 @@ namespace TradingLib.MoniterControl
         /// 当有帐户新增或者初始化时调用
         /// </summary>
         /// <param name="account"></param>
-        void InvokeGotAccount(AccountLite account)
+        void InvokeGotAccount(AccountItem account)
         {
             if (InvokeRequired)
             {
-                Invoke(new Action<AccountLite>(InvokeGotAccount), new object[] { account });
+                Invoke(new Action<AccountItem>(InvokeGotAccount), new object[] { account });
             }
             else
             {

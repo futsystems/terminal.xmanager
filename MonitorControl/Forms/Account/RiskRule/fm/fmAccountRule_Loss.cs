@@ -26,8 +26,8 @@ namespace TradingLib.MoniterControl
             btnSubmit.Click += new EventHandler(btnSubmit_Click);
         }
 
-        
-        public AccountLite Account { get; set; }
+
+        public AccountItem Account { get; set; }
 
         RuleClassItem _ruleclass = null;
 

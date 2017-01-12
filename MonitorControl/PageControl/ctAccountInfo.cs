@@ -45,8 +45,8 @@ namespace TradingLib.MoniterControl
             cbCurrnecy.SelectedIndexChanged += new EventHandler(cbCurrnecy_SelectedIndexChanged);
             cbCurrnecy.Enabled = false;
 
-            CoreService.EventAccount.OnAccountSelectedEvent += new Action<AccountLite>(OnAccountSelected);
-            CoreService.EventAccount.OnAccountChangedEvent += new Action<AccountLite>(EventAccount_OnAccountChangedEvent);
+            CoreService.EventAccount.OnAccountSelectedEvent += new Action<AccountItem>(OnAccountSelected);
+            CoreService.EventAccount.OnAccountChangedEvent += new Action<AccountItem>(EventAccount_OnAccountChangedEvent);
 
             CoreService.EventCore.RegIEventHandler(this);
             
@@ -140,7 +140,7 @@ namespace TradingLib.MoniterControl
         }
 
 
-        void EventAccount_OnAccountChangedEvent(AccountLite obj)
+        void EventAccount_OnAccountChangedEvent(AccountItem obj)
         {
             if (account != null && account.Account.Equals(obj.Account))
             {
@@ -228,8 +228,8 @@ namespace TradingLib.MoniterControl
         }
 
 
-        AccountLite account = null;
-        void OnAccountSelected(AccountLite obj)
+        AccountItem account = null;
+        void OnAccountSelected(AccountItem obj)
         {
             account = obj;
             lbAccount.Text = account.Account;
