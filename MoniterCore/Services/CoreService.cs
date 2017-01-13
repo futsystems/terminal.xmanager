@@ -70,20 +70,6 @@ namespace TradingLib.MoniterCore
         }
 
 
-        EventQuery _eventQuery = null;
-        /// <summary>
-        /// 查询事件汇聚
-        /// </summary>
-        public static EventQuery EventQuery
-        {
-            get
-            {
-                if (defaultinstance._eventQuery == null)
-                    defaultinstance._eventQuery = new EventQuery();
-                return defaultinstance._eventQuery;
-            }
-        }
-
 
     
         EventBasicInfo _eventBasicInfo = null;
@@ -179,20 +165,6 @@ namespace TradingLib.MoniterCore
             }
         }
 
-        EventAccount _eventAccount = null;
-        /// <summary>
-        /// 帐户类事件
-        /// 比如登入状态变化，实时财务数据通知，交易帐户参数修改等
-        /// </summary>
-        public static EventAccount EventAccount
-        {
-            get
-            {
-                if (defaultinstance._eventAccount == null)
-                    defaultinstance._eventAccount = new EventAccount();
-                return defaultinstance._eventAccount;
-            }
-        }
 
         SiteInfo _siteInfo = null;
         /// <summary>

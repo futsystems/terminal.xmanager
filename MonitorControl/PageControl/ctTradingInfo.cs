@@ -18,6 +18,21 @@ namespace TradingLib.MoniterControl
     public partial class ctTradingInfo : UserControl, IEventBinder, IMoniterControl
     {
         ILog logger = LogManager.GetLogger("ctTradingInfo");
+
+        AccountItem _account = null;
+        /// <summary>
+        /// 判断是否是当前选中帐户
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
+        bool IsCurrentAccount(string account)
+        {
+            if (_account == null) return false;
+            if (_account.Account.Equals(account)) return true;
+            return false;
+        }
+
+
         public ctTradingInfo()
         {
             InitializeComponent();
@@ -102,19 +117,8 @@ namespace TradingLib.MoniterControl
 
 
 
-        AccountItem _account = null;
-        AccountItem CurrentAccount { get { return _account; } }
-        /// <summary>
-        /// 判断是否是当前选中帐户
-        /// </summary>
-        /// <param name="account"></param>
-        /// <returns></returns>
-        bool IsCurrentAccount(string account)
-        {
-            if (CurrentAccount == null) return false;
-            if (CurrentAccount.Account.Equals(account)) return true;
-            return false;
-        }
+
+       
 
         void OnAccountSelected(AccountItem account)
         {
@@ -169,8 +173,9 @@ namespace TradingLib.MoniterControl
 
         void CancelOrder(long oid)
         {
+            
             OrderAction actoin = new OrderActionImpl();
-            actoin.Account = CurrentAccount.Account;
+            actoin.Account = _account.Account;
             actoin.ActionFlag = QSEnumOrderActionFlag.Delete;
             actoin.OrderID = oid;
             SendOrderAction(actoin);
@@ -178,13 +183,20 @@ namespace TradingLib.MoniterControl
 
         void SendOrderAction(OrderAction action)
         {
-            CoreService.TLClient.ReqOrderAction(action);
+            if (_account != null)
+            {
+                action.Account = _account.Account;
+                CoreService.TLClient.ReqOrderAction(action);
+            }
         }
 
         void SendOrder(Order o)
         {
-            o.Account = CurrentAccount.Account;
-            CoreService.TLClient.ReqOrderInsert(o);
+            if (_account != null)
+            {
+                o.Account = _account.Account;
+                CoreService.TLClient.ReqOrderInsert(o);
+            }
         }
 
 

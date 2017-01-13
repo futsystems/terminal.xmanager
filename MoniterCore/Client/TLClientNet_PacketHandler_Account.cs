@@ -36,7 +36,7 @@ namespace TradingLib.MoniterCore
         /// <param name="response"></param>
         void CliOnNotifyMGRAccountStatistic(NotifyMGRAccountStatistic response)
         {
-            CoreService.EventAccount.FireInfoLiteEvent(response.Statistic);
+            CoreService.EventHub.FireInfoLiteEvent(response.Statistic);
         }
 
         /// <summary>

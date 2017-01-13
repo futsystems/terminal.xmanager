@@ -28,13 +28,12 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-
-            CoreService.EventIndicator.OnSettlementEvent += new Action<RspMGRQrySettleResponse>(GotSettlement);
+            CoreService.EventHub.OnSettlementEvent += new Action<string, RspInfo, int, bool>(GotSettlement);
         }
 
         public void OnDisposed()
         {
-            CoreService.EventIndicator.OnSettlementEvent -= new Action<RspMGRQrySettleResponse>(GotSettlement);
+            CoreService.EventHub.OnSettlementEvent += new Action<string, RspInfo, int, bool>(GotSettlement);
         }
 
         public void SetAccount(string acc)
@@ -43,10 +42,10 @@ namespace TradingLib.MoniterControl
         }
 
         StringBuilder sb = new StringBuilder();
-        public void GotSettlement(RspMGRQrySettleResponse response)
+        public void GotSettlement(string settlement,RspInfo info,int requestId,bool isLast)
         {
-            sb.Append(response.SettlementContent);
-            if (response.IsLast)
+            sb.Append(settlement);
+            if (isLast)
             {
                 UpdateSettlebox(sb.ToString());
             }

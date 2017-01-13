@@ -410,7 +410,7 @@ namespace TradingLib.MoniterCore
                 accountmap[account.Account] = account;
             }
 
-            CoreService.EventAccount.FireAccountChangedEvent(account);
+            CoreService.EventHub.FireAccountChangedEvent(account);
         }
 
         internal void OnMGRQryAccountList(AccountItem account, bool islast)

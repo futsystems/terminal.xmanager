@@ -77,19 +77,20 @@ namespace TradingLib.MoniterControl
         public void OnInit()
         {
 
-            CoreService.EventIndicator.OnHistOrderEvent += new Action<Order, bool>(GotHistOrder);
-            CoreService.EventIndicator.OnHistTradeEvent += new Action<Trade, bool>(GotHistTrade);
-            CoreService.EventIndicator.OnHistPositionEvent += new Action<PositionDetail, bool>(GotHistPosition);
+            CoreService.EventHub.OnRspMGRQryOrderResponse += new Action<Order, RspInfo, int, bool>(GotHistOrder);
+            CoreService.EventHub.OnRspMGRQryFillResponse += new Action<Trade, RspInfo, int, bool>(GotHistTrade);
+            CoreService.EventHub.OnRspMGRQryPositionResponse += new Action<PositionDetail, RspInfo, int, bool>(GotHistPosition);
             
         }
 
         public void OnDisposed()
         {
-            CoreService.EventIndicator.OnHistOrderEvent -= new Action<Order, bool>(GotHistOrder);
-            CoreService.EventIndicator.OnHistTradeEvent -= new Action<Trade, bool>(GotHistTrade);
+            CoreService.EventHub.OnRspMGRQryOrderResponse -= new Action<Order, RspInfo, int, bool>(GotHistOrder);
+            CoreService.EventHub.OnRspMGRQryFillResponse -= new Action<Trade, RspInfo, int, bool>(GotHistTrade);
+            CoreService.EventHub.OnRspMGRQryPositionResponse -= new Action<PositionDetail, RspInfo, int, bool>(GotHistPosition);
         }
 
-        void GotHistPosition(PositionDetail d, bool islast)
+        void GotHistPosition(PositionDetail d, RspInfo rsp, int reqid, bool islast)
         {
             if (islast)
             {
@@ -103,7 +104,7 @@ namespace TradingLib.MoniterControl
                 ctHistPosition1.GotHistPosition(d);
             }
         }
-        void GotHistOrder(Order o, bool islast)
+        void GotHistOrder(Order o,RspInfo rsp,int reqid, bool islast)
         {
 
             if (islast)
@@ -119,7 +120,7 @@ namespace TradingLib.MoniterControl
                 ctHistOrder1.GotHistOrder(o);
             }
         }
-        public void GotHistTrade(Trade f, bool islast)
+        public void GotHistTrade(Trade f,RspInfo rsp,int reqid, bool islast)
         {
             if (islast)
             {

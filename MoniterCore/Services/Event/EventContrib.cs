@@ -14,6 +14,7 @@ namespace TradingLib.MoniterCore
     /// </summary>
     public class EventContrib
     {
+        ILog logger = LogManager.GetLogger("EventContrib");
 
         public EventContrib()
         {
@@ -22,22 +23,10 @@ namespace TradingLib.MoniterCore
 
         void HandleManagerNotify(string message)
         {
-            var obj = message.DeserializeObject<ManagerNotify>();// TradingLib.Mixins.Json.JsonMapper.ToObject<ManagerNotify>(message);
+            var obj = message.DeserializeObject<ManagerNotify>();
             CoreService.EventCore.FireManagerNotifyEvent(obj);
         }
-        ILog logger = LogManager.GetLogger("EventContrib");
-
-        public event Action<string> DemoEvent;
-
-        /// <summary>
-        /// 演示事件
-        /// </summary>
-        /// <param name="msg"></param>
-        public void FireDemo(string msg)
-        {
-            if (DemoEvent != null)
-                DemoEvent(msg);
-        }
+        
         /// <summary>
         /// 注册Request回调函数
         /// </summary>

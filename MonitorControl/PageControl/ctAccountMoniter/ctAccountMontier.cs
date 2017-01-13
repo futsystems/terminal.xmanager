@@ -75,8 +75,8 @@ namespace TradingLib.MoniterControl
 
             UpdateAccountNum();
 
-            CoreService.EventAccount.AccountStatisticNotify += new Action<AccountStatistic>(OnAccountStatisticNotify);
-            CoreService.EventAccount.OnAccountChangedEvent += new Action<AccountItem>(OnAccountChanged);
+            CoreService.EventHub.AccountStatisticNotify += new Action<AccountStatistic>(OnAccountStatisticNotify);
+            CoreService.EventHub.OnAccountChangedEvent += new Action<AccountItem>(OnAccountChanged);
 
 
             //根据角色隐藏表格相关列
@@ -99,8 +99,8 @@ namespace TradingLib.MoniterControl
 
         public void OnDisposed()
         {
-            CoreService.EventAccount.AccountStatisticNotify -= new Action<AccountStatistic>(OnAccountStatisticNotify);
-            CoreService.EventAccount.OnAccountChangedEvent -= new Action<AccountItem>(OnAccountChanged);
+            CoreService.EventHub.AccountStatisticNotify -= new Action<AccountStatistic>(OnAccountStatisticNotify);
+            CoreService.EventHub.OnAccountChangedEvent -= new Action<AccountItem>(OnAccountChanged);
         }
 
         void OnAccountStatisticNotify(AccountStatistic obj)

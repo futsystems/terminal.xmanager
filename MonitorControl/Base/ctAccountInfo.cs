@@ -46,7 +46,7 @@ namespace TradingLib.MoniterControl
             cbTransferType.SelectedIndexChanged += new EventHandler(cbTransferType_SelectedIndexChanged);
 
             ControlService.AccountSelected += new Action<AccountItem>(OnAccountSelected);
-            CoreService.EventAccount.OnAccountChangedEvent += new Action<AccountItem>(EventAccount_OnAccountChangedEvent);
+            CoreService.EventHub.OnAccountChangedEvent += new Action<AccountItem>(EventAccount_OnAccountChangedEvent);
 
             CoreService.EventCore.RegIEventHandler(this);
             
