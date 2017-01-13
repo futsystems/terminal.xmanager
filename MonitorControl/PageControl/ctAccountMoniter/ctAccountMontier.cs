@@ -77,9 +77,6 @@ namespace TradingLib.MoniterControl
                 InvokeGotAccount(account);
             }
 
-            //更新帐户数目
-            UpdateAccountNum();
-
             CoreService.EventAccount.AccountStatisticNotify += new Action<AccountStatistic>(OnAccountStatisticNotify);
             CoreService.EventAccount.OnAccountChangedEvent += new Action<AccountItem>(OnAccountChanged);
 

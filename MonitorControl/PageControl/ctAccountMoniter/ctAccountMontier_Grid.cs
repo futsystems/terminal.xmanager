@@ -304,7 +304,6 @@ namespace TradingLib.MoniterControl
                     {
                         AccountItem account = accountcache.Read();
                         InvokeGotAccount(account);
-                        UpdateAccountNum();
                         //如果在初始化之后获得AccountItem信息 则表明该帐户是新增造成的 需要重新watchaccount
                         if (CoreService.BasicInfoTracker.Initialized)
                         {

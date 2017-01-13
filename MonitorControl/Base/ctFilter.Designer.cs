@@ -34,7 +34,7 @@
             this.cbPos = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.cbLock = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.lbAccNum = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.SuspendLayout();
             // 
             // kryptonLabel1
@@ -84,20 +84,20 @@
             this.kryptonLabel2.TabIndex = 5;
             this.kryptonLabel2.Values.Text = "账户总数:";
             // 
-            // kryptonLabel3
+            // lbAccNum
             // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(374, 3);
-            this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(20, 20);
-            this.kryptonLabel3.TabIndex = 6;
-            this.kryptonLabel3.Values.Text = "--";
+            this.lbAccNum.Location = new System.Drawing.Point(374, 3);
+            this.lbAccNum.Name = "lbAccNum";
+            this.lbAccNum.Size = new System.Drawing.Size(20, 20);
+            this.lbAccNum.TabIndex = 6;
+            this.lbAccNum.Values.Text = "--";
             // 
             // ctFilter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.kryptonLabel3);
+            this.Controls.Add(this.lbAccNum);
             this.Controls.Add(this.kryptonLabel2);
             this.Controls.Add(this.cbLock);
             this.Controls.Add(this.cbPos);
@@ -105,7 +105,7 @@
             this.Controls.Add(this.tbAccount);
             this.Controls.Add(this.kryptonLabel1);
             this.Name = "ctFilter";
-            this.Size = new System.Drawing.Size(443, 24);
+            this.Size = new System.Drawing.Size(490, 24);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -119,6 +119,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox cbPos;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox cbLock;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lbAccNum;
     }
 }

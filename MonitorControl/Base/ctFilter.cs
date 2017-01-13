@@ -34,24 +34,28 @@ namespace TradingLib.MoniterControl
         {
             _arg.AccSearch = tbAccount.Text;
             ControlService.FireFilterArgsChanged(_arg);
+            lbAccNum.Text = _arg.AccNum.ToString();
         }
 
         void cbPos_CheckedChanged(object sender, EventArgs e)
         {
             _arg.AccPos = cbPos.Checked;
             ControlService.FireFilterArgsChanged(_arg);
+            lbAccNum.Text = _arg.AccNum.ToString();
         }
 
         void cbLogin_CheckedChanged(object sender, EventArgs e)
         {
             _arg.AccLogin = cbLogin.Checked;
             ControlService.FireFilterArgsChanged(_arg);
+            lbAccNum.Text = _arg.AccNum.ToString();
         }
 
         void cbExecute_CheckStateChanged(object sender, EventArgs e)
         {
             _arg.AccLock = cbLock.Checked;
             ControlService.FireFilterArgsChanged(_arg);
+            lbAccNum.Text = _arg.AccNum.ToString();
             
         }
     }

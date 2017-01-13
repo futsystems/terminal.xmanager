@@ -12,74 +12,6 @@ namespace TradingLib.MoniterControl
 
     public partial class ctAccountMontier
     {
-        //FilterArgs filterArgs = ControlService.FilterArgs;
-
-        
-        #region 过滤帐户列表
-
-        /// <summary>
-        /// 帐户类型选择
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //void ctAccountType1_AccountTypeSelectedChangedEvent()
-        //{
-        //    RefreshAccountQuery();
-        //}
-
-        /// <summary>
-        /// 路由类别选择
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //void ctRouterType1_RouterTypeSelectedChangedEvent()
-        //{
-        //    RefreshAccountQuery();
-        //}
-        ///// <summary>
-        ///// 帐户可交易选择
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //private void accexecute_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    RefreshAccountQuery();
-        //}
-
-        ///// <summary>
-        ///// 是否登入选择
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="args"></param>
-        //private void accLogin_CheckedChanged(object sender, EventArgs args)
-        //{
-        //    RefreshAccountQuery();
-        //}
-        ///// <summary>
-        ///// 单帐户查询框
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //private void acct_TextChanged(object sender, EventArgs e)
-        //{
-        //    RefreshAccountQuery();
-        //}
-        ///// <summary>
-        ///// 代理列表选择
-        ///// </summary>
-        ////private void ctAgentList1_AgentSelectedChangedEvent()
-        ////{
-        ////    RefreshAccountQuery();
-        ////}
-
-        //private void acchodpos_CheckedChanged(object sender, EventArgs args)
-        //{
-        //    RefreshAccountQuery();
-        //}
-        //void ctRouterGroupList1_RouterGroupSelectedChangedEvent()
-        //{
-        //    RefreshAccountQuery();
-        //}
 
         /// <summary>
         /// 刷新帐户筛选结果
@@ -156,22 +88,14 @@ namespace TradingLib.MoniterControl
 
             logger.Info("strfilter:" + strFilter);
             datasource.Filter = strFilter;
-
-            //更新帐户数目
-            UpdateAccountNum();
-
             //订阅观察列表
             //if (Globals.EnvReady)
             {
                 GridChanged();
             }
+            if (filterArgs != null) filterArgs.AccNum = accountgrid.Rows.Count;
+            
         }
 
-        void UpdateAccountNum()
-        {
-            //num.Text = accountgrid.Rows.Count.ToString();
-        }
-
-        #endregion
     }
 }
