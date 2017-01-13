@@ -208,10 +208,9 @@ namespace TradingLib.MoniterControl
                 return -1;
         }
 
-        //AccountItem accountselected = null;
-        //public AccountItem AccountSetlected { get { return accountselected; } }
-
-        //得到当前选择的交易帐户
+        /// <summary>
+        /// 当前交易账户
+        /// </summary>
         public AccountItem CurrentAccount
         {
             get
@@ -221,20 +220,7 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        /// <summary>
-        /// 帐户数量
-        /// 未删除帐户数量
-        /// </summary>
-        public int AccountCount
-        {
-            get
-            {
-                return accountmap.Values.Where(acc => !acc.Deleted).Count();
-            }
-        }
-
         #endregion
-
 
         #region 更新交易账户信息
 
@@ -511,9 +497,6 @@ namespace TradingLib.MoniterControl
         }
 
         #endregion
-
-
-        
 
     }
 }

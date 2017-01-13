@@ -20,29 +20,23 @@ namespace TradingLib.MoniterControl
         }
 
 
-        //FilterArgs _filterArgs = null;
-
-        ///// <summary>
-        ///// 获得当前帐户过滤参数
-        ///// 过滤器与帐户列表显示控件是分开的
-        ///// </summary>
-        //public static FilterArgs FilterArgs
-        //{
-        //    get
-        //    {
-        //        if (defaultintance._filterArgs == null)
-        //            defaultintance._filterArgs = new FilterArgs();
-        //        return defaultintance._filterArgs;
-        //    }
-        //}
-
-
         public static event Action<FilterArgs> FilterArgsChanged;
 
         static internal void FireFilterArgsChanged(FilterArgs arg)
         {
             if (FilterArgsChanged != null)
                 FilterArgsChanged(arg);
+        }
+
+        /// <summary>
+        /// 交易账户Grid显示账户显示数量
+        /// </summary>
+        public static event Action<int> AccGridNumChanged;
+
+        static internal void FireAccGridNumChanged(int num)
+        {
+            if (AccGridNumChanged != null)
+                AccGridNumChanged(num);
         }
     }
 }

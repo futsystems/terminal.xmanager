@@ -20,8 +20,6 @@ namespace TradingLib.MoniterControl
     public partial class ctAccountMontier : UserControl, IEventBinder, IMoniterControl
     {
         ILog logger = LogManager.GetLogger("AccountMontier");
-
-        const string PROGRAME = "AccountMontier";
         public ctAccountMontier()
         {
             try
@@ -42,9 +40,7 @@ namespace TradingLib.MoniterControl
         void ctAccountMontier_Load(object sender, EventArgs e)
         {
             WireEvents();
-
             FilterAccount(null);
-            
         }
 
 
@@ -77,6 +73,8 @@ namespace TradingLib.MoniterControl
                 InvokeGotAccount(account);
             }
 
+            UpdateAccountNum();
+
             CoreService.EventAccount.AccountStatisticNotify += new Action<AccountStatistic>(OnAccountStatisticNotify);
             CoreService.EventAccount.OnAccountChangedEvent += new Action<AccountItem>(OnAccountChanged);
 
@@ -87,14 +85,12 @@ namespace TradingLib.MoniterControl
                 //只有管理员可以查看路由类别
                 accountgrid.Columns[ROUTEIMG].Visible = CoreService.SiteInfo.Manager.IsRoot();
                 //管理员可以查看帐户类别
-                accountgrid.Columns[CATEGORYSTR].Visible = CoreService.SiteInfo.Manager.IsRoot();
-
+                //accountgrid.Columns[CATEGORYSTR].Visible = CoreService.SiteInfo.Manager.IsRoot();
                 //如果有实盘交易权限则可以查看路由组
                 accountgrid.Columns[ROUTERGROUPSTR].Visible = CoreService.SiteInfo.Manager.IsRoot();
 
                 CounterMoniterWidth();
             }
-
             //启动更新线程
             StartUpdate();
         }
@@ -167,8 +163,6 @@ namespace TradingLib.MoniterControl
                     e.CellStyle.ForeColor = System.Drawing.Color.Black;
 
                 }
-
-
             }
         }
 
@@ -206,9 +200,6 @@ namespace TradingLib.MoniterControl
             AccountItem account = this.CurrentAccount;
             if (account != null)
             {
-                //设定当前选中帐号
-                //accountselected = account;
-
                 //触发事件中继的帐户选择事件
                 CoreService.EventAccount.FireAccountSelectedEvent(account);
             }

@@ -33,7 +33,6 @@
             this.cbLogin = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.cbPos = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.cbLock = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
-            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lbAccNum = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.SuspendLayout();
             // 
@@ -47,14 +46,14 @@
             // 
             // tbAccount
             // 
-            this.tbAccount.Location = new System.Drawing.Point(38, 3);
+            this.tbAccount.Location = new System.Drawing.Point(33, 3);
             this.tbAccount.Name = "tbAccount";
             this.tbAccount.Size = new System.Drawing.Size(100, 20);
             this.tbAccount.TabIndex = 1;
             // 
             // cbLogin
             // 
-            this.cbLogin.Location = new System.Drawing.Point(145, 3);
+            this.cbLogin.Location = new System.Drawing.Point(138, 3);
             this.cbLogin.Name = "cbLogin";
             this.cbLogin.Size = new System.Drawing.Size(48, 20);
             this.cbLogin.TabIndex = 2;
@@ -62,7 +61,7 @@
             // 
             // cbPos
             // 
-            this.cbPos.Location = new System.Drawing.Point(199, 3);
+            this.cbPos.Location = new System.Drawing.Point(185, 3);
             this.cbPos.Name = "cbPos";
             this.cbPos.Size = new System.Drawing.Size(48, 20);
             this.cbPos.TabIndex = 3;
@@ -70,27 +69,19 @@
             // 
             // cbLock
             // 
-            this.cbLock.Location = new System.Drawing.Point(253, 3);
+            this.cbLock.Location = new System.Drawing.Point(232, 3);
             this.cbLock.Name = "cbLock";
             this.cbLock.Size = new System.Drawing.Size(48, 20);
             this.cbLock.TabIndex = 4;
             this.cbLock.Values.Text = "冻结";
             // 
-            // kryptonLabel2
-            // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(307, 3);
-            this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(63, 20);
-            this.kryptonLabel2.TabIndex = 5;
-            this.kryptonLabel2.Values.Text = "账户总数:";
-            // 
             // lbAccNum
             // 
-            this.lbAccNum.Location = new System.Drawing.Point(374, 3);
+            this.lbAccNum.Location = new System.Drawing.Point(277, 3);
             this.lbAccNum.Name = "lbAccNum";
-            this.lbAccNum.Size = new System.Drawing.Size(20, 20);
-            this.lbAccNum.TabIndex = 6;
-            this.lbAccNum.Values.Text = "--";
+            this.lbAccNum.Size = new System.Drawing.Size(63, 20);
+            this.lbAccNum.TabIndex = 5;
+            this.lbAccNum.Values.Text = "账户总数:";
             // 
             // ctFilter
             // 
@@ -98,14 +89,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.lbAccNum);
-            this.Controls.Add(this.kryptonLabel2);
             this.Controls.Add(this.cbLock);
             this.Controls.Add(this.cbPos);
             this.Controls.Add(this.cbLogin);
             this.Controls.Add(this.tbAccount);
             this.Controls.Add(this.kryptonLabel1);
             this.Name = "ctFilter";
-            this.Size = new System.Drawing.Size(490, 24);
+            this.Size = new System.Drawing.Size(385, 24);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -118,7 +108,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox cbLogin;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox cbPos;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox cbLock;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbAccNum;
     }
 }

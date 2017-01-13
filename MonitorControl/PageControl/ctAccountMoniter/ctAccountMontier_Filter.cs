@@ -7,15 +7,12 @@ using TradingLib.Common;
 
 namespace TradingLib.MoniterControl
 {
-    
-
-
     public partial class ctAccountMontier
     {
-
         /// <summary>
-        /// 刷新帐户筛选结果
+        /// 过滤账户
         /// </summary>
+        /// <param name="filterArgs"></param>
         void FilterAccount(FilterArgs filterArgs)
         {
             string strFilter = string.Empty;
@@ -86,15 +83,14 @@ namespace TradingLib.MoniterControl
 
             }
 
-            logger.Info("strfilter:" + strFilter);
             datasource.Filter = strFilter;
-            //订阅观察列表
-            //if (Globals.EnvReady)
-            {
-                GridChanged();
-            }
-            if (filterArgs != null) filterArgs.AccNum = accountgrid.Rows.Count;
-            
+            UpdateAccountNum();
+            GridChanged();
+        }
+
+        void UpdateAccountNum()
+        {
+            ControlService.FireAccGridNumChanged(accountgrid.Rows.Count);
         }
 
     }

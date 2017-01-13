@@ -779,12 +779,6 @@
     <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier_Grid.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PageControl\ctAccountMoniter\fmAcctFilter.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PageControl\ctAccountMoniter\fmAcctFilter.Designer.cs">
-      <DependentUpon>fmAcctFilter.cs</DependentUpon>
-    </Compile>
     <Compile Include="PageControl\ctFollowCentre.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1172,9 +1166,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PageControl\ctAccountMoniter\ctAccountMontier.resx">
       <DependentUpon>ctAccountMontier.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PageControl\ctAccountMoniter\fmAcctFilter.resx">
-      <DependentUpon>fmAcctFilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PageControl\ctFollowCentre.resx">
       <DependentUpon>ctFollowCentre.cs</DependentUpon>
