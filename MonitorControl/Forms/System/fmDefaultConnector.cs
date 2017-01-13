@@ -52,17 +52,17 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback(Modules.CONN_MGR,Method_CONN_MGR.QRY_DEFAULT_CONN_CONFIG, this.OnQryConnectorConfig);//查询交易帐户出入金请求
-            CoreService.EventContrib.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_DEFAULT_CONN_STATUS, this.OnQryConnectorStatus);
-            CoreService.EventContrib.RegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_CONN_STATUS, this.OnNotifyConnectorStatus);
+            CoreService.EventCore.RegisterCallback(Modules.CONN_MGR,Method_CONN_MGR.QRY_DEFAULT_CONN_CONFIG, this.OnQryConnectorConfig);//查询交易帐户出入金请求
+            CoreService.EventCore.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_DEFAULT_CONN_STATUS, this.OnQryConnectorStatus);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_CONN_STATUS, this.OnNotifyConnectorStatus);
             CoreService.TLClient.ReqQryDefaultConnectorConfig();
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_DEFAULT_CONN_CONFIG, this.OnQryConnectorConfig);//查询交易帐户出入金请求
-            CoreService.EventContrib.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_DEFAULT_CONN_STATUS, this.OnQryConnectorStatus);
-            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_CONN_STATUS, this.OnNotifyConnectorStatus);
+            CoreService.EventCore.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_DEFAULT_CONN_CONFIG, this.OnQryConnectorConfig);//查询交易帐户出入金请求
+            CoreService.EventCore.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_DEFAULT_CONN_STATUS, this.OnQryConnectorStatus);
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_CONN_STATUS, this.OnNotifyConnectorStatus);
 
             
         }

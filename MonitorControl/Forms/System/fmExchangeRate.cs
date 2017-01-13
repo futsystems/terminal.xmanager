@@ -82,14 +82,14 @@ namespace TradingLib.MoniterControl
         public void OnInit()
         {
 
-            CoreService.EventContrib.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_EXCHANGERATES, this.OnQryExchangeRates);
-            CoreService.EventContrib.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_EXCHANGERATES, this.OnNotifyExchangeRate);
+            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_EXCHANGERATES, this.OnQryExchangeRates);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_EXCHANGERATES, this.OnNotifyExchangeRate);
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_EXCHANGERATES, this.OnQryExchangeRates);
-            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_EXCHANGERATES, this.OnNotifyExchangeRate);
+            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_EXCHANGERATES, this.OnQryExchangeRates);
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_EXCHANGERATES, this.OnNotifyExchangeRate);
             
         }
 

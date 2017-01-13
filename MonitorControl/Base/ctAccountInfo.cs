@@ -58,8 +58,8 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback(Modules.MSG_EXCH, Method_MSG_EXCH.QRY_SESSION_INFO, OnSessionInfo);
-            CoreService.EventContrib.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_SESSION_INFO, OnSessionNotify);
+            CoreService.EventCore.RegisterCallback(Modules.MSG_EXCH, Method_MSG_EXCH.QRY_SESSION_INFO, OnSessionInfo);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_SESSION_INFO, OnSessionNotify);
             //只有管理员可以查看成交方式
             if (!CoreService.SiteInfo.Manager.IsRoot())
             {
@@ -72,8 +72,8 @@ namespace TradingLib.MoniterControl
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback(Modules.MSG_EXCH, Method_MSG_EXCH.QRY_SESSION_INFO, OnSessionInfo);
-            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_SESSION_INFO, OnSessionNotify);
+            CoreService.EventCore.UnRegisterCallback(Modules.MSG_EXCH, Method_MSG_EXCH.QRY_SESSION_INFO, OnSessionInfo);
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_SESSION_INFO, OnSessionNotify);
         }
 
 

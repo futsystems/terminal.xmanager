@@ -65,7 +65,7 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_CONN_NOTIN_GROUP, OnQryConnectorNotInGroup);
+            CoreService.EventCore.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_CONN_NOTIN_GROUP, OnQryConnectorNotInGroup);
             if (_item == null)
             {
                 CoreService.TLClient.ReqQryConnectorNotInGroup();
@@ -74,7 +74,7 @@ namespace TradingLib.MoniterControl
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_CONN_NOTIN_GROUP, OnQryConnectorNotInGroup);
+            CoreService.EventCore.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_CONN_NOTIN_GROUP, OnQryConnectorNotInGroup);
       
         }
 

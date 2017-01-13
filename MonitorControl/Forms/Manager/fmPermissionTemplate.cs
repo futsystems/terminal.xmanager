@@ -157,18 +157,18 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("MgrExchServer", "QueryPermmissionTemplate", OnQryPermissionTemplate);
-            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyPermissionTemplate", OnNotifyPermissionTemplate);
-            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyDeletePermissionTemplate", OnNotifyDelPermissionTemplate);
+            CoreService.EventCore.RegisterCallback("MgrExchServer", "QueryPermmissionTemplate", OnQryPermissionTemplate);
+            CoreService.EventCore.RegisterNotifyCallback("MgrExchServer", "NotifyPermissionTemplate", OnNotifyPermissionTemplate);
+            CoreService.EventCore.RegisterNotifyCallback("MgrExchServer", "NotifyDeletePermissionTemplate", OnNotifyDelPermissionTemplate);
             
             CoreService.TLClient.ReqQryPermmissionTemplateList();
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QueryPermmissionTemplate", OnQryPermissionTemplate);
-            CoreService.EventContrib.UnRegisterNotifyCallback("MgrExchServer", "NotifyPermissionTemplate", OnNotifyPermissionTemplate);
-            CoreService.EventContrib.UnRegisterNotifyCallback("MgrExchServer", "NotifyDeletePermissionTemplate", OnNotifyDelPermissionTemplate);
+            CoreService.EventCore.UnRegisterCallback("MgrExchServer", "QueryPermmissionTemplate", OnQryPermissionTemplate);
+            CoreService.EventCore.UnRegisterNotifyCallback("MgrExchServer", "NotifyPermissionTemplate", OnNotifyPermissionTemplate);
+            CoreService.EventCore.UnRegisterNotifyCallback("MgrExchServer", "NotifyDeletePermissionTemplate", OnNotifyDelPermissionTemplate);
             
 
         }

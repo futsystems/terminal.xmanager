@@ -115,19 +115,19 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("FollowCentre", "QryFollowStrategyList", OnQryFollowStrategyList);
-            CoreService.EventContrib.RegisterNotifyCallback("FollowCentre", "FollowStrategyConfigNotify", OnFollowStrategyConfigNotify);
-            CoreService.EventContrib.RegisterNotifyCallback("FollowCentre", "FollowStrategyStatusNotify", OnFollowStrategyStatusNotify);
+            CoreService.EventCore.RegisterCallback("FollowCentre", "QryFollowStrategyList", OnQryFollowStrategyList);
+            CoreService.EventCore.RegisterNotifyCallback("FollowCentre", "FollowStrategyConfigNotify", OnFollowStrategyConfigNotify);
+            CoreService.EventCore.RegisterNotifyCallback("FollowCentre", "FollowStrategyStatusNotify", OnFollowStrategyStatusNotify);
             
             CoreService.TLClient.ReqContribRequest("FollowCentre", "QryFollowStrategyList", "");
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("FollowCentre", "QryFollowStrategyList", OnQryFollowStrategyList);
-            CoreService.EventContrib.UnRegisterNotifyCallback("FollowCentre", "FollowStrategyConfigNotify", OnFollowStrategyConfigNotify);
+            CoreService.EventCore.UnRegisterCallback("FollowCentre", "QryFollowStrategyList", OnQryFollowStrategyList);
+            CoreService.EventCore.UnRegisterNotifyCallback("FollowCentre", "FollowStrategyConfigNotify", OnFollowStrategyConfigNotify);
           
-            CoreService.EventContrib.UnRegisterNotifyCallback("FollowCentre", "FollowStrategyStatusNotify", OnFollowStrategyStatusNotify);
+            CoreService.EventCore.UnRegisterNotifyCallback("FollowCentre", "FollowStrategyStatusNotify", OnFollowStrategyStatusNotify);
            
         }
 

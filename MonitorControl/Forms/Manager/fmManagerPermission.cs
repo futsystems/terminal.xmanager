@@ -65,9 +65,9 @@ namespace TradingLib.MoniterControl
         public void OnInit()
         {
 
-            CoreService.EventContrib.RegisterCallback("MgrExchServer", "QueryPermmissionTemplate", OnPermissionTemplate);
-            CoreService.EventContrib.RegisterCallback("MgrExchServer", "QueryAgentPermission", OnAgentPermission);
-            CoreService.EventContrib.RegisterNotifyCallback("MgrExchServer", "NotifyAgentPermission", OnNotifyAgentPermission);
+            CoreService.EventCore.RegisterCallback("MgrExchServer", "QueryPermmissionTemplate", OnPermissionTemplate);
+            CoreService.EventCore.RegisterCallback("MgrExchServer", "QueryAgentPermission", OnAgentPermission);
+            CoreService.EventCore.RegisterNotifyCallback("MgrExchServer", "NotifyAgentPermission", OnNotifyAgentPermission);
 
             CoreService.TLClient.ReqQryPermmissionTemplateList();
             CoreService.TLClient.ReqQryAgentPermission(_manager.ID);
@@ -75,9 +75,9 @@ namespace TradingLib.MoniterControl
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QueryPermmissionTemplate", OnPermissionTemplate);
-            CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QueryAgentPermission", OnAgentPermission);
-            CoreService.EventContrib.UnRegisterNotifyCallback("MgrExchServer", "NotifyAgentPermission", OnNotifyAgentPermission);
+            CoreService.EventCore.UnRegisterCallback("MgrExchServer", "QueryPermmissionTemplate", OnPermissionTemplate);
+            CoreService.EventCore.UnRegisterCallback("MgrExchServer", "QueryAgentPermission", OnAgentPermission);
+            CoreService.EventCore.UnRegisterNotifyCallback("MgrExchServer", "NotifyAgentPermission", OnNotifyAgentPermission);
         }
 
 

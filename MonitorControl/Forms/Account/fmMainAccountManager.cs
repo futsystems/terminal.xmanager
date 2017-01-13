@@ -65,12 +65,12 @@
 
 //        public void OnInit()
 //        {
-//            CoreService.EventContrib.RegisterCallback("BrokerRouterPassThrough", "QryBrokerAccountInfo", this.OnAccountInfo);
+//            CoreService.EventCore.RegisterCallback("BrokerRouterPassThrough", "QryBrokerAccountInfo", this.OnAccountInfo);
 //        }
 
 //        public void OnDisposed()
 //        {
-//            CoreService.EventContrib.UnRegisterCallback("BrokerRouterPassThrough", "QryBrokerAccountInfo", this.OnAccountInfo);
+//            CoreService.EventCore.UnRegisterCallback("BrokerRouterPassThrough", "QryBrokerAccountInfo", this.OnAccountInfo);
 
 //        }
 

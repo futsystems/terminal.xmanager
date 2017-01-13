@@ -38,14 +38,14 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("MainAcctFinService", "QryStatus", this.OnStatus);
+            CoreService.EventCore.RegisterCallback("MainAcctFinService", "QryStatus", this.OnStatus);
             CoreService.TLClient.ReqContribRequest("MainAcctFinService", "QryStatus", "");
 
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("MainAcctFinService", "QryStatus", this.OnStatus);
+            CoreService.EventCore.UnRegisterCallback("MainAcctFinService", "QryStatus", this.OnStatus);
         }
 
 

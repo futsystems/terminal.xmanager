@@ -80,11 +80,11 @@ namespace TradingLib.MoniterControl
             //绑定事件
             if (ViewType == CashOpViewType.Account)
             {
-                CoreService.EventContrib.RegisterCallback("MgrExchServer", "QueryAccountCashTrans", this.OnQryCashTrans);
+                CoreService.EventCore.RegisterCallback("MgrExchServer", "QueryAccountCashTrans", this.OnQryCashTrans);
             }
             else
             {
-                CoreService.EventContrib.RegisterCallback("MgrExchServer", "QueryAgentCashTrans", this.OnQryCashTrans);
+                CoreService.EventCore.RegisterCallback("MgrExchServer", "QueryAgentCashTrans", this.OnQryCashTrans);
             }
         }
 
@@ -92,11 +92,11 @@ namespace TradingLib.MoniterControl
         {
             if (ViewType == CashOpViewType.Account)
             {
-                CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QueryAccountCashTrans", this.OnQryCashTrans);
+                CoreService.EventCore.UnRegisterCallback("MgrExchServer", "QueryAccountCashTrans", this.OnQryCashTrans);
             }
             else
             {
-                CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QueryAgentCashTrans", this.OnQryCashTrans);
+                CoreService.EventCore.UnRegisterCallback("MgrExchServer", "QueryAgentCashTrans", this.OnQryCashTrans);
             }
         }
 

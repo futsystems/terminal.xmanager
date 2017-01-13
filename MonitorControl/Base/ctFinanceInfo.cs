@@ -50,8 +50,8 @@ namespace TradingLib.MoniterControl
         public void OnInit()
         {
 
-            CoreService.EventContrib.RegisterCallback(Modules.ACC_MGR,Method_ACC_MGR.QRY_ACC_FININFO, this.OnQryAccountInfo);
-            CoreService.EventContrib.RegisterNotifyCallback(Modules.ACC_MGR, Method_ACC_MGR.NOTIFY_ACC_FININFO, this.OnNotifyAccountInfo);
+            CoreService.EventCore.RegisterCallback(Modules.ACC_MGR,Method_ACC_MGR.QRY_ACC_FININFO, this.OnQryAccountInfo);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.ACC_MGR, Method_ACC_MGR.NOTIFY_ACC_FININFO, this.OnNotifyAccountInfo);
             //Globals.LogicEvent.GotAccountSelectedEvent += new Action<AccountItem>(OnAccountSelected);
 
             CoreService.TLClient.ReqQryAccountFinInfo(_account.Account);
@@ -65,8 +65,8 @@ namespace TradingLib.MoniterControl
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_FININFO, this.OnQryAccountInfo);
-            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.ACC_MGR, Method_ACC_MGR.NOTIFY_ACC_FININFO, this.OnNotifyAccountInfo);
+            CoreService.EventCore.UnRegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_FININFO, this.OnQryAccountInfo);
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.ACC_MGR, Method_ACC_MGR.NOTIFY_ACC_FININFO, this.OnNotifyAccountInfo);
             //Globals.LogicEvent.GotAccountSelectedEvent -= new Action<AccountItem>(OnAccountSelected);
             //Globals.Debug("ctFinanceInfo disposed...");
          }

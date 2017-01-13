@@ -108,8 +108,8 @@ namespace TradingLib.MoniterControl
         }
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("MainAcctFinService", "QryTodayFee", this.OnFee);
-            CoreService.EventContrib.RegisterNotifyCallback("MainAcctFinService", "NotifyFee", this.OnNotifyFee);
+            CoreService.EventCore.RegisterCallback("MainAcctFinService", "QryTodayFee", this.OnFee);
+            CoreService.EventCore.RegisterNotifyCallback("MainAcctFinService", "NotifyFee", this.OnNotifyFee);
             CoreService.TLClient.ReqContribRequest("MainAcctFinService", "QryTodayFee", "");
             
         }
@@ -117,8 +117,8 @@ namespace TradingLib.MoniterControl
         public void OnDisposed()
         {
             
-            CoreService.EventContrib.UnRegisterCallback("MainAcctFinService", "QryTodayFee", this.OnFee);
-            CoreService.EventContrib.UnRegisterNotifyCallback("MainAcctFinService", "NotifyFee", this.OnNotifyFee);
+            CoreService.EventCore.UnRegisterCallback("MainAcctFinService", "QryTodayFee", this.OnFee);
+            CoreService.EventCore.UnRegisterNotifyCallback("MainAcctFinService", "NotifyFee", this.OnNotifyFee);
         }
 
         void OnNotifyFee(string json)

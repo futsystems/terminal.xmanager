@@ -36,22 +36,6 @@ namespace TradingLib.MoniterCore
             }
         }
 
-        EventContrib _eventContrib = null;
-        /// <summary>
-        /// 扩展类事件集合
-        /// 此集合不对外暴露事件 而是通过注册回调的方式进行通知
-        /// 比如某个控件进行查询操作，则需要将对应的响应回报函数注册到对应的命令上，当该命令获得返回时
-        /// 注册函数被调用然后进行处理
-        /// </summary>
-        public static EventContrib EventContrib
-        {
-            get
-            {
-                if (defaultinstance._eventContrib == null)
-                    defaultinstance._eventContrib = new EventContrib();
-                return defaultinstance._eventContrib;
-            }
-        }
 
 
 

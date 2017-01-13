@@ -45,7 +45,7 @@ namespace TradingLib.MoniterControl
         {
             if (_cfg == null)
             {
-                CoreService.EventContrib.RegisterCallback("FollowCentre", "QryAvabileStrategyAccount", OnQryAvabileStrategyAccount);
+                CoreService.EventCore.RegisterCallback("FollowCentre", "QryAvabileStrategyAccount", OnQryAvabileStrategyAccount);
           
                 CoreService.TLClient.ReqContribRequest("FollowCentre", "QryAvabileStrategyAccount","");
      
@@ -56,7 +56,7 @@ namespace TradingLib.MoniterControl
         {
             if (_cfg == null)
             {
-                CoreService.EventContrib.UnRegisterCallback("FollowCentre", "QryAvabileStrategyAccount", OnQryAvabileStrategyAccount);
+                CoreService.EventCore.UnRegisterCallback("FollowCentre", "QryAvabileStrategyAccount", OnQryAvabileStrategyAccount);
           
             }
         

@@ -203,31 +203,31 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_CONN_CONFIG, this.OnQryConnectorConfig);
+            CoreService.EventCore.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_CONN_CONFIG, this.OnQryConnectorConfig);
 
-            CoreService.EventContrib.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_ROUTEGROUP, this.OnQryRouterGroup);
-            CoreService.EventContrib.RegisterNotifyCallback(Modules.CONN_MGR,Method_CONN_MGR.NOTIFY_ROUTEGROUP, this.OnNotifyRouterGroup);
+            CoreService.EventCore.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_ROUTEGROUP, this.OnQryRouterGroup);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.CONN_MGR,Method_CONN_MGR.NOTIFY_ROUTEGROUP, this.OnNotifyRouterGroup);
 
-            CoreService.EventContrib.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_ROUTEITEM, this.OnQryRouterItem);
-            CoreService.EventContrib.RegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_ROUTEITEM, this.OnNotifyRouterItem);
+            CoreService.EventCore.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_ROUTEITEM, this.OnQryRouterItem);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_ROUTEITEM, this.OnNotifyRouterItem);
 
-            CoreService.EventContrib.RegisterCallback(Modules.CONN_MGR,Method_CONN_MGR.QRY_CONN_STATUS, this.OnQryConnectorStatus);
-            CoreService.EventContrib.RegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_CONN_STATUS, this.OnNotifyConnectorStatus);
+            CoreService.EventCore.RegisterCallback(Modules.CONN_MGR,Method_CONN_MGR.QRY_CONN_STATUS, this.OnQryConnectorStatus);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_CONN_STATUS, this.OnNotifyConnectorStatus);
 
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_CONN_CONFIG, this.OnQryConnectorConfig);
+            CoreService.EventCore.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_CONN_CONFIG, this.OnQryConnectorConfig);
 
-            CoreService.EventContrib.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_ROUTEGROUP, this.OnQryRouterGroup);
-            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_ROUTEGROUP, this.OnNotifyRouterGroup);
+            CoreService.EventCore.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_ROUTEGROUP, this.OnQryRouterGroup);
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_ROUTEGROUP, this.OnNotifyRouterGroup);
 
-            CoreService.EventContrib.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_ROUTEITEM, this.OnQryRouterItem);
-            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_ROUTEITEM, this.OnNotifyRouterItem);
+            CoreService.EventCore.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_ROUTEITEM, this.OnQryRouterItem);
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_ROUTEITEM, this.OnNotifyRouterItem);
 
-            CoreService.EventContrib.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_CONN_STATUS, this.OnQryConnectorStatus);
-            CoreService.EventContrib.UnRegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_CONN_STATUS, this.OnNotifyConnectorStatus);
+            CoreService.EventCore.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_CONN_STATUS, this.OnQryConnectorStatus);
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_CONN_STATUS, this.OnNotifyConnectorStatus);
 
         }
 

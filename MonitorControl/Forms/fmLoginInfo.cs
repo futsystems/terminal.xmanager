@@ -30,19 +30,19 @@ namespace TradingLib.MoniterControl
         {
             if (_domain != null)
             {
-                CoreService.EventContrib.RegisterCallback(Modules.MGR_EXCH,Method_MGR_EXCH.QRY_DOMAIN_LOGININFO, this.OnLoginInfo);
+                CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH,Method_MGR_EXCH.QRY_DOMAIN_LOGININFO, this.OnLoginInfo);
                 CoreService.TLClient.ReqQryDomainRootLoginInfo(_domain.ID);
             }
 
             if (_manager != null)
             {
-                CoreService.EventContrib.RegisterCallback(Modules.MGR_EXCH, "QryManagerLoginInfo", this.OnLoginInfo);
+                CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, "QryManagerLoginInfo", this.OnLoginInfo);
                 CoreService.TLClient.ReqQryManagerLoginInfo(_manager.ID);
             }
 
             if (_account != null)
             {
-                CoreService.EventContrib.RegisterCallback(Modules.ACC_MGR,Method_ACC_MGR.QRY_LOGIN_INFO, this.OnLoginInfo);
+                CoreService.EventCore.RegisterCallback(Modules.ACC_MGR,Method_ACC_MGR.QRY_LOGIN_INFO, this.OnLoginInfo);
                 CoreService.TLClient.ReqQryAccountLoginInfo(_account.Account);
             }
 
@@ -52,16 +52,16 @@ namespace TradingLib.MoniterControl
         {
             if (_domain != null)
             {
-                CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QryDomainRootLoginInfo", this.OnLoginInfo);
+                CoreService.EventCore.UnRegisterCallback("MgrExchServer", "QryDomainRootLoginInfo", this.OnLoginInfo);
             }
             if (_manager != null)
             {
-                CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QryManagerLoginInfo", this.OnLoginInfo);
+                CoreService.EventCore.UnRegisterCallback("MgrExchServer", "QryManagerLoginInfo", this.OnLoginInfo);
             }
 
             if (_account != null)
             {
-                CoreService.EventContrib.UnRegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_LOGIN_INFO, this.OnLoginInfo);
+                CoreService.EventCore.UnRegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_LOGIN_INFO, this.OnLoginInfo);
             }
         }
 

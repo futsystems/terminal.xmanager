@@ -65,13 +65,13 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback(Modules.MGR_EXCH,Method_MGR_EXCH.QRY_CALENDAR, OnQryCalendarItems);
+            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH,Method_MGR_EXCH.QRY_CALENDAR, OnQryCalendarItems);
             CoreService.TLClient.ReqQryCalendar();
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_CALENDAR, OnQryCalendarItems);
+            CoreService.EventCore.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_CALENDAR, OnQryCalendarItems);
         }
 
         List<CalendarItem> calenarlist = new List<CalendarItem>();

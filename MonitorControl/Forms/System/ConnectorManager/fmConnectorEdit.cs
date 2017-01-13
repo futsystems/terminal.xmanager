@@ -32,13 +32,13 @@ namespace TradingLib.MoniterControl
         }
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_TOKEN_VALID, this.OnQryTokenValid);
+            CoreService.EventCore.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_TOKEN_VALID, this.OnQryTokenValid);
 
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_TOKEN_VALID, this.OnQryTokenValid);
+            CoreService.EventCore.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_TOKEN_VALID, this.OnQryTokenValid);
         }
 
         

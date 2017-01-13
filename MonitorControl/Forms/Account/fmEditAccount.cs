@@ -69,7 +69,7 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_PROFILE, this.OnQryAccountProfile);
+            CoreService.EventCore.RegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_PROFILE, this.OnQryAccountProfile);
             
             //如果设定了交易帐户 则表明是编辑/查询个人信息
             if (_account != null)
@@ -80,7 +80,7 @@ namespace TradingLib.MoniterControl
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_PROFILE, this.OnQryAccountProfile);
+            CoreService.EventCore.UnRegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_PROFILE, this.OnQryAccountProfile);
             
         }
 

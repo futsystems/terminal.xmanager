@@ -34,13 +34,13 @@ namespace TradingLib.MoniterControl
         }
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryReceiveableBank", this.OnQryBank);
+            CoreService.EventCore.RegisterCallback("MgrExchServer", "QryReceiveableBank", this.OnQryBank);
             CoreService.TLClient.ReqQryReceiveableBank();
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QryReceiveableBank", this.OnQryBank);
+            CoreService.EventCore.UnRegisterCallback("MgrExchServer", "QryReceiveableBank", this.OnQryBank);
         }
 
 

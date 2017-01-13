@@ -41,12 +41,12 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("MainAcctFinService", "QryFinService", this.OnFinService);
+            CoreService.EventCore.RegisterCallback("MainAcctFinService", "QryFinService", this.OnFinService);
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("MainAcctFinService", "QryFinService", this.OnFinService);
+            CoreService.EventCore.UnRegisterCallback("MainAcctFinService", "QryFinService", this.OnFinService);
         }
 
 

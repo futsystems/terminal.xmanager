@@ -43,14 +43,14 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("FollowCentre", "QryFollowItemDetail", OnQryFollowItemDetail);
+            CoreService.EventCore.RegisterCallback("FollowCentre", "QryFollowItemDetail", OnQryFollowItemDetail);
 
             CoreService.TLClient.ReqContribRequest("FollowCentre", "QryFollowItemDetail", _followkey);
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("FollowCentre", "QryFollowItemDetail", OnQryFollowItemDetail);
+            CoreService.EventCore.UnRegisterCallback("FollowCentre", "QryFollowItemDetail", OnQryFollowItemDetail);
 
             
         }

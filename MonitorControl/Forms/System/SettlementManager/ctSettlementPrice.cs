@@ -68,15 +68,15 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("SettleCentre", "QrySettlementPrice", OnQrySettlementPrice);
-            CoreService.EventContrib.RegisterCallback("SettleCentre", "UpdateSettlementPrice", OnUpdateSettlementPrice);
+            CoreService.EventCore.RegisterCallback("SettleCentre", "QrySettlementPrice", OnQrySettlementPrice);
+            CoreService.EventCore.RegisterCallback("SettleCentre", "UpdateSettlementPrice", OnUpdateSettlementPrice);
            
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("SettleCentre", "QrySettlementPrice", OnQrySettlementPrice);
-            CoreService.EventContrib.UnRegisterCallback("SettleCentre", "UpdateSettlementPrice", OnUpdateSettlementPrice);
+            CoreService.EventCore.UnRegisterCallback("SettleCentre", "QrySettlementPrice", OnQrySettlementPrice);
+            CoreService.EventCore.UnRegisterCallback("SettleCentre", "UpdateSettlementPrice", OnUpdateSettlementPrice);
         }
 
         //得到当前选择的行号

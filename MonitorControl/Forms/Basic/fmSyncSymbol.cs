@@ -69,7 +69,7 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryVendor", this.OnQryVendor);
+            CoreService.EventCore.RegisterCallback("MgrExchServer", "QryVendor", this.OnQryVendor);
             //Globals.LogicEvent.GotDomainEvent += new Action<DomainImpl>(LogicEvent_GotDomainEvent);
             CoreService.TLClient.ReqQryVendor();
         }
@@ -81,7 +81,7 @@ namespace TradingLib.MoniterControl
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QryVendor", this.OnQryVendor);
+            CoreService.EventCore.UnRegisterCallback("MgrExchServer", "QryVendor", this.OnQryVendor);
             //Globals.LogicEvent.GotDomainEvent -= new Action<DomainImpl>(LogicEvent_GotDomainEvent);
         }
 

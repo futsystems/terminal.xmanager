@@ -38,8 +38,6 @@ namespace TradingLib.MoniterCore
             SendPacket(request);
         }
 
-
-
         public void ReqOpenClearCentre()
         {
             logger.Info("请求开启交易中心");
@@ -77,6 +75,15 @@ namespace TradingLib.MoniterCore
             SendPacket(requets);
         }
 
+        public void ReqInsertTrade(Trade f)
+        {
+            logger.Info("请求插入成交");
+            MGRReqInsertTradeRequest request = RequestTemplate<MGRReqInsertTradeRequest>.CliSendRequest(++requestid);
+            request.TradeToSend = f;
+            SendPacket(request);
+
+        }
+
         public void ReqContribRequest(string module, string cmd, object jobj)
         {
             this.ReqContribRequest(module, cmd, jobj.SerializeObject());
@@ -102,13 +109,6 @@ namespace TradingLib.MoniterCore
 
         
 
-        public void ReqInsertTrade(Trade f)
-        {
-            logger.Info("请求插入成交");
-            MGRReqInsertTradeRequest request = RequestTemplate<MGRReqInsertTradeRequest>.CliSendRequest(++requestid);
-            request.TradeToSend = f;
-            SendPacket(request);
-
-        }
+        
     }
 }

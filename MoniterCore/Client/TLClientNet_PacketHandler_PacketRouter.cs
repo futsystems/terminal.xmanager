@@ -12,11 +12,7 @@ namespace TradingLib.MoniterCore
     public delegate void RspMGRLoginResponseDel(RspMGRLoginResponse response);
     public partial class TLClientNet
     {
-        void CliOnOperationResponse(RspMGROperationResponse response)
-        {
-            logger.Info("got operation response:" + response.ToString());
-            CoreService.EventCore.FireRspInfoEvent(response.RspInfo);
-        }
+
 
         void connecton_OnPacketEvent(IPacket packet)
         {
@@ -46,11 +42,25 @@ namespace TradingLib.MoniterCore
             }
             switch (packet.Type)
             {
+                #region Other
                 case MessageTypes.MGRLOGINRESPONSE://管理登入回报
                     CliOnRspMGRLoginResponse(packet as RspMGRLoginResponse);
                     break;
 
-                #region 交易记录通知 恢复账户当日交易记录或实时推送选中账户的实时交易记录
+                case MessageTypes.MGRCONTRIBRESPONSE://管理扩展回报
+                    CliOnMGRContribResponse(packet as RspMGRContribResponse);
+                    break;
+
+                case MessageTypes.MGRCONTRIBRNOTIFY://管理扩展通知
+                    CliOnMGRContribNotify(packet as NotifyMGRContribNotify);
+                    break;
+
+                case MessageTypes.MGROPERATIONRESPONSE://操作统一回报
+                    CliOnOperationResponse(packet as RspMGROperationResponse);
+                    break;
+                #endregion
+
+                #region Trading 交易记录通知 恢复账户当日交易记录或实时推送选中账户的实时交易记录
                 //昨日持仓数据
                 case MessageTypes.OLDPOSITIONNOTIFY:
                     CliOnOldPositionNotify(packet as HoldPositionNotify);
@@ -68,7 +78,7 @@ namespace TradingLib.MoniterCore
                     break;
                 #endregion
 
-                #region 交易账户 查询 财务统计更新 修改更新 日内交易记录恢复
+                #region Account 交易账户 查询 财务统计更新 修改更新 日内交易记录恢复
                 case MessageTypes.MGRQRYACCOUNTSRESPONSE://管理查询帐户列表回报
                     CliOnMGRQryAccountList(packet as RspMGRQryAccountResponse);
                     break;
@@ -83,7 +93,7 @@ namespace TradingLib.MoniterCore
                     break;
                 #endregion
 
-                #region 基础数据查询与更新回报
+                #region BasicInfo 基础数据查询与更新回报
                 case MessageTypes.MGRMARKETTIMERESPONSE://交易时间段回报
                     CliOnMGRMarketTime(packet as RspMGRQryMarketTimeResponse);
                     break;
@@ -117,7 +127,7 @@ namespace TradingLib.MoniterCore
                     break;
                 #endregion
 
-                #region 查询历史交易记录
+                #region HistQuery 查询历史交易记录
                 case MessageTypes.MGRORDERRESPONSE://查询委托回报
                     CliOnMGROrderResponse(packet as RspMGRQryOrderResponse);
                     break;
@@ -134,16 +144,6 @@ namespace TradingLib.MoniterCore
                     CliOnMGRSettlementResponse(packet as RspMGRQrySettleResponse);
                     break;
                 #endregion
-
-                case MessageTypes.MGROPERATIONRESPONSE://常规操作回报
-                    CliOnOperationResponse(packet as RspMGROperationResponse);
-                    break;
-                case MessageTypes.MGRCONTRIBRESPONSE://管理扩展回报
-                    CliOnMGRContribResponse(packet as RspMGRContribResponse);
-                    break;
-                case MessageTypes.MGRCONTRIBRNOTIFY://管理扩展通知
-                    CliOnMGRContribNotify(packet as NotifyMGRContribNotify);
-                    break;
 
                 default:
                     logger.Error("Packet Handler Not Set, Packet:" + packet.ToString());

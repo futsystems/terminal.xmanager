@@ -32,14 +32,14 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("RiskCentre", "QryVendorFlatRule", this.OnQryVenderFlatRule);
+            CoreService.EventCore.RegisterCallback("RiskCentre", "QryVendorFlatRule", this.OnQryVenderFlatRule);
             this.ReqQryVendorFlatRule(_account.Account);
 
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("RiskCentre", "QryVendorFlatRule", this.OnQryVenderFlatRule);
+            CoreService.EventCore.UnRegisterCallback("RiskCentre", "QryVendorFlatRule", this.OnQryVenderFlatRule);
             
         }
 

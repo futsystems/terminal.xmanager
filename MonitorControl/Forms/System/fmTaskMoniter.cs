@@ -76,14 +76,14 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("LogServer", "QryTaskRunLog", this.OnQryLogTaskEvent);
+            CoreService.EventCore.RegisterCallback("LogServer", "QryTaskRunLog", this.OnQryLogTaskEvent);
             CoreService.TLClient.ReqQryTaskRunLog();
         }
 
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("LogServer", "QryTaskRunLog", this.OnQryLogTaskEvent);
+            CoreService.EventCore.UnRegisterCallback("LogServer", "QryTaskRunLog", this.OnQryLogTaskEvent);
         }
 
 

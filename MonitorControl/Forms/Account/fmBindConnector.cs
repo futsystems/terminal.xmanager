@@ -26,8 +26,8 @@
 //        public void OnInit()
 //        {
 
-//            CoreService.EventContrib.RegisterCallback("BrokerRouterPassThrough", "QryAccountConnectorPair", this.OnAccountConnecorPair);
-//            CoreService.EventContrib.RegisterCallback("BrokerRouterPassThrough", "QryAvabileConnectors", this.OnAvabileConnectors);
+//            CoreService.EventCore.RegisterCallback("BrokerRouterPassThrough", "QryAccountConnectorPair", this.OnAccountConnecorPair);
+//            CoreService.EventCore.RegisterCallback("BrokerRouterPassThrough", "QryAvabileConnectors", this.OnAvabileConnectors);
 
 //            CoreService.TLClient.ReqQryAccountConnectorPair(_account.Account);
 //            CoreService.TLClient.ReqQryAvabileConnectors();
@@ -35,8 +35,8 @@
 
 //        public void OnDisposed()
 //        {
-//            CoreService.EventContrib.UnRegisterCallback("BrokerRouterPassThrough", "QryAccountConnectorPair", this.OnAccountConnecorPair);
-//            CoreService.EventContrib.UnRegisterCallback("BrokerRouterPassThrough", "QryAvabileConnectors", this.OnAvabileConnectors);
+//            CoreService.EventCore.UnRegisterCallback("BrokerRouterPassThrough", "QryAccountConnectorPair", this.OnAccountConnecorPair);
+//            CoreService.EventCore.UnRegisterCallback("BrokerRouterPassThrough", "QryAvabileConnectors", this.OnAvabileConnectors);
 //        }
 
 

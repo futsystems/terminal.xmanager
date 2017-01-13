@@ -24,14 +24,14 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("SettleCentre", "RollBackToDay", OnRollBack);
-            CoreService.EventContrib.RegisterCallback("SettleCentre", "QrySettleStatus", OnQrySettleStatus);
+            CoreService.EventCore.RegisterCallback("SettleCentre", "RollBackToDay", OnRollBack);
+            CoreService.EventCore.RegisterCallback("SettleCentre", "QrySettleStatus", OnQrySettleStatus);
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("SettleCentre", "RollBackToDay", OnRollBack);
-            CoreService.EventContrib.UnRegisterCallback("SettleCentre", "QrySettleStatus", OnQrySettleStatus);
+            CoreService.EventCore.UnRegisterCallback("SettleCentre", "RollBackToDay", OnRollBack);
+            CoreService.EventCore.UnRegisterCallback("SettleCentre", "QrySettleStatus", OnQrySettleStatus);
         }
 
         void OnQrySettleStatus(string json,bool islast)

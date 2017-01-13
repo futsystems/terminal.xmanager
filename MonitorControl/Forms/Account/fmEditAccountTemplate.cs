@@ -36,9 +36,9 @@ namespace TradingLib.MoniterControl
             cbMarginTemplate.Enabled = CoreService.SiteInfo.UIAccess.r_margin;
             cbExStrategyTemplate.Enabled = CoreService.SiteInfo.UIAccess.r_exstrategy;
 
-            CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryCommissionTemplate", this.OnQryCommissionTemplate);
-            CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryMarginTemplate", this.OnQryMarginTemplate);
-            CoreService.EventContrib.RegisterCallback("MgrExchServer", "QryExStrategyTemplate", this.OnQryExStrategyTemplate);
+            CoreService.EventCore.RegisterCallback("MgrExchServer", "QryCommissionTemplate", this.OnQryCommissionTemplate);
+            CoreService.EventCore.RegisterCallback("MgrExchServer", "QryMarginTemplate", this.OnQryMarginTemplate);
+            CoreService.EventCore.RegisterCallback("MgrExchServer", "QryExStrategyTemplate", this.OnQryExStrategyTemplate);
             if (CoreService.SiteInfo.UIAccess.r_commission)
             {
                 CoreService.TLClient.ReqQryCommissionTemplate();
@@ -56,9 +56,9 @@ namespace TradingLib.MoniterControl
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QryCommissionTemplate", this.OnQryCommissionTemplate);
-            CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QryMarginTemplate", this.OnQryMarginTemplate);
-            CoreService.EventContrib.UnRegisterCallback("MgrExchServer", "QryExStrategyTemplate", this.OnQryExStrategyTemplate);
+            CoreService.EventCore.UnRegisterCallback("MgrExchServer", "QryCommissionTemplate", this.OnQryCommissionTemplate);
+            CoreService.EventCore.UnRegisterCallback("MgrExchServer", "QryMarginTemplate", this.OnQryMarginTemplate);
+            CoreService.EventCore.UnRegisterCallback("MgrExchServer", "QryExStrategyTemplate", this.OnQryExStrategyTemplate);
 
         }
 

@@ -33,7 +33,7 @@ namespace TradingLib.MoniterControl.Base.Follow
 
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("FollowCentre", "QrySignalConfigList", OnQrySignalconfigList);
+            CoreService.EventCore.RegisterCallback("FollowCentre", "QrySignalConfigList", OnQrySignalconfigList);
 
             //查询跟单信号列表
             CoreService.TLClient.ReqContribRequest("FollowCentre", "QrySignalConfigList", "");
@@ -42,7 +42,7 @@ namespace TradingLib.MoniterControl.Base.Follow
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("FollowCentre", "QrySignalConfigList", OnQrySignalconfigList);
+            CoreService.EventCore.UnRegisterCallback("FollowCentre", "QrySignalConfigList", OnQrySignalconfigList);
            
         }
 

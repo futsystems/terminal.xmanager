@@ -209,20 +209,20 @@ namespace TradingLib.MoniterControl
         }
         public void OnInit()
         {
-            CoreService.EventContrib.RegisterCallback("FollowCentre", "QryEntryFollowItemList", OnQryEntryItemList);
-            CoreService.EventContrib.RegisterCallback("FollowCentre", "QryExitFollowItemList", OnQryExitItemList);
-            CoreService.EventContrib.RegisterNotifyCallback("FollowCentre", "EntryFollowItemNotify", OnNotifyEntryItem);
-            CoreService.EventContrib.RegisterNotifyCallback("FollowCentre", "ExitFollowItemNotify", OnNotifyExitItem);
+            CoreService.EventCore.RegisterCallback("FollowCentre", "QryEntryFollowItemList", OnQryEntryItemList);
+            CoreService.EventCore.RegisterCallback("FollowCentre", "QryExitFollowItemList", OnQryExitItemList);
+            CoreService.EventCore.RegisterNotifyCallback("FollowCentre", "EntryFollowItemNotify", OnNotifyEntryItem);
+            CoreService.EventCore.RegisterNotifyCallback("FollowCentre", "ExitFollowItemNotify", OnNotifyExitItem);
 
             //CoreService.TLClient.ReqContribRequest("FollowCentre", "QryEntryFollowItemList", "1");
         }
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("FollowCentre", "QryEntryFollowItemList", OnQryEntryItemList);
-            CoreService.EventContrib.UnRegisterCallback("FollowCentre", "QryExitFollowItemList", OnQryExitItemList);
-            CoreService.EventContrib.UnRegisterNotifyCallback("FollowCentre", "EntryFollowItemNotify", OnNotifyEntryItem);
-            CoreService.EventContrib.UnRegisterNotifyCallback("FollowCentre", "ExitFollowItemNotify", OnNotifyExitItem);
+            CoreService.EventCore.UnRegisterCallback("FollowCentre", "QryEntryFollowItemList", OnQryEntryItemList);
+            CoreService.EventCore.UnRegisterCallback("FollowCentre", "QryExitFollowItemList", OnQryExitItemList);
+            CoreService.EventCore.UnRegisterNotifyCallback("FollowCentre", "EntryFollowItemNotify", OnNotifyEntryItem);
+            CoreService.EventCore.UnRegisterNotifyCallback("FollowCentre", "ExitFollowItemNotify", OnNotifyExitItem);
 
         }
 

@@ -91,8 +91,8 @@ namespace TradingLib.MoniterControl
         public void OnInit()
         {
 
-            CoreService.EventContrib.RegisterCallback("FollowCentre", "QrySignalConfigList", OnQrySignalconfigList);
-            CoreService.EventContrib.RegisterCallback("FollowCentre", "QryStrategySignalList", OnQryStrategySignalList);
+            CoreService.EventCore.RegisterCallback("FollowCentre", "QrySignalConfigList", OnQrySignalconfigList);
+            CoreService.EventCore.RegisterCallback("FollowCentre", "QryStrategySignalList", OnQryStrategySignalList);
 
             
             CoreService.TLClient.ReqContribRequest("FollowCentre", "QryStrategySignalList", _cfg.ID.ToString());
@@ -100,8 +100,8 @@ namespace TradingLib.MoniterControl
 
         public void OnDisposed()
         {
-            CoreService.EventContrib.UnRegisterCallback("FollowCentre", "QrySignalConfigList", OnQrySignalconfigList);
-            CoreService.EventContrib.UnRegisterCallback("FollowCentre", "QryStrategySignalList", OnQryStrategySignalList);
+            CoreService.EventCore.UnRegisterCallback("FollowCentre", "QrySignalConfigList", OnQrySignalconfigList);
+            CoreService.EventCore.UnRegisterCallback("FollowCentre", "QryStrategySignalList", OnQryStrategySignalList);
 
         }
 
