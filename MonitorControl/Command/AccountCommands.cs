@@ -29,8 +29,7 @@ namespace TradingLib.MoniterControl
 
             if (accountMoniter.AccountCount == 0) return false;
 
-            string account = accountMoniter.CurrentAccount;
-            acct = CoreService.BasicInfoTracker.GetAccount(account);
+            acct = accountMoniter.CurrentAccount;
             if (acct == null)
             {
                 MoniterHelper.WindowMessage("请选择交易帐户");
@@ -196,22 +195,22 @@ namespace TradingLib.MoniterControl
     {
         public override void Run()
         {
-            AccountItem account = null;
-            if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
-            {
-                return;
-            }
+            //AccountItem account = null;
+            //if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
+            //{
+            //    return;
+            //}
 
-            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.UIAccess.r_account_info)
-            {
-                MoniterHelper.WindowMessage("无权限");
-                return;
-            }
+            //if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.UIAccess.r_account_info)
+            //{
+            //    MoniterHelper.WindowMessage("无权限");
+            //    return;
+            //}
 
-            fmChangeInvestor fm = new fmChangeInvestor();
-            fm.SetAccount(account);
-            fm.ShowDialog();
-            fm.Close();
+            //fmChangeInvestor fm = new fmChangeInvestor();
+            //fm.SetAccount(account);
+            //fm.ShowDialog();
+            //fm.Close();
         }
     }
 
@@ -369,8 +368,7 @@ namespace TradingLib.MoniterControl
         public override void Run()
         {
             ctAccountMontier accountMoniter = (ctAccountMontier)this.Owner;
-            string account = accountMoniter.CurrentAccount;
-            AccountItem acct = CoreService.BasicInfoTracker.GetAccount(account);
+            AccountItem acct = accountMoniter.CurrentAccount;
             if (acct == null)
             {
                 MoniterHelper.WindowMessage("请选择交易帐户");
@@ -505,7 +503,7 @@ namespace TradingLib.MoniterControl
         //    fmAcctFilter fm = 
         //    fm.FilterArgsChangedEvent += new VoidDelegate(fm_FilterArgsChangedEvent);
         //    fm.Show();
-            fmAcctFilter.Instance.Show();
+            //fmAcctFilter.Instance.Show();
         }
 
         void fm_FilterArgsChangedEvent()

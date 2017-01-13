@@ -180,17 +180,18 @@ namespace TradingLib.MoniterControl
     {
         public bool IsValid(object caller, Condition condition)
         {
-            AccountItem account = null;
-            if (!AccountMoniterHelper.GetCurrentAccount(caller, out account))
-            {
-                return false;
-            }
+            //AccountItem account = null;
+            //if (!AccountMoniterHelper.GetCurrentAccount(caller, out account))
+            //{
+            //    return false;
+            //}
 
-            if (string.IsNullOrEmpty(account.ConnectorToken))
-            {
-                return false;
-            }
-            return true;
+            //if (string.IsNullOrEmpty(account.ConnectorToken))
+            //{
+            //    return false;
+            //}
+            //return true;
+            return false;
         }
     }
 

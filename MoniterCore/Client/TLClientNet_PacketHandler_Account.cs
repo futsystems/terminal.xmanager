@@ -34,10 +34,9 @@ namespace TradingLib.MoniterCore
         /// 交易帐号财务信息更新
         /// </summary>
         /// <param name="response"></param>
-        void CliOnNotifyMGRAccountInfo(NotifyMGRAccountInfoLiteResponse response)
+        void CliOnNotifyMGRAccountStatistic(NotifyMGRAccountStatistic response)
         {
-            //logger.Info("got notify accountinfo:" + response.ToString());
-            CoreService.EventAccount.FireInfoLiteEvent(response.InfoLite);
+            CoreService.EventAccount.FireInfoLiteEvent(response.Statistic);
         }
 
         /// <summary>

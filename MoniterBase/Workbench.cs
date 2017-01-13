@@ -288,6 +288,24 @@ namespace TradingLib.MoniterBase
 
 
             toolbar = ToolbarService.CreateToolStrip(this, "/Workbench/Toolbar");
+            //ctFilter filter = new MoniterControl.ctFilter();
+            //filter.Dock = DockStyle.Fill;
+            //ToolStripControlHost host = new ToolStripControlHost(filter);
+
+
+            var panel = new Panel();
+            panel.BackColor = Color.Transparent;
+            ctFilter filter = new ctFilter();
+            panel.Size = new Size(filter.Size.Width, filter.Size.Height);
+            panel.Controls.Add(filter);
+            panel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            panel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            ToolStripControlHost host = new ToolStripControlHost(panel);
+            host.Size = new Size(filter.Size.Width, filter.Size.Height);
+            host.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            host.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            toolbar.Items.Add(host);
+
             this.Controls.Add(toolbar);
             this.Controls.Add(menu);
 

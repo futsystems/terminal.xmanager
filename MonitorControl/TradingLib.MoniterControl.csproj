@@ -76,6 +76,12 @@
     <Compile Include="Base\ctCashTrans.Designer.cs">
       <DependentUpon>ctCashTrans.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\ctFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Base\ctFilter.Designer.cs">
+      <DependentUpon>ctFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\ctFinanceInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -298,12 +304,6 @@
     </Compile>
     <Compile Include="Forms\Account\fmBindConnector.Designer.cs">
       <DependentUpon>fmBindConnector.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Account\fmChangeInvestor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Account\fmChangeInvestor.Designer.cs">
-      <DependentUpon>fmChangeInvestor.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Account\fmChangePassword.cs">
       <SubType>Form</SubType>
@@ -770,25 +770,13 @@
     <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier.Designer.cs">
       <DependentUpon>ctAccountMontier.cs</DependentUpon>
     </Compile>
-    <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier_.cs">
+    <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier_WatchFlash.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier_DyanmicWatchAccounts.cs">
+    <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier_Filter.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier_Event.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier_OnInit.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier_OnXXXXX.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier_FilterAccountList.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier_UpdateAccountInfo.cs">
+    <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier_Grid.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="PageControl\ctAccountMoniter\fmAcctFilter.cs">
@@ -842,6 +830,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\ctCashTrans.resx">
       <DependentUpon>ctCashTrans.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\ctFilter.resx">
+      <DependentUpon>ctFilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Base\ctFinanceInfo.resx">
       <DependentUpon>ctFinanceInfo.cs</DependentUpon>
@@ -951,9 +942,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\fmBindConnector.resx">
       <DependentUpon>fmBindConnector.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Account\fmChangeInvestor.resx">
-      <DependentUpon>fmChangeInvestor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\fmChangePassword.resx">
       <DependentUpon>fmChangePassword.cs</DependentUpon>

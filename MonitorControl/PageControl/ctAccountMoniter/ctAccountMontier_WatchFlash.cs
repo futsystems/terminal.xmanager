@@ -44,11 +44,10 @@ namespace TradingLib.MoniterControl
             return accountlist;
         }
 
-        //Dictionary<int, AccountItem> watchmap = new Dictionary<int, AccountItem>();
         /// <summary>
         /// 设定观察账户列表
         /// </summary>
-        void SwtWathAccounts()
+        void SetWathAccounts()
         {
             if ((!_watchchanged) || (DateTime.Now - _gridChangeTime).TotalSeconds < _freshdeay) return;//如果没有发生变化 并且时间没有超过2秒，则不用设置观察更新
             
@@ -59,6 +58,8 @@ namespace TradingLib.MoniterControl
             }
             _watchchanged = false;
         }
+
+
 
         bool flash = false;
         DateTime flashtime = DateTime.Now;
@@ -96,7 +97,7 @@ namespace TradingLib.MoniterControl
         void FlashAccountWarn()
         {
             //每隔2秒闪烁一次
-            if (DateTime.Now.Subtract(flashtime).TotalSeconds > 1)
+            if (DateTime.Now.Subtract(flashtime).TotalSeconds > 1 && accountgrid.Rows.Count > 0)
             {
                 bool anywarn = false;
                 flashtime = DateTime.Now;
@@ -133,16 +134,7 @@ namespace TradingLib.MoniterControl
             }
         }
 
-
-        private void accountgrid_Scroll(object sender, ScrollEventArgs e)
-        {
-            GridChanged();
-        }
-
-        private void accountgrid_SizeChanged(object sender, EventArgs e)
-        {
-            GridChanged();
-        }
+        
 
 
     }

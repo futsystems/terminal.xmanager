@@ -197,7 +197,7 @@ namespace TradingLib.MoniterCore
                     CliOnMGRQryAccountList(packet as RspMGRQryAccountResponse);
                     break;
                 case MessageTypes.MGRACCOUNTINFOLITENOTIFY://管理帐户财务数据更新
-                    CliOnNotifyMGRAccountInfo(packet as NotifyMGRAccountInfoLiteResponse);
+                    CliOnNotifyMGRAccountStatistic(packet as NotifyMGRAccountStatistic);
                     break;
                 case MessageTypes.MGRRESUMEACCOUNTRESPONE://管理恢复帐户日内交易数据回报
                     CliOnMGRResumeAccountResponse(packet as RspMGRResumeAccountResponse);

@@ -12,7 +12,7 @@ using TradingLib.API;
 using TradingLib.Common;
 using TradingLib.MoniterCore;
 using Common.Logging;
-
+using ICSharpCode.Core;
 
 namespace TradingLib.MoniterControl
 {
@@ -41,137 +41,185 @@ namespace TradingLib.MoniterControl
 
         void ctAccountMontier_Load(object sender, EventArgs e)
         {
-            
-
-            //初始表格右键化右键菜单
-            InitMenu();
-
             WireEvents();
 
-            RefreshAccountQuery();
+            FilterAccount(null);
             
         }
 
-
-
-        private void accountgrid_Click(object sender, EventArgs e)
-        {
-            logger.Info("grid mouse clicked...");
-        }
-
-
-
-        private void accountgrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            { 
-                
-            }
-        }
 
         void WireEvents()
         {
-            //交易帐户过滤控件
-            //accLogin.CheckedChanged+=new EventHandler(accLogin_CheckedChanged);
-            //acct.TextChanged+=new EventHandler(acct_TextChanged);
-            //acchodpos.CheckedChanged +=new EventHandler(acchodpos_CheckedChanged);
-            
-            //btnAcctFilter.Click +=new EventHandler(btnAcctFilter_Click);
-            //帐户表格事件
+            //绑定表格菜单
+            accountgrid.ContextMenuStrip = MenuService.CreateContextMenu(this, "/AccountList/ContextMenu");
+            //表格事件
             accountgrid.CellDoubleClick +=new DataGridViewCellEventHandler(accountgrid_CellDoubleClick);//双击单元格
-            accountgrid.CellFormatting +=new DataGridViewCellFormattingEventHandler(accountgrid_CellFormatting);//格式化单元格
-            
-
-            accountgrid.SizeChanged +=new EventHandler(accountgrid_SizeChanged);//大小改变
-
+            accountgrid.SizeChanged +=new EventHandler(accountgrid_SizeChanged);
             accountgrid.SizeChanged += new EventHandler(accountgrid_SizeChanged_FixWidth);//大小改变
-
             accountgrid.Scroll +=new ScrollEventHandler(accountgrid_Scroll);//滚轮滚动
+            //表格样式
+            accountgrid.CellFormatting += new DataGridViewCellFormattingEventHandler(accountgrid_CellFormatting);//格式化单元格
             accountgrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(accountgrid_RowPrePaint);
 
             //响应过滤参数变更事件
-            ControlService.OnFilterArgsChangeEvent += new VoidDelegate(RefreshAccountQuery);
-
-            //绑定事件
-            //btnAddAccount.Click += new EventHandler(btnAddAccount_Click);
+            ControlService.FilterArgsChanged += new Action<FilterArgs>(OnFilterArgsChanged);
 
             CoreService.EventCore.RegIEventHandler(this);
         }
 
+        
 
-
-        #region  辅助函数
-
-        private string _format = "{0:F2}";
-        private string decDisp(decimal d)
+        public void OnInit()
         {
-            return d.ToFormatStr(_format);
-        }
+            //加载帐户
+            foreach (AccountItem account in CoreService.BasicInfoTracker.Accounts)
+            {
+                InvokeGotAccount(account);
+            }
 
-        public event DebugDelegate SendDebugEvent;
-        bool _debugEnable = true;
-        /// <summary>
-        /// 是否输出日志
-        /// </summary>
-        public bool DebugEnable { get { return _debugEnable; } set { _debugEnable = value; } }
+            //更新帐户数目
+            UpdateAccountNum();
 
-        //QSEnumDebugLevel _debuglevel = QSEnumDebugLevel.INFO;
-        /// <summary>
-        /// 日志输出级别
-        /// </summary>
-       // public QSEnumDebugLevel DebugLevel { get { return _debuglevel; } set { _debuglevel = value; } }
+            CoreService.EventAccount.AccountStatisticNotify += new Action<AccountStatistic>(OnAccountStatisticNotify);
+            CoreService.EventAccount.OnAccountChangedEvent += new Action<AccountItem>(OnAccountChanged);
 
-        /// <summary>
-        /// 判断日志级别 然后再进行输出
-        /// 同时对外输出日志事件,用于被日志模块采集日志或分发
-        /// </summary>
-        /// <param name="msg"></param>
-        /// <param name="level"></param>
-        //protected void debug(string msg, QSEnumDebugLevel level = QSEnumDebugLevel.DEBUG)
-        //{
-        //    //1.判断日志级别,然后调用日志输出 比如向控件或者屏幕输出显示
-        //    if (_debugEnable && (int)level <= (int)_debuglevel)
-        //        msgdebug("[" + level.ToString() + "] " + PROGRAME + ":" + msg);
-        //}
 
-        /// <summary>
-        /// 日志输出
-        /// </summary>
-        /// <param name="msg"></param>
-        protected void msgdebug(string msg)
-        {
-            if (SendDebugEvent != null)
-                SendDebugEvent(msg);
+            //根据角色隐藏表格相关列
+            if (CoreService.SiteInfo.ProductType == QSEnumProductType.CounterSystem)
+            {
+                //只有管理员可以查看路由类别
+                accountgrid.Columns[ROUTEIMG].Visible = CoreService.SiteInfo.Manager.IsRoot();
+                //管理员可以查看帐户类别
+                accountgrid.Columns[CATEGORYSTR].Visible = CoreService.SiteInfo.Manager.IsRoot();
+
+                //如果有实盘交易权限则可以查看路由组
+                accountgrid.Columns[ROUTERGROUPSTR].Visible = CoreService.SiteInfo.Manager.IsRoot();
+
+                CounterMoniterWidth();
+            }
+
+            //启动更新线程
+            StartUpdate();
         }
 
 
 
-        #endregion
+        public void OnDisposed()
+        {
+            CoreService.EventAccount.AccountStatisticNotify -= new Action<AccountStatistic>(OnAccountStatisticNotify);
+            CoreService.EventAccount.OnAccountChangedEvent -= new Action<AccountItem>(OnAccountChanged);
+        }
 
-        //private void btnAcctFilter_Click(object sender, EventArgs e)
-        //{
+        void OnAccountStatisticNotify(AccountStatistic obj)
+        {
+            accountinfocache.Write(obj);
+        }
 
-        //    //fmAcctFilter fm = new fmAcctFilter();
-        //    //fm.SetFilterArgs(ref filterArgs);
-        //    //fm.FilterArgsChangedEvent += new VoidDelegate(fm_FilterArgsChangedEvent);
-
-        //    //Point p = this.PointToScreen(btnAcctFilter.Location);
-        //    //p.X = p.X + btnAcctFilter.Width + 5;
-        //    //p.Y = p.Y + btnAcctFilter.Height + 5;
-        //    //fm.Location = p;
-        //    //fm.Show();
-        //}
-
-        //void fm_FilterArgsChangedEvent()
-        //{
-        //    //MessageBox.Show("filter changed");
-        //    RefreshAccountQuery();
-        //}
+        /// <summary>
+        /// 响应帐户变动事件
+        /// </summary>
+        /// <param name="account"></param>
+        public void OnAccountChanged(AccountItem account)
+        {
+            accountcache.Write(account);
+        }
 
 
+        /// <summary>
+        /// grid滚动 重新设定观察列表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void accountgrid_Scroll(object sender, ScrollEventArgs e)
+        {
+            GridChanged();
+        }
+
+        /// <summary>
+        /// grid尺寸变化 重新设定观察列表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void accountgrid_SizeChanged(object sender, EventArgs e)
+        {
+            GridChanged();
+        }
+
+        /// <summary>
+        /// 格式化表格盈亏颜色
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void accountgrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 8 || e.ColumnIndex == 9 || e.ColumnIndex == 11)
+            {
+                e.CellStyle.Font = UIConstant.BoldFont;
+                decimal v = 0;
+                decimal.TryParse(e.Value.ToString(), out v);
+                if (v > 0)
+                {
+                    e.CellStyle.ForeColor = UIConstant.LongSideColor;
+                }
+                else if (v < 0)
+                {
+                    e.CellStyle.ForeColor = UIConstant.ShortSideColor;
+                }
+                else if (v == 0)
+                {
+                    e.CellStyle.ForeColor = System.Drawing.Color.Black;
+
+                }
+
+
+            }
+        }
+
+        /// <summary>
+        /// 禁止绘制单元格虚线选中框
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void accountgrid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            e.PaintParts = e.PaintParts ^ DataGridViewPaintParts.Focus;
+        }
+
+
+        DateTime _lastresumetime = DateTime.Now;
+        /// <summary>
+        /// 双击选择交易账户
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void accountgrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (CoreService.TradingInfoTracker.IsInResume)
+            {
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("交易记录恢复中,请稍候!");
+                return;
+            }
+
+            if (DateTime.Now.Subtract(_lastresumetime).TotalSeconds <= 1)
+            {
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请稍后再请求帐户日内数据");
+                return;
+            }
+            _lastresumetime = DateTime.Now;
+            AccountItem account = this.CurrentAccount;
+            if (account != null)
+            {
+                //设定当前选中帐号
+                //accountselected = account;
+
+                //触发事件中继的帐户选择事件
+                CoreService.EventAccount.FireAccountSelectedEvent(account);
+            }
+        }
+
+        void OnFilterArgsChanged(FilterArgs obj)
+        {
+            FilterAccount(obj);
+        }
     }
 }
