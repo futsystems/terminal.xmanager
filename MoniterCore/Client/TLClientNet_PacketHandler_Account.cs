@@ -17,7 +17,6 @@ namespace TradingLib.MoniterCore
         void CliOnMGRQryAccountList(RspMGRQryAccountResponse response)
         {
             CoreService.BasicInfoTracker.OnMGRQryAccountList(response.AccountItem, response.IsLast);
-           
         }
 
         /// <summary>
@@ -41,12 +40,16 @@ namespace TradingLib.MoniterCore
 
         /// <summary>
         /// 恢复交易记录回报
+        /// 服务端单个交易账户记录恢复过程
+        /// 1.发送BEGIN
+        /// 2.发送交易记录
+        /// 3.发送END记录
+        /// 发送消息是以通知形式在单个请求处理中进行发送 可以避免请求延迟导致实时通知与数据恢复之间造成异步无法正常衔接
+        /// 执行账户数据恢复后 本地交易记录维护期清空并准备接受服务端恢复过来的交易记录
         /// </summary>
         /// <param name="response"></param>
         void CliOnMGRResumeAccountResponse(RspMGRResumeAccountResponse response)
         {
-            ////logger.Info("got resume account response:" + response.ToString());
-            //CoreService.EventAccount.FireAccountResumeEvent(response);
             if (response.ResumeStatus == QSEnumResumeStatus.BEGIN)
             {
                 CoreService.EventHub.FireResumeDataStart();
@@ -56,27 +59,5 @@ namespace TradingLib.MoniterCore
                 CoreService.EventHub.FireResumeDataEnd();
             }
         }
-
-        ///// <summary>
-        ///// 交易帐户登入 退出更新
-        ///// </summary>
-        ///// <param name="notify"></param>
-        //void CliOnMGRSesssionUpdate(NotifyMGRSessionUpdateNotify notify)
-        //{
-        //    //logger.Info("got session update notify:" + notify.ToString());
-        //    CoreService.EventAccount.FireSessionUpdateEvent(notify);
-        //}
-
-        /// <summary>
-        /// 查询交易帐户信息
-        /// </summary>
-        /// <param name="response"></param>
-        //void CliOnMGRQryAccountInfo(RspMGRQryAccountInfoResponse response)
-        //{
-        //    //logger.Info("got mgr account info response:" + response.ToString());
-        //    //this.handler.OnAccountInfo(response.AccountInfoToSend);
-        //}
-
-
     }
 }

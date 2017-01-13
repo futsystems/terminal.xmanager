@@ -18,7 +18,6 @@ namespace TradingLib.MoniterCore
         /// <param name="pass"></param>
         public void ReqLogin(string loginid, string pass)
         {
-            //MGRLoginRequest request = RequestTemplate<MGRLoginRequest>.CliSendRequest(++requestid);
             logger.Info(string.Format("请求登入,{0} {1}", loginid, pass));
             LoginRequest request = RequestTemplate<LoginRequest>.CliSendRequest(++requestid);
             request.LoginID = loginid;
@@ -53,7 +52,7 @@ namespace TradingLib.MoniterCore
             this.ReqContribRequest("ClearCentre", "CloseClearCentre", "");
         }
 
-        #region 交易类操作
+
         /// <summary>
         /// 发送委托
         /// </summary>
@@ -78,64 +77,12 @@ namespace TradingLib.MoniterCore
             SendPacket(requets);
         }
 
-        #endregion
-
-
-
-
-
-        #region 扩展请求
-
-
-
-
-
-
-
-        #region 查询报表
-
-        /// <summary>
-        /// 查询某日所有代理的利润报表
-        /// </summary>
-        /// <param name="settleday"></param>
-        public void ReqQryTotalReport(int agentfk,int settleday)
+        public void ReqContribRequest(string module, string cmd, object jobj)
         {
-            this.ReqContribRequest("FinServiceCentre", "QryTotalReport", agentfk.ToString()+","+settleday.ToString());
-        }
-
-        /// <summary>
-        /// 查询某个代理的在一个时间段内的汇总
-        /// </summary>
-        /// <param name="settleday"></param>
-        public void ReqQrySummaryReport(int agentfk, int start, int end)
-        {
-            this.ReqContribRequest("FinServiceCentre", "QrySummaryReport", agentfk.ToString() + "," + start.ToString() + "," + end.ToString());
+            this.ReqContribRequest(module, cmd, jobj.SerializeObject());
         }
 
 
-        /// <summary>
-        /// 查询某个代理某个时间段内的所有利润流水
-        /// </summary>
-        /// <param name="agentfk"></param>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
-        public void ReqQryTotalReportByDayRange(int agentfk, int start, int end)
-        {
-            this.ReqContribRequest("FinServiceCentre", "QryTotalReportDayRange", agentfk.ToString() + "," + start.ToString() + "," + end.ToString());
-        }
-
-        /// <summary>
-        /// 查询某个代理某个交易日的按帐户汇总的利润报表
-        /// </summary>
-        /// <param name="agentfk"></param>
-        /// <param name="settleday"></param>
-        public void ReqQryDetailReportByAccount(int agentfk, int settleday)
-        {
-            this.ReqContribRequest("FinServiceCentre", "QryDetailReportByAccount", agentfk.ToString() + "," + settleday.ToString());
-        }
-        #endregion
-
-        
         /// <summary>
         /// 调用某个模块 某个命令 某个参数 
         /// </summary>
@@ -149,21 +96,12 @@ namespace TradingLib.MoniterCore
             request.ModuleID = module;
             request.CMDStr = cmd;
             request.Parameters = args;
-
             SendPacket(request);
-        
         }
 
-        public void ReqContribRequest(string module, string cmd,object jobj)
-        {
-            this.ReqContribRequest(module, cmd, jobj.SerializeObject());
-        }
 
         
 
-        #endregion
-
-        #region 插入成交
         public void ReqInsertTrade(Trade f)
         {
             logger.Info("请求插入成交");
@@ -172,6 +110,5 @@ namespace TradingLib.MoniterCore
             SendPacket(request);
 
         }
-        #endregion
     }
 }

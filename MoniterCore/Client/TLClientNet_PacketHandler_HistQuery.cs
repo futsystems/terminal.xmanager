@@ -10,7 +10,6 @@ namespace TradingLib.MoniterCore
 {
     public partial class TLClientNet
     {
-
         void CliOnMGROrderResponse(RspMGRQryOrderResponse response)
         {
             Order o = response.OrderToSend;

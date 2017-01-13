@@ -14,121 +14,9 @@ namespace TradingLib.MoniterCore
     {
         void CliOnOperationResponse(RspMGROperationResponse response)
         {
-            //
             logger.Info("got operation response:" + response.ToString());
             CoreService.EventCore.FireRspInfoEvent(response.RspInfo);
         }
-
-        #region 查询
-        //void CliOnRspQryAccountInfoResponse(RspQryAccountInfoResponse response)
-        //{
-        //    logger.Info("------------帐户信息-------------");
-        //    logger.Info("         Account:" + response.AccInfo.Account);
-        //    logger.Info("LastEqutiy:" + response.AccInfo.LastEquity.ToString());
-        //    logger.Info("NowEquity:" + response.AccInfo.NowEquity.ToString());
-        //    logger.Info("RealizedPL:" + response.AccInfo.RealizedPL.ToString());
-        //    logger.Info("UnRealizedPL:" + response.AccInfo.UnRealizedPL.ToString());
-        //    logger.Info("Commission:" + response.AccInfo.Commission.ToString());
-        //    logger.Info("Profit:" + response.AccInfo.Profit.ToString());
-        //    logger.Info("CashIn:" + response.AccInfo.CashIn.ToString());
-        //    logger.Info("CashOut:" + response.AccInfo.CashOut.ToString());
-        //    logger.Info("MoneyUsed:" + response.AccInfo.MoneyUsed.ToString());
-        //    logger.Info("TotalLiquidation:" + response.AccInfo.TotalLiquidation.ToString());
-        //    logger.Info("AvabileFunds:" + response.AccInfo.AvabileFunds.ToString());
-        //    logger.Info("Category:" + response.AccInfo.Category.ToString());
-        //    logger.Info("OrderRouterType:" + response.AccInfo.OrderRouteType.ToString());
-        //    logger.Info("Excute:" + response.AccInfo.Execute.ToString());
-        //    logger.Info("Intraday:" + response.AccInfo.IntraDay.ToString());
-
-        //    logger.Info("FutMarginUsed:" + response.AccInfo.FutMarginUsed.ToString());
-        //    logger.Info("FutMarginFrozen:" + response.AccInfo.FutMarginFrozen.ToString());
-        //    logger.Info("FutRealizedPL:" + response.AccInfo.FutRealizedPL.ToString());
-        //    logger.Info("FutUnRealizedPL:" + response.AccInfo.FutUnRealizedPL.ToString());
-        //    logger.Info("FutCommission:" + response.AccInfo.FutCommission.ToString());
-        //    logger.Info("FutCash:" + response.AccInfo.FutCash.ToString());
-        //    logger.Info("FutLiquidation:" + response.AccInfo.FutLiquidation.ToString());
-        //    logger.Info("FutMoneyUsed:" + response.AccInfo.FutMoneyUsed.ToString());
-        //    logger.Info("FutAvabileFunds:" + response.AccInfo.FutAvabileFunds.ToString());
-
-        //    logger.Info("OptPositionCost:" + response.AccInfo.OptPositionCost.ToString());
-        //    logger.Info("OptPositionValue:" + response.AccInfo.OptPositionValue.ToString());
-        //    logger.Info("OptRealizedPL:" + response.AccInfo.OptRealizedPL.ToString());
-        //    logger.Info("OptCommission:" + response.AccInfo.OptCommission.ToString());
-        //    logger.Info("OptMoneyFrozen:" + response.AccInfo.OptMoneyFrozen.ToString());
-        //    logger.Info("OptCash:" + response.AccInfo.OptCash.ToString());
-        //    logger.Info("OptMarketValue:" + response.AccInfo.OptMarketValue.ToString());
-        //    logger.Info("OptLiquidation:" + response.AccInfo.OptLiquidation.ToString());
-        //    logger.Info("OptMoneyUsed:" + response.AccInfo.OptMoneyUsed.ToString());
-        //    logger.Info("OptAvabileFunds:" + response.AccInfo.OptAvabileFunds.ToString());
-
-        //    logger.Info("InnovPositionCost:" + response.AccInfo.InnovPositionCost.ToString());
-        //    logger.Info("InnovPositionValue:" + response.AccInfo.InnovPositionValue.ToString());
-        //    logger.Info("InnovCommission:" + response.AccInfo.InnovCommission.ToString());
-        //    logger.Info("InnovRealizedPL:" + response.AccInfo.InnovRealizedPL.ToString());
-
-
-        //}
-
-        //void CliOnMaxOrderVol(RspQryMaxOrderVolResponse response)
-        //{
-
-        //}
-
-        ///// <summary>
-        ///// 查询委托回报
-        ///// </summary>
-        ///// <param name="response"></param>
-        //void CliOnRspQryOrderResponse(RspQryOrderResponse response)
-        //{
-
-        //}
-        ///// <summary>
-        ///// 查询成交回报
-        ///// </summary>
-        ///// <param name="response"></param>
-        //void CliOnRspQryTradeResponse(RspQryTradeResponse response)
-        //{
-
-        //}
-
-        ///// <summary>
-        ///// 查询持仓回报
-        ///// </summary>
-        ///// <param name="response"></param>
-        //void CliOnRspQryPositionResponse(RspQryPositionResponse response)
-        //{
-
-        //}
-
-        //void CliOnRspQryInvestorResponse(RspQryInvestorResponse response)
-        //{
-
-        //}
-
-        
-
-
-        #endregion
-
-
-        #region 交易帐号类操作
-
-        #endregion
-
-
-
-
-
-
-        //#region 管理员管理
-
-        //void CliOnMGRManagerResponse(RspMGRQryManagerResponse response)
-        //{
-        //    logger.Info("got manager response:" + response.ToString());
-        //    //this.handler.OnMGRMangerResponse(response.ManagerToSend, response.IsLast);
-        //}
-        //#endregion
-
 
         void connecton_OnPacketEvent(IPacket packet)
         {
@@ -158,10 +46,11 @@ namespace TradingLib.MoniterCore
             }
             switch (packet.Type)
             {
-                //Tick数据
-                //case MessageTypes.TICKNOTIFY:
-                //    CliOnTickNotify(packet as TickNotify);
-                //    break;
+                case MessageTypes.MGRLOGINRESPONSE://管理登入回报
+                    CliOnRspMGRLoginResponse(packet as RspMGRLoginResponse);
+                    break;
+
+                #region 交易记录通知 恢复账户当日交易记录或实时推送选中账户的实时交易记录
                 //昨日持仓数据
                 case MessageTypes.OLDPOSITIONNOTIFY:
                     CliOnOldPositionNotify(packet as HoldPositionNotify);
@@ -177,22 +66,9 @@ namespace TradingLib.MoniterCore
                 case MessageTypes.EXECUTENOTIFY:
                     CliOnTradeNotify(packet as TradeNotify);
                     break;
-                //持仓更新回报
-                case MessageTypes.POSITIONUPDATENOTIFY:
-                    CliOnPositionUpdateNotify(packet as PositionNotify);
-                    break;
-                //委托操作回报
-                //case MessageTypes.ORDERACTIONNOTIFY:
-                //    CliOnOrderAction(packet as OrderActionNotify);
-                //    break;
+                #endregion
 
-                case MessageTypes.ERRORORDERACTIONNOTIFY:
-                    break;
-
-                case MessageTypes.MGRLOGINRESPONSE://管理登入回报
-                    CliOnRspMGRLoginResponse(packet as RspMGRLoginResponse);
-                    break;
-                //--------------Account --------------------------------------------
+                #region 交易账户 查询 财务统计更新 修改更新 日内交易记录恢复
                 case MessageTypes.MGRQRYACCOUNTSRESPONSE://管理查询帐户列表回报
                     CliOnMGRQryAccountList(packet as RspMGRQryAccountResponse);
                     break;
@@ -202,28 +78,25 @@ namespace TradingLib.MoniterCore
                 case MessageTypes.MGRRESUMEACCOUNTRESPONE://管理恢复帐户日内交易数据回报
                     CliOnMGRResumeAccountResponse(packet as RspMGRResumeAccountResponse);
                     break;
-                //case MessageTypes.MGRSESSIONSTATUSUPDATE://管理 交易帐户登入 退出信息更新
-                //    CliOnMGRSesssionUpdate(packet as NotifyMGRSessionUpdateNotify);
-                //    break;
-                case MessageTypes.MGRACCOUNTINFORESPONSE://管理 查询交易帐户信息
-                    //CliOnMGRQryAccountInfo(packet as RspMGRQryAccountInfoResponse);
-                    break;
-                case MessageTypes.MGRACCOUNTCHANGEUPDATE://交易客户端更改通知
+                case MessageTypes.MGRACCOUNTCHANGEUPDATE://交易账户更改通知
                     CliOnMGRAccountUpdate(packet as NotifyMGRAccountChangeUpdateResponse);
                     break;
+                #endregion
 
-                case MessageTypes.MGREXCHANGERESPONSE://交易所列表回报
-                    CliOnMGRExchange(packet as RspMGRQryExchangeResponse);
-                    break;
-                case MessageTypes.MGRUPDATEEXCHANGERESPONSE://更新交易所回报
-                    CliOnMGRUpdateExchangeResponse(packet as RspMGRUpdateExchangeResponse);
-                    break;
+                #region 基础数据查询与更新回报
                 case MessageTypes.MGRMARKETTIMERESPONSE://交易时间段回报
                     CliOnMGRMarketTime(packet as RspMGRQryMarketTimeResponse);
                     break;
                 case MessageTypes.MGRUPDATEMARKETTIMERESPONSE://交易时间段更新回报
                     CliOnMGRUpdateMarketTimeResponse(packet as RspMGRUpdateMarketTimeResponse);
                     break;
+                case MessageTypes.MGREXCHANGERESPONSE://交易所列表回报
+                    CliOnMGRExchange(packet as RspMGRQryExchangeResponse);
+                    break;
+                case MessageTypes.MGRUPDATEEXCHANGERESPONSE://更新交易所回报
+                    CliOnMGRUpdateExchangeResponse(packet as RspMGRUpdateExchangeResponse);
+                    break;
+                
                 case MessageTypes.MGRSECURITYRESPONSE://品种回报
                     CliOnMGRSecurity(packet as RspMGRQrySecurityResponse);
                     break;
@@ -233,33 +106,16 @@ namespace TradingLib.MoniterCore
                 case MessageTypes.MGRSYMBOLRESPONSE://合约回报
                     CliOnMGRQrySymbol(packet as RspMGRQrySymbolResponse);
                     break;
-                case MessageTypes.MGRQRYEXCHANGERATERESPONSE://汇率信息汇报啊
-                    CliOnMGRQryExchageRate(packet as RspMGRQryExchangeRateResponse);
-                    break;
                 case MessageTypes.MGRUPDATESYMBOLRESPONSE://合约更新回报
                     CliOnMGRUpdateSymbol(packet as RspMGRUpdateSymbolResponse);
+                    break;
+                case MessageTypes.MGRQRYEXCHANGERATERESPONSE://汇率信息汇报啊
+                    CliOnMGRQryExchageRate(packet as RspMGRQryExchangeRateResponse);
                     break;
                 case MessageTypes.MGRQRYTICKSNAPSHOTRESPONSE://行情快照更新
                     CliOnMGRQryTickSnapshot(packet as RspMGRQryTickSnapShotResponse);
                     break;
-
-                case MessageTypes.MGRRULECLASSRESPONSE://风控规则回报
-                    //CliOnMGRRuleClass(packet as RspMGRQryRuleSetResponse);
-                    break;
-
-
-                case MessageTypes.MGRRULEITEMRESPONSE://帐户风控项目回报
-                    //CliOnMGRRuleItem(packet as RspMGRQryRuleItemResponse);
-                    break;
-                case MessageTypes.MGRUPDATERULEITEMRESPONSE://帐户风控更新回报
-                    //CliOnMGRUpdateRuleItem(packet as RspMGRUpdateRuleResponse);
-                    break;
-                case MessageTypes.MGRDELRULEITEMRESPONSE://删除风控项回报
-                    //CliOnMGRDelRule(packet as RspMGRDelRuleItemResponse);
-                    break;
-                //case MessageTypes.MGRSYSTEMSTATUSRESPONSE://查询系统状态回报
-                //    CliOnMGRystemStatus(packet as RspMGRQrySystemStatusResponse);
-                //    break;
+                #endregion
 
                 #region 查询历史交易记录
                 case MessageTypes.MGRORDERRESPONSE://查询委托回报
@@ -279,24 +135,9 @@ namespace TradingLib.MoniterCore
                     break;
                 #endregion
 
-
-                //case MessageTypes.MGRCHANGEACCOUNTPASSRESPONSE://修改密码回报
-                //    CliOnMGRChangePassResponse(packet as RspMGRChangeAccountPassResponse);
-                //    break;
-                //case MessageTypes.MGRADDSECURITYRESPONSE://添加品种回报
-                //    CliOnMGRAddSecurityResponse(packet as RspMGRReqAddSecurityResponse);
-                    break;
-                //case MessageTypes.MGRUPDATESYMBOLRESPONSE://更新合约回报
-                //    CliOnMGRAddSymbolResponse(packet as RspMGRReqAddSymbolResponse);
-                //    break;
                 case MessageTypes.MGROPERATIONRESPONSE://常规操作回报
                     CliOnOperationResponse(packet as RspMGROperationResponse);
                     break;
-                //case MessageTypes.MGRMANAGERRESPONSE://管理员查询回报
-                //    CliOnMGRManagerResponse(packet as RspMGRQryManagerResponse);
-                //    break;
-
-
                 case MessageTypes.MGRCONTRIBRESPONSE://管理扩展回报
                     CliOnMGRContribResponse(packet as RspMGRContribResponse);
                     break;
