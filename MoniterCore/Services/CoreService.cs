@@ -55,17 +55,17 @@ namespace TradingLib.MoniterCore
 
 
 
-        EventOther _eventOther = null;
+        EventHub _eventHub = null;
         /// <summary>
-        /// 界面事件汇聚器
+        /// 事件汇聚器
         /// </summary>
-        public static EventOther EventOther
+        public static EventHub EventHub
         {
             get
             {
-                if (defaultinstance._eventOther == null)
-                    defaultinstance._eventOther = new EventOther();
-                return defaultinstance._eventOther;
+                if (defaultinstance._eventHub == null)
+                    defaultinstance._eventHub = new EventHub();
+                return defaultinstance._eventHub;
             }
         }
 
@@ -118,19 +118,6 @@ namespace TradingLib.MoniterCore
             }
         }
 
-        //AccountTracker _accountTracker = null;
-        ///// <summary>
-        ///// 交易帐户维护器
-        ///// </summary>
-        //public static AccountTracker AccountTracker
-        //{
-        //    get
-        //    {
-        //        if (defaultinstance._accountTracker == null)
-        //            defaultinstance._accountTracker = new AccountTracker();
-        //        return defaultinstance._accountTracker;
-        //    }
-        //}
 
         TradingInfoTracker _tradinginfoTracker = null;
 

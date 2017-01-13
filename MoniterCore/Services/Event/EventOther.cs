@@ -7,7 +7,7 @@ using TradingLib.Common;
 
 namespace TradingLib.MoniterCore
 {
-    public class EventOther
+    public class EventHub
     {
 
         /// <summary>
@@ -36,20 +36,6 @@ namespace TradingLib.MoniterCore
 
 
 
-
-
-
-        public event Action<object,Symbol> OnSymbolSelectedEvent;
-
-        /// <summary>
-        /// 触发合约选择事件
-        /// </summary>
-        /// <param name="symbol"></param>
-        public void FireSymbolSelectedEvent(object obj,Symbol symbol)
-        {
-            if (OnSymbolSelectedEvent != null)
-                OnSymbolSelectedEvent(obj,symbol);
-        }
 
 
 

@@ -45,8 +45,16 @@ namespace TradingLib.MoniterCore
         /// <param name="response"></param>
         void CliOnMGRResumeAccountResponse(RspMGRResumeAccountResponse response)
         {
-            //logger.Info("got resume account response:" + response.ToString());
-            CoreService.EventAccount.FireAccountResumeEvent(response);
+            ////logger.Info("got resume account response:" + response.ToString());
+            //CoreService.EventAccount.FireAccountResumeEvent(response);
+            if (response.ResumeStatus == QSEnumResumeStatus.BEGIN)
+            {
+                CoreService.EventHub.FireResumeDataStart();
+            }
+            else
+            {
+                CoreService.EventHub.FireResumeDataEnd();
+            }
         }
 
         ///// <summary>

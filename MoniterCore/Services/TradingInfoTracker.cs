@@ -11,14 +11,17 @@ namespace TradingLib.MoniterCore
     public enum QSEnumInfoTrackerStatus
     {
         UNKNOWN,
+
         /// <summary>
         /// 恢复开始
         /// </summary>
         RESUMEBEGIN,
+
         /// <summary>
         /// 恢复结束
         /// </summary>
         RESUMEEND,
+
         /// <summary>
         /// 请求恢复 本地
         /// </summary>
@@ -50,7 +53,27 @@ namespace TradingLib.MoniterCore
             HoldPositionTracker = new LSPositionTracker("");
             TradeTracker = new ThreadSafeList<Trade>();
             Account = new AccountItem();
-            
+           
+        }
+        /// <summary>
+        /// 开始恢复交易记录
+        /// </summary>
+        /// <param name="account"></param>
+        public void StartResume(AccountItem account)
+        {
+            status = QSEnumInfoTrackerStatus.RESUMEREQUEST;
+            this.Clear();
+            this.Account = account;
+            CoreService.TLClient.ReqResumeAccount(account.Account);
+        }
+
+        /// <summary>
+        /// 交易记录恢复结束
+        /// 用于界面加载数据后再设置状态 避免状态提前设置后 界面处理数据导致卡死
+        /// </summary>
+        public void EndResume()
+        {
+            status = QSEnumInfoTrackerStatus.RESUMEEND;
         }
 
         /// <summary>
@@ -119,43 +142,6 @@ namespace TradingLib.MoniterCore
         }
 
 
-        /// <summary>
-        /// 获得服务端回报 获得开始恢复数据标记
-        /// </summary>
-        /// <param name="account"></param>
-        public void StartResume(AccountItem account)
-        {
-            Account = account;
-            status = QSEnumInfoTrackerStatus.RESUMEBEGIN;
-        }
-
-        /// <summary>
-        /// 获得服务端回报 获得结束恢复数据标记
-        /// </summary>
-        public void EndResume()
-        {
-            status = QSEnumInfoTrackerStatus.RESUMEEND;
-        }
-
-        /// <summary>
-        /// 请求恢复某个交易帐户的数据
-        /// </summary>
-        /// <param name="account"></param>
-        public void RequetResume(string account)
-        {
-            status = QSEnumInfoTrackerStatus.RESUMEREQUEST;
-            //请求恢复交易帐户交易记录
-            CoreService.TLClient.ReqResumeAccount(account);
-        }
-
-
-        public bool IsReady(string account)
-        {
-            if (string.IsNullOrEmpty(account)) return false;
-            if (account == Account.Account && status == QSEnumInfoTrackerStatus.RESUMEEND) return true;
-            return false;
-
-        }
         /// <summary>
         /// 清空所有历史数据
         /// </summary>
