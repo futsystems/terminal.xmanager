@@ -72,7 +72,7 @@ namespace TradingLib.MoniterControl
             if (accountlite != null)
             {
                 //触发事件中继的帐户选择事件
-                CoreService.EventAccount.FireAccountSelectedEvent(accountlite);
+                //CoreService.EventAccount.FireAccountSelectedEvent(accountlite);
 
                 //对外触发跟单策略选中事件
                 if (StrategySelected != null)

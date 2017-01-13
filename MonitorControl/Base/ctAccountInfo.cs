@@ -45,7 +45,7 @@ namespace TradingLib.MoniterControl
             cbHoldNight.CheckedChanged += new EventHandler(cbHoldNight_CheckedChanged);
             cbTransferType.SelectedIndexChanged += new EventHandler(cbTransferType_SelectedIndexChanged);
 
-            CoreService.EventAccount.OnAccountSelectedEvent += new Action<AccountItem>(OnAccountSelected);
+            ControlService.AccountSelected += new Action<AccountItem>(OnAccountSelected);
             CoreService.EventAccount.OnAccountChangedEvent += new Action<AccountItem>(EventAccount_OnAccountChangedEvent);
 
             CoreService.EventCore.RegIEventHandler(this);

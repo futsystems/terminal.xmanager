@@ -877,7 +877,7 @@ namespace TradingLib.MoniterControl
             {
                 SymbolSelectedEvent(symbol);
             }
-            CoreService.EventUI.FireSymbolselectedEvent(symbol);
+            ControlService.FireSymbolSelected(symbol);
             debug("Symbol:" + symbol.ToString() + " Selected");
         }
 
@@ -889,7 +889,7 @@ namespace TradingLib.MoniterControl
             {
                 SymbolSelectedEvent(symbol);
             }
-            CoreService.EventUI.FireSymbolselectedEvent(symbol);
+            ControlService.FireSymbolSelected(symbol);
             debug("Symbol:" + symbol.ToString() + " Selected");
         }
 

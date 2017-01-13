@@ -18,7 +18,7 @@ namespace TradingLib.MoniterControl
 
         AccountItem _account = null;
         Symbol _symbol = null;
-        public event OrderDelegate SendOrderEvent;
+
         public ctOrderSenderM()
         {
             InitializeComponent();
@@ -29,49 +29,28 @@ namespace TradingLib.MoniterControl
         {
             btnBuy.Click += new EventHandler(btnBuy_Click);
             btnSell.Click += new EventHandler(btnSell_Click);
-            //btnInsertTrade.Click += new EventHandler(btnInsertTrade_Click);
-            this.SendOrderEvent += new OrderDelegate(SendOrderOut);
             CoreService.EventCore.RegIEventHandler(this);
         }
 
         public void OnInit()
         {
-            //btnInsertTrade.Visible = Globals.UIAccess.fun_tab_placeorder_insert;
-            CoreService.EventAccount.OnAccountSelectedEvent += new Action<AccountItem>(OnAccountSelected);
-            CoreService.EventUI.OnSymbolSelectedEvent += new Action<Symbol>(EventUI_OnSymbolSelectedEvent);
+            ControlService.AccountSelected += new Action<AccountItem>(SetAccount);
+            ControlService.SymbolSelected += new Action<Symbol>(SetSymbol);
+            
             MoniterHelper.AdapterToIDataSource(cboffsetflag).BindDataSource(MoniterHelper.GetOffsetCBList());
             MoniterHelper.AdapterToIDataSource(cbordertype).BindDataSource(MoniterHelper.GetOrderTypeCBList());
-            //Globals.Debug("~~~~~~~~~~~~~~~~~~~~~~~~~~ order sender insert:" + Globals.Domain.Misc_InsertTrade.ToString() + " is root:" + Globals.Manager.IsRoot());
-            //如果不是超级域 则需要按设置来判断是否显示调试插入按钮
-            if (!CoreService.SiteInfo.Domain.Super)
-            {
-                //btnInsertTrade.Visible = CoreService.SiteInfo.Domain.Misc_InsertTrade && CoreService.SiteInfo.Manager.IsRoot();
-            }
-        }
 
-        void EventUI_OnSymbolSelectedEvent(Symbol obj)
-        {
-            SetSymbol(obj);
         }
 
         
 
         public void OnDisposed()
         {
-            CoreService.EventAccount.OnAccountSelectedEvent -= new Action<AccountItem>(OnAccountSelected);
+            ControlService.AccountSelected += new Action<AccountItem>(SetAccount);
+            ControlService.SymbolSelected += new Action<Symbol>(SetSymbol);
         }
 
 
-        void OnAccountSelected(AccountItem obj)
-        {
-            this.SetAccount(obj);
-        }
-
-        void SendOrderOut(Order o)
-        {
-            o.Account = _account.Account;
-            CoreService.TLClient.ReqOrderInsert(o);
-        }
 
         /// <summary>
         /// 绑定帐户
@@ -83,55 +62,29 @@ namespace TradingLib.MoniterControl
             account.Text = _account.Account;
         }
 
-        public void SetSymbol(Symbol sym)
+        void SetSymbol(Symbol sym)
         {
             _symbol = sym;
             symbol.Text = _symbol.Symbol;
-            int decimalplace = Util.GetDecimalPlace(sym.SecurityFamily.PriceTick);
-            price.DecimalPlaces = decimalplace;
+            price.DecimalPlaces = sym.SecurityFamily.PriceTick.GetDecimalPlaces();
         }
 
         private void btnBuy_Click(object sender, EventArgs e)
         {
-            try
-            {
-                genOrder(true);
-            }
-            catch (Exception ex)
-            {
-                //Globals.Debug("error:" + ex.ToString());
-            }
+            SendOrder(true);
         }
 
         private void btnSell_Click(object sender, EventArgs e)
         {
-            try
-            {
-                genOrder(false);
-            }
-            catch (Exception ex)
-            {
-                //Globals.Debug("error:" + ex.ToString());
-            }
+            SendOrder(false);
+            
         }
-
-        private void btnInsertTrade_Click(object sender, EventArgs e)
-        {
-            fmInsertTrade fm = new fmInsertTrade();
-            if (!ValidAccount()) return;
-            //if (!validSecurity()) return;
-            fm.SetAccount(_account.Account);
-            //fm.SetSymbol(_symbol);
-            fm.ShowDialog();
-        }
-
-
 
         /// <summary>
         /// 生成对应的买 卖委托并发送出去
         /// </summary>
         /// <param name="f"></param>
-        private void genOrder(bool f)
+        void SendOrder(bool f)
         {
             if (!ValidAccount()) return;
             if (!validSecurity()) return;
@@ -161,7 +114,8 @@ namespace TradingLib.MoniterControl
                 work.StopPrice = stop;
             }
             work.id = 0;
-            SendOrder(work);
+            work.Account = _account.Account;
+            CoreService.TLClient.ReqOrderInsert(work);
         }
 
 
@@ -223,14 +177,6 @@ namespace TradingLib.MoniterControl
             }
         }
         
-
-
-        void SendOrder(Order order)
-        {
-
-            if (SendOrderEvent != null)
-                SendOrderEvent(order);
-        }
 
         
 

@@ -201,7 +201,7 @@ namespace TradingLib.MoniterControl
             if (account != null)
             {
                 //触发事件中继的帐户选择事件
-                CoreService.EventAccount.FireAccountSelectedEvent(account);
+                ControlService.FireAccountSelected(account);
             }
         }
 

@@ -9,18 +9,18 @@ namespace TradingLib.MoniterCore
 {
     public class EventAccount
     {
-        /// <summary>
-        /// 交易帐户选择事件
-        /// 双击某个交易帐户 出发该事件 用于通知所有监听该事件的对象
-        /// </summary>
-        public event Action<AccountItem> OnAccountSelectedEvent;
+        ///// <summary>
+        ///// 交易帐户选择事件
+        ///// 双击某个交易帐户 出发该事件 用于通知所有监听该事件的对象
+        ///// </summary>
+        //public event Action<AccountItem> OnAccountSelectedEvent;
 
-        public void FireAccountSelectedEvent(AccountItem account)
-        {
-            LogService.Debug("FireAccountSelectedEvent");
-            if (OnAccountSelectedEvent != null)
-                OnAccountSelectedEvent(account);
-        }
+        //public void FireAccountSelectedEvent(AccountItem account)
+        //{
+        //    LogService.Debug("FireAccountSelectedEvent");
+        //    if (OnAccountSelectedEvent != null)
+        //        OnAccountSelectedEvent(account);
+        //}
 
 
         /// <summary>

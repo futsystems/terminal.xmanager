@@ -41,7 +41,7 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventAccount.OnAccountSelectedEvent += new Action<AccountItem>(OnAccountSelected);
+            ControlService.AccountSelected += new Action<AccountItem>(OnAccountSelected);
             CoreService.EventIndicator.GotTickEvent += new Action<Tick>(GotTick);
             CoreService.EventIndicator.GotOrderEvent += new Action<Order>(GotOrder);
             CoreService.EventIndicator.GotFillEvent += new Action<Trade>(GotTrade);
@@ -61,7 +61,7 @@ namespace TradingLib.MoniterControl
 
         public void OnDisposed()
         {
-            CoreService.EventAccount.OnAccountSelectedEvent -= new Action<AccountItem>(OnAccountSelected);
+            ControlService.AccountSelected -= new Action<AccountItem>(OnAccountSelected);
             //Globals.LogicEvent.GotAccountSyncEvent += new Action<AccountItem>(OnAccountSyncEvent);
             CoreService.EventIndicator.GotTickEvent -= new Action<Tick>(GotTick);
             CoreService.EventIndicator.GotOrderEvent -= new Action<Order>(GotOrder);

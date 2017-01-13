@@ -323,7 +323,7 @@ namespace TradingLib.MoniterControl
             orderGrid.CellFormatting += new DataGridViewCellFormattingEventHandler(orderGrid_CellFormatting);
             orderGrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(orderGrid_RowPrePaint);
 
-            CoreService.EventAccount.OnAccountSelectedEvent += new Action<AccountItem>(EventAccount_OnAccountSelectedEvent);
+            ControlService.AccountSelected += new Action<AccountItem>(EventAccount_OnAccountSelectedEvent);
             CoreService.EventCore.RegIEventHandler(this);
         }
 
