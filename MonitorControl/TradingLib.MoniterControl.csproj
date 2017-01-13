@@ -587,16 +587,16 @@
     <Compile Include="Forms\System\fmExchangeRateEdit.designer.cs">
       <DependentUpon>fmExchangeRateEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="PageControl\ctQuoteMoniterS.cs">
+    <Compile Include="Base\ctQuoteMoniterS.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PageControl\ctQuoteMoniterS.designer.cs">
+    <Compile Include="Base\ctQuoteMoniterS.designer.cs">
       <DependentUpon>ctQuoteMoniterS.cs</DependentUpon>
     </Compile>
-    <Compile Include="PageControl\fmLoginInfo.cs">
+    <Compile Include="Forms\fmLoginInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PageControl\fmLoginInfo.Designer.cs">
+    <Compile Include="Forms\fmLoginInfo.Designer.cs">
       <DependentUpon>fmLoginInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Follow\fmFollowItemView.cs">
@@ -758,10 +758,10 @@
       <DependentUpon>MonitorControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Command\AccountCommands.cs" />
-    <Compile Include="PageControl\ctAccountInfo.cs">
+    <Compile Include="Base\ctAccountInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PageControl\ctAccountInfo.Designer.cs">
+    <Compile Include="Base\ctAccountInfo.Designer.cs">
       <DependentUpon>ctAccountInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier.cs">
@@ -790,18 +790,6 @@
     </Compile>
     <Compile Include="PageControl\ctFunctionPanel.Designer.cs">
       <DependentUpon>ctFunctionPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PageControl\ctOrderPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PageControl\ctOrderPanel.Designer.cs">
-      <DependentUpon>ctOrderPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PageControl\ctQuoteMoniter.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PageControl\ctQuoteMoniter.Designer.cs">
-      <DependentUpon>ctQuoteMoniter.cs</DependentUpon>
     </Compile>
     <Compile Include="PageControl\ctTradingInfo.cs">
       <SubType>UserControl</SubType>
@@ -1078,10 +1066,10 @@
     <EmbeddedResource Include="Forms\System\fmExchangeRateEdit.resx">
       <DependentUpon>fmExchangeRateEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PageControl\ctQuoteMoniterS.resx">
+    <EmbeddedResource Include="Base\ctQuoteMoniterS.resx">
       <DependentUpon>ctQuoteMoniterS.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PageControl\fmLoginInfo.resx">
+    <EmbeddedResource Include="Forms\fmLoginInfo.resx">
       <DependentUpon>fmLoginInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Follow\fmFollowItemView.resx">
@@ -1161,7 +1149,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ImageFolder.resources" />
     <EmbeddedResource Include="ImageResources.resources" />
-    <EmbeddedResource Include="PageControl\ctAccountInfo.resx">
+    <EmbeddedResource Include="Base\ctAccountInfo.resx">
       <DependentUpon>ctAccountInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PageControl\ctAccountMoniter\ctAccountMontier.resx">
@@ -1172,12 +1160,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PageControl\ctFunctionPanel.resx">
       <DependentUpon>ctFunctionPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PageControl\ctOrderPanel.resx">
-      <DependentUpon>ctOrderPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PageControl\ctQuoteMoniter.resx">
-      <DependentUpon>ctQuoteMoniter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PageControl\ctTradingInfo.resx">
       <DependentUpon>ctTradingInfo.cs</DependentUpon>

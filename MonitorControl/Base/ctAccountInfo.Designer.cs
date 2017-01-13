@@ -33,8 +33,6 @@
             this.btnUpdateTransferType = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cbTransferType = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.btnUpdateCurrency = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.cbCurrnecy = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.kryptonLabel9 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.sessionGrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
@@ -51,7 +49,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.PanelRouter)).BeginInit();
             this.PanelRouter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbTransferType)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbCurrnecy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).BeginInit();
             this.kryptonGroupBox1.Panel.SuspendLayout();
@@ -62,8 +59,6 @@
             // kryptonPanel1
             // 
             this.kryptonPanel1.Controls.Add(this.PanelRouter);
-            this.kryptonPanel1.Controls.Add(this.btnUpdateCurrency);
-            this.kryptonPanel1.Controls.Add(this.cbCurrnecy);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel9);
             this.kryptonPanel1.Controls.Add(this.kryptonGroupBox1);
             this.kryptonPanel1.Controls.Add(this.btnExecute);
@@ -113,24 +108,6 @@
             this.cbTransferType.Name = "cbTransferType";
             this.cbTransferType.Size = new System.Drawing.Size(91, 21);
             this.cbTransferType.TabIndex = 11;
-            // 
-            // btnUpdateCurrency
-            // 
-            this.btnUpdateCurrency.Location = new System.Drawing.Point(262, 126);
-            this.btnUpdateCurrency.Name = "btnUpdateCurrency";
-            this.btnUpdateCurrency.Size = new System.Drawing.Size(86, 25);
-            this.btnUpdateCurrency.TabIndex = 18;
-            this.btnUpdateCurrency.Values.Text = "更 新";
-            this.btnUpdateCurrency.Visible = false;
-            // 
-            // cbCurrnecy
-            // 
-            this.cbCurrnecy.DropDownWidth = 91;
-            this.cbCurrnecy.Location = new System.Drawing.Point(89, 126);
-            this.cbCurrnecy.Name = "cbCurrnecy";
-            this.cbCurrnecy.Size = new System.Drawing.Size(91, 21);
-            this.cbCurrnecy.TabIndex = 17;
-            this.cbCurrnecy.Visible = false;
             // 
             // kryptonLabel9
             // 
@@ -244,7 +221,6 @@
             this.PanelRouter.ResumeLayout(false);
             this.PanelRouter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbTransferType)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbCurrnecy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).EndInit();
             this.kryptonGroupBox1.Panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
@@ -269,8 +245,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnUpdateInterday;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnExecute;
         private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox1;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btnUpdateCurrency;
-        private ComponentFactory.Krypton.Toolkit.KryptonComboBox cbCurrnecy;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel9;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel PanelRouter;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView sessionGrid;
