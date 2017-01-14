@@ -14,29 +14,29 @@ namespace TradingLib.MoniterCore
         /// 查询帐户列表回报
         /// </summary>
         /// <param name="response"></param>
-        void CliOnMGRQryAccountList(RspMGRQryAccountResponse response)
-        {
-            CoreService.BasicInfoTracker.OnMGRQryAccountList(response.AccountItem, response.IsLast);
-        }
+        //void CliOnMGRQryAccountList(RspMGRQryAccountResponse response)
+        //{
+        //    CoreService.BasicInfoTracker.OnMGRQryAccountList(response.AccountItem, response.IsLast);
+        //}
 
         /// <summary>
         /// 帐户参数更新通知
         /// </summary>
         /// <param name="notify"></param>
-        void CliOnMGRAccountUpdate(NotifyMGRAccountChangeUpdateResponse notify)
-        {
-            CoreService.BasicInfoTracker.OnMGRAccountUpdate(notify.AccountItem);
-        }
+        //void CliOnMGRAccountUpdate(NotifyMGRAccountChangeUpdateResponse notify)
+        //{
+        //    CoreService.BasicInfoTracker.OnMGRAccountUpdate(notify.AccountItem);
+        //}
 
 
         /// <summary>
         /// 交易帐号财务信息更新
         /// </summary>
         /// <param name="response"></param>
-        void CliOnNotifyMGRAccountStatistic(NotifyMGRAccountStatistic response)
-        {
-            CoreService.EventHub.FireInfoLiteEvent(response.Statistic);
-        }
+        //void CliOnNotifyMGRAccountStatistic(NotifyMGRAccountStatistic response)
+        //{
+        //    CoreService.EventHub.FireInfoLiteEvent(response.Statistic);
+        //}
 
         /// <summary>
         /// 恢复交易记录回报

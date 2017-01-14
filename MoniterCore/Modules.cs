@@ -181,7 +181,33 @@ namespace TradingLib.MoniterCore
         public const string QRY_CALENDAR = "QryCalendarList";
         #endregion
 
-        
+        #region Account
+        /// <summary>
+        /// 查询交易账户列表
+        /// </summary>
+        public const string QRY_ACC_LIST = "QryAccountList";
+
+        /// <summary>
+        /// 设定观察账户列表
+        /// </summary>
+        public const string WATCH_ACC_LIST = "WatchAccountList";
+
+        /// <summary>
+        /// 交易端会话信息通知
+        /// </summary>
+        public const string NOTIFY_SESSION_INFO = "NotifySession";
+
+        /// <summary>
+        /// 交易账户变动通知
+        /// </summary>
+        public const string NOTIFY_ACC_CHANGED = "NotifyAccountChanged";
+
+        /// <summary>
+        /// 交易账户财务统计通知
+        /// </summary>
+        public const string NOTIFY_ACC_STATISTIC = "NotifyAccountStatistic";
+
+        #endregion
 
         #region 手续费 保证金 交易参数 模板
         /// <summary>
@@ -414,10 +440,7 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public const string QRY_SYSTEM_STATUS = "QrySystemStatus";
 
-        /// <summary>
-        /// 交易端会话信息通知
-        /// </summary>
-        public const string NOTIFY_SESSION_INFO = "SessionNotify";
+       
         #endregion
     }
 

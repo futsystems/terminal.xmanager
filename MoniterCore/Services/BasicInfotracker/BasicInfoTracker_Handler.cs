@@ -402,49 +402,49 @@ namespace TradingLib.MoniterCore
         /// 管理端交易账户更新
         /// </summary>
         /// <param name="account"></param>
-        internal void OnMGRAccountUpdate(AccountItem account)
-        {
-            //更新本地内存记录数据
-            if (account != null)
-            {
-                accountmap[account.Account] = account;
-            }
+        //internal void OnMGRAccountUpdate(AccountItem account)
+        //{
+        //    //更新本地内存记录数据
+        //    if (account != null)
+        //    {
+        //        accountmap[account.Account] = account;
+        //    }
 
-            CoreService.EventHub.FireAccountChangedEvent(account);
-        }
+        //    CoreService.EventHub.FireAccountChangedEvent(account);
+        //}
 
-        internal void OnMGRQryAccountList(AccountItem account, bool islast)
-        {
-            if (account != null)
-            {
-                accountmap[account.Account] = account;
-            }
+        //internal void OnMGRQryAccountList(AccountItem account, bool islast)
+        //{
+        //    if (account != null)
+        //    {
+        //        accountmap[account.Account] = account;
+        //    }
             
-            //
-            if (islast && !_initialized)
-            {
-                Status("交易帐户列表同步成功");
-                //结构化基础数据
-                Bind();
-                //输出基础数据数量信息
-                logger.Info("============基础数据初始化完成============");
-                logger.Info("     Markettime num:" + this.MarketTimes.Count().ToString());
-                logger.Info("       Exchange num:" + this.Exchanges.Count().ToString());
-                logger.Info("       Security num:" + this.Securities.Count().ToString());
-                logger.Info("         Symbol num:" + this.Symbols.Count().ToString());
-                logger.Info("        RuleSet num:" + (this.AccountRuleClass.Count() + this.OrderRuleClass.Count()).ToString());
-                logger.Info("        Manager num:" + this.Managers.Count().ToString());
-                logger.Info("    RouterGroup num:" + this.RouterGroups.Count().ToString());
-                logger.Info("        Account num:" + this.Accounts.Count().ToString());
+        //    //
+        //    if (islast && !_initialized)
+        //    {
+        //        Status("交易帐户列表同步成功");
+        //        //结构化基础数据
+        //        Bind();
+        //        //输出基础数据数量信息
+        //        logger.Info("============基础数据初始化完成============");
+        //        logger.Info("     Markettime num:" + this.MarketTimes.Count().ToString());
+        //        logger.Info("       Exchange num:" + this.Exchanges.Count().ToString());
+        //        logger.Info("       Security num:" + this.Securities.Count().ToString());
+        //        logger.Info("         Symbol num:" + this.Symbols.Count().ToString());
+        //        logger.Info("        RuleSet num:" + (this.AccountRuleClass.Count() + this.OrderRuleClass.Count()).ToString());
+        //        logger.Info("        Manager num:" + this.Managers.Count().ToString());
+        //        logger.Info("    RouterGroup num:" + this.RouterGroups.Count().ToString());
+        //        logger.Info("        Account num:" + this.Accounts.Count().ToString());
 
-                //查询行情快照
-                CoreService.TLClient.ReqQryTickSnapshot();
+        //        //查询行情快照
+        //        CoreService.TLClient.ReqQryTickSnapshot();
 
-                CoreService.TLClient.StartTick();
-                //触发数据初始化完成事件
-                CoreService.EventCore.FireInitializedEvent();
-            }
-        }
+        //        CoreService.TLClient.StartTick();
+        //        //触发数据初始化完成事件
+        //        CoreService.EventCore.FireInitializedEvent();
+        //    }
+        //}
 
 
 

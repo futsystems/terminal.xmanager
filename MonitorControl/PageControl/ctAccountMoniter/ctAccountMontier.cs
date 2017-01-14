@@ -75,10 +75,10 @@ namespace TradingLib.MoniterControl
 
             UpdateAccountNum();
 
-            CoreService.EventHub.AccountStatisticNotify += new Action<AccountStatistic>(OnAccountStatisticNotify);
-            CoreService.EventHub.OnAccountChangedEvent += new Action<AccountItem>(OnAccountChanged);
-
-
+            //CoreService.EventHub.AccountStatisticNotify += new Action<AccountStatistic>(OnAccountStatisticNotify);
+            //CoreService.EventHub.OnAccountChangedEvent += new Action<AccountItem>(OnAccountChanged);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_ACC_CHANGED, OnAccountChanged);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_ACC_STATISTIC, OnNotifyAccountStatistic);
             //根据角色隐藏表格相关列
             if (CoreService.SiteInfo.ProductType == QSEnumProductType.CounterSystem)
             {
@@ -99,10 +99,19 @@ namespace TradingLib.MoniterControl
 
         public void OnDisposed()
         {
-            CoreService.EventHub.AccountStatisticNotify -= new Action<AccountStatistic>(OnAccountStatisticNotify);
-            CoreService.EventHub.OnAccountChangedEvent -= new Action<AccountItem>(OnAccountChanged);
+            //CoreService.EventHub.AccountStatisticNotify -= new Action<AccountStatistic>(OnAccountStatisticNotify);
+            //CoreService.EventHub.OnAccountChangedEvent -= new Action<AccountItem>(OnAccountChanged);
         }
 
+        void OnNotifyAccountStatistic(string json)
+        {
+            AccountStatistic item = CoreService.ParseJsonResponse<AccountStatistic>(json);
+            if (item != null)
+            {
+                accountinfocache.Write(item);
+            }
+            
+        }
         void OnAccountStatisticNotify(AccountStatistic obj)
         {
             accountinfocache.Write(obj);
@@ -112,9 +121,13 @@ namespace TradingLib.MoniterControl
         /// 响应帐户变动事件
         /// </summary>
         /// <param name="account"></param>
-        public void OnAccountChanged(AccountItem account)
+        public void OnAccountChanged(string json)
         {
-            accountcache.Write(account);
+            AccountItem item = CoreService.ParseJsonResponse<AccountItem>(json);
+            if (item != null)
+            {
+                accountcache.Write(item);
+            }
         }
 
 

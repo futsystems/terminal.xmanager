@@ -46,8 +46,8 @@ namespace TradingLib.MoniterControl
             cbTransferType.SelectedIndexChanged += new EventHandler(cbTransferType_SelectedIndexChanged);
 
             ControlService.AccountSelected += new Action<AccountItem>(OnAccountSelected);
-            CoreService.EventHub.OnAccountChangedEvent += new Action<AccountItem>(EventAccount_OnAccountChangedEvent);
-
+            //CoreService.EventHub.OnAccountChangedEvent += new Action<AccountItem>(EventAccount_OnAccountChangedEvent);
+            
             CoreService.EventCore.RegIEventHandler(this);
             
         }
@@ -60,6 +60,7 @@ namespace TradingLib.MoniterControl
         {
             CoreService.EventCore.RegisterCallback(Modules.MSG_EXCH, Method_MSG_EXCH.QRY_SESSION_INFO, OnSessionInfo);
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_SESSION_INFO, OnSessionNotify);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_ACC_CHANGED, OnAccountChanged);
             //只有管理员可以查看成交方式
             if (!CoreService.SiteInfo.Manager.IsRoot())
             {
@@ -171,20 +172,24 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        void EventAccount_OnAccountChangedEvent(AccountItem obj)
+        void OnAccountChanged(string json)
         {
-            if (account != null && account.Account.Equals(obj.Account))
+            AccountItem item = CoreService.ParseJsonResponse<AccountItem>(json);
+            if (item != null)
             {
-                account = obj;
-                lbAccountType.Text = Util.GetEnumDescription(account.Category);
+                if (account != null && account.Account.Equals(item.Account))
+                {
+                    account = item;
+                    lbAccountType.Text = Util.GetEnumDescription(account.Category);
 
-                btnExecute.Text = obj.Execute ? "冻 结" : "激 活";
-                btnExecute.StateCommon.Content.ShortText.Color1 = !obj.Execute ? UIConstant.ShortSideColor : UIConstant.LongSideColor;
-            
-                cbHoldNight.Checked = !account.IntraDay;
-                cbTransferType.SelectedValue = account.OrderRouteType;
-                btnUpdateInterday.Enabled = false;
-                btnUpdateTransferType.Enabled = false;
+                    btnExecute.Text = item.Execute ? "冻 结" : "激 活";
+                    btnExecute.StateCommon.Content.ShortText.Color1 = !item.Execute ? UIConstant.ShortSideColor : UIConstant.LongSideColor;
+
+                    cbHoldNight.Checked = !account.IntraDay;
+                    cbTransferType.SelectedValue = account.OrderRouteType;
+                    btnUpdateInterday.Enabled = false;
+                    btnUpdateTransferType.Enabled = false;
+                }
             }
         }
 

@@ -18,10 +18,10 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public void ReqQryAccountList()
         {
-            logger.Info("查询交易帐户列表");
-            MGRQryAccountRequest request = RequestTemplate<MGRQryAccountRequest>.CliSendRequest(++requestid);
-            SendPacket(request);
-
+            //logger.Info("查询交易帐户列表");
+            //MGRQryAccountRequest request = RequestTemplate<MGRQryAccountRequest>.CliSendRequest(++requestid);
+            //SendPacket(request);
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_ACC_LIST, "");
         }
 
         /// <summary>
@@ -30,10 +30,11 @@ namespace TradingLib.MoniterCore
         /// <param name="list"></param>
         public void ReqWatchAccount(List<string> list)
         {
-            logger.Info("请求设置观察帐户列表:" + string.Join(",", list.ToArray()));
-            MGRWatchAccountRequest request = RequestTemplate<MGRWatchAccountRequest>.CliSendRequest(++requestid);
-            request.Add(list);
-            SendPacket(request);
+            //logger.Info("请求设置观察帐户列表:" + string.Join(",", list.ToArray()));
+            //MGRWatchAccountRequest request = RequestTemplate<MGRWatchAccountRequest>.CliSendRequest(++requestid);
+            //request.Add(list);
+            //SendPacket(request);
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.WATCH_ACC_LIST, list.ToArray());
         }
 
         /// <summary>

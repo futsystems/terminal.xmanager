@@ -79,18 +79,18 @@ namespace TradingLib.MoniterCore
                 #endregion
 
                 #region Account 交易账户 查询 财务统计更新 修改更新 日内交易记录恢复
-                case MessageTypes.MGRQRYACCOUNTSRESPONSE://管理查询帐户列表回报
-                    CliOnMGRQryAccountList(packet as RspMGRQryAccountResponse);
-                    break;
-                case MessageTypes.MGRACCOUNTINFOLITENOTIFY://管理帐户财务数据更新
-                    CliOnNotifyMGRAccountStatistic(packet as NotifyMGRAccountStatistic);
-                    break;
+                //case MessageTypes.MGRQRYACCOUNTSRESPONSE://管理查询帐户列表回报
+                //    CliOnMGRQryAccountList(packet as RspMGRQryAccountResponse);
+                //    break;
+                //case MessageTypes.MGRACCOUNTINFOLITENOTIFY://管理帐户财务数据更新
+                //    CliOnNotifyMGRAccountStatistic(packet as NotifyMGRAccountStatistic);
+                //    break;
                 case MessageTypes.MGRRESUMEACCOUNTRESPONE://管理恢复帐户日内交易数据回报
                     CliOnMGRResumeAccountResponse(packet as RspMGRResumeAccountResponse);
                     break;
-                case MessageTypes.MGRACCOUNTCHANGEUPDATE://交易账户更改通知
-                    CliOnMGRAccountUpdate(packet as NotifyMGRAccountChangeUpdateResponse);
-                    break;
+                //case MessageTypes.MGRACCOUNTCHANGEUPDATE://交易账户更改通知
+                //    CliOnMGRAccountUpdate(packet as NotifyMGRAccountChangeUpdateResponse);
+                //    break;
                 #endregion
 
                 #region BasicInfo 基础数据查询与更新回报
