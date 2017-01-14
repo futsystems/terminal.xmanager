@@ -76,18 +76,17 @@ namespace TradingLib.MoniterControl
         }
         public void OnInit()
         {
-
-            CoreService.EventHub.OnRspMGRQryOrderResponse += new Action<Order, RspInfo, int, bool>(GotHistOrder);
-            CoreService.EventHub.OnRspMGRQryFillResponse += new Action<Trade, RspInfo, int, bool>(GotHistTrade);
-            CoreService.EventHub.OnRspMGRQryPositionResponse += new Action<PositionDetail, RspInfo, int, bool>(GotHistPosition);
-            
+            CoreService.EventCore.RegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_ORDER, OnOrder);
+            CoreService.EventCore.RegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_TRADE, OnTrade);
+            CoreService.EventCore.RegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_POSITION, OnPositioin);
         }
 
         public void OnDisposed()
         {
-            CoreService.EventHub.OnRspMGRQryOrderResponse -= new Action<Order, RspInfo, int, bool>(GotHistOrder);
-            CoreService.EventHub.OnRspMGRQryFillResponse -= new Action<Trade, RspInfo, int, bool>(GotHistTrade);
-            CoreService.EventHub.OnRspMGRQryPositionResponse -= new Action<PositionDetail, RspInfo, int, bool>(GotHistPosition);
+            CoreService.EventCore.UnRegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_ORDER, OnOrder);
+            CoreService.EventCore.UnRegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_TRADE, OnTrade);
+            CoreService.EventCore.UnRegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_POSITION, OnPositioin);
+        
         }
 
         void GotHistPosition(PositionDetail d, RspInfo rsp, int reqid, bool islast)
@@ -104,37 +103,79 @@ namespace TradingLib.MoniterControl
                 ctHistPosition1.GotHistPosition(d);
             }
         }
-        void GotHistOrder(Order o,RspInfo rsp,int reqid, bool islast)
-        {
 
-            if (islast)
+        void OnOrder(string json, bool isLast)
+        {
+            string omessage = CoreService.ParseJsonResponse<string>(json);
+            if (!string.IsNullOrEmpty(omessage))
             {
-                if (o!=null)
-                {
-                    ctHistOrder1.GotHistOrder(o);
-                }
-                CoreService.TLClient.ReqQryHistTrades(account.Text, Settleday,Settleday);
-            }
-            else
-            {
+                Order o = OrderImpl.Deserialize(omessage);
+                o.oSymbol = CoreService.BasicInfoTracker.GetSymbol(o.Symbol);
                 ctHistOrder1.GotHistOrder(o);
             }
-        }
-        public void GotHistTrade(Trade f,RspInfo rsp,int reqid, bool islast)
-        {
-            if (islast)
+            if (isLast)
             {
-                if (f!=null)
-                {
-                    ctHistTrade1.GotHistFill(f);
-                }
-                CoreService.TLClient.ReqQryHistPosition(account.Text, Settleday);
+                CoreService.TLClient.ReqQryAccountTrade(account.Text, Settleday, Settleday);
             }
-            else
+        }
+        void OnTrade(string json, bool isLast)
+        {
+            string fmessage = CoreService.ParseJsonResponse<string>(json);
+            if (!string.IsNullOrEmpty(fmessage))
             {
+                Trade f = TradeImpl.Deserialize(fmessage);
+                f.oSymbol = CoreService.BasicInfoTracker.GetSymbol(f.Symbol);
                 ctHistTrade1.GotHistFill(f);
             }
+
+            if (isLast)
+            {
+                CoreService.TLClient.ReqQryAccountPosition(account.Text, Settleday);
+            }
+            
         }
+
+        void OnPositioin(string json, bool isLast)
+        {
+            string pmessage = CoreService.ParseJsonResponse<string>(json);
+            if (!string.IsNullOrEmpty(pmessage))
+            {
+                PositionDetail p = PositionDetailImpl.Deserialize(pmessage);
+                p.oSymbol = CoreService.BasicInfoTracker.GetSymbol(p.Symbol);
+                ctHistPosition1.GotHistPosition(p);
+            }
+        }
+        //void GotHistOrder(Order o,RspInfo rsp,int reqid, bool islast)
+        //{
+
+        //    if (islast)
+        //    {
+        //        if (o!=null)
+        //        {
+        //            ctHistOrder1.GotHistOrder(o);
+        //        }
+        //        CoreService.TLClient.ReqQryHistTrades(account.Text, Settleday,Settleday);
+        //    }
+        //    else
+        //    {
+        //        ctHistOrder1.GotHistOrder(o);
+        //    }
+        //}
+        //public void GotHistTrade(Trade f,RspInfo rsp,int reqid, bool islast)
+        //{
+        //    if (islast)
+        //    {
+        //        if (f!=null)
+        //        {
+        //            ctHistTrade1.GotHistFill(f);
+        //        }
+        //        CoreService.TLClient.ReqQryHistPosition(account.Text, Settleday);
+        //    }
+        //    else
+        //    {
+        //        ctHistTrade1.GotHistFill(f);
+        //    }
+        //}
 
         public void SetAccount(string acc)
         {
@@ -169,7 +210,8 @@ namespace TradingLib.MoniterControl
             ctHistOrder1.Clear();
             ctHistTrade1.Clear();
             ctHistPosition1.Clear();
-            CoreService.TLClient.ReqQryHistOrders(account.Text, Settleday,Settleday);
+            CoreService.TLClient.ReqQryAccountOrder(account.Text, Settleday, Settleday);
+                
         }
 
         int Settleday

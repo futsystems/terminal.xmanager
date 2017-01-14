@@ -95,25 +95,25 @@ namespace TradingLib.MoniterCore
             }
         }
 
-        /// <summary>
-        /// 查询出入金记录
-        /// </summary>
-        public event Action<CashTransaction, RspInfo, int, bool> OnRspMGRQryCashTxnResponse;
-        internal void FireRspMGRQryCashTxnResponse(CashTransaction txn, RspInfo rsp, int reqid, bool islast)
-        {
-            if (OnRspMGRQryCashTxnResponse != null)
-            {
-                OnRspMGRQryCashTxnResponse(txn, rsp, reqid, islast);
-            }
-        }
+        ///// <summary>
+        ///// 查询出入金记录
+        ///// </summary>
+        //public event Action<CashTransaction, RspInfo, int, bool> OnRspMGRQryCashTxnResponse;
+        //internal void FireRspMGRQryCashTxnResponse(CashTransaction txn, RspInfo rsp, int reqid, bool islast)
+        //{
+        //    if (OnRspMGRQryCashTxnResponse != null)
+        //    {
+        //        OnRspMGRQryCashTxnResponse(txn, rsp, reqid, islast);
+        //    }
+        //}
 
-        public event Action<string,RspInfo,int,bool> OnSettlementEvent;
-        internal void FireSettlementEvent(string settlement,RspInfo rsp,int requestId,bool isLast)
-        {
+        //public event Action<string,RspInfo,int,bool> OnSettlementEvent;
+        //internal void FireSettlementEvent(string settlement,RspInfo rsp,int requestId,bool isLast)
+        //{
 
-            if (OnSettlementEvent != null)
-                OnSettlementEvent(settlement,rsp,requestId,isLast);
-        }
+        //    if (OnSettlementEvent != null)
+        //        OnSettlementEvent(settlement,rsp,requestId,isLast);
+        //}
 
     }
 }

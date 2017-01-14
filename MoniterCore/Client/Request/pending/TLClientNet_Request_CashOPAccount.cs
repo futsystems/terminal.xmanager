@@ -28,16 +28,7 @@ namespace TradingLib.MoniterCore
             this.ReqContribRequest("MgrExchServer", "QryAccountCashOperationTotal", "");
         }
 
-        /// <summary>
-        /// 查询交易帐户出入金记录
-        /// </summary>
-        /// <param name="account"></param>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
-        public void ReqQryAccountCashTrans(string account, long start, long end)
-        {
-            this.ReqContribRequest("MgrExchServer", "QueryAccountCashTrans", account + "," + start.ToString() + "," + end.ToString());
-        }
+        
         /// <summary>
         /// 请求出入金操作
         /// </summary>

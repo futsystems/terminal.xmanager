@@ -124,6 +124,35 @@ namespace TradingLib.MoniterCore
         /// 查询交易账户登入信息
         /// </summary>
         public const string QRY_LOGIN_INFO = "QryAccountLoginInfo";
+
+
+        #region 历史查询
+
+        /// <summary>
+        /// 查询交易账户结算单
+        /// </summary>
+        public const string QRY_ACC_SETTLEMENT = "QueryAccountSettlement";
+
+        /// <summary>
+        /// 查询交易账户出入金记录
+        /// </summary>
+        public const string QRY_ACC_TXN = "QueryAccountCashTxn";
+        /// <summary>
+        /// 查询交易账户委托
+        /// </summary>
+        public const string QRY_ACC_ORDER = "QueryAccountOrder";
+
+        /// <summary>
+        /// 查询交易账户成交
+        /// </summary>
+        public const string QRY_ACC_TRADE = "QueryAccountTrade";
+
+        /// <summary>
+        /// 查询交易账户持仓
+        /// </summary>
+        public const string QRY_ACC_POSITION = "QueryAccountPosition";
+
+        #endregion
     }
 
 
@@ -151,6 +180,8 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public const string QRY_CALENDAR = "QryCalendarList";
         #endregion
+
+        
 
         #region 手续费 保证金 交易参数 模板
         /// <summary>

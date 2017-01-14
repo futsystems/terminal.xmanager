@@ -10,60 +10,54 @@ namespace TradingLib.MoniterCore
 {
     public partial class TLClientNet
     {
-        public int ReqQryHistOrders(string account, int start,int end)
+        /// <summary>
+        /// 查询账户结算单
+        /// </summary>
+        /// <param name="mgrid"></param>
+        public void ReqQryAccountSettlement(string account,int tradingday)
         {
-            MGRQryOrderRequest request = RequestTemplate<MGRQryOrderRequest>.CliSendRequest(++requestid);
-            request.Account = account;
-            request.Start = start;
-            request.End = end;
-
-            SendPacket(request);
-            return requestid;
-
+            this.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_SETTLEMENT, new { account = account, tradingday = tradingday });
         }
 
-        public int ReqQryHistTrades(string account, int start,int end)
+        /// <summary>
+        /// 查询账户委托记录
+        /// </summary>
+        /// <param name="mgrid"></param>
+        public void ReqQryAccountOrder(string account, int start,int end)
         {
-            MGRQryTradeRequest request = RequestTemplate<MGRQryTradeRequest>.CliSendRequest(++requestid);
-            request.Account = account;
-            request.Start = start;
-            request.End = end;
-
-            SendPacket(request);
-            return requestid;
+            this.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_ORDER, new { account = account, start = start, end = end });
         }
 
-        public int ReqQryHistPosition(string account, int settleday)
+        /// <summary>
+        /// 查询账户成交记录
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        public void ReqQryAccountTrade(string account, int start, int end)
         {
-            MGRQryPositionRequest request = RequestTemplate<MGRQryPositionRequest>.CliSendRequest(++requestid);
-            request.Account = account;
-            request.Settleday = settleday;
-
-            SendPacket(request);
-            return requestid;
+            this.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_TRADE, new { account = account, start = start, end = end });
         }
 
-        public int ReqQryHistCashTransaction(string account, int start,int end)
+        /// <summary>
+        /// 查询交易账户持仓
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="tradingday"></param>
+        public void ReqQryAccountPosition(string account, int tradingday)
         {
-            MGRQryCashRequest request = RequestTemplate<MGRQryCashRequest>.CliSendRequest(++requestid);
-            request.Account = account;
-            request.Start = start;
-            request.End = end;
-
-            SendPacket(request);
-            return requestid;
+            this.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_POSITION, new { account = account, tradingday = tradingday });
         }
 
-        public int ReqQryHistSettlement(string account, int settleday)
+        /// <summary>
+        /// 查询交易帐户出入金记录
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        public void ReqQryAccountCashTxn(string account, long start, long end)
         {
-            MGRQrySettleRequest request = RequestTemplate<MGRQrySettleRequest>.CliSendRequest(++requestid);
-            request.Account = account;
-            request.Settleday = settleday;
-
-            SendPacket(request);
-
-            return requestid;
+            this.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_TXN, new { account = account, start = start, end = end });
         }
-      
     }
 }

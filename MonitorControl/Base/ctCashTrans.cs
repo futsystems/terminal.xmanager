@@ -80,7 +80,7 @@ namespace TradingLib.MoniterControl
             //绑定事件
             if (ViewType == CashOpViewType.Account)
             {
-                CoreService.EventCore.RegisterCallback("MgrExchServer", "QueryAccountCashTrans", this.OnQryCashTrans);
+                CoreService.EventCore.RegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_TXN, this.OnQryCashTrans);
             }
             else
             {
@@ -92,7 +92,7 @@ namespace TradingLib.MoniterControl
         {
             if (ViewType == CashOpViewType.Account)
             {
-                CoreService.EventCore.UnRegisterCallback("MgrExchServer", "QueryAccountCashTrans", this.OnQryCashTrans);
+                CoreService.EventCore.UnRegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_TXN, this.OnQryCashTrans);
             }
             else
             {
@@ -122,13 +122,10 @@ namespace TradingLib.MoniterControl
 
         void OnQryCashTrans(string jsonstr, bool islast)
         {
-            //JsonData jd = TradingLib.Mixins.LitJson.JsonMapper.ToObject(jsonstr);
-            //int code = int.Parse(jd["Code"].ToString());
-            JsonWrapperCasnTrans[] obj = CoreService.ParseJsonResponse<JsonWrapperCasnTrans[]>(jsonstr);
+            CashTransactionImpl[] obj = CoreService.ParseJsonResponse<CashTransactionImpl[]>(jsonstr);
             if (obj != null)
             {
-                //JsonWrapperCasnTrans[] obj = TradingLib.Mixins.LitJson.JsonMapper.ToObject<JsonWrapperCasnTrans[]>(jd["Playload"].ToJson());
-                foreach (JsonWrapperCasnTrans c in obj)
+                foreach (CashTransactionImpl c in obj)
                 {
                     GotCashTrans(c);
                 }
@@ -137,22 +134,21 @@ namespace TradingLib.MoniterControl
 
         }
 
-        delegate void del1(JsonWrapperCasnTrans trans);
-        void GotCashTrans(JsonWrapperCasnTrans trans)
+        void GotCashTrans(CashTransactionImpl trans)
         {
             if (InvokeRequired)
             {
-                Invoke(new del1(GotCashTrans), new object[] { trans });
+                Invoke(new Action<CashTransactionImpl>(GotCashTrans), new object[] { trans });
             }
             else
             {
                 DataRow r = gt.Rows.Add("");
                 int i = gt.Rows.Count - 1;//得到新建的Row号
-                gt.Rows[i][ID] = trans.ID;
+                gt.Rows[i][ID] = trans.TxnID;
                 gt.Rows[i][SETTLEDAY] = trans.Settleday;
                 gt.Rows[i][DATETIME] = Util.ToDateTime(trans.DateTime);
                 gt.Rows[i][ACCOUNT] = trans.Account;
-                gt.Rows[i][MGRFK] = trans.mgr_fk;
+                gt.Rows[i][MGRFK] = trans.Operator;
                 gt.Rows[i][OPERATION] = trans.TxnType == QSEnumCashOperation.Deposit?"入金" : "出金";
                 gt.Rows[i][TYPE] = Util.GetEnumDescription(trans.EquityType);
                 gt.Rows[i][AMOUNT] = Math.Abs(trans.Amount);
@@ -269,7 +265,7 @@ namespace TradingLib.MoniterControl
                         return;
                     }
 
-                    CoreService.TLClient.ReqQryAccountCashTrans(boxaccount.Text, Util.ToTLDateTime(start.Value), Util.ToTLDateTimeEnd(end.Value));
+                    CoreService.TLClient.ReqQryAccountCashTxn(boxaccount.Text, Util.ToTLDateTime(start.Value), Util.ToTLDateTimeEnd(end.Value));
                 }
                 else
                 {

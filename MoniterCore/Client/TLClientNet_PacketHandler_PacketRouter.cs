@@ -127,24 +127,7 @@ namespace TradingLib.MoniterCore
                     break;
                 #endregion
 
-                #region HistQuery 查询历史交易记录
-                case MessageTypes.MGRORDERRESPONSE://查询委托回报
-                    CliOnMGROrderResponse(packet as RspMGRQryOrderResponse);
-                    break;
-                case MessageTypes.MGRTRADERESPONSE://查询成交回报
-                    CliOnMGRTradeResponse(packet as RspMGRQryTradeResponse);
-                    break;
-                case MessageTypes.MGRPOSITIONRESPONSE://查询结算持仓回报
-                    CliOnMGRPositionResponse(packet as RspMGRQryPositionResponse);
-                    break;
-                case MessageTypes.MGRCASHRESPONSE://查询出入金记录
-                    CliOnMGRCashTransactionResponse(packet as RspMGRQryCashResponse);
-                    break;
-                case MessageTypes.MGRSETTLEMENTRESPONSE://查询结算单回报
-                    CliOnMGRSettlementResponse(packet as RspMGRQrySettleResponse);
-                    break;
-                #endregion
-
+               
                 default:
                     logger.Error("Packet Handler Not Set, Packet:" + packet.ToString());
                     break;

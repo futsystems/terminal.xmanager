@@ -14,6 +14,9 @@ namespace TradingLib.MoniterControl
 {
     public partial class fmSettlement : ComponentFactory.Krypton.Toolkit.KryptonForm,IEventBinder
     {
+
+        StringBuilder sb = new StringBuilder();
+
         public fmSettlement()
         {
             InitializeComponent();
@@ -28,12 +31,12 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventHub.OnSettlementEvent += new Action<string, RspInfo, int, bool>(GotSettlement);
+            CoreService.EventCore.RegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_SETTLEMENT, OnSettlement);
         }
 
         public void OnDisposed()
         {
-            CoreService.EventHub.OnSettlementEvent += new Action<string, RspInfo, int, bool>(GotSettlement);
+            CoreService.EventCore.UnRegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_SETTLEMENT, OnSettlement);
         }
 
         public void SetAccount(string acc)
@@ -41,16 +44,17 @@ namespace TradingLib.MoniterControl
             account.Text = acc;
         }
 
-        StringBuilder sb = new StringBuilder();
-        public void GotSettlement(string settlement,RspInfo info,int requestId,bool isLast)
+        void OnSettlement(string json, bool islast)
         {
-            sb.Append(settlement);
-            if (isLast)
+            string settlement = CoreService.ParseJsonResponse<string>(json);
+            sb.Append(settlement.Replace('*', '|') + "\n");
+            if (islast)
             {
                 UpdateSettlebox(sb.ToString());
             }
-            
         }
+        
+       
 
         void UpdateSettlebox(string content)
         {
@@ -79,8 +83,7 @@ namespace TradingLib.MoniterControl
             string ac = account.Text;
            
             lastqrytime = DateTime.Now;
-
-            CoreService.TLClient.ReqQryHistSettlement(ac, Settleday);
+            CoreService.TLClient.ReqQryAccountSettlement(ac, Settleday);
         }
         int Settleday
         {

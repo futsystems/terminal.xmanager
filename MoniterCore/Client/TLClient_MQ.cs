@@ -1087,6 +1087,7 @@ namespace TradingLib.MoniterCore
 
             //    debug("raw message type:" + type.ToString() + " message:" + msg, QSEnumDebugLevel.INFO);
             //}
+            logger.Debug("Packet:" + msg.Content);
             IPacket packet = PacketHelper.CliRecvResponse(msg);
             switch (packet.Type)
             {
