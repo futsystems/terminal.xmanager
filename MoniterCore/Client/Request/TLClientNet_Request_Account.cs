@@ -21,7 +21,7 @@ namespace TradingLib.MoniterCore
             //logger.Info("查询交易帐户列表");
             //MGRQryAccountRequest request = RequestTemplate<MGRQryAccountRequest>.CliSendRequest(++requestid);
             //SendPacket(request);
-            this.ReqContribJsonRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_ACC_LIST, "");
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_ACC_LIST, "");
         }
 
         /// <summary>

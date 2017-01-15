@@ -77,7 +77,7 @@ namespace TradingLib.MoniterCore
             //MGRUpdateMarketTimeRequest request = RequestTemplate<MGRUpdateMarketTimeRequest>.CliSendRequest(++requestid);
             //request.MarketTime = mt;
             //SendPacket(request);
-            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_INFO_MARKETTIME, MarketTimeImpl.Serialize(mt));
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_INFO_MARKETTIME, MarketTimeImpl.Serialize(mt),true);
         }
         public void ReqQrySecurity()
         {
