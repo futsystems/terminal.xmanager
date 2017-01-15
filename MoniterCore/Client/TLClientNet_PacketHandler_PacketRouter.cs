@@ -108,9 +108,9 @@ namespace TradingLib.MoniterCore
                 //case MessageTypes.MGRQRYEXCHANGERATERESPONSE://汇率信息汇报啊
                 //    CliOnMGRQryExchageRate(packet as RspMGRQryExchangeRateResponse);
                 //    break;
-                case MessageTypes.MGRQRYTICKSNAPSHOTRESPONSE://行情快照更新
-                    CliOnMGRQryTickSnapshot(packet as RspMGRQryTickSnapShotResponse);
-                    break;
+                //case MessageTypes.MGRQRYTICKSNAPSHOTRESPONSE://行情快照更新
+                //    CliOnMGRQryTickSnapshot(packet as RspMGRQryTickSnapShotResponse);
+                //    break;
                 #endregion
 
                

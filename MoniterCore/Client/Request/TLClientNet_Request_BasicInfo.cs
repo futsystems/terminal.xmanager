@@ -14,33 +14,21 @@ namespace TradingLib.MoniterCore
 {
     public partial class TLClientNet
     {
-       
-        #region 基础数据维护
-
-
         public void ReqQryCalendar()
         {
             this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_CALENDAR, "");
         }
 
-        /// <summary>
-        /// 请求同步品种
-        /// </summary>
         public void ReqSyncSecurity()
         {
             this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.SYNC_SEC_INFO, "");
         }
 
-        /// <summary>
-        /// 请求同步合约数据
-        /// </summary>
         public void ReqSyncSymbol()
         {
             this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.SYNC_SYMBOL_INFO, "");
         }
-        /// <summary>
-        /// 请求禁止所有合约
-        /// </summary>
+
         public void ReqDisableAllSymbols()
         {
             this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.DISABLE_ALL_SYMBOL, "");
@@ -48,58 +36,36 @@ namespace TradingLib.MoniterCore
 
         public void ReqQryMarketTime()
         {
-            logger.Info("请求查询市场时间列表");
-            //MGRQryMarketTimeRequest request = RequestTemplate<MGRQryMarketTimeRequest>.CliSendRequest(++requestid);
-            //SendPacket(request);
             this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_MARKETTIME, "");
         }
 
         public void ReqUpdateMarketTime(MarketTimeImpl mt)
         {
-            logger.Info("请求更新交易时间段");
-            //MGRUpdateMarketTimeRequest request = RequestTemplate<MGRUpdateMarketTimeRequest>.CliSendRequest(++requestid);
-            //request.MarketTime = mt;
-            //SendPacket(request);
             this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_INFO_MARKETTIME, MarketTimeImpl.Serialize(mt), true);
         }
 
         public void ReqQryExchange()
         {
-            //logger.Info("请求查询交易所列表");
-            //MGRQryExchangeRequuest request = RequestTemplate<MGRQryExchangeRequuest>.CliSendRequest(++requestid);
-            //SendPacket(request);
             this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_EXCHANGE, "");
         }
 
         public void ReqUpdateExchange(ExchangeImpl ex)
         {
-            logger.Info("请求更新交易所");
-            //MGRUpdateExchangeRequest request = RequestTemplate<MGRUpdateExchangeRequest>.CliSendRequest(++requestid);
-            //request.Exchange = ex;
-            //SendPacket(request);
             this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_INFO_EXCHANGE, ExchangeImpl.Serialize(ex), true);
 
         }
         
         public void ReqQrySecurity()
         {
-            logger.Info("请求查询品种列表");
-            //MGRQrySecurityRequest request = RequestTemplate<MGRQrySecurityRequest>.CliSendRequest(++requestid);
-            //SendPacket(request);
             this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_SEC, "");
         }
         public void ReqUpdateSecurity(SecurityFamilyImpl sec)
         {
-            logger.Info("请求更新品种信息");
-            //MGRUpdateSecurityRequest request = RequestTemplate<MGRUpdateSecurityRequest>.CliSendRequest(++requestid);
-            //request.SecurityFaimly = sec;
-            //SendPacket(request);
             this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_INFO_SEC, SecurityFamilyImpl.Serialize(sec), true);
         }
 
         public void ReqQrySymbol()
         {
-            logger.Info("请求查询合约列表");
             this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_SYM, "");
         }
 
@@ -113,29 +79,15 @@ namespace TradingLib.MoniterCore
             this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_EXCHANGERATES, "");
         }
 
-
         public void ReqUpdateExchangeRate(ExchangeRate rate)
         {
             this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_INFO_EXCHANGERATES, rate);
         }
 
-
-
-        /// <summary>
-        /// 请求查询合约快照
-        /// </summary>
-        /// <param name="exchange"></param>
-        /// <param name="symbol"></param>
-        /// <returns></returns>
-        public int ReqQryTickSnapshot(string exchange ="", string symbol = "")
+        public void ReqQryTickSnapshot(string exchange ="", string symbol = "")
         {
-            logger.Info(string.Format("QryTickSnapshot Exchange:{0} Symbol:{1}", exchange, symbol));
-            MGRQryTickSnapShotRequest request = RequestTemplate<MGRQryTickSnapShotRequest>.CliSendRequest(++requestid);
-            request.Exchange = exchange;
-            request.Symbol = symbol;
-            SendPacket(request);
-            return requestid;
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_TICK_SNAPSHOT, new { exchange = exchange, symbol = symbol });
         }
-        #endregion
     }
+
 }

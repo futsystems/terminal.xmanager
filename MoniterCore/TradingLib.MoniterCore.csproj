@@ -121,7 +121,6 @@
     <Compile Include="Services\BasicInfotracker\BasicInfoTracker_Handler.cs" />
     <Compile Include="Services\BasicInfotracker\BasicInfoTracker_data.cs" />
     <Compile Include="Services\BasicInfotracker\BasicInfoUtils.cs" />
-    <Compile Include="Services\Event\EventBasicInfo.cs" />
     <Compile Include="Services\Event\EventCore.cs" />
     <Compile Include="Services\Event\EventIndicator.cs" />
     <Compile Include="Services\CoreService.cs" />

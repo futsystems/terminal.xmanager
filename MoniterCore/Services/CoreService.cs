@@ -36,21 +36,6 @@ namespace TradingLib.MoniterCore
             }
         }
 
-        EventBasicInfo _eventBasicInfo = null;
-        /// <summary>
-        /// 基础数据事件集合
-        /// 交易所，交易时间，品种合约，交易帐户，管理员列表，风控规则集等
-        /// 相关数据的更新事件需要从该事件集订阅
-        /// </summary>
-        public static EventBasicInfo EventBasicInfo
-        {
-            get
-            {
-                if (defaultinstance._eventBasicInfo == null)
-                    defaultinstance._eventBasicInfo = new EventBasicInfo();
-                return defaultinstance._eventBasicInfo;
-            }
-        }
 
         BasicInfoTracker _basicinfortracker = null;
 

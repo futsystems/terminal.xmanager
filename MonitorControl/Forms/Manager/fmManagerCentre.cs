@@ -35,8 +35,7 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-
-            CoreService.EventBasicInfo.OnManagerEvent += new Action<ManagerSetting>(GotManager);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MANAGER, OnNotifyManager);
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH,Method_MGR_EXCH.NOTIFY_MANGER_DELETE, OnNotifyManagerDelete);
 
 
@@ -49,6 +48,7 @@ namespace TradingLib.MoniterControl
                 mgrgrid.ContextMenuStrip.Items[8].Visible = false;
             }
 
+            //管理员从基础数据集加载
             foreach (ManagerSetting m in CoreService.BasicInfoTracker.Managers)
             {
                 this.GotManager(m);
@@ -58,7 +58,8 @@ namespace TradingLib.MoniterControl
 
         public void OnDisposed()
         {
-            CoreService.EventBasicInfo.OnManagerEvent -= new Action<ManagerSetting>(GotManager);
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MANAGER, OnNotifyManager);
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MANGER_DELETE, OnNotifyManagerDelete);
         }
         void mgrgrid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
@@ -231,6 +232,15 @@ namespace TradingLib.MoniterControl
             if (mgr != null)
             {
                 OnManagerDelete(mgr);
+            }
+        }
+
+        void OnNotifyManager(string json)
+        {
+            ManagerSetting mgr = CoreService.ParseJsonResponse<ManagerSetting>(json);
+            if (mgr != null)
+            {
+                this.GotManager(mgr);   
             }
         }
 

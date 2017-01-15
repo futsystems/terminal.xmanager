@@ -26,12 +26,6 @@ namespace TradingLib.MoniterControl
 
         void ctRouterGroupList_Load(object sender, EventArgs e)
         {
-            WireEvent();
-        }
-
-        void WireEvent()
-        {
-            
             cbrglist.SelectedIndexChanged += new EventHandler(rglist_SelectedIndexChanged);
             CoreService.EventCore.RegIEventHandler(this);
         }
@@ -63,18 +57,17 @@ namespace TradingLib.MoniterControl
         public void OnInit()
         {
             ReloadRouterGroupList();
-            CoreService.EventBasicInfo.OnRouterGroupEvent += new Action<RouterGroupSetting>(BasicInfoTracker_GotRouterGroupEvent);
-
+            CoreService.EventCore.RegisterNotifyCallback(Modules.CONN_MGR,Method_CONN_MGR.NOTIFY_ROUTEGROUP, OnRouteGroup);
         }
 
-        void BasicInfoTracker_GotRouterGroupEvent(RouterGroupSetting obj)
+        void OnRouteGroup(string json)
         {
             ReloadRouterGroupList();
         }
 
         public void OnDisposed()
         {
-            CoreService.EventBasicInfo.OnRouterGroupEvent -= new Action<RouterGroupSetting>(BasicInfoTracker_GotRouterGroupEvent);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_ROUTEGROUP, OnRouteGroup);
         }
 
         

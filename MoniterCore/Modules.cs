@@ -433,6 +433,11 @@ namespace TradingLib.MoniterCore
         /// 汇率更新通知
         /// </summary>
         public const string NOTIFY_INFO_EXCHANGERATES = "NotifyExchangeRateUpdate";
+
+        /// <summary>
+        /// 查询行情快照
+        /// </summary>
+        public const string QRY_TICK_SNAPSHOT = "QryTickSnapshot";
         #endregion
 
         #region Manager

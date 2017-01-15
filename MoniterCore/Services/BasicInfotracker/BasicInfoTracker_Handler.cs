@@ -317,14 +317,14 @@ namespace TradingLib.MoniterCore
                 CoreService.SiteInfo.Manager = manager;
             }
             //对外触发 初始化过程中不对外出发
-            if (_initialized)
-            {
-                CoreService.EventBasicInfo.FireManagerEvent(notify);
-            }
+            //if (_initialized)
+            //{
+            //    CoreService.EventBasicInfo.FireManagerEvent(notify);
+            //}
         }
 
 
-        void OnQryManager(string jsonstr, bool islast)
+        void OnRspManager(string jsonstr, bool islast)
         {
             ManagerSetting[] mgrlist = CoreService.ParseJsonResponse<ManagerSetting[]>(jsonstr);
             if (mgrlist != null)
@@ -386,10 +386,10 @@ namespace TradingLib.MoniterCore
             }
 
             //对外触发获得路由组事件
-            if (_initialized)
-            {
-                CoreService.EventBasicInfo.FireRouterGroupEvent(target != null ? target : rg);
-            }
+            //if (_initialized)
+            //{
+            //    CoreService.EventBasicInfo.FireRouterGroupEvent(target != null ? target : rg);
+            //}
         }
 
         void OnQryRouterGroup(string jsonstr, bool islast)
