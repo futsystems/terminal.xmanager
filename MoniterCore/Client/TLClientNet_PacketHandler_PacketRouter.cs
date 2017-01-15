@@ -86,12 +86,12 @@ namespace TradingLib.MoniterCore
                 //case MessageTypes.MGRUPDATEMARKETTIMERESPONSE://交易时间段更新回报
                 //    CliOnMGRUpdateMarketTimeResponse(packet as RspMGRUpdateMarketTimeResponse);
                 //    break;
-                case MessageTypes.MGREXCHANGERESPONSE://交易所列表回报
-                    CliOnMGRExchange(packet as RspMGRQryExchangeResponse);
-                    break;
-                case MessageTypes.MGRUPDATEEXCHANGERESPONSE://更新交易所回报
-                    CliOnMGRUpdateExchangeResponse(packet as RspMGRUpdateExchangeResponse);
-                    break;
+                //case MessageTypes.MGREXCHANGERESPONSE://交易所列表回报
+                //    CliOnMGRExchange(packet as RspMGRQryExchangeResponse);
+                //    break;
+                //case MessageTypes.MGRUPDATEEXCHANGERESPONSE://更新交易所回报
+                //    CliOnMGRUpdateExchangeResponse(packet as RspMGRUpdateExchangeResponse);
+                //    break;
                 
                 case MessageTypes.MGRSECURITYRESPONSE://品种回报
                     CliOnMGRSecurity(packet as RspMGRQrySecurityResponse);

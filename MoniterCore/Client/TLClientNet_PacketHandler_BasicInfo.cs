@@ -22,17 +22,17 @@ namespace TradingLib.MoniterCore
         //    CoreService.BasicInfoTracker.GotMarketTime(response.MarketTime, response.IsLast);
         //}
 
-        void CliOnMGRExchange(RspMGRQryExchangeResponse response)
-        {
-            logger.Debug("got exchange response:" + response.ToString());
-            CoreService.BasicInfoTracker.GotExchange(response.Exchange, response.IsLast);
-        }
+        //void CliOnMGRExchange(RspMGRQryExchangeResponse response)
+        //{
+        //    logger.Debug("got exchange response:" + response.ToString());
+        //    CoreService.BasicInfoTracker.GotExchange(response.Exchange, response.IsLast);
+        //}
 
-        void CliOnMGRUpdateExchangeResponse(RspMGRUpdateExchangeResponse response)
-        {
-            logger.Debug("got exchange update response:" + response.ToString());
-            CoreService.BasicInfoTracker.GotExchange(response.Exchange, response.IsLast);
-        }
+        //void CliOnMGRUpdateExchangeResponse(RspMGRUpdateExchangeResponse response)
+        //{
+        //    logger.Debug("got exchange update response:" + response.ToString());
+        //    CoreService.BasicInfoTracker.GotExchange(response.Exchange, response.IsLast);
+        //}
 
         void CliOnMGRSecurity(RspMGRQrySecurityResponse response)
         {

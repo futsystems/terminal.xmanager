@@ -49,18 +49,19 @@ namespace TradingLib.MoniterCore
 
         public void ReqQryExchange()
         {
-            logger.Info("请求查询交易所列表");
-            MGRQryExchangeRequuest request = RequestTemplate<MGRQryExchangeRequuest>.CliSendRequest(++requestid);
-            SendPacket(request);
+            //logger.Info("请求查询交易所列表");
+            //MGRQryExchangeRequuest request = RequestTemplate<MGRQryExchangeRequuest>.CliSendRequest(++requestid);
+            //SendPacket(request);
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_EXCHANGE, "");
         }
 
         public void ReqUpdateExchange(ExchangeImpl ex)
         {
             logger.Info("请求更新交易所");
-            MGRUpdateExchangeRequest request = RequestTemplate<MGRUpdateExchangeRequest>.CliSendRequest(++requestid);
-            request.Exchange = ex;
-            SendPacket(request);
-
+            //MGRUpdateExchangeRequest request = RequestTemplate<MGRUpdateExchangeRequest>.CliSendRequest(++requestid);
+            //request.Exchange = ex;
+            //SendPacket(request);
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_INFO_EXCHANGE, ExchangeImpl.Serialize(ex), true);
 
         }
         public void ReqQryMarketTime()

@@ -377,6 +377,21 @@ namespace TradingLib.MoniterCore
         public const string NOTIFY_INFO_MARKETTIME = "NotifyMarketTime";
 
         /// <summary>
+        /// 查询交易所
+        /// </summary>
+        public const string QRY_INFO_EXCHANGE = "QryInfoExchange";
+
+        /// <summary>
+        /// 更新交易所
+        /// </summary>
+        public const string UPDATE_INFO_EXCHANGE = "UpdateInfoExchange";
+
+        /// <summary>
+        /// 交易所更新通知
+        /// </summary>
+        public const string NOTIFY_INFO_EXCHANGE = "NotifyExchange";
+
+        /// <summary>
         /// 查询汇率
         /// </summary>
         public const string QRY_EXCHANGERATES = "QryExchangeRates";

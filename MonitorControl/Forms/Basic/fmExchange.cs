@@ -13,7 +13,7 @@ using TradingLib.MoniterCore;
 
 namespace TradingLib.MoniterControl
 {
-    public partial class fmExchange : ComponentFactory.Krypton.Toolkit.KryptonForm
+    public partial class fmExchange : ComponentFactory.Krypton.Toolkit.KryptonForm,IEventBinder
     {
         public fmExchange()
         {
@@ -30,7 +30,6 @@ namespace TradingLib.MoniterControl
 
         void fmExchange_Load(object sender, EventArgs e)
         {
-            
             exchangegrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(exchangegrid_RowPrePaint);
             exchangegrid.DoubleClick += new EventHandler(exchangegrid_DoubleClick);
             btnAddExchange.Click += new EventHandler(btnAddExchange_Click);
@@ -39,7 +38,17 @@ namespace TradingLib.MoniterControl
                 this.InvokeGotExchange(ex);
             }
 
-            CoreService.EventBasicInfo.OnExchangeEvent += new Action<ExchangeImpl>(EventBasicInfo_OnExchangeEvent);
+            CoreService.EventCore.RegIEventHandler(this);
+        }
+
+        public void OnInit()
+        {
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_EXCHANGE, OnNotifyExchange);
+        }
+
+        public void OnDisposed()
+        {
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_EXCHANGE, OnNotifyExchange);
         }
 
         void btnAddExchange_Click(object sender, EventArgs e)
@@ -49,10 +58,13 @@ namespace TradingLib.MoniterControl
             fm.Close();
         }
 
-        void EventBasicInfo_OnExchangeEvent(ExchangeImpl obj)
+        void OnNotifyExchange(string json)
         {
-            InvokeGotExchange(obj);
+            string content = json.DeserializeObject<string>();
+            ExchangeImpl ex = ExchangeImpl.Deserialize(content);
+            InvokeGotExchange(ex);
         }
+
 
         private int CurrentRow { get { return exchangegrid.SelectedRows.Count > 0 ? exchangegrid.SelectedRows[0].Index : -1; } }
 

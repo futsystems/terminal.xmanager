@@ -19,16 +19,16 @@ namespace TradingLib.MoniterCore
 
         void OnNotifyMarketTime(string json)
         {
-            string mtmessage = json.DeserializeObject<string>();
-            MarketTimeImpl mt = MarketTimeImpl.Deserialize(mtmessage);
+            string content = json.DeserializeObject<string>();
+            MarketTimeImpl mt = MarketTimeImpl.Deserialize(content);
             
             GotMarketTime(mt);
         }
 
         void OnRspMarketTime(string json, bool isLast)
         {
-            string mtmessage = json.DeserializeObject<string>();
-            MarketTimeImpl mt = MarketTimeImpl.Deserialize(mtmessage);
+            string content = json.DeserializeObject<string>();
+            MarketTimeImpl mt = MarketTimeImpl.Deserialize(content);
 
             GotMarketTime(mt);
             if (isLast && !_initialized)
@@ -66,7 +66,26 @@ namespace TradingLib.MoniterCore
             }
         }
 
-        public void GotExchange(ExchangeImpl ex, bool islast)
+
+        void OnNotifyExchange(string json)
+        {
+            string content = json.DeserializeObject<string>();
+            ExchangeImpl ex = ExchangeImpl.Deserialize(content);
+            GotExchange(ex);
+        }
+
+        void OnRspExchange(string json, bool isLast)
+        {
+            string content = json.DeserializeObject<string>();
+            ExchangeImpl ex = ExchangeImpl.Deserialize(content);
+            GotExchange(ex);
+            if (isLast && !_initialized)
+            {
+                Status("交易所查询完毕,查询品种信息");
+                CoreService.TLClient.ReqQrySecurity();
+            }
+        }
+        void GotExchange(ExchangeImpl ex)
         {
             if (ex != null)
             {
@@ -87,17 +106,13 @@ namespace TradingLib.MoniterCore
                     exchangemap.Add(ex.ID, ex);
                     notify = ex;
                 }
-                //对外触发
-                if (_initialized)
-                {
-                    CoreService.EventBasicInfo.FireExchangeEvent(notify);
-                }
+                ////对外触发
+                //if (_initialized)
+                //{
+                //    CoreService.EventBasicInfo.FireExchangeEvent(notify);
+                //}
             }
-            if (islast && !_initialized)
-            {
-                Status("交易所查询完毕,查询品种信息");
-                CoreService.TLClient.ReqQrySecurity();
-            }
+            
         }
 
         /// <summary>

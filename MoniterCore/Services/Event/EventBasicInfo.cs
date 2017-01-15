@@ -12,7 +12,7 @@ namespace TradingLib.MoniterCore
     {
         //public event Action<MarketTimeImpl> OnMarketTimeEvent;
 
-        public event Action<ExchangeImpl> OnExchangeEvent;
+        //public event Action<ExchangeImpl> OnExchangeEvent;
 
         public event Action<SecurityFamilyImpl> OnSecurityEvent;
 
@@ -31,13 +31,13 @@ namespace TradingLib.MoniterCore
         //    }
         //}
 
-        internal void FireExchangeEvent(ExchangeImpl exch)
-        {
-            if (OnExchangeEvent != null)
-            {
-                OnExchangeEvent(exch);
-            }
-        }
+        //internal void FireExchangeEvent(ExchangeImpl exch)
+        //{
+        //    if (OnExchangeEvent != null)
+        //    {
+        //        OnExchangeEvent(exch);
+        //    }
+        //}
 
         internal void FireSecurityEvent(SecurityFamilyImpl sec)
         {
