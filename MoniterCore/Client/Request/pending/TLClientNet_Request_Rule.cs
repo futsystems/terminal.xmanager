@@ -14,24 +14,24 @@ namespace TradingLib.MoniterCore
         public void ReqQryRuleSet()
         {
             logger.Info("请求查询风控规则列表");
-            this.ReqContribRequest("RiskCentre", "QryRuleSet", "");
+            this.ReqContribCommaRequest("RiskCentre", "QryRuleSet", "");
         }
 
         public void ReqQryRuleItem(string account, QSEnumRuleType type)
         {
             logger.Info("请求查询帐户风控规则列表");
-            this.ReqContribRequest("RiskCentre", "QryRuleItem", new { account = account, ruletype = type }.SerializeObject());
+            this.ReqContribJsonRequest("RiskCentre", "QryRuleItem", new { account = account, ruletype = type }.SerializeObject());
         }
         public void ReqUpdateRuleItem(RuleItem item)
         {
             logger.Info("请求更新风控规则");
-            this.ReqContribRequest("RiskCentre", "UpdateRuleItem", item.SerializeObject());
+            this.ReqContribJsonRequest("RiskCentre", "UpdateRuleItem", item.SerializeObject());
         }
 
         public void ReqDelRuleItem(RuleItem item)
         {
             logger.Info("请求删除风控规则");
-            this.ReqContribRequest("RiskCentre", "DelRuleItem", item.SerializeObject());
+            this.ReqContribJsonRequest("RiskCentre", "DelRuleItem", item.SerializeObject());
         }
     }
 }

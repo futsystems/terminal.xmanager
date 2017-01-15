@@ -193,6 +193,11 @@ namespace TradingLib.MoniterCore
         public const string WATCH_ACC_LIST = "WatchAccountList";
 
         /// <summary>
+        /// 恢复某个交易账户交易记录
+        /// </summary>
+        public const string RESUME_ACC = "ResumeAccount";
+
+        /// <summary>
         /// 交易端会话信息通知
         /// </summary>
         public const string NOTIFY_SESSION_INFO = "NotifySession";
@@ -207,6 +212,10 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public const string NOTIFY_ACC_STATISTIC = "NotifyAccountStatistic";
 
+        /// <summary>
+        /// 交易账户数据恢复通知
+        /// </summary>
+        public const string NOTIFY_ACC_RESUME = "NotifyResume";
         #endregion
 
         #region 手续费 保证金 交易参数 模板
@@ -354,6 +363,19 @@ namespace TradingLib.MoniterCore
         #endregion
 
         #region 汇率
+        /// <summary>
+        /// 查询交易时间段
+        /// </summary>
+        public const string QRY_INFO_MARKETTIME = "QryInfoMarketTime";
+        /// <summary>
+        /// 更新交易时间段
+        /// </summary>
+        public const string UPDATE_INFO_MARKETTIME = "UpdateInfoMarketTime";
+        /// <summary>
+        /// 交易时间段更新通知
+        /// </summary>
+        public const string NOTIFY_INFO_MARKETTIME = "NotifyMarketTime";
+
         /// <summary>
         /// 查询汇率
         /// </summary>

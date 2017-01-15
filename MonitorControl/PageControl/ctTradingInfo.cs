@@ -57,9 +57,9 @@ namespace TradingLib.MoniterControl
             CoreService.EventIndicator.GotOrderEvent += new Action<Order>(GotOrder);
             CoreService.EventIndicator.GotFillEvent += new Action<Trade>(GotTrade);
 
-            CoreService.EventHub.OnResumeDataEnd += new Action(EventHub_OnResumeDataEnd);
-            CoreService.EventHub.OnResumeDataStart += new Action(EventHub_OnResumeDataStart);
-
+            //CoreService.EventHub.OnResumeDataEnd += new Action(EventHub_OnResumeDataEnd);
+            //CoreService.EventHub.OnResumeDataStart += new Action(EventHub_OnResumeDataStart);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_ACC_RESUME, OnNotifyResume);
             if (!CoreService.SiteInfo.Domain.Super)
             {
                 //管理员可以执行平仓操作
@@ -76,29 +76,37 @@ namespace TradingLib.MoniterControl
 
         }
 
+        void OnNotifyResume(string json)
+        {
+            int status = json.DeserializeObject<int>();
+            if (status == 1)
+            {
+                ctPositionView1.PositionTracker = CoreService.TradingInfoTracker.PositionTracker;
+                ctPositionView1.OrderTracker = CoreService.TradingInfoTracker.OrderTracker;
+                ctOrderView1.OrderTracker = CoreService.TradingInfoTracker.OrderTracker;
+
+                foreach (Position pos in CoreService.TradingInfoTracker.HoldPositionTracker)
+                {
+                    ctPositionView1.GotPosition(pos);
+                }
+
+                foreach (Order o in CoreService.TradingInfoTracker.OrderTracker)
+                {
+                    ctOrderView1.GotOrder(o);
+                }
+
+                foreach (Trade f in CoreService.TradingInfoTracker.TradeTracker)
+                {
+                    ctTradeView1.GotFill(f);
+                    ctPositionView1.GotFill(f);
+                }
+                CoreService.TradingInfoTracker.EndResume();
+            }
+        }
 
         void EventHub_OnResumeDataEnd()
         {
-            ctPositionView1.PositionTracker = CoreService.TradingInfoTracker.PositionTracker;
-            ctPositionView1.OrderTracker = CoreService.TradingInfoTracker.OrderTracker;
-            ctOrderView1.OrderTracker = CoreService.TradingInfoTracker.OrderTracker;
-
-            foreach (Position pos in CoreService.TradingInfoTracker.HoldPositionTracker)
-            {
-                ctPositionView1.GotPosition(pos);
-            }
-
-            foreach (Order o in CoreService.TradingInfoTracker.OrderTracker)
-            {
-                ctOrderView1.GotOrder(o);
-            }
-
-            foreach (Trade f in CoreService.TradingInfoTracker.TradeTracker)
-            {
-                ctTradeView1.GotFill(f);
-                ctPositionView1.GotFill(f);
-            }
-            CoreService.TradingInfoTracker.EndResume();
+            
         }
 
 
@@ -111,8 +119,9 @@ namespace TradingLib.MoniterControl
             CoreService.EventIndicator.GotOrderEvent -= new Action<Order>(GotOrder);
             CoreService.EventIndicator.GotFillEvent -= new Action<Trade>(GotTrade);
 
-            CoreService.EventHub.OnResumeDataEnd -= new Action(EventHub_OnResumeDataEnd);
-            CoreService.EventHub.OnResumeDataStart -= new Action(EventHub_OnResumeDataStart);
+            //CoreService.EventHub.OnResumeDataEnd -= new Action(EventHub_OnResumeDataEnd);
+            //CoreService.EventHub.OnResumeDataStart -= new Action(EventHub_OnResumeDataStart);
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_ACC_RESUME, OnNotifyResume);
         }
 
 

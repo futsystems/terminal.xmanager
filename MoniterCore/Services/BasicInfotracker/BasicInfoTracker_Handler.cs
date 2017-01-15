@@ -17,7 +17,27 @@ namespace TradingLib.MoniterCore
         }
 
 
-        public void GotMarketTime(MarketTimeImpl mt, bool islast)
+        void OnNotifyMarketTime(string json)
+        {
+            string mtmessage = json.DeserializeObject<string>();
+            MarketTimeImpl mt = MarketTimeImpl.Deserialize(mtmessage);
+            
+            GotMarketTime(mt);
+        }
+
+        void OnRspMarketTime(string json, bool isLast)
+        {
+            string mtmessage = json.DeserializeObject<string>();
+            MarketTimeImpl mt = MarketTimeImpl.Deserialize(mtmessage);
+
+            GotMarketTime(mt);
+            if (isLast && !_initialized)
+            {
+                Status("交易时间查询完毕,查询交易所信息");
+                CoreService.TLClient.ReqQryExchange();
+            }
+        }
+        void GotMarketTime(MarketTimeImpl mt)
         {
             if (mt != null)
             {
@@ -38,18 +58,12 @@ namespace TradingLib.MoniterCore
                     notify = mt;
                 }
 
-                //对外触发
-                if (_initialized)
-                {
-                    CoreService.EventBasicInfo.FireMarketTime(notify);
-                }
+                ////对外触发
+                //if (_initialized)
+                //{
+                //    CoreService.EventBasicInfo.FireMarketTime(notify);
+                //}
             }
-            if (islast && !_initialized)
-            {
-                Status("交易时间查询完毕,查询交易所信息");
-                CoreService.TLClient.ReqQryExchange();
-            }
-
         }
 
         public void GotExchange(ExchangeImpl ex, bool islast)

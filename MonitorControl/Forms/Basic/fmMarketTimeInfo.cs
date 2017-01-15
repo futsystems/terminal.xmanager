@@ -14,7 +14,7 @@ using TradingLib.MoniterCore;
 
 namespace TradingLib.MoniterControl
 {
-    public partial class fmMarketTimeInfo : ComponentFactory.Krypton.Toolkit.KryptonForm//,IEventBinder
+    public partial class fmMarketTimeInfo : ComponentFactory.Krypton.Toolkit.KryptonForm,IEventBinder
     {
         public fmMarketTimeInfo()
         {
@@ -30,19 +30,38 @@ namespace TradingLib.MoniterControl
             //btnEdit.Click += new EventHandler(btnEdit_Click);
             btnSubmit.Click += new EventHandler(btnSubmit_Click);
 
-            CoreService.EventBasicInfo.OnMarketTimeEvent += new Action<MarketTimeImpl>(EventBasicInfo_OnMarketTimeEvent);
-
+            //CoreService.EventBasicInfo.OnMarketTimeEvent += new Action<MarketTimeImpl>(EventBasicInfo_OnMarketTimeEvent);
+            
             //timezone.SelectedIndex = 1;
         }
 
-        void EventBasicInfo_OnMarketTimeEvent(MarketTimeImpl obj)
+        public void OnInit()
         {
-            if (obj.ID == _mt.ID)
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_MARKETTIME, OnNotifyMarketTime);
+        }
+
+        public void OnDisposed()
+        { 
+            
+        }
+
+        void OnNotifyMarketTime(string json)
+        {
+            string mtmessage = json.DeserializeObject<string>();
+            MarketTimeImpl mt = MarketTimeImpl.Deserialize(mtmessage);
+            if (mt != null && mt.ID == _mt.ID)
             {
-                LogService.Info("got markettime obj..");
-                SetMarketTime(obj);
+                SetMarketTime(mt);
             }
         }
+        //void EventBasicInfo_OnMarketTimeEvent(MarketTimeImpl obj)
+        //{
+        //    if (obj.ID == _mt.ID)
+        //    {
+        //        LogService.Info("got markettime obj..");
+        //        SetMarketTime(obj);
+        //    }
+        //}
 
 
         //public void OnInit()

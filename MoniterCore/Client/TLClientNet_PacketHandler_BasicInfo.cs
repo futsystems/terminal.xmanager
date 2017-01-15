@@ -10,17 +10,17 @@ namespace TradingLib.MoniterCore
 {
     public partial class TLClientNet
     {
-        void CliOnMGRMarketTime(RspMGRQryMarketTimeResponse response)
-        {
-            logger.Debug("got markettime response:" + response.ToString());
-            CoreService.BasicInfoTracker.GotMarketTime(response.MarketTime, response.IsLast);
-        }
+        //void CliOnMGRMarketTime(RspMGRQryMarketTimeResponse response)
+        //{
+        //    logger.Debug("got markettime response:" + response.ToString());
+        //    CoreService.BasicInfoTracker.GotMarketTime(response.MarketTime, response.IsLast);
+        //}
 
-        void CliOnMGRUpdateMarketTimeResponse(RspMGRUpdateMarketTimeResponse response)
-        {
-            logger.Debug("got markettime update response:" + response.ToString());
-            CoreService.BasicInfoTracker.GotMarketTime(response.MarketTime, response.IsLast);
-        }
+        //void CliOnMGRUpdateMarketTimeResponse(RspMGRUpdateMarketTimeResponse response)
+        //{
+        //    logger.Debug("got markettime update response:" + response.ToString());
+        //    CoreService.BasicInfoTracker.GotMarketTime(response.MarketTime, response.IsLast);
+        //}
 
         void CliOnMGRExchange(RspMGRQryExchangeResponse response)
         {

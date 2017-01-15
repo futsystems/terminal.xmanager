@@ -36,26 +36,6 @@ namespace TradingLib.MoniterCore
             }
         }
 
-
-
-
-        EventHub _eventHub = null;
-        /// <summary>
-        /// 事件汇聚器
-        /// </summary>
-        public static EventHub EventHub
-        {
-            get
-            {
-                if (defaultinstance._eventHub == null)
-                    defaultinstance._eventHub = new EventHub();
-                return defaultinstance._eventHub;
-            }
-        }
-
-
-
-    
         EventBasicInfo _eventBasicInfo = null;
         /// <summary>
         /// 基础数据事件集合

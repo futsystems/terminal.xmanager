@@ -24,6 +24,8 @@ namespace TradingLib.MoniterCore
         {
 
             CoreService.EventCore.RegisterCallback("RiskCentre", "QryRuleSet", OnQryRuleSet);
+            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_MARKETTIME, OnRspMarketTime);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_MARKETTIME, OnNotifyMarketTime);
 
             CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_ACC_LIST, OnQryAccountList);
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_ACC_CHANGED, OnAccountChanged);

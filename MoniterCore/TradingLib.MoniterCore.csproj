@@ -125,7 +125,6 @@
     <Compile Include="Services\Event\EventCore.cs" />
     <Compile Include="Services\Event\EventIndicator.cs" />
     <Compile Include="Services\CoreService.cs" />
-    <Compile Include="Services\Event\EventHub.cs" />
     <Compile Include="Services\LoggingService.cs" />
     <Compile Include="Services\SiteInfo.cs" />
     <Compile Include="Services\TradingInfoTracker.cs" />

@@ -21,7 +21,7 @@ namespace TradingLib.MoniterCore
             //logger.Info("查询交易帐户列表");
             //MGRQryAccountRequest request = RequestTemplate<MGRQryAccountRequest>.CliSendRequest(++requestid);
             //SendPacket(request);
-            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_ACC_LIST, "");
+            this.ReqContribJsonRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_ACC_LIST, "");
         }
 
         /// <summary>
@@ -43,10 +43,11 @@ namespace TradingLib.MoniterCore
         /// <param name="account"></param>
         public void ReqResumeAccount(string account)
         {
-            logger.Info("请求恢复日内交易数据 Account:" + account);
-            MGRResumeAccountRequest request = RequestTemplate<MGRResumeAccountRequest>.CliSendRequest(++requestid);
-            request.ResumeAccount = account;
-            SendPacket(request);
+            //logger.Info("请求恢复日内交易数据 Account:" + account);
+            //MGRResumeAccountRequest request = RequestTemplate<MGRResumeAccountRequest>.CliSendRequest(++requestid);
+            //request.ResumeAccount = account;
+            //SendPacket(request);
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.RESUME_ACC, new { account = account });
         }
 
         public void ReqCashOperation(string account, decimal amount,QSEnumEquityType eq_type, string transref, string comment,bool syncmacct)

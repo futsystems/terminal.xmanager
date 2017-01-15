@@ -48,16 +48,16 @@ namespace TradingLib.MoniterCore
         /// 执行账户数据恢复后 本地交易记录维护期清空并准备接受服务端恢复过来的交易记录
         /// </summary>
         /// <param name="response"></param>
-        void CliOnMGRResumeAccountResponse(RspMGRResumeAccountResponse response)
-        {
-            if (response.ResumeStatus == QSEnumResumeStatus.BEGIN)
-            {
-                CoreService.EventHub.FireResumeDataStart();
-            }
-            else
-            {
-                CoreService.EventHub.FireResumeDataEnd();
-            }
-        }
+        //void CliOnMGRResumeAccountResponse(RspMGRResumeAccountResponse response)
+        //{
+        //    if (response.ResumeStatus == QSEnumResumeStatus.BEGIN)
+        //    {
+        //        CoreService.EventHub.FireResumeDataStart();
+        //    }
+        //    else
+        //    {
+        //        CoreService.EventHub.FireResumeDataEnd();
+        //    }
+        //}
     }
 }

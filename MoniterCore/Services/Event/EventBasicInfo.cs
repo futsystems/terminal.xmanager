@@ -10,7 +10,7 @@ namespace TradingLib.MoniterCore
 {
     public class EventBasicInfo
     {
-        public event Action<MarketTimeImpl> OnMarketTimeEvent;
+        //public event Action<MarketTimeImpl> OnMarketTimeEvent;
 
         public event Action<ExchangeImpl> OnExchangeEvent;
 
@@ -23,13 +23,13 @@ namespace TradingLib.MoniterCore
         public event Action<ManagerSetting> OnManagerEvent;
 
 
-        internal void FireMarketTime(MarketTimeImpl mt)
-        {
-            if (OnMarketTimeEvent != null)
-            {
-                OnMarketTimeEvent(mt);
-            }
-        }
+        //internal void FireMarketTime(MarketTimeImpl mt)
+        //{
+        //    if (OnMarketTimeEvent != null)
+        //    {
+        //        OnMarketTimeEvent(mt);
+        //    }
+        //}
 
         internal void FireExchangeEvent(ExchangeImpl exch)
         {

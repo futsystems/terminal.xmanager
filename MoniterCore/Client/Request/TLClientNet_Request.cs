@@ -84,10 +84,10 @@ namespace TradingLib.MoniterCore
 
         }
 
-        public void ReqContribRequest(string module, string cmd, object jobj)
-        {
-            this.ReqContribRequest(module, cmd, jobj.SerializeObject());
-        }
+        //public void ReqContribRequest(string module, string cmd, object jobj)
+        //{
+        //    this.ReqContribRequest(module, cmd, jobj.SerializeObject());
+        //}
 
 
         /// <summary>
@@ -96,13 +96,23 @@ namespace TradingLib.MoniterCore
         /// <param name="module"></param>
         /// <param name="cmd"></param>
         /// <param name="args"></param>
-        public void ReqContribRequest(string module, string cmd, string args)
+        public void ReqContribCommaRequest(string module, string cmd, string arg)
         {
-            logger.Info(string.Format("ContribRequest Module:{0} Cmd:{1} Args:{2}", module, cmd, args));
+            logger.Info(string.Format("ContribRequest Module:{0} Cmd:{1} Args:{2}", module, cmd, arg));
             MGRContribRequest request = RequestTemplate<MGRContribRequest>.CliSendRequest(++requestid);
             request.ModuleID = module;
             request.CMDStr = cmd;
-            request.Parameters = args;
+            request.Parameters = arg;
+            SendPacket(request);
+        }
+
+        public void ReqContribJsonRequest(string module, string cmd,object obj)
+        {
+            logger.Info(string.Format("ContribRequest Module:{0} Cmd:{1} Args:{2}", module, cmd, obj));
+            MGRContribRequest request = RequestTemplate<MGRContribRequest>.CliSendRequest(++requestid);
+            request.ModuleID = module;
+            request.CMDStr = cmd;
+            request.Parameters = obj.SerializeObject();
             SendPacket(request);
         }
 

@@ -78,28 +78,14 @@ namespace TradingLib.MoniterCore
                     break;
                 #endregion
 
-                #region Account 交易账户 查询 财务统计更新 修改更新 日内交易记录恢复
-                //case MessageTypes.MGRQRYACCOUNTSRESPONSE://管理查询帐户列表回报
-                //    CliOnMGRQryAccountList(packet as RspMGRQryAccountResponse);
-                //    break;
-                //case MessageTypes.MGRACCOUNTINFOLITENOTIFY://管理帐户财务数据更新
-                //    CliOnNotifyMGRAccountStatistic(packet as NotifyMGRAccountStatistic);
-                //    break;
-                case MessageTypes.MGRRESUMEACCOUNTRESPONE://管理恢复帐户日内交易数据回报
-                    CliOnMGRResumeAccountResponse(packet as RspMGRResumeAccountResponse);
-                    break;
-                //case MessageTypes.MGRACCOUNTCHANGEUPDATE://交易账户更改通知
-                //    CliOnMGRAccountUpdate(packet as NotifyMGRAccountChangeUpdateResponse);
-                //    break;
-                #endregion
 
                 #region BasicInfo 基础数据查询与更新回报
-                case MessageTypes.MGRMARKETTIMERESPONSE://交易时间段回报
-                    CliOnMGRMarketTime(packet as RspMGRQryMarketTimeResponse);
-                    break;
-                case MessageTypes.MGRUPDATEMARKETTIMERESPONSE://交易时间段更新回报
-                    CliOnMGRUpdateMarketTimeResponse(packet as RspMGRUpdateMarketTimeResponse);
-                    break;
+                //case MessageTypes.MGRMARKETTIMERESPONSE://交易时间段回报
+                //    CliOnMGRMarketTime(packet as RspMGRQryMarketTimeResponse);
+                //    break;
+                //case MessageTypes.MGRUPDATEMARKETTIMERESPONSE://交易时间段更新回报
+                //    CliOnMGRUpdateMarketTimeResponse(packet as RspMGRUpdateMarketTimeResponse);
+                //    break;
                 case MessageTypes.MGREXCHANGERESPONSE://交易所列表回报
                     CliOnMGRExchange(packet as RspMGRQryExchangeResponse);
                     break;

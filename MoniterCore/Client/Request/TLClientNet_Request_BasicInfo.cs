@@ -66,16 +66,18 @@ namespace TradingLib.MoniterCore
         public void ReqQryMarketTime()
         {
             logger.Info("请求查询市场时间列表");
-            MGRQryMarketTimeRequest request = RequestTemplate<MGRQryMarketTimeRequest>.CliSendRequest(++requestid);
-            SendPacket(request);
+            //MGRQryMarketTimeRequest request = RequestTemplate<MGRQryMarketTimeRequest>.CliSendRequest(++requestid);
+            //SendPacket(request);
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_MARKETTIME,"");
         }
 
         public void ReqUpdateMarketTime(MarketTimeImpl mt)
         {
             logger.Info("请求更新交易时间段");
-            MGRUpdateMarketTimeRequest request = RequestTemplate<MGRUpdateMarketTimeRequest>.CliSendRequest(++requestid);
-            request.MarketTime = mt;
-            SendPacket(request);
+            //MGRUpdateMarketTimeRequest request = RequestTemplate<MGRUpdateMarketTimeRequest>.CliSendRequest(++requestid);
+            //request.MarketTime = mt;
+            //SendPacket(request);
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_INFO_MARKETTIME, MarketTimeImpl.Serialize(mt));
         }
         public void ReqQrySecurity()
         {
