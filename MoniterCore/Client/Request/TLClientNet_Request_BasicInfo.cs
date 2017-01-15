@@ -46,6 +46,22 @@ namespace TradingLib.MoniterCore
             this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.DISABLE_ALL_SYMBOL, "");
         }
 
+        public void ReqQryMarketTime()
+        {
+            logger.Info("请求查询市场时间列表");
+            //MGRQryMarketTimeRequest request = RequestTemplate<MGRQryMarketTimeRequest>.CliSendRequest(++requestid);
+            //SendPacket(request);
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_MARKETTIME, "");
+        }
+
+        public void ReqUpdateMarketTime(MarketTimeImpl mt)
+        {
+            logger.Info("请求更新交易时间段");
+            //MGRUpdateMarketTimeRequest request = RequestTemplate<MGRUpdateMarketTimeRequest>.CliSendRequest(++requestid);
+            //request.MarketTime = mt;
+            //SendPacket(request);
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_INFO_MARKETTIME, MarketTimeImpl.Serialize(mt), true);
+        }
 
         public void ReqQryExchange()
         {
@@ -64,51 +80,46 @@ namespace TradingLib.MoniterCore
             this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_INFO_EXCHANGE, ExchangeImpl.Serialize(ex), true);
 
         }
-        public void ReqQryMarketTime()
-        {
-            logger.Info("请求查询市场时间列表");
-            //MGRQryMarketTimeRequest request = RequestTemplate<MGRQryMarketTimeRequest>.CliSendRequest(++requestid);
-            //SendPacket(request);
-            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_MARKETTIME,"");
-        }
-
-        public void ReqUpdateMarketTime(MarketTimeImpl mt)
-        {
-            logger.Info("请求更新交易时间段");
-            //MGRUpdateMarketTimeRequest request = RequestTemplate<MGRUpdateMarketTimeRequest>.CliSendRequest(++requestid);
-            //request.MarketTime = mt;
-            //SendPacket(request);
-            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_INFO_MARKETTIME, MarketTimeImpl.Serialize(mt),true);
-        }
+        
         public void ReqQrySecurity()
         {
             logger.Info("请求查询品种列表");
-            MGRQrySecurityRequest request = RequestTemplate<MGRQrySecurityRequest>.CliSendRequest(++requestid);
-            SendPacket(request);
+            //MGRQrySecurityRequest request = RequestTemplate<MGRQrySecurityRequest>.CliSendRequest(++requestid);
+            //SendPacket(request);
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_SEC, "");
         }
         public void ReqUpdateSecurity(SecurityFamilyImpl sec)
         {
             logger.Info("请求更新品种信息");
-            MGRUpdateSecurityRequest request = RequestTemplate<MGRUpdateSecurityRequest>.CliSendRequest(++requestid);
-            request.SecurityFaimly = sec;
-            SendPacket(request);
+            //MGRUpdateSecurityRequest request = RequestTemplate<MGRUpdateSecurityRequest>.CliSendRequest(++requestid);
+            //request.SecurityFaimly = sec;
+            //SendPacket(request);
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_INFO_SEC, SecurityFamilyImpl.Serialize(sec), true);
         }
 
         public void ReqQrySymbol()
         {
             logger.Info("请求查询合约列表");
-            MGRQrySymbolRequest request = RequestTemplate<MGRQrySymbolRequest>.CliSendRequest(++requestid);
-            SendPacket(request);
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_SYM, "");
         }
 
-        public int ReqUpdateSymbol(SymbolImpl sym)
+        public void ReqUpdateSymbol(SymbolImpl sym)
         {
-            logger.Info("请求更新合约");
-            MGRUpdateSymbolRequest request = RequestTemplate<MGRUpdateSymbolRequest>.CliSendRequest(++requestid);
-            request.Symbol = sym;
-            SendPacket(request);
-            return requestid;
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_INFO_SYM, SymbolImpl.Serialize(sym), true);
         }
+
+        public void ReqQryExchangeRate()
+        {
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_EXCHANGERATES, "");
+        }
+
+
+        public void ReqUpdateExchangeRate(ExchangeRate rate)
+        {
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_INFO_EXCHANGERATES, rate);
+        }
+
+
 
         /// <summary>
         /// 请求查询合约快照

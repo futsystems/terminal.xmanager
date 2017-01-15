@@ -417,12 +417,22 @@ namespace TradingLib.MoniterControl
                     btnSyncSymbols.Visible = CoreService.BasicInfoTracker.Symbols.Count() == 0;
                 }
             }
-            CoreService.EventBasicInfo.OnSymbolEvent += new Action<SymbolImpl>(InvokeGotSymbol);
+            //CoreService.EventBasicInfo.OnSymbolEvent += new Action<SymbolImpl>(InvokeGotSymbol);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_SYM, OnNotifySymbol);
         }
         public void OnDisposed()
         {
             //Globals.Debug("释放事件绑定");
-            CoreService.EventBasicInfo.OnSymbolEvent -= new Action<SymbolImpl>(InvokeGotSymbol);
+            //CoreService.EventBasicInfo.OnSymbolEvent -= new Action<SymbolImpl>(InvokeGotSymbol);
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_SYM, OnNotifySymbol);
+        }
+
+        void OnNotifySymbol(string json)
+        {
+            string content = json.DeserializeObject<string>();
+            SymbolImpl sym = SymbolImpl.Deserialize(content);
+            var localSym = CoreService.BasicInfoTracker.GetSymbol(sym.ID);
+            InvokeGotSymbol(localSym);
         }
 
         void WireEvent()

@@ -24,11 +24,21 @@ namespace TradingLib.MoniterCore
         {
 
             CoreService.EventCore.RegisterCallback("RiskCentre", "QryRuleSet", OnQryRuleSet);
+            //交易时间段
             CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_MARKETTIME, OnRspMarketTime);
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_MARKETTIME, OnNotifyMarketTime);
-
+            //交易所
             CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_EXCHANGE, OnRspExchange);
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_EXCHANGE, OnNotifyExchange);
+            //品种
+            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_SEC, OnRspSecurity);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_SEC, OnNotifySecurity);
+            //合约
+            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_SYM, OnRspSymbol);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_SYM, OnNotifySymbol);
+            //汇率
+            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_EXCHANGERATES, OnRspExchangeRate);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_EXCHANGERATES, OnNotifyExchangeRate);
 
 
             CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_ACC_LIST, OnQryAccountList);
@@ -41,7 +51,7 @@ namespace TradingLib.MoniterCore
             CoreService.EventCore.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_ROUTEGROUP, OnQryRouterGroup);
             CoreService.EventCore.RegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_ROUTEGROUP, OnNotifyRouterGroup);
 
-            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_EXCHANGERATES, this.OnNotifyExchangeRate);
+            
         
             //RegisterCallback("MgrExchServer", "NotifyDomain", OnNotifyDomain);
             

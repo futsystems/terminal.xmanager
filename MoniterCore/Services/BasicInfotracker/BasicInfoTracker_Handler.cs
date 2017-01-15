@@ -115,11 +115,30 @@ namespace TradingLib.MoniterCore
             
         }
 
+
+        void OnRspSecurity(string json, bool isLast)
+        {
+            string content = json.DeserializeObject<string>();
+            SecurityFamilyImpl sec = SecurityFamilyImpl.Deserialize(content);
+            GotSecurity(sec);
+            if (isLast && !_initialized)
+            {
+                Status("品种查询完毕,查询合约信息");
+                CoreService.TLClient.ReqQrySymbol();
+            }
+        }
+
+        void OnNotifySecurity(string json)
+        {
+            string content = json.DeserializeObject<string>();
+            SecurityFamilyImpl sec = SecurityFamilyImpl.Deserialize(content);
+            GotSecurity(sec);
+        }
         /// <summary>
         /// 获得品种信息
         /// </summary>
         /// <param name="sec"></param>
-        public void GotSecurity(SecurityFamilyImpl sec,bool islast)
+        void GotSecurity(SecurityFamilyImpl sec)
         {
             if (sec != null)
             {
@@ -159,24 +178,38 @@ namespace TradingLib.MoniterCore
                 }
 
                 //对外触发
-                if (_initialized)
-                {
-                    CoreService.EventBasicInfo.FireSecurityEvent(notify);
-                }
+                //if (_initialized)
+                //{
+                //    CoreService.EventBasicInfo.FireSecurityEvent(notify);
+                //}
             }
 
-            if (islast && !_initialized)
-            {
-                Status("品种查询完毕,查询合约信息");
-                CoreService.TLClient.ReqQrySymbol();
-            }
+           
         }
 
+        void OnNotifySymbol(string json)
+        {
+            string content = json.DeserializeObject<string>();
+            SymbolImpl sym = SymbolImpl.Deserialize(content);
+            GotSymbol(sym);
+        }
+
+        void OnRspSymbol(string json, bool isLast)
+        {
+            string content = json.DeserializeObject<string>();
+            SymbolImpl sym = SymbolImpl.Deserialize(content);
+            GotSymbol(sym);
+            if (isLast && !_initialized)
+            {
+                Status("合约查询完毕,查询汇率信息");
+                CoreService.TLClient.ReqQryExchangeRate();
+            }
+        }
         /// <summary>
         /// 获得合约信息
         /// </summary>
         /// <param name="symbol"></param>
-        public void GotSymbol(SymbolImpl symbol,bool islast)
+        void GotSymbol(SymbolImpl symbol)
         {
             if (symbol != null)
             {
@@ -218,44 +251,17 @@ namespace TradingLib.MoniterCore
                     notify = symbol;
                 }
 
-                //如果已经初始化完毕则需要对外触发事件
-                if (_initialized)
-                {
-                    CoreService.EventBasicInfo.FireSymbolEvent(notify);
-                }
+                ////如果已经初始化完毕则需要对外触发事件
+                //if (_initialized)
+                //{
+                //    CoreService.EventBasicInfo.FireSymbolEvent(notify);
+                //}
             }
-            if (islast && !_initialized)
-            {
-                Status("合约查询完毕,查询汇率信息");
-                CoreService.TLClient.ReqQryExchangeRate();
-            }
+            
 
         }
 
-        public void GotExchangeRate(ExchangeRate rate,bool isLast)
-        {
-            if (rate != null)
-            {
-                ExchangeRate target = null;
-                if (exchangeRateaIDMap.TryGetValue(rate.ID, out target))
-                {
-                    target.AskRate = rate.AskRate;
-                    target.IntermediateRate = rate.IntermediateRate;
-                    target.BidRate = rate.BidRate;
-                    target.UpdateTime = rate.UpdateTime;
-                }
-                else
-                {
-                    exchangeRateaIDMap.Add(rate.ID, rate);
-                    exchangeRateCurrencyMap[rate.Currency] = rate;
-                }
-            }
-            if (isLast && !_initialized)
-            {
-                Status("汇率查询完毕,查询委托风控规则");
-                CoreService.TLClient.ReqQryRuleSet();
-            }
-        }
+        
         
 
         void OnQryRuleSet(string json, bool islast)
@@ -415,15 +421,46 @@ namespace TradingLib.MoniterCore
         #endregion
 
 
-        #region 汇率更新
+        #region 汇率
+
+        void OnRspExchangeRate(string json,bool isLast)
+        {
+            ExchangeRate obj = CoreService.ParseJsonResponse<ExchangeRate>(json);
+            this.GotExchangeRate(obj);
+            if (isLast && !_initialized)
+            {
+                Status("汇率查询完毕,查询委托风控规则");
+                CoreService.TLClient.ReqQryRuleSet();
+            }
+        }
         void OnNotifyExchangeRate(string json)
         {
             ExchangeRate obj = CoreService.ParseJsonResponse<ExchangeRate>(json);
-            if (obj != null)
-            {
-                this.GotExchangeRate(obj,true);
-            }
+            this.GotExchangeRate(obj);
+            
         }
+
+        public void GotExchangeRate(ExchangeRate rate)
+        {
+            if (rate != null)
+            {
+                ExchangeRate target = null;
+                if (exchangeRateaIDMap.TryGetValue(rate.ID, out target))
+                {
+                    target.AskRate = rate.AskRate;
+                    target.IntermediateRate = rate.IntermediateRate;
+                    target.BidRate = rate.BidRate;
+                    target.UpdateTime = rate.UpdateTime;
+                }
+                else
+                {
+                    exchangeRateaIDMap.Add(rate.ID, rate);
+                    exchangeRateCurrencyMap[rate.Currency] = rate;
+                }
+            }
+            
+        }
+
         #endregion
 
 

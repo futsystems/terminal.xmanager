@@ -34,34 +34,34 @@ namespace TradingLib.MoniterCore
         //    CoreService.BasicInfoTracker.GotExchange(response.Exchange, response.IsLast);
         //}
 
-        void CliOnMGRSecurity(RspMGRQrySecurityResponse response)
-        {
-            logger.Debug("got security response:" + response.ToString());
-            CoreService.BasicInfoTracker.GotSecurity(response.SecurityFaimly, response.IsLast);
-        }
+        //void CliOnMGRSecurity(RspMGRQrySecurityResponse response)
+        //{
+        //    logger.Debug("got security response:" + response.ToString());
+        //    CoreService.BasicInfoTracker.GotSecurity(response.SecurityFaimly, response.IsLast);
+        //}
 
-        void CliOnMGRUpdateSymbol(RspMGRUpdateSymbolResponse response)
-        {
-            logger.Debug("got symbol update response:" + response.ToString());
-            CoreService.BasicInfoTracker.GotSymbol(response.Symbol, response.IsLast);
-        }
-        void CliOnMGRUpdateSecurity(RspMGRUpdateSecurityResponse response)
-        {
-            logger.Debug("got security update response:" + response.ToString());
-            CoreService.BasicInfoTracker.GotSecurity(response.SecurityFaimly, response.IsLast);
-        }
+        //void CliOnMGRUpdateSymbol(RspMGRUpdateSymbolResponse response)
+        //{
+        //    logger.Debug("got symbol update response:" + response.ToString());
+        //    CoreService.BasicInfoTracker.GotSymbol(response.Symbol, response.IsLast);
+        //}
+        //void CliOnMGRUpdateSecurity(RspMGRUpdateSecurityResponse response)
+        //{
+        //    logger.Debug("got security update response:" + response.ToString());
+        //    CoreService.BasicInfoTracker.GotSecurity(response.SecurityFaimly, response.IsLast);
+        //}
 
-        void CliOnMGRQrySymbol(RspMGRQrySymbolResponse response)
-        {
-            logger.Debug("got symbol response:" + response.ToString());
-            CoreService.BasicInfoTracker.GotSymbol(response.Symbol, response.IsLast);
-        }
+        //void CliOnMGRQrySymbol(RspMGRQrySymbolResponse response)
+        //{
+        //    logger.Debug("got symbol response:" + response.ToString());
+        //    CoreService.BasicInfoTracker.GotSymbol(response.Symbol, response.IsLast);
+        //}
 
-        void CliOnMGRQryExchageRate(RspMGRQryExchangeRateResponse response)
-        {
-            logger.Debug("got exchange rate response:" + response.ToString());
-            CoreService.BasicInfoTracker.GotExchangeRate(response.ExchangeRate, response.IsLast);
-        }
+        //void CliOnMGRQryExchageRate(RspMGRQryExchangeRateResponse response)
+        //{
+        //    logger.Debug("got exchange rate response:" + response.ToString());
+        //    CoreService.BasicInfoTracker.GotExchangeRate(response.ExchangeRate, response.IsLast);
+        //}
 
         void CliOnMGRQryTickSnapshot(RspMGRQryTickSnapShotResponse response)
         {

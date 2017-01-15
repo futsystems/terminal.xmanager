@@ -130,7 +130,7 @@ namespace TradingLib.MoniterControl
             }
            
         }
-        int  UpdateSymbol(SecurityFamilyImpl sec,string symbol, string name)
+        void  UpdateSymbol(SecurityFamilyImpl sec,string symbol, string name)
         {
             SymbolImpl target = new SymbolImpl();
 
@@ -154,7 +154,7 @@ namespace TradingLib.MoniterControl
             target.Name = name;
             target.Tradeable = true;
 
-            return CoreService.TLClient.ReqUpdateSymbol(target);
+            CoreService.TLClient.ReqUpdateSymbol(target);
         }
     }
 }

@@ -93,21 +93,21 @@ namespace TradingLib.MoniterCore
                 //    CliOnMGRUpdateExchangeResponse(packet as RspMGRUpdateExchangeResponse);
                 //    break;
                 
-                case MessageTypes.MGRSECURITYRESPONSE://品种回报
-                    CliOnMGRSecurity(packet as RspMGRQrySecurityResponse);
-                    break;
-                case MessageTypes.MGRUPDATESECURITYRESPONSE://更新品种回报
-                    CliOnMGRUpdateSecurity(packet as RspMGRUpdateSecurityResponse);
-                    break;
-                case MessageTypes.MGRSYMBOLRESPONSE://合约回报
-                    CliOnMGRQrySymbol(packet as RspMGRQrySymbolResponse);
-                    break;
-                case MessageTypes.MGRUPDATESYMBOLRESPONSE://合约更新回报
-                    CliOnMGRUpdateSymbol(packet as RspMGRUpdateSymbolResponse);
-                    break;
-                case MessageTypes.MGRQRYEXCHANGERATERESPONSE://汇率信息汇报啊
-                    CliOnMGRQryExchageRate(packet as RspMGRQryExchangeRateResponse);
-                    break;
+                //case MessageTypes.MGRSECURITYRESPONSE://品种回报
+                //    CliOnMGRSecurity(packet as RspMGRQrySecurityResponse);
+                //    break;
+                //case MessageTypes.MGRUPDATESECURITYRESPONSE://更新品种回报
+                //    CliOnMGRUpdateSecurity(packet as RspMGRUpdateSecurityResponse);
+                //    break;
+                //case MessageTypes.MGRSYMBOLRESPONSE://合约回报
+                //    CliOnMGRQrySymbol(packet as RspMGRQrySymbolResponse);
+                //    break;
+                //case MessageTypes.MGRUPDATESYMBOLRESPONSE://合约更新回报
+                //    CliOnMGRUpdateSymbol(packet as RspMGRUpdateSymbolResponse);
+                //    break;
+                //case MessageTypes.MGRQRYEXCHANGERATERESPONSE://汇率信息汇报啊
+                //    CliOnMGRQryExchageRate(packet as RspMGRQryExchangeRateResponse);
+                //    break;
                 case MessageTypes.MGRQRYTICKSNAPSHOTRESPONSE://行情快照更新
                     CliOnMGRQryTickSnapshot(packet as RspMGRQryTickSnapShotResponse);
                     break;

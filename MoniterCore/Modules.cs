@@ -392,17 +392,47 @@ namespace TradingLib.MoniterCore
         public const string NOTIFY_INFO_EXCHANGE = "NotifyExchange";
 
         /// <summary>
+        /// 查询品种列表
+        /// </summary>
+        public const string QRY_INFO_SEC = "QryInfoSecurity";
+
+        /// <summary>
+        /// 更新品种
+        /// </summary>
+        public const string UPDATE_INFO_SEC = "UpdateInfoSecurity";
+
+        /// <summary>
+        /// 更新品种通知
+        /// </summary>
+        public const string NOTIFY_INFO_SEC = "NotifySecurity";
+
+        /// <summary>
+        /// 查询合约
+        /// </summary>
+        public const string QRY_INFO_SYM = "QryInfoSymbol";
+
+        /// <summary>
+        /// 更新合约
+        /// </summary>
+        public const string UPDATE_INFO_SYM = "UpdateInfoSymbol";
+
+        /// <summary>
+        /// 更新合约通知
+        /// </summary>
+        public const string NOTIFY_INFO_SYM = "NotifySymbol";
+
+        /// <summary>
         /// 查询汇率
         /// </summary>
-        public const string QRY_EXCHANGERATES = "QryExchangeRates";
+        public const string QRY_INFO_EXCHANGERATES = "QryExchangeRates";
         /// <summary>
         /// 更新汇率
         /// </summary>
-        public const string UPDATE_EXCHANGERATES = "UpdateExchangeRate";
+        public const string UPDATE_INFO_EXCHANGERATES = "UpdateExchangeRate";
         /// <summary>
         /// 汇率更新通知
         /// </summary>
-        public const string NOTIFY_EXCHANGERATES = "NotifyExchangeRateUpdate";
+        public const string NOTIFY_INFO_EXCHANGERATES = "NotifyExchangeRateUpdate";
         #endregion
 
         #region Manager

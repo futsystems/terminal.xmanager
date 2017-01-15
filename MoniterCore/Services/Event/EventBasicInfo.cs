@@ -14,9 +14,9 @@ namespace TradingLib.MoniterCore
 
         //public event Action<ExchangeImpl> OnExchangeEvent;
 
-        public event Action<SecurityFamilyImpl> OnSecurityEvent;
+        //public event Action<SecurityFamilyImpl> OnSecurityEvent;
 
-        public event Action<SymbolImpl> OnSymbolEvent;
+        //public event Action<SymbolImpl> OnSymbolEvent;
 
         public event Action<RouterGroupSetting> OnRouterGroupEvent;
 
@@ -39,17 +39,17 @@ namespace TradingLib.MoniterCore
         //    }
         //}
 
-        internal void FireSecurityEvent(SecurityFamilyImpl sec)
-        {
-            if (OnSecurityEvent != null)
-                OnSecurityEvent(sec);
-        }
+        //internal void FireSecurityEvent(SecurityFamilyImpl sec)
+        //{
+        //    if (OnSecurityEvent != null)
+        //        OnSecurityEvent(sec);
+        //}
 
-        internal void FireSymbolEvent(SymbolImpl sym)
-        {
-            if (OnSymbolEvent != null)
-                OnSymbolEvent(sym);
-        }
+        //internal void FireSymbolEvent(SymbolImpl sym)
+        //{
+        //    if (OnSymbolEvent != null)
+        //        OnSymbolEvent(sym);
+        //}
 
         internal void FireRouterGroupEvent(RouterGroupSetting rg)
         {

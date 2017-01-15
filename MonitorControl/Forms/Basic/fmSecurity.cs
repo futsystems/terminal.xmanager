@@ -74,12 +74,11 @@ namespace TradingLib.MoniterControl
         }
 
 
-        delegate void SecurityFamilyDel(SecurityFamilyImpl sec);
         void InvokGotSecurity(SecurityFamilyImpl sec)
         {
             if (InvokeRequired)
             {
-                Invoke(new SecurityFamilyDel(InvokGotSecurity), new object[] { sec });
+                Invoke(new Action<SecurityFamilyImpl>(InvokGotSecurity), new object[] { sec });
             }
             else
             {
@@ -406,12 +405,19 @@ namespace TradingLib.MoniterControl
                 //btnAddSecurity.Visible = CoreService.SiteInfo.Manager.IsRoot();
             }
 
-            CoreService.EventBasicInfo.OnSecurityEvent += new Action<SecurityFamilyImpl>(InvokGotSecurity);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_SEC, OnNotifySecurity);
         }
 
         public void OnDisposed()
         {
-            CoreService.EventBasicInfo.OnSecurityEvent -= new Action<SecurityFamilyImpl>(InvokGotSecurity);
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_SEC, OnNotifySecurity);
+        }
+
+        void OnNotifySecurity(string json)
+        {
+            string content = json.DeserializeObject<string>();
+            SecurityFamilyImpl sec = SecurityFamilyImpl.Deserialize(content);
+            InvokGotSecurity(sec);
         }
         void WireEvent()
         {

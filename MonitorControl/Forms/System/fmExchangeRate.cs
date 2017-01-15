@@ -30,7 +30,7 @@ namespace TradingLib.MoniterControl
         void fmExchangeRate_Load(object sender, EventArgs e)
         {
 
-            CoreService.TLClient.ReqQryExchangeRateContrib();
+            CoreService.TLClient.ReqQryExchangeRate();
             rategrid.DoubleClick += new EventHandler(rategrid_DoubleClick);
         }
 
@@ -82,14 +82,14 @@ namespace TradingLib.MoniterControl
         public void OnInit()
         {
 
-            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_EXCHANGERATES, this.OnQryExchangeRates);
-            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_EXCHANGERATES, this.OnNotifyExchangeRate);
+            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_EXCHANGERATES, this.OnQryExchangeRates);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_EXCHANGERATES, this.OnNotifyExchangeRate);
         }
 
         public void OnDisposed()
         {
-            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_EXCHANGERATES, this.OnQryExchangeRates);
-            CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_EXCHANGERATES, this.OnNotifyExchangeRate);
+            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_EXCHANGERATES, this.OnQryExchangeRates);
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_EXCHANGERATES, this.OnNotifyExchangeRate);
             
         }
 
@@ -104,13 +104,10 @@ namespace TradingLib.MoniterControl
         void OnQryExchangeRates(string json,bool islast)
         {
 
-            ExchangeRate[] obj = CoreService.ParseJsonResponse<ExchangeRate[]>(json);
-            if (obj != null)
+            ExchangeRate rate = CoreService.ParseJsonResponse<ExchangeRate>(json);
+            if (rate != null)
             {
-                foreach (var rate in obj)
-                {
-                    InvokeGotExchangeRate(rate);
-                }
+                InvokeGotExchangeRate(rate);
             }
         }
 
