@@ -12,8 +12,6 @@ namespace TradingLib.MoniterCore
     public delegate void RspMGRLoginResponseDel(RspMGRLoginResponse response);
     public partial class TLClientNet
     {
-
-
         void connecton_OnPacketEvent(IPacket packet)
         {
             //需要在所有回报处理之前 检查是否需要进行错误提示或者正常返回的消息显示
@@ -43,20 +41,20 @@ namespace TradingLib.MoniterCore
             switch (packet.Type)
             {
                 #region Other
-                case MessageTypes.MGRLOGINRESPONSE://管理登入回报
+                case MessageTypes.MGR_RSP_LOGIN://管理登入回报
                     CliOnRspMGRLoginResponse(packet as RspMGRLoginResponse);
                     break;
 
-                case MessageTypes.MGRCONTRIBRESPONSE://管理扩展回报
+                case MessageTypes.MGR_RSP_CONTRIB://管理扩展回报
                     CliOnMGRContribResponse(packet as RspMGRContribResponse);
                     break;
 
-                case MessageTypes.MGRCONTRIBRNOTIFY://管理扩展通知
+                case MessageTypes.MGR_RTN_CONTRIB://管理扩展通知
                     CliOnMGRContribNotify(packet as NotifyMGRContribNotify);
                     break;
 
-                case MessageTypes.MGROPERATIONRESPONSE://操作统一回报
-                    CliOnOperationResponse(packet as RspMGROperationResponse);
+                case MessageTypes.MGR_RSP://操作应答
+                    CliOnRspMGRResponse(packet as RspMGRResponse);
                     break;
                 #endregion
 
@@ -78,42 +76,6 @@ namespace TradingLib.MoniterCore
                     break;
                 #endregion
 
-
-                #region BasicInfo 基础数据查询与更新回报
-                //case MessageTypes.MGRMARKETTIMERESPONSE://交易时间段回报
-                //    CliOnMGRMarketTime(packet as RspMGRQryMarketTimeResponse);
-                //    break;
-                //case MessageTypes.MGRUPDATEMARKETTIMERESPONSE://交易时间段更新回报
-                //    CliOnMGRUpdateMarketTimeResponse(packet as RspMGRUpdateMarketTimeResponse);
-                //    break;
-                //case MessageTypes.MGREXCHANGERESPONSE://交易所列表回报
-                //    CliOnMGRExchange(packet as RspMGRQryExchangeResponse);
-                //    break;
-                //case MessageTypes.MGRUPDATEEXCHANGERESPONSE://更新交易所回报
-                //    CliOnMGRUpdateExchangeResponse(packet as RspMGRUpdateExchangeResponse);
-                //    break;
-                
-                //case MessageTypes.MGRSECURITYRESPONSE://品种回报
-                //    CliOnMGRSecurity(packet as RspMGRQrySecurityResponse);
-                //    break;
-                //case MessageTypes.MGRUPDATESECURITYRESPONSE://更新品种回报
-                //    CliOnMGRUpdateSecurity(packet as RspMGRUpdateSecurityResponse);
-                //    break;
-                //case MessageTypes.MGRSYMBOLRESPONSE://合约回报
-                //    CliOnMGRQrySymbol(packet as RspMGRQrySymbolResponse);
-                //    break;
-                //case MessageTypes.MGRUPDATESYMBOLRESPONSE://合约更新回报
-                //    CliOnMGRUpdateSymbol(packet as RspMGRUpdateSymbolResponse);
-                //    break;
-                //case MessageTypes.MGRQRYEXCHANGERATERESPONSE://汇率信息汇报啊
-                //    CliOnMGRQryExchageRate(packet as RspMGRQryExchangeRateResponse);
-                //    break;
-                //case MessageTypes.MGRQRYTICKSNAPSHOTRESPONSE://行情快照更新
-                //    CliOnMGRQryTickSnapshot(packet as RspMGRQryTickSnapShotResponse);
-                //    break;
-                #endregion
-
-               
                 default:
                     logger.Error("Packet Handler Not Set, Packet:" + packet.ToString());
                     break;

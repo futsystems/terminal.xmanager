@@ -50,7 +50,7 @@ namespace TradingLib.MoniterCore
             CoreService.EventCore.GotMGRContribNotifyResponse(module, cmd, ret);
         }
 
-        void CliOnOperationResponse(RspMGROperationResponse response)
+        void CliOnRspMGRResponse(RspMGRResponse response)
         {
             logger.Info("got operation response:" + response.ToString());
             CoreService.EventCore.FireRspInfoEvent(response.RspInfo);

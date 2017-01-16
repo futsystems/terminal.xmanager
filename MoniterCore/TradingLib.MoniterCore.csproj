@@ -76,7 +76,6 @@
     <Compile Include="Client\AsyncClient_MQ.cs" />
     <Compile Include="Client\Request\pending\TLClientNet_Request_SettleManager.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_ExchangeRate.cs" />
-    <Compile Include="Client\TLClientNet_PacketHandler_Account.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_Account.cs" />
     <Compile Include="Client\Request\old\TLClientNet_Request_AccountConnector.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_BasicInfo.cs" />
@@ -98,7 +97,6 @@
     <Compile Include="Client\TLClientNet.cs" />
     <Compile Include="Client\TLClientNet_PacketHandler_PacketRouter.cs" />
     <Compile Include="Client\TLClientNet_PacketHandler_Trading.cs" />
-    <Compile Include="Client\TLClientNet_PacketHandler_BasicInfo.cs" />
     <Compile Include="Client\Request\TLClientNet_Request.cs" />
     <Compile Include="Client\TLClient_MQ.cs" />
     <Compile Include="Client\ZMessage.cs" />

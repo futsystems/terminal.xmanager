@@ -18,9 +18,6 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public void ReqQryAccountList()
         {
-            //logger.Info("查询交易帐户列表");
-            //MGRQryAccountRequest request = RequestTemplate<MGRQryAccountRequest>.CliSendRequest(++requestid);
-            //SendPacket(request);
             this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_ACC_LIST, "");
         }
 
@@ -30,10 +27,6 @@ namespace TradingLib.MoniterCore
         /// <param name="list"></param>
         public void ReqWatchAccount(List<string> list)
         {
-            //logger.Info("请求设置观察帐户列表:" + string.Join(",", list.ToArray()));
-            //MGRWatchAccountRequest request = RequestTemplate<MGRWatchAccountRequest>.CliSendRequest(++requestid);
-            //request.Add(list);
-            //SendPacket(request);
             this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.WATCH_ACC_LIST, list.ToArray());
         }
 
@@ -43,10 +36,6 @@ namespace TradingLib.MoniterCore
         /// <param name="account"></param>
         public void ReqResumeAccount(string account)
         {
-            //logger.Info("请求恢复日内交易数据 Account:" + account);
-            //MGRResumeAccountRequest request = RequestTemplate<MGRResumeAccountRequest>.CliSendRequest(++requestid);
-            //request.ResumeAccount = account;
-            //SendPacket(request);
             this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.RESUME_ACC, new { account = account });
         }
 

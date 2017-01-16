@@ -362,7 +362,7 @@ namespace TradingLib.MoniterCore
         public const string QRY_DOMAIN_LOGININFO = "QryDomainRootLoginInfo";
         #endregion
 
-        #region 汇率
+        #region 基础数据
         /// <summary>
         /// 查询交易时间段
         /// </summary>
@@ -512,7 +512,10 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public const string QRY_SYSTEM_STATUS = "QrySystemStatus";
 
-       
+        /// <summary>
+        /// 请求补充交易记录
+        /// </summary>
+        public const string REQ_INSERT_TRADE = "InsertTrade";
         #endregion
     }
 

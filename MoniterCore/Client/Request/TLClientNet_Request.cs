@@ -61,6 +61,7 @@ namespace TradingLib.MoniterCore
             request.Order = order;
             SendPacket(request);
             return requestid;
+            
         }
 
         /// <summary>
@@ -77,11 +78,7 @@ namespace TradingLib.MoniterCore
 
         public void ReqInsertTrade(Trade f)
         {
-            logger.Info("请求插入成交");
-            MGRReqInsertTradeRequest request = RequestTemplate<MGRReqInsertTradeRequest>.CliSendRequest(++requestid);
-            request.TradeToSend = f;
-            SendPacket(request);
-
+            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.REQ_INSERT_TRADE, TradeImpl.Serialize(f), true);
         }
 
         /// <summary>
@@ -94,23 +91,6 @@ namespace TradingLib.MoniterCore
         {
             this.ReqContribRequest(module, cmd, jobj.SerializeObject());
         }
-
-
-        /// <summary>
-        /// 调用某个模块 某个命令 某个参数 
-        /// </summary>
-        /// <param name="module"></param>
-        /// <param name="cmd"></param>
-        /// <param name="args"></param>
-        //public void ReqContribCommaRequest(string module, string cmd, string arg)
-        //{
-        //    logger.Info(string.Format("ContribRequest Module:{0} Cmd:{1} Args:{2}", module, cmd, arg));
-        //    MGRContribRequest request = RequestTemplate<MGRContribRequest>.CliSendRequest(++requestid);
-        //    request.ModuleID = module;
-        //    request.CMDStr = cmd;
-        //    request.Parameters = arg;
-        //    SendPacket(request);
-        //}
 
         public void ReqContribRequest(string module, string cmd,string arg,bool str2json = false)
         {
