@@ -52,7 +52,7 @@ namespace TradingLib.MoniterControl
             cbinterfacelist.SelectedIndexChanged += new EventHandler(cbinterfacelist_SelectedIndexChanged);
             if (this.IsAddMode)
             {
-                LoadInputControl(1);
+                LoadInputControl((int)cbinterfacelist.SelectedValue);
             }
             else
             {
