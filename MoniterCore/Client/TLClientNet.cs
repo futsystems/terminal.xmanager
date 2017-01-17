@@ -15,6 +15,19 @@ namespace TradingLib.MoniterCore
 
         TLClient_MQ connecton = null;
 
+        int requestid = 0;
+        object _reqidobj = new object();
+        protected int NextRequestID
+        {
+            get
+            {
+                lock (_reqidobj)
+                {
+                    return ++requestid;
+                }
+            }
+        }
+
         /// <summary>
         /// 是否处于连接状态
         /// </summary>
@@ -87,9 +100,6 @@ namespace TradingLib.MoniterCore
 
 
         }
-
-        
-        int requestid = 0;
 
         void SendPacket(IPacket packet)
         {

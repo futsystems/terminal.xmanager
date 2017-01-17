@@ -30,6 +30,11 @@ namespace TradingLib.MoniterCore
         /// 通道管理模块
         /// </summary>
         public const string CONN_MGR = "ConnectorManager";
+
+        /// <summary>
+        /// 风控模块
+        /// </summary>
+        public const string RiskCentre = "RiskCentre";
     }
 
 
@@ -620,5 +625,18 @@ namespace TradingLib.MoniterCore
         /// 查询交易端会话信息
         /// </summary>
         public const string QRY_SESSION_INFO = "QrySessionInfo";
+    }
+
+
+    public class Method_RiskCentre
+    {
+        public const string QRY_RULESET = "QryRuleSet";
+
+        public const string QRY_RULEITEM = "QryRuleItem";
+
+        public const string UPDATE_RULEITEM = "UpdateRuleItem";
+
+        public const string DEL_RULEITEM = "DelRuleItem";
+
     }
 }
