@@ -61,18 +61,18 @@ namespace TradingLib.MoniterControl
         public void OnInit()
         {
 
-            CoreService.EventCore.RegisterCallback("RiskCentre", "QryRuleItem", this.OnRuleItem);
-            CoreService.EventCore.RegisterCallback("RiskCentre", "UpdateRuleItem", this.OnRuleItemUpdate);
-            CoreService.EventCore.RegisterCallback("RiskCentre", "DelRuleItem", this.OnRuleItemDel);
+            CoreService.EventCore.RegisterCallback(Modules.RiskCentre, Method_RiskCentre.QRY_RULEITEM, this.OnRuleItem);
+            CoreService.EventCore.RegisterCallback(Modules.RiskCentre, Method_RiskCentre.UPDATE_RULEITEM, this.OnRuleItemUpdate);
+            CoreService.EventCore.RegisterCallback(Modules.RiskCentre, Method_RiskCentre.DEL_RULEITEM, this.OnRuleItemDel);
             CoreService.TLClient.ReqQryRuleItem(_account.Account, QSEnumRuleType.OrderRule);
             CoreService.TLClient.ReqQryRuleItem(_account.Account, QSEnumRuleType.AccountRule);
         }
 
         public void OnDisposed()
         {
-            CoreService.EventCore.UnRegisterCallback("RiskCentre", "QryRuleItem", this.OnRuleItem);
-            CoreService.EventCore.UnRegisterCallback("RiskCentre", "UpdateRuleItem", this.OnRuleItemUpdate);
-            CoreService.EventCore.UnRegisterCallback("RiskCentre", "DelRuleItem", this.OnRuleItemDel);
+            CoreService.EventCore.UnRegisterCallback(Modules.RiskCentre, Method_RiskCentre.QRY_RULEITEM, this.OnRuleItem);
+            CoreService.EventCore.UnRegisterCallback(Modules.RiskCentre, Method_RiskCentre.UPDATE_RULEITEM, this.OnRuleItemUpdate);
+            CoreService.EventCore.UnRegisterCallback(Modules.RiskCentre, Method_RiskCentre.DEL_RULEITEM, this.OnRuleItemDel);
         }
 
         void OnRuleItem(string json, bool islast)

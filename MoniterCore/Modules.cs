@@ -630,13 +630,30 @@ namespace TradingLib.MoniterCore
 
     public class Method_RiskCentre
     {
+        /// <summary>
+        /// 查询风控规则
+        /// </summary>
         public const string QRY_RULESET = "QryRuleSet";
 
+        /// <summary>
+        /// 查询账户风控项目时
+        /// </summary>
         public const string QRY_RULEITEM = "QryRuleItem";
 
+        /// <summary>
+        /// 更新账户风控项目
+        /// </summary>
         public const string UPDATE_RULEITEM = "UpdateRuleItem";
 
+        /// <summary>
+        /// 删除账户风控项目
+        /// </summary>
         public const string DEL_RULEITEM = "DelRuleItem";
+
+        /// <summary>
+        /// 强平分账户所有持仓
+        /// </summary>
+        public const string Flat_ALL = "FlatAllPosition";
 
     }
 }

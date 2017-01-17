@@ -264,7 +264,7 @@ namespace TradingLib.MoniterCore
         
         
 
-        void OnQryRuleSet(string json, bool islast)
+        void OnRspRuleSet(string json, bool islast)
         {
             RuleClassItem item = CoreService.ParseJsonResponse<RuleClassItem>(json);
 

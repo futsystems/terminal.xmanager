@@ -22,8 +22,6 @@ namespace TradingLib.MoniterCore
 
         public BasicInfoTracker()
         {
-
-            CoreService.EventCore.RegisterCallback("RiskCentre", "QryRuleSet", OnQryRuleSet);
             //交易时间段
             CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_MARKETTIME, OnRspMarketTime);
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_MARKETTIME, OnNotifyMarketTime);
@@ -44,18 +42,21 @@ namespace TradingLib.MoniterCore
             CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_INFO_EXCHANGERATES, OnRspExchangeRate);
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_EXCHANGERATES, OnNotifyExchangeRate);
 
-            //交易账户
-            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_ACC_LIST, OnQryAccountList);
-            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_ACC_CHANGED, OnAccountChanged);
+            //查询风控规则
+            CoreService.EventCore.RegisterCallback(Modules.RiskCentre, Method_RiskCentre.QRY_RULESET, OnRspRuleSet);
 
             //管理员
             CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_MANAGER, OnRspManager);
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MANAGER, OnNotifyManagerUpdate);
-            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH,Method_MGR_EXCH.NOTIFY_MANGER_DELETE, OnNotifyManagerDelete);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MANGER_DELETE, OnNotifyManagerDelete);
 
             //路由组
             CoreService.EventCore.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_ROUTEGROUP, OnQryRouterGroup);
             CoreService.EventCore.RegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_ROUTEGROUP, OnNotifyRouterGroup);
+
+            //交易账户
+            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_ACC_LIST, OnQryAccountList);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_ACC_CHANGED, OnAccountChanged);
 
             CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_TICK_SNAPSHOT, OnRspTickSnapshot);
         }
