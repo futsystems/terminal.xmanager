@@ -144,7 +144,7 @@ namespace TradingLib.MoniterControl
 
         void commissionGrid_DoubleClick(object sender, EventArgs e)
         {
-            CommissionTemplateItemSetting item = GetVisibleCommissionItem(CurrentItemID);
+            CommissionTemplateItemSetting item = CurrentItem;
             if (item == null)
             {
                 MoniterHelper.WindowMessage("请选择需要编辑的手续费模板项目");
@@ -153,47 +153,17 @@ namespace TradingLib.MoniterControl
 
             fmCommissionTemplateItemEdit fm = new fmCommissionTemplateItemEdit();
             fm.SetCommissionTemplateItem(item);
-            fm.SetCommissionTemplateItems(itemmap.Values);
+            //fm.SetCommissionTemplateItems(itemmap.Values);
             fm.ShowDialog();
         }
 
-        //得到当前选择的行号
-        private int CurrentItemID
-        {
-            get
-            {
-                int row = commissionGrid.SelectedRows.Count > 0 ? commissionGrid.SelectedRows[0].Index : -1;
-                if (row >= 0)
-                {
-                    return int.Parse(commissionGrid[0, row].Value.ToString());
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-        }
 
+        
 
-
-        //通过行号得该行的Security
-        CommissionTemplateItemSetting GetVisibleCommissionItem(int id)
-        {
-            CommissionTemplateItemSetting item = null;
-            if (itemmap.TryGetValue(id, out item))
-            {
-                return item;
-            }
-            else
-            {
-                return null;
-            }
-        }
 
 
         void AddItem_Click(object sender, EventArgs e)
         {
-
             fmCommissionTemplateItemEdit fm = new fmCommissionTemplateItemEdit();
             try
             {
@@ -205,7 +175,6 @@ namespace TradingLib.MoniterControl
                         fm.SetCommissionTemplateID(t.ID);
                         fm.ShowDialog();
                     }
-
                 }
             }
             catch (Exception ex)
@@ -220,6 +189,7 @@ namespace TradingLib.MoniterControl
             fmTemplateEdit fm = new fmTemplateEdit(TemplateEditType.Commission);
             fm.ShowDialog();
         }
+
         void Del_Click(object sender, EventArgs e)
         { 
             if(tempateTree.SelectedNode.Parent != null)//父节点不为空 表面为二级节点
@@ -232,7 +202,6 @@ namespace TradingLib.MoniterControl
                     if (MoniterHelper.WindowConfirm(string.Format("确认删除手续费模板:{0}?", t.Name)) == System.Windows.Forms.DialogResult.Yes)
                     {
                         ClearItem();
-
                         CoreService.TLClient.ReqDelCommissionTemplate(t);
                     }
 
@@ -262,7 +231,6 @@ namespace TradingLib.MoniterControl
 
         public void OnDisposed()
         {
-            //LogService.Debug("disposed.....");
             CoreService.EventCore.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_COMMISSION_TEMPLATE, this.OnQryCommissionTemplate);
             CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_COMMISSION_TEMPLATE, this.OnNotifyCommissionTemplate);
             CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_COMMISSION_TEMPLATE_DELETE, this.OnNotifyDelCommissionTemplate);
@@ -289,12 +257,30 @@ namespace TradingLib.MoniterControl
         {
             commissionGrid.DataSource = null;
             itemrowmap.Clear();
-            itemmap.Clear();
             gt.Rows.Clear();
             BindToTable();
         }
+
+
+        #region CommissioinTemplateItem
+        private CommissionTemplateItemSetting CurrentItem
+        {
+            get
+            {
+                int row = commissionGrid.SelectedRows.Count > 0 ? commissionGrid.SelectedRows[0].Index : -1;
+                if (row >= 0)
+                {
+                    return commissionGrid[TAG, row].Value as CommissionTemplateItemSetting;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+
         Dictionary<int, int> itemrowmap  = new Dictionary<int, int>();
-        Dictionary<int, CommissionTemplateItemSetting> itemmap = new Dictionary<int, CommissionTemplateItemSetting>();
 
         int ItemIdx(int id)
         {
@@ -309,10 +295,6 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="json"></param>
         void OnQryCommissionTemplateItem(string json, bool islast)
         {
             CommissionTemplateItemSetting obj = CoreService.ParseJsonResponse<CommissionTemplateItemSetting>(json);
@@ -359,7 +341,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][PERCENT] = item.Percent;
                     gt.Rows[i][CHARGETYPE] = GetChargeTypeStr(item.ChargeType);// == QSEnumChargeType.Absolute ? "绝对" : "相对";
 
-                    itemmap.Add(item.ID, item);
+                    gt.Rows[i][TAG] = item;
                     itemrowmap.Add(item.ID, i);
 
                 }
@@ -374,31 +356,31 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][CLOSEBYVOLUME] = item.CloseByVolume;
                     gt.Rows[i][PERCENT] = item.Percent;
                     gt.Rows[i][CHARGETYPE] = GetChargeTypeStr(item.ChargeType);// == QSEnumChargeType.Absolute ? "绝对" : "相对";
-                    itemmap[item.ID]=item;
+                    gt.Rows[i][TAG] = item;
                 }
             }
         }
+
+        #endregion
+
+
 
         Dictionary<int, CommissionTemplateSetting> templatemap = new Dictionary<int, CommissionTemplateSetting>();
         void OnQryCommissionTemplate(string json, bool islast)
         {
             try
             {
-                //LogService.Debug("template str:" + json);
                 CommissionTemplateSetting[] list = CoreService.ParseJsonResponse<CommissionTemplateSetting[]>(json);
                 if (list != null)
                 {
                     foreach (CommissionTemplateSetting t in list)
                     {
-                        //LogService.Debug("commissiontempalte:" + t.ID + " " + t.Name);
                         templatemap.Add(t.ID, t);
-                        //templatelist.Items.Add(t);
                         InvokeGotCommissiontTemplateItem(t);
                     }
                 }
                 if (islast)
                 {
-                    //模板加载完毕后展开所有节点
                     tempateTree.ExpandAll();
                 }
             }
@@ -407,19 +389,6 @@ namespace TradingLib.MoniterControl
                 MessageBox.Show(ex.ToString());
             }
         }
-
-        void InvokeGotCommissiontTemplateItem(CommissionTemplateSetting commission)
-        {
-            if (InvokeRequired)
-            {
-                Invoke(new Action<CommissionTemplateSetting>(InvokeGotCommissiontTemplateItem), new object[] { commission });
-            }
-            else
-            {
-                tempateTree.Nodes[0].Nodes.Add(CreateCommissionTemplateItem(commission));
-            }
-        }
-
         void OnNotifyDelCommissionTemplate(string json)
         {
             CommissionTemplateSetting obj = CoreService.ParseJsonResponse<CommissionTemplateSetting>(json);
@@ -438,22 +407,33 @@ namespace TradingLib.MoniterControl
             if (obj != null)
             {
                 CommissionTemplateSetting target = null;
-                if (templatemap.TryGetValue(obj.ID,out target))
+                if (templatemap.TryGetValue(obj.ID, out target))
                 {
                     target.Name = obj.Name;
                     target.Description = obj.Description;
-                    //templatelist.Refresh();
                     tempateTree.Refresh();
                 }
                 else
                 {
                     templatemap.Add(obj.ID, obj);
-                    //templatelist.Items.Add(obj);
                     InvokeGotCommissiontTemplateItem(obj);
                 }
                 tempateTree.ExpandAll();
             }
         }
+        void InvokeGotCommissiontTemplateItem(CommissionTemplateSetting commission)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action<CommissionTemplateSetting>(InvokeGotCommissiontTemplateItem), new object[] { commission });
+            }
+            else
+            {
+                tempateTree.Nodes[0].Nodes.Add(CreateCommissionTemplateItem(commission));
+            }
+        }
+
+
 
 
 
@@ -472,6 +452,7 @@ namespace TradingLib.MoniterControl
         const string CLOSEBYVOLUME = "平仓(手数)";
         const string PERCENT = "百分比";
         const string CHARGETYPE = "计算方式";
+        const string TAG = "TAG";
 
         #endregion
 
@@ -515,6 +496,7 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(CLOSEBYVOLUME);//
             gt.Columns.Add(PERCENT);
             gt.Columns.Add(CHARGETYPE);
+            gt.Columns.Add(TAG, typeof(CommissionTemplateItemSetting));
         }
 
         /// <summary>
@@ -527,13 +509,11 @@ namespace TradingLib.MoniterControl
             grid.DataSource = datasource;
 
             grid.Columns[ID].Visible = false;
+            grid.Columns[TAG].Visible = false;
 
             grid.Columns[ID].Width = 60;
             grid.Columns[CODE].Width =60;
             grid.Columns[MONTH].Width = 60;
-
-            
-
         }
 
 

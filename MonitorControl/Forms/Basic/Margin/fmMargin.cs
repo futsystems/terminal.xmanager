@@ -108,7 +108,7 @@ namespace TradingLib.MoniterControl
 
         void commissionGrid_DoubleClick(object sender, EventArgs e)
         {
-            MarginTemplateItemSetting item = GetVisibleCommissionItem(CurrentItemID);
+            MarginTemplateItemSetting item = CurrentItem;
             if (item == null)
             {
                 MoniterHelper.WindowMessage("请选择需要编辑的保证金模板项目");
@@ -120,32 +120,19 @@ namespace TradingLib.MoniterControl
         }
 
         //得到当前选择的行号
-        private int CurrentItemID
+        private MarginTemplateItemSetting CurrentItem
         {
             get
             {
                 int row = marginGrid.SelectedRows.Count > 0 ? marginGrid.SelectedRows[0].Index : -1;
                 if (row >= 0)
                 {
-                    return int.Parse(marginGrid[0, row].Value.ToString());
+                    return marginGrid[TAG, row].Value as MarginTemplateItemSetting;
                 }
                 else
                 {
-                    return 0;
+                    return null;
                 }
-            }
-        }
-
-        MarginTemplateItemSetting GetVisibleCommissionItem(int id)
-        {
-            MarginTemplateItemSetting item = null;
-            if (itemmap.TryGetValue(id, out item))
-            {
-                return item;
-            }
-            else
-            {
-                return null;
             }
         }
 
@@ -243,14 +230,12 @@ namespace TradingLib.MoniterControl
         {
             marginGrid.DataSource = null;
             itemrowmap.Clear();
-            itemmap.Clear();
             gt.Rows.Clear();
             BindToTable();
         }
 
 
         Dictionary<int, int> itemrowmap  = new Dictionary<int, int>();
-        Dictionary<int, MarginTemplateItemSetting> itemmap = new Dictionary<int, MarginTemplateItemSetting>();
 
         int ItemIdx(int id)
         {
@@ -306,8 +291,8 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][MARGINBYVOLUME] = item.MarginByVolume;
                     gt.Rows[i][PERCENT] = item.Percent;
                     gt.Rows[i][CHARGETYPE] = GetChargeTypeStr(item.ChargeType);// == QSEnumChargeType.Absolute ? "绝对" : "相对";
-
-                    itemmap.Add(item.ID, item);
+                    gt.Rows[i][TAG] = item;
+                    
                     itemrowmap.Add(item.ID, i);
 
                 }
@@ -318,7 +303,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][MARGINBYVOLUME] = item.MarginByVolume;
                     gt.Rows[i][PERCENT] = item.Percent;
                     gt.Rows[i][CHARGETYPE] = GetChargeTypeStr(item.ChargeType);// == QSEnumChargeType.Absolute ? "绝对" : "相对";
-                    itemmap[item.ID]=item;
+                    gt.Rows[i][TAG] = item;
                 }
             }
         }
@@ -376,13 +361,11 @@ namespace TradingLib.MoniterControl
                 {
                     target.Name = obj.Name;
                     target.Description = obj.Description;
-                    //templatelist.Refresh();
                     templateTree.Refresh();
                 }
                 else
                 {
                     templatemap.Add(obj.ID, obj);
-                    //templatelist.Items.Add(obj);
                     InvokeGotMarginTemplate(obj);
                 }
                 templateTree.ExpandAll();
@@ -402,7 +385,7 @@ namespace TradingLib.MoniterControl
         const string MARGINBYVOLUME = "保证金(数量)";
         const string PERCENT = "上浮比例";
         const string CHARGETYPE = "计算方式";
-
+        const string TAG = "TAG";
         #endregion
 
         DataTable gt = new DataTable();
@@ -441,6 +424,7 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(MARGINBYVOLUME);//
             gt.Columns.Add(PERCENT);
             gt.Columns.Add(CHARGETYPE);
+            gt.Columns.Add(TAG, typeof(MarginTemplateItemSetting));
         }
 
         /// <summary>
@@ -453,6 +437,7 @@ namespace TradingLib.MoniterControl
             grid.DataSource = datasource;
 
             grid.Columns[ID].Visible = false;
+            grid.Columns[TAG].Visible = false;
             grid.Columns[ID].Width = 60;
             grid.Columns[CODE].Width =60;
             grid.Columns[MONTH].Width = 60;

@@ -136,8 +136,8 @@ namespace TradingLib.MoniterControl
 
                     gt.Rows[i][UNDERLAYINGSYMBOLID] = sym.underlayingsymbol_fk;
                     gt.Rows[i][UNDERLAYINGSYMBOL] = sym.UnderlayingSymbol != null ? sym.UnderlayingSymbol.Symbol : "无";
-                    gt.Rows[i][MONTH] = GetMonth(sym);//sym.Month;
-                    gt.Rows[i][EXPIREDATE] = GetExpireDate(sym);//sym.ExpireDate;
+                    gt.Rows[i][MONTH] = GetMonth(sym);
+                    gt.Rows[i][EXPIREDATE] = GetExpireDate(sym);
                     gt.Rows[i][TRADEABLE] = sym.Tradeable;
                     gt.Rows[i][TRADEABLETITLE] = GetTradeableTitle(sym.Tradeable);
                     gt.Rows[i][SYMBOLTYPE] = Util.GetEnumDescription(sym.SymbolType);
@@ -301,7 +301,7 @@ namespace TradingLib.MoniterControl
 
         #endregion
 
-        void RefreshSecurityQuery()
+        void FilterSymbol()
         {
             string strFilter = string.Format(SECTYPE + " > '{0}'", "*");
 
@@ -421,12 +421,12 @@ namespace TradingLib.MoniterControl
 
         private void cbsecurity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.RefreshSecurityQuery();
+            this.FilterSymbol();
         }
 
         private void cbexchange_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.RefreshSecurityQuery();
+            this.FilterSymbol();
 
             //通过交易所ID获得该交易所所有合约
             if (CoreService.BasicInfoTracker.Initialized)
@@ -450,7 +450,7 @@ namespace TradingLib.MoniterControl
 
         private void cbtradeable_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.RefreshSecurityQuery();
+            this.FilterSymbol();
         }
 
         private void btnAddSymbol_Click(object sender, EventArgs e)

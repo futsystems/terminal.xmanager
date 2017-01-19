@@ -188,14 +188,6 @@ namespace TradingLib.MoniterControl
 
         CommissionTemplateItemSetting _item = null;
 
-        IEnumerable<CommissionTemplateItemSetting> _items = null;
-
-
-        public void SetCommissionTemplateItems(IEnumerable<CommissionTemplateItemSetting> items)
-        {
-            _items = items;
-        }
-
         public void SetCommissionTemplateItem(CommissionTemplateItemSetting item)
         {
             _item = item;
