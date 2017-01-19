@@ -258,34 +258,34 @@
     <Compile Include="Forms\Account\fmCashOperationCounter.Designer.cs">
       <DependentUpon>fmCashOperationCounter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Account\FeeManagerment\ctTodayFeeList.cs">
+    <Compile Include="Forms\1-pending\FeeManagerment\ctTodayFeeList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Account\FeeManagerment\ctTodayFeeList.Designer.cs">
+    <Compile Include="Forms\1-pending\FeeManagerment\ctTodayFeeList.Designer.cs">
       <DependentUpon>ctTodayFeeList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Account\FeeManagerment\fmCollectFeeManual.cs">
+    <Compile Include="Forms\1-pending\FeeManagerment\fmCollectFeeManual.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Account\FeeManagerment\fmCollectFeeManual.Designer.cs">
+    <Compile Include="Forms\1-pending\FeeManagerment\fmCollectFeeManual.Designer.cs">
       <DependentUpon>fmCollectFeeManual.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Account\FeeManagerment\fmEditFee.cs">
+    <Compile Include="Forms\1-pending\FeeManagerment\fmEditFee.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Account\FeeManagerment\fmEditFee.Designer.cs">
+    <Compile Include="Forms\1-pending\FeeManagerment\fmEditFee.Designer.cs">
       <DependentUpon>fmEditFee.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Account\fmAddAccount.cs">
+    <Compile Include="Forms\1-pending\fmAddAccount.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Account\fmAddAccount.Designer.cs">
+    <Compile Include="Forms\1-pending\fmAddAccount.Designer.cs">
       <DependentUpon>fmAddAccount.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Account\fmCashOperation.cs">
+    <Compile Include="Forms\1-pending\fmCashOperation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Account\fmCashOperation.Designer.cs">
+    <Compile Include="Forms\1-pending\fmCashOperation.Designer.cs">
       <DependentUpon>fmCashOperation.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Account\fmEditAccountTemplate.cs">
@@ -300,10 +300,10 @@
     <Compile Include="Forms\Account\fmEditAccount.Designer.cs">
       <DependentUpon>fmEditAccount.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Account\fmBindConnector.cs">
+    <Compile Include="Forms\1-pending\fmBindConnector.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Account\fmBindConnector.Designer.cs">
+    <Compile Include="Forms\1-pending\fmBindConnector.Designer.cs">
       <DependentUpon>fmBindConnector.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Account\fmChangePassword.cs">
@@ -336,20 +336,20 @@
     <Compile Include="Forms\Account\RiskRule\fmRuleSetConfig.Designer.cs">
       <DependentUpon>fmRuleSetConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Account\fmSyncEquity.cs">
+    <Compile Include="Forms\1-pending\fmSyncEquity.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Account\fmSyncEquity.Designer.cs">
+    <Compile Include="Forms\1-pending\fmSyncEquity.Designer.cs">
       <DependentUpon>fmSyncEquity.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Account\MainAcctFinService\fmEditService.cs">
+    <Compile Include="Forms\1-pending\MainAcctFinService\fmEditService.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Account\MainAcctFinService\fmEditService.Designer.cs">
+    <Compile Include="Forms\1-pending\MainAcctFinService\fmEditService.Designer.cs">
       <DependentUpon>fmEditService.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Account\fmMainAccountManager.cs" />
-    <Compile Include="Forms\Account\fmMainAccountManager.Designer.cs">
+    <Compile Include="Forms\1-pending\fmMainAccountManager.cs" />
+    <Compile Include="Forms\1-pending\fmMainAccountManager.Designer.cs">
       <DependentUpon>fmMainAccountManager.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Account\RiskRule\fmEditVendorFlatRule.cs">
@@ -358,13 +358,13 @@
     <Compile Include="Forms\Account\RiskRule\fmEditVendorFlatRule.Designer.cs">
       <DependentUpon>fmEditVendorFlatRule.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Account\FeeManagerment\fmFeeManagement.cs">
+    <Compile Include="Forms\1-pending\FeeManagerment\fmFeeManagement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Account\FeeManagerment\fmFeeManagement.Designer.cs">
+    <Compile Include="Forms\1-pending\FeeManagerment\fmFeeManagement.Designer.cs">
       <DependentUpon>fmFeeManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Account\MainAcctFinService\Protocol_MainAcctFinService.cs" />
+    <Compile Include="Forms\1-pending\MainAcctFinService\Protocol_MainAcctFinService.cs" />
     <Compile Include="Forms\Account\RiskRule\fm\fmAccountRule_HoldRatio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -551,29 +551,29 @@
     <Compile Include="Forms\Manager\fmPermissionTemplateEdit.Designer.cs">
       <DependentUpon>fmPermissionTemplateEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\System\ConnectorManager\ctBrokerCTPDirect.cs">
+    <Compile Include="Forms\Account\MainAccount\ConnectorManager\ctBrokerCTPDirect.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\System\ConnectorManager\ctBrokerCTPDirect.Designer.cs">
+    <Compile Include="Forms\Account\MainAccount\ConnectorManager\ctBrokerCTPDirect.Designer.cs">
       <DependentUpon>ctBrokerCTPDirect.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\System\ConnectorManager\IConnectorControl.cs" />
-    <Compile Include="Forms\System\ConnectorManager\ctBrokerESunnyDirect.cs">
+    <Compile Include="Forms\Account\MainAccount\ConnectorManager\IConnectorControl.cs" />
+    <Compile Include="Forms\Account\MainAccount\ConnectorManager\ctBrokerESunnyDirect.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\System\ConnectorManager\ctBrokerESunnyDirect.Designer.cs">
+    <Compile Include="Forms\Account\MainAccount\ConnectorManager\ctBrokerESunnyDirect.Designer.cs">
       <DependentUpon>ctBrokerESunnyDirect.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\System\ConnectorManager\ctBrokerIBDirect.cs">
+    <Compile Include="Forms\Account\MainAccount\ConnectorManager\ctBrokerIBDirect.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\System\ConnectorManager\ctBrokerIBDirect.Designer.cs">
+    <Compile Include="Forms\Account\MainAccount\ConnectorManager\ctBrokerIBDirect.Designer.cs">
       <DependentUpon>ctBrokerIBDirect.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\System\fmDataManager.cs">
+    <Compile Include="Forms\Tools\fmDataManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\System\fmDataManager.Designer.cs">
+    <Compile Include="Forms\Tools\fmDataManager.Designer.cs">
       <DependentUpon>fmDataManager.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Basic\ExchangeRate\fmExchangeRate.cs">
@@ -654,34 +654,34 @@
     <Compile Include="Forms\Report\fmSettlement.Designer.cs">
       <DependentUpon>fmSettlement.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\System\ConnectorManager\fmConnectorManager.cs">
+    <Compile Include="Forms\Account\MainAccount\ConnectorManager\fmConnectorManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\System\ConnectorManager\fmConnectorManager.Designer.cs">
+    <Compile Include="Forms\Account\MainAccount\ConnectorManager\fmConnectorManager.Designer.cs">
       <DependentUpon>fmConnectorManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\System\ConnectorManager\fmConnectorEdit.cs">
+    <Compile Include="Forms\Account\MainAccount\ConnectorManager\fmConnectorEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\System\ConnectorManager\fmConnectorEdit.Designer.cs">
+    <Compile Include="Forms\Account\MainAccount\ConnectorManager\fmConnectorEdit.Designer.cs">
       <DependentUpon>fmConnectorEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\System\ConnectorManager\fmRouterGroup.cs">
+    <Compile Include="Forms\Account\MainAccount\ConnectorManager\fmRouterGroup.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\System\ConnectorManager\fmRouterGroup.Designer.cs">
+    <Compile Include="Forms\Account\MainAccount\ConnectorManager\fmRouterGroup.Designer.cs">
       <DependentUpon>fmRouterGroup.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\System\ConnectorManager\fmRouterGroupEdit.cs">
+    <Compile Include="Forms\Account\MainAccount\ConnectorManager\fmRouterGroupEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\System\ConnectorManager\fmRouterGroupEdit.Designer.cs">
+    <Compile Include="Forms\Account\MainAccount\ConnectorManager\fmRouterGroupEdit.Designer.cs">
       <DependentUpon>fmRouterGroupEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\System\ConnectorManager\fmRouterItemEdit.cs">
+    <Compile Include="Forms\Account\MainAccount\ConnectorManager\fmRouterItemEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\System\ConnectorManager\fmRouterItemEdit.Designer.cs">
+    <Compile Include="Forms\Account\MainAccount\ConnectorManager\fmRouterItemEdit.Designer.cs">
       <DependentUpon>fmRouterItemEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\System\fmSystemStatus.cs">
@@ -714,40 +714,40 @@
     <Compile Include="Forms\System\fmTaskMoniter.Designer.cs">
       <DependentUpon>fmTaskMoniter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\System\SettlementManager\ctPositionDetails.cs">
+    <Compile Include="Forms\Tools\SettlementManager\ctPositionDetails.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\System\SettlementManager\ctPositionDetails.designer.cs">
+    <Compile Include="Forms\Tools\SettlementManager\ctPositionDetails.designer.cs">
       <DependentUpon>ctPositionDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\System\SettlementManager\ctPositionHold.cs">
+    <Compile Include="Forms\Tools\SettlementManager\ctPositionHold.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\System\SettlementManager\ctPositionHold.designer.cs">
+    <Compile Include="Forms\Tools\SettlementManager\ctPositionHold.designer.cs">
       <DependentUpon>ctPositionHold.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\System\SettlementManager\ctSettlementPrice.cs">
+    <Compile Include="Forms\Tools\SettlementManager\ctSettlementPrice.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\System\SettlementManager\ctSettlementPrice.designer.cs">
+    <Compile Include="Forms\Tools\SettlementManager\ctSettlementPrice.designer.cs">
       <DependentUpon>ctSettlementPrice.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\System\SettlementManager\fmFlatPosition.cs">
+    <Compile Include="Forms\Tools\SettlementManager\fmFlatPosition.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\System\SettlementManager\fmFlatPosition.designer.cs">
+    <Compile Include="Forms\Tools\SettlementManager\fmFlatPosition.designer.cs">
       <DependentUpon>fmFlatPosition.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\System\SettlementManager\fmSettleManager.cs">
+    <Compile Include="Forms\Tools\SettlementManager\fmSettleManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\System\SettlementManager\fmSettleManager.designer.cs">
+    <Compile Include="Forms\Tools\SettlementManager\fmSettleManager.designer.cs">
       <DependentUpon>fmSettleManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\System\SettlementManager\fmUpdateSettlementPrice.cs">
+    <Compile Include="Forms\Tools\SettlementManager\fmUpdateSettlementPrice.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\System\SettlementManager\fmUpdateSettlementPrice.designer.cs">
+    <Compile Include="Forms\Tools\SettlementManager\fmUpdateSettlementPrice.designer.cs">
       <DependentUpon>fmUpdateSettlementPrice.cs</DependentUpon>
     </Compile>
     <Compile Include="HandlerInfo.cs" />
@@ -902,19 +902,19 @@
     <EmbeddedResource Include="Forms\Account\fmCashOperationCounter.resx">
       <DependentUpon>fmCashOperationCounter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Account\FeeManagerment\ctTodayFeeList.resx">
+    <EmbeddedResource Include="Forms\1-pending\FeeManagerment\ctTodayFeeList.resx">
       <DependentUpon>ctTodayFeeList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Account\FeeManagerment\fmCollectFeeManual.resx">
+    <EmbeddedResource Include="Forms\1-pending\FeeManagerment\fmCollectFeeManual.resx">
       <DependentUpon>fmCollectFeeManual.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Account\FeeManagerment\fmEditFee.resx">
+    <EmbeddedResource Include="Forms\1-pending\FeeManagerment\fmEditFee.resx">
       <DependentUpon>fmEditFee.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Account\fmAddAccount.resx">
+    <EmbeddedResource Include="Forms\1-pending\fmAddAccount.resx">
       <DependentUpon>fmAddAccount.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Account\fmCashOperation.resx">
+    <EmbeddedResource Include="Forms\1-pending\fmCashOperation.resx">
       <DependentUpon>fmCashOperation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\fmEditAccountTemplate.resx">
@@ -923,7 +923,7 @@
     <EmbeddedResource Include="Forms\Account\fmEditAccount.resx">
       <DependentUpon>fmEditAccount.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Account\fmBindConnector.resx">
+    <EmbeddedResource Include="Forms\1-pending\fmBindConnector.resx">
       <DependentUpon>fmBindConnector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\fmChangePassword.resx">
@@ -941,19 +941,19 @@
     <EmbeddedResource Include="Forms\Account\RiskRule\fmRuleSetConfig.resx">
       <DependentUpon>fmRuleSetConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Account\fmSyncEquity.resx">
+    <EmbeddedResource Include="Forms\1-pending\fmSyncEquity.resx">
       <DependentUpon>fmSyncEquity.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Account\MainAcctFinService\fmEditService.resx">
+    <EmbeddedResource Include="Forms\1-pending\MainAcctFinService\fmEditService.resx">
       <DependentUpon>fmEditService.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Account\fmMainAccountManager.resx">
+    <EmbeddedResource Include="Forms\1-pending\fmMainAccountManager.resx">
       <DependentUpon>fmMainAccountManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\RiskRule\fmEditVendorFlatRule.resx">
       <DependentUpon>fmEditVendorFlatRule.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Account\FeeManagerment\fmFeeManagement.resx">
+    <EmbeddedResource Include="Forms\1-pending\FeeManagerment\fmFeeManagement.resx">
       <DependentUpon>fmFeeManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\RiskRule\fm\fmAccountRule_HoldRatio.resx">
@@ -1049,16 +1049,16 @@
     <EmbeddedResource Include="Forms\Manager\fmPermissionTemplateEdit.resx">
       <DependentUpon>fmPermissionTemplateEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\System\ConnectorManager\ctBrokerCTPDirect.resx">
+    <EmbeddedResource Include="Forms\Account\MainAccount\ConnectorManager\ctBrokerCTPDirect.resx">
       <DependentUpon>ctBrokerCTPDirect.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\System\ConnectorManager\ctBrokerESunnyDirect.resx">
+    <EmbeddedResource Include="Forms\Account\MainAccount\ConnectorManager\ctBrokerESunnyDirect.resx">
       <DependentUpon>ctBrokerESunnyDirect.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\System\ConnectorManager\ctBrokerIBDirect.resx">
+    <EmbeddedResource Include="Forms\Account\MainAccount\ConnectorManager\ctBrokerIBDirect.resx">
       <DependentUpon>ctBrokerIBDirect.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\System\fmDataManager.resx">
+    <EmbeddedResource Include="Forms\Tools\fmDataManager.resx">
       <DependentUpon>fmDataManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Basic\ExchangeRate\fmExchangeRate.resx">
@@ -1100,19 +1100,19 @@
     <EmbeddedResource Include="Forms\Report\fmSettlement.resx">
       <DependentUpon>fmSettlement.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\System\ConnectorManager\fmConnectorManager.resx">
+    <EmbeddedResource Include="Forms\Account\MainAccount\ConnectorManager\fmConnectorManager.resx">
       <DependentUpon>fmConnectorManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\System\ConnectorManager\fmConnectorEdit.resx">
+    <EmbeddedResource Include="Forms\Account\MainAccount\ConnectorManager\fmConnectorEdit.resx">
       <DependentUpon>fmConnectorEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\System\ConnectorManager\fmRouterGroup.resx">
+    <EmbeddedResource Include="Forms\Account\MainAccount\ConnectorManager\fmRouterGroup.resx">
       <DependentUpon>fmRouterGroup.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\System\ConnectorManager\fmRouterGroupEdit.resx">
+    <EmbeddedResource Include="Forms\Account\MainAccount\ConnectorManager\fmRouterGroupEdit.resx">
       <DependentUpon>fmRouterGroupEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\System\ConnectorManager\fmRouterItemEdit.resx">
+    <EmbeddedResource Include="Forms\Account\MainAccount\ConnectorManager\fmRouterItemEdit.resx">
       <DependentUpon>fmRouterItemEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\System\fmSystemStatus.resx">
@@ -1130,22 +1130,22 @@
     <EmbeddedResource Include="Forms\System\fmTaskMoniter.resx">
       <DependentUpon>fmTaskMoniter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\System\SettlementManager\ctPositionDetails.resx">
+    <EmbeddedResource Include="Forms\Tools\SettlementManager\ctPositionDetails.resx">
       <DependentUpon>ctPositionDetails.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\System\SettlementManager\ctPositionHold.resx">
+    <EmbeddedResource Include="Forms\Tools\SettlementManager\ctPositionHold.resx">
       <DependentUpon>ctPositionHold.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\System\SettlementManager\ctSettlementPrice.resx">
+    <EmbeddedResource Include="Forms\Tools\SettlementManager\ctSettlementPrice.resx">
       <DependentUpon>ctSettlementPrice.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\System\SettlementManager\fmFlatPosition.resx">
+    <EmbeddedResource Include="Forms\Tools\SettlementManager\fmFlatPosition.resx">
       <DependentUpon>fmFlatPosition.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\System\SettlementManager\fmSettleManager.resx">
+    <EmbeddedResource Include="Forms\Tools\SettlementManager\fmSettleManager.resx">
       <DependentUpon>fmSettleManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\System\SettlementManager\fmUpdateSettlementPrice.resx">
+    <EmbeddedResource Include="Forms\Tools\SettlementManager\fmUpdateSettlementPrice.resx">
       <DependentUpon>fmUpdateSettlementPrice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImageFolder.resources" />
@@ -1227,7 +1227,6 @@
     <None Include="Resource\disconnect.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Forms\1-pending\" />
     <Folder Include="Utils\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
