@@ -19,9 +19,9 @@ namespace TradingLib.MoniterControl
         public fmSymbolEdit()
         {
             InitializeComponent();
-            MoniterHelper.AdapterToIDataSource(cbexchange).BindDataSource(CoreService.BasicInfoTracker.GetExchangeCombList());
+            MoniterHelper.AdapterToIDataSource(cbexchange).BindDataSource(MoniterHelper.GetExchangeComboxArray());
             MoniterHelper.AdapterToIDataSource(cboptionside).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumOptionSide>());
-            MoniterHelper.AdapterToIDataSource(cbexpiremonth).BindDataSource(CoreService.BasicInfoTracker.GetExpireMonth());
+            MoniterHelper.AdapterToIDataSource(cbexpiremonth).BindDataSource(MoniterHelper.GetExpireMonthComboxArray());
             MoniterHelper.AdapterToIDataSource(cbSymbolType).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumSymbolType>());
             
             entrycommission.Value = -1;
@@ -76,7 +76,7 @@ namespace TradingLib.MoniterControl
                 cbexchange.SelectedValue = exid;
                 cbexchange.Enabled = false;
 
-                MoniterHelper.AdapterToIDataSource(cbsecurity).BindDataSource(CoreService.BasicInfoTracker.GetSecurityCombListViaExchange(exid));
+                MoniterHelper.AdapterToIDataSource(cbsecurity).BindDataSource(MoniterHelper.GetSecurityComboxArrayViaExchange(exid));
                 cbsecurity.SelectedValue = _symbol.SecurityFamily != null ? (_symbol.SecurityFamily as SecurityFamilyImpl).ID : 0;
                 cbsecurity.Enabled = false;
 
@@ -99,7 +99,7 @@ namespace TradingLib.MoniterControl
                 if (_symbol.SecurityFamily.Type == SecurityType.FUT)
                 {
                     //绑定月份
-                    MoniterHelper.AdapterToIDataSource(cbexpiremonth).BindDataSource(CoreService.BasicInfoTracker.GetExpireMonth());
+                    MoniterHelper.AdapterToIDataSource(cbexpiremonth).BindDataSource(MoniterHelper.GetExpireMonthComboxArray());
                     cbexpiremonth.SelectedValue = (int)_symbol.ExpireDate / 100;
                     cbexpiremonth.Enabled = false;
 
@@ -317,7 +317,7 @@ namespace TradingLib.MoniterControl
         {
             if (!_loaded) return;
             int exid = (int)cbexchange.SelectedValue;
-            MoniterHelper.AdapterToIDataSource(cbsecurity).BindDataSource(CoreService.BasicInfoTracker.GetSecurityCombListViaExchange(exid));
+            MoniterHelper.AdapterToIDataSource(cbsecurity).BindDataSource(MoniterHelper.GetSecurityComboxArrayViaExchange(exid));
 
             GenSymbolName();
         }
@@ -445,7 +445,7 @@ namespace TradingLib.MoniterControl
             { 
                 case QSEnumSymbolType.Standard:
                     expiredate.Enabled = true;
-                    MoniterHelper.AdapterToIDataSource(cbexpiremonth).BindDataSource(CoreService.BasicInfoTracker.GetExpireMonth());
+                    MoniterHelper.AdapterToIDataSource(cbexpiremonth).BindDataSource(MoniterHelper.GetExpireMonthComboxArray());
            
                     break;
                 case QSEnumSymbolType.MonthContinuous:

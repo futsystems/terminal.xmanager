@@ -23,24 +23,18 @@ namespace TradingLib.MoniterControl
             InitTable();
             BindToTable();
 
+            MoniterHelper.AdapterToIDataSource(interfaceType).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumConnectorType>());
             this.Load += new EventHandler(fmInterface_Load);
         }
 
         void fmInterface_Load(object sender, EventArgs e)
         {
-            WireEvent();
-
-            MoniterHelper.AdapterToIDataSource(interfaceType).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumConnectorType>());
-            
-        }
-
-        void WireEvent()
-        {
-            CoreService.EventCore.RegIEventHandler(this);
             interfacegrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(grid_RowPrePaint);
             interfacegrid.DoubleClick += new EventHandler(interfacegrid_DoubleClick);
             isxapi.CheckedChanged += new EventHandler(isxapi_CheckedChanged);
             btnUpdate.Click += new EventHandler(btnUpdate_Click);
+
+            CoreService.EventCore.RegIEventHandler(this);
         }
 
         void btnUpdate_Click(object sender, EventArgs e)
@@ -84,10 +78,6 @@ namespace TradingLib.MoniterControl
                     InvokeGotInterface(op);
                 }
             }
-            else//如果没有配资服
-            {
-
-            }
         }
 
         //得到当前选择的行号
@@ -98,12 +88,7 @@ namespace TradingLib.MoniterControl
                 int row = interfacegrid.SelectedRows.Count > 0 ? interfacegrid.SelectedRows[0].Index : -1;
                 if (row >= 0)
                 {
-                    int id= int.Parse(interfacegrid[0, row].Value.ToString());
-
-                    if (interfacemap.Keys.Contains(id))
-                        return interfacemap[id];
-                    else
-                        return null;
+                    return interfacegrid[TAG, row].Value as ConnectorInterface;
                 }
                 else
                 {
@@ -112,7 +97,6 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        ConcurrentDictionary<int, ConnectorInterface> interfacemap = new ConcurrentDictionary<int, ConnectorInterface>();
         ConcurrentDictionary<int, int> interfacerowid = new ConcurrentDictionary<int, int>();
 
         int InterfaceIDx(int interfaceid)
@@ -150,17 +134,10 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][WRAPPERPATH] = c.libpath_wrapper;
                     gt.Rows[i][BROKERNAME] = c.libname_broker;
                     gt.Rows[i][BROKERPATH] = c.libpath_broker;
+                    gt.Rows[i][TAG] = c;
 
                     interfacerowid.TryAdd(c.ID, i);
-                    interfacemap.TryAdd(c.ID, c);
                 }
-                else
-                {
-                    //更新状态
-                    //gt.Rows[r][STATUS] = c.Status;
-                    //connectormap[c.Token] = c;
-                }
-
             }
         }
 
@@ -204,7 +181,7 @@ namespace TradingLib.MoniterControl
         const string WRAPPERPATH = "Wrapper目录";
         const string BROKERNAME = "Broker文件名";
         const string BROKERPATH = "Broker目录";
-
+        const string TAG = "TAG";
 
         #endregion
 
@@ -246,6 +223,7 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(WRAPPERNAME);//1
             gt.Columns.Add(BROKERPATH);//1
             gt.Columns.Add(BROKERNAME);//1
+            gt.Columns.Add(TAG, typeof(ConnectorInterface));
 
         }
 
@@ -263,6 +241,8 @@ namespace TradingLib.MoniterControl
             grid.Columns[NAME].Width = 120;
             grid.Columns[ISXAPI].Width =50;
             grid.Columns[TYPE].Width = 50;
+
+            grid.Columns[TAG].Visible = false;
             /*
             datasource.Sort = ACCOUNT + " ASC";
             

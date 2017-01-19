@@ -21,9 +21,9 @@ namespace TradingLib.MoniterControl
             InitTable();
             BindToTable();
 
-            MoniterHelper.AdapterToIDataSource(cbsecurity).BindDataSource(CoreService.BasicInfoTracker.GetSecurityCombListViaExchange(0, SecurityType.FUT, true));
+            MoniterHelper.AdapterToIDataSource(cbsecurity).BindDataSource(MoniterHelper.GetSecurityComboxArrayViaExchange(0, SecurityType.FUT, true));
             MoniterHelper.AdapterToIDataSource(cbtradeable).BindDataSource(MoniterHelper.GetTradeableCBList(true));
-            MoniterHelper.AdapterToIDataSource(cbexchange).BindDataSource(CoreService.BasicInfoTracker.GetExchangeCombList(true));
+            MoniterHelper.AdapterToIDataSource(cbexchange).BindDataSource(MoniterHelper.GetExchangeComboxArray(true));
 
             this.Load += new EventHandler(fmSymbol_Load);
         }
@@ -483,7 +483,7 @@ namespace TradingLib.MoniterControl
             if (CoreService.BasicInfoTracker.Initialized)
             {
                 int exid = (int)cbexchange.SelectedValue;
-                MoniterHelper.AdapterToIDataSource(cbsecurity).BindDataSource(CoreService.BasicInfoTracker.GetSecurityCombListViaExchange(exid,SecurityType.FUT,true));
+                MoniterHelper.AdapterToIDataSource(cbsecurity).BindDataSource(MoniterHelper.GetSecurityComboxArrayViaExchange(exid, SecurityType.FUT, true));
             }
         }
 

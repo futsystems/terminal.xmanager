@@ -505,7 +505,7 @@ namespace TradingLib.MoniterControl
 
         void fm_FilterArgsChangedEvent()
         {
-            LogService.Debug("filter args changed");
+            //LogService.Debug("filter args changed");
         }
     }
 

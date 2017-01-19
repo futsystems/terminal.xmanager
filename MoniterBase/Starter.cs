@@ -80,7 +80,7 @@ namespace TradingLib.MoniterBase
 
         void InitCSharpCode()
         {
-            LogService.Debug("在后台线程初始化主窗体对象");
+            //LogService.Debug("在后台线程初始化主窗体对象");
             // The LoggingService is a small wrapper around log4net.
             // Our application contains a .config file telling log4net to write
             // to System.Diagnostics.Trace.

@@ -56,5 +56,8 @@ namespace TradingLib.MoniterControl
         {
             AccGridNumChanged(num);
         }
+
+
+
     }
 }

@@ -13,17 +13,16 @@ using TradingLib.MoniterCore;
 
 namespace TradingLib.MoniterControl
 {
-    public partial class fmSecEdit : ComponentFactory.Krypton.Toolkit.KryptonForm,IEventBinder
+    public partial class fmSecurityEdit : ComponentFactory.Krypton.Toolkit.KryptonForm,IEventBinder
     {
-        public fmSecEdit()
+        public fmSecurityEdit()
         {
             InitializeComponent();
             MoniterHelper.AdapterToIDataSource(cbsectype).BindDataSource(MoniterHelper.GetEnumValueObjects<SecurityType>());
-            MoniterHelper.AdapterToIDataSource(exchange).BindDataSource(CoreService.BasicInfoTracker.GetExchangeCombList());
-            MoniterHelper.AdapterToIDataSource(underlay).BindDataSource(CoreService.BasicInfoTracker.GetSecurityCombList(true));
-            MoniterHelper.AdapterToIDataSource(markettime).BindDataSource(CoreService.BasicInfoTracker.GetMarketTimeCombList());
+            MoniterHelper.AdapterToIDataSource(exchange).BindDataSource(MoniterHelper.GetExchangeComboxArray());
+            //MoniterHelper.AdapterToIDataSource(underlay).BindDataSource(CoreService.BasicInfoTracker.GetSecurityCombList(true));
+            MoniterHelper.AdapterToIDataSource(markettime).BindDataSource(MoniterHelper.GetMarketTimeComboxArray());
             MoniterHelper.AdapterToIDataSource(cbCurrency).BindDataSource(MoniterHelper.GetEnumValueObjects<CurrencyType>());
-            MoniterHelper.AdapterToIDataSource(cbDatafeed).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumDataFeedTypes>());
             
             cbCurrency.SelectedIndex = 0;
             cbsectype.SelectedIndex = 1;
@@ -48,8 +47,6 @@ namespace TradingLib.MoniterControl
                 cbsectype.Enabled = false;
                 pricetick.Enabled = false;
                 cbCurrency.Enabled = false;
-                cbDatafeed.Visible = false;
-                kryptonLabel4.Visible = false;
             }
         }
 
@@ -57,6 +54,7 @@ namespace TradingLib.MoniterControl
         { 
         
         }
+
         SecurityFamilyImpl _sec = null;
         //当前编辑的合约
         public SecurityFamilyImpl Security
@@ -72,9 +70,6 @@ namespace TradingLib.MoniterControl
                 code.Text = _sec.Code;
                 name.Text = _sec.Name;
                 cbCurrency.SelectedValue = _sec.Currency;
-                //currency.SelectedValue = _sec.Currency;
-                //securitytype.SelectedValue = _sec.Type;
-
                 multiple.Value = _sec.Multiple;
                 pricetick.Value = _sec.PriceTick;
                 entrycommission.Value = _sec.EntryCommission;
@@ -88,7 +83,6 @@ namespace TradingLib.MoniterControl
                 underlay.SelectedValue = _sec.underlaying_fk;
                 markettime.SelectedValue = _sec.mkttime_fk;
                 tradeable.Checked = _sec.Tradeable;
-                cbDatafeed.SelectedValue = _sec.DataFeed;
                 cbsectype.SelectedValue = _sec.Type;
             }
         }
@@ -98,7 +92,6 @@ namespace TradingLib.MoniterControl
         {
             if (_sec != null)
             {
-                //
                 _sec.Code = code.Text;
                 _sec.Name = name.Text;
                 _sec.Currency = (CurrencyType)cbCurrency.SelectedValue;
@@ -114,17 +107,16 @@ namespace TradingLib.MoniterControl
                 _sec.ExtraMargin = extramargin.Value;
                 _sec.MaintanceMargin = maintancemargin.Value;
                 _sec.exchange_fk = (int)exchange.SelectedValue;
-                _sec.underlaying_fk = (int)underlay.SelectedValue;
+                //_sec.underlaying_fk = (int)underlay.SelectedValue;
                 _sec.mkttime_fk = (int)markettime.SelectedValue;
                 _sec.Tradeable = tradeable.Checked;
-                _sec.DataFeed = (QSEnumDataFeedTypes)cbDatafeed.SelectedValue;
                 CoreService.TLClient.ReqUpdateSecurity(_sec);
             }
             else
             {
                 SecurityFamilyImpl target = new SecurityFamilyImpl();
 
-                target.ID = 0;//0标识新增 数据库ID非0
+                target.ID = 0;
                 target.Code = code.Text;
                 target.Name = name.Text;
                 target.Currency = (CurrencyType)cbCurrency.SelectedValue;
@@ -140,10 +132,9 @@ namespace TradingLib.MoniterControl
                 target.MaintanceMargin = maintancemargin.Value;
                 target.exchange_fk = (int)exchange.SelectedValue;
 
-                target.underlaying_fk = (int)underlay.SelectedValue;
+                //target.underlaying_fk = (int)underlay.SelectedValue;
                 target.mkttime_fk = (int)markettime.SelectedValue;
                 target.Tradeable = tradeable.Checked;
-                target.DataFeed = (QSEnumDataFeedTypes)cbDatafeed.SelectedValue;
                 CoreService.TLClient.ReqUpdateSecurity(target);
             }
             this.Close();

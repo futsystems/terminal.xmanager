@@ -44,15 +44,15 @@ namespace TradingLib.MoniterControl
                 GetConnectorGridRightMenu().Show(Control.MousePosition);
             }
         }
-
         void routergrid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             e.PaintParts = e.PaintParts ^ DataGridViewPaintParts.Focus;
         }
 
+
         public void OnInit()
         {
-            CoreService.EventCore.RegisterCallback(Modules.CONN_MGR,Method_CONN_MGR.QRY_DEFAULT_CONN_CONFIG, this.OnQryConnectorConfig);//查询交易帐户出入金请求
+            CoreService.EventCore.RegisterCallback(Modules.CONN_MGR,Method_CONN_MGR.QRY_DEFAULT_CONN_CONFIG, this.OnQryConnectorConfig);
             CoreService.EventCore.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_DEFAULT_CONN_STATUS, this.OnQryConnectorStatus);
             CoreService.EventCore.RegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_CONN_STATUS, this.OnNotifyConnectorStatus);
             CoreService.TLClient.ReqQryDefaultConnectorConfig();
@@ -60,27 +60,14 @@ namespace TradingLib.MoniterControl
 
         public void OnDisposed()
         {
-            CoreService.EventCore.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_DEFAULT_CONN_CONFIG, this.OnQryConnectorConfig);//查询交易帐户出入金请求
+            CoreService.EventCore.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_DEFAULT_CONN_CONFIG, this.OnQryConnectorConfig);
             CoreService.EventCore.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_DEFAULT_CONN_STATUS, this.OnQryConnectorStatus);
             CoreService.EventCore.UnRegisterNotifyCallback(Modules.CONN_MGR, Method_CONN_MGR.NOTIFY_CONN_STATUS, this.OnNotifyConnectorStatus);
 
             
         }
 
-        void OnNotifyConnectorConfig(string jsonstr)
-        {
-            ConnectorConfig objs = CoreService.ParseJsonResponse<ConnectorConfig>(jsonstr);
-            if (objs != null)
-            {
-                InvokeGotConnector(objs);
-            }
-            else//如果没有配资服
-            {
 
-            }
-        }
-
-        bool _gotconnector = false;
         void OnQryConnectorConfig(string jsonstr, bool islast)
         {
             ConnectorConfig[] objs = CoreService.ParseJsonResponse<ConnectorConfig[]>(jsonstr);
@@ -90,19 +77,13 @@ namespace TradingLib.MoniterControl
                 {
                     InvokeGotConnector(op);
                 }
-                _gotconnector = true;
-                if (!_gotstatus)
-                {
-                    CoreService.TLClient.ReqQryDefaultConnectorStatus();
-                }
             }
-            else//如果没有配资服
+            if (islast)
             {
-
+                CoreService.TLClient.ReqQryDefaultConnectorStatus();
             }
         }
 
-        bool _gotstatus = false;
         void OnQryConnectorStatus(string jsonstr, bool islast)
         {
             ConnectorStatus[] objs = CoreService.ParseJsonResponse<ConnectorStatus[]>(jsonstr);
@@ -112,11 +93,6 @@ namespace TradingLib.MoniterControl
                 {
                     InvokeGotConnectorStatus(op);
                 }
-                _gotstatus = true;
-            }
-            else//如果没有配资服
-            {
-
             }
         }
 
@@ -126,11 +102,6 @@ namespace TradingLib.MoniterControl
             if (obj != null)
             {
                 InvokeGotConnectorStatus(obj);
-                _gotstatus = true;
-            }
-            else//如果没有配资服
-            {
-
             }
         }
 
@@ -142,12 +113,7 @@ namespace TradingLib.MoniterControl
                 int row = routergrid.SelectedRows.Count > 0 ? routergrid.SelectedRows[0].Index : -1;
                 if (row >= 0)
                 {
-                    int id = int.Parse(routergrid[0, row].Value.ToString());
-
-                    if (connectormap.Keys.Contains(id))
-                        return connectormap[id];
-                    else
-                        return null;
+                    return routergrid[TAG, row].Value as ConnectorConfig;
                 }
                 else
                 {
@@ -156,10 +122,7 @@ namespace TradingLib.MoniterControl
             }
         }
 
-
-        ConcurrentDictionary<int, ConnectorConfig> connectormap = new ConcurrentDictionary<int, ConnectorConfig>();
         ConcurrentDictionary<int, int> connectorrowid = new ConcurrentDictionary<int, int>();
-
         int ConnectorIdx(int id)
         {
             int rowid = -1;
@@ -224,15 +187,12 @@ namespace TradingLib.MoniterControl
 
                     gt.Rows[i][TOKEN] = c.Token;
                     gt.Rows[i][NAME] = c.Name;
-
+                    gt.Rows[i][TAG] = c;
                     connectorrowid.TryAdd(c.ID, i);
-                    connectormap.TryAdd(c.ID, c);
                 }
                 else
                 {
-                    //更新状态
                     gt.Rows[r][NAME] = c.Name;
-                    connectormap[c.ID] = c;
                 }
 
             }
@@ -246,11 +206,12 @@ namespace TradingLib.MoniterControl
         const string NAME = "名称";
         const string CONSTATUS = "status";
         const string CONSTATUSIMG = "状态";
+        const string TAG = "TAG";
         #endregion
 
         DataTable gt = new DataTable();
         BindingSource datasource = new BindingSource();
-
+        ContextMenuStrip routergridmenu = null;
         /// <summary>
         /// 设定表格控件的属性
         /// </summary>
@@ -272,32 +233,23 @@ namespace TradingLib.MoniterControl
             grid.StateCommon.Background.Color1 = Color.WhiteSmoke;
             grid.StateCommon.Background.Color2 = Color.WhiteSmoke;
 
-            //grid.ContextMenuStrip = new ContextMenuStrip();
-
             routergridmenu = new ContextMenuStrip();
             routergridmenu.Items.Add("启动通道", null, new EventHandler(StartConnector_Click));//6
             routergridmenu.Items.Add("停止通道", null, new EventHandler(StopConnector_Click));//7
 
         }
 
-        ContextMenuStrip routergridmenu = null;
+        
 
 
-        void configgrid_MouseClick(object sender, MouseEventArgs e)
-        {
-            //throw new NotImplementedException();
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                GetConnectorGridRightMenu().Show(Control.MousePosition);
-            }
-        }
+
+
         ContextMenuStrip GetConnectorGridRightMenu()
         {
             ConnectorConfig cfg = CurrentConnectorConfig;
             int r = ConnectorIdx(cfg.ID);
             routergridmenu.Items[0].Enabled = true;
             routergridmenu.Items[1].Enabled = true;
-            //MessageBox.Show("id:"+r.ToString() +" status:"+(QSEnumConnectorStatus)Enum.Parse(typeof(QSEnumConnectorStatus), gt.Rows[r][CONSTATUS].ToString()));
             if (r >= 0)
             {
                 QSEnumConnectorStatus status = (QSEnumConnectorStatus)Enum.Parse(typeof(QSEnumConnectorStatus), gt.Rows[r][CONSTATUS].ToString());
@@ -325,28 +277,15 @@ namespace TradingLib.MoniterControl
             return routergridmenu;
         }
 
-        //初始化Account显示空格
+
         private void InitTable()
         {
-            gt.Columns.Add(ID);//0
-            gt.Columns.Add(TOKEN);//1
-            gt.Columns.Add(NAME);//1
-
-            //gt.Columns.Add(SRVADDRESS);
-            //gt.Columns.Add(SRVPORT);//1
-            //gt.Columns.Add(SRV1);//1
-            //gt.Columns.Add(SRV2);//1
-            //gt.Columns.Add(SRV3);//1
-            //gt.Columns.Add(USERID);//1
-            //gt.Columns.Add(PASSWORD);//1
-            //gt.Columns.Add(USR1);//1
-            //gt.Columns.Add(USR2);//1
-
-            //gt.Columns.Add(INTERFACE);//1
-            //gt.Columns.Add(VENDORACCOUNT);
-            //gt.Columns.Add(ISBINDED);
+            gt.Columns.Add(ID);
+            gt.Columns.Add(TOKEN);
+            gt.Columns.Add(NAME);
             gt.Columns.Add(CONSTATUS);
             gt.Columns.Add(CONSTATUSIMG, typeof(Image));
+            gt.Columns.Add(TAG, typeof(ConnectorConfig));
 
         }
 
@@ -360,19 +299,13 @@ namespace TradingLib.MoniterControl
             datasource.DataSource = gt;
             grid.DataSource = datasource;
             grid.Columns[CONSTATUS].Visible = false;
-
+            grid.Columns[TAG].Visible = false;
             grid.Columns[ID].Width = 50;
 
             grid.Columns[TOKEN].Width = 100;
             grid.Columns[NAME].Width = 130;
-            //grid.Columns[USERID].Width = 100;
-            //grid.Columns[INTERFACE].Width = 150;
             grid.Columns[CONSTATUSIMG].Width = 40;
         }
-
-
-
-
 
 
         #endregion

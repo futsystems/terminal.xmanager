@@ -18,7 +18,6 @@ namespace TradingLib.MoniterControl
         public fmCoreStatus()
         {
             InitializeComponent();
-            //this.CancelButton = 
             this.Load += new EventHandler(fmCoreStatus_Load);
         }
 
@@ -62,6 +61,7 @@ namespace TradingLib.MoniterControl
         {
             CoreService.EventCore.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_SYSTEM_STATUS, this.OnQrySystemStatus);
         }
+
         void OnQrySystemStatus(string json, bool islast)
         {
             SystemStatus status = CoreService.ParseJsonResponse<SystemStatus>(json);

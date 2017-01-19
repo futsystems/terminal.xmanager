@@ -47,12 +47,7 @@ namespace TradingLib.MoniterControl
                 int row = taskgrid.SelectedRows.Count > 0 ? taskgrid.SelectedRows[0].Index : -1;
                 if (row >= 0)
                 {
-                    int id = int.Parse(taskgrid[0, row].Value.ToString());
-
-                    if (logtaskeventmap.Keys.Contains(id))
-                        return logtaskeventmap[id];
-                    else
-                        return null;
+                    return taskgrid[TAG, row].Value as LogTaskEvent;
                 }
                 else
                 {
@@ -99,8 +94,6 @@ namespace TradingLib.MoniterControl
             }
 
         }
-
-        ConcurrentDictionary<int, LogTaskEvent> logtaskeventmap = new ConcurrentDictionary<int, LogTaskEvent>();
         ConcurrentDictionary<int, int> logtaskeventmaprowid = new ConcurrentDictionary<int, int>();
 
         int LogTaskEventIdx(int id)
@@ -137,15 +130,10 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][DATE] = log.Date;
                     gt.Rows[i][TIME] = log.Time;
                     gt.Rows[i][RESULT] = GetTaskRunResult(log.Result);
-                    //gt.Rows[i][EXCEPTION] =log.Exception;
+                    gt.Rows[i][TAG] = log;
 
                     logtaskeventmaprowid.TryAdd(log.ID, i);
-                    logtaskeventmap.TryAdd(log.ID,log);
-                }
-                else
-                {
-                    //gt.Rows[r][CONSTATUS] = status.Status;
-                    //gt.Rows[r][CONSTATUSIMG] = GetStatusImage(status.Status);
+
                 }
             }
         }
@@ -172,7 +160,7 @@ namespace TradingLib.MoniterControl
         const string DATE = "完成日期";
         const string TIME = "完成时间";
         const string RESULT = "执行结果";
-        //const string EXCEPTION = "异常内容";
+        const string TAG = "TAG";
 
         #endregion
 
@@ -200,30 +188,22 @@ namespace TradingLib.MoniterControl
             grid.StateCommon.Background.Color1 = Color.WhiteSmoke;
             grid.StateCommon.Background.Color2 = Color.WhiteSmoke;
 
-            //grid.ContextMenuStrip = new ContextMenuStrip();
-
-            //routergridmenu = new ContextMenuStrip();
-            //routergridmenu.Items.Add("启动通道", null, new EventHandler(StartConnector_Click));//6
-            //routergridmenu.Items.Add("停止通道", null, new EventHandler(StopConnector_Click));//7
 
         }
 
         //初始化Account显示空格
         private void InitTable()
         {
-            gt.Columns.Add(ID);//0
+            gt.Columns.Add(ID);
             
-            gt.Columns.Add(DATE);//1
+            gt.Columns.Add(DATE);
             gt.Columns.Add(TIME);
-            gt.Columns.Add(SETTLEDAY);//0
-            gt.Columns.Add(TASKNAME);//1
-            gt.Columns.Add(TASKTYPE);//1
+            gt.Columns.Add(SETTLEDAY);
+            gt.Columns.Add(TASKNAME);
+            gt.Columns.Add(TASKTYPE);
             gt.Columns.Add(TASKMEMO);
-
-            
-            
-            gt.Columns.Add(RESULT,typeof(Image));//1
-            //gt.Columns.Add(EXCEPTION);
+            gt.Columns.Add(RESULT,typeof(Image));
+            gt.Columns.Add(TAG, typeof(LogTaskEvent));
         }
 
 
@@ -240,6 +220,7 @@ namespace TradingLib.MoniterControl
             grid.Columns[TASKTYPE].Visible = false;
             grid.Columns[TASKMEMO].Visible = false;
             grid.Columns[SETTLEDAY].Visible = false;
+            grid.Columns[TAG].Visible = false;
 
             grid.Columns[SETTLEDAY].Width = 80;
             grid.Columns[TASKNAME].Width = 150;

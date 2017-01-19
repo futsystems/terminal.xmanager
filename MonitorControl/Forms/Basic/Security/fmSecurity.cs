@@ -24,34 +24,63 @@ namespace TradingLib.MoniterControl
             InitTable();
             BindToTable();
 
-            //MoniterHelper.AdapterToIDataSource(cbsecurity).BindDataSource(MoniterHelper.GetEnumValueObjects<SecurityType>(true));
             MoniterHelper.AdapterToIDataSource(cbtradeable).BindDataSource(MoniterHelper.GetTradeableCBList(true));
-            MoniterHelper.AdapterToIDataSource(cbexchange).BindDataSource(CoreService.BasicInfoTracker.GetExchangeCombList(true));
+            MoniterHelper.AdapterToIDataSource(cbexchange).BindDataSource(MoniterHelper.GetExchangeComboxArray(true));
   
             this.Load += new EventHandler(fmSecurity_Load);
         }
 
         void fmSecurity_Load(object sender, EventArgs e)
         {
-            WireEvent();
+            CoreService.EventCore.RegIEventHandler(this);
+            cbexchange.SelectedIndexChanged += new EventHandler(cbexchange_SelectedIndexChanged);
+            cbtradeable.SelectedIndexChanged += new EventHandler(cbtradeable_SelectedIndexChanged);
+
+            secgrid.DoubleClick += new EventHandler(secgrid_DoubleClick);
+            btnAddSecurity.Click += new EventHandler(btnAddSecurity_Click);
+            btnSyncSec.Click += new EventHandler(btnSyncSec_Click);
+            secgrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(secgrid_RowPrePaint);
 
             foreach (SecurityFamilyImpl sec in CoreService.BasicInfoTracker.Securities)
             {
                 InvokGotSecurity(sec);
             }
-
         }
 
-        public bool AnySecurity
+
+        public void OnInit()
         {
-            get
+            //根据权限显示界面按钮
+            if (!CoreService.SiteInfo.Domain.Super)
             {
-                return securitymap.Count > 0;
+
+                btnSyncSec.Visible = false;
+                btnAddSecurity.Visible = false;
+
+                //如果是管理员 并且没有品种数据 则同步品种按钮可见
+                if (CoreService.SiteInfo.Manager.IsRoot())
+                {
+                    btnSyncSec.Visible = CoreService.BasicInfoTracker.Securities.Count() == 0;
+                }
             }
+
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_SEC, OnNotifySecurity);
+        }
+
+        public void OnDisposed()
+        {
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_SEC, OnNotifySecurity);
+        }
+
+        void OnNotifySecurity(string json)
+        {
+            string content = json.DeserializeObject<string>();
+            SecurityFamilyImpl sec = SecurityFamilyImpl.Deserialize(content);
+            InvokGotSecurity(sec);
         }
 
 
-        Dictionary<int, SecurityFamilyImpl> securitymap = new Dictionary<int, SecurityFamilyImpl>();
+
         Dictionary<int, int> securityidxmap = new Dictionary<int, int>();
         int SecurityFamilyIdx(int id)
         {
@@ -82,16 +111,11 @@ namespace TradingLib.MoniterControl
             }
             else
             {
-                //只处理期货品种
-                //if (sec.Type != SecurityType.FUT) return;
-
                 int r = SecurityFamilyIdx(sec.ID);
                 if (r == -1)
                 {
                     gt.Rows.Add(sec.ID);
                     int i = gt.Rows.Count - 1;
-
-                    securitymap.Add(sec.ID, sec);
                     securityidxmap.Add(sec.ID, i);
 
                     gt.Rows[i][CCODE] = sec.Code;
@@ -118,43 +142,14 @@ namespace TradingLib.MoniterControl
 
                     gt.Rows[i][TRADEABLE] = sec.Tradeable ? 1 : -1;
                     gt.Rows[i][TRADEABLETITLE] = GetTradeableTitle(sec.Tradeable);
-                    gt.Rows[i][DATAFEED] = sec.DataFeed;
+                    gt.Rows[i][TAG] = sec;
                 }
                 else
                 {
                     int i = r;
-                    //获得当前实例
-                    
                     SecurityFamilyImpl target = CoreService.BasicInfoTracker.GetSecurity(sec.ID);
-                    //MessageBox.Show("got security target code:" + target.Code + " seccode:" + sec.Code);
                     if (target != null)
                     {
-                        //1.更新当前实例
-                        target.Code = sec.Code;
-                        target.Name = sec.Name;
-                        target.Currency = sec.Currency;
-                        target.Type = sec.Type;
-
-                        target.exchange_fk = sec.exchange_fk;
-                        target.Exchange = CoreService.BasicInfoTracker.GetExchange(sec.exchange_fk);
-
-                        target.mkttime_fk = sec.mkttime_fk;
-                        target.MarketTime = CoreService.BasicInfoTracker.GetMarketTime(sec.mkttime_fk);
-
-                        target.underlaying_fk = sec.underlaying_fk;
-                        //target.UnderLaying = BasicTracker.SecurityTracker[target.underlaying_fk];
-
-                        target.Multiple = sec.Multiple;
-                        target.PriceTick = sec.PriceTick;
-                        target.EntryCommission = sec.EntryCommission;
-                        target.ExitCommission = sec.ExitCommission;
-                        target.ExitCommissionToday = sec.ExitCommissionToday;
-                        target.Margin = sec.Margin;
-                        target.ExtraMargin = sec.ExtraMargin;
-                        target.MaintanceMargin = sec.MaintanceMargin;
-                        target.Tradeable = sec.Tradeable;
-
-                        //2.更新表格
                         gt.Rows[i][CCODE] = target.Code;
                         gt.Rows[i][NAME] = target.Name;
                         gt.Rows[i][CURRENCY] = Util.GetEnumDescription(sec.Currency);
@@ -177,7 +172,7 @@ namespace TradingLib.MoniterControl
 
                         gt.Rows[i][TRADEABLE] = sec.Tradeable ? 1 : -1;
                         gt.Rows[i][TRADEABLETITLE] = GetTradeableTitle(sec.Tradeable);
-                        gt.Rows[i][DATAFEED] = sec.DataFeed;
+
                     }
 
 
@@ -195,7 +190,6 @@ namespace TradingLib.MoniterControl
         const string TYPE = "证券品种";
         const string MULTIPLE = "乘数";
         const string PRICETICK = "价格变动";
-        //const string TRADABLE = "是否交易";
         const string ENTRYCOMMISSION = "开仓手续费";
         const string EXITCOMMISSION = "平仓手续费";
         const string EXITCOMMISSIONTODAY = "平今手续费";
@@ -210,7 +204,7 @@ namespace TradingLib.MoniterControl
         const string MARKETTIME = "交易时间段";
         const string TRADEABLE = "TRADEABLE";
         const string TRADEABLETITLE = "允许交易";
-        const string DATAFEED = "行情源";
+        const string TAG = "TAG";
         #endregion
 
         DataTable gt = new DataTable();
@@ -242,32 +236,31 @@ namespace TradingLib.MoniterControl
         //初始化Account显示空格
         private void InitTable()
         {
-            gt.Columns.Add(ID);//
-            gt.Columns.Add(CCODE);//
-            gt.Columns.Add(NAME);//
-            gt.Columns.Add(CURRENCY);//
-            gt.Columns.Add(TYPE);//
-            gt.Columns.Add(EXCHANGEID);//
-            gt.Columns.Add(EXCHANGE);//
-            gt.Columns.Add(MARKETTIMEID);//
-            gt.Columns.Add(MARKETTIME);//
+            gt.Columns.Add(ID);
+            gt.Columns.Add(CCODE);
+            gt.Columns.Add(NAME);
+            gt.Columns.Add(CURRENCY);
+            gt.Columns.Add(TYPE);
+            gt.Columns.Add(EXCHANGEID);
+            gt.Columns.Add(EXCHANGE);
+            gt.Columns.Add(MARKETTIMEID);
+            gt.Columns.Add(MARKETTIME);
 
-            gt.Columns.Add(MULTIPLE);//
-            gt.Columns.Add(PRICETICK);//
-            //gt.Columns.Add(TRADABLE);//
-            gt.Columns.Add(ENTRYCOMMISSION);//
-            gt.Columns.Add(EXITCOMMISSION);//
+            gt.Columns.Add(MULTIPLE);
+            gt.Columns.Add(PRICETICK);
+            gt.Columns.Add(ENTRYCOMMISSION);
+            gt.Columns.Add(EXITCOMMISSION);
             gt.Columns.Add(EXITCOMMISSIONTODAY);
-            gt.Columns.Add(MARGIN);//
-            gt.Columns.Add(EXTRAMARGIN);//
-            gt.Columns.Add(MAINTANCEMARGIN);//
+            gt.Columns.Add(MARGIN);
+            gt.Columns.Add(EXTRAMARGIN);
+            gt.Columns.Add(MAINTANCEMARGIN);
             
-            gt.Columns.Add(UNDERLAYINGID);//
-            gt.Columns.Add(UNDERLAYING);//
+            gt.Columns.Add(UNDERLAYINGID);
+            gt.Columns.Add(UNDERLAYING);
             
             gt.Columns.Add(TRADEABLE);
             gt.Columns.Add(TRADEABLETITLE);
-            gt.Columns.Add(DATAFEED);
+            gt.Columns.Add(TAG,typeof(SecurityFamilyImpl));
         }
 
         /// <summary>
@@ -282,7 +275,6 @@ namespace TradingLib.MoniterControl
 
             //需要在绑定数据源后设定具体的可见性
             grid.Columns[ID].Visible = false;
-            //grid.Columns[CURRENCY].Visible = false;
             grid.Columns[UNDERLAYING].Visible = false;
             grid.Columns[TYPE].Visible = false;
 
@@ -293,12 +285,7 @@ namespace TradingLib.MoniterControl
 
             grid.Columns[EXTRAMARGIN].Visible = false;
             grid.Columns[MAINTANCEMARGIN].Visible = false;
-
-            if (!CoreService.SiteInfo.Domain.Super)
-            {
-                grid.Columns[DATAFEED].Visible = false;
-            }
-            
+            grid.Columns[TAG].Visible = false;
         }
 
 
@@ -312,27 +299,7 @@ namespace TradingLib.MoniterControl
         {
             string sectype = string.Empty;
             sectype = "*";
-
-            //if (cbsecurity.SelectedIndex == 0)
-            //{
-            //    sectype = "*";
-            //}
-            //else
-            //{
-            //    sectype = cbsecurity.SelectedValue.ToString();
-            //}
-
-
             string strFilter = string.Empty;
-
-            //if (cbsecurity.SelectedIndex == 0)
-            //{
-            //    strFilter = string.Format(TYPE + " > '{0}'", sectype);
-            //}
-            //else
-            //{
-            //    strFilter = string.Format(TYPE + " = '{0}'", sectype);
-            //}
 
             strFilter = string.Format(TYPE + " > '{0}'", sectype);
 
@@ -347,92 +314,25 @@ namespace TradingLib.MoniterControl
                 strFilter = string.Format(strFilter + " and " + TRADEABLE + " = '{0}'", sv);
 
             }
-            //Globals.Debug(strFilter);
             datasource.Filter = strFilter;
         }
 
-
-
-        //得到当前选择的行号
-        private int CurrentSecurityID
+        private SecurityFamilyImpl CurrentSecurity
         {
             get
             {
                 int row = secgrid.SelectedRows.Count > 0 ? secgrid.SelectedRows[0].Index : -1;
                 if (row >= 0)
                 {
-                    return int.Parse(secgrid[0, row].Value.ToString());
+                    return secgrid[TAG, row].Value as SecurityFamilyImpl;
                 }
                 else
                 {
-                    return 0;
+                    return null;
                 }
             }
         }
 
-
-
-        //通过行号得该行的Security
-        SecurityFamilyImpl GetVisibleSecurity(int id)
-        {
-            SecurityFamilyImpl sec = null;
-            if (securitymap.TryGetValue(id, out sec))
-            {
-                return sec;
-            }
-            else
-            {
-                return null;
-            }
-
-        }
-
-
-        public void OnInit()
-        {
-            if (!CoreService.SiteInfo.Domain.Super)
-            {
-                
-                btnSyncSec.Visible = false;
-                btnAddSecurity.Visible = false;
-
-                //如果是管理员 并且没有品种数据 则同步品种按钮可见
-                if (CoreService.SiteInfo.Manager.IsRoot())
-                {
-                    btnSyncSec.Visible = CoreService.BasicInfoTracker.Securities.Count() == 0;
-                }
-
-                //btnAddSecurity.Visible = CoreService.SiteInfo.Manager.IsRoot();
-            }
-
-            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_SEC, OnNotifySecurity);
-        }
-
-        public void OnDisposed()
-        {
-            CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_SEC, OnNotifySecurity);
-        }
-
-        void OnNotifySecurity(string json)
-        {
-            string content = json.DeserializeObject<string>();
-            SecurityFamilyImpl sec = SecurityFamilyImpl.Deserialize(content);
-            InvokGotSecurity(sec);
-        }
-        void WireEvent()
-        {
-            CoreService.EventCore.RegIEventHandler(this);
-            //cbsecurity.SelectedIndexChanged += new EventHandler(cbsecurity_SelectedIndexChanged);
-            cbexchange.SelectedIndexChanged += new EventHandler(cbexchange_SelectedIndexChanged);
-            cbtradeable.SelectedIndexChanged += new EventHandler(cbtradeable_SelectedIndexChanged);
-
-            secgrid.DoubleClick +=new EventHandler(secgrid_DoubleClick);
-            btnAddSecurity.Click +=new EventHandler(btnAddSecurity_Click);
-            btnSyncSec.Click += new EventHandler(btnSyncSec_Click);
-            secgrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(secgrid_RowPrePaint);
-
-
-        }
 
         void btnSyncSec_Click(object sender, EventArgs e)
         {
@@ -447,7 +347,6 @@ namespace TradingLib.MoniterControl
             e.PaintParts = e.PaintParts ^ DataGridViewPaintParts.Focus;
         }
 
-
         private void cbsecurity_SelectedIndexChanged(object sender, EventArgs e)
         {
             RefreshSecurityQuery();
@@ -458,26 +357,26 @@ namespace TradingLib.MoniterControl
             RefreshSecurityQuery();
         }
 
-        private void secgrid_DoubleClick(object sender, EventArgs e)
-        {
-            if (!CoreService.SiteInfo.Manager.IsRoot()) return;
-            SecurityFamilyImpl sec = GetVisibleSecurity(CurrentSecurityID);
-            if (sec != null)
-            {
-                fmSecEdit fm = new fmSecEdit();
-                fm.Security = sec;
-                fm.ShowDialog();
-            }
-        }
-
         private void cbtradeable_SelectedIndexChanged(object sender, EventArgs e)
         {
             RefreshSecurityQuery();
         }
 
+        private void secgrid_DoubleClick(object sender, EventArgs e)
+        {
+            if (!CoreService.SiteInfo.Manager.IsRoot()) return;
+            SecurityFamilyImpl sec = CurrentSecurity;
+            if (sec != null)
+            {
+                fmSecurityEdit fm = new fmSecurityEdit();
+                fm.Security = sec;
+                fm.ShowDialog();
+            }
+        }
+
         private void btnAddSecurity_Click(object sender, EventArgs e)
         {
-            fmSecEdit fm = new fmSecEdit();
+            fmSecurityEdit fm = new fmSecurityEdit();
             fm.ShowDialog();
         }
     }

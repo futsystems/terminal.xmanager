@@ -46,22 +46,22 @@ namespace TradingLib.MoniterControl
 
         void tempateTree_Disposed(object sender, EventArgs e)
         {
-            LogService.Debug("tempateTree disposed......");
+            //LogService.Debug("tempateTree disposed......");
         }
 
         void fmCommission_FormClosed(object sender, FormClosedEventArgs e)
         {
-            LogService.Debug("fmcommission closed......");
+            //LogService.Debug("fmcommission closed......");
         }
 
         void fmCommission_FormClosing(object sender, FormClosingEventArgs e)
         {
-            LogService.Debug("fmcommission closing......");
+            //LogService.Debug("fmcommission closing......");
         }
 
         void fmCommission_Disposed(object sender, EventArgs e)
         {
-            LogService.Debug("fmcommission disposed......");
+            //LogService.Debug("fmcommission disposed......");
         }
 
         private ComponentFactory.Krypton.Toolkit.KryptonTreeNode CreateBaseItem(string lb)
@@ -262,7 +262,7 @@ namespace TradingLib.MoniterControl
 
         public void OnDisposed()
         {
-            LogService.Debug("disposed.....");
+            //LogService.Debug("disposed.....");
             CoreService.EventCore.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_COMMISSION_TEMPLATE, this.OnQryCommissionTemplate);
             CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_COMMISSION_TEMPLATE, this.OnNotifyCommissionTemplate);
             CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_COMMISSION_TEMPLATE_DELETE, this.OnNotifyDelCommissionTemplate);
@@ -384,13 +384,13 @@ namespace TradingLib.MoniterControl
         {
             try
             {
-                LogService.Debug("template str:" + json);
+                //LogService.Debug("template str:" + json);
                 CommissionTemplateSetting[] list = CoreService.ParseJsonResponse<CommissionTemplateSetting[]>(json);
                 if (list != null)
                 {
                     foreach (CommissionTemplateSetting t in list)
                     {
-                        LogService.Debug("commissiontempalte:" + t.ID + " " + t.Name);
+                        //LogService.Debug("commissiontempalte:" + t.ID + " " + t.Name);
                         templatemap.Add(t.ID, t);
                         //templatelist.Items.Add(t);
                         InvokeGotCommissiontTemplateItem(t);

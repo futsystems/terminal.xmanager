@@ -11,6 +11,16 @@ namespace TradingLib.MoniterControl
 {
     public static class BasicInfoTrackerUtil
     {
+        public static string GetExchangeName(this BasicInfoTracker info, string exchange)
+        {
+            string title = exchange;
+            ExchangeImpl ex = info.Exchanges.FirstOrDefault(e => e.EXCode.Equals(exchange));
+            if (ex != null)
+            {
+                title = ex.Title;
+            }
+            return title;
+        }
 
         /// <summary>
         /// 返回manger选择项
@@ -23,7 +33,7 @@ namespace TradingLib.MoniterControl
 
             if (all)
             {
-                list.Add(new ValueObject<int> { Name = MoniterUtil.AnyCBStr, Value = 0 });
+                list.Add(new ValueObject<int> { Name = UIConstant.COMBOX_ANY_STR, Value = 0 });
             }
             //从柜员列表中获得超级管理员域或代理域
             foreach (ManagerSetting m in info.Managers.Where(g => (g.Type == QSEnumManagerType.ROOT || g.Type == QSEnumManagerType.AGENT)))

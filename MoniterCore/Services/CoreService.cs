@@ -92,7 +92,6 @@ namespace TradingLib.MoniterCore
 
         public static void Destory()
         {
-            LogService.Debug("destory tlclient .........");
             if (defaultinstance._tlclient != null)
             {
                 TLClient.Stop();

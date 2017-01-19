@@ -16,6 +16,72 @@ namespace TradingLib.MoniterCore
     public partial class BasicInfoTracker
     {
 
+        #region 数据集
+        /// <summary>
+        /// 市场时间段map
+        /// </summary>
+        Dictionary<int, MarketTimeImpl> markettimemap = new Dictionary<int, MarketTimeImpl>();
+
+        /// <summary>
+        /// 交易所map
+        /// </summary>
+        Dictionary<int, ExchangeImpl> exchangemap = new Dictionary<int, ExchangeImpl>();
+
+        /// <summary>
+        /// 品种map
+        /// </summary>
+        Dictionary<int, SecurityFamilyImpl> securitymap = new Dictionary<int, SecurityFamilyImpl>();
+
+        /// <summary>
+        /// 合约map
+        /// </summary>
+        Dictionary<int, SymbolImpl> symbolmap = new Dictionary<int, SymbolImpl>();
+
+        /// <summary>
+        /// 合约名称map
+        /// </summary>
+        Dictionary<string, SymbolImpl> symbolnammap = new Dictionary<string, SymbolImpl>();
+
+
+        Dictionary<int, ExchangeRate> exchangeRateaIDMap = new Dictionary<int, ExchangeRate>();
+        /// <summary>
+        /// 汇率信息map
+        /// </summary>
+        Dictionary<CurrencyType, ExchangeRate> exchangeRateCurrencyMap = new Dictionary<CurrencyType, ExchangeRate>();
+        /// <summary>
+        /// 主管理员map
+        /// </summary>
+        Dictionary<int, ManagerSetting> managermap = new Dictionary<int, ManagerSetting>();
+
+        /// <summary>
+        /// 路由组数据
+        /// </summary>
+        Dictionary<int, RouterGroupSetting> rgmap = new Dictionary<int, RouterGroupSetting>();
+
+        /// <summary>
+        /// 委托风控规则map
+        /// </summary>
+        Dictionary<string, RuleClassItem> orderruleclassmap = new Dictionary<string, RuleClassItem>();
+
+
+        /// <summary>
+        /// 帐户风控规则map
+        /// </summary>
+        Dictionary<string, RuleClassItem> accountruleclassmap = new Dictionary<string, RuleClassItem>();
+
+
+        /// <summary>
+        /// 交易帐户列表map
+        /// </summary>
+        Dictionary<string, AccountItem> accountmap = new Dictionary<string, AccountItem>();
+
+
+        /// <summary>
+        /// 行情快照维护器
+        /// </summary>
+        TickTracker ticktracker = new TickTracker();
+        #endregion
+
         #region 获得市场事件，交易所，品种，合约等基础数据
         /// <summary>
         /// 市场时间段
@@ -275,6 +341,7 @@ namespace TradingLib.MoniterCore
         }
 
         public IEnumerable<Tick> TickSnapshots { get { return ticktracker.TickSnapshots; } }
+
 
         public Tick GetTickSnapshot(string exchange, string symbol)
         {

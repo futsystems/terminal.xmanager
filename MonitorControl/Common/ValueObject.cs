@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TradingLib.MoniterCore
+namespace TradingLib.MoniterControl
 {
     //下拉菜单所使用的vlaueobject,用于形成名称与对应的value
 

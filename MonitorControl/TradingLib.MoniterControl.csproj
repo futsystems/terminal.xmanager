@@ -226,6 +226,7 @@
     <Compile Include="Common\ChinSpell.cs" />
     <Compile Include="Common\FilterArgs.cs" />
     <Compile Include="Common\JsonProtocolFinService.cs" />
+    <Compile Include="Common\ValueObject.cs" />
     <Compile Include="ContribProtocol\ProtocolLogServer.cs" />
     <Compile Include="ControlService.cs" />
     <Compile Include="ctDebug.cs">
@@ -442,52 +443,52 @@
     <Compile Include="Forms\Basic\ExStrategy\fmExStrategy.Designer.cs">
       <DependentUpon>fmExStrategy.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Basic\fmExchange.cs">
+    <Compile Include="Forms\Basic\Exchange\fmExchange.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Basic\fmExchange.Designer.cs">
+    <Compile Include="Forms\Basic\Exchange\fmExchange.Designer.cs">
       <DependentUpon>fmExchange.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Basic\fmExchangeEdit.cs">
+    <Compile Include="Forms\Basic\Exchange\fmExchangeEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Basic\fmExchangeEdit.Designer.cs">
+    <Compile Include="Forms\Basic\Exchange\fmExchangeEdit.Designer.cs">
       <DependentUpon>fmExchangeEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Basic\fmMarketTime.cs">
+    <Compile Include="Forms\Basic\MarketTime\fmMarketTime.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Basic\fmMarketTime.Designer.cs">
+    <Compile Include="Forms\Basic\MarketTime\fmMarketTime.Designer.cs">
       <DependentUpon>fmMarketTime.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Basic\fmMarketTimeInfo.cs">
+    <Compile Include="Forms\Basic\MarketTime\fmMarketTimeInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Basic\fmMarketTimeInfo.Designer.cs">
+    <Compile Include="Forms\Basic\MarketTime\fmMarketTimeInfo.Designer.cs">
       <DependentUpon>fmMarketTimeInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Basic\fmSecEdit.cs">
+    <Compile Include="Forms\Basic\Security\fmSecurityEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Basic\fmSecEdit.Designer.cs">
-      <DependentUpon>fmSecEdit.cs</DependentUpon>
+    <Compile Include="Forms\Basic\Security\fmSecurityEdit.Designer.cs">
+      <DependentUpon>fmSecurityEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Basic\fmSecurity.cs">
+    <Compile Include="Forms\Basic\Security\fmSecurity.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Basic\fmSecurity.Designer.cs">
+    <Compile Include="Forms\Basic\Security\fmSecurity.Designer.cs">
       <DependentUpon>fmSecurity.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Basic\fmSymbol.cs">
+    <Compile Include="Forms\Basic\Symbol\fmSymbol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Basic\fmSymbol.Designer.cs">
+    <Compile Include="Forms\Basic\Symbol\fmSymbol.Designer.cs">
       <DependentUpon>fmSymbol.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Basic\fmSymbolEdit.cs">
+    <Compile Include="Forms\Basic\Symbol\fmSymbolEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Basic\fmSymbolEdit.Designer.cs">
+    <Compile Include="Forms\Basic\Symbol\fmSymbolEdit.Designer.cs">
       <DependentUpon>fmSymbolEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Basic\fmSyncSymbol.cs">
@@ -508,22 +509,22 @@
     <Compile Include="Forms\Contrib\fmInsertTrade.Designer.cs">
       <DependentUpon>fmInsertTrade.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Domain\fmDomain.cs">
+    <Compile Include="Forms\System\Domain\fmDomain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Domain\fmDomain.Designer.cs">
+    <Compile Include="Forms\System\Domain\fmDomain.Designer.cs">
       <DependentUpon>fmDomain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Domain\fmDomainEdit.cs">
+    <Compile Include="Forms\System\Domain\fmDomainEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Domain\fmDomainEdit.Designer.cs">
+    <Compile Include="Forms\System\Domain\fmDomainEdit.Designer.cs">
       <DependentUpon>fmDomainEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Domain\fmDomainInfo.cs">
+    <Compile Include="Forms\System\fmDomainInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Domain\fmDomainInfo.Designer.cs">
+    <Compile Include="Forms\System\fmDomainInfo.Designer.cs">
       <DependentUpon>fmDomainInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Basic\fmImportStk.cs">
@@ -575,16 +576,16 @@
     <Compile Include="Forms\System\fmDataManager.Designer.cs">
       <DependentUpon>fmDataManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\System\fmExchangeRate.cs">
+    <Compile Include="Forms\Basic\ExchangeRate\fmExchangeRate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\System\fmExchangeRate.designer.cs">
+    <Compile Include="Forms\Basic\ExchangeRate\fmExchangeRate.designer.cs">
       <DependentUpon>fmExchangeRate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\System\fmExchangeRateEdit.cs">
+    <Compile Include="Forms\Basic\ExchangeRate\fmExchangeRateEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\System\fmExchangeRateEdit.designer.cs">
+    <Compile Include="Forms\Basic\ExchangeRate\fmExchangeRateEdit.designer.cs">
       <DependentUpon>fmExchangeRateEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Base\ctQuoteMoniterS.cs">
@@ -683,11 +684,11 @@
     <Compile Include="Forms\System\ConnectorManager\fmRouterItemEdit.Designer.cs">
       <DependentUpon>fmRouterItemEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\System\fmCoreStatus.cs">
+    <Compile Include="Forms\System\fmSystemStatus.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\System\fmCoreStatus.Designer.cs">
-      <DependentUpon>fmCoreStatus.cs</DependentUpon>
+    <Compile Include="Forms\System\fmSystemStatus.Designer.cs">
+      <DependentUpon>fmSystemStatus.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\System\fmDefaultConnector.cs">
       <SubType>Form</SubType>
@@ -804,7 +805,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="UIConstant.cs" />
-    <Compile Include="Utils\BasicInfoTrackerUtil.cs" />
+    <Compile Include="BasicInfoTrackerUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Base\ctBasicMangerInfo.resx">
@@ -994,28 +995,28 @@
     <EmbeddedResource Include="Forms\Basic\ExStrategy\fmExStrategy.resx">
       <DependentUpon>fmExStrategy.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Basic\fmExchange.resx">
+    <EmbeddedResource Include="Forms\Basic\Exchange\fmExchange.resx">
       <DependentUpon>fmExchange.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Basic\fmExchangeEdit.resx">
+    <EmbeddedResource Include="Forms\Basic\Exchange\fmExchangeEdit.resx">
       <DependentUpon>fmExchangeEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Basic\fmMarketTime.resx">
+    <EmbeddedResource Include="Forms\Basic\MarketTime\fmMarketTime.resx">
       <DependentUpon>fmMarketTime.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Basic\fmMarketTimeInfo.resx">
+    <EmbeddedResource Include="Forms\Basic\MarketTime\fmMarketTimeInfo.resx">
       <DependentUpon>fmMarketTimeInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Basic\fmSecEdit.resx">
-      <DependentUpon>fmSecEdit.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Basic\Security\fmSecurityEdit.resx">
+      <DependentUpon>fmSecurityEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Basic\fmSecurity.resx">
+    <EmbeddedResource Include="Forms\Basic\Security\fmSecurity.resx">
       <DependentUpon>fmSecurity.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Basic\fmSymbol.resx">
+    <EmbeddedResource Include="Forms\Basic\Symbol\fmSymbol.resx">
       <DependentUpon>fmSymbol.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Basic\fmSymbolEdit.resx">
+    <EmbeddedResource Include="Forms\Basic\Symbol\fmSymbolEdit.resx">
       <DependentUpon>fmSymbolEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Basic\fmSyncSymbol.resx">
@@ -1027,13 +1028,13 @@
     <EmbeddedResource Include="Forms\Contrib\fmInsertTrade.resx">
       <DependentUpon>fmInsertTrade.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Domain\fmDomain.resx">
+    <EmbeddedResource Include="Forms\System\Domain\fmDomain.resx">
       <DependentUpon>fmDomain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Domain\fmDomainEdit.resx">
+    <EmbeddedResource Include="Forms\System\Domain\fmDomainEdit.resx">
       <DependentUpon>fmDomainEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Domain\fmDomainInfo.resx">
+    <EmbeddedResource Include="Forms\System\fmDomainInfo.resx">
       <DependentUpon>fmDomainInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Basic\fmImportStk.resx">
@@ -1060,10 +1061,10 @@
     <EmbeddedResource Include="Forms\System\fmDataManager.resx">
       <DependentUpon>fmDataManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\System\fmExchangeRate.resx">
+    <EmbeddedResource Include="Forms\Basic\ExchangeRate\fmExchangeRate.resx">
       <DependentUpon>fmExchangeRate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\System\fmExchangeRateEdit.resx">
+    <EmbeddedResource Include="Forms\Basic\ExchangeRate\fmExchangeRateEdit.resx">
       <DependentUpon>fmExchangeRateEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Base\ctQuoteMoniterS.resx">
@@ -1114,8 +1115,8 @@
     <EmbeddedResource Include="Forms\System\ConnectorManager\fmRouterItemEdit.resx">
       <DependentUpon>fmRouterItemEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\System\fmCoreStatus.resx">
-      <DependentUpon>fmCoreStatus.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\System\fmSystemStatus.resx">
+      <DependentUpon>fmSystemStatus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\System\fmDefaultConnector.resx">
       <DependentUpon>fmDefaultConnector.cs</DependentUpon>
@@ -1225,7 +1226,10 @@
     <None Include="Resource\connect.png" />
     <None Include="Resource\disconnect.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Forms\1-pending\" />
+    <Folder Include="Utils\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

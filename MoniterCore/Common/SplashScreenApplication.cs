@@ -28,8 +28,6 @@ namespace TradingLib.MoniterCore
         {
             try
             {
-                LogService.Debug("SplashScreenApplicationContext created");
-
                 //如果有更新则我们先进行更新 然后再重新启动
                 if (!this.OnUpdate())
                 {
@@ -125,7 +123,6 @@ namespace TradingLib.MoniterCore
         //方式2.将第一屏幕显示时间设置成无限长,则实现登入窗口,则登入的时候需要手工关闭第一屏
         public void CloseSplashScreen()
         {
-            LogService.Debug("close splash screen............");
             this._SplashScreenTimer.Dispose();
             this._SplashScreenTimer = null;
             this._bSplashScreenClosed = true;
@@ -148,7 +145,6 @@ namespace TradingLib.MoniterCore
                 Application.DoEvents();
                 Thread.Sleep(10);
             }
-            LogService.Debug("Mainform load .......... run to here to close splashscreenform");
             DisposeDelegate SplashScreenFormDisposeDelegate = new DisposeDelegate(this._SplashScreenForm.Dispose);
             this._SplashScreenForm.Invoke(SplashScreenFormDisposeDelegate);
             this._SplashScreenForm = null;

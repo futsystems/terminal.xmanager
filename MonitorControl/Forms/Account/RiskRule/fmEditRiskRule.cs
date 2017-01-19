@@ -26,8 +26,8 @@ namespace TradingLib.MoniterControl
         {
 
             
-            MoniterHelper.AdapterToIDataSource(orderRuleClassList).BindDataSource(CoreService.BasicInfoTracker.GetOrderRuleClassListItems());
-            MoniterHelper.AdapterToIDataSource(accountRuleClassList).BindDataSource(CoreService.BasicInfoTracker.GetAccountRuleClassListItems());
+            MoniterHelper.AdapterToIDataSource(orderRuleClassList).BindDataSource(MoniterHelper.GetOrderRuleClassComboxArray());
+            MoniterHelper.AdapterToIDataSource(accountRuleClassList).BindDataSource(MoniterHelper.GetAccountRuleClassComboxArray());
 
             accountRuleClassList.ContextMenuStrip = new ContextMenuStrip();
             accountRuleClassList.ContextMenuStrip.Items.Add("添加强平规则", null, new EventHandler(AddAccountRule_Click));//0

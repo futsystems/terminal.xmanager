@@ -91,7 +91,7 @@ namespace TradingLib.MoniterControl
             {
                 
                 string rangestr = GetRangesStr();
-                LogService.Debug("RangeStr:" + rangestr);
+                //LogService.Debug("RangeStr:" + rangestr);
                 //_mt.TimeZone = timezone.SelectedValue.ToString();
                 _mt.CloseTime = Util.ToTLTime(closetime.Value);
                 _mt.DeserializeTradingRange(rangestr);

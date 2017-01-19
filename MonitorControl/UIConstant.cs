@@ -8,6 +8,7 @@ namespace TradingLib.MoniterControl
 {
     public class UIConstant
     {
+        public static string COMBOX_ANY_STR = "所有";
         public static int HeaderHeight = 26;
         public static int RowHeight = 24;
 

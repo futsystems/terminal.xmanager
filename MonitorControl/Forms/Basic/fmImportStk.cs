@@ -21,7 +21,7 @@ namespace TradingLib.MoniterControl
         public fmImportStk()
         {
             InitializeComponent();
-            MoniterHelper.AdapterToIDataSource(cbexchange).BindDataSource(CoreService.BasicInfoTracker.GetExchangeCombList());
+            MoniterHelper.AdapterToIDataSource(cbexchange).BindDataSource(MoniterHelper.GetExchangeComboxArray());
 
             _loaded = true;
             WireEvent();
@@ -93,7 +93,7 @@ namespace TradingLib.MoniterControl
         {
             if (!_loaded) return;
             int exid = (int)cbexchange.SelectedValue;
-            MoniterHelper.AdapterToIDataSource(cbsecurity).BindDataSource(CoreService.BasicInfoTracker.GetSecurityCombListViaExchange(exid));
+            MoniterHelper.AdapterToIDataSource(cbsecurity).BindDataSource(MoniterHelper.GetSecurityComboxArrayViaExchange(exid));
 
             
         }

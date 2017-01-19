@@ -29,13 +29,8 @@ namespace TradingLib.MoniterControl
 
         void fmDomain_Load(object sender, EventArgs e)
         {
-            WireEvent();
-        }
-
-        void WireEvent()
-        {
-            CoreService.EventCore.RegIEventHandler(this);
             domaingrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(domaingrid_RowPrePaint);
+            CoreService.EventCore.RegIEventHandler(this);
         }
 
         void domaingrid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -44,7 +39,6 @@ namespace TradingLib.MoniterControl
         }
 
 
-        //得到当前选择的行号
         private DomainImpl CurrentDomain
         {
             get
@@ -52,12 +46,7 @@ namespace TradingLib.MoniterControl
                 int row = domaingrid.SelectedRows.Count > 0 ? domaingrid.SelectedRows[0].Index : -1;
                 if (row >= 0)
                 {
-                    int id = int.Parse(domaingrid[0, row].Value.ToString());
-
-                    if (domainmap.Keys.Contains(id))
-                        return domainmap[id];
-                    else
-                        return null;
+                    return domaingrid[TAG, row].Value as DomainImpl;
                 }
                 else
                 {
@@ -80,7 +69,6 @@ namespace TradingLib.MoniterControl
        
         }
 
-        bool _godomain = false;
         void OnQryDomain(string jsonstr, bool islast)
         {
             DomainImpl[] objs = CoreService.ParseJsonResponse<DomainImpl[]>(jsonstr);
@@ -90,30 +78,18 @@ namespace TradingLib.MoniterControl
                 {
                     InvokeGotDomain(op);
                 }
-                _godomain = true;
-            }
-            else//如果没有配资服
-            {
-
             }
         }
 
         void OnNotifyDomain(string json)
         {
-            logger.Debug("Got NotifyDomain:" + json);
             DomainImpl obj = CoreService.ParseJsonResponse<DomainImpl>(json);
             if (obj != null)
             {
                 InvokeGotDomain(obj);
             }
-            else//如果没有配资服
-            {
-
-            }
         }
 
-
-        ConcurrentDictionary<int, DomainImpl> domainmap = new ConcurrentDictionary<int, DomainImpl>();
         ConcurrentDictionary<int, int> domainrowid = new ConcurrentDictionary<int, int>();
 
         int DomainIdx(int id)
@@ -154,10 +130,10 @@ namespace TradingLib.MoniterControl
                     //gt.Rows[i][ROUTERITEMLIMIT] = domain.RouterItemLimit;
                     gt.Rows[i][DISCOUNTNUM] = domain.DiscountNum;
                     gt.Rows[i][PRODUCTION] = domain.IsProduction ? "运营" : "测试";
-
+                    gt.Rows[i][TAG] = domain;
 
                     domainrowid.TryAdd(domain.ID, i);
-                    domainmap.TryAdd(domain.ID, domain);
+                    
                 }
                 else
                 {
@@ -171,8 +147,6 @@ namespace TradingLib.MoniterControl
                     //gt.Rows[r][ROUTERITEMLIMIT] = domain.RouterItemLimit;
                     gt.Rows[r][DISCOUNTNUM] = domain.DiscountNum;
                     gt.Rows[r][PRODUCTION] = domain.IsProduction?"运营":"测试";
-
-                    domainmap[domain.ID] = domain;
                 }
 
             }
@@ -194,6 +168,7 @@ namespace TradingLib.MoniterControl
         //const string ROUTERITEMLIMIT = "路由项目";
         const string DISCOUNTNUM = "优惠数量";
         const string PRODUCTION = "状态";
+        const string TAG = "TAG";
 
         #endregion
 
@@ -239,9 +214,9 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(VENDORLIMIT);
             gt.Columns.Add(ACCLIMIT);//1
             gt.Columns.Add(ROUTERGROUPLIMIT);//1
-            //gt.Columns.Add(ROUTERITEMLIMIT);//1
             gt.Columns.Add(DISCOUNTNUM);
             gt.Columns.Add(PRODUCTION);
+            gt.Columns.Add(TAG, typeof(DomainImpl));
         }
 
         /// <summary>
@@ -255,6 +230,8 @@ namespace TradingLib.MoniterControl
             //datasource.Sort = DOMAINID;
 
             grid.DataSource = datasource;
+
+            grid.Columns[TAG].Visible = false;
 
             grid.Columns[DOMAINID].Width = 30;
             grid.Columns[NAME].Width = 100;
@@ -270,20 +247,7 @@ namespace TradingLib.MoniterControl
             grid.Columns[DISCOUNTNUM].Width = 60;
             grid.Columns[PRODUCTION].Width = 60;
             
-            /*
-            datasource.Sort = ACCOUNT + " ASC";
-            
-
-            accountgrid.Columns[EXECUTE].IsVisible = false;
-            accountgrid.Columns[ROUTE].IsVisible = false;
-            accountgrid.Columns[LOGINSTATUS].IsVisible = false;
-
-            accountgrid.Columns[ACCOUNT].Width = 60;
-            accountgrid.Columns[ROUTEIMG].Width = 20;
-            accountgrid.Columns[EXECUTEIMG].Width = 20;
-            accountgrid.Columns[PROFITLOSSIMG].Width = 20;
-            accountgrid.Columns[LOGINSTATUSIMG].Width = 20;
-            accountgrid.Columns[ADDRESS].Width = 120;**/
+           
 
             for (int i = 0; i < gt.Columns.Count; i++)
             {

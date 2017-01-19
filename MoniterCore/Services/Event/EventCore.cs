@@ -21,7 +21,6 @@ namespace TradingLib.MoniterCore
         event VoidDelegate _OnInitializedEvent;
         internal void FireInitializedEvent()
         {
-            LogService.Debug("FireInitializedEvent");
             //先调用本地初始化完成依赖回调
             if (_OnInitializedEvent != null)
             {
@@ -75,7 +74,6 @@ namespace TradingLib.MoniterCore
                 {
                     IEventBinder h = control as IEventBinder;
                     //注册初始化完成事件响应函数 用于响应初始化完成事件 当对象在初始化完成之前创建 需要在完成初始化后 加载基础数据
-                    LogService.Debug("EventCore Register EventHandler:" + control.ToString());
                     RegisterInitializedCallBack(h.OnInit);
                     //将组件销毁的事件与对应的注销函数进行绑定
                     (control as Form).Disposed += (s, e) => { h.OnDisposed(); };
@@ -89,7 +87,6 @@ namespace TradingLib.MoniterCore
         public event VoidDelegate OnConnectedEvent;
         internal void FireConnectedEvent()
         {
-            LogService.Debug("FireConnectedEvent ***");
             if (OnConnectedEvent != null)
                 OnConnectedEvent();
         }
@@ -100,7 +97,6 @@ namespace TradingLib.MoniterCore
         public event VoidDelegate OnDisconnectedEvent;
         internal void FireDisconnectedEvent()
         {
-            LogService.Debug("FireDisconnectedEvent");
             if(OnDisconnectedEvent != null)
                 OnDisconnectedEvent();
         }
@@ -109,7 +105,6 @@ namespace TradingLib.MoniterCore
         public event VoidDelegate OnDataConnectedEvent;
         internal void FireDataConnectedEvent()
         {
-            LogService.Debug("FireDataConnectedEvent");
             if (OnDataConnectedEvent != null)
                 OnDataConnectedEvent();
         }
@@ -117,7 +112,6 @@ namespace TradingLib.MoniterCore
         public event VoidDelegate OnDataDisconnectedEvent;
         internal void FireDataDisconnectedEvent()
         {
-            LogService.Debug("FireDataDisconnectedEvent");
             if (OnDataDisconnectedEvent != null)
                 OnDataDisconnectedEvent();
         }
@@ -125,7 +119,6 @@ namespace TradingLib.MoniterCore
         public event Action<RspMGRLoginResponse> OnLoginEvent;
         internal void FireLoginEvent(RspMGRLoginResponse response)
         {
-            LogService.Debug("FireLoginEvent");
             if (OnLoginEvent != null)
                 OnLoginEvent(response);
         }
@@ -149,7 +142,6 @@ namespace TradingLib.MoniterCore
         public event Action<RspInfo> OnRspInfoEvent;
         internal void FireRspInfoEvent(RspInfo info)
         {
-            LogService.Debug("FireRspInfoEvent");
             if (OnRspInfoEvent != null)
                 OnRspInfoEvent(info);
         }
@@ -187,7 +179,6 @@ namespace TradingLib.MoniterCore
             {
                 callbackmap.TryAdd(key, new List<Action<string, bool>>());
             }
-            LogService.Debug("EventCore RegisterCallback:" + key);
             callbackmap[key].Add(del);
 
         }
@@ -227,8 +218,6 @@ namespace TradingLib.MoniterCore
             {
                 callbackmap.TryAdd(key, new List<Action<string, bool>>());
             }
-
-            LogService.Debug("EventCore UnRegisterCallback:" + key);
 
             if (callbackmap[key].Contains(del))
             {

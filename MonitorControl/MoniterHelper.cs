@@ -134,7 +134,7 @@ namespace TradingLib.MoniterControl
             if (any)
             {
                 ValueObject<QSEnumAccountCategory> vo = new ValueObject<QSEnumAccountCategory>();
-                vo.Name = MoniterUtil.AnyCBStr;
+                vo.Name = UIConstant.COMBOX_ANY_STR;
                 vo.Value = (QSEnumAccountCategory)(-1);
                 list.Add(vo);
             }
@@ -185,7 +185,7 @@ namespace TradingLib.MoniterControl
             if (any)
             {
                 ValueObject<QSEnumOrderTransferType> vo = new ValueObject<QSEnumOrderTransferType>();
-                vo.Name = MoniterUtil.AnyCBStr;
+                vo.Name = UIConstant.COMBOX_ANY_STR;
                 vo.Value = (QSEnumOrderTransferType)(-1);
                 list.Add(vo);
             }
@@ -267,7 +267,7 @@ namespace TradingLib.MoniterControl
             if (any)
             {
                 ValueObject<int> vo = new ValueObject<int>();
-                vo.Name = MoniterUtil.AnyCBStr;
+                vo.Name = UIConstant.COMBOX_ANY_STR;
                 vo.Value = 0;
                 list.Add(vo);
             }
@@ -317,7 +317,7 @@ namespace TradingLib.MoniterControl
             if (isany)
             {
                 ValueObject<T> vo = new ValueObject<T>();
-                vo.Name = MoniterUtil.AnyCBStr;
+                vo.Name = UIConstant.COMBOX_ANY_STR;
                 vo.Value = (T)(Enum.GetValues(typeof(T)).GetValue(0));
                 list.Add(vo);
             }
@@ -503,6 +503,203 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        
+
+        #region 获取下拉列表Array
+        /// <summary>
+        /// 交易所下拉列表Array
+        /// </summary>
+        /// <param name="isany"></param>
+        /// <returns></returns>
+        public static ArrayList GetExchangeComboxArray(bool isany = false)
+        {
+            ArrayList list = new ArrayList();
+            if (isany)
+            {
+                ValueObject<int> vo1 = new ValueObject<int>();
+                vo1.Name = UIConstant.COMBOX_ANY_STR;
+                vo1.Value = 0;
+                list.Add(vo1);
+            }
+            foreach (ExchangeImpl ex in CoreService.BasicInfoTracker.Exchanges)
+            {
+                ValueObject<int> vo = new ValueObject<int>();
+                vo.Name = ex.Name;
+                vo.Value = ex.ID;
+                list.Add(vo);
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// 交易时间段下拉列表Array
+        /// </summary>
+        /// <param name="isany"></param>
+        /// <returns></returns>
+        public static ArrayList GetMarketTimeComboxArray(bool isany = false)
+        {
+            ArrayList list = new ArrayList();
+            if (isany)
+            {
+                ValueObject<int> vo1 = new ValueObject<int>();
+                vo1.Name = UIConstant.COMBOX_ANY_STR;
+                vo1.Value = 0;
+                list.Add(vo1);
+            }
+            foreach (MarketTimeImpl mt in CoreService.BasicInfoTracker.MarketTimes)
+            {
+                ValueObject<int> vo = new ValueObject<int>();
+                vo.Name = mt.Name;
+                vo.Value = mt.ID;
+                list.Add(vo);
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// 委托规则下拉列表Array
+        /// </summary>
+        /// <returns></returns>
+        public static ArrayList GetOrderRuleClassComboxArray()
+        {
+            ArrayList list = new ArrayList();
+            foreach (RuleClassItem item in CoreService.BasicInfoTracker.OrderRuleClass)
+            {
+                ValueObject<RuleClassItem> vo = new ValueObject<RuleClassItem>();
+                vo.Name = item.Title;
+                vo.Value = item;
+                list.Add(vo);
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// 账户规则下拉列表Array
+        /// </summary>
+        /// <returns></returns>
+        public static ArrayList GetAccountRuleClassComboxArray()
+        {
+            ArrayList list = new ArrayList();
+
+            foreach (RuleClassItem item in CoreService.BasicInfoTracker.AccountRuleClass)
+            {
+                ValueObject<RuleClassItem> vo = new ValueObject<RuleClassItem>();
+                vo.Name = item.Title;
+                vo.Value = item;
+                list.Add(vo);
+            }
+            return list;
+        }
+
+
+        /// <summary>
+        /// 获得某个交易所的所有品种
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static ArrayList GetSecurityComboxArrayViaExchange(int id, SecurityType type = SecurityType.NIL, bool any = false)
+        {
+            ArrayList list = new ArrayList();
+            if (any)
+            {
+                ValueObject<int> vo = new ValueObject<int>();
+                vo.Name = UIConstant.COMBOX_ANY_STR;
+                vo.Value = 0;
+                list.Add(vo);
+            }
+            //未指定品种类型 则返回所有品种
+            if (type == SecurityType.NIL)
+            {
+                if (id == 0)
+                {
+                    foreach (SecurityFamilyImpl sec in CoreService.BasicInfoTracker.Securities)
+                    {
+                        ValueObject<int> vo = new ValueObject<int>();
+                        vo.Name = sec.Code + "-" + sec.Name;
+                        vo.Value = sec.ID;
+                        list.Add(vo);
+                    }
+
+                }
+                else
+                {
+                    foreach (SecurityFamilyImpl sec in CoreService.BasicInfoTracker.Securities.Where(ex => (ex != null && ((ex.Exchange as ExchangeImpl).ID == id))).ToArray())
+                    {
+                        ValueObject<int> vo = new ValueObject<int>();
+                        vo.Name = sec.Code + "-" + sec.Name;
+                        vo.Value = sec.ID;
+                        list.Add(vo);
+                    }
+                }
+            }
+            else
+            {
+                if (id == 0)
+                {
+                    foreach (SecurityFamilyImpl sec in CoreService.BasicInfoTracker.Securities.Where(s => s.Type == type))
+                    {
+                        ValueObject<int> vo = new ValueObject<int>();
+                        vo.Name = sec.Code + "-" + sec.Name;
+                        vo.Value = sec.ID;
+                        list.Add(vo);
+                    }
+
+                }
+                else
+                {
+                    foreach (SecurityFamilyImpl sec in CoreService.BasicInfoTracker.Securities.Where(s => s.Type == type).Where(ex => (ex != null && ((ex.Exchange as ExchangeImpl).ID == id))).ToArray())
+                    {
+                        ValueObject<int> vo = new ValueObject<int>();
+                        vo.Name = sec.Code + "-" + sec.Name;
+                        vo.Value = sec.ID;
+                        list.Add(vo);
+                    }
+                }
+            }
+            return list;
+        }
+
+        public static ArrayList GetExpireMonthComboxArray()
+        {
+            ArrayList list = new ArrayList();
+            DateTime lastday = Convert.ToDateTime(DateTime.Now.AddMonths(1).ToString("yyyy-MM-01")).AddDays(-1);
+            for (int i = 0; i < 12; i++)
+            {
+                ValueObject<int> vo = new ValueObject<int>();
+                vo.Name = lastday.AddMonths(i).ToString("yyyyMM");//201501
+                vo.Value = Convert.ToInt32(vo.Name);
+                list.Add(vo);
+            }
+            return list;
+        }
+        /// <summary>
+        /// 返回manger选择项
+        /// 用于创建用户
+        /// </summary>
+        /// <returns></returns>
+        //public static ArrayList GetBaseManagerComboxArray(bool all = false, bool includeself = true)
+        //{
+        //    ArrayList list = new ArrayList();
+
+        //    if (all)
+        //    {
+        //        list.Add(new ValueObject<int> { Name = MoniterUtil.AnyCBStr, Value = 0 });
+        //    }
+        //    //从柜员列表中获得管理员或代理域
+        //    foreach (ManagerSetting m in CoreService.BasicInfoTracker.Managers.Where(g => (g.Type == QSEnumManagerType.ROOT || g.Type == QSEnumManagerType.AGENT)))
+        //    {
+        //        if (!includeself && m.mgr_fk == CoreService.SiteInfo.BaseMGRFK)
+        //        {
+        //            continue;
+        //        }
+        //        ValueObject<int> vo1 = new ValueObject<int>();
+        //        vo1.Name = m.Name + " - " + m.mgr_fk;
+        //        vo1.Value = m.mgr_fk;
+        //        list.Add(vo1);
+
+        //    }
+        //    return list;
+        //}
+        #endregion
+
     }
 }

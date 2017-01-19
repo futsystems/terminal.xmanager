@@ -1,6 +1,6 @@
 ﻿namespace TradingLib.MoniterControl
 {
-    partial class fmSecEdit
+    partial class fmSecurityEdit
     {
         /// <summary>
         /// Required designer variable.
@@ -33,8 +33,6 @@
             this.kryptonLabel16 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel15 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cbsectype = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.cbDatafeed = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cbCurrency = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
@@ -67,7 +65,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pannel)).BeginInit();
             this.pannel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbsectype)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbDatafeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbCurrency)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).BeginInit();
@@ -84,8 +81,6 @@
             this.pannel.Controls.Add(this.kryptonLabel16);
             this.pannel.Controls.Add(this.kryptonLabel15);
             this.pannel.Controls.Add(this.cbsectype);
-            this.pannel.Controls.Add(this.cbDatafeed);
-            this.pannel.Controls.Add(this.kryptonLabel4);
             this.pannel.Controls.Add(this.kryptonLabel3);
             this.pannel.Controls.Add(this.cbCurrency);
             this.pannel.Controls.Add(this.kryptonGroupBox1);
@@ -112,7 +107,7 @@
             this.pannel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pannel.Location = new System.Drawing.Point(0, 0);
             this.pannel.Name = "pannel";
-            this.pannel.Size = new System.Drawing.Size(280, 418);
+            this.pannel.Size = new System.Drawing.Size(280, 399);
             this.pannel.TabIndex = 0;
             // 
             // exitcommisiontoday
@@ -156,22 +151,6 @@
             this.cbsectype.Name = "cbsectype";
             this.cbsectype.Size = new System.Drawing.Size(116, 21);
             this.cbsectype.TabIndex = 35;
-            // 
-            // cbDatafeed
-            // 
-            this.cbDatafeed.DropDownWidth = 116;
-            this.cbDatafeed.Location = new System.Drawing.Point(115, 328);
-            this.cbDatafeed.Name = "cbDatafeed";
-            this.cbDatafeed.Size = new System.Drawing.Size(116, 21);
-            this.cbDatafeed.TabIndex = 34;
-            // 
-            // kryptonLabel4
-            // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(51, 329);
-            this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(51, 20);
-            this.kryptonLabel4.TabIndex = 33;
-            this.kryptonLabel4.Values.Text = "行情源:";
             // 
             // kryptonLabel3
             // 
@@ -278,7 +257,7 @@
             // btnSubmit
             // 
             this.btnSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSubmit.Location = new System.Drawing.Point(191, 380);
+            this.btnSubmit.Location = new System.Drawing.Point(191, 362);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(77, 25);
             this.btnSubmit.TabIndex = 29;
@@ -369,7 +348,7 @@
             // 
             // tradeable
             // 
-            this.tradeable.Location = new System.Drawing.Point(115, 355);
+            this.tradeable.Location = new System.Drawing.Point(115, 323);
             this.tradeable.Name = "tradeable";
             this.tradeable.Size = new System.Drawing.Size(73, 20);
             this.tradeable.TabIndex = 13;
@@ -479,16 +458,16 @@
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "品种编号:";
             // 
-            // fmSecEdit
+            // fmSecurityEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(280, 418);
+            this.ClientSize = new System.Drawing.Size(280, 399);
             this.Controls.Add(this.pannel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "fmSecEdit";
+            this.Name = "fmSecurityEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "品种编辑";
             this.TopMost = true;
@@ -496,7 +475,6 @@
             this.pannel.ResumeLayout(false);
             this.pannel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbsectype)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbDatafeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbCurrency)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).EndInit();
             this.kryptonGroupBox1.Panel.ResumeLayout(false);
@@ -542,8 +520,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox cbCurrency;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
-        private ComponentFactory.Krypton.Toolkit.KryptonComboBox cbDatafeed;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel15;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox cbsectype;
         private ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown exitcommisiontoday;
