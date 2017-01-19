@@ -7,6 +7,128 @@ using TradingLib.Common;
 
 namespace TradingLib.MoniterCore
 {
+    /// <summary>
+    /// 账户管理模块扩展命令
+    /// </summary>
+    public class Method_ACC_MGR
+    {
+        /// <summary>
+        /// 添加账户
+        /// </summary>
+        public const string ADD_ACC = "AddAccountFacde";
+
+        /// <summary>
+        /// 删除账户
+        /// </summary>
+        public const string DEL_ACC = "DelAccount";
+
+        /// <summary>
+        /// 查询账户Profile
+        /// </summary>
+        public const string QRY_ACC_PROFILE = "QryAccountProfile";
+
+        /// <summary>
+        /// 更新账户Profile
+        /// </summary>
+        public const string UPDATE_ACC_PROFILE = "UpdateAccountProfile";
+
+        /// <summary>
+        /// 更新账户日内属性
+        /// </summary>
+        public const string UPDATE_ACC_INTRADAY = "UpdateAccountIntraday";
+
+        /// <summary>
+        /// 更新账户路由属性
+        /// </summary>
+        public const string UPDATE_ROUTE_TYPE = "UpdateRouteType";
+
+        /// <summary>
+        /// 更新账户交易状态
+        /// </summary>
+        public const string UPDATE_ACC_EXECUTE = "UpdateAccountExecute";
+
+        /// <summary>
+        /// 更新账户密码
+        /// </summary>
+        public const string UPDATE_ACC_PASS = "UpdateAccountPass";
+
+        /// <summary>
+        /// 更新账户货币
+        /// </summary>
+        public const string UPDATE_ACC_CURRENCY = "UpdateAccountCurrency";
+
+        /// <summary>
+        /// 更新账户手续费模板
+        /// </summary>
+        public const string UPDATE_TEMPLATE_COMMISSION = "UpdateAccountCommissionTemplate";
+
+        /// <summary>
+        /// 更新保证金模板
+        /// </summary>
+        public const string UPDATE_TEMPLATE_MARGIN = "UpdateAccountMarginTemplate";
+
+        /// <summary>
+        /// 更新交易参数模板
+        /// </summary>
+        public const string UPDATE_TEMPLATE_EXSTRATEGY = "UpdateAccountExStrategyTemplate";
+
+
+        /// <summary>
+        /// 更新账户路由组
+        /// </summary>
+        public const string UPDATE_ACC_ROUTEGROUP = "UpdateAccountRouterGroup";
+
+        /// <summary>
+        /// 执行出入金操作
+        /// </summary>
+        public const string CASH_ACC = "AccountCashOperation";
+
+        /// <summary>
+        /// 查询账户财务信息
+        /// </summary>
+        public const string QRY_ACC_FININFO = "QryAccountFinInfo";
+
+        /// <summary>
+        /// 账户财务信息更新
+        /// </summary>
+        public const string NOTIFY_ACC_FININFO = "NotifyAccountFinInfo";
+
+
+        /// <summary>
+        /// 查询交易账户登入信息
+        /// </summary>
+        public const string QRY_LOGIN_INFO = "QryAccountLoginInfo";
+
+
+        #region 历史查询
+
+        /// <summary>
+        /// 查询交易账户结算单
+        /// </summary>
+        public const string QRY_ACC_SETTLEMENT = "QueryAccountSettlement";
+
+        /// <summary>
+        /// 查询交易账户出入金记录
+        /// </summary>
+        public const string QRY_ACC_TXN = "QueryAccountCashTxn";
+        /// <summary>
+        /// 查询交易账户委托
+        /// </summary>
+        public const string QRY_ACC_ORDER = "QueryAccountOrder";
+
+        /// <summary>
+        /// 查询交易账户成交
+        /// </summary>
+        public const string QRY_ACC_TRADE = "QueryAccountTrade";
+
+        /// <summary>
+        /// 查询交易账户持仓
+        /// </summary>
+        public const string QRY_ACC_POSITION = "QueryAccountPosition";
+
+        #endregion
+    }
+
     public static class Client_AccountManager
     {
         /// <summary>
@@ -100,6 +222,15 @@ namespace TradingLib.MoniterCore
             return client.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.UPDATE_TEMPLATE_EXSTRATEGY, account + "," + templateid.ToString());
         }
 
+        /// <summary>
+        /// 修改交易帐户路由组
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="rgid"></param>
+        public static int ReqUpdateRouterGroup(this TLClientNet client, string account, int rgid)
+        {
+            return client.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.UPDATE_ACC_ROUTEGROUP, account + "," + rgid.ToString());
+        }
 
         /// <summary>
         /// 查询交易帐户信息

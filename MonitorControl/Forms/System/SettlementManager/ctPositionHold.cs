@@ -71,14 +71,14 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventCore.RegisterCallback("SettleCentre", "QryPositionHold", OnQryPositionHold);
+            CoreService.EventCore.RegisterCallback(Modules.SettleCentre,Method_SettleCentre.QRY_POSITIONHOLD, OnQryPositionHold);
             //Globals.LogicEvent.RegisterCallback("SettleCentre", "UpdateSettlementPrice", OnUpdateSettlementPrice);
 
         }
 
         public void OnDisposed()
         {
-            CoreService.EventCore.UnRegisterCallback("SettleCentre", "QryPositionHold", OnQryPositionHold);
+            CoreService.EventCore.UnRegisterCallback(Modules.SettleCentre,Method_SettleCentre.QRY_POSITIONHOLD, OnQryPositionHold);
             //Globals.LogicEvent.UnRegisterCallback("SettleCentre", "UpdateSettlementPrice", OnUpdateSettlementPrice);
         }
 

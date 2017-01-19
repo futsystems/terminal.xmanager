@@ -24,7 +24,7 @@ namespace TradingLib.MoniterControl
         {
             if (MoniterHelper.WindowConfirm("确认转储所有交易记录?") == System.Windows.Forms.DialogResult.Yes)
             {
-                CoreService.TLClient.ReqContribRequest("SettleCentre", "StoreSettledData", "");
+                CoreService.TLClient.ReqStoreSettleData();
             }
         }
 
@@ -32,7 +32,7 @@ namespace TradingLib.MoniterControl
         {
             if (MoniterHelper.WindowConfirm("确认删除已结算交易记录?") == System.Windows.Forms.DialogResult.Yes)
             {
-                CoreService.TLClient.ReqContribRequest("SettleCentre", "DeleteSettledData", "");
+                CoreService.TLClient.ReqDelSettleData();
             }
         }
 

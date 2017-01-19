@@ -74,19 +74,12 @@
     <Compile Include="Attr\MoniterCommandAttr.cs" />
     <Compile Include="Attr\MoniterControlAttr.cs" />
     <Compile Include="Client\AsyncClient_MQ.cs" />
-    <Compile Include="Client\Request\pending\TLClientNet_Request_SettleManager.cs" />
-    <Compile Include="Client\Request\TLClientNet_Request_Account.cs" />
     <Compile Include="Client\Request\old\TLClientNet_Request_AccountConnector.cs" />
-    <Compile Include="Client\Request\TLClientNet_Request_BasicInfo.cs" />
     <Compile Include="Client\Request\pending\TLClientNet_Request_CashOPAccount.cs" />
     <Compile Include="Client\Request\pending\TLClientNet_Request_CashOpAgent.cs" />
-    <Compile Include="Client\Request\TLClientNet_Request_ConfigTemplate.cs" />
-    <Compile Include="Client\Request\TLClientNet_Request_Domain.cs" />
-    <Compile Include="Client\Request\pending\TLClientNet_Request_ExCore_Exchange.cs" />
     <Compile Include="Client\Request\pending\TLClientNet_Request_FinAgent.cs" />
     <Compile Include="Client\Request\old\TLClientNet_Request_FinService.cs" />
     <Compile Include="Client\Request\pending\TLClientNet_Request_log.cs" />
-    <Compile Include="Client\Request\TLClientNet_Request_Manager.cs" />
     <Compile Include="Client\Request\TLClientNet_Request_Other.cs" />
     <Compile Include="Client\Request\pending\TLClientNet_Request_Permission.cs" />
     <Compile Include="Client\Request\pending\TLClientNet_Request_Vendor.cs" />
@@ -101,7 +94,10 @@
     <Compile Include="Common\SplashScreenApplication.cs" />
     <Compile Include="ContribRequest\ConnectorManager.cs" />
     <Compile Include="ContribRequest\AccountManager.cs" />
+    <Compile Include="ContribRequest\ExCore.cs" />
+    <Compile Include="ContribRequest\MgrExch.cs" />
     <Compile Include="ContribRequest\RiskCentre.cs" />
+    <Compile Include="ContribRequest\SettleCentre.cs" />
     <Compile Include="fmNotice.cs">
       <SubType>Form</SubType>
     </Compile>
