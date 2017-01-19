@@ -37,16 +37,7 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        public bool AnySymbol
-        {
-            get
-            {
-                return symbolmap.Count > 0;
-            }
-        }
 
-
-        Dictionary<int, SymbolImpl> symbolmap = new Dictionary<int, SymbolImpl>();
         Dictionary<int, int> symbolidxmap = new Dictionary<int, int>();
 
         int SymbolIdx(int id)
@@ -105,12 +96,12 @@ namespace TradingLib.MoniterControl
                     return "";
             }
         }
-        delegate void SymbolImplDel(SymbolImpl sym);
+
         void InvokeGotSymbol(SymbolImpl sym)
         {
             if (InvokeRequired)
             {
-                Invoke(new SymbolImplDel(InvokeGotSymbol), new object[] { sym });
+                Invoke(new Action<SymbolImpl>(InvokeGotSymbol), new object[] { sym });
             }
             else
             {
@@ -122,7 +113,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows.Add(sym.ID);
                     int i = gt.Rows.Count - 1;
 
-                    symbolmap.Add(sym.ID, sym);
+
                     symbolidxmap.Add(sym.ID, i);
 
                     gt.Rows[i][SYMBOL] = sym.Symbol;
@@ -150,7 +141,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][TRADEABLE] = sym.Tradeable;
                     gt.Rows[i][TRADEABLETITLE] = GetTradeableTitle(sym.Tradeable);
                     gt.Rows[i][SYMBOLTYPE] = Util.GetEnumDescription(sym.SymbolType);
-
+                    gt.Rows[i][TAG] = sym;
                 }
                 else
                 {
@@ -212,7 +203,7 @@ namespace TradingLib.MoniterControl
         const string TRADEABLE = "TRADEABLE";
         const string TRADEABLETITLE = "允许交易";
         const string SYMBOLTYPE = "类别";
-        
+        const string TAG = "TAG";
 
 
         #endregion
@@ -268,6 +259,7 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(TRADEABLE);
             gt.Columns.Add(TRADEABLETITLE);
             gt.Columns.Add(SYMBOLTYPE);
+            gt.Columns.Add(TAG, typeof(SymbolImpl));
 
         }
 
@@ -298,6 +290,7 @@ namespace TradingLib.MoniterControl
 
             grid.Columns[UNDERLAYINGSYMBOL].Visible = false;
             grid.Columns[UNDERLAYING].Visible = false;
+            grid.Columns[TAG].Visible = false;
 
             
         }
@@ -308,33 +301,9 @@ namespace TradingLib.MoniterControl
 
         #endregion
 
-
-        //bool _load = false;
         void RefreshSecurityQuery()
         {
-            //if (!_load) return;
-            //string sectype = string.Empty;
-
-            //if (cbsecurity.SelectedIndex == 0)
-            //{
-            //    sectype = "*";
-            //}
-            //else
-            //{
-            //    sectype = cbsecurity.SelectedValue.ToString();
-            //}
-
             string strFilter = string.Format(SECTYPE + " > '{0}'", "*");
-
-
-            //if (cbsecurity.SelectedIndex == 0)
-            //{
-            //    strFilter = string.Format(SECTYPE + " > '{0}'", sectype);
-            //}
-            //else
-            //{
-            //    strFilter = string.Format(SECTYPE + " = '{0}'", sectype);
-            //}
 
             //通过交易所过滤
             if (cbexchange.SelectedIndex != 0)
@@ -362,50 +331,33 @@ namespace TradingLib.MoniterControl
                     strFilter = string.Format(strFilter + " and " + TRADEABLE + " = '{0}'", false);
                 }
             }
-            //Globals.Debug("strFilter:" + strFilter);
             datasource.Filter = strFilter;
         }
 
 
         //得到当前选择的行号
-        private int CurrentSymbolID
+        private SymbolImpl CurrentSymbol
         {
             get
             {
                 int row = symgrid.SelectedRows.Count > 0 ? symgrid.SelectedRows[0].Index : -1;
                 if (row >= 0)
                 {
-                    return int.Parse(symgrid[0, row].Value.ToString());
+                    return symgrid[TAG, row].Value as SymbolImpl;
                 }
                 else
                 {
-                    return 0;
+                    return null;
                 }
             }
         }
 
-
-
-        //通过行号得该行的Security
-        SymbolImpl GetVisibleSymbol(int id)
-        {
-            SymbolImpl sym = null;
-            if (symbolmap.TryGetValue(id, out sym))
-            {
-                return sym;
-            }
-            else
-            {
-                return null;
-            }
-
-        }
 
         public void OnInit()
         {
             btnAddSymbol.Visible = CoreService.SiteInfo.Manager.IsRoot();
             btnSyncSymbols.Visible = CoreService.SiteInfo.Manager.IsRoot();
-            //Globals.Debug("绑定获得合约事件");
+
             if (!CoreService.SiteInfo.Domain.Super)
             {
                 btnDisableAll.Visible = false;
@@ -417,13 +369,10 @@ namespace TradingLib.MoniterControl
                     btnSyncSymbols.Visible = CoreService.BasicInfoTracker.Symbols.Count() == 0;
                 }
             }
-            //CoreService.EventBasicInfo.OnSymbolEvent += new Action<SymbolImpl>(InvokeGotSymbol);
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_SYM, OnNotifySymbol);
         }
         public void OnDisposed()
         {
-            //Globals.Debug("释放事件绑定");
-            //CoreService.EventBasicInfo.OnSymbolEvent -= new Action<SymbolImpl>(InvokeGotSymbol);
             CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_INFO_SYM, OnNotifySymbol);
         }
 
@@ -490,7 +439,7 @@ namespace TradingLib.MoniterControl
         private void symgrid_DoubleClick(object sender, EventArgs e)
         {
             if (!CoreService.SiteInfo.Manager.IsRoot()) return;
-            SymbolImpl symbol = GetVisibleSymbol(CurrentSymbolID);
+            SymbolImpl symbol = CurrentSymbol;
             if (symbol != null)
             {
                 fmSymbolEdit fm = new fmSymbolEdit();
