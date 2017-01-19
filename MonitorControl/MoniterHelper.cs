@@ -12,6 +12,7 @@ using TradingLib.Common;
 using TradingLib.MoniterCore;
 using ComponentFactory.Krypton.Toolkit;
 using TradingLib.Mixins.Json;
+using System.Data;
 
 
 namespace TradingLib.MoniterControl
@@ -83,7 +84,6 @@ namespace TradingLib.MoniterControl
             return ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show(message, title, System.Windows.Forms.MessageBoxButtons.OK);
         }
 
-
         /// <summary>
         /// 将数据导出到CSV文件
         /// </summary>
@@ -110,7 +110,7 @@ namespace TradingLib.MoniterControl
             StringBuilder strValue = new StringBuilder();
 
 
-            using (StreamWriter sw = new StreamWriter(filename))
+            using (StreamWriter sw = new StreamWriter(filename,false, Encoding.GetEncoding("gb2312")))
             {
                 for (int k = 0; k < view.Columns.Count; k++)
                 {

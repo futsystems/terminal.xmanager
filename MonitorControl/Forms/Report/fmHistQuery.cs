@@ -29,6 +29,7 @@ namespace TradingLib.MoniterControl
         {
             this.btnQryHist.Click +=new EventHandler(btnQryHist_Click);
             this.btnExport.Click += new EventHandler(btnExport_Click);
+
             CoreService.EventCore.RegIEventHandler(this);
         }
 
