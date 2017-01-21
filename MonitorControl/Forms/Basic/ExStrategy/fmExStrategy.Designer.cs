@@ -182,8 +182,8 @@
             // 
             // templateTree
             // 
-            this.templateTree.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.templateTree.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.templateTree.Location = new System.Drawing.Point(0, 0);
             this.templateTree.Name = "templateTree";
             this.templateTree.Size = new System.Drawing.Size(160, 386);
@@ -296,6 +296,7 @@
             // 
             // margin
             // 
+            this.margin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.margin.DropDownWidth = 146;
             this.margin.Location = new System.Drawing.Point(130, 2);
             this.margin.Name = "margin";

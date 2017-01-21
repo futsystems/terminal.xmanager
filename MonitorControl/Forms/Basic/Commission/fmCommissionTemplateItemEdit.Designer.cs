@@ -333,6 +333,7 @@
             // 
             // chargetype
             // 
+            this.chargetype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.chargetype.DropDownWidth = 132;
             this.chargetype.Location = new System.Drawing.Point(92, 355);
             this.chargetype.Name = "chargetype";

@@ -128,6 +128,7 @@
             // 
             // cbSymbolType
             // 
+            this.cbSymbolType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSymbolType.DropDownWidth = 187;
             this.cbSymbolType.Location = new System.Drawing.Point(115, 152);
             this.cbSymbolType.Name = "cbSymbolType";
@@ -405,6 +406,7 @@
             // 
             // cbexpiremonth
             // 
+            this.cbexpiremonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbexpiremonth.DropDownWidth = 187;
             this.cbexpiremonth.Location = new System.Drawing.Point(115, 99);
             this.cbexpiremonth.Name = "cbexpiremonth";
@@ -413,6 +415,7 @@
             // 
             // cbsecurity
             // 
+            this.cbsecurity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbsecurity.DropDownWidth = 187;
             this.cbsecurity.Location = new System.Drawing.Point(115, 72);
             this.cbsecurity.Name = "cbsecurity";
@@ -421,6 +424,7 @@
             // 
             // cbexchange
             // 
+            this.cbexchange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbexchange.DropDownWidth = 183;
             this.cbexchange.Location = new System.Drawing.Point(115, 45);
             this.cbexchange.Name = "cbexchange";

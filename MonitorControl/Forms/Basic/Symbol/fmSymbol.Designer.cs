@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmSymbol));
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btnImportStk = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cbsecurity = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.btnDisableAll = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -40,7 +41,6 @@
             this.cbtradeable = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.cbexchange = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.symgrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.btnImportStk = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbsecurity)).BeginInit();
@@ -68,6 +68,14 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(844, 416);
             this.kryptonPanel1.TabIndex = 0;
             // 
+            // btnImportStk
+            // 
+            this.btnImportStk.Location = new System.Drawing.Point(415, 388);
+            this.btnImportStk.Name = "btnImportStk";
+            this.btnImportStk.Size = new System.Drawing.Size(90, 25);
+            this.btnImportStk.TabIndex = 18;
+            this.btnImportStk.Values.Text = "导入股票列表";
+            // 
             // kryptonLabel1
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(213, 8);
@@ -78,6 +86,7 @@
             // 
             // cbsecurity
             // 
+            this.cbsecurity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbsecurity.DropDownWidth = 121;
             this.cbsecurity.Location = new System.Drawing.Point(260, 5);
             this.cbsecurity.Name = "cbsecurity";
@@ -126,6 +135,7 @@
             // 
             // cbtradeable
             // 
+            this.cbtradeable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbtradeable.DropDownWidth = 121;
             this.cbtradeable.Location = new System.Drawing.Point(458, 5);
             this.cbtradeable.Name = "cbtradeable";
@@ -134,6 +144,7 @@
             // 
             // cbexchange
             // 
+            this.cbexchange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbexchange.DropDownWidth = 121;
             this.cbexchange.Location = new System.Drawing.Point(66, 5);
             this.cbexchange.Name = "cbexchange";
@@ -151,14 +162,6 @@
             this.symgrid.RowTemplate.Height = 23;
             this.symgrid.Size = new System.Drawing.Size(844, 350);
             this.symgrid.TabIndex = 0;
-            // 
-            // btnImportStk
-            // 
-            this.btnImportStk.Location = new System.Drawing.Point(415, 388);
-            this.btnImportStk.Name = "btnImportStk";
-            this.btnImportStk.Size = new System.Drawing.Size(90, 25);
-            this.btnImportStk.TabIndex = 18;
-            this.btnImportStk.Values.Text = "导入股票列表";
             // 
             // fmSymbol
             // 

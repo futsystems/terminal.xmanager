@@ -79,6 +79,7 @@
             // 
             // cbtradeable
             // 
+            this.cbtradeable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbtradeable.DropDownWidth = 121;
             this.cbtradeable.Location = new System.Drawing.Point(297, 8);
             this.cbtradeable.Name = "cbtradeable";
@@ -95,6 +96,7 @@
             // 
             // cbexchange
             // 
+            this.cbexchange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbexchange.DropDownWidth = 121;
             this.cbexchange.Location = new System.Drawing.Point(66, 8);
             this.cbexchange.Name = "cbexchange";
@@ -111,9 +113,9 @@
             // 
             // secgrid
             // 
-            this.secgrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.secgrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.secgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.secgrid.Location = new System.Drawing.Point(0, 35);
             this.secgrid.Name = "secgrid";

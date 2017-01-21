@@ -146,6 +146,7 @@
             // 
             // cbsectype
             // 
+            this.cbsectype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbsectype.DropDownWidth = 183;
             this.cbsectype.Location = new System.Drawing.Point(115, 114);
             this.cbsectype.Name = "cbsectype";
@@ -162,6 +163,7 @@
             // 
             // cbCurrency
             // 
+            this.cbCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCurrency.DropDownWidth = 183;
             this.cbCurrency.Location = new System.Drawing.Point(115, 87);
             this.cbCurrency.Name = "cbCurrency";
@@ -356,6 +358,7 @@
             // 
             // markettime
             // 
+            this.markettime.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.markettime.DropDownWidth = 183;
             this.markettime.Location = new System.Drawing.Point(115, 141);
             this.markettime.Name = "markettime";
@@ -430,6 +433,7 @@
             // 
             // exchange
             // 
+            this.exchange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.exchange.DropDownWidth = 183;
             this.exchange.Location = new System.Drawing.Point(115, 57);
             this.exchange.Name = "exchange";
