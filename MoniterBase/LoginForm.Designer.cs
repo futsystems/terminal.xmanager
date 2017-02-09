@@ -207,7 +207,7 @@
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Blue;
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "巨融资管柜台系统";
+            this.Text = "巨融资管柜台系统 201702";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.servers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();

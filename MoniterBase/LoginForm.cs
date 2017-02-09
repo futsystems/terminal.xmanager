@@ -76,7 +76,7 @@ namespace TradingLib.MoniterBase
             }
 
 
-            this.Text = string.Format("{0}资管柜台系统", Global.IsOEM ? "" : "巨融");
+            this.Text = string.Format("{0}资管柜台系统 201702", Global.IsOEM ? "" : "巨融");
             
             
 
