@@ -79,6 +79,9 @@ namespace TradingLib.MoniterBase
             {
                 imgLink.Image = (Image)Properties.Resources.online;
             }
+
+           
+
             //超管查看结算状态
             if (CoreService.SiteInfo.Domain.Super)
             {
@@ -174,6 +177,8 @@ namespace TradingLib.MoniterBase
             //需要在load后再注册核心调用函数 否则会出现 对象未初始化完毕
             CoreService.EventCore.RegIEventHandler(this);
 
+            //管理端启动第一次加载时 执行查询行情快照
+            CoreService.TLClient.ReqQryTickSnapshot();
         }
 
         void EventCore_OnDisconnectedEvent()

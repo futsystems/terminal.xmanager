@@ -68,7 +68,14 @@ namespace TradingLib.MoniterCore
         {
             string content = json.DeserializeObject<string>();
             Tick tick = TickImpl.Deserialize2(content);
-            CoreService.EventIndicator.FireTick(tick);
+            if (tick != null)
+            {
+                //查询行情快照 此处与connecton_OnTick 相同 用于更新本地行情数据
+                CoreService.BasicInfoTracker.GotTick(tick);//更新快照
+                CoreService.TradingInfoTracker.GotTick(tick);//驱动交易数据更新
+                CoreService.EventIndicator.FireTick(tick);
+            }
+            
         }
     }
 }

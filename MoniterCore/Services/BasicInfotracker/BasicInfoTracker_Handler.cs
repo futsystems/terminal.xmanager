@@ -439,7 +439,7 @@ namespace TradingLib.MoniterCore
                 logger.Info("        Account num:" + this.Accounts.Count().ToString());
 
                 //查询行情快照
-                CoreService.TLClient.ReqQryTickSnapshot();
+                //CoreService.TLClient.ReqQryTickSnapshot();
                 CoreService.TLClient.StartTick();
                 //触发数据初始化完成事件
                 CoreService.EventCore.FireInitializedEvent();

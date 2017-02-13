@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using TradingLib.MoniterCore;
 
 namespace TradingLib.MoniterBase
 {
@@ -38,6 +39,11 @@ namespace TradingLib.MoniterBase
         {
             e.Cancel = true;
             this.Hide();
+        }
+
+        private void btnDebug_Click(object sender, EventArgs e)
+        {
+            TradingLib.MoniterCore.CoreService.TLClient.ReqQryTickSnapshot();
         }
     }
 }
