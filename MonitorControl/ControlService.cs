@@ -14,12 +14,16 @@ namespace TradingLib.MoniterControl
         static ControlService()
         {
             defaultintance = new ControlService();
+            ConfigFile _config = ConfigFile.GetConfigFile("moniter.cfg");
+            SuperRoot = _config["SuperRoot"].AsString();
         }
 
         private ControlService()
         {
             
         }
+
+        public static string SuperRoot { get; set; }
 
         /// <summary>
         /// 合约选择事件

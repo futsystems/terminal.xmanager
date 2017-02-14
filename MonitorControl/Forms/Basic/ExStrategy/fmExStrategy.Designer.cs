@@ -30,6 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonGroupBoxsimtrade = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.simMinSize = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
+            this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.simFillAll = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.simUseBidAsk = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.btnAddTemplate = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonGroupBox3 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -56,8 +61,15 @@
             this.sidemargin = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.simStickLimit = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.simTimeCheck = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.simCFFEX = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBoxsimtrade)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBoxsimtrade.Panel)).BeginInit();
+            this.kryptonGroupBoxsimtrade.Panel.SuspendLayout();
+            this.kryptonGroupBoxsimtrade.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3.Panel)).BeginInit();
             this.kryptonGroupBox3.Panel.SuspendLayout();
@@ -75,6 +87,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonGroupBoxsimtrade);
             this.kryptonPanel1.Controls.Add(this.btnAddTemplate);
             this.kryptonPanel1.Controls.Add(this.kryptonGroupBox3);
             this.kryptonPanel1.Controls.Add(this.templateTree);
@@ -84,12 +97,66 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(519, 420);
+            this.kryptonPanel1.Size = new System.Drawing.Size(554, 481);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // kryptonGroupBoxsimtrade
+            // 
+            this.kryptonGroupBoxsimtrade.Location = new System.Drawing.Point(362, 243);
+            this.kryptonGroupBoxsimtrade.Name = "kryptonGroupBoxsimtrade";
+            // 
+            // kryptonGroupBoxsimtrade.Panel
+            // 
+            this.kryptonGroupBoxsimtrade.Panel.Controls.Add(this.simCFFEX);
+            this.kryptonGroupBoxsimtrade.Panel.Controls.Add(this.simTimeCheck);
+            this.kryptonGroupBoxsimtrade.Panel.Controls.Add(this.simStickLimit);
+            this.kryptonGroupBoxsimtrade.Panel.Controls.Add(this.simMinSize);
+            this.kryptonGroupBoxsimtrade.Panel.Controls.Add(this.kryptonLabel10);
+            this.kryptonGroupBoxsimtrade.Panel.Controls.Add(this.simFillAll);
+            this.kryptonGroupBoxsimtrade.Panel.Controls.Add(this.simUseBidAsk);
+            this.kryptonGroupBoxsimtrade.Size = new System.Drawing.Size(180, 195);
+            this.kryptonGroupBoxsimtrade.TabIndex = 21;
+            this.kryptonGroupBoxsimtrade.Values.Heading = "成交参数";
+            // 
+            // simMinSize
+            // 
+            this.simMinSize.Location = new System.Drawing.Point(95, 56);
+            this.simMinSize.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.simMinSize.Name = "simMinSize";
+            this.simMinSize.Size = new System.Drawing.Size(45, 22);
+            this.simMinSize.TabIndex = 21;
+            // 
+            // kryptonLabel10
+            // 
+            this.kryptonLabel10.Location = new System.Drawing.Point(1, 58);
+            this.kryptonLabel10.Name = "kryptonLabel10";
+            this.kryptonLabel10.Size = new System.Drawing.Size(88, 20);
+            this.kryptonLabel10.TabIndex = 20;
+            this.kryptonLabel10.Values.Text = "最小成交数量:";
+            // 
+            // simFillAll
+            // 
+            this.simFillAll.Location = new System.Drawing.Point(3, 30);
+            this.simFillAll.Name = "simFillAll";
+            this.simFillAll.Size = new System.Drawing.Size(98, 20);
+            this.simFillAll.TabIndex = 18;
+            this.simFillAll.Values.Text = "一次成交所有";
+            // 
+            // simUseBidAsk
+            // 
+            this.simUseBidAsk.Location = new System.Drawing.Point(3, 4);
+            this.simUseBidAsk.Name = "simUseBidAsk";
+            this.simUseBidAsk.Size = new System.Drawing.Size(98, 20);
+            this.simUseBidAsk.TabIndex = 17;
+            this.simUseBidAsk.Values.Text = "使用盘口成交";
             // 
             // btnAddTemplate
             // 
-            this.btnAddTemplate.Location = new System.Drawing.Point(70, 392);
+            this.btnAddTemplate.Location = new System.Drawing.Point(70, 453);
             this.btnAddTemplate.Name = "btnAddTemplate";
             this.btnAddTemplate.Size = new System.Drawing.Size(90, 25);
             this.btnAddTemplate.TabIndex = 20;
@@ -110,13 +177,13 @@
             this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonLabel7);
             this.kryptonGroupBox3.Panel.Controls.Add(this.entrySlip);
             this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonLabel2);
-            this.kryptonGroupBox3.Size = new System.Drawing.Size(316, 134);
+            this.kryptonGroupBox3.Size = new System.Drawing.Size(179, 134);
             this.kryptonGroupBox3.TabIndex = 19;
             this.kryptonGroupBox3.Values.Heading = "风险度设置";
             // 
             // kryptonLabel8
             // 
-            this.kryptonLabel8.Location = new System.Drawing.Point(45, 61);
+            this.kryptonLabel8.Location = new System.Drawing.Point(6, 61);
             this.kryptonLabel8.Name = "kryptonLabel8";
             this.kryptonLabel8.Size = new System.Drawing.Size(63, 20);
             this.kryptonLabel8.TabIndex = 19;
@@ -124,7 +191,7 @@
             // 
             // probability
             // 
-            this.probability.Location = new System.Drawing.Point(114, 85);
+            this.probability.Location = new System.Drawing.Point(75, 85);
             this.probability.Name = "probability";
             this.probability.Size = new System.Drawing.Size(45, 22);
             this.probability.TabIndex = 18;
@@ -136,7 +203,7 @@
             // 
             // kryptonLabel3
             // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(70, 87);
+            this.kryptonLabel3.Location = new System.Drawing.Point(31, 87);
             this.kryptonLabel3.Name = "kryptonLabel3";
             this.kryptonLabel3.Size = new System.Drawing.Size(38, 20);
             this.kryptonLabel3.TabIndex = 17;
@@ -144,7 +211,7 @@
             // 
             // limitcheck
             // 
-            this.limitcheck.Location = new System.Drawing.Point(111, 59);
+            this.limitcheck.Location = new System.Drawing.Point(72, 59);
             this.limitcheck.Name = "limitcheck";
             this.limitcheck.Size = new System.Drawing.Size(48, 20);
             this.limitcheck.TabIndex = 16;
@@ -152,14 +219,14 @@
             // 
             // exitSlip
             // 
-            this.exitSlip.Location = new System.Drawing.Point(114, 30);
+            this.exitSlip.Location = new System.Drawing.Point(75, 30);
             this.exitSlip.Name = "exitSlip";
             this.exitSlip.Size = new System.Drawing.Size(88, 22);
             this.exitSlip.TabIndex = 3;
             // 
             // kryptonLabel7
             // 
-            this.kryptonLabel7.Location = new System.Drawing.Point(70, 32);
+            this.kryptonLabel7.Location = new System.Drawing.Point(31, 32);
             this.kryptonLabel7.Name = "kryptonLabel7";
             this.kryptonLabel7.Size = new System.Drawing.Size(38, 20);
             this.kryptonLabel7.TabIndex = 2;
@@ -167,14 +234,14 @@
             // 
             // entrySlip
             // 
-            this.entrySlip.Location = new System.Drawing.Point(114, 2);
+            this.entrySlip.Location = new System.Drawing.Point(75, 2);
             this.entrySlip.Name = "entrySlip";
             this.entrySlip.Size = new System.Drawing.Size(88, 22);
             this.entrySlip.TabIndex = 1;
             // 
             // kryptonLabel2
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(70, 4);
+            this.kryptonLabel2.Location = new System.Drawing.Point(31, 4);
             this.kryptonLabel2.Name = "kryptonLabel2";
             this.kryptonLabel2.Size = new System.Drawing.Size(38, 20);
             this.kryptonLabel2.TabIndex = 0;
@@ -186,7 +253,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.templateTree.Location = new System.Drawing.Point(0, 0);
             this.templateTree.Name = "templateTree";
-            this.templateTree.Size = new System.Drawing.Size(160, 386);
+            this.templateTree.Size = new System.Drawing.Size(160, 447);
             this.templateTree.TabIndex = 18;
             // 
             // kryptonGroupBox2
@@ -200,7 +267,7 @@
             this.kryptonGroupBox2.Panel.Controls.Add(this.creditseparate);
             this.kryptonGroupBox2.Panel.Controls.Add(this.poslock);
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel6);
-            this.kryptonGroupBox2.Size = new System.Drawing.Size(316, 91);
+            this.kryptonGroupBox2.Size = new System.Drawing.Size(365, 91);
             this.kryptonGroupBox2.TabIndex = 17;
             this.kryptonGroupBox2.Values.Heading = "其他";
             // 
@@ -250,7 +317,7 @@
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel4);
             this.kryptonGroupBox1.Panel.Controls.Add(this.margin);
             this.kryptonGroupBox1.Panel.Controls.Add(this.sidemargin);
-            this.kryptonGroupBox1.Size = new System.Drawing.Size(317, 119);
+            this.kryptonGroupBox1.Size = new System.Drawing.Size(366, 119);
             this.kryptonGroupBox1.TabIndex = 16;
             this.kryptonGroupBox1.Values.Heading = "保证金与可用资金";
             // 
@@ -314,7 +381,7 @@
             // btnSubmit
             // 
             this.btnSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSubmit.Location = new System.Drawing.Point(437, 383);
+            this.btnSubmit.Location = new System.Drawing.Point(472, 444);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(70, 25);
             this.btnSubmit.TabIndex = 13;
@@ -326,11 +393,35 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // simStickLimit
+            // 
+            this.simStickLimit.Location = new System.Drawing.Point(3, 84);
+            this.simStickLimit.Name = "simStickLimit";
+            this.simStickLimit.Size = new System.Drawing.Size(111, 20);
+            this.simStickLimit.TabIndex = 22;
+            this.simStickLimit.Values.Text = "限定挂单价成交";
+            // 
+            // simTimeCheck
+            // 
+            this.simTimeCheck.Location = new System.Drawing.Point(3, 110);
+            this.simTimeCheck.Name = "simTimeCheck";
+            this.simTimeCheck.Size = new System.Drawing.Size(95, 20);
+            this.simTimeCheck.TabIndex = 23;
+            this.simTimeCheck.Values.Text = "Tick时间检查";
+            // 
+            // simCFFEX
+            // 
+            this.simCFFEX.Location = new System.Drawing.Point(3, 136);
+            this.simCFFEX.Name = "simCFFEX";
+            this.simCFFEX.Size = new System.Drawing.Size(107, 20);
+            this.simCFFEX.TabIndex = 24;
+            this.simCFFEX.Values.Text = "CFFEX成交策略";
+            // 
             // fmExStrategy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(519, 420);
+            this.ClientSize = new System.Drawing.Size(554, 481);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
@@ -340,6 +431,11 @@
             this.Text = "交易参数模板设置";
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBoxsimtrade.Panel)).EndInit();
+            this.kryptonGroupBoxsimtrade.Panel.ResumeLayout(false);
+            this.kryptonGroupBoxsimtrade.Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBoxsimtrade)).EndInit();
+            this.kryptonGroupBoxsimtrade.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3.Panel)).EndInit();
             this.kryptonGroupBox3.Panel.ResumeLayout(false);
             this.kryptonGroupBox3.Panel.PerformLayout();
@@ -389,5 +485,13 @@
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox limitcheck;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel8;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnAddTemplate;
+        private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBoxsimtrade;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox simUseBidAsk;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox simFillAll;
+        private ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown simMinSize;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel10;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox simStickLimit;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox simCFFEX;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox simTimeCheck;
     }
 }

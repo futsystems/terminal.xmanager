@@ -93,6 +93,13 @@ namespace TradingLib.MoniterControl
             _current.LimitCheck = limitcheck.Checked;
             _current.Probability = (int)probability.Value;
 
+            _current.SimExecuteCFFEXStrategy = simCFFEX.Checked;
+            _current.SimExecuteFillAll = simFillAll.Checked;
+            _current.SimExecuteMinSize = (int)simMinSize.Value;
+            _current.SimExecuteStickLimitPrice = simStickLimit.Checked;
+            _current.SimExecuteTimeCheck = simTimeCheck.Checked;
+            _current.SimExecuteUseAskBid = simUseBidAsk.Checked;
+
             CoreService.TLClient.ReqUpdateExStrategyTemplateItem(_current);
         }
 
@@ -152,6 +159,26 @@ namespace TradingLib.MoniterControl
             if (!CoreService.SiteInfo.Domain.Module_Slip)
             {
                 kryptonGroupBox3.Visible = false;
+            }
+
+            kryptonGroupBoxsimtrade.Visible = false;
+            if (!CoreService.SiteInfo.Domain.Super)
+            {
+                if (CoreService.SiteInfo.Manager.IsRoot())
+                {
+                    bool see = false;
+                    //如果设置了超级管理员 且管理员为超级管理员则可见按钮
+                    if (!string.IsNullOrEmpty(ControlService.SuperRoot))
+                    {
+                        see = (CoreService.SiteInfo.Manager.Login == ControlService.SuperRoot);
+                    }
+
+                    kryptonGroupBoxsimtrade.Visible = see;
+                }
+            }
+            else
+            {
+                kryptonGroupBoxsimtrade.Visible = true;
             }
 
             CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH,Method_MGR_EXCH.QRY_EXSTRATEGY_TEMPLATE, this.OnQryExStrategyTemplate);
@@ -216,6 +243,13 @@ namespace TradingLib.MoniterControl
                 exitSlip.Value = item.ExitSlip;
                 limitcheck.Checked = item.LimitCheck;
                 probability.Value = item.Probability;
+
+                simCFFEX.Checked = item.SimExecuteCFFEXStrategy;
+                simFillAll.Checked = item.SimExecuteFillAll;
+                simMinSize.Value = item.SimExecuteMinSize;
+                simStickLimit.Checked = item.SimExecuteStickLimitPrice;
+                simTimeCheck.Checked = item.SimExecuteTimeCheck;
+                simUseBidAsk.Checked = item.SimExecuteUseAskBid;
                 _current = item;
             }
         }
@@ -287,6 +321,8 @@ namespace TradingLib.MoniterControl
                 }
             }
         }
+
+
 
 
 
