@@ -322,7 +322,7 @@ namespace TradingLib.MoniterControl
 
 
         #region 表格
-        const string SESSIONID = "回话编号";
+        const string SESSIONID = "会话编号";
         const string IPADDRESS = "IP地址";
         const string TERMINAL = "终端类别";
         const string CREATEDTIME = "建立时间";
