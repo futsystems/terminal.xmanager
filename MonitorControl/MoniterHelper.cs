@@ -75,7 +75,7 @@ namespace TradingLib.MoniterControl
             StringBuilder strValue = new StringBuilder();
 
 
-            using (StreamWriter sw = new StreamWriter(filename))
+            using (StreamWriter sw = new StreamWriter(filename, false, Encoding.GetEncoding("gb2312")))
             {
                 for (int k = 0; k < view.Columns.Count; k++)
                 {

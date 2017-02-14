@@ -101,6 +101,15 @@ namespace TradingLib.MoniterControl
                     ctPositionView1.GotFill(f);
                 }
                 CoreService.TradingInfoTracker.EndResume();
+
+                //交易数据恢复完毕后 查询行情快照并驱动持仓列表数据
+                foreach (var pos in CoreService.TradingInfoTracker.PositionTracker)
+                {
+                    if (pos.oSymbol == null) continue;
+                    Tick k = CoreService.BasicInfoTracker.GetTickSnapshot(pos.oSymbol.Exchange, pos.oSymbol.Symbol);
+                    if (k == null) continue;
+                    this.GotTick(k);
+                }
             }
         }
 

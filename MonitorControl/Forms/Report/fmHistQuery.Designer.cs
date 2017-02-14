@@ -38,10 +38,10 @@
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonNavigator1 = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
             this.pageOrder = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.pageTrade = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.pagePosition = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.ctHistOrder1 = new TradingLib.MoniterControl.ctHistOrder();
+            this.pageTrade = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.ctHistTrade1 = new TradingLib.MoniterControl.ctHistTrade();
+            this.pagePosition = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.ctHistPosition1 = new TradingLib.MoniterControl.ctHistPosition();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -67,12 +67,12 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(794, 471);
+            this.kryptonPanel1.Size = new System.Drawing.Size(869, 471);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(792, 434);
+            this.btnExport.Location = new System.Drawing.Point(797, 437);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(60, 25);
             this.btnExport.TabIndex = 6;
@@ -80,7 +80,7 @@
             // 
             // btnQryHist
             // 
-            this.btnQryHist.Location = new System.Drawing.Point(726, 434);
+            this.btnQryHist.Location = new System.Drawing.Point(726, 437);
             this.btnQryHist.Name = "btnQryHist";
             this.btnQryHist.Size = new System.Drawing.Size(60, 25);
             this.btnQryHist.TabIndex = 5;
@@ -90,14 +90,14 @@
             // 
             this.settleday.Location = new System.Drawing.Point(562, 439);
             this.settleday.Name = "settleday";
-            this.settleday.Size = new System.Drawing.Size(147, 20);
+            this.settleday.Size = new System.Drawing.Size(147, 21);
             this.settleday.TabIndex = 4;
             // 
             // kryptonLabel2
             // 
             this.kryptonLabel2.Location = new System.Drawing.Point(501, 441);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(55, 18);
+            this.kryptonLabel2.Size = new System.Drawing.Size(51, 20);
             this.kryptonLabel2.TabIndex = 3;
             this.kryptonLabel2.Values.Text = "结算日:";
             // 
@@ -105,22 +105,22 @@
             // 
             this.account.Location = new System.Drawing.Point(359, 437);
             this.account.Name = "account";
-            this.account.Size = new System.Drawing.Size(126, 21);
+            this.account.Size = new System.Drawing.Size(126, 20);
             this.account.TabIndex = 2;
             // 
             // kryptonLabel1
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(285, 441);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(68, 18);
+            this.kryptonLabel1.Size = new System.Drawing.Size(63, 20);
             this.kryptonLabel1.TabIndex = 1;
             this.kryptonLabel1.Values.Text = "交易帐户:";
             // 
             // kryptonNavigator1
             // 
-            this.kryptonNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.kryptonNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.kryptonNavigator1.Bar.TabStyle = ComponentFactory.Krypton.Toolkit.TabStyle.LowProfile;
             // 
             // 
@@ -136,7 +136,7 @@
             this.pageTrade,
             this.pagePosition});
             this.kryptonNavigator1.SelectedIndex = 0;
-            this.kryptonNavigator1.Size = new System.Drawing.Size(794, 428);
+            this.kryptonNavigator1.Size = new System.Drawing.Size(869, 428);
             this.kryptonNavigator1.TabIndex = 0;
             this.kryptonNavigator1.Text = "kryptonNavigator1";
             // 
@@ -148,10 +148,18 @@
             this.pageOrder.LastVisibleSet = true;
             this.pageOrder.MinimumSize = new System.Drawing.Size(50, 50);
             this.pageOrder.Name = "pageOrder";
-            this.pageOrder.Size = new System.Drawing.Size(792, 403);
+            this.pageOrder.Size = new System.Drawing.Size(867, 401);
             this.pageOrder.Text = "委 托";
             this.pageOrder.ToolTipTitle = "Page ToolTip";
             this.pageOrder.UniqueName = "590193F15ED84477088CD0F38750A7C3";
+            // 
+            // ctHistOrder1
+            // 
+            this.ctHistOrder1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctHistOrder1.Location = new System.Drawing.Point(0, 0);
+            this.ctHistOrder1.Name = "ctHistOrder1";
+            this.ctHistOrder1.Size = new System.Drawing.Size(867, 401);
+            this.ctHistOrder1.TabIndex = 0;
             // 
             // pageTrade
             // 
@@ -161,10 +169,18 @@
             this.pageTrade.LastVisibleSet = true;
             this.pageTrade.MinimumSize = new System.Drawing.Size(50, 50);
             this.pageTrade.Name = "pageTrade";
-            this.pageTrade.Size = new System.Drawing.Size(854, 407);
+            this.pageTrade.Size = new System.Drawing.Size(867, 401);
             this.pageTrade.Text = "成 交";
             this.pageTrade.ToolTipTitle = "Page ToolTip";
             this.pageTrade.UniqueName = "484B4FDD7D58432A7BA5AEDB09324076";
+            // 
+            // ctHistTrade1
+            // 
+            this.ctHistTrade1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctHistTrade1.Location = new System.Drawing.Point(0, 0);
+            this.ctHistTrade1.Name = "ctHistTrade1";
+            this.ctHistTrade1.Size = new System.Drawing.Size(867, 401);
+            this.ctHistTrade1.TabIndex = 0;
             // 
             // pagePosition
             // 
@@ -174,40 +190,24 @@
             this.pagePosition.LastVisibleSet = true;
             this.pagePosition.MinimumSize = new System.Drawing.Size(50, 50);
             this.pagePosition.Name = "pagePosition";
-            this.pagePosition.Size = new System.Drawing.Size(854, 407);
+            this.pagePosition.Size = new System.Drawing.Size(867, 401);
             this.pagePosition.Text = "持 仓";
             this.pagePosition.ToolTipTitle = "Page ToolTip";
             this.pagePosition.UniqueName = "93EA66440495432B228CD438AC6F3C4F";
-            // 
-            // ctHistOrder1
-            // 
-            this.ctHistOrder1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctHistOrder1.Location = new System.Drawing.Point(0, 0);
-            this.ctHistOrder1.Name = "ctHistOrder1";
-            this.ctHistOrder1.Size = new System.Drawing.Size(792, 403);
-            this.ctHistOrder1.TabIndex = 0;
-            // 
-            // ctHistTrade1
-            // 
-            this.ctHistTrade1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctHistTrade1.Location = new System.Drawing.Point(0, 0);
-            this.ctHistTrade1.Name = "ctHistTrade1";
-            this.ctHistTrade1.Size = new System.Drawing.Size(854, 407);
-            this.ctHistTrade1.TabIndex = 0;
             // 
             // ctHistPosition1
             // 
             this.ctHistPosition1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ctHistPosition1.Location = new System.Drawing.Point(0, 0);
             this.ctHistPosition1.Name = "ctHistPosition1";
-            this.ctHistPosition1.Size = new System.Drawing.Size(854, 407);
+            this.ctHistPosition1.Size = new System.Drawing.Size(867, 401);
             this.ctHistPosition1.TabIndex = 0;
             // 
             // fmHistQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(794, 471);
+            this.ClientSize = new System.Drawing.Size(869, 471);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

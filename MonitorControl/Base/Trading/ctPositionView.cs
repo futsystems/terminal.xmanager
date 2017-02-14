@@ -338,7 +338,7 @@ namespace TradingLib.MoniterControl
                 try
                 {
                     int posidx = PositionRowIdx(pos.GetPositionKey());
-                    string _fromat = pos.oSymbol.SecurityFamily.GetPriceFormat();
+                    string _format = pos.oSymbol.SecurityFamily.GetPriceFormat();
                     AccountItem account = CoreService.BasicInfoTracker.GetAccount(pos.Account);
                     if ((posidx > -1) && (posidx < gt.Rows.Count))//idx存在
                     {
@@ -346,9 +346,10 @@ namespace TradingLib.MoniterControl
                         gt.Rows[posidx][SIZE] = Math.Abs(size);
                         gt.Rows[posidx][YDSIZE] = pos.PositionDetailYdNew.Sum(p => p.Volume);
                         gt.Rows[posidx][CANFLATSIZE] = getCanFlatSize(pos);
-                        gt.Rows[posidx][AVGPRICE] = pos.AvgPrice.ToFormatStr(_fromat);
+                        gt.Rows[posidx][AVGPRICE] = pos.AvgPrice.ToFormatStr(_format);
+                        gt.Rows[posidx][OPENPRICE] = pos.CalcAvgOpenPrice().ToFormatStr(_format);
                         gt.Rows[posidx][REALIZEDPL] = (pos.ClosedPL * pos.oSymbol.Multiple).ToFormatStr();
-                        gt.Rows[posidx][REALIZEDPLPOINT] = pos.ClosedPL.ToFormatStr(_fromat);
+                        gt.Rows[posidx][REALIZEDPLPOINT] = pos.ClosedPL.ToFormatStr(_format);
                         gt.Rows[posidx][REALIZEDPLACCTCURRENCY] = account != null ? ((pos.ClosedPL * pos.oSymbol.Multiple) * account.GetExchangeRate(pos.oSymbol.SecurityFamily.Currency)).ToFormatStr() :"";
                     }
                     else//idx不存在
@@ -360,15 +361,16 @@ namespace TradingLib.MoniterControl
                         gt.Rows[i][SIZE] = Math.Abs(size);
                         gt.Rows[i][YDSIZE] = pos.PositionDetailYdNew.Sum(p => p.Volume);
                         gt.Rows[i][CANFLATSIZE] = getCanFlatSize(pos);
-                        gt.Rows[i][AVGPRICE] = pos.AvgPrice.ToFormatStr(_fromat);
-
+                        gt.Rows[i][AVGPRICE] = pos.AvgPrice.ToFormatStr(_format);
+                        gt.Rows[i][OPENPRICE] = pos.CalcAvgOpenPrice().ToFormatStr(_format);
                         Tick k = CoreService.BasicInfoTracker.GetTickSnapshot(pos.oSymbol.Exchange, pos.oSymbol.Symbol);
                         if (k != null)
                         {
-                            gt.Rows[i][LASTPRICE] = k.Trade.ToFormatStr(_fromat);
+                            gt.Rows[i][LASTPRICE] = k.Trade.ToFormatStr(_format);
                             //空仓 未平仓合约与 最新价格
                             if (pos.isFlat)
                             {
+                                gt.Rows[i][UNREALIZEDPLT] = 0;
                                 gt.Rows[i][UNREALIZEDPL] = 0;
                                 gt.Rows[i][UNREALIZEDPLPOINT] = 0;
                                 gt.Rows[i][UNREALIZEDPLACCTCURRENCY] = 0;
@@ -378,14 +380,14 @@ namespace TradingLib.MoniterControl
                                 decimal unrealizedpl = pos.UnRealizedPL;
                                 //更新unrealizedpl
                                 gt.Rows[i][UNREALIZEDPL] = (unrealizedpl * pos.oSymbol.Multiple).ToFormatStr();
-                                gt.Rows[i][UNREALIZEDPLPOINT] = unrealizedpl.ToFormatStr(_fromat);
+                                gt.Rows[i][UNREALIZEDPLPOINT] = unrealizedpl.ToFormatStr(_format);
                                 gt.Rows[i][UNREALIZEDPLACCTCURRENCY] = account != null ? ((unrealizedpl * pos.oSymbol.Multiple) * account.GetExchangeRate(pos.oSymbol.SecurityFamily.Currency)).ToFormatStr() : "";
                             }
 
                         }
 
                         gt.Rows[i][REALIZEDPL] = (pos.ClosedPL * pos.oSymbol.Multiple).ToFormatStr();
-                        gt.Rows[i][REALIZEDPLPOINT] = pos.ClosedPL.ToFormatStr(_fromat);
+                        gt.Rows[i][REALIZEDPLPOINT] = pos.ClosedPL.ToFormatStr(_format);
                         gt.Rows[i][REALIZEDPLACCTCURRENCY] = account != null ? ((pos.ClosedPL * pos.oSymbol.Multiple) * account.GetExchangeRate(pos.oSymbol.SecurityFamily.Currency)).ToFormatStr() : "";
                         
                     }
@@ -433,6 +435,7 @@ namespace TradingLib.MoniterControl
                             //空仓 未平仓合约与 最新价格
                             if (pos.isFlat)
                             {
+                                gt.Rows[i][UNREALIZEDPLT] = 0;
                                 gt.Rows[i][UNREALIZEDPL] = 0;
                                 gt.Rows[i][UNREALIZEDPLPOINT] = 0;
                                 gt.Rows[i][UNREALIZEDPLACCTCURRENCY] = 0;
@@ -440,6 +443,7 @@ namespace TradingLib.MoniterControl
                             else
                             {
                                 //更新unrealizedpl
+                                gt.Rows[i][UNREALIZEDPLT] = ((pos.LastPrice - pos.CalcAvgOpenPrice()) * (pos.isLong ? 1 : -1) *pos.UnsignedSize* pos.oSymbol.Multiple).ToFormatStr();
                                 gt.Rows[i][UNREALIZEDPL] = (unrealizedpl * pos.oSymbol.Multiple).ToFormatStr();
                                 gt.Rows[i][UNREALIZEDPLPOINT] = unrealizedpl.ToFormatStr(_fromat);
                                 gt.Rows[i][UNREALIZEDPLACCTCURRENCY] = account != null ? ((unrealizedpl * pos.oSymbol.Multiple) * account.GetExchangeRate(pos.oSymbol.SecurityFamily.Currency)).ToFormatStr() : "";
@@ -545,6 +549,7 @@ namespace TradingLib.MoniterControl
                         gt.Rows[posidx][YDSIZE] = pos.PositionDetailYdNew.Sum(p => p.Volume);
                         gt.Rows[posidx][CANFLATSIZE] = getCanFlatSize(pos);
                         gt.Rows[posidx][AVGPRICE] = pos.AvgPrice.ToFormatStr(_format);
+                        gt.Rows[posidx][OPENPRICE] = pos.CalcAvgOpenPrice().ToFormatStr(_format);
                         gt.Rows[posidx][REALIZEDPL] = (pos.ClosedPL * pos.oSymbol.Multiple).ToFormatStr();
                         gt.Rows[posidx][REALIZEDPLPOINT] = pos.ClosedPL.ToFormatStr(_format);
                         gt.Rows[posidx][REALIZEDPLACCTCURRENCY] = account != null ? ((pos.ClosedPL * pos.oSymbol.Multiple) * account.GetExchangeRate(pos.oSymbol.SecurityFamily.Currency)).ToFormatStr() : "";
@@ -563,7 +568,9 @@ namespace TradingLib.MoniterControl
                         gt.Rows[i][SIZE] = Math.Abs(size);
                         gt.Rows[i][YDSIZE] = pos.PositionDetailYdNew.Sum(p => p.Volume);
                         gt.Rows[i][CANFLATSIZE] = getCanFlatSize(pos);
+                        gt.Rows[i][OPENPRICE] = pos.CalcAvgOpenPrice().ToFormatStr(_format);
                         gt.Rows[i][AVGPRICE] = pos.AvgPrice.ToFormatStr(_format);
+
                         gt.Rows[i][REALIZEDPL] = (pos.ClosedPL * pos.oSymbol.Multiple).ToFormatStr();
                         gt.Rows[i][REALIZEDPLPOINT] = pos.ClosedPL.ToFormatStr(_format);
                         gt.Rows[i][REALIZEDPLACCTCURRENCY] = account != null ? ((pos.ClosedPL * pos.oSymbol.Multiple) * account.GetExchangeRate(pos.oSymbol.SecurityFamily.Currency)).ToFormatStr() : "";
@@ -589,6 +596,8 @@ namespace TradingLib.MoniterControl
         const string YDSIZE = "昨仓";
         const string CANFLATSIZE = "可平量";//用于计算当前限价委托可以挂单数量
         const string LASTPRICE = "最新";//最新成交价
+        const string OPENPRICE = "开仓均价";
+        const string UNREALIZEDPLT = "浮动盈亏(总)";
         const string AVGPRICE = "持仓均价";
         const string UNREALIZEDPL = "持仓盈亏";
         const string UNREALIZEDPLPOINT = "点数(持)";
@@ -639,6 +648,8 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(YDSIZE,typeof(int));//4
             gt.Columns.Add(CANFLATSIZE, typeof(int));//5
             gt.Columns.Add(LASTPRICE);//6
+            gt.Columns.Add(OPENPRICE);
+            gt.Columns.Add(UNREALIZEDPLT);
             gt.Columns.Add(AVGPRICE);//7
             gt.Columns.Add(UNREALIZEDPL);//8
             gt.Columns.Add(UNREALIZEDPLACCTCURRENCY);
@@ -684,6 +695,9 @@ namespace TradingLib.MoniterControl
             grid.Columns[YDSIZE].Width = 50;
             grid.Columns[CANFLATSIZE].Width = 50;
             grid.Columns[LASTPRICE].Width = 80;
+            grid.Columns[OPENPRICE].Width = 80;
+
+            grid.Columns[UNREALIZEDPLT].Width = 80;
 
             grid.Columns[AVGPRICE].Width =80;
 
@@ -750,7 +764,7 @@ namespace TradingLib.MoniterControl
                     }
                 }
 
-                if (e.ColumnIndex == 8 || e.ColumnIndex == 9 || e.ColumnIndex == 10 || e.ColumnIndex == 11 || e.ColumnIndex == 12 || e.ColumnIndex == 13)
+                if (e.ColumnIndex == 8 || e.ColumnIndex == 10 || e.ColumnIndex == 11 || e.ColumnIndex == 12 || e.ColumnIndex == 13 || e.ColumnIndex == 14 || e.ColumnIndex == 15)
                 {
 
                     decimal v = 0;
