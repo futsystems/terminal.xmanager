@@ -120,6 +120,11 @@ namespace TradingLib.MoniterControl
                     cfg.ExitPendingThresholdValue = (int)exitpendingvalue.Value;
                     cfg.ExitPendingOperationType = (QSEnumPendingOperationType)exitpendingoptype.SelectedValue;
 
+                    if (string.IsNullOrEmpty(cfg.Account))
+                    {
+                        ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("跟单策略需要绑定下单账户");
+                        return;
+                    }
                     CoreService.TLClient.ReqContribRequest("FollowCentre", "UpdateFollowStrategyCfg", cfg);
                     this.Close();
                 }

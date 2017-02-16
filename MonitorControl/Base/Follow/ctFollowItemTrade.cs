@@ -33,7 +33,7 @@ namespace TradingLib.MoniterControl
             {
                 tradeIDs.Text = string.Format("{0}/{1}", info.LocalTradeID, info.RemoteTradeID);
                 //remoteTradeID.Text = info.RemoteTradeID;
-                xSize.Text = info.Size.ToString();
+                xSize.Text = Math.Abs(info.Size).ToString();
                 xPrice.Text = info.Price.ToFormatStr();
             }
         }

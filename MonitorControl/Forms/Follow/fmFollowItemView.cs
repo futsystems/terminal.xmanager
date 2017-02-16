@@ -72,6 +72,7 @@ namespace TradingLib.MoniterControl
 
         void GotFollowItemDetail(FollowItemDetail detail)
         {
+            this.Text = string.Format("跟单项明细-{0}", detail.FollowKey);
             int y_location = 0;
             if (InvokeRequired)
             {
@@ -112,6 +113,25 @@ namespace TradingLib.MoniterControl
                         itemsPanel.Controls.Add(orderview);
                     }
                 }
+
+                foreach (var trigger in detail.ExitManualTrigger)
+                {
+                    ctFollowItemManualTrigger tmp = new ctFollowItemManualTrigger();
+                    tmp.GotManualTrigger(trigger);
+                    tmp.Location = new Point(0, y_location); y_location += tmp.Size.Height;
+                    itemsPanel.Controls.Add(tmp);
+
+                    //遍历所有委托显示委托数据
+                    foreach (var order in trigger.Orders)
+                    {
+                        ctFollowOrderView orderview = new ctFollowOrderView();
+                        orderview.GotOrder(order);
+                        orderview.Location = new Point(0, y_location); y_location += orderview.Size.Height;
+                        itemsPanel.Controls.Add(orderview);
+                    }
+                }
+
+
 
                 itemsPanel.Visible = true;
             }

@@ -41,6 +41,7 @@ namespace TradingLib.MoniterControl
             {
                 strategyGrid.ContextMenuStrip = MenuService.CreateContextMenu(this, "/FollowStrategyList/ContextMenu");
                 strategyGrid.DoubleClick += new EventHandler(strategyGrid_DoubleClick);
+                strategyGrid.SizeChanged += new EventHandler(strategyGrid_SizeChanged);
             }
             catch (Exception ex)
             { 
@@ -49,6 +50,11 @@ namespace TradingLib.MoniterControl
 
             strategyGrid.MouseClick += new MouseEventHandler(strategyGrid_MouseClick);
             
+        }
+
+        void strategyGrid_SizeChanged(object sender, EventArgs e)
+        {
+            //ResetColumeSize();
         }
 
         DateTime _lastresumetime = DateTime.Now;
@@ -72,8 +78,7 @@ namespace TradingLib.MoniterControl
             if (accountlite != null)
             {
                 //触发事件中继的帐户选择事件
-                //CoreService.EventAccount.FireAccountSelectedEvent(accountlite);
-
+                ControlService.FireAccountSelected(accountlite);
                 //对外触发跟单策略选中事件
                 if (StrategySelected != null)
                 {
@@ -181,6 +186,26 @@ namespace TradingLib.MoniterControl
             return null;
         }
 
+
+        /// <summary>
+        /// 获得策略工作状态图标
+        /// </summary>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        Image GetStatusImage(QSEnumFollowWorkState state)
+        {
+            switch (state)
+            { 
+                case QSEnumFollowWorkState.Begin:
+                    return Properties.Resources.begin;
+                case QSEnumFollowWorkState.Shutdown:
+                    return Properties.Resources.shutdown;
+                case QSEnumFollowWorkState.Suspend:
+                    return Properties.Resources.suspend;
+                default:
+                    return Properties.Resources.unknown;
+            }
+        }
         void InvokeGotStrategyStatusNotify(FollowStrategyStatus status)
         {
             if (InvokeRequired)
@@ -193,14 +218,18 @@ namespace TradingLib.MoniterControl
                 if (r != -1)
                 {
                     gt.Rows[r][WORKSTATE] = status.WorkState;
+                    gt.Rows[r][WORKSTATEIMG] = GetStatusImage(status.WorkState);
 
                     gt.Rows[r][SIGNALCNT] = status.SignalCount;
 
-                    gt.Rows[r][SIGREALIZEDPL] = status.SignalRealizedPL;
-                    gt.Rows[r][SIGUNREALIZEDPL] = status.SignalUnRealizedPL;
-                    gt.Rows[r][FOLLOWREALIZEDPL] = status.FollowRealizedPL;
-                    gt.Rows[r][FOLLOWUNREALIZEDPL] = status.FollowUnRealizedPL;
-                    gt.Rows[r][TOTALSLIP] = status.TotalSlip;
+                    gt.Rows[r][SIGREALIZEDPL] = status.SignalRealizedPL.ToFormatStr();
+                    gt.Rows[r][SIGUNREALIZEDPL] = status.SignalUnRealizedPL.ToFormatStr();
+                    gt.Rows[r][FOLLOWREALIZEDPL] = status.FollowRealizedPL.ToFormatStr();
+                    gt.Rows[r][FOLLOWUNREALIZEDPL] = status.FollowUnRealizedPL.ToFormatStr();
+                    gt.Rows[r][TOTALSLIP] = status.TotalSlip.ToFormatStr();
+                    gt.Rows[r][ENTRYSLIP] = status.TotalEntrySlip.ToFormatStr();
+                    gt.Rows[r][EXITSLIP] = status.TotalExitSlip.ToFormatStr();
+
                     gt.Rows[r][ENTRYITEMTOTAL] = status.TotalEntryCount;
                     gt.Rows[r][ENTRYITEMSUCCESS] = status.TotalEntrySuccessCount;
 
@@ -223,6 +252,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][STRATEGYID] = cfg.ID;
                     gt.Rows[i][NAME] = cfg.Token;
                     gt.Rows[i][WORKSTATE] = QSEnumFollowWorkState.Shutdown;
+                    gt.Rows[i][WORKSTATEIMG] = GetStatusImage(QSEnumFollowWorkState.Shutdown);
                     gt.Rows[i][SIGNALCNT] = 0;
                     gt.Rows[i][FOLLOWACCOUNT] = cfg.Account;
 
@@ -243,23 +273,26 @@ namespace TradingLib.MoniterControl
         #region 表格
 
         const string STRATEGYID = "ID";
-        const string NAME = "名称";
+        const string NAME = "跟单策略标识";
         const string WORKSTATE = "WORKSTATE";
         const string WORKSTATEIMG = "状态";
 
-        const string SIGNALCNT = "信号数";
+        const string SIGNALCNT = "信号";
         const string FOLLOWACCOUNT = "跟单帐户";
 
-        const string SIGREALIZEDPL = "平(信号)";
-        const string SIGUNREALIZEDPL = "浮(信号)";
+        const string SIGREALIZEDPL = "平仓盈亏(信号)";
+        const string SIGUNREALIZEDPL = "浮动盈亏(信号)";
 
 
-        const string FOLLOWREALIZEDPL = "平(跟单)";
-        const string FOLLOWUNREALIZEDPL = "浮(跟单)";
+        const string FOLLOWREALIZEDPL = "平仓盈亏(跟单)";
+        const string FOLLOWUNREALIZEDPL = "浮动盈亏(跟单)";
         const string TOTALSLIP = "滑点";
+        const string ENTRYSLIP = "滑点(开)";
+        const string EXITSLIP = "滑点(平)";
 
-        const string ENTRYITEMTOTAL = "开仓项";
-        const string ENTRYITEMSUCCESS = "执行";
+        const string ENTRYITEMTOTAL = "开仓信号数";
+        const string ENTRYITEMSUCCESS = "开仓成功数";
+        const string DESP = "描述";
 
 
         DataTable gt = new DataTable();
@@ -298,7 +331,7 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(NAME);//1
 
             gt.Columns.Add(WORKSTATE);//2
-            gt.Columns.Add(WORKSTATEIMG);//3
+            gt.Columns.Add(WORKSTATEIMG,typeof(Image));//3
 
 
             gt.Columns.Add(SIGNALCNT);//4
@@ -310,10 +343,12 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(FOLLOWREALIZEDPL);//8
             gt.Columns.Add(FOLLOWUNREALIZEDPL);//9
             gt.Columns.Add(TOTALSLIP);//10
-
+            gt.Columns.Add(ENTRYSLIP);
+            gt.Columns.Add(EXITSLIP);
             gt.Columns.Add(ENTRYITEMTOTAL);//11
 
             gt.Columns.Add(ENTRYITEMSUCCESS);//18
+            gt.Columns.Add(DESP);
 
         }
 
@@ -326,16 +361,42 @@ namespace TradingLib.MoniterControl
             //datasource.Sort = ACCOUNT + " ASC";
             strategyGrid.DataSource = datasource;
 
-            //strategyGrid.Columns[CATEGORY].Visible = false;
+            strategyGrid.Columns[WORKSTATE].Visible = false;
             //strategyGrid.Columns[AGENTMGRFK].Visible = false;
+            strategyGrid.Columns[SIGREALIZEDPL].HeaderCell.Style.BackColor = Color.Teal;
+            strategyGrid.Columns[SIGUNREALIZEDPL].HeaderCell.Style.BackColor = Color.Teal;
 
-           
+            strategyGrid.Columns[FOLLOWREALIZEDPL].HeaderCell.Style.BackColor = Color.Tomato;
+            strategyGrid.Columns[FOLLOWUNREALIZEDPL].HeaderCell.Style.BackColor = Color.Tomato;
+
+
+            ResetColumeSize();
             for (int i = 0; i < gt.Columns.Count; i++)
             {
                 strategyGrid.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
         }
 
+        void ResetColumeSize()
+        {
+            ComponentFactory.Krypton.Toolkit.KryptonDataGridView grid = strategyGrid;
+            grid.Columns[STRATEGYID].Width = 10;
+            grid.Columns[NAME].Width = 50;
+            grid.Columns[WORKSTATEIMG].Width = 14;
+            grid.Columns[SIGNALCNT].Width = 20;
+            grid.Columns[FOLLOWACCOUNT].Width = 30;
+
+            grid.Columns[SIGREALIZEDPL].Width = 40;
+            grid.Columns[SIGUNREALIZEDPL].Width = 40;
+            grid.Columns[FOLLOWREALIZEDPL].Width = 40;
+            grid.Columns[FOLLOWUNREALIZEDPL].Width = 40;
+
+            grid.Columns[TOTALSLIP].Width = 30;
+            grid.Columns[ENTRYSLIP].Width = 30;
+            grid.Columns[EXITSLIP].Width = 30;
+            grid.Columns[ENTRYITEMTOTAL].Width = 30;
+            grid.Columns[ENTRYITEMSUCCESS].Width = 30;
+        }
         #endregion
     }
 }

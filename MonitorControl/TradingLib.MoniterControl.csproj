@@ -142,6 +142,12 @@
     <Compile Include="Base\Follow\ctFollowItemTrade.Designer.cs">
       <DependentUpon>ctFollowItemTrade.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\Follow\ctFollowItemManualTrigger.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Base\Follow\ctFollowItemManualTrigger.Designer.cs">
+      <DependentUpon>ctFollowItemManualTrigger.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\Trading\ctOrderView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -847,6 +853,9 @@
     <EmbeddedResource Include="Base\Follow\ctFollowItemTrade.resx">
       <DependentUpon>ctFollowItemTrade.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Base\Follow\ctFollowItemManualTrigger.resx">
+      <DependentUpon>ctFollowItemManualTrigger.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Base\Trading\ctOrderView.resx">
       <DependentUpon>ctOrderView.cs</DependentUpon>
     </EmbeddedResource>
@@ -1215,6 +1224,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Resource\follow\unknown.png" />
+    <None Include="Resource\follow\suspend.png" />
+    <None Include="Resource\follow\shutdown.png" />
+    <None Include="Resource\follow\begin.png" />
     <None Include="Resource\success_24.png" />
     <None Include="Resource\error_24.png" />
     <None Include="Resource\success.png" />

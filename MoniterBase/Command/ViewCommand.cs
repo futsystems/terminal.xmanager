@@ -40,9 +40,9 @@ namespace TradingLib.MoniterBase.Command
             //functoinPanel.Visible = CoreService.SiteInfo.UIAccess.r_execution;
 
 
-            //ctFollowCentre followMoniter = new ctFollowCentre();
-            //followMoniter.Dock = DockStyle.Fill;
-            //workbench.AppendControl(followMoniter);
+            ctFollowCentre followMoniter = new ctFollowCentre();
+            followMoniter.Dock = DockStyle.Fill;
+            workbench.AppendControl(followMoniter);
 
             //ctOrderPanel orderPanel = new ctOrderPanel();
             //orderPanel.Dock = DockStyle.Fill;

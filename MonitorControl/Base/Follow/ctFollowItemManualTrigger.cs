@@ -12,22 +12,21 @@ using TradingLib.Common;
 
 namespace TradingLib.MoniterControl
 {
-    public partial class ctFollowItemSignalTrade : UserControl
+    public partial class ctFollowItemManualTrigger : UserControl
     {
-        public ctFollowItemSignalTrade()
+        public ctFollowItemManualTrigger()
         {
             InitializeComponent();
         }
 
-        public void GotSignalTrade(FollowItemSignalTradeInfo signal)
+        public void GotManualTrigger(FollowItemManualTriggerInfo signal)
         {
             if (InvokeRequired)
             {
-                Invoke(new Action<FollowItemSignalTradeInfo>(GotSignalTrade), new object[] { signal });
+                Invoke(new Action<FollowItemManualTriggerInfo>(GotManualTrigger), new object[] { signal });
             }
             else
             {
-                tradeIDs.Text = string.Format("{0}/{1}", signal.LocalTradeID, signal.RemoteTradeID);
                 //remoteTradeID.Text = signal.RemoteTradeID;
                 side.Text = signal.Side ? "买入" : "卖出";
                 side.StateCommon.ShortText.Color1 = signal.Side ? UIConstant.LongSideColor : UIConstant.ShortSideColor;

@@ -360,10 +360,10 @@
 		             icon = "Icons.ViewQuote"
 		             class  = "TradingLib.MoniterBase.Command.ShowQuoteCommand"/-->
 
-    <!--ToolbarItem id = "ViewQuote"
+    <ToolbarItem id = "ViewQuote"
 		             tooltip = "跟单"
 		             icon = "Icons.ViewQuote"
-		             class  = "TradingLib.MoniterBase.Command.ShowFollowCommand"/-->
+		             class  = "TradingLib.MoniterBase.Command.ShowFollowCommand"/>
     
     <ToolbarItem id = "ExpandViewCommand"
 		             tooltip = "扩展主视区"

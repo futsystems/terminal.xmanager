@@ -41,11 +41,11 @@ namespace TradingLib.MoniterControl
                 //orderIDs.Text = order.LocalOrderID;
                 orderIDs.Text = string.Format("{0}/{1}", order.LocalOrderID, order.RemoteOrderID);
                 //remoteOrderID.Text = order.RemoteOrderID;
-                status.Text = order.Status;
+                status.Text =Util.GetEnumDescription(order.Status);
                 symbol.Text = order.Symbol;
                 side.Text = order.Side ? "买入" : "卖出";
                 side.StateCommon.ShortText.Color1 = order.Side ? UIConstant.LongSideColor : UIConstant.ShortSideColor;
-                sizeinfo.Text = string.Format("{0}/{1}", order.SentSize, order.FillSize);
+                sizeinfo.Text = string.Format("{0}/{1}", Math.Abs(order.SentSize), Math.Abs(order.FillSize));
                 //fillsize.Text = order.FillSize.ToString();
                 price.Text = order.Price.ToFormatStr();
 
