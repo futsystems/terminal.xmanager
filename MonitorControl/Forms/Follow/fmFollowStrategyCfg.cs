@@ -30,13 +30,45 @@ namespace TradingLib.MoniterControl
             MoniterHelper.AdapterToIDataSource(exitpendingtype).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumPendingThresholdType>());
             MoniterHelper.AdapterToIDataSource(exitpendingoptype).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumPendingOperationType>());
 
+            entrypricetype.SelectedValueChanged += new EventHandler(entrypricetype_SelectedValueChanged);
+            exitpricetype.SelectedValueChanged += new EventHandler(exitpricetype_SelectedValueChanged);
+            this.btnSubmit.Click += new EventHandler(btnSubmit_Click);
+
             this.Text = "添加跟单策略";
             this.Load += new EventHandler(fmFollowStrategyCfg_Load);
         }
 
+        void exitpricetype_SelectedValueChanged(object sender, EventArgs e)
+        {
+            QSEnumFollowPriceType val = (QSEnumFollowPriceType)exitpricetype.SelectedValue;
+            if (val == QSEnumFollowPriceType.SignalPrice)
+            {
+                exitpricetickoffset.Enabled = true;
+            }
+            else
+            {
+                exitpricetickoffset.Enabled = false;
+            }
+        }
+
+        void entrypricetype_SelectedValueChanged(object sender, EventArgs e)
+        {
+
+            QSEnumFollowPriceType val = (QSEnumFollowPriceType)entrypricetype.SelectedValue;
+            if (val == QSEnumFollowPriceType.SignalPrice)
+            {
+                entrypricetickoffset.Enabled = true;
+            }
+            else
+            {
+                entrypricetickoffset.Enabled = false;
+            }
+        }
+
         void fmFollowStrategyCfg_Load(object sender, EventArgs e)
         {
-            this.btnSubmit.Click += new EventHandler(btnSubmit_Click);
+            exitpricetype_SelectedValueChanged(null,null);
+            entrypricetype_SelectedValueChanged(null, null);
             CoreService.EventCore.RegIEventHandler(this);
             
         }

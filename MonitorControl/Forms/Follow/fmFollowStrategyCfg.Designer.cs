@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.followaccount = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.token = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel14 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -59,9 +60,9 @@
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.entrypricetype = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.followaccount = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.followaccount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.direction)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2.Panel)).BeginInit();
@@ -77,7 +78,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.entrypendingoptype)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.entrypendingtype)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.entrypricetype)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.followaccount)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPanel1
@@ -98,6 +98,14 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(510, 379);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // followaccount
+            // 
+            this.followaccount.DropDownWidth = 85;
+            this.followaccount.Location = new System.Drawing.Point(69, 91);
+            this.followaccount.Name = "followaccount";
+            this.followaccount.Size = new System.Drawing.Size(161, 21);
+            this.followaccount.TabIndex = 11;
             // 
             // btnSubmit
             // 
@@ -200,6 +208,7 @@
             // 
             // exitpendingoptype
             // 
+            this.exitpendingoptype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.exitpendingoptype.DropDownWidth = 121;
             this.exitpendingoptype.Location = new System.Drawing.Point(395, 33);
             this.exitpendingoptype.Name = "exitpendingoptype";
@@ -231,6 +240,7 @@
             // 
             // exitpendingtype
             // 
+            this.exitpendingtype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.exitpendingtype.DropDownWidth = 121;
             this.exitpendingtype.Location = new System.Drawing.Point(69, 33);
             this.exitpendingtype.Name = "exitpendingtype";
@@ -248,6 +258,11 @@
             // exitpricetickoffset
             // 
             this.exitpricetickoffset.Location = new System.Drawing.Point(237, 4);
+            this.exitpricetickoffset.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.exitpricetickoffset.Name = "exitpricetickoffset";
             this.exitpricetickoffset.Size = new System.Drawing.Size(72, 22);
             this.exitpricetickoffset.TabIndex = 3;
@@ -262,6 +277,7 @@
             // 
             // exitpricetype
             // 
+            this.exitpricetype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.exitpricetype.DropDownWidth = 85;
             this.exitpricetype.Location = new System.Drawing.Point(69, 3);
             this.exitpricetype.Name = "exitpricetype";
@@ -299,6 +315,7 @@
             // 
             // entrypendingoptype
             // 
+            this.entrypendingoptype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.entrypendingoptype.DropDownWidth = 121;
             this.entrypendingoptype.Location = new System.Drawing.Point(395, 33);
             this.entrypendingoptype.Name = "entrypendingoptype";
@@ -330,6 +347,7 @@
             // 
             // entrypendingtype
             // 
+            this.entrypendingtype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.entrypendingtype.DropDownWidth = 121;
             this.entrypendingtype.Location = new System.Drawing.Point(69, 33);
             this.entrypendingtype.Name = "entrypendingtype";
@@ -347,6 +365,11 @@
             // entrypricetickoffset
             // 
             this.entrypricetickoffset.Location = new System.Drawing.Point(237, 4);
+            this.entrypricetickoffset.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.entrypricetickoffset.Name = "entrypricetickoffset";
             this.entrypricetickoffset.Size = new System.Drawing.Size(72, 22);
             this.entrypricetickoffset.TabIndex = 3;
@@ -361,6 +384,7 @@
             // 
             // entrypricetype
             // 
+            this.entrypricetype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.entrypricetype.DropDownWidth = 85;
             this.entrypricetype.Location = new System.Drawing.Point(69, 3);
             this.entrypricetype.Name = "entrypricetype";
@@ -374,14 +398,6 @@
             this.kryptonLabel1.Size = new System.Drawing.Size(60, 20);
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "下单方式";
-            // 
-            // followaccount
-            // 
-            this.followaccount.DropDownWidth = 85;
-            this.followaccount.Location = new System.Drawing.Point(69, 91);
-            this.followaccount.Name = "followaccount";
-            this.followaccount.Size = new System.Drawing.Size(161, 21);
-            this.followaccount.TabIndex = 11;
             // 
             // fmFollowStrategyCfg
             // 
@@ -398,6 +414,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.followaccount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.direction)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2.Panel)).EndInit();
             this.kryptonGroupBox2.Panel.ResumeLayout(false);
@@ -415,7 +432,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.entrypendingoptype)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.entrypendingtype)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.entrypricetype)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.followaccount)).EndInit();
             this.ResumeLayout(false);
 
         }
