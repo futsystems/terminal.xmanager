@@ -35,7 +35,7 @@ namespace TradingLib.MoniterControl
         {
             if (MoniterHelper.WindowConfirm("确认平掉该跟单项目对应持仓?") == System.Windows.Forms.DialogResult.Yes)
             {
-                CoreService.TLClient.ReqContribRequest("FollowCentre", "FlatFollowItem", _followkey);
+                CoreService.TLClient.ReqFlatFollowItem(_strategyId, _followkey);
             }
         }
 
@@ -43,21 +43,23 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            CoreService.EventCore.RegisterCallback("FollowCentre", "QryFollowItemDetail", OnQryFollowItemDetail);
+            CoreService.EventCore.RegisterCallback(Modules.Follow, Method_Follow.QRY_FOLLOW_ITEM_DETAIL, OnQryFollowItemDetail);
+            CoreService.TLClient.ReqQryFollowItemDetail(_strategyId, _followkey);
 
-            CoreService.TLClient.ReqContribRequest("FollowCentre", "QryFollowItemDetail", _followkey);
         }
 
         public void OnDisposed()
         {
-            CoreService.EventCore.UnRegisterCallback("FollowCentre", "QryFollowItemDetail", OnQryFollowItemDetail);
+            CoreService.EventCore.UnRegisterCallback(Modules.Follow, Method_Follow.QRY_FOLLOW_ITEM_DETAIL, OnQryFollowItemDetail);
 
             
         }
 
         string _followkey = string.Empty;
-        public void SetFollowKey(string followkey)
+        int _strategyId = 0;
+        public void SetFollowKey(int strategyId,string followkey)
         {
+            _strategyId = strategyId;
             _followkey = followkey;
         }
         void OnQryFollowItemDetail(string json, bool islast)

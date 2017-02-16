@@ -66,11 +66,17 @@ namespace TradingLib.MoniterControl
                 }
             }
         }
+
         void itemGrid_DoubleClick(object sender, EventArgs e)
         {
+            if (cfgSelected == null)
+            {
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("未选中跟单策略");
+                return;
+            }
             fmFollowItemView fm = new fmFollowItemView();
             //MessageBox.Show("rowidx:" + CurrentRowIdx.ToString() + " currentfollowkey:" + CurrentFollowKey);
-            fm.SetFollowKey(CurrentFollowKey);
+            fm.SetFollowKey(cfgSelected.ID,CurrentFollowKey);
             //fm.Visible = false;
 
             fm.ShowDialog();

@@ -40,6 +40,8 @@ namespace TradingLib.MoniterCore
         /// 结算模块
         /// </summary>
         public const string SettleCentre = "SettleCentre";
+
+        public const string Follow = "FollowCentre";
     }
 
 

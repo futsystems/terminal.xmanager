@@ -95,6 +95,7 @@
     <Compile Include="ContribRequest\ConnectorManager.cs" />
     <Compile Include="ContribRequest\AccountManager.cs" />
     <Compile Include="ContribRequest\ExCore.cs" />
+    <Compile Include="ContribRequest\Follow.cs" />
     <Compile Include="ContribRequest\MgrExch.cs" />
     <Compile Include="ContribRequest\RiskCentre.cs" />
     <Compile Include="ContribRequest\SettleCentre.cs" />
