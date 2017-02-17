@@ -75,12 +75,17 @@ namespace TradingLib.MoniterControl
     {
         public bool IsValid(object caller, Condition condition)
         {
+            //管理员默认拥有所有权限
+            if (CoreService.SiteInfo.Manager.IsRoot() && CoreService.SiteInfo.Domain.Super) return true;
+
             string module = condition.Properties["module"];//对应的产品
             module = module.ToUpper();
             switch (module)
             { 
                 case "AGENT":
                     return CoreService.SiteInfo.Domain.Module_Agent;
+                case "FOLLOW": 
+                    return CoreService.SiteInfo.Domain.Module_Follow;
                 default:
                     return false;
             }

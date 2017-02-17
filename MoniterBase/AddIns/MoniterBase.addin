@@ -359,11 +359,12 @@
 		             tooltip = "查看实时行情"
 		             icon = "Icons.ViewQuote"
 		             class  = "TradingLib.MoniterBase.Command.ShowQuoteCommand"/-->
-
+    <Condition name="ModuleState" module="follow" >
     <ToolbarItem id = "ViewQuote"
 		             tooltip = "跟单"
 		             icon = "Icons.ViewQuote"
 		             class  = "TradingLib.MoniterBase.Command.ShowFollowCommand"/>
+    </Condition>
     <ToolbarItem id = "ViewSeparator" type = "Separator"/>
     <ToolbarItem id = "ExpandViewCommand"
 		             tooltip = "扩展主视区"
