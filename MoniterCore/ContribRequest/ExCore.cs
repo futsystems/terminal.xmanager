@@ -18,6 +18,13 @@ namespace TradingLib.MoniterCore
         /// 断开某个交易账户所有连接终端
         /// </summary>
         public const string REQ_CLOSE_TERMINALS = "ClearAccountTerminals";
+
+
+        /// <summary>
+        /// 关闭某个会话
+        /// </summary>
+        public const string KILL_SESSION = "KillSession";
+
     }
 
     public static class ExCore
@@ -38,6 +45,17 @@ namespace TradingLib.MoniterCore
         public static int ReqClearTerminals(this TLClientNet client, string account)
         {
             return client.ReqContribRequest(Modules.MSG_EXCH, Method_MSG_EXCH.REQ_CLOSE_TERMINALS, account);
+        }
+
+        /// <summary>
+        /// 关闭一个会话连接
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="clientID"></param>
+        /// <returns></returns>
+        public static int ReqKillSession(this TLClientNet client, string clientID)
+        {
+            return client.ReqContribRequest(Modules.MSG_EXCH, Method_MSG_EXCH.KILL_SESSION, clientID);
         }
     }
 }

@@ -421,6 +421,12 @@
     <Compile Include="Forms\Account\RiskRule\fm\fmAccountRule_MaxChange.Designer.cs">
       <DependentUpon>fmAccountRule_MaxChange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Account\RiskRule\fm\fmOrderRule_MaxTradeSize.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Account\RiskRule\fm\fmOrderRule_MaxTradeSize.Designer.cs">
+      <DependentUpon>fmOrderRule_MaxTradeSize.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Basic\Commission\fmCommission.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -996,6 +1002,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\RiskRule\fm\fmAccountRule_MaxChange.resx">
       <DependentUpon>fmAccountRule_MaxChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Account\RiskRule\fm\fmOrderRule_MaxTradeSize.resx">
+      <DependentUpon>fmOrderRule_MaxTradeSize.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Basic\Commission\fmCommission.resx">
       <DependentUpon>fmCommission.cs</DependentUpon>

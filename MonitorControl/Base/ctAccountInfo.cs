@@ -47,9 +47,17 @@ namespace TradingLib.MoniterControl
 
             ControlService.AccountSelected += new Action<AccountItem>(OnAccountSelected);
             //CoreService.EventHub.OnAccountChangedEvent += new Action<AccountItem>(EventAccount_OnAccountChangedEvent);
-            
+            sessionGrid.MouseClick += new MouseEventHandler(sessionGrid_MouseClick);
             CoreService.EventCore.RegIEventHandler(this);
             
+        }
+
+        void sessionGrid_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                sessionMenu.Show(Control.MousePosition);
+            }
         }
 
 
@@ -320,7 +328,22 @@ namespace TradingLib.MoniterControl
             
         }
 
-
+        //得到当前选择的行号
+        private string CurrentClientID
+        {
+            get
+            {
+                int row = sessionGrid.SelectedRows.Count > 0 ? sessionGrid.SelectedRows[0].Index : -1;
+                if (row >= 0)
+                {
+                    return sessionGrid[SESSIONID, row].Value.ToString();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
         #region 表格
         const string SESSIONID = "会话编号";
         const string IPADDRESS = "IP地址";
@@ -330,6 +353,7 @@ namespace TradingLib.MoniterControl
 
         DataTable tb = new DataTable();
         BindingSource datasource = new BindingSource();
+        ContextMenuStrip sessionMenu;
         /// <summary>
         /// 设定表格控件的属性
         /// </summary>
@@ -350,7 +374,26 @@ namespace TradingLib.MoniterControl
 
             grid.StateCommon.Background.Color1 = Color.WhiteSmoke;
             grid.StateCommon.Background.Color2 = Color.WhiteSmoke;
+
+            sessionMenu = new ContextMenuStrip();
+            sessionMenu.Items.Add("关闭连接", null, new EventHandler(KillSession_Click));//6
+
         }
+
+        void KillSession_Click(object sender, EventArgs e)
+        {
+            string clientID = CurrentClientID;
+            if (string.IsNullOrEmpty(clientID))
+            {
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请选择客户端连接");
+                return;
+            }
+            if (ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("确认关闭该连接?", "确定关闭", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+            {
+                CoreService.TLClient.ReqKillSession(clientID);
+            }
+        }
+
         /// <summary>
         /// 初始化数据表格
         /// </summary>
@@ -378,6 +421,7 @@ namespace TradingLib.MoniterControl
             //grid.Columns[ID].Visible = false;
             //grid.Columns[ORDERREF].Visible = false;
             //grid.Columns[RAWDATETIME].Visible = false;
+            
 
             ResetColumeSize();
 
@@ -390,7 +434,7 @@ namespace TradingLib.MoniterControl
         void ResetColumeSize()
         {
             ComponentFactory.Krypton.Toolkit.KryptonDataGridView grid = sessionGrid;
-            
+            grid.Columns[SESSIONID].Width = 200;
         }
         #endregion
 

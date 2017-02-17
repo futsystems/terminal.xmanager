@@ -149,7 +149,6 @@ namespace TradingLib.MoniterCore
             return client.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.DEL_ACC, account);
         }
 
-
         /// <summary>
         /// 查询个人信息
         /// </summary>
