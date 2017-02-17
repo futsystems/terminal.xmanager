@@ -470,6 +470,7 @@ namespace TradingLib.MoniterBase
         }
 
 
+        string oldpanelkey = string.Empty;
         /// <summary>
         /// 将某个控件显示到对应的视区
         /// </summary>
@@ -489,12 +490,16 @@ namespace TradingLib.MoniterBase
 
             if (location == EnumControlLocation.TopPanel)
             {
-                toolBarFilterPanel.Controls.Clear();//清空原有控件
-                IMoniterControl mc = ctl as IMoniterControl;
-                if (mc != null && mc.FilterToolBar != null)
+                if (oldpanelkey != key)
                 {
-                    ShowToolBar(mc.FilterToolBar);
+                    toolBarFilterPanel.Controls.Clear();//清空原有控件
+                    IMoniterControl mc = ctl as IMoniterControl;
+                    if (mc != null && mc.FilterToolBar != null)
+                    {
+                        ShowToolBar(mc.FilterToolBar);
+                    }
                 }
+                oldpanelkey = key;
             }
         }
 

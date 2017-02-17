@@ -107,6 +107,12 @@
     <Compile Include="Base\ctTLPermissionEdit.designer.cs">
       <DependentUpon>ctTLPermissionEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\Filter\ctFollowItemFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Base\Filter\ctFollowItemFilter.Designer.cs">
+      <DependentUpon>ctFollowItemFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\Follow\ctFollowItemList.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -234,6 +240,7 @@
     <Compile Include="Common\FilterArgs.cs" />
     <Compile Include="Common\JsonProtocolFinService.cs" />
     <Compile Include="Common\ValueObject.cs" />
+    <Compile Include="Common\FollowFilterArgs.cs" />
     <Compile Include="ContribProtocol\ProtocolLogServer.cs" />
     <Compile Include="ControlService.cs" />
     <Compile Include="ctDebug.cs">
@@ -835,6 +842,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\ctTLPermissionEdit.resx">
       <DependentUpon>ctTLPermissionEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\Filter\ctFollowItemFilter.resx">
+      <DependentUpon>ctFollowItemFilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Base\Follow\ctFollowItemList.resx">
       <DependentUpon>ctFollowItemList.cs</DependentUpon>

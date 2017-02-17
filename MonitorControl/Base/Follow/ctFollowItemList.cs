@@ -361,6 +361,9 @@ namespace TradingLib.MoniterControl
 
                     gt.Rows[i][EXITFOLLOWSTAGE] = Util.GetEnumDescription(item.Stage);
                     gt.Rows[i][COMMENT] = item.Comment;
+                    gt.Rows[i][SOURCESIGNAL] = item.Filter_SourceSignal;
+                    gt.Rows[i][HOLD] = item.Filter_PositonHold;
+                    gt.Rows[i][PROFIT] = item.Filter_Profit;
 
                     exitmap.TryAdd(item.FollowKey, item);
                     exitrowmp.TryAdd(item.FollowKey, i);
@@ -375,7 +378,8 @@ namespace TradingLib.MoniterControl
 
                     gt.Rows[i][EXITFOLLOWSTAGE] = Util.GetEnumDescription(item.Stage);
                     gt.Rows[i][COMMENT] = item.Comment;
-                    
+                    gt.Rows[i][HOLD] = item.Filter_PositonHold;
+                    gt.Rows[i][PROFIT] = item.Filter_Profit;
                 }
 
                 //cfgmap.TryAdd(cfg.ID, cfg);
@@ -442,6 +446,9 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][TOTALPROFIT] = item.TotalRealizedPL.ToFormatStr(item.PriceFormat);
                     gt.Rows[i][POSITIONHOLDSIZE] = item.PositionHoldSize;
                     gt.Rows[i][COMMENT] = item.Comment;
+                    gt.Rows[i][SOURCESIGNAL] = item.Filter_SourceSignal;
+                    gt.Rows[i][HOLD] = item.Filter_PositonHold;
+                    gt.Rows[i][PROFIT] = item.Filter_Profit;
 
                     entrymap.TryAdd(item.FollowKey, item);
                     entryrowmap.TryAdd(item.FollowKey, i);
@@ -458,6 +465,8 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][TOTALPROFIT] = item.TotalRealizedPL.ToFormatStr(item.PriceFormat);
                     gt.Rows[i][POSITIONHOLDSIZE] = item.PositionHoldSize;
                     gt.Rows[i][COMMENT] = item.Comment;
+                    gt.Rows[i][HOLD] = item.Filter_PositonHold;
+                    gt.Rows[i][PROFIT] = item.Filter_Profit;
                 }
 
                 //cfgmap.TryAdd(cfg.ID, cfg);
@@ -467,7 +476,48 @@ namespace TradingLib.MoniterControl
 
 
 
+        /// <summary>
+        /// 过滤跟单项
+        /// </summary>
+        /// <param name="filterArgs"></param>
+        public void FilterFollowItem(FollowFilterArgs filterArgs)
+        {
+            string strFilter = string.Empty;
 
+            string trigger = string.Empty;
+            trigger = "*";
+            strFilter = string.Format(TRIGGER + " > '{0}'", trigger);
+
+            if (filterArgs != null)
+            {
+                //持仓
+                if (filterArgs.FollowPos)
+                {
+                    strFilter = string.Format(strFilter + " and " + HOLD + " > 0");
+                }
+                if (filterArgs.ProfitEnable)
+                {
+                    strFilter = string.Format(strFilter + " and " + PROFIT + " {0}" + " and " + HOLD + " = 0",filterArgs.FollowProfit? "> 0":"< 0");
+                }
+                //跟单项类别
+                if (filterArgs.EventTypeEnable)
+                {
+                    strFilter = string.Format(strFilter + " and " + POSEVENTTYPE + " = '{0}'", filterArgs.EventType);
+                }
+                //帐户检索
+                if (!string.IsNullOrEmpty(filterArgs.SignalSearch))
+                {
+                    strFilter = string.Format(strFilter + " and " + SOURCESIGNAL + " like '{0}*'", filterArgs.SignalSearch);
+                }
+                //备注检索
+                if (!string.IsNullOrEmpty(filterArgs.SymbolSearch))
+                {
+                    strFilter = string.Format(strFilter + " and " + SYMBOL + " like '{0}*'", filterArgs.SymbolSearch);
+                }
+
+            }
+            datasource.Filter = strFilter;
+        }
         #region 表格
 
         const string ITEMID = "ID";
@@ -508,8 +558,9 @@ namespace TradingLib.MoniterControl
         const string TOTALSLIP = "滑点(T)";
         const string TOTALPROFIT = "平仓盈亏(T)";
         const string COMMENT = "备注";
-
-
+        const string SOURCESIGNAL = "初始信号F";
+        const string HOLD = "持仓F";
+        const string PROFIT = "盈利F";
 
 
         DataTable gt = new DataTable();
@@ -577,8 +628,9 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(TOTALSLIP);//22
             gt.Columns.Add(TOTALPROFIT);//23
             gt.Columns.Add(COMMENT);
-
-
+            gt.Columns.Add(SOURCESIGNAL);
+            gt.Columns.Add(HOLD,typeof(int));
+            gt.Columns.Add(PROFIT,typeof(decimal));
         }
 
         /// <summary>
@@ -600,7 +652,9 @@ namespace TradingLib.MoniterControl
 
             itemGrid.Columns[ENTRYOPENTRADEID].Visible = false;
             itemGrid.Columns[EXITCLOSETRADEID].Visible = false;
-
+            itemGrid.Columns[SOURCESIGNAL].Visible = false;
+            itemGrid.Columns[HOLD].Visible = false;
+            itemGrid.Columns[PROFIT].Visible = false;
 
             itemGrid.Columns[ENTRYOPENTRADEID].HeaderCell.Style.BackColor = Color.Teal;
             //itemGrid.Columns[ENTRYOPENTRADEID].HeaderCell.Style.Font = new System.Drawing.Font(itemGrid.Columns[ENTRYOPENTRADEID].HeaderCell.Style.Font, FontStyle.Bold);

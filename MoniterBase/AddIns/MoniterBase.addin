@@ -364,7 +364,7 @@
 		             tooltip = "跟单"
 		             icon = "Icons.ViewQuote"
 		             class  = "TradingLib.MoniterBase.Command.ShowFollowCommand"/>
-    
+    <ToolbarItem id = "ViewSeparator" type = "Separator"/>
     <ToolbarItem id = "ExpandViewCommand"
 		             tooltip = "扩展主视区"
 		             icon = "Icons.ViewExpand"

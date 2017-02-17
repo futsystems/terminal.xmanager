@@ -17,10 +17,20 @@ namespace TradingLib.MoniterControl
     public partial class ctFollowCentre : UserControl, IEventBinder, IMoniterControl
     {
         public Control FilterToolBar { get; set; }
+        ctFollowItemFilter filterBox = null;
         public ctFollowCentre()
         {
             InitializeComponent();
+            filterBox = new ctFollowItemFilter();
+            filterBox.FilterArgsChanged += new Action<FollowFilterArgs>(filterBox_FilterArgsChanged);
+            this.FilterToolBar = filterBox;
+
             this.Load += new EventHandler(ctFollowCentre_Load);
+        }
+
+        void filterBox_FilterArgsChanged(FollowFilterArgs obj)
+        {
+            ctFollowItemList1.FilterFollowItem(obj);
         }
 
         void ctFollowCentre_Load(object sender, EventArgs e)

@@ -121,6 +121,7 @@ namespace TradingLib.MoniterControl
         }
 
 
+       
 
         /// <summary>
         /// 返回帐户类别

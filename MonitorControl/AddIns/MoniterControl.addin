@@ -219,12 +219,12 @@
 
   <!--工具栏-->
   <Path name = "/Workbench/Toolbar">
-    
-    <ToolbarItem id = "FilterAccountCommand"
+
+    <!--ToolbarItem id = "FilterAccountCommand"
                  tooltip = "筛选帐户"
                  shortcut = "Control|F"
                  icon = "Icons.FilterAccount"
-                 class  = "TradingLib.MoniterControl.FilterAccountCommand"/>
+                 class  = "TradingLib.MoniterControl.FilterAccountCommand"/-->
 
 
   </Path>
