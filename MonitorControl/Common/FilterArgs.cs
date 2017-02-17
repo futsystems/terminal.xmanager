@@ -18,8 +18,8 @@ namespace TradingLib.MoniterControl
 
         public bool AccPos = false;
         //帐户类别
-        //public bool AcctTypeEnable = false;
-        //public QSEnumAccountCategory AcctType = QSEnumAccountCategory.SUBACCOUNT;
+        public bool AcctTypeEnable = false;
+        public QSEnumAccountCategory AcctType = QSEnumAccountCategory.SUBACCOUNT;
 
         //所属代理商
         public bool AgentEnable = false;
@@ -43,5 +43,7 @@ namespace TradingLib.MoniterControl
 
         //帐号过滤
         public string AccSearch = string.Empty;
+        //备注过滤
+        public string MemoSearch = string.Empty;
     }
 }

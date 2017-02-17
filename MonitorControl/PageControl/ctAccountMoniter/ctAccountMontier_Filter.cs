@@ -70,6 +70,10 @@ namespace TradingLib.MoniterControl
                     strFilter = string.Format(strFilter + " and " + LOGINSTATUS + " = '{0}'", getLoginStatus(true));
                 }
 
+                if (filterArgs.AcctTypeEnable)
+                {
+                    strFilter = string.Format(strFilter + " and " + CATEGORY + " = '{0}'", filterArgs.AcctType);
+                }
                 //持仓
                 if (filterArgs.AccPos)
                 {
@@ -79,6 +83,11 @@ namespace TradingLib.MoniterControl
                 if (!string.IsNullOrEmpty(filterArgs.AccSearch))
                 {
                     strFilter = string.Format(strFilter + " and " + ACCOUNT + " like '{0}*'", filterArgs.AccSearch);
+                }
+                //备注检索
+                if (!string.IsNullOrEmpty(filterArgs.MemoSearch))
+                {
+                    strFilter = string.Format(strFilter + " and " + MEMO + " like '{0}*'", filterArgs.MemoSearch);
                 }
 
             }
@@ -90,7 +99,7 @@ namespace TradingLib.MoniterControl
 
         void UpdateAccountNum()
         {
-            ControlService.FireAccGridNumChanged(accountgrid.Rows.Count);
+            filterBox.SetAccountNum(accountgrid.Rows.Count);
         }
 
     }

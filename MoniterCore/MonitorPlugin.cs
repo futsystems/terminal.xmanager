@@ -157,11 +157,11 @@ namespace TradingLib.MoniterCore
                     //bool issub = typeof(IMoniterControl).IsAssignableFrom(type);
                     //bool issub2 = typeof(MonitorControl).IsAssignableFrom(type);
                     //bool issub3 = type.GetInterface(typeof(IMoniterControl).FullName) != null;
-                    if (!type.IsAbstract && type.GetInterface(typeof(IMoniterControl).FullName) != null)
-                    {
+                    //if (!type.IsAbstract && type.GetInterface(typeof(IMoniterControl).FullName) != null)
+                    //{
 
-                        dictionary[a.GetType(type.FullName)] = true;//标记该类型被加载
-                    }
+                    //    dictionary[a.GetType(type.FullName)] = true;//标记该类型被加载
+                    //}
 
                     //判断是否是管理端命令对象
                     if (!type.IsAbstract && type.GetInterface(typeof(IMonterCommand).FullName) != null)

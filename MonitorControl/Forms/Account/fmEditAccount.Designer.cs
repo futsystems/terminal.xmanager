@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.ctAgentList1 = new TradingLib.MoniterControl.ctAgentList();
             this.cbCurrency = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lbNotice = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -46,7 +45,6 @@
             this.bankac = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.ctBankList1 = new TradingLib.MoniterControl.ctBankList();
             this.branch = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -59,6 +57,10 @@
             this.idcard = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.mobile = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.qq = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonLabel12 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.memo = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.ctAgentList1 = new TradingLib.MoniterControl.ctAgentList();
+            this.ctBankList1 = new TradingLib.MoniterControl.ctBankList();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbCurrency)).BeginInit();
@@ -95,20 +97,8 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(333, 171);
+            this.kryptonPanel1.Size = new System.Drawing.Size(333, 590);
             this.kryptonPanel1.TabIndex = 0;
-            // 
-            // ctAgentList1
-            // 
-            this.ctAgentList1.CurrentAgentFK = 0;
-            this.ctAgentList1.EnableAny = false;
-            this.ctAgentList1.EnableDefaultBaseMGR = true;
-            this.ctAgentList1.EnableSelected = true;
-            this.ctAgentList1.EnableSelf = true;
-            this.ctAgentList1.Location = new System.Drawing.Point(40, 87);
-            this.ctAgentList1.Name = "ctAgentList1";
-            this.ctAgentList1.Size = new System.Drawing.Size(151, 21);
-            this.ctAgentList1.TabIndex = 23;
             // 
             // cbCurrency
             // 
@@ -146,7 +136,7 @@
             // 
             // kryptonGroupBox3
             // 
-            this.kryptonGroupBox3.Location = new System.Drawing.Point(21, 464);
+            this.kryptonGroupBox3.Location = new System.Drawing.Point(21, 482);
             this.kryptonGroupBox3.Name = "kryptonGroupBox3";
             // 
             // kryptonGroupBox3.Panel
@@ -213,7 +203,7 @@
             // 
             // kryptonGroupBox2
             // 
-            this.kryptonGroupBox2.Location = new System.Drawing.Point(21, 344);
+            this.kryptonGroupBox2.Location = new System.Drawing.Point(21, 365);
             this.kryptonGroupBox2.Name = "kryptonGroupBox2";
             // 
             // kryptonGroupBox2.Panel
@@ -250,14 +240,6 @@
             this.kryptonLabel6.TabIndex = 12;
             this.kryptonLabel6.Values.Text = "分行:";
             // 
-            // ctBankList1
-            // 
-            this.ctBankList1.BankSelected = 0;
-            this.ctBankList1.Location = new System.Drawing.Point(31, 3);
-            this.ctBankList1.Name = "ctBankList1";
-            this.ctBankList1.Size = new System.Drawing.Size(173, 21);
-            this.ctBankList1.TabIndex = 11;
-            // 
             // branch
             // 
             this.branch.Location = new System.Drawing.Point(82, 30);
@@ -272,6 +254,8 @@
             // 
             // kryptonGroupBox1.Panel
             // 
+            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel12);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.memo);
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel8);
             this.kryptonGroupBox1.Panel.Controls.Add(this.email);
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel4);
@@ -282,7 +266,7 @@
             this.kryptonGroupBox1.Panel.Controls.Add(this.idcard);
             this.kryptonGroupBox1.Panel.Controls.Add(this.mobile);
             this.kryptonGroupBox1.Panel.Controls.Add(this.qq);
-            this.kryptonGroupBox1.Size = new System.Drawing.Size(286, 177);
+            this.kryptonGroupBox1.Size = new System.Drawing.Size(286, 200);
             this.kryptonGroupBox1.TabIndex = 12;
             this.kryptonGroupBox1.Values.Heading = "基本信息";
             this.kryptonGroupBox1.Visible = false;
@@ -362,11 +346,46 @@
             this.qq.Size = new System.Drawing.Size(181, 20);
             this.qq.TabIndex = 6;
             // 
+            // kryptonLabel12
+            // 
+            this.kryptonLabel12.Location = new System.Drawing.Point(17, 147);
+            this.kryptonLabel12.Name = "kryptonLabel12";
+            this.kryptonLabel12.Size = new System.Drawing.Size(38, 20);
+            this.kryptonLabel12.TabIndex = 10;
+            this.kryptonLabel12.Values.Text = "备注:";
+            // 
+            // memo
+            // 
+            this.memo.Location = new System.Drawing.Point(82, 144);
+            this.memo.Name = "memo";
+            this.memo.Size = new System.Drawing.Size(181, 20);
+            this.memo.TabIndex = 11;
+            // 
+            // ctAgentList1
+            // 
+            this.ctAgentList1.CurrentAgentFK = 0;
+            this.ctAgentList1.EnableAny = false;
+            this.ctAgentList1.EnableDefaultBaseMGR = true;
+            this.ctAgentList1.EnableSelected = true;
+            this.ctAgentList1.EnableSelf = true;
+            this.ctAgentList1.Location = new System.Drawing.Point(40, 87);
+            this.ctAgentList1.Name = "ctAgentList1";
+            this.ctAgentList1.Size = new System.Drawing.Size(151, 21);
+            this.ctAgentList1.TabIndex = 23;
+            // 
+            // ctBankList1
+            // 
+            this.ctBankList1.BankSelected = 0;
+            this.ctBankList1.Location = new System.Drawing.Point(31, 3);
+            this.ctBankList1.Name = "ctBankList1";
+            this.ctBankList1.Size = new System.Drawing.Size(173, 21);
+            this.ctBankList1.TabIndex = 11;
+            // 
             // fmEditAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(333, 171);
+            this.ClientSize = new System.Drawing.Size(333, 590);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
@@ -432,5 +451,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox cbCurrency;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel10;
         private ctAgentList ctAgentList1;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel12;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox memo;
     }
 }

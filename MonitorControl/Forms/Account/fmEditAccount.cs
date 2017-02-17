@@ -19,6 +19,7 @@ namespace TradingLib.MoniterControl
         public fmEditAccount()
         {
             InitializeComponent();
+            SmallView();
             this.Load += new EventHandler(fmAddFinAccount_Load);
         }
 
@@ -48,12 +49,12 @@ namespace TradingLib.MoniterControl
 
         void BigView()
         {
-            this.Height = 610;
+            this.Height = 630;
             lbNotice.Visible = true;
             kryptonGroupBox1.Visible = true;
             kryptonGroupBox2.Visible = true;
             kryptonGroupBox3.Visible = true;
-            btnSubmit.Location = new Point(215, 545);
+            btnSubmit.Location = new Point(215, 565);
         }
         void btnFillInfo_CheckedChanged(object sender, EventArgs e)
         {
@@ -99,6 +100,7 @@ namespace TradingLib.MoniterControl
                 name.Text = profile.Name;
                 qq.Text = profile.QQ;
                 broker.Text = profile.Broker;
+                memo.Text = profile.Memo;
             }
         }
         AccountItem _account = null;
@@ -130,6 +132,7 @@ namespace TradingLib.MoniterControl
             profile.Name = name.Text;
             profile.QQ = qq.Text;
             profile.Broker = broker.Text;
+            profile.Memo = memo.Text;
 
             AccountCreation createion = new AccountCreation();
             createion.Account = account.Text;

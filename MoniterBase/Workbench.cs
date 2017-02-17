@@ -231,6 +231,7 @@ namespace TradingLib.MoniterBase
         #region 初始化
         /// <summary>
         /// 初始化split容器控件
+        /// 在contentPanel中添加一个嵌套的SplitContainer
         /// </summary>
         void InitSplitContainer()
         {
@@ -263,6 +264,7 @@ namespace TradingLib.MoniterBase
 
             
         }
+
         #region 控件
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lbDeployID;
@@ -272,7 +274,8 @@ namespace TradingLib.MoniterBase
         private System.Windows.Forms.ToolStripStatusLabel lbSpring;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel imgLink;
-
+        private System.Windows.Forms.Panel toolBarFilterPanel;
+        private System.Windows.Forms.ToolStripControlHost toolBarFilterHost;
         #endregion
 
         /// <summary>
@@ -293,23 +296,23 @@ namespace TradingLib.MoniterBase
 
 
             toolbar = ToolbarService.CreateToolStrip(this, "/Workbench/Toolbar");
-            //ctFilter filter = new MoniterControl.ctFilter();
-            //filter.Dock = DockStyle.Fill;
-            //ToolStripControlHost host = new ToolStripControlHost(filter);
 
 
-            var panel = new Panel();
-            panel.BackColor = Color.Transparent;
-            ctFilter filter = new ctFilter();
-            panel.Size = new Size(filter.Size.Width, filter.Size.Height);
-            panel.Controls.Add(filter);
-            panel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            panel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            ToolStripControlHost host = new ToolStripControlHost(panel);
-            host.Size = new Size(filter.Size.Width, filter.Size.Height);
-            host.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            host.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            toolbar.Items.Add(host);
+            toolBarFilterPanel = new Panel();
+            toolBarFilterPanel.BackColor = Color.Transparent;
+            toolBarFilterHost = new ToolStripControlHost(toolBarFilterPanel);
+            toolBarFilterPanel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            toolBarFilterPanel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            toolBarFilterHost.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            toolBarFilterHost.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+
+            toolbar.Items.Add(toolBarFilterHost);
+
+            //ctAccountFilter filter = new ctAccountFilter();
+            //toolBarFilterPanel.Size = new Size(filter.Size.Width, filter.Size.Height);
+            //toolBarFilterPanel.Controls.Add(filter);
+            //host.Size = new Size(filter.Size.Width, filter.Size.Height);
+
 
             this.Controls.Add(toolbar);
             this.Controls.Add(menu);
@@ -483,8 +486,28 @@ namespace TradingLib.MoniterBase
             var panel = this.GetPanel(location);
             panel.Controls.Clear();
             panel.Controls.Add(ctl);
+
+            if (location == EnumControlLocation.TopPanel)
+            {
+                toolBarFilterPanel.Controls.Clear();//清空原有控件
+                IMoniterControl mc = ctl as IMoniterControl;
+                if (mc != null && mc.FilterToolBar != null)
+                {
+                    ShowToolBar(mc.FilterToolBar);
+                }
+            }
         }
 
+        void ShowToolBar(Control ctl)
+        {
+            //ctAccountFilter filter = new ctAccountFilter();
+
+            toolBarFilterHost.AutoSize = false;
+            toolBarFilterPanel.Size = new Size(ctl.Size.Width, ctl.Size.Height);
+            toolBarFilterHost.Size = new Size(ctl.Size.Width, ctl.Size.Height);
+            toolBarFilterPanel.Controls.Add(ctl);
+            //MessageBox.Show(string.Format("{0} - {1} / {2}-{3}", toolBarFilterHost.Size.Height, toolBarFilterHost.Size.Width, ctl.Size.Height, ctl.Size.Width));
+        }
 
         /// <summary>
         /// 向视区添加控件

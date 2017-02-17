@@ -24,6 +24,7 @@ namespace TradingLib.MoniterBase.Command
                 return;
             }
             fmEditAccount fm = new fmEditAccount();
+            
             fm.ShowDialog();
             fm.Close();
         }

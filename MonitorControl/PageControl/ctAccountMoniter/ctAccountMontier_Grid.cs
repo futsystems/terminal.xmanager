@@ -51,7 +51,7 @@ namespace TradingLib.MoniterControl
         const string CURRENCY = "基币";
         const string AGENTMGRFK = "AGENTMGRFK";
         const string AGENTCODE = "代理编号";
-        
+        const string MEMO = "备注";
         const string DELETE = "DELETE";
         const string TAG = "ACCOUNTTAG";
 
@@ -130,6 +130,7 @@ namespace TradingLib.MoniterControl
             //代理编号
             gt.Columns.Add(AGENTCODE);//20
             gt.Columns.Add(AGENTMGRFK);//21
+            gt.Columns.Add(MEMO);
             gt.Columns.Add(TAG,typeof(AccountItem));
             gt.Columns.Add(DELETE);
             
@@ -175,6 +176,7 @@ namespace TradingLib.MoniterControl
             accountgrid.Columns[LOGINSTATUSIMG].Width = 50;
             accountgrid.Columns[EXECUTEIMG].Width = 50;
             accountgrid.Columns[CURRENCY].Width = 50;
+            accountgrid.Columns[AGENTCODE].Width = 80;
         }
 
         private void accountgrid_SizeChanged_FixWidth(object sender, EventArgs e)
@@ -399,6 +401,7 @@ namespace TradingLib.MoniterControl
                         gt.Rows[i][DELETE] = account.Deleted;
                         gt.Rows[i][CURRENCY] = Util.GetEnumDescription(account.Currency);
                         gt.Rows[i][TAG] = account;
+                        gt.Rows[i][MEMO] = account.Memo;
                         accountmap.TryAdd(account.Account, account);
                         accountrowmap.TryAdd(account.Account, i);
                        
@@ -439,7 +442,7 @@ namespace TradingLib.MoniterControl
                         bool oldwarn = bool.Parse(gt.Rows[r][WARN].ToString());
                         gt.Rows[r][WARN] = account.IsWarn;
                         gt.Rows[r][WARNSTR] = account.WarnMessage;
-
+                        gt.Rows[r][MEMO] = account.Memo;
                         if (oldwarn && !account.IsWarn)
                         {
                             AccountWarnOff(account.Account);

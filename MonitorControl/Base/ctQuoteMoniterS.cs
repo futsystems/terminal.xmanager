@@ -18,7 +18,7 @@ namespace TradingLib.MoniterControl
     /// <summary>
     /// 按交易所分类显示所有合约行情列表
     /// </summary>
-    public partial class ctQuoteMoniterS : UserControl,IEventBinder, IMoniterControl
+    public partial class ctQuoteMoniterS : UserControl,IEventBinder
     {
         ILog logger = LogManager.GetLogger("QuoteMoniterS");
 

@@ -16,6 +16,7 @@ namespace TradingLib.MoniterControl
     [MoniterControlAttr("FunctionPanel", "功能面板", EnumControlLocation.BottomRight)]
     public partial class ctFunctionPanel : UserControl, IMoniterControl
     {
+        public Control FilterToolBar { get; set; }
         public ctFunctionPanel()
         {
             InitializeComponent();

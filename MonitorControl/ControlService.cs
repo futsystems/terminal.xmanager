@@ -46,20 +46,20 @@ namespace TradingLib.MoniterControl
         /// <summary>
         /// 账户过滤参数
         /// </summary>
-        public static event Action<FilterArgs> FilterArgsChanged = delegate { };
-        static internal void FireFilterArgsChanged(FilterArgs arg)
-        {
-            FilterArgsChanged(arg);
-        }
+        //public static event Action<FilterArgs> FilterArgsChanged = delegate { };
+        //static internal void FireFilterArgsChanged(FilterArgs arg)
+        //{
+        //    FilterArgsChanged(arg);
+        //}
 
-        /// <summary>
-        /// 交易账户Grid显示账户显示数量
-        /// </summary>
-        public static event Action<int> AccGridNumChanged = delegate { };
-        static internal void FireAccGridNumChanged(int num)
-        {
-            AccGridNumChanged(num);
-        }
+        ///// <summary>
+        ///// 交易账户Grid显示账户显示数量
+        ///// </summary>
+        //public static event Action<int> AccGridNumChanged = delegate { };
+        //static internal void FireAccGridNumChanged(int num)
+        //{
+        //    AccGridNumChanged(num);
+        //}
 
 
 

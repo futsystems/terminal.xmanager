@@ -20,6 +20,8 @@ namespace TradingLib.MoniterControl
     public partial class ctAccountMontier : UserControl, IEventBinder, IMoniterControl
     {
         ILog logger = LogManager.GetLogger("AccountMontier");
+        public Control FilterToolBar { get; set; }
+        ctAccountFilter filterBox;
         public ctAccountMontier()
         {
             try
@@ -28,6 +30,11 @@ namespace TradingLib.MoniterControl
                 SetPreferences();
                 InitTable();
                 BindToTable();
+                filterBox = new ctAccountFilter();
+                filterBox.FilterArgsChanged += new Action<FilterArgs>(OnFilterArgsChanged);
+                this.FilterToolBar = filterBox;
+               
+
                 this.Load += new EventHandler(ctAccountMontier_Load);
             }
             catch (Exception ex)
@@ -36,6 +43,8 @@ namespace TradingLib.MoniterControl
             }
             
         }
+
+       
 
         void ctAccountMontier_Load(object sender, EventArgs e)
         {
@@ -56,9 +65,6 @@ namespace TradingLib.MoniterControl
             //表格样式
             accountgrid.CellFormatting += new DataGridViewCellFormattingEventHandler(accountgrid_CellFormatting);//格式化单元格
             accountgrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(accountgrid_RowPrePaint);
-
-            //响应过滤参数变更事件
-            ControlService.FilterArgsChanged += new Action<FilterArgs>(OnFilterArgsChanged);
 
             CoreService.EventCore.RegIEventHandler(this);
         }

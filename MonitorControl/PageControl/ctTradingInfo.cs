@@ -18,7 +18,7 @@ namespace TradingLib.MoniterControl
     public partial class ctTradingInfo : UserControl, IEventBinder, IMoniterControl
     {
         ILog logger = LogManager.GetLogger("ctTradingInfo");
-
+        public Control FilterToolBar { get; set; }
         AccountItem _account = null;
         /// <summary>
         /// 判断是否是当前选中帐户

@@ -16,6 +16,7 @@ namespace TradingLib.MoniterControl
     [MoniterControlAttr("FollowMoniter", "跟单监控", EnumControlLocation.TopPanel)]
     public partial class ctFollowCentre : UserControl, IEventBinder, IMoniterControl
     {
+        public Control FilterToolBar { get; set; }
         public ctFollowCentre()
         {
             InitializeComponent();

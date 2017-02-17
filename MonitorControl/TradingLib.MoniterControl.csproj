@@ -64,6 +64,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IMoniterControl.cs" />
     <Compile Include="Base\ctBasicMangerInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -76,11 +77,11 @@
     <Compile Include="Base\ctCashTrans.Designer.cs">
       <DependentUpon>ctCashTrans.cs</DependentUpon>
     </Compile>
-    <Compile Include="Base\ctFilter.cs">
+    <Compile Include="Base\Filter\ctAccountFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Base\ctFilter.Designer.cs">
-      <DependentUpon>ctFilter.cs</DependentUpon>
+    <Compile Include="Base\Filter\ctAccountFilter.Designer.cs">
+      <DependentUpon>ctAccountFilter.cs</DependentUpon>
     </Compile>
     <Compile Include="Base\ctFinanceInfo.cs">
       <SubType>UserControl</SubType>
@@ -820,8 +821,8 @@
     <EmbeddedResource Include="Base\ctCashTrans.resx">
       <DependentUpon>ctCashTrans.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Base\ctFilter.resx">
-      <DependentUpon>ctFilter.cs</DependentUpon>
+    <EmbeddedResource Include="Base\Filter\ctAccountFilter.resx">
+      <DependentUpon>ctAccountFilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Base\ctFinanceInfo.resx">
       <DependentUpon>ctFinanceInfo.cs</DependentUpon>
