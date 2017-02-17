@@ -234,9 +234,11 @@ namespace TradingLib.MoniterControl
             module_finservice.Checked = _domain.Module_FinService;
             module_payonline.Checked = _domain.Module_PayOnline;
             module_slip.Checked = _domain.Module_Slip;
+            module_follow.Checked = _domain.Module_Follow;
 
             cfg_GrossPositioin.Checked = _domain.Cfg_GrossPosition;
             cfg_MaxMarginSide.Checked = _domain.Cfg_MaxMarginSide;
+            cfg_followstrategynum.Value = _domain.Cfg_FollowStrategyNum;
 
             router_live.Checked = _domain.Router_Live;
             router_sim.Checked = _domain.Router_Sim;
@@ -287,6 +289,7 @@ namespace TradingLib.MoniterControl
                 _domain.Module_FinService = module_finservice.Checked;
                 _domain.Module_PayOnline = module_payonline.Checked;
                 _domain.Module_Slip = module_slip.Checked;
+                _domain.Module_Follow = module_follow.Checked;
 
                 _domain.Router_Live = router_live.Checked;
                 _domain.Router_Sim = router_sim.Checked;
@@ -297,6 +300,7 @@ namespace TradingLib.MoniterControl
                 _domain.Dedicated = dedicated.Checked;
                 _domain.Cfg_MaxMarginSide = cfg_MaxMarginSide.Checked;
                 _domain.Cfg_GrossPosition = cfg_GrossPositioin.Checked;
+                _domain.Cfg_FollowStrategyNum = (int)cfg_followstrategynum.Value;
 
                 if (MoniterHelper.WindowConfirm("确认更新分区设置?") == System.Windows.Forms.DialogResult.Yes)
                 {

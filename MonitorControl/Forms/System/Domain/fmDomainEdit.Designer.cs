@@ -72,6 +72,8 @@
             this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonPage4 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonPanel5 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.cfg_GrossPositioin = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.cfg_MaxMarginSide = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.module_slip = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.module_subagent = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.module_payonline = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -88,8 +90,11 @@
             this.kryptonPanel7 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.finsplist = new System.Windows.Forms.CheckedListBox();
             this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.cfg_MaxMarginSide = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
-            this.cfg_GrossPositioin = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.kryptonGroupBox2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.module_follow = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.kryptonLabel21 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.cfg_followstrategynum = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
@@ -118,6 +123,14 @@
             this.splisttab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel7)).BeginInit();
             this.kryptonPanel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).BeginInit();
+            this.kryptonGroupBox1.Panel.SuspendLayout();
+            this.kryptonGroupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2.Panel)).BeginInit();
+            this.kryptonGroupBox2.Panel.SuspendLayout();
+            this.kryptonGroupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
@@ -585,22 +598,33 @@
             // 
             // kryptonPanel5
             // 
-            this.kryptonPanel5.Controls.Add(this.cfg_GrossPositioin);
-            this.kryptonPanel5.Controls.Add(this.cfg_MaxMarginSide);
-            this.kryptonPanel5.Controls.Add(this.module_slip);
-            this.kryptonPanel5.Controls.Add(this.module_subagent);
-            this.kryptonPanel5.Controls.Add(this.module_payonline);
-            this.kryptonPanel5.Controls.Add(this.module_finservice);
-            this.kryptonPanel5.Controls.Add(this.module_agent);
+            this.kryptonPanel5.Controls.Add(this.kryptonGroupBox2);
+            this.kryptonPanel5.Controls.Add(this.kryptonGroupBox1);
             this.kryptonPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel5.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel5.Name = "kryptonPanel5";
             this.kryptonPanel5.Size = new System.Drawing.Size(429, 229);
             this.kryptonPanel5.TabIndex = 0;
             // 
+            // cfg_GrossPositioin
+            // 
+            this.cfg_GrossPositioin.Location = new System.Drawing.Point(3, 21);
+            this.cfg_GrossPositioin.Name = "cfg_GrossPositioin";
+            this.cfg_GrossPositioin.Size = new System.Drawing.Size(73, 20);
+            this.cfg_GrossPositioin.TabIndex = 6;
+            this.cfg_GrossPositioin.Values.Text = "支持锁仓";
+            // 
+            // cfg_MaxMarginSide
+            // 
+            this.cfg_MaxMarginSide.Location = new System.Drawing.Point(3, 4);
+            this.cfg_MaxMarginSide.Name = "cfg_MaxMarginSide";
+            this.cfg_MaxMarginSide.Size = new System.Drawing.Size(73, 20);
+            this.cfg_MaxMarginSide.TabIndex = 5;
+            this.cfg_MaxMarginSide.Values.Text = "单向大边";
+            // 
             // module_slip
             // 
-            this.module_slip.Location = new System.Drawing.Point(17, 84);
+            this.module_slip.Location = new System.Drawing.Point(3, 29);
             this.module_slip.Name = "module_slip";
             this.module_slip.Size = new System.Drawing.Size(98, 20);
             this.module_slip.TabIndex = 4;
@@ -608,7 +632,7 @@
             // 
             // module_subagent
             // 
-            this.module_subagent.Location = new System.Drawing.Point(107, 11);
+            this.module_subagent.Location = new System.Drawing.Point(104, 7);
             this.module_subagent.Name = "module_subagent";
             this.module_subagent.Size = new System.Drawing.Size(73, 20);
             this.module_subagent.TabIndex = 3;
@@ -616,23 +640,25 @@
             // 
             // module_payonline
             // 
-            this.module_payonline.Location = new System.Drawing.Point(17, 58);
+            this.module_payonline.Location = new System.Drawing.Point(303, 29);
             this.module_payonline.Name = "module_payonline";
             this.module_payonline.Size = new System.Drawing.Size(111, 20);
             this.module_payonline.TabIndex = 2;
             this.module_payonline.Values.Text = "在线出入金模块";
+            this.module_payonline.Visible = false;
             // 
             // module_finservice
             // 
-            this.module_finservice.Location = new System.Drawing.Point(17, 34);
+            this.module_finservice.Location = new System.Drawing.Point(341, 3);
             this.module_finservice.Name = "module_finservice";
             this.module_finservice.Size = new System.Drawing.Size(73, 20);
             this.module_finservice.TabIndex = 1;
             this.module_finservice.Values.Text = "配资模块";
+            this.module_finservice.Visible = false;
             // 
             // module_agent
             // 
-            this.module_agent.Location = new System.Drawing.Point(17, 11);
+            this.module_agent.Location = new System.Drawing.Point(3, 8);
             this.module_agent.Name = "module_agent";
             this.module_agent.Size = new System.Drawing.Size(73, 20);
             this.module_agent.TabIndex = 0;
@@ -646,7 +672,7 @@
             this.kryptonPage5.LastVisibleSet = true;
             this.kryptonPage5.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage5.Name = "kryptonPage5";
-            this.kryptonPage5.Size = new System.Drawing.Size(429, 209);
+            this.kryptonPage5.Size = new System.Drawing.Size(429, 229);
             this.kryptonPage5.Text = "路由类别";
             this.kryptonPage5.ToolTipTitle = "Page ToolTip";
             this.kryptonPage5.UniqueName = "09404FB13E7847A3E39A6465894CD0A8";
@@ -658,7 +684,7 @@
             this.kryptonPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel6.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel6.Name = "kryptonPanel6";
-            this.kryptonPanel6.Size = new System.Drawing.Size(429, 209);
+            this.kryptonPanel6.Size = new System.Drawing.Size(429, 229);
             this.kryptonPanel6.TabIndex = 0;
             // 
             // router_live
@@ -685,7 +711,7 @@
             this.intfaceTab.LastVisibleSet = true;
             this.intfaceTab.MinimumSize = new System.Drawing.Size(50, 50);
             this.intfaceTab.Name = "intfaceTab";
-            this.intfaceTab.Size = new System.Drawing.Size(429, 209);
+            this.intfaceTab.Size = new System.Drawing.Size(429, 229);
             this.intfaceTab.Text = "接口设置";
             this.intfaceTab.ToolTipTitle = "Page ToolTip";
             this.intfaceTab.UniqueName = "695651D7EF754B2B58965D7533DC0B40";
@@ -696,7 +722,7 @@
             this.kryptonPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel4.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel4.Name = "kryptonPanel4";
-            this.kryptonPanel4.Size = new System.Drawing.Size(429, 209);
+            this.kryptonPanel4.Size = new System.Drawing.Size(429, 229);
             this.kryptonPanel4.TabIndex = 0;
             // 
             // interfacelist
@@ -705,7 +731,7 @@
             this.interfacelist.FormattingEnabled = true;
             this.interfacelist.Location = new System.Drawing.Point(0, 0);
             this.interfacelist.Name = "interfacelist";
-            this.interfacelist.Size = new System.Drawing.Size(429, 209);
+            this.interfacelist.Size = new System.Drawing.Size(429, 229);
             this.interfacelist.TabIndex = 0;
             // 
             // splisttab
@@ -749,21 +775,65 @@
             this.btnSubmit.Values.Text = "提 交";
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
-            // cfg_MaxMarginSide
+            // kryptonGroupBox1
             // 
-            this.cfg_MaxMarginSide.Location = new System.Drawing.Point(17, 117);
-            this.cfg_MaxMarginSide.Name = "cfg_MaxMarginSide";
-            this.cfg_MaxMarginSide.Size = new System.Drawing.Size(73, 20);
-            this.cfg_MaxMarginSide.TabIndex = 5;
-            this.cfg_MaxMarginSide.Values.Text = "单向大边";
+            this.kryptonGroupBox1.Location = new System.Drawing.Point(3, 138);
+            this.kryptonGroupBox1.Name = "kryptonGroupBox1";
             // 
-            // cfg_GrossPositioin
+            // kryptonGroupBox1.Panel
             // 
-            this.cfg_GrossPositioin.Location = new System.Drawing.Point(107, 117);
-            this.cfg_GrossPositioin.Name = "cfg_GrossPositioin";
-            this.cfg_GrossPositioin.Size = new System.Drawing.Size(73, 20);
-            this.cfg_GrossPositioin.TabIndex = 6;
-            this.cfg_GrossPositioin.Values.Text = "支持锁仓";
+            this.kryptonGroupBox1.Panel.Controls.Add(this.cfg_MaxMarginSide);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.cfg_GrossPositioin);
+            this.kryptonGroupBox1.Size = new System.Drawing.Size(423, 87);
+            this.kryptonGroupBox1.TabIndex = 7;
+            this.kryptonGroupBox1.Values.Heading = "全局参数";
+            // 
+            // kryptonGroupBox2
+            // 
+            this.kryptonGroupBox2.Location = new System.Drawing.Point(2, 3);
+            this.kryptonGroupBox2.Name = "kryptonGroupBox2";
+            // 
+            // kryptonGroupBox2.Panel
+            // 
+            this.kryptonGroupBox2.Panel.Controls.Add(this.cfg_followstrategynum);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel21);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.module_follow);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.module_finservice);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.module_agent);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.module_subagent);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.module_slip);
+            this.kryptonGroupBox2.Panel.Controls.Add(this.module_payonline);
+            this.kryptonGroupBox2.Size = new System.Drawing.Size(424, 134);
+            this.kryptonGroupBox2.TabIndex = 8;
+            this.kryptonGroupBox2.Values.Heading = "功能模块";
+            // 
+            // module_follow
+            // 
+            this.module_follow.Location = new System.Drawing.Point(3, 55);
+            this.module_follow.Name = "module_follow";
+            this.module_follow.Size = new System.Drawing.Size(73, 20);
+            this.module_follow.TabIndex = 5;
+            this.module_follow.Values.Text = "跟单模块";
+            // 
+            // kryptonLabel21
+            // 
+            this.kryptonLabel21.Location = new System.Drawing.Point(82, 55);
+            this.kryptonLabel21.Name = "kryptonLabel21";
+            this.kryptonLabel21.Size = new System.Drawing.Size(51, 20);
+            this.kryptonLabel21.TabIndex = 7;
+            this.kryptonLabel21.Values.Text = "策略数:";
+            // 
+            // cfg_followstrategynum
+            // 
+            this.cfg_followstrategynum.Location = new System.Drawing.Point(140, 53);
+            this.cfg_followstrategynum.Name = "cfg_followstrategynum";
+            this.cfg_followstrategynum.Size = new System.Drawing.Size(50, 22);
+            this.cfg_followstrategynum.TabIndex = 8;
+            this.cfg_followstrategynum.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // fmDomainEdit
             // 
@@ -796,7 +866,6 @@
             this.kryptonPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel5)).EndInit();
             this.kryptonPanel5.ResumeLayout(false);
-            this.kryptonPanel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage5)).EndInit();
             this.kryptonPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel6)).EndInit();
@@ -810,6 +879,16 @@
             this.splisttab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel7)).EndInit();
             this.kryptonPanel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).EndInit();
+            this.kryptonGroupBox1.Panel.ResumeLayout(false);
+            this.kryptonGroupBox1.Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
+            this.kryptonGroupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2.Panel)).EndInit();
+            this.kryptonGroupBox2.Panel.ResumeLayout(false);
+            this.kryptonGroupBox2.Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).EndInit();
+            this.kryptonGroupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -878,5 +957,10 @@
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox module_slip;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox cfg_MaxMarginSide;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox cfg_GrossPositioin;
+        private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox1;
+        private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox2;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox module_follow;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel21;
+        private ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown cfg_followstrategynum;
     }
 }
