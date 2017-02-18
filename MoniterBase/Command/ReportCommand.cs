@@ -67,4 +67,18 @@ namespace TradingLib.MoniterBase.Command
             fm.Close();
         }
     }
+
+    /// <summary>
+    /// 查询结算单
+    /// </summary>
+    public class QryFollowExecutioinCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            fmQryFollowExecution fm = new fmQryFollowExecution();
+            fm.ShowDialog();
+            fm.Close();
+        }
+    }
+
 }

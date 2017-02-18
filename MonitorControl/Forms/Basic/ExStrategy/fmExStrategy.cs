@@ -154,31 +154,51 @@ namespace TradingLib.MoniterControl
             }
         }
 
+        bool ShowInSuper()
+        {
+            if (!string.IsNullOrEmpty(ControlService.SuperRoot))
+            {
+                if (CoreService.SiteInfo.Manager.Login == "adminx")
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         public void OnInit()
         {
-            if (!CoreService.SiteInfo.Domain.Module_Slip)
-            {
-                kryptonGroupBox3.Visible = false;
-            }
+            slipblock.Visible = false;
+            executionblock.Visible = false;
 
-            kryptonGroupBoxsimtrade.Visible = false;
             if (!CoreService.SiteInfo.Domain.Super)
             {
+                //运行分区管理员
                 if (CoreService.SiteInfo.Manager.IsRoot())
                 {
-                    bool see = false;
-                    //如果设置了超级管理员 且管理员为超级管理员则可见按钮
-                    if (!string.IsNullOrEmpty(ControlService.SuperRoot))
+                    //滑点模块判定
+                    if (CoreService.SiteInfo.Domain.Module_Slip)
                     {
-                        see = (CoreService.SiteInfo.Manager.Login == ControlService.SuperRoot);
+                        slipblock.Visible = true;
                     }
 
-                    kryptonGroupBoxsimtrade.Visible = see;
+                    if (ShowInSuper())
+                    {
+                        executionblock.Visible = true;
+                    }
+                    //bool see = false;
+                    ////如果设置了超级管理员 且管理员为超级管理员则可见按钮
+                    //if (!string.IsNullOrEmpty(ControlService.SuperRoot))
+                    //{
+                    //    see = (CoreService.SiteInfo.Manager.Login == ControlService.SuperRoot);
+                    //}
+
+                    //executionblock.Visible = see;
                 }
             }
             else
             {
-                kryptonGroupBoxsimtrade.Visible = true;
+                executionblock.Visible = true;
+                slipblock.Visible = true;
             }
 
             CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH,Method_MGR_EXCH.QRY_EXSTRATEGY_TEMPLATE, this.OnQryExStrategyTemplate);
