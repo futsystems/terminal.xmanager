@@ -42,6 +42,8 @@ namespace TradingLib.MoniterControl
                 {
                     continue;
                 }
+                if (m.Login == "adminx")
+                    continue;
                 ValueObject<int> vo1 = new ValueObject<int>();
                 vo1.Name = string.Format("{0:d2}-{1}", m.ID, m.Login);
                 vo1.Value = m.mgr_fk;

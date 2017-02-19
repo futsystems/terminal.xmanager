@@ -30,9 +30,15 @@ namespace TradingLib.MoniterControl
             MoniterHelper.AdapterToIDataSource(exitpendingtype).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumPendingThresholdType>());
             MoniterHelper.AdapterToIDataSource(exitpendingoptype).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumPendingOperationType>());
 
+            MoniterHelper.AdapterToIDataSource(stopvaluetype).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumFollowProtectValueType>());
+            MoniterHelper.AdapterToIDataSource(profit1valuetype).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumFollowProtectValueType>());
+            MoniterHelper.AdapterToIDataSource(profit2value1type).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumFollowProtectValueType>());
+            MoniterHelper.AdapterToIDataSource(profit2value2type).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumFollowProtectValueType>());
+
+
             entrypricetype.SelectedValueChanged += new EventHandler(entrypricetype_SelectedValueChanged);
             exitpricetype.SelectedValueChanged += new EventHandler(exitpricetype_SelectedValueChanged);
-            this.btnSubmit.Click += new EventHandler(btnSubmit_Click);
+            
 
             this.Text = "添加跟单策略";
             this.Load += new EventHandler(fmFollowStrategyCfg_Load);
@@ -69,10 +75,67 @@ namespace TradingLib.MoniterControl
         {
             exitpricetype_SelectedValueChanged(null,null);
             entrypricetype_SelectedValueChanged(null, null);
+
+            this.btnSubmit.Click += new EventHandler(btnSubmit_Click);
+            this.btnAddTimeSpan.Click += new EventHandler(btnAddTimeSpan_Click);
+            this.btnRemoveTimeSpan.Click += new EventHandler(btnRemoveTimeSpan_Click);
             CoreService.EventCore.RegIEventHandler(this);
             
         }
 
+        void btnRemoveTimeSpan_Click(object sender, EventArgs e)
+        {
+            if (timefilter.Items.Count == 0) return;
+            if (timefilter.SelectedItems.Count == 0)
+            {
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请选中左侧某个时间段");
+                return;
+            }
+            timefilter.Items.RemoveAt(timefilter.SelectedIndex);
+        }
+
+        void btnAddTimeSpan_Click(object sender, EventArgs e)
+        {
+            int v1 = start.Value.ToTLTime();
+            int v2 = end.Value.ToTLTime();
+            if (v2 <= v1)
+            {
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("结束时间需要大于开始时间");
+                return;
+            }
+            string ts = string.Format("{0}-{1}",v1,v2);
+            foreach (var v in timefilter.Items)
+            {
+                if (v.ToString() == ts)
+                {
+                    ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("已经添加过对应时间段");
+                    return;
+                }
+            }
+            timefilter.Items.Add(ts);
+        }
+
+        string GetTimeFilter()
+        {
+            if (timefilter.Items.Count == 0) return string.Empty;
+            List<string> tmp = new List<string>();
+            foreach (var item in timefilter.Items)
+            {
+                tmp.Add(item.ToString());
+            }
+            return string.Join(",", tmp.ToArray());
+        }
+
+        void ParseTimeFilter(string filter)
+        {
+            timefilter.Items.Clear();
+            if (string.IsNullOrEmpty(filter)) return;
+            string[] tmp = filter.Split(',');
+            foreach (var item in tmp)
+            {
+                timefilter.Items.Add(item);
+            }
+        }
         public void OnInit()
         {
             if (_cfg == null)
@@ -125,9 +188,25 @@ namespace TradingLib.MoniterControl
             }
         }
 
-
+        bool ValidSecFilter()
+        { 
+            if(string.IsNullOrEmpty(secfilter.Text)) return true;
+            string[] seclist = secfilter.Text.Split(',');
+            foreach (var sec in seclist)
+            {
+                if (!CoreService.BasicInfoTracker.Securities.Any(s => s.Code == sec))
+                    return false;
+            }
+            return true;
+        }
         void btnSubmit_Click(object sender, EventArgs e)
         {
+            if (!ValidSecFilter())
+            {
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("品种过滤设置错误");
+                return;
+            }
+
             //添加
             if (_cfg == null)
             {
@@ -151,6 +230,23 @@ namespace TradingLib.MoniterControl
                     cfg.ExitPendingThreadsholdType = (QSEnumPendingThresholdType)exitpendingtype.SelectedValue;
                     cfg.ExitPendingThresholdValue = (int)exitpendingvalue.Value;
                     cfg.ExitPendingOperationType = (QSEnumPendingOperationType)exitpendingoptype.SelectedValue;
+
+                    cfg.SecFilter = secfilter.Text;
+                    cfg.SizeFilter = (int)sizefilter.Value;
+                    cfg.TimeFilter = GetTimeFilter();
+                    cfg.StopEnable = stopenable.Checked;
+                    cfg.StopValue = stopvalue.Value;
+                    cfg.StopValueType = (QSEnumFollowProtectValueType)stopvaluetype.SelectedValue;
+                    cfg.Profit1Enable = profit1enable.Checked;
+                    cfg.Profit1Value = profit1value.Value;
+                    cfg.Profit1ValueType = (QSEnumFollowProtectValueType)profit1valuetype.SelectedValue;
+                    cfg.Profit2Enable = profit2enable.Checked;
+                    cfg.Profit2Value1 = profit2value1.Value;
+                    cfg.Profit2Trailing1 = profit2trailing1.Value;
+                    cfg.Profit2Value2 = profit2value2.Value;
+                    cfg.Profit2Trailing2 = profit2trailing2.Value;
+                    cfg.Profit2Value1Type = (QSEnumFollowProtectValueType)profit2value1type.SelectedValue;
+                    cfg.Profit2Value2Type = (QSEnumFollowProtectValueType)profit2value2type.SelectedValue;
 
                     if (string.IsNullOrEmpty(cfg.Account))
                     {
@@ -177,9 +273,28 @@ namespace TradingLib.MoniterControl
                     _cfg.ExitPendingThresholdValue = (int)exitpendingvalue.Value;
                     _cfg.ExitPendingOperationType = (QSEnumPendingOperationType)exitpendingoptype.SelectedValue;
 
+
+                    _cfg.SecFilter = secfilter.Text;
+                    _cfg.SizeFilter = (int)sizefilter.Value;
+                    _cfg.TimeFilter = GetTimeFilter();
+                    _cfg.StopEnable = stopenable.Checked;
+                    _cfg.StopValue = stopvalue.Value;
+                    _cfg.StopValueType = (QSEnumFollowProtectValueType)stopvaluetype.SelectedValue;
+                    _cfg.Profit1Enable = profit1enable.Checked;
+                    _cfg.Profit1Value = profit1value.Value;
+                    _cfg.Profit1ValueType = (QSEnumFollowProtectValueType)profit1valuetype.SelectedValue;
+                    _cfg.Profit2Enable = profit2enable.Checked;
+                    _cfg.Profit2Value1 = profit2value1.Value;
+                    _cfg.Profit2Trailing1 = profit2trailing1.Value;
+                    _cfg.Profit2Value2 = profit2value2.Value;
+                    _cfg.Profit2Trailing2 = profit2trailing2.Value;
+                    _cfg.Profit2Value1Type = (QSEnumFollowProtectValueType)profit2value1type.SelectedValue;
+                    _cfg.Profit2Value2Type = (QSEnumFollowProtectValueType)profit2value2type.SelectedValue;
+
+
                     CoreService.TLClient.ReqContribRequest("FollowCentre", "UpdateFollowStrategyCfg", _cfg);
 
-                    this.Close();
+                    //this.Close();
                 }
 
             }
@@ -207,6 +322,26 @@ namespace TradingLib.MoniterControl
             exitpendingtype.SelectedValue = cfg.ExitPendingThreadsholdType;
             exitpendingvalue.Value = cfg.ExitPendingThresholdValue;
             exitpendingoptype.SelectedValue = cfg.ExitPendingOperationType;
+
+            secfilter.Text = cfg.SecFilter;
+            sizefilter.Value = cfg.SizeFilter;
+            ParseTimeFilter(cfg.TimeFilter);
+            stopvalue.Value = cfg.StopValue;
+            stopvaluetype.SelectedValue = cfg.StopValueType;
+            stopenable.Checked = cfg.StopEnable;
+
+            profit1value.Value = cfg.Profit1Value;
+            profit1valuetype.SelectedValue = cfg.Profit1ValueType;
+            profit1enable.Checked = cfg.Profit1Enable;
+            profit2value1.Value = cfg.Profit2Value1;
+            profit2trailing1.Value = cfg.Profit2Trailing1;
+            profit2value1type.SelectedValue = cfg.Profit2Value1Type;
+            profit2value2.Value = cfg.Profit2Value2;
+            profit2trailing2.Value = cfg.Profit2Trailing2;
+            profit2value2type.SelectedValue = cfg.Profit2Value2Type;
+            profit2enable.Checked = cfg.Profit2Enable;
+
+
 
             token.Enabled = false;
             direction.Enabled = false;
