@@ -36,29 +36,29 @@ namespace TradingLib.MoniterControl
             cbMarginTemplate.Enabled = CoreService.SiteInfo.UIAccess.r_margin;
             cbExStrategyTemplate.Enabled = CoreService.SiteInfo.UIAccess.r_exstrategy;
 
-            CoreService.EventCore.RegisterCallback("MgrExchServer", "QryCommissionTemplate", this.OnQryCommissionTemplate);
-            CoreService.EventCore.RegisterCallback("MgrExchServer", "QryMarginTemplate", this.OnQryMarginTemplate);
-            CoreService.EventCore.RegisterCallback("MgrExchServer", "QryExStrategyTemplate", this.OnQryExStrategyTemplate);
+            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_COMMISSION_TEMPLATE, this.OnQryCommissionTemplate);
+            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_MARGIN_TEMPLATE, this.OnQryMarginTemplate);
+            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_EXSTRATEGY_TEMPLATE, this.OnQryExStrategyTemplate);
             if (CoreService.SiteInfo.UIAccess.r_commission)
             {
                 CoreService.TLClient.ReqQryCommissionTemplate();
             }
-            if (CoreService.SiteInfo.UIAccess.r_margin)
-            {
-                CoreService.TLClient.ReqQryMarginTemplate();
-            }
-            if (CoreService.SiteInfo.UIAccess.r_exstrategy)
-            {
-                CoreService.TLClient.ReqQryExStrategyTemplate();
-            }
+            //if (CoreService.SiteInfo.UIAccess.r_margin)
+            //{
+            //    CoreService.TLClient.ReqQryMarginTemplate();
+            //}
+            //if (CoreService.SiteInfo.UIAccess.r_exstrategy)
+            //{
+            //    CoreService.TLClient.ReqQryExStrategyTemplate();
+            //}
 
         }
 
         public void OnDisposed()
         {
-            CoreService.EventCore.UnRegisterCallback("MgrExchServer", "QryCommissionTemplate", this.OnQryCommissionTemplate);
-            CoreService.EventCore.UnRegisterCallback("MgrExchServer", "QryMarginTemplate", this.OnQryMarginTemplate);
-            CoreService.EventCore.UnRegisterCallback("MgrExchServer", "QryExStrategyTemplate", this.OnQryExStrategyTemplate);
+            CoreService.EventCore.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_COMMISSION_TEMPLATE, this.OnQryCommissionTemplate);
+            CoreService.EventCore.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_MARGIN_TEMPLATE, this.OnQryMarginTemplate);
+            CoreService.EventCore.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_EXSTRATEGY_TEMPLATE, this.OnQryExStrategyTemplate);
 
         }
 
@@ -73,45 +73,59 @@ namespace TradingLib.MoniterControl
             return false;
         }
 
-
+        List<CommissionTemplateSetting> commissionList = new List<CommissionTemplateSetting>();
         void OnQryCommissionTemplate(string json, bool islast)
         {
-            CommissionTemplateSetting[] list = CoreService.ParseJsonResponse<CommissionTemplateSetting[]>(json);
-            if (list != null)
+            CommissionTemplateSetting item = CoreService.ParseJsonResponse<CommissionTemplateSetting>(json);
+            if (item != null)
             {
-                MoniterHelper.AdapterToIDataSource(cbCommissionTemplate).BindDataSource(GetCommissionTemplateCBList(list));
+                commissionList.Add(item);
+            }
+            if (islast)
+            {
+                MoniterHelper.AdapterToIDataSource(cbCommissionTemplate).BindDataSource(GetCommissionTemplateCBList(commissionList));
                 int commissoinid = AnyMathItem(cbCommissionTemplate, _account.Commissin_ID) ? _account.Commissin_ID : 0;
                 cbCommissionTemplate.SelectedValue = commissoinid;
             }
         }
 
 
-
+        List<MarginTemplateSetting> marginList = new List<MarginTemplateSetting>();
         void OnQryMarginTemplate(string json, bool islast)
         {
-            MarginTemplateSetting[] list = CoreService.ParseJsonResponse<MarginTemplateSetting[]>(json);
-            if (list != null)
+            MarginTemplateSetting item = CoreService.ParseJsonResponse<MarginTemplateSetting>(json);
+            if (item != null)
             {
-                MoniterHelper.AdapterToIDataSource(cbMarginTemplate).BindDataSource(GetMarginTemplateCBList(list));
+                marginList.Add(item);
+                
+            }
+            if (islast)
+            {
+                MoniterHelper.AdapterToIDataSource(cbMarginTemplate).BindDataSource(GetMarginTemplateCBList(marginList));
                 int marginid = AnyMathItem(cbMarginTemplate, _account.Margin_ID) ? _account.Margin_ID : 0;
                 cbMarginTemplate.SelectedValue = marginid;
             }
         }
 
 
-
+        List<ExStrategyTemplateSetting> strategyList = new List<ExStrategyTemplateSetting>();
         void OnQryExStrategyTemplate(string json, bool islast)
         {
-            ExStrategyTemplateSetting[] list = CoreService.ParseJsonResponse<ExStrategyTemplateSetting[]>(json);
-            if (list != null)
+            ExStrategyTemplateSetting item= CoreService.ParseJsonResponse<ExStrategyTemplateSetting>(json);
+            if (item != null)
             {
-                MoniterHelper.AdapterToIDataSource(cbExStrategyTemplate).BindDataSource(GetExStrategyTemplateCBList(list));
+                strategyList.Add(item);
+            }
+            if (islast)
+            {
+                MoniterHelper.AdapterToIDataSource(cbExStrategyTemplate).BindDataSource(GetExStrategyTemplateCBList(strategyList));
                 int strategyid = AnyMathItem(cbExStrategyTemplate, _account.ExStrategy_ID) ? _account.ExStrategy_ID : 0;
                 cbExStrategyTemplate.SelectedValue = strategyid;
+                
             }
         }
 
-        static ArrayList GetExStrategyTemplateCBList(ExStrategyTemplateSetting[] items)
+        static ArrayList GetExStrategyTemplateCBList(List<ExStrategyTemplateSetting> items)
         {
             ArrayList list = new ArrayList();
             ValueObject<int> vo1 = new ValueObject<int>();
@@ -128,7 +142,7 @@ namespace TradingLib.MoniterControl
             }
             return list;
         }
-        static ArrayList GetMarginTemplateCBList(MarginTemplateSetting[] items)
+        static ArrayList GetMarginTemplateCBList(List<MarginTemplateSetting> items)
         {
             ArrayList list = new ArrayList();
             ValueObject<int> vo1 = new ValueObject<int>();
@@ -145,7 +159,7 @@ namespace TradingLib.MoniterControl
             }
             return list;
         }
-        static ArrayList GetCommissionTemplateCBList(CommissionTemplateSetting[] items)
+        static ArrayList GetCommissionTemplateCBList(List<CommissionTemplateSetting> items)
         {
             ArrayList list = new ArrayList();
             ValueObject<int> vo1 = new ValueObject<int>();

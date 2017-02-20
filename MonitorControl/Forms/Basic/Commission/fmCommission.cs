@@ -370,14 +370,11 @@ namespace TradingLib.MoniterControl
         {
             try
             {
-                CommissionTemplateSetting[] list = CoreService.ParseJsonResponse<CommissionTemplateSetting[]>(json);
-                if (list != null)
+                CommissionTemplateSetting item = CoreService.ParseJsonResponse<CommissionTemplateSetting>(json);
+                if (item != null)
                 {
-                    foreach (CommissionTemplateSetting t in list)
-                    {
-                        templatemap.Add(t.ID, t);
-                        InvokeGotCommissiontTemplateItem(t);
-                    }
+                    templatemap.Add(item.ID, item);
+                    InvokeGotCommissiontTemplateItem(item);
                 }
                 if (islast)
                 {

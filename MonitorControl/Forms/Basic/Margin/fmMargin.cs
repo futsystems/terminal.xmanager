@@ -311,14 +311,11 @@ namespace TradingLib.MoniterControl
         Dictionary<int, MarginTemplateSetting> templatemap = new Dictionary<int, MarginTemplateSetting>();
         void OnQryMarginTemplate(string json, bool islast)
         {
-            MarginTemplateSetting[] list = CoreService.ParseJsonResponse<MarginTemplateSetting[]>(json);
-            if (list != null)
+            MarginTemplateSetting item = CoreService.ParseJsonResponse<MarginTemplateSetting>(json);
+            if (item != null)
             {
-                foreach (MarginTemplateSetting t in list)
-                {
-                    templatemap.Add(t.ID, t);
-                    InvokeGotMarginTemplate(t);
-                }
+                templatemap.Add(item.ID, item);
+                InvokeGotMarginTemplate(item);
             }
             if (islast)
             {

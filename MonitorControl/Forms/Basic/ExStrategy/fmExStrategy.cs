@@ -290,14 +290,11 @@ namespace TradingLib.MoniterControl
         Dictionary<int, ExStrategyTemplateSetting> templatemap = new Dictionary<int, ExStrategyTemplateSetting>();
         void OnQryExStrategyTemplate(string json, bool islast)
         {
-            ExStrategyTemplateSetting[] list = CoreService.ParseJsonResponse<ExStrategyTemplateSetting[]>(json);
-            if (list != null)
+            ExStrategyTemplateSetting item = CoreService.ParseJsonResponse<ExStrategyTemplateSetting>(json);
+            if (item != null)
             {
-                foreach (ExStrategyTemplateSetting t in list)
-                {
-                    templatemap.Add(t.ID, t);
-                    InvokeGotExStrategyTemplate(t);
-                }
+                templatemap.Add(item.ID, item);
+                InvokeGotExStrategyTemplate(item);
             }
 
             if (islast)
