@@ -1,6 +1,6 @@
 ﻿namespace TradingLib.MoniterControl
 {
-    partial class fmOrderRule_TimeFilter
+    partial class fmOrderRule_TimeFilter2
     {
         /// <summary>
         /// Required designer variable.
@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.seclist = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.lbDesp = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnRemoveTimeSpan = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btnAddTimeSpan = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.end = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
+            this.seclist = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.start = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
+            this.lbDesp = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.timefilter = new ComponentFactory.Krypton.Toolkit.KryptonListBox();
             this.kryptonLabel17 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -63,47 +63,6 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(436, 293);
             this.kryptonPanel1.TabIndex = 0;
             // 
-            // kryptonLabel4
-            // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(31, 199);
-            this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(228, 20);
-            this.kryptonLabel4.TabIndex = 19;
-            this.kryptonLabel4.Values.Text = "品种列表,用逗号分隔,注意大小写与逗号";
-            // 
-            // kryptonLabel2
-            // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(12, 124);
-            this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(60, 20);
-            this.kryptonLabel2.TabIndex = 18;
-            this.kryptonLabel2.Values.Text = "品种列表";
-            // 
-            // seclist
-            // 
-            this.seclist.Location = new System.Drawing.Point(76, 124);
-            this.seclist.Multiline = true;
-            this.seclist.Name = "seclist";
-            this.seclist.Size = new System.Drawing.Size(181, 69);
-            this.seclist.TabIndex = 17;
-            // 
-            // lbDesp
-            // 
-            this.lbDesp.Location = new System.Drawing.Point(12, 228);
-            this.lbDesp.Name = "lbDesp";
-            this.lbDesp.Size = new System.Drawing.Size(20, 20);
-            this.lbDesp.TabIndex = 9;
-            this.lbDesp.Values.Text = "--";
-            // 
-            // btnSubmit
-            // 
-            this.btnSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSubmit.Location = new System.Drawing.Point(357, 256);
-            this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(67, 25);
-            this.btnSubmit.TabIndex = 8;
-            this.btnSubmit.Values.Text = "提 交";
-            // 
             // btnRemoveTimeSpan
             // 
             this.btnRemoveTimeSpan.Location = new System.Drawing.Point(269, 62);
@@ -112,6 +71,14 @@
             this.btnRemoveTimeSpan.TabIndex = 41;
             this.btnRemoveTimeSpan.Values.Text = "删 除";
             // 
+            // kryptonLabel4
+            // 
+            this.kryptonLabel4.Location = new System.Drawing.Point(31, 199);
+            this.kryptonLabel4.Name = "kryptonLabel4";
+            this.kryptonLabel4.Size = new System.Drawing.Size(228, 20);
+            this.kryptonLabel4.TabIndex = 19;
+            this.kryptonLabel4.Values.Text = "品种列表,用逗号分隔,注意大小写与逗号";
+            // 
             // btnAddTimeSpan
             // 
             this.btnAddTimeSpan.Location = new System.Drawing.Point(350, 62);
@@ -119,6 +86,14 @@
             this.btnAddTimeSpan.Size = new System.Drawing.Size(70, 25);
             this.btnAddTimeSpan.TabIndex = 36;
             this.btnAddTimeSpan.Values.Text = "添 加";
+            // 
+            // kryptonLabel2
+            // 
+            this.kryptonLabel2.Location = new System.Drawing.Point(12, 124);
+            this.kryptonLabel2.Name = "kryptonLabel2";
+            this.kryptonLabel2.Size = new System.Drawing.Size(60, 20);
+            this.kryptonLabel2.TabIndex = 18;
+            this.kryptonLabel2.Values.Text = "品种列表";
             // 
             // end
             // 
@@ -130,6 +105,14 @@
             this.end.Size = new System.Drawing.Size(86, 21);
             this.end.TabIndex = 40;
             // 
+            // seclist
+            // 
+            this.seclist.Location = new System.Drawing.Point(76, 124);
+            this.seclist.Multiline = true;
+            this.seclist.Name = "seclist";
+            this.seclist.Size = new System.Drawing.Size(181, 69);
+            this.seclist.TabIndex = 17;
+            // 
             // start
             // 
             this.start.CustomFormat = "HH:mm:ss";
@@ -139,6 +122,14 @@
             this.start.ShowUpDown = true;
             this.start.Size = new System.Drawing.Size(86, 21);
             this.start.TabIndex = 39;
+            // 
+            // lbDesp
+            // 
+            this.lbDesp.Location = new System.Drawing.Point(12, 228);
+            this.lbDesp.Name = "lbDesp";
+            this.lbDesp.Size = new System.Drawing.Size(20, 20);
+            this.lbDesp.TabIndex = 9;
+            this.lbDesp.Values.Text = "--";
             // 
             // timefilter
             // 
@@ -155,7 +146,16 @@
             this.kryptonLabel17.TabIndex = 37;
             this.kryptonLabel17.Values.Text = "时间段";
             // 
-            // fmOrderRule_TimeFilter
+            // btnSubmit
+            // 
+            this.btnSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSubmit.Location = new System.Drawing.Point(357, 256);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(67, 25);
+            this.btnSubmit.TabIndex = 8;
+            this.btnSubmit.Values.Text = "提 交";
+            // 
+            // fmOrderRule_TimeFilter2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -164,9 +164,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "fmOrderRule_TimeFilter";
+            this.Name = "fmOrderRule_TimeFilter2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "时间段内允许开仓";
+            this.Text = "时间段内禁止开仓";
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();

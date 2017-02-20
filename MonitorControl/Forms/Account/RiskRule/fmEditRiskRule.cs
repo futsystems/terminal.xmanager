@@ -287,6 +287,14 @@ namespace TradingLib.MoniterControl
                     fm.ShowDialog();
                     fm.Close();
                 }
+                if (item.ClassName.Equals("RuleSet2.Order.RSTimeFilter2"))
+                {
+                    fmOrderRule_TimeFilter2 fm = new fmOrderRule_TimeFilter2();
+                    fm.Account = _account;
+                    fm.RuleClass = item;
+                    fm.ShowDialog();
+                    fm.Close();
+                }
             }
         }
 
