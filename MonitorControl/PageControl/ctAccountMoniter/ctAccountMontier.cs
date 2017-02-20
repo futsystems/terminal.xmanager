@@ -32,6 +32,7 @@ namespace TradingLib.MoniterControl
                 BindToTable();
                 filterBox = new ctAccountFilter();
                 filterBox.FilterArgsChanged += new Action<FilterArgs>(OnFilterArgsChanged);
+                filterBox.DebugEvent += new VoidDelegate(filterBox_DebugEvent);
                 this.FilterToolBar = filterBox;
                
 
@@ -42,6 +43,18 @@ namespace TradingLib.MoniterControl
                 MessageBox.Show("error ex:" + ex.ToString());
             }
             
+        }
+
+        void filterBox_DebugEvent()
+        {
+            int accCnt = accountmap.Count;
+            int rowCnt = accountrowmap.Count;
+            int tableRowCnt = gt.Rows.Count;
+            int gridCnt = accountgrid.RowCount;
+            
+
+            MessageBox.Show(string.Format("账户:{0} 行:{1} 表:{2} 表格显示:{3} 过滤:{4}", accCnt, rowCnt, tableRowCnt, gridCnt, datasource.Filter));
+            datasource.Filter = "";
         }
 
        

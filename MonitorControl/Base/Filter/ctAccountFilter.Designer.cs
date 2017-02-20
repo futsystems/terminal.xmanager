@@ -37,6 +37,7 @@
             this.accountType = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.tbMemo = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.btnDebug = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.accountType)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,11 +112,22 @@
             this.kryptonLabel2.TabIndex = 7;
             this.kryptonLabel2.Values.Text = "备注";
             // 
+            // btnDebug
+            // 
+            this.btnDebug.Location = new System.Drawing.Point(579, 0);
+            this.btnDebug.Name = "btnDebug";
+            this.btnDebug.Size = new System.Drawing.Size(75, 23);
+            this.btnDebug.TabIndex = 9;
+            this.btnDebug.Text = "测试";
+            this.btnDebug.UseVisualStyleBackColor = true;
+            this.btnDebug.Visible = false;
+            // 
             // ctAccountFilter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.btnDebug);
             this.Controls.Add(this.tbMemo);
             this.Controls.Add(this.kryptonLabel2);
             this.Controls.Add(this.accountType);
@@ -144,5 +156,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox accountType;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox tbMemo;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
+        private System.Windows.Forms.Button btnDebug;
     }
 }

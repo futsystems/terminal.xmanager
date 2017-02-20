@@ -15,28 +15,7 @@ namespace TradingLib.MoniterControl
         /// <param name="filterArgs"></param>
         void FilterAccount(FilterArgs filterArgs)
         {
-            string strFilter = string.Empty;
-
-            string acctype = string.Empty;
-            //if (!filterArgs.AcctTypeEnable)
-            //{
-                acctype = "*";
-            //}
-            //else
-            //{
-            //    acctype = filterArgs.AcctType.ToString();
-            //}
-            ////帐户类别
-            //if (!filterArgs.AcctTypeEnable)
-            //{
-                strFilter = string.Format(CATEGORY + " > '{0}'", acctype);
-            //}
-            //else
-            //{
-                //strFilter = string.Format(CATEGORY + " = '{0}'", acctype);
-            //}
-
-            strFilter = string.Format(strFilter + " and " + DELETE + " ='{0}'", false);
+            string strFilter = string.Format(DELETE + " ='{0}'", false);
 
             if (filterArgs != null)
             {
