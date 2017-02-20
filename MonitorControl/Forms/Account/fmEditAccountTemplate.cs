@@ -43,14 +43,14 @@ namespace TradingLib.MoniterControl
             {
                 CoreService.TLClient.ReqQryCommissionTemplate();
             }
-            //if (CoreService.SiteInfo.UIAccess.r_margin)
-            //{
-            //    CoreService.TLClient.ReqQryMarginTemplate();
-            //}
-            //if (CoreService.SiteInfo.UIAccess.r_exstrategy)
-            //{
-            //    CoreService.TLClient.ReqQryExStrategyTemplate();
-            //}
+            if (CoreService.SiteInfo.UIAccess.r_margin)
+            {
+                CoreService.TLClient.ReqQryMarginTemplate();
+            }
+            if (CoreService.SiteInfo.UIAccess.r_exstrategy)
+            {
+                CoreService.TLClient.ReqQryExStrategyTemplate();
+            }
 
         }
 
