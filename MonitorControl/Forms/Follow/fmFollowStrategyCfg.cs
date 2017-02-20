@@ -38,10 +38,32 @@ namespace TradingLib.MoniterControl
 
             entrypricetype.SelectedValueChanged += new EventHandler(entrypricetype_SelectedValueChanged);
             exitpricetype.SelectedValueChanged += new EventHandler(exitpricetype_SelectedValueChanged);
-            
 
+            
             this.Text = "添加跟单策略";
             this.Load += new EventHandler(fmFollowStrategyCfg_Load);
+        }
+
+        void profit2enable_CheckedChanged(object sender, EventArgs e)
+        {
+            profit2value1.Enabled = profit2enable.Checked;
+            profit2trailing1.Enabled = profit2enable.Checked;
+            profit2value1type.Enabled = profit2enable.Checked;
+            profit2value2.Enabled = profit2enable.Checked;
+            profit2trailing2.Enabled = profit2enable.Checked;
+            profit2value2type.Enabled = profit2enable.Checked;
+        }
+
+        void profit1enable_CheckedChanged(object sender, EventArgs e)
+        {
+            profit1value.Enabled = profit1enable.Checked;
+            profit1valuetype.Enabled = profit1enable.Checked;
+        }
+
+        void stopenable_CheckedChanged(object sender, EventArgs e)
+        {
+            stopvalue.Enabled = stopenable.Checked;
+            stopvaluetype.Enabled = stopenable.Checked;
         }
 
         void exitpricetype_SelectedValueChanged(object sender, EventArgs e)
@@ -76,11 +98,96 @@ namespace TradingLib.MoniterControl
             exitpricetype_SelectedValueChanged(null,null);
             entrypricetype_SelectedValueChanged(null, null);
 
+            this.stopvaluetype.SelectedIndexChanged += new EventHandler(stopvaluetype_SelectedIndexChanged);
+            this.profit1valuetype.SelectedIndexChanged += new EventHandler(profit1valuetype_SelectedIndexChanged);
+            this.profit2value1type.SelectedIndexChanged += new EventHandler(profit2value1type_SelectedIndexChanged);
+            this.profit2value2type.SelectedIndexChanged += new EventHandler(profit2value2type_SelectedIndexChanged);
+
+            this.stopenable.CheckedChanged += new EventHandler(stopenable_CheckedChanged);
+            this.profit1enable.CheckedChanged += new EventHandler(profit1enable_CheckedChanged);
+            this.profit2enable.CheckedChanged += new EventHandler(profit2enable_CheckedChanged);
+
             this.btnSubmit.Click += new EventHandler(btnSubmit_Click);
             this.btnAddTimeSpan.Click += new EventHandler(btnAddTimeSpan_Click);
             this.btnRemoveTimeSpan.Click += new EventHandler(btnRemoveTimeSpan_Click);
+
+            
             CoreService.EventCore.RegIEventHandler(this);
             
+        }
+
+        void profit2value2type_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            profit2value2.Value = 0;
+            profit2trailing2.Value = 0;
+            QSEnumFollowProtectValueType valueType = (QSEnumFollowProtectValueType)profit2value2type.SelectedValue;
+            if (valueType == QSEnumFollowProtectValueType.Point)
+            {
+                profit2value2.Maximum = 1000;
+                profit2value2.DecimalPlaces = 0;
+                profit2trailing2.Maximum = 1000;
+                profit2trailing2.DecimalPlaces = 0;
+            }
+            else
+            {
+                profit2value2.Maximum = 100;
+                profit2value2.DecimalPlaces = 2;
+                profit2trailing2.Maximum = 100;
+                profit2trailing2.DecimalPlaces = 2;
+            }
+        }
+
+        void profit2value1type_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            profit2value1.Value = 0;
+            profit2trailing1.Value = 0;
+            QSEnumFollowProtectValueType valueType = (QSEnumFollowProtectValueType)profit2value1type.SelectedValue;
+            if (valueType == QSEnumFollowProtectValueType.Point)
+            {
+                profit2value1.Maximum = 1000;
+                profit2value1.DecimalPlaces = 0;
+                profit2trailing1.Maximum = 1000;
+                profit2trailing1.DecimalPlaces = 0;
+            }
+            else
+            {
+                profit2value1.Maximum = 100;
+                profit2value1.DecimalPlaces = 2;
+                profit2trailing1.Maximum = 100;
+                profit2trailing1.DecimalPlaces = 2;
+            }
+        }
+
+        void profit1valuetype_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            profit1value.Value = 0;
+            QSEnumFollowProtectValueType valueType = (QSEnumFollowProtectValueType)profit1valuetype.SelectedValue;
+            if (valueType == QSEnumFollowProtectValueType.Point)
+            {
+                profit1value.Maximum = 1000;
+                profit1value.DecimalPlaces = 0;
+            }
+            else
+            {
+                profit1value.Maximum = 100;
+                profit1value.DecimalPlaces = 2;
+            }
+        }
+
+        void stopvaluetype_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            stopvalue.Value = 0;
+            QSEnumFollowProtectValueType valueType = (QSEnumFollowProtectValueType)stopvaluetype.SelectedValue;
+            if (valueType == QSEnumFollowProtectValueType.Point)
+            {
+                stopvalue.Maximum = 1000;
+                stopvalue.DecimalPlaces = 0;
+            }
+            else
+            {
+                stopvalue.Maximum = 100;
+                stopvalue.DecimalPlaces = 2;
+            }
         }
 
         void btnRemoveTimeSpan_Click(object sender, EventArgs e)
@@ -261,6 +368,7 @@ namespace TradingLib.MoniterControl
             {
                 if (MoniterHelper.WindowConfirm("确认更新跟单策略参数?") == System.Windows.Forms.DialogResult.Yes)
                 {
+                    _cfg.FollowPower = (int)power.Value;
                     _cfg.EntryPriceType = (QSEnumFollowPriceType)entrypricetype.SelectedValue;
                     _cfg.EntryOffsetTicks = (int)entrypricetickoffset.Value;
                     _cfg.EntryPendingThresholdType = (QSEnumPendingThresholdType)entrypendingtype.SelectedValue;
@@ -326,21 +434,30 @@ namespace TradingLib.MoniterControl
             secfilter.Text = cfg.SecFilter;
             sizefilter.Value = cfg.SizeFilter;
             ParseTimeFilter(cfg.TimeFilter);
-            stopvalue.Value = cfg.StopValue;
             stopvaluetype.SelectedValue = cfg.StopValueType;
+            stopvaluetype_SelectedIndexChanged(null, null);
+            stopvalue.Value = cfg.StopValue;
             stopenable.Checked = cfg.StopEnable;
+            stopenable_CheckedChanged(null, null);
 
-            profit1value.Value = cfg.Profit1Value;
             profit1valuetype.SelectedValue = cfg.Profit1ValueType;
+            profit1valuetype_SelectedIndexChanged(null, null);
+            profit1value.Value = cfg.Profit1Value;
             profit1enable.Checked = cfg.Profit1Enable;
+            profit1enable_CheckedChanged(null, null);
+
+            profit2value1type.SelectedValue = cfg.Profit2Value1Type;
+            profit2value1type_SelectedIndexChanged(null, null);
             profit2value1.Value = cfg.Profit2Value1;
             profit2trailing1.Value = cfg.Profit2Trailing1;
-            profit2value1type.SelectedValue = cfg.Profit2Value1Type;
+
+            profit2value2type.SelectedValue = cfg.Profit2Value2Type;
+            profit2value2type_SelectedIndexChanged(null, null);
             profit2value2.Value = cfg.Profit2Value2;
             profit2trailing2.Value = cfg.Profit2Trailing2;
-            profit2value2type.SelectedValue = cfg.Profit2Value2Type;
+            
             profit2enable.Checked = cfg.Profit2Enable;
-
+            profit2enable_CheckedChanged(null, null);
 
 
             token.Enabled = false;
