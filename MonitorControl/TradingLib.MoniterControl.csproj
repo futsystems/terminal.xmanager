@@ -547,6 +547,25 @@
     <Compile Include="Forms\Follow\fmQryFollowExecution.Designer.cs">
       <DependentUpon>fmQryFollowExecution.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\PaymentGateWay\ctGateWayBaoFu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\PaymentGateWay\ctGateWayBaoFu.Designer.cs">
+      <DependentUpon>ctGateWayBaoFu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PaymentGateWay\fmPaymentGateway.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PaymentGateWay\fmPaymentGateway.Designer.cs">
+      <DependentUpon>fmPaymentGateway.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PaymentGateWay\IGateWayControl.cs" />
+    <Compile Include="Forms\PaymentGateWay\ctGateWayAliPay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\PaymentGateWay\ctGateWayAliPay.Designer.cs">
+      <DependentUpon>ctGateWayAliPay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\System\Domain\fmDomain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1083,6 +1102,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Follow\fmQryFollowExecution.resx">
       <DependentUpon>fmQryFollowExecution.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PaymentGateWay\ctGateWayBaoFu.resx">
+      <DependentUpon>ctGateWayBaoFu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PaymentGateWay\fmPaymentGateway.resx">
+      <DependentUpon>fmPaymentGateway.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PaymentGateWay\ctGateWayAliPay.resx">
+      <DependentUpon>ctGateWayAliPay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\System\Domain\fmDomain.resx">
       <DependentUpon>fmDomain.cs</DependentUpon>

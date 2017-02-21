@@ -77,7 +77,6 @@
       </MenuItem>
     </Condition>
 
-    <Condition name="DeployState" deploy="s">
       <Condition name="ProductState" product="*">
         <MenuItem id = "FinManager"
                   type = "Menu"
@@ -85,7 +84,6 @@
           <Include id = "FinManager" path = "/Workspace/FinManager"/>
         </MenuItem>
       </Condition>
-    </Condition>
     
 
     <MenuItem id = "Help"
@@ -329,7 +327,11 @@
               label = "收费管理"
               class = "TradingLib.MoniterBase.Command.FeeManagerCommand"/>
     </Condition>
-
+    <Condition name="ModuleState" module="payonline" >
+      <MenuItem id = "PayGateWayCommand"
+              label = "支付通道"
+              class = "TradingLib.MoniterBase.Command.PayGateWayCommand"/>
+    </Condition>
   </Path>
 
   

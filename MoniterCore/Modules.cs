@@ -42,6 +42,8 @@ namespace TradingLib.MoniterCore
         public const string SettleCentre = "SettleCentre";
 
         public const string Follow = "FollowCentre";
+
+        public const string APIService = "APIService";
     }
 
 

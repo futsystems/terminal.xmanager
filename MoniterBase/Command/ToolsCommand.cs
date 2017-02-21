@@ -70,4 +70,14 @@ namespace TradingLib.MoniterBase.Command
             fm.Close();
         }
     }
+
+    public class PayGateWayCommand: AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            fmPaymentGateway fm = new fmPaymentGateway();
+            fm.ShowDialog();
+            fm.Close();
+        }
+    }
 }

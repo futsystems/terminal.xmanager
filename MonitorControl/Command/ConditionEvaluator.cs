@@ -86,12 +86,16 @@ namespace TradingLib.MoniterControl
                     return CoreService.SiteInfo.Domain.Module_Agent;
                 case "FOLLOW": 
                     return CoreService.SiteInfo.Domain.Module_Follow;
+                case "PAYONLINE":
+                    return CoreService.SiteInfo.Domain.Module_PayOnline;
                 default:
                     return false;
             }
 
         }
     }
+
+
 
     /// <summary>
     /// 权限检查

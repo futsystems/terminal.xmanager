@@ -92,6 +92,7 @@
     <Compile Include="Client\TLClientNet_PacketHandler_Other.cs" />
     <Compile Include="Common\HandlerInfo.cs" />
     <Compile Include="Common\SplashScreenApplication.cs" />
+    <Compile Include="ContribRequest\API.cs" />
     <Compile Include="ContribRequest\ConnectorManager.cs" />
     <Compile Include="ContribRequest\AccountManager.cs" />
     <Compile Include="ContribRequest\ExCore.cs" />

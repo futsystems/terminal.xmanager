@@ -105,15 +105,27 @@ namespace TradingLib.MoniterControl
 
         }
 
+        Dictionary<int, SignalConfig> signalMap = new Dictionary<int, SignalConfig>();
         void OnQrySignalconfigList(string json, bool islast)
         {
             SignalConfig item = CoreService.ParseJsonResponse<SignalConfig>(json);
             if (item != null)
             {
-                //跟单信号列表中不包含的信号才在可用信号列表中显示
-                if (!strategySignalList.Contains(item.ID))
+                if (!signalMap.Keys.Contains(item.ID))
                 {
-                    InvokeGotSignalConfig(item);
+                    signalMap.Add(item.ID, item);
+                }
+                
+            }
+            if (islast)
+            {
+                foreach (var signal in signalMap.Values.OrderBy(s=>s.SignalToken))
+                {
+                    //跟单信号列表中不包含的信号才在可用信号列表中显示
+                    if (!strategySignalList.Contains(signal.ID))
+                    {
+                        InvokeGotSignalConfig(signal);
+                    }
                 }
             }
             
@@ -129,7 +141,7 @@ namespace TradingLib.MoniterControl
             else
             {
                 ValueObject<SignalConfig> vo = new ValueObject<SignalConfig>();
-                vo.Name = string.Format("ID:{0}Token:{1}", item.ID, item.SignalToken);
+                vo.Name = string.Format("{0}[{1}]", item.SignalToken, item.SignalType);
                 vo.Value = item;
                 signals.Items.Add(vo);
 
@@ -164,7 +176,7 @@ namespace TradingLib.MoniterControl
             else
             {
                 ValueObject<SignalConfig> vo = new ValueObject<SignalConfig>();
-                vo.Name = string.Format("ID:{0}Token:{1}", item.ID, item.SignalToken);
+                vo.Name = string.Format("{0}[{1}]", item.SignalToken,item.SignalType);
                 vo.Value = item;
                 avabileSignals.Items.Add(vo);
 
