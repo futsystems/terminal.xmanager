@@ -20,6 +20,56 @@ namespace TradingLib.MoniterCore
         AliPay,
     }
 
+    public class CashOperation
+    {
+        /// <summary>
+        /// 交易账户
+        /// </summary>
+        public string Account { get; set; }
+
+        /// <summary>
+        /// 金额
+        /// </summary>
+        public decimal Amount { get; set; }
+
+        /// <summary>
+        /// 时间
+        /// </summary>
+        public long DateTime { get; set; }
+
+        /// <summary>
+        /// 出入金类别
+        /// </summary>
+        public QSEnumCashOperation OperationType { get; set; }
+
+        /// <summary>
+        /// 网关类别
+        /// </summary>
+        public QSEnumGateWayType GateWayType { get; set; }
+
+
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public QSEnumCashInOutStatus Status { get; set; }
+
+        /// <summary>
+        /// 单号引用
+        /// </summary>
+        public string Ref { get; set; }
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public string Comment { get; set; }
+
+        /// <summary>
+        /// 分区编号
+        /// </summary>
+        public int Domain_ID { get; set; }
+
+    }
+
 
     public class GateWayConfig
     {
@@ -41,7 +91,7 @@ namespace TradingLib.MoniterCore
 
         public const string QRY_GATEWAY_CONFUIG = "QryGateWayConfig";
 
-    
+        public const string QRY_CASH_OPERATION = "QryCashOperation";
     }
 
     public static class Client_API
@@ -64,6 +114,20 @@ namespace TradingLib.MoniterCore
         {
             return client.ReqContribRequest(Modules.APIService, Method_API.QRY_GATEWAY_CONFUIG, "");
         }
+
+        /// <summary>
+        /// 查询一个时间段内的出入金请求记录
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public static int ReqQryCashOperation(this TLClientNet client,int start,int end)
+        {
+            return client.ReqContribRequest(Modules.APIService, Method_API.QRY_CASH_OPERATION, new { start = start, end = end });
+        }
+
+
 
     }
 }

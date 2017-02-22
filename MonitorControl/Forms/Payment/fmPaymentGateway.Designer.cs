@@ -29,20 +29,20 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.gatewayType = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.avabile = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.holder = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.avabile = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.gatewayType = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gatewayType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).BeginInit();
             this.kryptonGroupBox1.Panel.SuspendLayout();
             this.kryptonGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.holder)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gatewayType)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPanel1
@@ -57,40 +57,6 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(391, 436);
             this.kryptonPanel1.TabIndex = 0;
-            // 
-            // kryptonLabel1
-            // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(4, 13);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(85, 20);
-            this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "支付网关类别";
-            // 
-            // gatewayType
-            // 
-            this.gatewayType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.gatewayType.DropDownWidth = 111;
-            this.gatewayType.Location = new System.Drawing.Point(95, 12);
-            this.gatewayType.Name = "gatewayType";
-            this.gatewayType.Size = new System.Drawing.Size(111, 21);
-            this.gatewayType.TabIndex = 1;
-            // 
-            // btnSubmit
-            // 
-            this.btnSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSubmit.Location = new System.Drawing.Point(308, 399);
-            this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(70, 25);
-            this.btnSubmit.TabIndex = 2;
-            this.btnSubmit.Values.Text = "更 新";
-            // 
-            // avabile
-            // 
-            this.avabile.Location = new System.Drawing.Point(237, 13);
-            this.avabile.Name = "avabile";
-            this.avabile.Size = new System.Drawing.Size(48, 20);
-            this.avabile.TabIndex = 3;
-            this.avabile.Values.Text = "启用";
             // 
             // kryptonGroupBox1
             // 
@@ -112,6 +78,40 @@
             this.holder.Size = new System.Drawing.Size(362, 309);
             this.holder.TabIndex = 25;
             // 
+            // avabile
+            // 
+            this.avabile.Location = new System.Drawing.Point(237, 13);
+            this.avabile.Name = "avabile";
+            this.avabile.Size = new System.Drawing.Size(48, 20);
+            this.avabile.TabIndex = 3;
+            this.avabile.Values.Text = "启用";
+            // 
+            // btnSubmit
+            // 
+            this.btnSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSubmit.Location = new System.Drawing.Point(308, 399);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(70, 25);
+            this.btnSubmit.TabIndex = 2;
+            this.btnSubmit.Values.Text = "更 新";
+            // 
+            // gatewayType
+            // 
+            this.gatewayType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.gatewayType.DropDownWidth = 111;
+            this.gatewayType.Location = new System.Drawing.Point(95, 12);
+            this.gatewayType.Name = "gatewayType";
+            this.gatewayType.Size = new System.Drawing.Size(111, 21);
+            this.gatewayType.TabIndex = 1;
+            // 
+            // kryptonLabel1
+            // 
+            this.kryptonLabel1.Location = new System.Drawing.Point(4, 13);
+            this.kryptonLabel1.Name = "kryptonLabel1";
+            this.kryptonLabel1.Size = new System.Drawing.Size(85, 20);
+            this.kryptonLabel1.TabIndex = 0;
+            this.kryptonLabel1.Values.Text = "支付网关类别";
+            // 
             // fmPaymentGateway
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -121,16 +121,16 @@
             this.Name = "fmPaymentGateway";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "编辑支付网关";
+            this.Text = "支付网关设置";
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gatewayType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).EndInit();
             this.kryptonGroupBox1.Panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
             this.kryptonGroupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.holder)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gatewayType)).EndInit();
             this.ResumeLayout(false);
 
         }

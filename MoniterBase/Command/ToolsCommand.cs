@@ -70,12 +70,27 @@ namespace TradingLib.MoniterBase.Command
             fm.Close();
         }
     }
-
+    /// <summary>
+    /// 支付通道设置 
+    /// </summary>
     public class PayGateWayCommand: AbstractMenuCommand
     {
         public override void Run()
         {
             fmPaymentGateway fm = new fmPaymentGateway();
+            fm.ShowDialog();
+            fm.Close();
+        }
+    }
+
+    /// <summary>
+    /// 在线出入金管理
+    /// </summary>
+    public class CashOperationCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            fmCashOperationManager fm = new fmCashOperationManager();
             fm.ShowDialog();
             fm.Close();
         }

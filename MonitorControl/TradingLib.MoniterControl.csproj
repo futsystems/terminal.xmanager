@@ -547,23 +547,29 @@
     <Compile Include="Forms\Follow\fmQryFollowExecution.Designer.cs">
       <DependentUpon>fmQryFollowExecution.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PaymentGateWay\ctGateWayBaoFu.cs">
+    <Compile Include="Forms\Payment\ctGateWayBaoFu.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\PaymentGateWay\ctGateWayBaoFu.Designer.cs">
+    <Compile Include="Forms\Payment\ctGateWayBaoFu.Designer.cs">
       <DependentUpon>ctGateWayBaoFu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PaymentGateWay\fmPaymentGateway.cs">
+    <Compile Include="Forms\Payment\fmCashOperationManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\PaymentGateWay\fmPaymentGateway.Designer.cs">
+    <Compile Include="Forms\Payment\fmCashOperationManager.Designer.cs">
+      <DependentUpon>fmCashOperationManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Payment\fmPaymentGateway.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Payment\fmPaymentGateway.Designer.cs">
       <DependentUpon>fmPaymentGateway.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PaymentGateWay\IGateWayControl.cs" />
-    <Compile Include="Forms\PaymentGateWay\ctGateWayAliPay.cs">
+    <Compile Include="Forms\Payment\IGateWayControl.cs" />
+    <Compile Include="Forms\Payment\ctGateWayAliPay.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\PaymentGateWay\ctGateWayAliPay.Designer.cs">
+    <Compile Include="Forms\Payment\ctGateWayAliPay.Designer.cs">
       <DependentUpon>ctGateWayAliPay.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\System\Domain\fmDomain.cs">
@@ -1103,13 +1109,16 @@
     <EmbeddedResource Include="Forms\Follow\fmQryFollowExecution.resx">
       <DependentUpon>fmQryFollowExecution.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PaymentGateWay\ctGateWayBaoFu.resx">
+    <EmbeddedResource Include="Forms\Payment\ctGateWayBaoFu.resx">
       <DependentUpon>ctGateWayBaoFu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PaymentGateWay\fmPaymentGateway.resx">
+    <EmbeddedResource Include="Forms\Payment\fmCashOperationManager.resx">
+      <DependentUpon>fmCashOperationManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Payment\fmPaymentGateway.resx">
       <DependentUpon>fmPaymentGateway.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PaymentGateWay\ctGateWayAliPay.resx">
+    <EmbeddedResource Include="Forms\Payment\ctGateWayAliPay.resx">
       <DependentUpon>ctGateWayAliPay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\System\Domain\fmDomain.resx">
