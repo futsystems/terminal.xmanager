@@ -25,12 +25,138 @@ namespace TradingLib.MoniterControl
             InitTable();
             BindToTable();
 
+            menu = new ContextMenuStrip();
+            menu.Items.Add("取消", null, new EventHandler(Cancel_Click));
+            menu.Items.Add("拒绝", null, new EventHandler(Reject_Click));
+            menu.Items.Add("确认", null, new EventHandler(Confirm_Click));
+
+            start.Value = DateTime.Now.AddDays(-1);
             btnQry.Click += new EventHandler(btnQry_Click);
             status.SelectedIndexChanged += new EventHandler(status_SelectedIndexChanged);
             optype.SelectedIndexChanged += new EventHandler(optype_SelectedIndexChanged);
             account.TextChanged += new EventHandler(account_TextChanged);
+            cashOperationGrid.MouseClick += new MouseEventHandler(cashOperationGrid_MouseClick);
+            cashOperationGrid.CellFormatting += new DataGridViewCellFormattingEventHandler(cashOperationGrid_CellFormatting);
+            cashOperationGrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(cashOperationGrid_RowPrePaint);
             this.Load += new EventHandler(fmCashOperationManager_Load);
         }
+
+        void cashOperationGrid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            e.PaintParts = e.PaintParts ^ DataGridViewPaintParts.Focus;
+        }
+
+        void cashOperationGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 5)
+            {
+                QSEnumCashOperation op = (QSEnumCashOperation)cashOperationGrid[4, e.RowIndex].Value;
+                if (op== QSEnumCashOperation.Deposit)
+                {
+                    e.CellStyle.ForeColor = UIConstant.LongSideColor;
+                }
+                else
+                {
+                    e.CellStyle.ForeColor = UIConstant.ShortSideColor;
+                }
+            }
+            if (e.ColumnIndex == 5)
+            {
+                e.CellStyle.Font = UIConstant.BoldFont;
+            }
+        }
+
+        void cashOperationGrid_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                var menu = GetMenu();
+                if (menu != null)
+                {
+                    menu.Show(Control.MousePosition);
+                }
+            }
+        }
+
+        CashOperation CurrentCashOperation
+        {
+            get
+            {
+
+                if (cashOperationGrid.SelectedRows.Count > 0)
+                {
+                    return cashOperationGrid.CurrentRow.Cells[TAG].Value as CashOperation;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+        ContextMenuStrip menu = null;
+
+        ContextMenuStrip GetMenu()
+        {
+            CashOperation op = CurrentCashOperation;
+            if (op == null) return null;
+            switch (op.Status)
+            { 
+                case QSEnumCashInOutStatus.CANCELED:
+                case QSEnumCashInOutStatus.CONFIRMED:
+                case QSEnumCashInOutStatus.REFUSED:
+                    menu.Items[0].Enabled = false;
+                    menu.Items[1].Enabled = false;
+                    menu.Items[2].Enabled = false;
+                    return menu;
+                case QSEnumCashInOutStatus.PENDING:
+                     menu.Items[0].Enabled = true;
+                     menu.Items[1].Enabled = true;
+                     menu.Items[2].Enabled = true;
+                    return menu;
+                default:
+                    menu.Items[0].Enabled = false;
+                    menu.Items[1].Enabled = false;
+                    menu.Items[2].Enabled = false;
+                    return null;
+            }      
+        }
+
+        void Cancel_Click(object sender, EventArgs e)
+        {
+            CashOperation op = CurrentCashOperation;
+            if (op != null)
+            {
+                if (ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("取消该出入金请求?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    CoreService.TLClient.ReqCancelCashOperation(op.Ref);
+                }
+            }
+        }
+        void Confirm_Click(object sender, EventArgs e)
+        {
+            CashOperation op = CurrentCashOperation;
+            if (op != null)
+            {
+                if (ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("确认该出入金请求?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    CoreService.TLClient.ReqConfirmCashOperation(op.Ref);
+                }
+            }
+        }
+
+        void Reject_Click(object sender, EventArgs e)
+        {
+            CashOperation op = CurrentCashOperation;
+            if (op != null)
+            {
+                if (ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("拒绝该出入金请求?", "", MessageBoxButtons.YesNo,MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    CoreService.TLClient.ReqRejectCashOperation(op.Ref);
+                }
+            }
+        }
+
+
 
         void account_TextChanged(object sender, EventArgs e)
         {
@@ -74,7 +200,7 @@ namespace TradingLib.MoniterControl
 
         void btnQry_Click(object sender, EventArgs e)
         {
-
+            Clear();
             CoreService.TLClient.ReqQryCashOperation(start.Value.ToTLDate(), end.Value.ToTLDate());
         }
 
@@ -82,20 +208,45 @@ namespace TradingLib.MoniterControl
         public void OnInit()
         {
             CoreService.EventCore.RegisterCallback(Modules.APIService, Method_API.QRY_CASH_OPERATION, this.OnQryCashOperation);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.APIService, Method_API.NOTIFY_CASH_OPERATION, this.OnNotifyCashOperation);
+            CoreService.TLClient.ReqQryCashOperation(start.Value.ToTLDate(), end.Value.ToTLDate());
         }
 
         public void OnDisposed()
         {
             CoreService.EventCore.UnRegisterCallback(Modules.APIService, Method_API.QRY_CASH_OPERATION, this.OnQryCashOperation);
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.APIService, Method_API.NOTIFY_CASH_OPERATION, this.OnNotifyCashOperation);
         }
 
-
+        void OnNotifyCashOperation(string json)
+        {
+            CashOperation op = json.DeserializeObject<CashOperation>();
+            if (op != null)
+            {
+                InvokeGotCashOperation(op);
+            }
+        }
         void OnQryCashOperation(string json, bool islast)
         {
             CashOperation op = json.DeserializeObject<CashOperation>();
             if (op != null)
             {
                 InvokeGotCashOperation(op);
+            }
+        }
+
+
+        Dictionary<string, int> oprowidmap = new Dictionary<string, int>();
+        int CashOperatioinIdx(string cashref)
+        {
+            int rowid = -1;
+            if (!oprowidmap.TryGetValue(cashref, out rowid))
+            {
+                return -1;
+            }
+            else
+            {
+                return rowid;
             }
         }
 
@@ -107,18 +258,33 @@ namespace TradingLib.MoniterControl
             }
             else
             {
-                DataRow r = tb.Rows.Add(0);
-                int i = tb.Rows.Count - 1;//得到新建的Row号
-                tb.Rows[i][ACCOUNT] = op.Account;
-                tb.Rows[i][DATETIME] = Util.ToDateTime(op.DateTime).ToString("yyy/MM/dd HH:mm:ss");
-                tb.Rows[i][OPERATION] = op.OperationType;
-                tb.Rows[i][OPERATIONSTR] = Util.GetEnumDescription(op.OperationType);
-                tb.Rows[i][AMOUNT] = op.Amount.ToFormatStr();
-                tb.Rows[i][GATEWAYTYPE] = op.GateWayType;
-                tb.Rows[i][STATUS] = op.Status;
-                tb.Rows[i][STATUSSTR] = Util.GetEnumDescription(op.Status);
-                tb.Rows[i][REF] = op.Ref;
-                tb.Rows[i][COMMENT] = op.Comment;
+                int i = CashOperatioinIdx(op.Ref);
+                if (i == -1)
+                {
+                    tb.Rows.Add();
+                    i = tb.Rows.Count - 1;
+                    tb.Rows[i][ID] = 0;
+                    tb.Rows[i][ACCOUNT] = op.Account;
+                    tb.Rows[i][DATETIME] = Util.ToDateTime(op.DateTime).ToString("yyy/MM/dd HH:mm:ss");
+                    tb.Rows[i][OPERATION] = op.OperationType;
+                    tb.Rows[i][OPERATIONSTR] = Util.GetEnumDescription(op.OperationType);
+                    tb.Rows[i][AMOUNT] = op.Amount.ToFormatStr();
+                    tb.Rows[i][GATEWAYTYPE] = (int)op.GateWayType == -1 ? "手工" : Util.GetEnumDescription(op.GateWayType);
+                    tb.Rows[i][STATUS] = op.Status;
+                    tb.Rows[i][STATUSSTR] = Util.GetEnumDescription(op.Status);
+                    tb.Rows[i][REF] = op.Ref;
+                    tb.Rows[i][COMMENT] = op.Comment;
+                    tb.Rows[i][TAG] = op;
+
+                    oprowidmap.Add(op.Ref, i);
+                }
+                else
+                {
+                    tb.Rows[i][STATUS] = op.Status;
+                    tb.Rows[i][STATUSSTR] = Util.GetEnumDescription(op.Status);
+                    tb.Rows[i][COMMENT] = op.Comment;
+                    tb.Rows[i][TAG] = op;
+                }
             }
         }
         #region 表格
@@ -136,6 +302,7 @@ namespace TradingLib.MoniterControl
         const string STATUSSTR = "状态";
         const string REF = "本地订单号";
         const string COMMENT = "备注";
+        const string TAG = "TAG";
 
         #endregion
 
@@ -173,13 +340,14 @@ namespace TradingLib.MoniterControl
             tb.Columns.Add(ACCOUNT);//4
             tb.Columns.Add(DATETIME);//5
 
-            tb.Columns.Add(OPERATION);//2
+            tb.Columns.Add(OPERATION,typeof(QSEnumCashOperation));//2
             tb.Columns.Add(OPERATIONSTR);
             tb.Columns.Add(AMOUNT);//
             tb.Columns.Add(GATEWAYTYPE);
             tb.Columns.Add(STATUS);
             tb.Columns.Add(STATUSSTR);
             tb.Columns.Add(COMMENT);
+            tb.Columns.Add(TAG, typeof(CashOperation));
             
 
         }
@@ -193,6 +361,7 @@ namespace TradingLib.MoniterControl
 
 
             datasource.DataSource = tb;
+            datasource.Sort = REF + " DESC";// " ASC"
             grid.DataSource = datasource;
 
             //需要在绑定数据源后设定具体的可见性
@@ -206,10 +375,12 @@ namespace TradingLib.MoniterControl
             grid.Columns[OPERATION].Visible = false;
             grid.Columns[ID].Visible = false;
             grid.Columns[STATUS].Visible = false;
+            grid.Columns[TAG].Visible = false;
         }
 
         void Clear()
         {
+            oprowidmap.Clear();
             cashOperationGrid.DataSource = null;
             tb.Rows.Clear();
             BindToTable();

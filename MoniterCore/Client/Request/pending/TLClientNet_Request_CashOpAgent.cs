@@ -47,31 +47,31 @@ namespace TradingLib.MoniterCore
             this.ReqContribRequest("MgrExchServer", "RequestCashOperation", playload);
         }
 
-        /// <summary>
-        /// 确认出入金操作
-        /// </summary>
-        /// <param name="playload"></param>
-        public void ReqConfirmCashOperation(string playload)
-        {
-            this.ReqContribRequest("MgrExchServer", "ConfirmCashOperation", playload);
-        }
+        ///// <summary>
+        ///// 确认出入金操作
+        ///// </summary>
+        ///// <param name="playload"></param>
+        //public void ReqConfirmCashOperation(string playload)
+        //{
+        //    this.ReqContribRequest("MgrExchServer", "ConfirmCashOperation", playload);
+        //}
 
-        /// <summary>
-        /// 取消出入金操作
-        /// </summary>
-        /// <param name="playload"></param>
-        public void ReqCancelCashOperation(string playload)
-        {
-            this.ReqContribRequest("MgrExchServer", "CancelCashOperation", playload);
-        }
+        ///// <summary>
+        ///// 取消出入金操作
+        ///// </summary>
+        ///// <param name="playload"></param>
+        //public void ReqCancelCashOperation(string playload)
+        //{
+        //    this.ReqContribRequest("MgrExchServer", "CancelCashOperation", playload);
+        //}
 
-        /// <summary>
-        /// 拒绝出入金操作
-        /// </summary>
-        /// <param name="playload"></param>
-        public void ReqRejectCashOperation(string playload)
-        {
-            this.ReqContribRequest("MgrExchServer", "RejectCashOperation", playload);
-        }
+        ///// <summary>
+        ///// 拒绝出入金操作
+        ///// </summary>
+        ///// <param name="playload"></param>
+        //public void ReqRejectCashOperation(string playload)
+        //{
+        //    this.ReqContribRequest("MgrExchServer", "RejectCashOperation", playload);
+        //}
     }
 }

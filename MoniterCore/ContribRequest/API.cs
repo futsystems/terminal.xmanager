@@ -92,6 +92,14 @@ namespace TradingLib.MoniterCore
         public const string QRY_GATEWAY_CONFUIG = "QryGateWayConfig";
 
         public const string QRY_CASH_OPERATION = "QryCashOperation";
+
+        public const string REJECT_CASH_OPERATION = "RejectCashOperation";
+
+        public const string CANCEL_CASH_OPERATION = "CancelCashOperation";
+
+        public const string CONFIRM_CASH_OPERATION = "ConfirmCashOperation";
+
+        public const string NOTIFY_CASH_OPERATION = "NotifyCashOperation";
     }
 
     public static class Client_API
@@ -127,7 +135,38 @@ namespace TradingLib.MoniterCore
             return client.ReqContribRequest(Modules.APIService, Method_API.QRY_CASH_OPERATION, new { start = start, end = end });
         }
 
+        /// <summary>
+        /// 拒绝出入金请求
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="transid"></param>
+        /// <returns></returns>
+        public static int ReqRejectCashOperation(this TLClientNet client, string transid)
+        {
+            return client.ReqContribRequest(Modules.APIService, Method_API.REJECT_CASH_OPERATION, transid);
+        }
 
+        /// <summary>
+        /// 取消出入金操作
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="transid"></param>
+        /// <returns></returns>
+        public static int ReqCancelCashOperation(this TLClientNet client, string transid)
+        {
+            return client.ReqContribRequest(Modules.APIService, Method_API.CANCEL_CASH_OPERATION, transid);
+        }
+
+        /// <summary>
+        /// 确认出入金操作
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="transid"></param>
+        /// <returns></returns>
+        public static int ReqConfirmCashOperation(this TLClientNet client, string transid)
+        {
+            return client.ReqContribRequest(Modules.APIService, Method_API.CONFIRM_CASH_OPERATION, transid);
+        }
 
     }
 }
