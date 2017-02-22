@@ -31,10 +31,6 @@
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.md5key = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.keytype = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.version = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.memberId = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.payurl = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -47,10 +43,6 @@
             // 
             this.kryptonPanel1.Controls.Add(this.md5key);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel7);
-            this.kryptonPanel1.Controls.Add(this.keytype);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel5);
-            this.kryptonPanel1.Controls.Add(this.version);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel4);
             this.kryptonPanel1.Controls.Add(this.memberId);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
             this.kryptonPanel1.Controls.Add(this.payurl);
@@ -63,83 +55,51 @@
             // 
             // md5key
             // 
-            this.md5key.Location = new System.Drawing.Point(67, 120);
+            this.md5key.Location = new System.Drawing.Point(27, 133);
             this.md5key.Name = "md5key";
-            this.md5key.Size = new System.Drawing.Size(109, 20);
+            this.md5key.Size = new System.Drawing.Size(148, 20);
             this.md5key.TabIndex = 12;
-            this.md5key.Text = "abcdefg";
+            this.md5key.Text = "abcdefg123123";
             // 
             // kryptonLabel7
             // 
-            this.kryptonLabel7.Location = new System.Drawing.Point(4, 120);
+            this.kryptonLabel7.Location = new System.Drawing.Point(7, 107);
             this.kryptonLabel7.Name = "kryptonLabel7";
-            this.kryptonLabel7.Size = new System.Drawing.Size(57, 20);
+            this.kryptonLabel7.Size = new System.Drawing.Size(62, 20);
             this.kryptonLabel7.TabIndex = 11;
-            this.kryptonLabel7.Values.Text = "MD5Key";
-            // 
-            // keytype
-            // 
-            this.keytype.Location = new System.Drawing.Point(67, 94);
-            this.keytype.Name = "keytype";
-            this.keytype.Size = new System.Drawing.Size(47, 20);
-            this.keytype.TabIndex = 9;
-            this.keytype.Text = "RSA";
-            // 
-            // kryptonLabel5
-            // 
-            this.kryptonLabel5.Location = new System.Drawing.Point(4, 94);
-            this.kryptonLabel5.Name = "kryptonLabel5";
-            this.kryptonLabel5.Size = new System.Drawing.Size(60, 20);
-            this.kryptonLabel5.TabIndex = 8;
-            this.kryptonLabel5.Values.Text = "签名方式";
-            // 
-            // version
-            // 
-            this.version.Location = new System.Drawing.Point(67, 68);
-            this.version.Name = "version";
-            this.version.Size = new System.Drawing.Size(47, 20);
-            this.version.TabIndex = 7;
-            this.version.Text = "1.0";
-            // 
-            // kryptonLabel4
-            // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(4, 68);
-            this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(48, 20);
-            this.kryptonLabel4.TabIndex = 6;
-            this.kryptonLabel4.Values.Text = "版本号";
+            this.kryptonLabel7.Values.Text = "MD5密钥";
             // 
             // memberId
             // 
-            this.memberId.Location = new System.Drawing.Point(67, 42);
+            this.memberId.Location = new System.Drawing.Point(27, 81);
             this.memberId.Name = "memberId";
-            this.memberId.Size = new System.Drawing.Size(109, 20);
+            this.memberId.Size = new System.Drawing.Size(148, 20);
             this.memberId.TabIndex = 3;
-            this.memberId.Text = "100000178";
+            this.memberId.Text = "208888888888";
             // 
             // kryptonLabel2
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(4, 42);
+            this.kryptonLabel2.Location = new System.Drawing.Point(4, 55);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(47, 20);
+            this.kryptonLabel2.Size = new System.Drawing.Size(112, 20);
             this.kryptonLabel2.TabIndex = 2;
-            this.kryptonLabel2.Values.Text = "app_id";
+            this.kryptonLabel2.Values.Text = "合作伙伴身份(PID)";
             // 
             // payurl
             // 
-            this.payurl.Location = new System.Drawing.Point(67, 4);
+            this.payurl.Location = new System.Drawing.Point(27, 29);
             this.payurl.Name = "payurl";
             this.payurl.Size = new System.Drawing.Size(229, 20);
             this.payurl.TabIndex = 1;
-            this.payurl.Text = "https://openapi.alipay.com/gateway.do";
+            this.payurl.Text = "https://mapi.alipay.com/gateway.do";
             // 
             // kryptonLabel1
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(4, 4);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(60, 20);
+            this.kryptonLabel1.Size = new System.Drawing.Size(88, 20);
             this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "网关地址";
+            this.kryptonLabel1.Values.Text = "mapi网关地址";
             // 
             // ctGateWayAliPay
             // 
@@ -162,10 +122,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox payurl;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox memberId;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox version;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox keytype;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox md5key;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
     }

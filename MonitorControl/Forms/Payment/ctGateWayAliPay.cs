@@ -22,12 +22,21 @@ namespace TradingLib.MoniterControl
 
         public void SetGatewayConfig(GateWayConfig config)
         {
-
+            var data = config.Config.DeserializeObject();
+            payurl.Text = data["PayUrl"].ToString();
+            memberId.Text = data["Partner"].ToString();
+            md5key.Text = data["Key"].ToString();
         }
 
         public string GetGateWayConfig()
         {
-            return string.Empty;
+            return new
+            {
+                PayUrl = payurl.Text,
+                Partner = memberId.Text,
+                Key = md5key.Text
+            }
+            .SerializeObject();
         }
     }
 }
