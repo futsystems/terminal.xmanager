@@ -77,6 +77,13 @@ namespace TradingLib.MoniterBase.Command
     {
         public override void Run()
         {
+            //root可查看
+            if (!CoreService.SiteInfo.Manager.IsRoot())
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+
             fmPaymentGateway fm = new fmPaymentGateway();
             fm.ShowDialog();
             fm.Close();
@@ -90,6 +97,13 @@ namespace TradingLib.MoniterBase.Command
     {
         public override void Run()
         {
+            //root可查看
+            if (!CoreService.SiteInfo.Manager.IsRoot())
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+
             fmCashOperationManager fm = new fmCashOperationManager();
             fm.ShowDialog();
             fm.Close();

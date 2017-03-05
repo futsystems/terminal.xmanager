@@ -211,11 +211,12 @@
               label = "交易参数管理"
               class = "TradingLib.MoniterBase.Command.ExStrategyTemplateCommand"/>
     </Condition>
+    <Condition name="RoleState" role="root" >
     <MenuItem id = "Separator1" type = "Separator"/>
     <MenuItem id = "ExchangeRateCommand"
         label = "汇率管理"
         class = "TradingLib.MoniterBase.Command.ExchangeRateCommand"/>
-    
+    </Condition>
 
 
     <!--超级管理员可见菜单-->
@@ -327,13 +328,15 @@
               label = "收费管理"
               class = "TradingLib.MoniterBase.Command.FeeManagerCommand"/>
     </Condition>
-    <Condition name="ModuleState" module="payonline" >
-      <MenuItem id = "PayGateWayCommand"
-              label = "支付通道"
-              class = "TradingLib.MoniterBase.Command.PayGateWayCommand"/>
-      <MenuItem id = "CashOperationCommand"
-              label = "在线出入金管理"
-              class = "TradingLib.MoniterBase.Command.CashOperationCommand"/>
+    <Condition name="RoleState" role="root" >
+      <Condition name="ModuleState" module="payonline" >
+        <MenuItem id = "PayGateWayCommand"
+                label = "支付通道"
+                class = "TradingLib.MoniterBase.Command.PayGateWayCommand"/>
+        <MenuItem id = "CashOperationCommand"
+                label = "在线出入金管理"
+                class = "TradingLib.MoniterBase.Command.CashOperationCommand"/>
+      </Condition>
     </Condition>
   </Path>
 
