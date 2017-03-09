@@ -31,13 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+    <Reference Include="Common.Logging, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\RequiredLibraries\Common.Logging.dll</HintPath>
+      <HintPath>..\..\..\Futs.base\lib\Common.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+    <Reference Include="Common.Logging.Core, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\RequiredLibraries\Common.Logging.Core.dll</HintPath>
+      <HintPath>..\..\..\Futs.base\lib\Common.Logging.Core.dll</HintPath>
     </Reference>
     <Reference Include="ComponentFactory.Krypton.Navigator, Version=4.4.0.0, Culture=neutral, PublicKeyToken=dc91bbef911870e2, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -290,15 +290,11 @@
     <Compile Include="Forms\1-pending\FeeManagerment\fmEditFee.Designer.cs">
       <DependentUpon>fmEditFee.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\1-pending\fmAddAccount.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\1-pending\fmAddAccount.cs" />
     <Compile Include="Forms\1-pending\fmAddAccount.Designer.cs">
       <DependentUpon>fmAddAccount.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\1-pending\fmCashOperation.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\1-pending\fmCashOperation.cs" />
     <Compile Include="Forms\1-pending\fmCashOperation.Designer.cs">
       <DependentUpon>fmCashOperation.cs</DependentUpon>
     </Compile>
@@ -314,9 +310,7 @@
     <Compile Include="Forms\Account\fmEditAccount.Designer.cs">
       <DependentUpon>fmEditAccount.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\1-pending\fmBindConnector.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\1-pending\fmBindConnector.cs" />
     <Compile Include="Forms\1-pending\fmBindConnector.Designer.cs">
       <DependentUpon>fmBindConnector.cs</DependentUpon>
     </Compile>
