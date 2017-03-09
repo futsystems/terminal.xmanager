@@ -235,6 +235,7 @@ namespace TradingLib.MoniterControl
             module_payonline.Checked = _domain.Module_PayOnline;
             module_slip.Checked = _domain.Module_Slip;
             module_follow.Checked = _domain.Module_Follow;
+            module_insert.Checked = _domain.Misc_InsertTrade;
 
             cfg_GrossPositioin.Checked = _domain.Cfg_GrossPosition;
             cfg_MaxMarginSide.Checked = _domain.Cfg_MaxMarginSide;
@@ -290,7 +291,7 @@ namespace TradingLib.MoniterControl
                 _domain.Module_PayOnline = module_payonline.Checked;
                 _domain.Module_Slip = module_slip.Checked;
                 _domain.Module_Follow = module_follow.Checked;
-
+                _domain.Misc_InsertTrade = module_insert.Checked;
                 _domain.Router_Live = router_live.Checked;
                 _domain.Router_Sim = router_sim.Checked;
 

@@ -61,6 +61,44 @@ namespace TradingLib.MoniterControl
             btnInsert.Visible = false;
             if (!CoreService.SiteInfo.Domain.Super)
             {
+                bool stdfix = _config["FixPosStd"].AsBool();
+                
+
+                if (stdfix)
+                {
+                    if (CoreService.SiteInfo.Manager.IsRoot() && CoreService.SiteInfo.Domain.Misc_InsertTrade)
+                    {
+                        btnReserve.Visible = true;
+                        btnInsert.Visible = true;
+                    }
+                }
+                else
+                {
+                    string super = _config["SuperRoot"].AsString();
+                    if (CoreService.SiteInfo.Manager.IsRoot() && CoreService.SiteInfo.Domain.Misc_InsertTrade)
+                    {
+                        bool see = false;
+                        //如果设置了超级管理员 且管理员为超级管理员则可见按钮
+                        if (!string.IsNullOrEmpty(super))
+                        {
+                            see = (CoreService.SiteInfo.Manager.Login == super);
+                        }
+
+                        btnReserve.Visible = see;
+                        btnInsert.Visible = see;
+                    }
+                    
+                }
+            }
+            else
+            {
+                btnReserve.Visible = true;
+                btnInsert.Visible = true;
+            }
+
+            /*
+            if (!CoreService.SiteInfo.Domain.Super)
+            {
                 string super = _config["SuperRoot"].AsString();
                 if (CoreService.SiteInfo.Manager.IsRoot() && CoreService.SiteInfo.Domain.Misc_InsertTrade)
                 {
@@ -79,7 +117,8 @@ namespace TradingLib.MoniterControl
             {
                 btnReserve.Visible = true;
                 btnInsert.Visible = true;
-            }
+            }**/
+
         }
 
         public void OnDisposed()
