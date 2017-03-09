@@ -62,6 +62,16 @@ namespace TradingLib.MoniterControl
             //请求操作可以放在OnInit调用内，这样所有回调注册或初始化操作均已经完成
             CoreService.TLClient.ReqQryInterface();
             //CoreService.TLClient.ReqQryServicePlan();
+            module_follow.Visible = CoreService.SiteInfo.Domain.Module_Follow;
+            kryptonLabel21.Visible = CoreService.SiteInfo.Domain.Module_Follow;
+            cfg_followstrategynum.Visible = CoreService.SiteInfo.Domain.Module_Follow;
+
+
+            module_agent.Visible = CoreService.SiteInfo.Domain.Module_Agent;
+            module_payonline.Visible = CoreService.SiteInfo.Domain.Module_PayOnline;
+            module_slip.Visible = CoreService.SiteInfo.Domain.Module_Slip;
+            module_insert.Visible = CoreService.SiteInfo.Domain.Misc_InsertTrade;
+
         }
 
         public void OnDisposed()
