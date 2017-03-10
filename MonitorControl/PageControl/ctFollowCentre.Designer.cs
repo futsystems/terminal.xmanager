@@ -31,14 +31,20 @@
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.ctFollowItemList1 = new TradingLib.MoniterControl.ctFollowItemList();
             this.ctFollowStrategyMoniter1 = new TradingLib.MoniterControl.ctFollowStrategyMoniter();
+            this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
+            this.kryptonSplitContainer1.Panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).BeginInit();
+            this.kryptonSplitContainer1.Panel2.SuspendLayout();
+            this.kryptonSplitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
-            this.kryptonPanel1.Controls.Add(this.ctFollowItemList1);
-            this.kryptonPanel1.Controls.Add(this.ctFollowStrategyMoniter1);
+            this.kryptonPanel1.Controls.Add(this.kryptonSplitContainer1);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
@@ -47,21 +53,39 @@
             // 
             // ctFollowItemList1
             // 
-            this.ctFollowItemList1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.ctFollowItemList1.Location = new System.Drawing.Point(0, 108);
+            this.ctFollowItemList1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctFollowItemList1.Location = new System.Drawing.Point(0, 0);
             this.ctFollowItemList1.Name = "ctFollowItemList1";
-            this.ctFollowItemList1.Size = new System.Drawing.Size(836, 337);
+            this.ctFollowItemList1.Size = new System.Drawing.Size(836, 320);
             this.ctFollowItemList1.TabIndex = 1;
             // 
             // ctFollowStrategyMoniter1
             // 
-            this.ctFollowStrategyMoniter1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctFollowStrategyMoniter1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ctFollowStrategyMoniter1.Location = new System.Drawing.Point(0, 0);
             this.ctFollowStrategyMoniter1.Name = "ctFollowStrategyMoniter1";
-            this.ctFollowStrategyMoniter1.Size = new System.Drawing.Size(836, 102);
+            this.ctFollowStrategyMoniter1.Size = new System.Drawing.Size(836, 120);
             this.ctFollowStrategyMoniter1.TabIndex = 0;
+            // 
+            // kryptonSplitContainer1
+            // 
+            this.kryptonSplitContainer1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.kryptonSplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonSplitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonSplitContainer1.Margin = new System.Windows.Forms.Padding(0);
+            this.kryptonSplitContainer1.Name = "kryptonSplitContainer1";
+            this.kryptonSplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // kryptonSplitContainer1.Panel1
+            // 
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.ctFollowStrategyMoniter1);
+            // 
+            // kryptonSplitContainer1.Panel2
+            // 
+            this.kryptonSplitContainer1.Panel2.Controls.Add(this.ctFollowItemList1);
+            this.kryptonSplitContainer1.Size = new System.Drawing.Size(836, 445);
+            this.kryptonSplitContainer1.SplitterDistance = 120;
+            this.kryptonSplitContainer1.TabIndex = 2;
             // 
             // ctFollowCentre
             // 
@@ -72,6 +96,12 @@
             this.Size = new System.Drawing.Size(836, 445);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).EndInit();
+            this.kryptonSplitContainer1.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).EndInit();
+            this.kryptonSplitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).EndInit();
+            this.kryptonSplitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -81,5 +111,6 @@
         private ctFollowStrategyMoniter ctFollowStrategyMoniter1;
         private ctFollowItemList ctFollowItemList1;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer1;
     }
 }
