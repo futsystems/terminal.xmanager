@@ -214,6 +214,15 @@ namespace TradingLib.MoniterControl
                     fm.Close();
                     
                 }
+                else if (item.ClassName.Equals("RuleSet2.Account.RSPriceLimitFlat"))
+                {
+                    var fm = new fmAccountRule_PriceLimit();
+                    fm.Account = _account;
+                    fm.RuleClass = item;
+                    fm.ShowDialog();
+                    fm.Close();
+
+                }
             }
         }
 
@@ -290,6 +299,14 @@ namespace TradingLib.MoniterControl
                 if (item.ClassName.Equals("RuleSet2.Order.RSTimeFilter2"))
                 {
                     fmOrderRule_TimeFilter2 fm = new fmOrderRule_TimeFilter2();
+                    fm.Account = _account;
+                    fm.RuleClass = item;
+                    fm.ShowDialog();
+                    fm.Close();
+                }
+                if (item.ClassName.Equals("RuleSet2.Order.RSPriceLimit"))
+                {
+                    var fm = new fmOrderRule_PriceLimit();
                     fm.Account = _account;
                     fm.RuleClass = item;
                     fm.ShowDialog();
