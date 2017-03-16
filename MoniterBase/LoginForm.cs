@@ -31,6 +31,9 @@ namespace TradingLib.MoniterBase
             InitializeComponent();
             
             ConfigFile config = ConfigFile.GetConfigFile("moniter.cfg");
+            Global.IsOEM = config["OEM"].AsBool();
+            Global.Brand = config["Brand"].AsString();
+
             mStart = start;
 
             //初始状态设置
@@ -76,7 +79,7 @@ namespace TradingLib.MoniterBase
             }
 
 
-            this.Text = string.Format("{0}资管柜台系统-2.0.1", Global.IsOEM ? "" : "巨融");
+            this.Text = string.Format("{0}资管柜台系统-2.0.1", Global.IsOEM ? Global.Brand : "巨融");
             
             
 

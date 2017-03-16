@@ -8,5 +8,6 @@ namespace TradingLib.MoniterBase
     public class Global
     {
         public static bool IsOEM = false;
+        public static string Brand = "";
     }
 }

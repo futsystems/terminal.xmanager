@@ -215,11 +215,11 @@ namespace TradingLib.MoniterBase
             switch (type)
             { 
                 case QSEnumProductType.CounterSystem:
-                    return string.Format("{0}资管柜台系统",Global.IsOEM?"":"巨融");
+                    return string.Format("{0}资管柜台系统",Global.IsOEM?Global.Brand:"巨融");
                 case QSEnumProductType.VendorMoniter:
-                    return string.Format("{0}主帐户监控系统", Global.IsOEM ? "" : "巨融");
+                    return string.Format("{0}主帐户监控系统", Global.IsOEM ? Global.Brand : "巨融");
                 default:
-                    return string.Format("{0}业务系统", Global.IsOEM ? "" : "巨融");
+                    return string.Format("{0}业务系统", Global.IsOEM ? Global.Brand : "巨融");
             }
         }
 
