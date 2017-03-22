@@ -38,6 +38,7 @@
             this.tbMemo = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btnDebug = new System.Windows.Forms.Button();
+            this.btnStatistic = new ComponentFactory.Krypton.Toolkit.KryptonLinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.accountType)).BeginInit();
             this.SuspendLayout();
             // 
@@ -114,7 +115,7 @@
             // 
             // btnDebug
             // 
-            this.btnDebug.Location = new System.Drawing.Point(579, 0);
+            this.btnDebug.Location = new System.Drawing.Point(690, 0);
             this.btnDebug.Name = "btnDebug";
             this.btnDebug.Size = new System.Drawing.Size(75, 23);
             this.btnDebug.TabIndex = 9;
@@ -122,11 +123,20 @@
             this.btnDebug.UseVisualStyleBackColor = true;
             this.btnDebug.Visible = false;
             // 
+            // btnStatistic
+            // 
+            this.btnStatistic.Location = new System.Drawing.Point(604, 3);
+            this.btnStatistic.Name = "btnStatistic";
+            this.btnStatistic.Size = new System.Drawing.Size(60, 20);
+            this.btnStatistic.TabIndex = 11;
+            this.btnStatistic.Values.Text = "查看统计";
+            // 
             // ctAccountFilter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.btnStatistic);
             this.Controls.Add(this.btnDebug);
             this.Controls.Add(this.tbMemo);
             this.Controls.Add(this.kryptonLabel2);
@@ -138,7 +148,7 @@
             this.Controls.Add(this.tbAccount);
             this.Controls.Add(this.kryptonLabel1);
             this.Name = "ctAccountFilter";
-            this.Size = new System.Drawing.Size(732, 24);
+            this.Size = new System.Drawing.Size(782, 24);
             ((System.ComponentModel.ISupportInitialize)(this.accountType)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -157,5 +167,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox tbMemo;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private System.Windows.Forms.Button btnDebug;
+        private ComponentFactory.Krypton.Toolkit.KryptonLinkLabel btnStatistic;
     }
 }

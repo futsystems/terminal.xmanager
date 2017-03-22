@@ -38,10 +38,20 @@ namespace TradingLib.MoniterControl
             accountType.SelectedValueChanged += new EventHandler(accountType_SelectedValueChanged);
             tbMemo.TextChanged += new EventHandler(tbMemo_TextChanged);
             btnDebug.Click += new EventHandler(btnDebug_Click);
-           
+            btnStatistic.Click +=new EventHandler(btnStatistic_Click);
+        }
+
+        void btnStatistic_Click(object sender, EventArgs e)
+        {
+            if (StatisticEvent != null)
+            {
+                StatisticEvent();
+            }
         }
 
         public event VoidDelegate DebugEvent;
+
+        public event VoidDelegate StatisticEvent;
         void btnDebug_Click(object sender, EventArgs e)
         {
             if (DebugEvent != null)

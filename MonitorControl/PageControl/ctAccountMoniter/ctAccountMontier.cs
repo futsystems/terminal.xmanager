@@ -33,6 +33,7 @@ namespace TradingLib.MoniterControl
                 filterBox = new ctAccountFilter();
                 filterBox.FilterArgsChanged += new Action<FilterArgs>(OnFilterArgsChanged);
                 filterBox.DebugEvent += new VoidDelegate(filterBox_DebugEvent);
+                filterBox.StatisticEvent += new VoidDelegate(filterBox_StatisticEvent);
                 this.FilterToolBar = filterBox;
                
 
@@ -43,6 +44,14 @@ namespace TradingLib.MoniterControl
                 MessageBox.Show("error ex:" + ex.ToString());
             }
             
+        }
+
+        void filterBox_StatisticEvent()
+        {
+            fmStatistic fm = new fmStatistic();
+            fm.SetGrid(accountgrid);
+            fm.Update();
+            fm.ShowDialog();
         }
 
         void filterBox_DebugEvent()

@@ -54,6 +54,7 @@ namespace TradingLib.MoniterControl
         const string MEMO = "备注";
         const string DELETE = "DELETE";
         const string TAG = "ACCOUNTTAG";
+        const string TAG2 = "ACCOUNTTAG2";
 
         DataTable gt = new DataTable();
         BindingSource datasource = new BindingSource();
@@ -132,6 +133,7 @@ namespace TradingLib.MoniterControl
             gt.Columns.Add(AGENTMGRFK);//21
             gt.Columns.Add(MEMO);
             gt.Columns.Add(TAG,typeof(AccountItem));
+            gt.Columns.Add(TAG2, typeof(AccountStatistic));
             gt.Columns.Add(DELETE);
             
             
@@ -155,6 +157,7 @@ namespace TradingLib.MoniterControl
             accountgrid.Columns[WARN].Visible = false;
             accountgrid.Columns[EXECUTE].Visible = false;
             accountgrid.Columns[TAG].Visible = false;
+            accountgrid.Columns[TAG2].Visible = false;
             accountgrid.Columns[DELETE].Visible = false;
 
             for (int i = 0; i < gt.Columns.Count; i++)
@@ -391,7 +394,7 @@ namespace TradingLib.MoniterControl
                             gt.Rows[i][ROUTERGROUPSTR] = rg != null ? rg.Name : "";
 
                         }
-
+                        
                         gt.Rows[i][WARN] = account.IsWarn;
                         gt.Rows[i][WARNSTR] = account.WarnMessage;
 
@@ -495,6 +498,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[r][PROFIT] = notify.Profit.ToFormatStr();
                     //gt.Rows[r][PROFITLOSSIMG] = getProfitLossImage(account.Profit);
                     gt.Rows[r][HOLDSIZE] = notify.TotalPositionSize;
+                    gt.Rows[r][TAG2] = notify;
                 }
             }
         }

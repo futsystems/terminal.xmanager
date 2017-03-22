@@ -98,7 +98,7 @@ namespace TradingLib.MoniterControl
             }
             if (_quotelist.Columns.Contains(QuoteListConst.SYMBOLNAME))
             {
-                this[QuoteListConst.SYMBOLNAME].Symbol = _symbol.GetName();
+                this[QuoteListConst.SYMBOLNAME].Symbol = _symbol.GetName(true);
             }
         }
 

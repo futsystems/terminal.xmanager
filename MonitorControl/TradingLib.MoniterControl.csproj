@@ -547,6 +547,12 @@
     <Compile Include="Forms\Contrib\fmInsertTrade.Designer.cs">
       <DependentUpon>fmInsertTrade.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmStatistic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmStatistic.Designer.cs">
+      <DependentUpon>fmStatistic.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Follow\fmQryFollowExecution.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1123,6 +1129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Contrib\fmInsertTrade.resx">
       <DependentUpon>fmInsertTrade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmStatistic.resx">
+      <DependentUpon>fmStatistic.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Follow\fmQryFollowExecution.resx">
       <DependentUpon>fmQryFollowExecution.cs</DependentUpon>
