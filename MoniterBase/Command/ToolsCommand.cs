@@ -95,6 +95,7 @@ namespace TradingLib.MoniterBase.Command
     /// </summary>
     public class CashOperationCommand : AbstractMenuCommand
     {
+        static fmCashOperationManager mgr = null;
         public override void Run()
         {
             //root可查看
@@ -103,10 +104,10 @@ namespace TradingLib.MoniterBase.Command
                 MoniterHelper.WindowMessage("无权限");
                 return;
             }
-
-            fmCashOperationManager fm = new fmCashOperationManager();
-            fm.ShowDialog();
-            fm.Close();
+            if (mgr == null)
+                mgr = new fmCashOperationManager();
+            //fmCashOperationManager fm = new fmCashOperationManager();
+            mgr.Show();
         }
     }
 }

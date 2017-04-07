@@ -236,11 +236,13 @@ namespace TradingLib.MoniterControl
             grid.DataSource = datasource;
 
             //需要在绑定数据源后设定具体的可见性
-            grid.Columns[ID].Width = 40;
+            //grid.Columns[ID].Width = 40;
             grid.Columns[SETTLEDAY].Width = 80;
             grid.Columns[DATETIME].Width = 120;
-            grid.Columns[ACCOUNT].Width = 80;
             grid.Columns[OPERATION].Width = 40;
+            grid.Columns[ACCOUNT].Width = 80;
+            grid.Columns[TYPE].Width = 60;
+            grid.Columns[AMOUNT].Width = 100;
 
             if (ViewType == CashOpViewType.Account)
             {

@@ -166,6 +166,15 @@ namespace TradingLib.MoniterControl
                             connCtrl.IDChanged += new Action(connCtrl_IDChanged);
                         }
                         break;
+                    case 9:
+                        {
+                            ctBrokerCTPDirect input = new ctBrokerCTPDirect();
+                            holder.Controls.Add(input);
+                            input.Dock = DockStyle.Fill;
+                            connCtrl = input;
+                            connCtrl.IDChanged += new Action(connCtrl_IDChanged);
+                        }
+                        break;
                     case 8:
                         {
                             ctBrokerESunnyDirect input = new ctBrokerESunnyDirect();

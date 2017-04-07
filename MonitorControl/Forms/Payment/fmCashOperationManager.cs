@@ -39,6 +39,13 @@ namespace TradingLib.MoniterControl
             cashOperationGrid.CellFormatting += new DataGridViewCellFormattingEventHandler(cashOperationGrid_CellFormatting);
             cashOperationGrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(cashOperationGrid_RowPrePaint);
             this.Load += new EventHandler(fmCashOperationManager_Load);
+            this.FormClosing += new FormClosingEventHandler(fmCashOperationManager_FormClosing);
+        }
+
+        void fmCashOperationManager_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
         }
 
         void cashOperationGrid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -224,6 +231,7 @@ namespace TradingLib.MoniterControl
             if (op != null)
             {
                 InvokeGotCashOperation(op);
+                UpdateText();
             }
         }
         void OnQryCashOperation(string json, bool islast)
@@ -233,14 +241,25 @@ namespace TradingLib.MoniterControl
             {
                 InvokeGotCashOperation(op);
             }
+
+            if (islast)
+            {
+                UpdateText();
+            }
+        }
+
+        void UpdateText()
+        {
+            this.Text = string.Format("未处理:{0}个【在线出入金管理】 ", opmap.Values.Where(c => c.Status == QSEnumCashInOutStatus.PENDING).Count());
         }
 
 
         Dictionary<string, int> oprowidmap = new Dictionary<string, int>();
-        int CashOperatioinIdx(string cashref)
+        Dictionary<string, CashOperation> opmap = new Dictionary<string, CashOperation>();
+        int CashOperatioinIdx(CashOperation op)
         {
             int rowid = -1;
-            if (!oprowidmap.TryGetValue(cashref, out rowid))
+            if (!oprowidmap.TryGetValue(op.Ref, out rowid))
             {
                 return -1;
             }
@@ -258,7 +277,7 @@ namespace TradingLib.MoniterControl
             }
             else
             {
-                int i = CashOperatioinIdx(op.Ref);
+                int i = CashOperatioinIdx(op);
                 if (i == -1)
                 {
                     tb.Rows.Add();
@@ -272,11 +291,14 @@ namespace TradingLib.MoniterControl
                     tb.Rows[i][GATEWAYTYPE] = (int)op.GateWayType == -1 ? "手工" : Util.GetEnumDescription(op.GateWayType);
                     tb.Rows[i][STATUS] = op.Status;
                     tb.Rows[i][STATUSSTR] = Util.GetEnumDescription(op.Status);
+                    tb.Rows[i][BUSINESSTYPE] = op.BusinessType;
+                    tb.Rows[i][BUSINESSTYPESTR] = Util.GetEnumDescription(op.BusinessType);
                     tb.Rows[i][REF] = op.Ref;
                     tb.Rows[i][COMMENT] = op.Comment;
                     tb.Rows[i][TAG] = op;
 
                     oprowidmap.Add(op.Ref, i);
+                    opmap.Add(op.Ref, op);
                 }
                 else
                 {
@@ -284,6 +306,7 @@ namespace TradingLib.MoniterControl
                     tb.Rows[i][STATUSSTR] = Util.GetEnumDescription(op.Status);
                     tb.Rows[i][COMMENT] = op.Comment;
                     tb.Rows[i][TAG] = op;
+                    opmap[op.Ref] = op;
                 }
             }
         }
@@ -300,6 +323,8 @@ namespace TradingLib.MoniterControl
         const string GATEWAYTYPE = "支付通道";
         const string STATUS = "F状态";
         const string STATUSSTR = "状态";
+        const string BUSINESSTYPE = "F类别";
+        const string BUSINESSTYPESTR = "业务类别";
         const string REF = "本地订单号";
         const string COMMENT = "备注";
         const string TAG = "TAG";
@@ -346,6 +371,8 @@ namespace TradingLib.MoniterControl
             tb.Columns.Add(GATEWAYTYPE);
             tb.Columns.Add(STATUS);
             tb.Columns.Add(STATUSSTR);
+            tb.Columns.Add(BUSINESSTYPE);
+            tb.Columns.Add(BUSINESSTYPESTR);
             tb.Columns.Add(COMMENT);
             tb.Columns.Add(TAG, typeof(CashOperation));
             
@@ -370,12 +397,14 @@ namespace TradingLib.MoniterControl
             grid.Columns[DATETIME].Width = 90;
             grid.Columns[OPERATIONSTR].Width = 30;
             grid.Columns[STATUSSTR].Width = 40;
+            grid.Columns[BUSINESSTYPESTR].Width = 60;
             grid.Columns[AMOUNT].Width = 60;
 
             grid.Columns[OPERATION].Visible = false;
             grid.Columns[ID].Visible = false;
             grid.Columns[STATUS].Visible = false;
             grid.Columns[TAG].Visible = false;
+            grid.Columns[BUSINESSTYPE].Visible = false;
         }
 
         void Clear()

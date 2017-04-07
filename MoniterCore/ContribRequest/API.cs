@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+using System.ComponentModel;
 using TradingLib.API;
 using TradingLib.Common;
 
@@ -24,6 +26,28 @@ namespace TradingLib.MoniterCore
         /// </summary>
         IPS,
     }
+
+    public enum EnumBusinessType
+    {
+        /// <summary>
+        /// 普通类别
+        /// </summary>
+        [Description("普通出入金")]
+        Normal,
+
+        /// <summary>
+        /// 配资入金 资金会根据账户资金按杠杆比例自动调整优先资金
+        /// </summary>
+        [Description("配资入金")]
+        LeverageDeposit,
+
+        /// <summary>
+        /// 减少配资 减少账户优先资金 用于降低风险
+        /// </summary>
+        [Description("减少配资")]
+        CreditWithdraw
+    }
+
 
     public class CashOperation
     {
@@ -67,6 +91,14 @@ namespace TradingLib.MoniterCore
         /// 备注
         /// </summary>
         public string Comment { get; set; }
+
+        /// <summary>
+        /// 业务类别
+        /// 普通 不执行优先资金操作
+        /// 配资 执行优先资金操作
+        /// </summary>
+        public EnumBusinessType BusinessType { get; set; }
+
 
         /// <summary>
         /// 分区编号

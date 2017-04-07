@@ -100,6 +100,10 @@ namespace TradingLib.MoniterControl
             _current.SimExecuteTimeCheck = simTimeCheck.Checked;
             _current.SimExecuteUseAskBid = simUseBidAsk.Checked;
 
+            _current.DepositCommission = depositCommission.Value;
+            _current.WithdrawCommission = withdrawCommission.Value;
+            _current.LeverageRatio = leverageRatio.Value;
+
             CoreService.TLClient.ReqUpdateExStrategyTemplateItem(_current);
         }
 
@@ -270,6 +274,10 @@ namespace TradingLib.MoniterControl
                 simStickLimit.Checked = item.SimExecuteStickLimitPrice;
                 simTimeCheck.Checked = item.SimExecuteTimeCheck;
                 simUseBidAsk.Checked = item.SimExecuteUseAskBid;
+
+                depositCommission.Value = item.DepositCommission;
+                withdrawCommission.Value = item.WithdrawCommission;
+                leverageRatio.Value = item.LeverageRatio;
                 _current = item;
             }
         }

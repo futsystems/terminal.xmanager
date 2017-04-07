@@ -41,7 +41,7 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(794, 476);
+            this.kryptonPanel1.Size = new System.Drawing.Size(891, 476);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // ctCashTrans1
@@ -49,7 +49,7 @@
             this.ctCashTrans1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ctCashTrans1.Location = new System.Drawing.Point(0, 0);
             this.ctCashTrans1.Name = "ctCashTrans1";
-            this.ctCashTrans1.Size = new System.Drawing.Size(794, 476);
+            this.ctCashTrans1.Size = new System.Drawing.Size(891, 476);
             this.ctCashTrans1.TabIndex = 0;
             this.ctCashTrans1.ViewType = TradingLib.MoniterControl.CashOpViewType.Account;
             // 
@@ -57,7 +57,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(794, 476);
+            this.ClientSize = new System.Drawing.Size(891, 476);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
