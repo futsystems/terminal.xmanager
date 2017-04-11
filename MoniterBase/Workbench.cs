@@ -80,13 +80,32 @@ namespace TradingLib.MoniterBase
                 imgLink.Image = (Image)Properties.Resources.online;
             }
 
-           
+
+            //订阅出入金通知
+            CoreService.EventCore.RegisterNotifyCallback(Modules.APIService, Method_API.NOTIFY_CASH_OPERATION, this.OnNotifyCashOperation);
 
             //超管查看结算状态
             if (CoreService.SiteInfo.Domain.Super)
             {
                 CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_SYSTEM_STATUS, this.OnQrySystemStatus);
                 CoreService.TLClient.ReqQrySystemStatus();
+            }
+        }
+
+        void OnNotifyCashOperation(string json)
+        {
+            CashOperation op = json.DeserializeObject<CashOperation>();
+            if (op != null)
+            {
+                if (op.OperationType == QSEnumCashOperation.Deposit && op.Status == QSEnumCashInOutStatus.CONFIRMED)
+                {
+                    soundNotify.Play();
+                }
+                if (op.OperationType == QSEnumCashOperation.WithDraw && op.Status == QSEnumCashInOutStatus.PENDING)
+                {
+                    soundNotify.Play();
+                }
+                
             }
         }
 
@@ -120,7 +139,7 @@ namespace TradingLib.MoniterBase
 
         Dictionary<string, Control> controlmap = new Dictionary<string, Control>();
         Dictionary<string, EnumControlLocation> locationmap = new Dictionary<string, EnumControlLocation>();
-
+        SoundNotify soundNotify = new SoundNotify();
         private Workbench()
         {
             InitializeComponent();

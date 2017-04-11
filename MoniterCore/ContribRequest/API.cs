@@ -25,6 +25,11 @@ namespace TradingLib.MoniterCore
         /// 环迅
         /// </summary>
         IPS,
+
+        /// <summary>
+        /// 银生宝
+        /// </summary>
+        UnsPay,
     }
 
     public enum EnumBusinessType
