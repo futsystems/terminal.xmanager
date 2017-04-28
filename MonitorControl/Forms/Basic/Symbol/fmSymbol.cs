@@ -117,7 +117,7 @@ namespace TradingLib.MoniterControl
                     symbolidxmap.Add(sym.ID, i);
 
                     gt.Rows[i][SYMBOL] = sym.Symbol;
-                    gt.Rows[i][NAME] = sym.GetName(true);
+                    gt.Rows[i][NAME] = sym.GetTitleName(true);
                     gt.Rows[i][ENTRYCOMMISSION] = sym.EntryCommission;
                     gt.Rows[i][EXITCOMMISSION] = sym.ExitCommission;
                     gt.Rows[i][EXITCOMMISSIONTODAY] = sym.ExitCommissionToday;
@@ -147,7 +147,7 @@ namespace TradingLib.MoniterControl
                 {
                     int i = r;
                     gt.Rows[i][SYMBOL] = sym.Symbol;
-                    gt.Rows[i][NAME] = sym.GetName(true);
+                    gt.Rows[i][NAME] = sym.GetTitleName(true);
                     gt.Rows[i][ENTRYCOMMISSION] = sym.EntryCommission;
                     gt.Rows[i][EXITCOMMISSION] = sym.ExitCommission;
                     gt.Rows[i][EXITCOMMISSIONTODAY] = sym.ExitCommissionToday;
