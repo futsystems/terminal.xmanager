@@ -47,6 +47,7 @@
     <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <OutputPath>bin\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Logging, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">

@@ -16,6 +16,7 @@ XConsole.suo
 /Logs
 /bin
 
+/publish
 
 #排除子目录中的bin obj debug release
 **/bin/

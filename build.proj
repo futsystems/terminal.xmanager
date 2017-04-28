@@ -1,0 +1,79 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="4.0">
+<PropertyGroup>
+<SolutionDir Condition="'$(SolutionDir)' == ''">$(MSBuildProjectDirectory)</SolutionDir>
+<BuildDir>build</BuildDir>
+<Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
+<OperatingPlatform Condition="'$(OperatingPlatform)' == ''">Windows</OperatingPlatform>
+<PackageDir>publish\Release</PackageDir>
+</PropertyGroup>
+
+<ItemGroup>
+	<PackageCleanFiles Include="$(PackageDir)\*.dll" />
+	<PackageCleanFiles Include="$(PackageDir)\*.exe" />
+	<PackageCleanFiles Include="$(PackageDir)\*.a" />
+	<PackageCleanFiles Include="$(PackageDir)\**\*.dll" />
+</ItemGroup>
+
+<ItemGroup>
+	<BuildCleanFiles Include="MoniterBase\bin\**\*" />
+	<BuildCleanFiles Include="MoniterCore\bin\**\*" />
+	<BuildCleanFiles Include="ICSharpCode.Core\bin\**\*" />
+	<BuildCleanFiles Include="MoniterControl\bin\**\*" />
+	<BuildCleanFiles Include="MoniterSkeleton\bin\**\*" />
+</ItemGroup>
+
+
+
+
+<Target Name="Build">
+		<MSBuild Projects="ICSharpCode.Core\ICSharpCode.Core.csproj" Properties="Configuration=$(Configuration);" />
+		<MSBuild Projects="MoniterCore\TradingLib.MoniterCore.csproj" Properties="Configuration=$(Configuration);" />
+		<MSBuild Projects="MonitorControl\TradingLib.MoniterControl.csproj" Properties="Configuration=$(Configuration);" />
+		<MSBuild Projects="MoniterBase\TradingLib.MoniterBase.csproj" Properties="Configuration=$(Configuration);" />
+		<MSBuild Projects="MoniterSkeleton\MoniterSkeleton.csproj" Properties="Configuration=$(Configuration);" />
+</Target>
+
+
+<ItemGroup>
+		<LibFiles Include="..\..\Futs.base\lib\Newtonsoft.Json.dll" />
+		<LibFiles Include="..\..\Futs.base\lib\NodaTime.dll" />
+		<LibFiles Include="..\..\Futs.base\lib\NetMQ.dll" />
+		<LibFiles Include="..\..\Futs.base\lib\update\Ant.Component.dll" />
+		<LibFiles Include="..\..\Futs.base\lib\update\Beetle.dll" />
+		<LibFiles Include="..\..\Futs.base\lib\update\Smark.Core.dll" />
+		<LibFiles Include="..\..\Futs.base\lib\Common.Logging.Core.dll" />
+		<LibFiles Include="..\..\Futs.base\lib\Common.Logging.dll" />
+		<LibFiles Include="..\..\Futs.base\lib\TradingLib\TradingLib.API.dll" />
+		<LibFiles Include="..\..\Futs.base\lib\TradingLib\TradingLib.Common.dll" />
+		<LibFiles Include="RequiredLibraries\kypton\ComponentFactory.Krypton.Toolkit.dll" />
+		<LibFiles Include="RequiredLibraries\kypton\ComponentFactory.Krypton.Navigator.dll" />
+</ItemGroup>
+<ItemGroup>
+		<BuildFiles Include="MoniterCore\bin\Release\TradingLib.MoniterCore.dll" />
+		<BuildFiles Include="MoniterSkeleton\bin\Release\XManager.exe" />
+		<BuildFiles Include="ICSharpCode.Core\bin\Release\ICSharpCode.Core.dll" />
+		<BuildFiles Include="MonitorControl\bin\Release\XSystem.Control.dll" />
+		<BuildFiles Include="MoniterBase\bin\Release\XSystem.Base.dll" />
+</ItemGroup>
+
+<ItemGroup>
+		<AddInFiles Include="MonitorControl\bin\Release\AddIns\MoniterControl.addin" />
+		<AddInFiles Include="MoniterBase\bin\Release\AddIns\MoniterBase.addin" />
+</ItemGroup>		
+
+<Target Name="Publish">
+	<MakeDir Directories="$(PackageDir)\AddIns" />
+	<Copy SourceFiles="@(BuildFiles)" DestinationFolder="$(PackageDir)" ContinueOnError="false" />
+	<Copy SourceFiles="@(LibFiles)" DestinationFolder="$(PackageDir)" ContinueOnError="false" />
+</Target>
+  
+<Target Name="BuildClean">
+	<Delete Files="@(BuildCleanFiles)"/>
+</Target>
+
+
+
+
+
+
+</Project>
