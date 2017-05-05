@@ -333,6 +333,33 @@ namespace TradingLib.MoniterControl
             return list;
         }
 
+        /// <summary>
+        /// 在只有合约字符串
+        /// 无法确保有合约对象时 通过合约解析出品种字符串然后通过品种来格式化价格
+        /// </summary>
+        /// <param name="symbol"></param>
+        /// <param name="val"></param>
+        /// <returns></returns>
+        public static  string FormatPrice(string symbol, decimal val)
+        {
+            string sec = SymbolImpl.ParseSecCode(symbol);
+            SecurityFamily s = CoreService.BasicInfoTracker.GetSecurity(sec);
+            if (s == null) val.ToFormatStr();
+            return val.ToFormatStr(s.GetPriceFormat());
+        }
+
+        /// <summary>
+        /// 获得某个合约的价格格式字符串
+        /// </summary>
+        /// <param name="symbol"></param>
+        /// <returns></returns>
+        public static string GetPriceFormat(string symbol)
+        {
+            string sec = SymbolImpl.ParseSecCode(symbol);
+            SecurityFamily s = CoreService.BasicInfoTracker.GetSecurity(sec);
+            if (s == null) return "{0:F2}";
+            return s.GetPriceFormat();
+        }
 
         static bool IsWindows(PlatformID id)
         {

@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using TradingLib.API;
 using TradingLib.Common;
+using TradingLib.MoniterCore;
 
 
 
@@ -66,6 +67,8 @@ namespace TradingLib.MoniterControl
 
         DataTable tb = new DataTable();
 
+        
+
         string GetOrderPrice(Order o)
         {
             if (o.isMarket)
@@ -74,11 +77,11 @@ namespace TradingLib.MoniterControl
             }
             if (o.isLimit)
             {
-                return "限价:" + o.LimitPrice.ToString();
+                return "限价:" +MoniterHelper.FormatPrice(o.Symbol, o.LimitPrice);
             }
             if (o.isStop)
             {
-                return "Stop:" + o.StopPrice.ToString();
+                return "Stop:" + MoniterHelper.FormatPrice(o.Symbol, o.StopPrice);
             }
             return "未知";
         }
