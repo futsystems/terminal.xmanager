@@ -30,6 +30,11 @@ namespace TradingLib.MoniterCore
         /// 银生宝
         /// </summary>
         UnsPay,
+
+        /// <summary>
+        /// 智付
+        /// </summary>
+        DinPay,
     }
 
     public enum EnumBusinessType
