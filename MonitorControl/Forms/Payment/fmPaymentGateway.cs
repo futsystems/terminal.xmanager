@@ -54,6 +54,7 @@ namespace TradingLib.MoniterControl
             }
             if (islast && _cfg != null)
             {
+
                 gatewayType.SelectedValue = _cfg.GateWayType;
                 avabile.Checked = _cfg.Avabile;
                 LoadInputControl(_cfg.GateWayType);
@@ -153,6 +154,14 @@ namespace TradingLib.MoniterControl
                         {
                             ctGateWayDinPay input = new ctGateWayDinPay();
                             holder.Controls.Add(input);
+                            input.Dock = DockStyle.Fill;
+                            gwControl = input;
+                        }
+                        break;
+                    case QSEnumGateWayType.ChinagPay:
+                        {
+                            ctGateWayChinagPay input = new ctGateWayChinagPay();
+                             holder.Controls.Add(input);
                             input.Dock = DockStyle.Fill;
                             gwControl = input;
                         }

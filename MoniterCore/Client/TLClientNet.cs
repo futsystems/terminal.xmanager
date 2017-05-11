@@ -40,7 +40,7 @@ namespace TradingLib.MoniterCore
             }
         }
 
-        public TLVersion ServerVersion { get { return connecton == null ? null : connecton.ServerVersion; } }
+        public TLNegotiation Negotiation { get { return connecton == null ? null : connecton.Negotiation; } }
         string[] _servers = new string[] { };
         int _port = 5570;
 

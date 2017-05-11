@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.domain = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.account = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.md5key = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.merCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.payurl = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.account = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.domain = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -60,6 +60,38 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(321, 281);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // domain
+            // 
+            this.domain.Location = new System.Drawing.Point(27, 237);
+            this.domain.Name = "domain";
+            this.domain.Size = new System.Drawing.Size(269, 20);
+            this.domain.TabIndex = 16;
+            this.domain.Text = "www.demo.com";
+            // 
+            // kryptonLabel4
+            // 
+            this.kryptonLabel4.Location = new System.Drawing.Point(7, 211);
+            this.kryptonLabel4.Name = "kryptonLabel4";
+            this.kryptonLabel4.Size = new System.Drawing.Size(60, 20);
+            this.kryptonLabel4.TabIndex = 15;
+            this.kryptonLabel4.Values.Text = "绑定域名";
+            // 
+            // account
+            // 
+            this.account.Location = new System.Drawing.Point(27, 129);
+            this.account.Name = "account";
+            this.account.Size = new System.Drawing.Size(148, 20);
+            this.account.TabIndex = 14;
+            this.account.Text = "1000010019";
+            // 
+            // kryptonLabel3
+            // 
+            this.kryptonLabel3.Location = new System.Drawing.Point(7, 103);
+            this.kryptonLabel3.Name = "kryptonLabel3";
+            this.kryptonLabel3.Size = new System.Drawing.Size(60, 20);
+            this.kryptonLabel3.TabIndex = 13;
+            this.kryptonLabel3.Values.Text = "交易账号";
             // 
             // md5key
             // 
@@ -105,41 +137,9 @@
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(4, 4);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(60, 20);
+            this.kryptonLabel1.Size = new System.Drawing.Size(85, 20);
             this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "网关地址";
-            // 
-            // account
-            // 
-            this.account.Location = new System.Drawing.Point(27, 129);
-            this.account.Name = "account";
-            this.account.Size = new System.Drawing.Size(148, 20);
-            this.account.TabIndex = 14;
-            this.account.Text = "1000010019";
-            // 
-            // kryptonLabel3
-            // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(7, 103);
-            this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(60, 20);
-            this.kryptonLabel3.TabIndex = 13;
-            this.kryptonLabel3.Values.Text = "交易账号";
-            // 
-            // domain
-            // 
-            this.domain.Location = new System.Drawing.Point(27, 237);
-            this.domain.Name = "domain";
-            this.domain.Size = new System.Drawing.Size(269, 20);
-            this.domain.TabIndex = 16;
-            this.domain.Text = "www.demo.com";
-            // 
-            // kryptonLabel4
-            // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(7, 211);
-            this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(60, 20);
-            this.kryptonLabel4.TabIndex = 15;
-            this.kryptonLabel4.Values.Text = "绑定域名";
+            this.kryptonLabel1.Values.Text = "环迅网关地址";
             // 
             // ctGateWayIPS
             // 

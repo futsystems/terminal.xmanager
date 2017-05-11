@@ -103,11 +103,7 @@ namespace TradingLib.MoniterCore
         {
             get
             {
-                if (CoreService.TLClient.ServerVersion == null)
-                {
-                    return QSEnumProductType.CounterSystem;
-                }
-                return CoreService.TLClient.ServerVersion.ProductType;
+                return QSEnumProductType.CounterSystem;
             }
         }
 
@@ -118,11 +114,11 @@ namespace TradingLib.MoniterCore
         {
             get
             {
-                if (CoreService.TLClient.ServerVersion == null)
+                if (CoreService.TLClient.Negotiation == null)
                 {
                     return PlatformID.Win32NT;
                 }
-                return CoreService.TLClient.ServerVersion.Platfrom;
+                return CoreService.TLClient.Negotiation.PlatformID;
             }
         }
     }

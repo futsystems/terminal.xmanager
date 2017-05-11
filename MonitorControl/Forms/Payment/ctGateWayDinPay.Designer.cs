@@ -30,20 +30,24 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctGateWayDinPay));
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.domain = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.dinPublicKey = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.merPrivateKey = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.mercode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.payurl = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.dinPublicKey = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.domain);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel4);
             this.kryptonPanel1.Controls.Add(this.dinPublicKey);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel3);
             this.kryptonPanel1.Controls.Add(this.merPrivateKey);
@@ -57,6 +61,38 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(321, 281);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // domain
+            // 
+            this.domain.Location = new System.Drawing.Point(27, 236);
+            this.domain.Name = "domain";
+            this.domain.Size = new System.Drawing.Size(134, 20);
+            this.domain.TabIndex = 16;
+            this.domain.Text = "abc.com";
+            // 
+            // kryptonLabel4
+            // 
+            this.kryptonLabel4.Location = new System.Drawing.Point(7, 210);
+            this.kryptonLabel4.Name = "kryptonLabel4";
+            this.kryptonLabel4.Size = new System.Drawing.Size(35, 20);
+            this.kryptonLabel4.TabIndex = 15;
+            this.kryptonLabel4.Values.Text = "域名";
+            // 
+            // dinPublicKey
+            // 
+            this.dinPublicKey.Location = new System.Drawing.Point(27, 185);
+            this.dinPublicKey.Name = "dinPublicKey";
+            this.dinPublicKey.Size = new System.Drawing.Size(269, 20);
+            this.dinPublicKey.TabIndex = 14;
+            this.dinPublicKey.Text = resources.GetString("dinPublicKey.Text");
+            // 
+            // kryptonLabel3
+            // 
+            this.kryptonLabel3.Location = new System.Drawing.Point(7, 159);
+            this.kryptonLabel3.Name = "kryptonLabel3";
+            this.kryptonLabel3.Size = new System.Drawing.Size(60, 20);
+            this.kryptonLabel3.TabIndex = 13;
+            this.kryptonLabel3.Values.Text = "智付公钥";
             // 
             // merPrivateKey
             // 
@@ -102,25 +138,9 @@
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(4, 4);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(60, 20);
+            this.kryptonLabel1.Size = new System.Drawing.Size(85, 20);
             this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "网关地址";
-            // 
-            // dinPublicKey
-            // 
-            this.dinPublicKey.Location = new System.Drawing.Point(27, 185);
-            this.dinPublicKey.Name = "dinPublicKey";
-            this.dinPublicKey.Size = new System.Drawing.Size(269, 20);
-            this.dinPublicKey.TabIndex = 14;
-            this.dinPublicKey.Text = resources.GetString("dinPublicKey.Text");
-            // 
-            // kryptonLabel3
-            // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(7, 159);
-            this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(60, 20);
-            this.kryptonLabel3.TabIndex = 13;
-            this.kryptonLabel3.Values.Text = "智付公钥";
+            this.kryptonLabel1.Values.Text = "智付网关地址";
             // 
             // ctGateWayDinPay
             // 
@@ -147,5 +167,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox dinPublicKey;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox domain;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
     }
 }

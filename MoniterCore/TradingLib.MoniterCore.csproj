@@ -121,6 +121,7 @@
     <Compile Include="Services\CoreService.cs" />
     <Compile Include="Services\SiteInfo.cs" />
     <Compile Include="Services\TradingInfoTracker.cs" />
+    <Compile Include="StringChiper.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Abstract\MonitorControl.resx">

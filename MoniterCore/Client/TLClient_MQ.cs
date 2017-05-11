@@ -98,8 +98,8 @@ namespace TradingLib.MoniterCore
         Providers _bn = Providers.Unknown;
         public Providers BrokerName { get { return _bn; } }
         //服务端版本
-        private TLVersion _serverversion;
-        public TLVersion ServerVersion { get { return _serverversion; } }
+        private TLNegotiation _negotiation;
+        public TLNegotiation Negotiation { get { return _negotiation; } }
 
         //服务端版本与客户端API版本是否匹配
         //public bool IsAPIOK { get { return Util.Version >= _serverversion; } }
@@ -640,11 +640,11 @@ namespace TradingLib.MoniterCore
                 _bn = servers[_curprovider];
                 //当所有组件初始化完毕 统一启动Start就可以正确调用到这里的回调
                 //初始化initconnection/启动后台线程完毕后触发事件
-                logger.Info("??????????????????????????????????");
-                if (OnConnectEvent != null)
-                {
-                    OnConnectEvent();
-                }
+                //logger.Info("??????????????????????????????????");
+                //if (OnConnectEvent != null)
+                //{
+                //    OnConnectEvent();
+                //}
                 return true;
             }
             catch (Exception ex)
@@ -664,11 +664,11 @@ namespace TradingLib.MoniterCore
             // register ourselves with provider 注册
             Register();
             Util.sleep(100);
-            // request list of features from provider 请求功能支持列表
-            RequestFeatures();
-            //request server version;查询服务器版本
-            ReqServerVersion();
-            //当我们得到服务器版本后 我们设定 _reconnectreq = false; 这样 就不会一直进行重连
+            //// request list of features from provider 请求功能支持列表
+            //RequestFeatures();
+            ////request server version;查询服务器版本
+            //ReqServerVersion();
+            ////当我们得到服务器版本后 我们设定 _reconnectreq = false; 这样 就不会一直进行重连
         }
         /// <summary>
         /// 用于通过ip地址来获得对应的provider名称,可以检查是否有对应的服务存在
@@ -807,7 +807,8 @@ namespace TradingLib.MoniterCore
             FeatureRequest request = RequestTemplate<FeatureRequest>.CliSendRequest(++requestid);
             TLSend(request);
         }
-
+        string neoKey = string.Empty;
+        string neoString = string.Empty;
         /// <summary>
         /// 请求服务器版本
         /// </summary>
@@ -817,6 +818,12 @@ namespace TradingLib.MoniterCore
             VersionRequest request = RequestTemplate<VersionRequest>.CliSendRequest(++requestid);
             request.ClientVersion = "2.0";
             request.DeviceType = "PC";
+            neoKey = Util.GetRandomString(8);
+            neoString = Util.GetRandomString(12);
+            request.NegotiationKey = neoKey;
+            request.NegotiationString = neoString;
+            request.EncryptUUID = StringCipher.Encrypt(_sessionID, neoKey);
+
             TLSend(request);
         }
         /// <summary>
@@ -945,10 +952,39 @@ namespace TradingLib.MoniterCore
         /// <param name="response"></param>
         void CliOnVersionResponse(VersionResponse response)
         {
-            _serverversion = response.Version;
+            _negotiation = response.Negotiation;
 
             //_uuid = response.ClientUUID;
-            logger.Info("Client got version response, version:" + _serverversion.ToString());
+            logger.Info("Client got version response, version:" + _negotiation.Version.ToString());
+
+            string rawstr = string.Empty;
+            try
+            {
+                rawstr = StringCipher.Decrypt(response.Negotiation.NegoResponse,neoKey);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Negotiation Error");
+            }
+
+            if (rawstr != neoString)
+            {
+                //如果原来的连接存活 则先断开连接
+                if ((_mqcli != null) && (_mqcli.isConnected))
+                {
+                    logger.Info(_skip + "Disconnect old Connection...");
+                    _mqcli.Disconnect();
+                    markdisconnect();
+                }
+            }
+
+            else
+            {
+                if (OnConnectEvent != null)
+                {
+                    OnConnectEvent();
+                }
+            }
         }
 
         /// <summary>
@@ -1079,6 +1115,8 @@ namespace TradingLib.MoniterCore
         }
         #endregion
 
+        string _sessionID = string.Empty;
+
         //消息处理逻辑
         void handle(Message msg)
         {
@@ -1146,6 +1184,19 @@ namespace TradingLib.MoniterCore
                     {
                         updateheartbeat();
                         CliOnHeartbeatResponse(packet as HeartBeatResponse);
+                    }
+                    break;
+                case MessageTypes.REGISTERCLIENTRESPONSE:
+                    { 
+                        RspRegisterClientResponse response = packet as RspRegisterClientResponse;
+                        _sessionID = response.SessionID;
+
+                        // request list of features from provider 请求功能支持列表
+                        RequestFeatures();
+                        //request server version;查询服务器版本
+                        ReqServerVersion();
+                        //当我们得到服务器版本后 我们设定 _reconnectreq = false; 这样 就不会一直进行重连
+
                     }
                     break;
                 //其余逻辑数据包

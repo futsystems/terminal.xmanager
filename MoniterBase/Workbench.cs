@@ -53,7 +53,7 @@ namespace TradingLib.MoniterBase
             }
 
             //设置部署编号
-            lbDeployID.Text = string.Format("{0}-{1}.{2}.{3}-{4}", CoreService.TLClient.ServerVersion.DeployID, CoreService.TLClient.ServerVersion.Major, CoreService.TLClient.ServerVersion.Minor, CoreService.TLClient.ServerVersion.Fix, CoreService.TLClient.ServerVersion.Date);
+            lbDeployID.Text = string.Format("{0}-{1}", CoreService.TLClient.Negotiation.DeployID,CoreService.TLClient.Negotiation.Version);
 
             if (!CoreService.SiteInfo.Domain.Super)
             {

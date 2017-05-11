@@ -168,9 +168,9 @@
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(4, 4);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(45, 20);
+            this.kryptonLabel1.Size = new System.Drawing.Size(60, 20);
             this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "PayUrl";
+            this.kryptonLabel1.Values.Text = "宝付地址";
             // 
             // ctGateWayBaoFu
             // 
