@@ -79,7 +79,7 @@ namespace TradingLib.MoniterBase
             }
 
 
-            this.Text = string.Format("{0}资管柜台系统-2.0.1", Global.IsOEM ? Global.Brand : "巨融");
+            this.Text = string.Format("{0}资管柜台系统-{1}", Global.IsOEM ? Global.Brand : "巨融",TradingLib.API.Const.APIVersion);
             
             
 

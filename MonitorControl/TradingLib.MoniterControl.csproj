@@ -608,6 +608,12 @@
     <Compile Include="Forms\Payment\ctGateWayChinagPay.Designer.cs">
       <DependentUpon>ctGateWayChinagPay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Payment\ctGateWayCai1Pay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Payment\ctGateWayCai1Pay.Designer.cs">
+      <DependentUpon>ctGateWayCai1Pay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\System\Domain\fmDomain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1177,6 +1183,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Payment\ctGateWayChinagPay.resx">
       <DependentUpon>ctGateWayChinagPay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Payment\ctGateWayCai1Pay.resx">
+      <DependentUpon>ctGateWayCai1Pay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\System\Domain\fmDomain.resx">
       <DependentUpon>fmDomain.cs</DependentUpon>

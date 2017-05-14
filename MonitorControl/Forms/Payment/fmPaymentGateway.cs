@@ -166,6 +166,14 @@ namespace TradingLib.MoniterControl
                             gwControl = input;
                         }
                         break;
+                    case QSEnumGateWayType.Cai1Pay:
+                        {
+                            ctGateWayCai1Pay input = new ctGateWayCai1Pay();
+                            holder.Controls.Add(input);
+                            input.Dock = DockStyle.Fill;
+                            gwControl = input;
+                        }
+                        break;
                     default:
                         break;
                 }

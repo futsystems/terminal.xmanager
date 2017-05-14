@@ -40,6 +40,11 @@ namespace TradingLib.MoniterCore
         /// 爱农
         /// </summary>
         ChinagPay,
+
+        /// <summary>
+        /// 财易支付
+        /// </summary>
+        Cai1Pay
     }
 
     public enum EnumBusinessType
