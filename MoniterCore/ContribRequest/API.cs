@@ -55,6 +55,11 @@ namespace TradingLib.MoniterCore
         /// 天付宝
         /// </summary>
         TFBPay,
+
+        /// <summary>
+        /// 墨宝
+        /// </summary>
+        MoBoPay,
     }
 
     public enum EnumBusinessType
