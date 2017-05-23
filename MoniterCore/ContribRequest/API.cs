@@ -50,6 +50,11 @@ namespace TradingLib.MoniterCore
         /// 国付宝
         /// </summary>
         GoPay,
+
+        /// <summary>
+        /// 天付宝
+        /// </summary>
+        TFBPay,
     }
 
     public enum EnumBusinessType
