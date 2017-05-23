@@ -9,5 +9,6 @@ namespace TradingLib.MoniterBase
     {
         public static bool IsOEM = false;
         public static string Brand = "";
+        public static bool HideExpire = false;
     }
 }

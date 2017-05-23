@@ -21,6 +21,7 @@ namespace TradingLib.MoniterBase
     {
 
         ILog logger = LogManager.GetLogger("LoginForm");
+
         Starter mStart;
         public LoginForm(Starter start)
         {
@@ -33,6 +34,8 @@ namespace TradingLib.MoniterBase
             ConfigFile config = ConfigFile.GetConfigFile("moniter.cfg");
             Global.IsOEM = config["OEM"].AsBool();
             Global.Brand = config["Brand"].AsString();
+            Global.HideExpire = config["HideExpire"].AsBool();
+
 
             mStart = start;
 

@@ -40,7 +40,7 @@ namespace TradingLib.MoniterBase
                 //独立部署
                 if (CoreService.SiteInfo.Domain.Dedicated)
                 {
-                    this.Text = string.Format("{0}(独立部署)-{1} {2}-{3}", GetProductName(CoreService.SiteInfo.ProductType), CoreService.SiteInfo.Domain.Name,CoreService.SiteInfo.Manager.Login, Util.GetEnumDescription(CoreService.SiteInfo.Manager.Type));
+                    this.Text = string.Format("{0}-{1} {2}-{3}", GetProductName(CoreService.SiteInfo.ProductType), CoreService.SiteInfo.Domain.Name,CoreService.SiteInfo.Manager.Login, Util.GetEnumDescription(CoreService.SiteInfo.Manager.Type));
                 }
                 else
                 {
@@ -60,7 +60,7 @@ namespace TradingLib.MoniterBase
                 DateTime expire = Util.ToDateTime(CoreService.SiteInfo.Domain.DateExpired, 235959);
                 DateTime now = DateTime.Now;
                 double daysremain = expire.Subtract(now).TotalDays;
-                if (daysremain < 7)
+                if (daysremain < 7 && (!Global.HideExpire))
                 {
                     lbExpireMessage.Text = string.Format("柜台还有{0:F}天过期,请及时续费", daysremain);
                     lbExpireMessage.ForeColor = UIConstant.ShortSideColor;
