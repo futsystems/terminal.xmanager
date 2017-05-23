@@ -14,7 +14,7 @@ namespace TradingLib.MoniterControl
 {
     public partial class ctGateWayMoBoPay : UserControl, IGateWayControl
     {
-        public QSEnumGateWayType GateWayType { get { return QSEnumGateWayType.TFBPay; } }
+        public QSEnumGateWayType GateWayType { get { return QSEnumGateWayType.MoBoPay; } }
         public ctGateWayMoBoPay()
         {
             InitializeComponent();
