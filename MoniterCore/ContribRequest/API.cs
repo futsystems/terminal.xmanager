@@ -60,6 +60,11 @@ namespace TradingLib.MoniterCore
         /// 墨宝
         /// </summary>
         MoBoPay,
+
+        /// <summary>
+        /// 随行付
+        /// </summary>
+        SuiXingPay,
     }
 
     public enum EnumBusinessType
