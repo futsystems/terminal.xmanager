@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TradingLib.API;
 using TradingLib.Common;
+using TradingLib.MoniterCore;
 
 namespace TradingLib.MoniterControl
 {
@@ -13,7 +14,7 @@ namespace TradingLib.MoniterControl
         /// 过滤账户
         /// </summary>
         /// <param name="filterArgs"></param>
-        void FilterAccount(FilterArgs filterArgs)
+        void FilterAccount()
         {
             string strFilter = string.Format(DELETE + " ='{0}'", false);
 
@@ -63,12 +64,18 @@ namespace TradingLib.MoniterControl
                 {
                     strFilter = string.Format(strFilter + " and " + ACCOUNT + " like '{0}*'", filterArgs.AccSearch);
                 }
+                
                 //备注检索
                 if (!string.IsNullOrEmpty(filterArgs.MemoSearch))
                 {
                     strFilter = string.Format(strFilter + " and " + MEMO + " like '{0}*'", filterArgs.MemoSearch);
                 }
 
+            }
+
+            if (!(_managerSelected == null || _managerSelected.mgr_fk == CoreService.SiteInfo.Manager.mgr_fk))
+            {
+                strFilter = string.Format(strFilter + " and " + AGENTMGRFK + " = '{0}'", _managerSelected.mgr_fk);
             }
 
             datasource.Filter = strFilter;

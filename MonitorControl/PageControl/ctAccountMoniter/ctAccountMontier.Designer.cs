@@ -31,6 +31,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.accountgrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.splitContainer = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
+            this.agentTree = new ComponentFactory.Krypton.Toolkit.KryptonTreeView();
+            this.ctAgentSummary = new TradingLib.MoniterControl.Base.ctAgentSummary();
             this.kcmFilter = new ComponentFactory.Krypton.Toolkit.KryptonContextMenu();
             this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuItem1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
@@ -38,6 +41,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.accountgrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
             this.kryptonPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer.Panel1)).BeginInit();
+            this.splitContainer.Panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer.Panel2)).BeginInit();
+            this.splitContainer.Panel2.SuspendLayout();
+            this.splitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // accountgrid
@@ -47,26 +56,63 @@
             this.accountgrid.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.accountgrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.accountgrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.accountgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.accountgrid.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.accountgrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.accountgrid.Location = new System.Drawing.Point(0, 0);
+            this.accountgrid.Location = new System.Drawing.Point(0, 55);
             this.accountgrid.Name = "accountgrid";
             this.accountgrid.ReadOnly = true;
             this.accountgrid.RowHeadersVisible = false;
             this.accountgrid.RowTemplate.Height = 23;
             this.accountgrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.accountgrid.Size = new System.Drawing.Size(1380, 638);
+            this.accountgrid.Size = new System.Drawing.Size(1214, 586);
             this.accountgrid.TabIndex = 30;
             // 
             // kryptonPanel2
             // 
-            this.kryptonPanel2.Controls.Add(this.accountgrid);
+            this.kryptonPanel2.Controls.Add(this.splitContainer);
             this.kryptonPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel2.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel2.Name = "kryptonPanel2";
             this.kryptonPanel2.Size = new System.Drawing.Size(1380, 638);
             this.kryptonPanel2.TabIndex = 2;
+            // 
+            // splitContainer
+            // 
+            this.splitContainer.Cursor = System.Windows.Forms.Cursors.Default;
+            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer.Name = "splitContainer";
+            // 
+            // splitContainer.Panel1
+            // 
+            this.splitContainer.Panel1.Controls.Add(this.agentTree);
+            // 
+            // splitContainer.Panel2
+            // 
+            this.splitContainer.Panel2.Controls.Add(this.ctAgentSummary);
+            this.splitContainer.Panel2.Controls.Add(this.accountgrid);
+            this.splitContainer.Size = new System.Drawing.Size(1380, 638);
+            this.splitContainer.SplitterDistance = 161;
+            this.splitContainer.TabIndex = 31;
+            // 
+            // agentTree
+            // 
+            this.agentTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.agentTree.Location = new System.Drawing.Point(0, 0);
+            this.agentTree.Name = "agentTree";
+            this.agentTree.Size = new System.Drawing.Size(161, 638);
+            this.agentTree.TabIndex = 0;
+            // 
+            // ctAgentSummary
+            // 
+            this.ctAgentSummary.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctAgentSummary.Location = new System.Drawing.Point(0, 0);
+            this.ctAgentSummary.Name = "ctAgentSummary";
+            this.ctAgentSummary.Size = new System.Drawing.Size(1214, 55);
+            this.ctAgentSummary.TabIndex = 31;
             // 
             // kcmFilter
             // 
@@ -98,6 +144,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.accountgrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).EndInit();
             this.kryptonPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer.Panel1)).EndInit();
+            this.splitContainer.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer.Panel2)).EndInit();
+            this.splitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
+            this.splitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -111,6 +163,9 @@
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems1;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem1;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem2;
+        private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer splitContainer;
+        private ComponentFactory.Krypton.Toolkit.KryptonTreeView agentTree;
+        private Base.ctAgentSummary ctAgentSummary;
 
         //private Telerik.WinControls.UI.RadPageViewPage LottoServicePage;
 

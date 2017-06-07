@@ -65,6 +65,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IMoniterControl.cs" />
+    <Compile Include="Base\ctAgentSummary.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Base\ctAgentSummary.Designer.cs">
+      <DependentUpon>ctAgentSummary.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\ctBasicMangerInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -559,6 +565,12 @@
     <Compile Include="Forms\Follow\fmQryFollowExecution.Designer.cs">
       <DependentUpon>fmQryFollowExecution.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Manager\fmEditAgentTemplate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Manager\fmEditAgentTemplate.Designer.cs">
+      <DependentUpon>fmEditAgentTemplate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Payment\ctGateWayBaoFu.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -943,6 +955,9 @@
     <Compile Include="BasicInfoTrackerUtil.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Base\ctAgentSummary.resx">
+      <DependentUpon>ctAgentSummary.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Base\ctBasicMangerInfo.resx">
       <DependentUpon>ctBasicMangerInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -1190,6 +1205,9 @@
     <EmbeddedResource Include="Forms\Follow\fmQryFollowExecution.resx">
       <DependentUpon>fmQryFollowExecution.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Manager\fmEditAgentTemplate.resx">
+      <DependentUpon>fmEditAgentTemplate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Payment\ctGateWayBaoFu.resx">
       <DependentUpon>ctGateWayBaoFu.cs</DependentUpon>
     </EmbeddedResource>
@@ -1435,6 +1453,7 @@
     <None Include="Resource\disconnect.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Forms\Agent\" />
     <Folder Include="Utils\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

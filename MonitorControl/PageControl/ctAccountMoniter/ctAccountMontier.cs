@@ -36,7 +36,7 @@ namespace TradingLib.MoniterControl
                 filterBox.StatisticEvent += new VoidDelegate(filterBox_StatisticEvent);
                 this.FilterToolBar = filterBox;
                
-                
+               
                 this.Load += new EventHandler(ctAccountMontier_Load);
             }
             catch (Exception ex)
@@ -71,7 +71,7 @@ namespace TradingLib.MoniterControl
         void ctAccountMontier_Load(object sender, EventArgs e)
         {
             WireEvents();
-            FilterAccount(null);
+            FilterAccount();
         }
 
 
@@ -121,8 +121,62 @@ namespace TradingLib.MoniterControl
             }
             //启动更新线程
             StartUpdate();
+
+            InitMgrList();
         }
 
+
+        void InitMgrList()
+        {
+
+            MenuItem menu = GetAgentMenu();
+
+            TreeNode mainNode = new TreeNode(menu.AgentAccount);
+            mainNode.Tag = menu;
+            agentTree.Nodes.Add(mainNode);
+
+            foreach (var subItem in menu.SubAgents)
+            {
+                this.AddMenu(mainNode, subItem);
+            }
+
+            agentTree.NodeMouseClick += new TreeNodeMouseClickEventHandler(agentTree_NodeMouseClick);
+         
+        }
+
+
+
+        ManagerSetting _managerSelected = null;
+        
+        void agentTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            MenuItem menu = e.Node.Tag as MenuItem;
+            if (menu != null)
+            {
+                _managerSelected = menu.Manager;
+                //设定代理财务统计账户
+                ctAgentSummary.SetAgentAccount(_managerSelected.Login);
+                //过滤账户列表
+                FilterAccount();
+
+            }
+            
+        }
+
+     
+        void AddMenu(TreeNode node,MenuItem item)
+        { 
+            TreeNode itemNode = new TreeNode(item.AgentAccount);
+            itemNode.Tag = item;
+
+            node.Nodes.Add(itemNode);
+            foreach (var subItem in item.SubAgents)
+            {
+                this.AddMenu(itemNode, subItem);
+            }
+        }
+
+        
 
 
         public void OnDisposed()
@@ -245,10 +299,76 @@ namespace TradingLib.MoniterControl
                 ControlService.FireAccountSelected(account);
             }
         }
-
+        FilterArgs filterArgs = null;
         void OnFilterArgsChanged(FilterArgs obj)
         {
-            FilterAccount(obj);
+            filterArgs = obj;
+            FilterAccount();
         }
+
+        /// <summary>
+        /// 生成代理树状菜单项
+        /// </summary>
+        /// <returns></returns>
+        MenuItem GetAgentMenu()
+        {
+            Dictionary<int, MenuItem> menuMap = new Dictionary<int, MenuItem>();
+            foreach (var mgr in CoreService.BasicInfoTracker.Managers)
+            {
+                if (mgr.mgr_fk == CoreService.SiteInfo.Manager.mgr_fk) continue;//如果对应的管理域ID与当前管理域ID相同则过滤
+                if (mgr.Type != QSEnumManagerType.AGENT) continue;//只生成代理对应菜单项
+                menuMap.Add(mgr.mgr_fk, new MenuItem(mgr.mgr_fk,mgr.parent_fk, mgr.Login,mgr));
+            }
+            //最后生成当前管理域菜单项
+            MenuItem menu = new MenuItem(CoreService.SiteInfo.Manager.mgr_fk, CoreService.SiteInfo.Manager.parent_fk, CoreService.SiteInfo.Manager.Login, CoreService.SiteInfo.Manager);
+            menuMap.Add(menu.MGR_ID, menu);
+
+            foreach (var item in menuMap.Values)
+            {
+                MenuItem parent = null;
+                if (menuMap.TryGetValue(item.Parent_ID, out parent))
+                {
+                    if (parent.MGR_ID == item.MGR_ID) continue;
+                    parent.SubAgents.Add(item);
+                }
+                
+            }
+            return menu;
+        }
+    }
+
+
+
+
+
+    internal class MenuItem
+    {
+        public MenuItem(int id,int parent,string account,ManagerSetting manager)
+        {
+            this.MGR_ID = id;
+            this.Manager = manager;
+            this.Parent_ID = parent;
+            this.AgentAccount = account;
+            this.SubAgents = new List<MenuItem>();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ManagerSetting Manager { get; set; }
+
+        public int Parent_ID { get; set; }
+        /// <summary>
+        /// 管理域编号
+        /// </summary>
+        public int MGR_ID { get; set; }
+
+        /// <summary>
+        /// 管理域财务账户ID
+        /// </summary>
+        public string AgentAccount { get; set; }
+
+
+        public List<MenuItem> SubAgents { get; set; }
     }
 }

@@ -369,6 +369,26 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public const string REQ_INSERT_TRADE = "InsertTrade";
         #endregion
+
+        #region Agent
+        /// <summary>
+        /// 查询单个代理财务账户
+        /// </summary>
+        public const string QRY_AGENT = "QryAgent";
+
+        /// <summary>
+        /// 更新代理模板
+        /// </summary>
+        public const string REQ_UPDATE_AGENT_TEMPLATE = "UpdateAgentTemplate";
+
+
+        /// <summary>
+        /// Agent更新通知
+        /// </summary>
+        public const string NOTIFY_AGENT = "NotifyAgent";
+
+        #endregion
+
     }
 
     public static class MgrExch
@@ -685,11 +705,35 @@ namespace TradingLib.MoniterCore
         /// 更新管理员
         /// </summary>
         /// <param name="mgr"></param>
-        public static int ReqUpdateManager(this TLClientNet client, ManagerSetting mgr)
+        public static int ReqUpdateManager(this TLClientNet client, object reqObj)
         {
-            return client.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_MANAGER, mgr.SerializeObject());
+            return client.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_MANAGER, reqObj.SerializeObject());
         }
         #endregion
-        
+
+        #region Agent
+        /// <summary>
+        /// 查询单个代理财务账户
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="account"></param>
+        /// <returns></returns>
+        public static int ReqQryAgent(this TLClientNet client,string account)
+        {
+            return client.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_AGENT, account);
+        }
+
+        /// <summary>
+        /// 更新代理模板设置
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="reqObj"></param>
+        /// <returns></returns>
+        public static int ReqUpdateAgentTemplate(this TLClientNet client, object reqObj)
+        {
+            return client.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.REQ_UPDATE_AGENT_TEMPLATE, reqObj);
+        }
+        #endregion
+
     }
 }
