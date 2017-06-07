@@ -57,8 +57,9 @@ namespace TradingLib.MoniterCore
         int _tickheartbeatdead = Const.TICKHEARTBEATDEADMS;
         int _tickprocesscheckfreq = Const.TICKHEARTBEATCHECKFREQ;
 
-        int _sendheartbeat = Const.SENDHEARTBEATMS;//发送心跳请求间隔
-        int _heartbeatdeadat = Const.HEARTBEATDEADMS;//心跳死亡间隔
+        int _sendheartbeat =10*1000;// Const.SENDHEARTBEATMS;//发送心跳请求间隔
+        int _heartbeatdeadat = 3 * 10 * 1000;// Const.HEARTBEATDEADMS;//心跳死亡间隔
+
         long _lastheartbeat = 0;//最后心跳时间
         long _tickhartbeat = 0;//最后tick心跳时间
         bool _requestheartbeat = false;//请求心跳回复

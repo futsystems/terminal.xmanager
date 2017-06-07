@@ -36,7 +36,7 @@ namespace TradingLib.MoniterControl
                 filterBox.StatisticEvent += new VoidDelegate(filterBox_StatisticEvent);
                 this.FilterToolBar = filterBox;
                
-
+                
                 this.Load += new EventHandler(ctAccountMontier_Load);
             }
             catch (Exception ex)

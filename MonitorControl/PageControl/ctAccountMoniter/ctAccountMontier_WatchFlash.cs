@@ -68,23 +68,30 @@ namespace TradingLib.MoniterControl
         /// 当过滤帐户时 单元格变化会改变显示颜色，如果单元格没有变化则颜色不会发生变化，需要手工强制修改颜色
         /// </summary>
         /// <param name="account"></param>
-        void AccountWarnOff(string account)
-        { 
-            int _startrow = accountgrid.FirstDisplayedCell.RowIndex;
-            int _rownum = accountgrid.DisplayedRowCount(true);
-            for (int i = 0; i < _rownum; i++)
+        void InvokeAccountWarnOff(string account)
+        {
+            if (InvokeRequired)
             {
-                if (accountgrid[ACCOUNT, _startrow + i].Value.ToString() == account)
-                { 
-                    if (_startrow + i % 2 == 0)
+                Invoke(new Action<string>(InvokeAccountWarnOff), new object[] { account });
+            }
+            else
+            {
+                int _startrow = accountgrid.FirstDisplayedCell.RowIndex;
+                int _rownum = accountgrid.DisplayedRowCount(true);
+                for (int i = 0; i < _rownum; i++)
+                {
+                    if (accountgrid[ACCOUNT, _startrow + i].Value.ToString() == account)
                     {
-                        accountgrid[0, _startrow + i].Style.BackColor = System.Drawing.Color.White;
+                        if (_startrow + i % 2 == 0)
+                        {
+                            accountgrid[0, _startrow + i].Style.BackColor = System.Drawing.Color.White;
+                        }
+                        else
+                        {
+                            accountgrid[0, _startrow + i].Style.BackColor = System.Drawing.Color.WhiteSmoke;
+                        }
+                        accountgrid[0, _startrow + i].Style.ForeColor = System.Drawing.Color.Black;
                     }
-                    else
-                    {
-                        accountgrid[0, _startrow + i].Style.BackColor = System.Drawing.Color.WhiteSmoke;
-                    }
-                    accountgrid[0, _startrow + i].Style.ForeColor = System.Drawing.Color.Black;
                 }
             }
         }
@@ -94,42 +101,52 @@ namespace TradingLib.MoniterControl
         /// <summary>
         /// 闪烁处于警告状态的帐户
         /// </summary>
-        void FlashAccountWarn()
+        void InvokeFlashAccountWarn()
         {
-            //每隔2秒闪烁一次
-            if (DateTime.Now.Subtract(flashtime).TotalSeconds > 1 && accountgrid.Rows.Count > 0)
+
+            if (InvokeRequired)
             {
-                bool anywarn = false;
-                flashtime = DateTime.Now;
-                //遍历界面中的可视grid
-                int _startrow = accountgrid.FirstDisplayedCell.RowIndex;
-                int _rownum = accountgrid.DisplayedRowCount(true);
-                for (int i = 0; i < _rownum; i++)
+                Invoke(new Action(InvokeFlashAccountWarn), new object[] { });
+            }
+            else
+            {
+                //每隔2秒闪烁一次
+                if (DateTime.Now.Subtract(flashtime).TotalSeconds > 1 && accountgrid.Rows.Count > 0)
                 {
-                    int rowidx = _startrow + i;
-                    //如果该帐户行对应的警告标识处于警告状态
-                    bool iswarn = bool.Parse(accountgrid[WARN, rowidx].Value.ToString());
-                    //如果处于警告状态则进行闪烁
-                    if (iswarn)
+                    bool anywarn = false;
+                    flashtime = DateTime.Now;
+                    //遍历界面中的可视grid
+                    int _startrow = accountgrid.FirstDisplayedCell.RowIndex;
+                    int _rownum = accountgrid.DisplayedRowCount(true);
+                    for (int i = 0; i < _rownum; i++)
                     {
-                        anywarn = true;
-                        if (!flash)
+                        int rowidx = _startrow + i;
+                        //如果该帐户行对应的警告标识处于警告状态
+                        bool iswarn = bool.Parse(accountgrid[WARN, rowidx].Value.ToString());
+                        //如果处于警告状态则进行闪烁
+                        if (iswarn)
                         {
-                            accountgrid[0, rowidx].Style.BackColor = System.Drawing.Color.Crimson;
-                            accountgrid[0, rowidx].Style.ForeColor = System.Drawing.Color.White;
-                            flash = true;
-                        }
-                        else
-                        {
-                            accountgrid[0, rowidx].Style.BackColor = rowidx % 2 == 0 ? System.Drawing.Color.White : System.Drawing.Color.WhiteSmoke;
-                            accountgrid[0, rowidx].Style.ForeColor = System.Drawing.Color.Crimson;
-                            flash = false;
+                            anywarn = true;
+                            if (!flash)
+                            {
+                                accountgrid[0, rowidx].Style.BackColor = System.Drawing.Color.Crimson;
+                                accountgrid[0, rowidx].Style.ForeColor = System.Drawing.Color.White;
+                                flash = true;
+                            }
+                            else
+                            {
+                                accountgrid[0, rowidx].Style.BackColor = rowidx % 2 == 0 ? System.Drawing.Color.White : System.Drawing.Color.WhiteSmoke;
+                                accountgrid[0, rowidx].Style.ForeColor = System.Drawing.Color.Crimson;
+                                flash = false;
+                            }
                         }
                     }
-                }
-                if (anywarn & flash)
-                {
-                    Console.Beep();
+                    /*
+                    if (anywarn & flash)
+                    {
+                        Console.Beep();
+                    }**/
+
                 }
             }
         }

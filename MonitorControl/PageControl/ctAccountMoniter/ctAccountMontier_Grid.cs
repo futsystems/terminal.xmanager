@@ -312,7 +312,7 @@ namespace TradingLib.MoniterControl
                     SetWathAccounts();
 
                     //闪烁警告
-                    FlashAccountWarn();
+                    InvokeFlashAccountWarn();
                     Thread.Sleep(10);
                 }
                 catch (Exception ex)
@@ -448,7 +448,7 @@ namespace TradingLib.MoniterControl
                         gt.Rows[r][MEMO] = account.Memo;
                         if (oldwarn && !account.IsWarn)
                         {
-                            AccountWarnOff(account.Account);
+                            InvokeAccountWarnOff(account.Account);
                         }
 
                         //如果删除帐户 则需要刷新帐户列表 防止没有任何选中帐户
