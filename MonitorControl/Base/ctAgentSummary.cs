@@ -68,6 +68,7 @@ namespace TradingLib.MoniterControl.Base
         {
             CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_AGENT, OnQryAgent);
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_AGENT, OnNotifyAgent);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_AGENT_STATISTIC, OnNotifyAgentStatistic);
         }
         public void OnDisposed()
         { 
@@ -108,6 +109,15 @@ namespace TradingLib.MoniterControl.Base
             }
         }
 
+        void OnNotifyAgentStatistic(string json)
+        {
+            AgentStatistic st = CoreService.ParseJsonResponse<AgentStatistic>(json);
+            if (st != null)
+            {
+                commissionCost.Text = st.CommissionCost.ToFormatStr();
+                commissionIncome.Text = st.CommissioinIncome.ToFormatStr();
+            }
+        }
         void InvokeGotAgent(AgentSetting agent)
         {
             if (InvokeRequired)

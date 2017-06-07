@@ -156,6 +156,8 @@ namespace TradingLib.MoniterControl
                 _managerSelected = menu.Manager;
                 //设定代理财务统计账户
                 ctAgentSummary.SetAgentAccount(_managerSelected.Login);
+
+                CoreService.TLClient.ReqWatchAgents(new string[] { _managerSelected.Login });
                 //过滤账户列表
                 FilterAccount();
 

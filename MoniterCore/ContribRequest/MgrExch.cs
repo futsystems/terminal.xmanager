@@ -387,6 +387,15 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public const string NOTIFY_AGENT = "NotifyAgent";
 
+        /// <summary>
+        /// 代理统计通知
+        /// </summary>
+        public const string NOTIFY_AGENT_STATISTIC = "NotifyAgentStatistic";
+
+        /// <summary>
+        /// 观察代理列表
+        /// </summary>
+        public const string REQ_WATCH_AGENTS = "WatchAgents";
         #endregion
 
     }
@@ -732,6 +741,17 @@ namespace TradingLib.MoniterCore
         public static int ReqUpdateAgentTemplate(this TLClientNet client, object reqObj)
         {
             return client.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.REQ_UPDATE_AGENT_TEMPLATE, reqObj);
+        }
+
+        /// <summary>
+        /// 观察代理列表
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="accounts"></param>
+        /// <returns></returns>
+        public static int ReqWatchAgents(this TLClientNet client, string[] accounts)
+        {
+            return client.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.REQ_WATCH_AGENTS, accounts);
         }
         #endregion
 
