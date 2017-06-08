@@ -44,6 +44,11 @@ namespace TradingLib.MoniterCore
         public const string Follow = "FollowCentre";
 
         public const string APIService = "APIService";
+
+        /// <summary>
+        /// 代理账户管理模块
+        /// </summary>
+        public const string AgentManager = "AgentManager";
     }
 
 

@@ -55,7 +55,15 @@ namespace TradingLib.MoniterControl.Base
         /// <param name="e"></param>
         void kryptonContextMenuItem1_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (_agent == null)
+            {
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("代理财务账户不存在");
+                return;
+            }
+            fmAgentCashOperation fm = new fmAgentCashOperation();
+            fm.SetAgent(_agent);
+            fm.ShowDialog();
+            fm.Close();
         }
         public void SetAgentAccount(string account)
         {
@@ -66,8 +74,8 @@ namespace TradingLib.MoniterControl.Base
         }
         public void OnInit()
         {
-            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_AGENT, OnQryAgent);
-            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_AGENT, OnNotifyAgent);
+            CoreService.EventCore.RegisterCallback(Modules.AgentManager, Method_AGENT_MGR.QRY_AGENT, OnQryAgent);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.AgentManager, Method_AGENT_MGR.NOTIFY_AGENT, OnNotifyAgent);
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_AGENT_STATISTIC, OnNotifyAgentStatistic);
         }
         public void OnDisposed()
@@ -116,6 +124,8 @@ namespace TradingLib.MoniterControl.Base
             {
                 commissionCost.Text = st.CommissionCost.ToFormatStr();
                 commissionIncome.Text = st.CommissioinIncome.ToFormatStr();
+                closedPL.Text = st.RealizedPL.ToFormatStr();
+                unrealizedPL.Text = st.UnRealizedPL.ToFormatStr();
             }
         }
         void InvokeGotAgent(AgentSetting agent)

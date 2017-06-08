@@ -1,6 +1,6 @@
 ﻿namespace TradingLib.MoniterControl
 {
-    partial class fmCashOperationCounter
+    partial class fmAgentCashOperation
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,6 @@
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
-            this.ctFinanceInfo1 = new TradingLib.MoniterControl.ctFinanceInfo();
             this.kryptonGroupBox2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.cbCurrency = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -42,6 +41,7 @@
             this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cashop_amount = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.ctAgentFinanceInfo1 = new TradingLib.MoniterControl.ctAgentFinanceInfo();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
@@ -63,7 +63,7 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(751, 226);
+            this.kryptonPanel1.Size = new System.Drawing.Size(754, 252);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // kryptonGroupBox1
@@ -75,18 +75,10 @@
             // 
             // kryptonGroupBox1.Panel
             // 
-            this.kryptonGroupBox1.Panel.Controls.Add(this.ctFinanceInfo1);
-            this.kryptonGroupBox1.Size = new System.Drawing.Size(522, 220);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.ctAgentFinanceInfo1);
+            this.kryptonGroupBox1.Size = new System.Drawing.Size(522, 246);
             this.kryptonGroupBox1.TabIndex = 6;
-            this.kryptonGroupBox1.Values.Heading = "投资者帐户查询";
-            // 
-            // ctFinanceInfo1
-            // 
-            this.ctFinanceInfo1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctFinanceInfo1.Location = new System.Drawing.Point(0, 0);
-            this.ctFinanceInfo1.Name = "ctFinanceInfo1";
-            this.ctFinanceInfo1.Size = new System.Drawing.Size(518, 196);
-            this.ctFinanceInfo1.TabIndex = 0;
+            this.kryptonGroupBox1.Values.Heading = "代理帐户查询";
             // 
             // kryptonGroupBox2
             // 
@@ -107,7 +99,7 @@
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel8);
             this.kryptonGroupBox2.Panel.Controls.Add(this.cashop_amount);
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel6);
-            this.kryptonGroupBox2.Size = new System.Drawing.Size(223, 220);
+            this.kryptonGroupBox2.Size = new System.Drawing.Size(223, 246);
             this.kryptonGroupBox2.TabIndex = 5;
             this.kryptonGroupBox2.Values.Heading = "出入金";
             // 
@@ -198,18 +190,26 @@
             this.kryptonLabel6.TabIndex = 2;
             this.kryptonLabel6.Values.Text = "金额:";
             // 
-            // fmCashOperationCounter
+            // ctAgentFinanceInfo1
+            // 
+            this.ctAgentFinanceInfo1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctAgentFinanceInfo1.Location = new System.Drawing.Point(0, 0);
+            this.ctAgentFinanceInfo1.Name = "ctAgentFinanceInfo1";
+            this.ctAgentFinanceInfo1.Size = new System.Drawing.Size(518, 222);
+            this.ctAgentFinanceInfo1.TabIndex = 0;
+            // 
+            // fmAgentCashOperation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(751, 226);
+            this.ClientSize = new System.Drawing.Size(754, 252);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "fmCashOperationCounter";
+            this.Name = "fmAgentCashOperation";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "出入金与帐户查询【投资者】";
+            this.Text = "出入金与帐户查询【代理】";
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).EndInit();
@@ -231,7 +231,6 @@
 
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox1;
-        private ctFinanceInfo ctFinanceInfo1;
         private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox2;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnAccountWithdraw;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox cbEquityTypeList;
@@ -243,5 +242,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel6;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox cbCurrency;
+        private ctAgentFinanceInfo ctAgentFinanceInfo1;
     }
 }

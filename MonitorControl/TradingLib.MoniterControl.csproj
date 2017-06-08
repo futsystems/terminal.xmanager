@@ -238,6 +238,12 @@
     <Compile Include="Base\HistQuery\ctHistTrade.Designer.cs">
       <DependentUpon>ctHistTrade.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\ctAgentFinanceInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Base\ctAgentFinanceInfo.Designer.cs">
+      <DependentUpon>ctAgentFinanceInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Command\CashViewType.cs" />
     <Compile Include="Command\ConditionEvaluator.cs" />
     <Compile Include="Command\FollowStrategyList.cs" />
@@ -564,6 +570,12 @@
     </Compile>
     <Compile Include="Forms\Follow\fmQryFollowExecution.Designer.cs">
       <DependentUpon>fmQryFollowExecution.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Manager\fmAgentCashOperation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Manager\fmAgentCashOperation.Designer.cs">
+      <DependentUpon>fmAgentCashOperation.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Manager\fmEditAgentTemplate.cs">
       <SubType>Form</SubType>
@@ -953,6 +965,8 @@
     </Compile>
     <Compile Include="UIConstant.cs" />
     <Compile Include="BasicInfoTrackerUtil.cs" />
+    <Compile Include="Utils\AccountExtend.cs" />
+    <Compile Include="Utils\AgentExtend.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Base\ctAgentSummary.resx">
@@ -1039,6 +1053,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\HistQuery\ctHistTrade.resx">
       <DependentUpon>ctHistTrade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\ctAgentFinanceInfo.resx">
+      <DependentUpon>ctAgentFinanceInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ctDebug.resx">
       <DependentUpon>ctDebug.cs</DependentUpon>
@@ -1204,6 +1221,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Follow\fmQryFollowExecution.resx">
       <DependentUpon>fmQryFollowExecution.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Manager\fmAgentCashOperation.resx">
+      <DependentUpon>fmAgentCashOperation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Manager\fmEditAgentTemplate.resx">
       <DependentUpon>fmEditAgentTemplate.cs</DependentUpon>
@@ -1454,7 +1474,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Forms\Agent\" />
-    <Folder Include="Utils\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
