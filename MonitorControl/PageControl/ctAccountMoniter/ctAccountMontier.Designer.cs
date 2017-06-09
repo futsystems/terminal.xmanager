@@ -61,7 +61,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.accountgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.accountgrid.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.accountgrid.Location = new System.Drawing.Point(0, 55);
+            this.accountgrid.Location = new System.Drawing.Point(0, 60);
             this.accountgrid.Name = "accountgrid";
             this.accountgrid.ReadOnly = true;
             this.accountgrid.RowHeadersVisible = false;
@@ -111,7 +111,7 @@
             this.ctAgentSummary.Dock = System.Windows.Forms.DockStyle.Top;
             this.ctAgentSummary.Location = new System.Drawing.Point(0, 0);
             this.ctAgentSummary.Name = "ctAgentSummary";
-            this.ctAgentSummary.Size = new System.Drawing.Size(1214, 55);
+            this.ctAgentSummary.Size = new System.Drawing.Size(1214, 60);
             this.ctAgentSummary.TabIndex = 31;
             // 
             // kcmFilter

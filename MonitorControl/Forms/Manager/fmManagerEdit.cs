@@ -78,11 +78,21 @@ namespace TradingLib.MoniterControl
                 MoniterHelper.WindowMessage("没有添加柜员的权限");
                 return;
             }
+
+            var mgr_type = (QSEnumManagerType)type.SelectedValue;
+            var login = this.login.Text;
+
+            var name = this.name.Text;
+            var mobile = this.mobile.Text;
+            var qq = this.qq.Text;
+            var acc_limit = (int)this.acclimit.Value;
+            var agent_limit = (int)this.agentlimit.Value;
+            var mgr_fk = 0;
+
             if (_manger == null)
             {
                
-                var mgr_type = (QSEnumManagerType)type.SelectedValue;
-                var login = this.login.Text;
+                
                 if (string.IsNullOrEmpty(login))
                 {
                     ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请输入登入名");
@@ -99,12 +109,7 @@ namespace TradingLib.MoniterControl
                     return;
                 }
 
-                var name = this.name.Text;
-                var mobile = this.mobile.Text;
-                var qq = this.qq.Text;
-                var acc_limit = (int)this.acclimit.Value;
-                var agent_limit = (int)this.agentlimit.Value;
-                var mgr_fk = 0;
+                
 
                 //如果添加代理则mgr_fk=0
                 if (CoreService.SiteInfo.Manager.Type == QSEnumManagerType.ROOT)
@@ -145,20 +150,26 @@ namespace TradingLib.MoniterControl
             }
             else
             {
-                //更新
-                _manger.Login = this.login.Text;
-                _manger.Name = this.name.Text;
-                _manger.Mobile = this.mobile.Text;
-                _manger.QQ = this.qq.Text;
-
-                if (_manger.Type == QSEnumManagerType.AGENT)
+                var obj = new
                 {
-                    _manger.AccLimit = (int)this.acclimit.Value;
-                    _manger.AgentLimit = (int)this.agentlimit.Value;
-                }
+                    id = _manger.ID,
+                    login = _manger.Login,
+                    mgr_type = _manger.Type,
+
+                    name = name,
+                    mobile = mobile,
+                    qq = qq,
+                    acc_limit = acc_limit,
+                    agent_limit = agent_limit,
+                    mgr_fk = mgr_fk,
+                    agent_type = (EnumAgentType)agentType.SelectedValue,
+
+                };
+
+
                 if (MoniterHelper.WindowConfirm("确认更新管理员信息?") == System.Windows.Forms.DialogResult.Yes)
                 {
-                    CoreService.TLClient.ReqUpdateManager(_manger);
+                    CoreService.TLClient.ReqUpdateManager(obj);
                 }
 
             }

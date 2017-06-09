@@ -62,14 +62,33 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Futs.base\lib\TradingLib\TradingLib.Common.dll</HintPath>
     </Reference>
+    <Reference Include="XSystem.Control, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IMoniterControl.cs" />
-    <Compile Include="Base\ctAgentSummary.cs">
+    <Compile Include="Base\AgentControlPanel\ctAgentSummary.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Base\ctAgentSummary.Designer.cs">
+    <Compile Include="Base\AgentControlPanel\ctAgentSummary.Designer.cs">
       <DependentUpon>ctAgentSummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Base\AgentControlPanel\ctCustSummary.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Base\AgentControlPanel\ctCustSummary.Designer.cs">
+      <DependentUpon>ctCustSummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Base\AgentControlPanel\ctNormalAgentSummary.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Base\AgentControlPanel\ctNormalAgentSummary.Designer.cs">
+      <DependentUpon>ctNormalAgentSummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Base\AgentControlPanel\ctSelfOperateAgentSummary.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Base\AgentControlPanel\ctSelfOperateAgentSummary.Designer.cs">
+      <DependentUpon>ctSelfOperateAgentSummary.cs</DependentUpon>
     </Compile>
     <Compile Include="Base\ctBasicMangerInfo.cs">
       <SubType>UserControl</SubType>
@@ -969,8 +988,17 @@
     <Compile Include="Utils\AgentExtend.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Base\ctAgentSummary.resx">
+    <EmbeddedResource Include="Base\AgentControlPanel\ctAgentSummary.resx">
       <DependentUpon>ctAgentSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\AgentControlPanel\ctCustSummary.resx">
+      <DependentUpon>ctCustSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\AgentControlPanel\ctNormalAgentSummary.resx">
+      <DependentUpon>ctNormalAgentSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\AgentControlPanel\ctSelfOperateAgentSummary.resx">
+      <DependentUpon>ctSelfOperateAgentSummary.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Base\ctBasicMangerInfo.resx">
       <DependentUpon>ctBasicMangerInfo.cs</DependentUpon>

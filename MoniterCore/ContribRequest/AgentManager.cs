@@ -18,6 +18,11 @@ namespace TradingLib.MoniterCore
         public const string QRY_AGENT = "QryAgent";
 
         /// <summary>
+        /// 获得所有代理账户
+        /// </summary>
+        public const string QRY_ALL_AGENT = "QryAllAgent";
+
+        /// <summary>
         /// 更新代理模板
         /// </summary>
         public const string REQ_UPDATE_AGENT_TEMPLATE = "UpdateAgentTemplate";
@@ -36,6 +41,11 @@ namespace TradingLib.MoniterCore
         /// Agent更新通知
         /// </summary>
         public const string NOTIFY_AGENT = "NotifyAgent";
+
+        /// <summary>
+        /// 代理账户财务信息更新通知
+        /// </summary>
+        public const string NOTIFY_AGENT_FINANCE_INFO = "NotifyAgentFinInfo";
     }
 
     public static class AgentManager
@@ -50,6 +60,17 @@ namespace TradingLib.MoniterCore
         {
             return client.ReqContribRequest(Modules.AgentManager, Method_AGENT_MGR.QRY_AGENT, account);
         }
+
+        /// <summary>
+        /// 查询所有代理账户
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
+        public static int ReqQryAgent(this TLClientNet client)
+        {
+            return client.ReqContribRequest(Modules.AgentManager, Method_AGENT_MGR.QRY_ALL_AGENT,"");
+        }
+
 
         /// <summary>
         /// 更新代理模板设置

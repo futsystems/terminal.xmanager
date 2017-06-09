@@ -55,6 +55,17 @@ namespace TradingLib.MoniterCore
             internal set { _manger = value; }
         }
 
+        AgentSetting _agent;
+        /// <summary>
+        /// 当前代理账户
+        /// </summary>
+        public AgentSetting Agent
+        {
+            get { return _agent;}
+            internal set { _agent = value; }
+        }
+
+
         public int MGRID
         {
             get 

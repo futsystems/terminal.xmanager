@@ -76,16 +76,10 @@ namespace TradingLib.MoniterControl
                 return;
             }
 
-            //if (CoreService.SiteInfo.ProductType == QSEnumProductType.VendorMoniter)
-            //{
-            //    fmCashOperation fm = new fmCashOperation();
-            //    fm.SetAccount(account);
-            //    fm.ShowDialog();
-            //    fm.Close();
-            //}
             if (CoreService.SiteInfo.ProductType == QSEnumProductType.CounterSystem)
             {
-                if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.UIAccess.r_cashop)
+                //不是超级超级管理员 不是自营代理主管理员 (特殊权限信息)
+                if (!CoreService.SiteInfo.Manager.IsRoot() && !(CoreService.SiteInfo.Agent!= null && CoreService.SiteInfo.Agent.AgentType == EnumAgentType.SelfOperated && CoreService.SiteInfo.Manager.Type == QSEnumManagerType.AGENT))
                 {
                     MoniterHelper.WindowMessage("无权限");
                     return;

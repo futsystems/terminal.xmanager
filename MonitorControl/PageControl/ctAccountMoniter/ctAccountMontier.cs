@@ -131,7 +131,7 @@ namespace TradingLib.MoniterControl
 
             MenuItem menu = GetAgentMenu();
 
-            TreeNode mainNode = new TreeNode(menu.AgentAccount);
+            TreeNode mainNode = new TreeNode(menu.Title);
             mainNode.Tag = menu;
             agentTree.Nodes.Add(mainNode);
 
@@ -143,7 +143,17 @@ namespace TradingLib.MoniterControl
             agentTree.NodeMouseClick += new TreeNodeMouseClickEventHandler(agentTree_NodeMouseClick);
          
         }
+        void AddMenu(TreeNode node, MenuItem item)
+        {
+            TreeNode itemNode = new TreeNode(item.Title);
+            itemNode.Tag = item;
 
+            node.Nodes.Add(itemNode);
+            foreach (var subItem in item.SubAgents)
+            {
+                this.AddMenu(itemNode, subItem);
+            }
+        }
 
 
         ManagerSetting _managerSelected = null;
@@ -153,9 +163,14 @@ namespace TradingLib.MoniterControl
             MenuItem menu = e.Node.Tag as MenuItem;
             if (menu != null)
             {
+                if (menu.AgentAccount == null)
+                {
+                    ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show(string.Format("代理:{0}账户不存在", menu.Manager.Login));
+                    return;
+                }
                 _managerSelected = menu.Manager;
                 //设定代理财务统计账户
-                ctAgentSummary.SetAgentAccount(_managerSelected.Login);
+                ctAgentSummary.SetAgent(menu.AgentAccount);
 
                 CoreService.TLClient.ReqWatchAgents(new string[] { _managerSelected.Login });
                 //过滤账户列表
@@ -166,17 +181,7 @@ namespace TradingLib.MoniterControl
         }
 
      
-        void AddMenu(TreeNode node,MenuItem item)
-        { 
-            TreeNode itemNode = new TreeNode(item.AgentAccount);
-            itemNode.Tag = item;
-
-            node.Nodes.Add(itemNode);
-            foreach (var subItem in item.SubAgents)
-            {
-                this.AddMenu(itemNode, subItem);
-            }
-        }
+        
 
         
 
@@ -319,10 +324,10 @@ namespace TradingLib.MoniterControl
             {
                 if (mgr.mgr_fk == CoreService.SiteInfo.Manager.mgr_fk) continue;//如果对应的管理域ID与当前管理域ID相同则过滤
                 if (mgr.Type != QSEnumManagerType.AGENT) continue;//只生成代理对应菜单项
-                menuMap.Add(mgr.mgr_fk, new MenuItem(mgr.mgr_fk,mgr.parent_fk, mgr.Login,mgr));
+                menuMap.Add(mgr.mgr_fk, new MenuItem(mgr.mgr_fk,mgr.parent_fk, CoreService.BasicInfoTracker.GetAgent(mgr.Login),mgr));
             }
             //最后生成当前管理域菜单项
-            MenuItem menu = new MenuItem(CoreService.SiteInfo.Manager.mgr_fk, CoreService.SiteInfo.Manager.parent_fk, CoreService.SiteInfo.Manager.Login, CoreService.SiteInfo.Manager);
+            MenuItem menu = new MenuItem(CoreService.SiteInfo.Manager.mgr_fk, CoreService.SiteInfo.Manager.parent_fk, CoreService.BasicInfoTracker.GetAgent(CoreService.SiteInfo.Manager.Login), CoreService.SiteInfo.Manager);
             menuMap.Add(menu.MGR_ID, menu);
 
             foreach (var item in menuMap.Values)
@@ -345,30 +350,35 @@ namespace TradingLib.MoniterControl
 
     internal class MenuItem
     {
-        public MenuItem(int id,int parent,string account,ManagerSetting manager)
+        public MenuItem(int id,int parent,AgentSetting  agent,ManagerSetting manager)
         {
             this.MGR_ID = id;
             this.Manager = manager;
             this.Parent_ID = parent;
-            this.AgentAccount = account;
+            this.AgentAccount = agent;
             this.SubAgents = new List<MenuItem>();
+            this.Title = manager.Login;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public ManagerSetting Manager { get; set; }
+        
 
         public int Parent_ID { get; set; }
+
         /// <summary>
         /// 管理域编号
         /// </summary>
         public int MGR_ID { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public ManagerSetting Manager { get; set; }
+
+        public string Title { get; private set; }
+        /// <summary>
         /// 管理域财务账户ID
         /// </summary>
-        public string AgentAccount { get; set; }
+        public AgentSetting AgentAccount { get; set; }
 
 
         public List<MenuItem> SubAgents { get; set; }

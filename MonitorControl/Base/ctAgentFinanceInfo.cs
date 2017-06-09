@@ -52,21 +52,22 @@ namespace TradingLib.MoniterControl
         {
 
             CoreService.EventCore.RegisterCallback(Modules.AgentManager, Method_AGENT_MGR.QRY_AGENT_FINANCE_INFO, this.OnQryAgentInfo);
-            CoreService.EventCore.RegisterNotifyCallback(Modules.AgentManager, Method_ACC_MGR.NOTIFY_ACC_FININFO, this.OnNotifyAccountInfo);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.AgentManager, Method_AGENT_MGR.NOTIFY_AGENT_FINANCE_INFO, this.OnNotifyAgentInfo);
             CoreService.TLClient.ReqQryAgentFinInfo(_agent.Account);
         }
 
         public void OnDisposed()
         {
             CoreService.EventCore.UnRegisterCallback(Modules.AgentManager, Method_AGENT_MGR.QRY_AGENT_FINANCE_INFO, this.OnQryAgentInfo);
-            CoreService.EventCore.UnRegisterNotifyCallback(Modules.AgentManager, Method_ACC_MGR.NOTIFY_ACC_FININFO, this.OnNotifyAccountInfo);
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.AgentManager, Method_AGENT_MGR.NOTIFY_AGENT_FINANCE_INFO, this.OnNotifyAgentInfo);
 
          }
 
-        void OnNotifyAccountInfo(string json)
+        void OnNotifyAgentInfo(string json)
         {
             OnQryAgentInfo(json, true);
         }
+
         void OnQryAgentInfo(string json, bool islast)
         {
             AgentFinanceInfo obj = CoreService.ParseJsonResponse<AgentFinanceInfo>(json);

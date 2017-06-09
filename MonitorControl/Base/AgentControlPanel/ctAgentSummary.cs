@@ -21,6 +21,9 @@ namespace TradingLib.MoniterControl.Base
            
             CoreService.EventCore.RegIEventHandler(this);
 
+            ctNormalAgentSummary.Location = new Point(90, 0);
+            ctNormalAgentSummary.Size = new System.Drawing.Size(120*3, 60);
+            ctCustSummary.Location = new Point(90 + 120 * 3, 0);
             WireEvent();
         }
 
@@ -65,16 +68,10 @@ namespace TradingLib.MoniterControl.Base
             fm.ShowDialog();
             fm.Close();
         }
-        public void SetAgentAccount(string account)
-        {
-            this.agentAccount.Text = account;
-            this.Reset();
-            //查询代理财务账户
-            CoreService.TLClient.ReqQryAgent(account);
-        }
+        
         public void OnInit()
         {
-            CoreService.EventCore.RegisterCallback(Modules.AgentManager, Method_AGENT_MGR.QRY_AGENT, OnQryAgent);
+            //CoreService.EventCore.RegisterCallback(Modules.AgentManager, Method_AGENT_MGR.QRY_AGENT, OnQryAgent);
             CoreService.EventCore.RegisterNotifyCallback(Modules.AgentManager, Method_AGENT_MGR.NOTIFY_AGENT, OnNotifyAgent);
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_AGENT_STATISTIC, OnNotifyAgentStatistic);
         }
@@ -83,29 +80,55 @@ namespace TradingLib.MoniterControl.Base
             
         }
 
+        public void SetAgent(AgentSetting agent)
+        {
+            _agent = agent;
+            agentBtnGroup.Values.Text = _agent.Account;
+            if (_agent.AgentType == EnumAgentType.Normal)
+            {
+                ctNormalAgentSummary.Visible = true;
+                ctSelfOperateAgentSummary.Visible = false;
+
+                ctNormalAgentSummary.Location = new Point(90, 0);
+                ctNormalAgentSummary.Size = new System.Drawing.Size(360, 60);
+                ctCustSummary.Location = new Point(90 + 360, 0);
+
+
+            }
+            if (_agent.AgentType == EnumAgentType.SelfOperated)
+            {
+                ctNormalAgentSummary.Visible = false;
+                ctSelfOperateAgentSummary.Visible = true;
+                ctSelfOperateAgentSummary.Location = new Point(90, 0);
+                ctSelfOperateAgentSummary.Size = new System.Drawing.Size(720, 60);
+                ctCustSummary.Location = new Point(90 + 720, 0);
+            }
+        }
+
         const string EMPTY = "--";
         void Reset()
         {
             _agent = null;
+            /*
             lastEquity.Text = EMPTY;
             nowEquity.Text = EMPTY;
             unrealizedPL.Text = EMPTY;
             closedPL.Text = EMPTY;
             commissionCost.Text = EMPTY;
-            commissionIncome.Text = EMPTY;
+            commissionIncome.Text = EMPTY;**/
         }
 
         AgentSetting _agent;
-        void OnQryAgent(string json,bool islast)
-        {
-            AgentSetting item = CoreService.ParseJsonResponse<AgentSetting>(json);
+        //void OnQryAgent(string json,bool islast)
+        //{
+        //    AgentSetting item = CoreService.ParseJsonResponse<AgentSetting>(json);
             
-            if (item != null)
-            {
-                _agent = item;
-                InvokeGotAgent(_agent);
-            }
-        }
+        //    if (item != null)
+        //    {
+        //        _agent = item;
+        //        InvokeGotAgent(_agent);
+        //    }
+        //}
 
         void OnNotifyAgent(string json)
         {
@@ -122,10 +145,10 @@ namespace TradingLib.MoniterControl.Base
             AgentStatistic st = CoreService.ParseJsonResponse<AgentStatistic>(json);
             if (st != null)
             {
-                commissionCost.Text = st.CommissionCost.ToFormatStr();
-                commissionIncome.Text = st.CommissioinIncome.ToFormatStr();
-                closedPL.Text = st.RealizedPL.ToFormatStr();
-                unrealizedPL.Text = st.UnRealizedPL.ToFormatStr();
+                //commissionCost.Text = st.CommissionCost.ToFormatStr();
+                //commissionIncome.Text = st.CommissioinIncome.ToFormatStr();
+                //closedPL.Text = st.RealizedPL.ToFormatStr();
+                //unrealizedPL.Text = st.UnRealizedPL.ToFormatStr();
             }
         }
         void InvokeGotAgent(AgentSetting agent)
@@ -136,7 +159,7 @@ namespace TradingLib.MoniterControl.Base
             }
             else
             {
-                lastEquity.Text = agent.LastEquity.ToFormatStr();
+                //lastEquity.Text = agent.LastEquity.ToFormatStr();
             }
         }
     }

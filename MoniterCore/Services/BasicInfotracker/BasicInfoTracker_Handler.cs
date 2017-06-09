@@ -359,8 +359,8 @@ namespace TradingLib.MoniterCore
 
             if (islast && !_initialized)
             {
-                Status("柜员信息下载完成,下载账户列表");
-                CoreService.TLClient.ReqQryAccountList();
+                Status("柜员信息下载完成,下载代理账户列表");
+                CoreService.TLClient.ReqQryAgent();
             }
         }
 
@@ -389,19 +389,16 @@ namespace TradingLib.MoniterCore
         void GotManager(ManagerSetting manager)
         {
             ManagerSetting target = null;
-            ManagerSetting notify = null;
             if (managermap.TryGetValue(manager.ID, out target))
             {
                 target.Mobile = manager.Mobile;
                 target.Name = manager.Name;
                 target.QQ = manager.QQ;
                 target.Active = manager.Active;
-                notify = target;
             }
             else
             {
                 managermap.Add(manager.ID, manager);
-                notify = manager;
             }
 
             //将获得的柜员列表中 属于本登入mgr_fk的manager绑定到全局对象
@@ -412,6 +409,53 @@ namespace TradingLib.MoniterCore
         }
         #endregion
 
+
+        #region Agent
+
+        void GotAgent(AgentSetting agent)
+        {
+            AgentSetting target = null;
+            if (agentmap.TryGetValue(agent.ID, out target))
+            {
+                //更新当前Agent数据
+                target.AgentType = agent.AgentType;
+                target.Commission_ID = agent.Commission_ID;
+                target.ExStrategy_ID = agent.ExStrategy_ID;
+                target.Margin_ID = agent.Margin_ID;
+                
+            }
+            else
+            {
+                target = agent;
+                agentmap.Add(target.ID, target);
+                agentAccountMap.Add(target.Account, target);
+            }
+
+            //更新当前域的Agent
+            if (CoreService.SiteInfo.Manager != null && CoreService.SiteInfo.Manager.Login == agent.Account)
+            {
+                CoreService.SiteInfo.Agent = target;
+            }
+
+        }
+        void OnRspAgent(string jsonstr, bool islast)
+        {
+            AgentSetting[] agentlist = CoreService.ParseJsonResponse<AgentSetting[]>(jsonstr);
+            if (agentlist != null)
+            {
+                foreach(var agent in agentlist)
+                {
+                    this.GotAgent(agent);
+                }
+            }
+
+            if (islast && !_initialized)
+            {
+                Status("代理账户信息下载完成,下载投资者账户列表");
+                CoreService.TLClient.ReqQryAccountList();
+            }
+        }
+        #endregion
 
         #region Account
         void OnQryAccountList(string json, bool isLast)

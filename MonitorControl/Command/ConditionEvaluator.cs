@@ -119,8 +119,27 @@ namespace TradingLib.MoniterControl
                     return CoreService.SiteInfo.UIAccess.r_execution;
                 case "BLOCK":
                     return CoreService.SiteInfo.UIAccess.r_block;
+
+                //case "CASHOP":
+                //    return CoreService.SiteInfo.UIAccess.r_cashop;
                 case "CASHOP":
-                    return CoreService.SiteInfo.UIAccess.r_cashop;
+                    {
+                        //分区管理员 可以查看出入金按钮
+                        if (CoreService.SiteInfo.Manager.IsRoot())
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            //自盈代理有出入金权限
+                            if (CoreService.SiteInfo.Agent != null && CoreService.SiteInfo.Agent.AgentType == EnumAgentType.SelfOperated)
+                            {
+                                return true;
+                            }
+
+                        }
+                        return false;
+                    }
                 case "RISKRULE":
                     return CoreService.SiteInfo.UIAccess.r_riskrule;
                 case "COMMISSION":

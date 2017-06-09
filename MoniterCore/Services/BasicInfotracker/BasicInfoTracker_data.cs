@@ -48,10 +48,18 @@ namespace TradingLib.MoniterCore
         /// 汇率信息map
         /// </summary>
         Dictionary<CurrencyType, ExchangeRate> exchangeRateCurrencyMap = new Dictionary<CurrencyType, ExchangeRate>();
+
+
         /// <summary>
         /// 主管理员map
         /// </summary>
         Dictionary<int, ManagerSetting> managermap = new Dictionary<int, ManagerSetting>();
+
+        /// <summary>
+        /// 代理账户列表
+        /// </summary>
+        Dictionary<int, AgentSetting> agentmap = new Dictionary<int, AgentSetting>();
+        Dictionary<string, AgentSetting> agentAccountMap = new Dictionary<string, AgentSetting>();
 
         /// <summary>
         /// 路由组数据
@@ -74,6 +82,7 @@ namespace TradingLib.MoniterCore
         /// 交易帐户列表map
         /// </summary>
         Dictionary<string, AccountItem> accountmap = new Dictionary<string, AccountItem>();
+
 
 
         /// <summary>
@@ -218,6 +227,36 @@ namespace TradingLib.MoniterCore
         }
         #endregion
 
+        #region Agent数据
+
+        public IEnumerable<AgentSetting> Agents
+        {
+            get
+            {
+                return agentmap.Values;
+            }
+        }
+
+        public AgentSetting GetAgent(int agentid)
+        {
+            AgentSetting agent = null;
+            if (agentmap.TryGetValue(agentid, out agent))
+            {
+                return agent;
+            }
+            return null;
+        }
+
+        public AgentSetting GetAgent(string account)
+        {
+            AgentSetting agent = null;
+            if (agentAccountMap.TryGetValue(account, out agent))
+            {
+                return agent;
+            }
+            return null;
+        }
+        #endregion
 
         #region 风控规则
 
