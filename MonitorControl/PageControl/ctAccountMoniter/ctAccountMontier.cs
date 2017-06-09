@@ -107,6 +107,8 @@ namespace TradingLib.MoniterControl
             //CoreService.EventHub.OnAccountChangedEvent += new Action<AccountItem>(OnAccountChanged);
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_ACC_CHANGED, OnAccountChanged);
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_ACC_STATISTIC, OnNotifyAccountStatistic);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_AGENT_CREATE, OnNotifyAgentCreate);
+
             //根据角色隐藏表格相关列
             if (CoreService.SiteInfo.ProductType == QSEnumProductType.CounterSystem)
             {
@@ -122,13 +124,28 @@ namespace TradingLib.MoniterControl
             //启动更新线程
             StartUpdate();
 
+            agentTree.NodeMouseClick += new TreeNodeMouseClickEventHandler(agentTree_NodeMouseClick);
             InitMgrList();
 
             //初始化后自动设定到当前顶级管理员
             if (CoreService.SiteInfo.Agent != null)
             {
-                ctAgentSummary.SetAgent(CoreService.SiteInfo.Agent);
+                ctAgentSummary.SetAgent(CoreService.SiteInfo.Manager,CoreService.SiteInfo.Agent);
                 CoreService.TLClient.ReqWatchAgents(new string[] { CoreService.SiteInfo.Agent.Account });
+            }
+        }
+
+        void OnNotifyAgentCreate(string json)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action<string>(OnNotifyAgentCreate), new object[] { json });
+            }
+            else
+            {
+                agentTree.Nodes.Clear();
+
+                InitMgrList();
             }
         }
 
@@ -142,12 +159,12 @@ namespace TradingLib.MoniterControl
             mainNode.Tag = menu;
             agentTree.Nodes.Add(mainNode);
 
-            foreach (var subItem in menu.SubAgents)
+            foreach (var subItem in menu.SubAgents.OrderBy(men=>men.Manager.Login))
             {
                 this.AddMenu(mainNode, subItem);
             }
 
-            agentTree.NodeMouseClick += new TreeNodeMouseClickEventHandler(agentTree_NodeMouseClick);
+            
          
         }
         void AddMenu(TreeNode node, MenuItem item)
@@ -177,7 +194,7 @@ namespace TradingLib.MoniterControl
                 }
                 _managerSelected = menu.Manager;
                 //设定代理财务统计账户
-                ctAgentSummary.SetAgent(menu.AgentAccount);
+                ctAgentSummary.SetAgent(menu.Manager,menu.AgentAccount);
 
                 CoreService.TLClient.ReqWatchAgents(new string[] { menu.AgentAccount.Account });
                 //过滤账户列表

@@ -26,6 +26,7 @@ namespace TradingLib.MoniterControl
             acct = null;
             ctAccountMontier accountMoniter = obj as ctAccountMontier;
             if (accountMoniter == null) return false;
+            if (accountMoniter.VisualAccountCount == 0) return false;
             acct = accountMoniter.CurrentAccount;
             if (acct == null)
             {

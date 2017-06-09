@@ -62,7 +62,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Futs.base\lib\TradingLib\TradingLib.Common.dll</HintPath>
     </Reference>
-    <Reference Include="XSystem.Control, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IMoniterControl.cs" />

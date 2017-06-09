@@ -54,8 +54,9 @@ namespace TradingLib.MoniterCore
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MANAGER, OnNotifyManagerUpdate);
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MANGER_DELETE, OnNotifyManagerDelete);
 
-            //管理员账户
+            //结算账户
             CoreService.EventCore.RegisterCallback(Modules.AgentManager, Method_AGENT_MGR.QRY_ALL_AGENT, OnRspAgent);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_AGENT_CREATE, OnNotifyAgentCreate);
 
 
             //交易账户

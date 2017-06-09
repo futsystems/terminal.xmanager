@@ -195,6 +195,7 @@ namespace TradingLib.MoniterControl
         }
         #endregion
 
+        public int VisualAccountCount { get { return accountgrid.RowCount; } }
         #region 帐户内存数据结构
         private ConcurrentDictionary<string, AccountItem> accountmap = new ConcurrentDictionary<string, AccountItem>();
         private ConcurrentDictionary<string, int> accountrowmap = new ConcurrentDictionary<string, int>();

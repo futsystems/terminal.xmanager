@@ -379,6 +379,11 @@ namespace TradingLib.MoniterCore
         public const string NOTIFY_AGENT_STATISTIC = "NotifyAgentStatistic";
 
         /// <summary>
+        /// 代理结算账户创建
+        /// </summary>
+        public const string NOTIFY_AGENT_CREATE = "NotifyAgentCreate";
+
+        /// <summary>
         /// 观察代理列表
         /// </summary>
         public const string REQ_WATCH_AGENTS = "WatchAgents";

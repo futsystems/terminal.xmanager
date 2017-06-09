@@ -438,6 +438,15 @@ namespace TradingLib.MoniterCore
             }
 
         }
+
+        void OnNotifyAgentCreate(string json)
+        { 
+            AgentSetting agent = CoreService.ParseJsonResponse<AgentSetting>(json);
+            if (agent != null)
+            {
+                this.GotAgent(agent);
+            }
+        }
         void OnRspAgent(string jsonstr, bool islast)
         {
             AgentSetting[] agentlist = CoreService.ParseJsonResponse<AgentSetting[]>(jsonstr);

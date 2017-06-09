@@ -84,11 +84,21 @@ namespace TradingLib.MoniterControl.Base
         }
 
         AgentSetting _agent;
-        public void SetAgent(AgentSetting agent)
+        ManagerSetting _manager;
+        public void SetAgent(ManagerSetting mgr,AgentSetting agent)
         {
             _agent = agent;
+            _manager = mgr;
             agentBtnGroup.Values.Text = _agent.Account;
-            kryptonContextMenuHeading1.Text = Util.GetEnumDescription(_agent.AgentType);
+
+            if (_manager.Type == QSEnumManagerType.ROOT)
+            {
+                kryptonContextMenuHeading1.Text = "管理员";
+            }
+            else
+            {
+                kryptonContextMenuHeading1.Text = Util.GetEnumDescription(_agent.AgentType);
+            }
 
             if (_agent.AgentType == EnumAgentType.Normal)
             {
