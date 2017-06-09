@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.ctSelfOperateAgentSummary = new TradingLib.MoniterControl.ctSelfOperateAgentSummary();
+            this.ctCustSummary = new TradingLib.MoniterControl.ctCustSummary();
+            this.ctNormalAgentSummary = new TradingLib.MoniterControl.ctNormalAgentSummary();
             this.agentBtnGroup = new ComponentFactory.Krypton.Toolkit.KryptonDropButton();
             this.agentMenu = new ComponentFactory.Krypton.Toolkit.KryptonContextMenu();
             this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
@@ -44,9 +47,7 @@
             this.kryptonContextMenuItems3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuItem3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem4 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.ctCustSummary = new TradingLib.MoniterControl.ctCustSummary();
-            this.ctNormalAgentSummary = new TradingLib.MoniterControl.ctNormalAgentSummary();
-            this.ctSelfOperateAgentSummary = new TradingLib.MoniterControl.ctSelfOperateAgentSummary();
+            this.kryptonContextMenuHeading1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -64,6 +65,30 @@
             this.kryptonPanel1.StateCommon.Color1 = System.Drawing.Color.DimGray;
             this.kryptonPanel1.TabIndex = 0;
             // 
+            // ctSelfOperateAgentSummary
+            // 
+            this.ctSelfOperateAgentSummary.BackColor = System.Drawing.SystemColors.Control;
+            this.ctSelfOperateAgentSummary.Location = new System.Drawing.Point(301, 0);
+            this.ctSelfOperateAgentSummary.Name = "ctSelfOperateAgentSummary";
+            this.ctSelfOperateAgentSummary.Size = new System.Drawing.Size(173, 60);
+            this.ctSelfOperateAgentSummary.TabIndex = 17;
+            // 
+            // ctCustSummary
+            // 
+            this.ctCustSummary.BackColor = System.Drawing.Color.DimGray;
+            this.ctCustSummary.Location = new System.Drawing.Point(550, 0);
+            this.ctCustSummary.Name = "ctCustSummary";
+            this.ctCustSummary.Size = new System.Drawing.Size(541, 60);
+            this.ctCustSummary.TabIndex = 16;
+            // 
+            // ctNormalAgentSummary
+            // 
+            this.ctNormalAgentSummary.BackColor = System.Drawing.Color.DimGray;
+            this.ctNormalAgentSummary.Location = new System.Drawing.Point(91, 0);
+            this.ctNormalAgentSummary.Name = "ctNormalAgentSummary";
+            this.ctNormalAgentSummary.Size = new System.Drawing.Size(149, 60);
+            this.ctNormalAgentSummary.TabIndex = 15;
+            // 
             // agentBtnGroup
             // 
             this.agentBtnGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -79,6 +104,7 @@
             // agentMenu
             // 
             this.agentMenu.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
+            this.kryptonContextMenuHeading1,
             this.kryptonContextMenuItems1});
             // 
             // kryptonContextMenuItems1
@@ -131,29 +157,10 @@
             // 
             this.kryptonContextMenuItem4.Text = "Menu Item";
             // 
-            // ctCustSummary
+            // kryptonContextMenuHeading1
             // 
-            this.ctCustSummary.BackColor = System.Drawing.Color.DimGray;
-            this.ctCustSummary.Location = new System.Drawing.Point(550, 0);
-            this.ctCustSummary.Name = "ctCustSummary";
-            this.ctCustSummary.Size = new System.Drawing.Size(541, 60);
-            this.ctCustSummary.TabIndex = 16;
-            // 
-            // ctNormalAgentSummary
-            // 
-            this.ctNormalAgentSummary.BackColor = System.Drawing.Color.DimGray;
-            this.ctNormalAgentSummary.Location = new System.Drawing.Point(91, 0);
-            this.ctNormalAgentSummary.Name = "ctNormalAgentSummary";
-            this.ctNormalAgentSummary.Size = new System.Drawing.Size(149, 60);
-            this.ctNormalAgentSummary.TabIndex = 15;
-            // 
-            // ctSelfOperateAgentSummary
-            // 
-            this.ctSelfOperateAgentSummary.BackColor = System.Drawing.SystemColors.Control;
-            this.ctSelfOperateAgentSummary.Location = new System.Drawing.Point(301, 0);
-            this.ctSelfOperateAgentSummary.Name = "ctSelfOperateAgentSummary";
-            this.ctSelfOperateAgentSummary.Size = new System.Drawing.Size(173, 60);
-            this.ctSelfOperateAgentSummary.TabIndex = 17;
+            this.kryptonContextMenuHeading1.ExtraText = "";
+            this.kryptonContextMenuHeading1.Text = "--";
             // 
             // ctAgentSummary
             // 
@@ -189,5 +196,6 @@
         private ctNormalAgentSummary ctNormalAgentSummary;
         private ctCustSummary ctCustSummary;
         private ctSelfOperateAgentSummary ctSelfOperateAgentSummary;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading kryptonContextMenuHeading1;
     }
 }

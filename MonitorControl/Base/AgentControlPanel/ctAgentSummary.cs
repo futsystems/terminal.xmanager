@@ -24,6 +24,9 @@ namespace TradingLib.MoniterControl.Base
             ctNormalAgentSummary.Location = new Point(90, 0);
             ctNormalAgentSummary.Size = new System.Drawing.Size(120*3, 60);
             ctCustSummary.Location = new Point(90 + 120 * 3, 0);
+
+            this.Reset();
+
             WireEvent();
         }
 
@@ -69,10 +72,10 @@ namespace TradingLib.MoniterControl.Base
             fm.Close();
         }
         
+
+
         public void OnInit()
         {
-            //CoreService.EventCore.RegisterCallback(Modules.AgentManager, Method_AGENT_MGR.QRY_AGENT, OnQryAgent);
-            CoreService.EventCore.RegisterNotifyCallback(Modules.AgentManager, Method_AGENT_MGR.NOTIFY_AGENT, OnNotifyAgent);
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_AGENT_STATISTIC, OnNotifyAgentStatistic);
         }
         public void OnDisposed()
@@ -80,10 +83,13 @@ namespace TradingLib.MoniterControl.Base
             
         }
 
+        AgentSetting _agent;
         public void SetAgent(AgentSetting agent)
         {
             _agent = agent;
             agentBtnGroup.Values.Text = _agent.Account;
+            kryptonContextMenuHeading1.Text = Util.GetEnumDescription(_agent.AgentType);
+
             if (_agent.AgentType == EnumAgentType.Normal)
             {
                 ctNormalAgentSummary.Visible = true;
@@ -109,57 +115,28 @@ namespace TradingLib.MoniterControl.Base
         void Reset()
         {
             _agent = null;
-            /*
-            lastEquity.Text = EMPTY;
-            nowEquity.Text = EMPTY;
-            unrealizedPL.Text = EMPTY;
-            closedPL.Text = EMPTY;
-            commissionCost.Text = EMPTY;
-            commissionIncome.Text = EMPTY;**/
+            agentBtnGroup.Values.Text = EMPTY;
+            ctCustSummary.Reset();
+            ctNormalAgentSummary.Reset();
+            ctSelfOperateAgentSummary.Reset();
         }
 
-        AgentSetting _agent;
-        //void OnQryAgent(string json,bool islast)
-        //{
-        //    AgentSetting item = CoreService.ParseJsonResponse<AgentSetting>(json);
-            
-        //    if (item != null)
-        //    {
-        //        _agent = item;
-        //        InvokeGotAgent(_agent);
-        //    }
-        //}
-
-        void OnNotifyAgent(string json)
-        {
-            AgentSetting item = CoreService.ParseJsonResponse<AgentSetting>(json);
-            if (item != null)
-            {
-                _agent = item;
-                InvokeGotAgent(_agent);
-            }
-        }
+        
 
         void OnNotifyAgentStatistic(string json)
         {
             AgentStatistic st = CoreService.ParseJsonResponse<AgentStatistic>(json);
-            if (st != null)
+            if (st != null && _agent!= null)
             {
-                //commissionCost.Text = st.CommissionCost.ToFormatStr();
-                //commissionIncome.Text = st.CommissioinIncome.ToFormatStr();
-                //closedPL.Text = st.RealizedPL.ToFormatStr();
-                //unrealizedPL.Text = st.UnRealizedPL.ToFormatStr();
-            }
-        }
-        void InvokeGotAgent(AgentSetting agent)
-        {
-            if (InvokeRequired)
-            {
-                Invoke(new Action<AgentSetting>(InvokeGotAgent), new object[] { agent });
-            }
-            else
-            {
-                //lastEquity.Text = agent.LastEquity.ToFormatStr();
+                if (_agent.AgentType == EnumAgentType.Normal)
+                {
+                    ctNormalAgentSummary.GotAgentStatic(st);
+                }
+                if (_agent.AgentType == EnumAgentType.SelfOperated)
+                {
+                    ctSelfOperateAgentSummary.GotAgentStatic(st);
+                }
+                ctCustSummary.GotAgentStatic(st);
             }
         }
     }

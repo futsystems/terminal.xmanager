@@ -123,6 +123,13 @@ namespace TradingLib.MoniterControl
             StartUpdate();
 
             InitMgrList();
+
+            //初始化后自动设定到当前顶级管理员
+            if (CoreService.SiteInfo.Agent != null)
+            {
+                ctAgentSummary.SetAgent(CoreService.SiteInfo.Agent);
+                CoreService.TLClient.ReqWatchAgents(new string[] { CoreService.SiteInfo.Agent.Account });
+            }
         }
 
 
@@ -172,7 +179,7 @@ namespace TradingLib.MoniterControl
                 //设定代理财务统计账户
                 ctAgentSummary.SetAgent(menu.AgentAccount);
 
-                CoreService.TLClient.ReqWatchAgents(new string[] { _managerSelected.Login });
+                CoreService.TLClient.ReqWatchAgents(new string[] { menu.AgentAccount.Account });
                 //过滤账户列表
                 FilterAccount();
 

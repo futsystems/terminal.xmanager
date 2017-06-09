@@ -32,15 +32,15 @@
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.label4 = new System.Windows.Forms.Label();
-            this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.commissioncost = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonPanel4 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.label5 = new System.Windows.Forms.Label();
-            this.kryptonLabel9 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.commissionincome = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonPanel5 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.label6 = new System.Windows.Forms.Label();
-            this.kryptonLabel11 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.lastequity = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel12 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.panelCost = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.label3 = new System.Windows.Forms.Label();
@@ -100,7 +100,7 @@
             // kryptonPanel3
             // 
             this.kryptonPanel3.Controls.Add(this.label4);
-            this.kryptonPanel3.Controls.Add(this.kryptonLabel7);
+            this.kryptonPanel3.Controls.Add(this.commissioncost);
             this.kryptonPanel3.Controls.Add(this.kryptonLabel8);
             this.kryptonPanel3.Location = new System.Drawing.Point(240, 0);
             this.kryptonPanel3.Name = "kryptonPanel3";
@@ -117,19 +117,19 @@
             this.label4.TabIndex = 1;
             this.label4.Text = "label4";
             // 
-            // kryptonLabel7
+            // commissioncost
             // 
-            this.kryptonLabel7.AutoSize = false;
-            this.kryptonLabel7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.kryptonLabel7.Location = new System.Drawing.Point(0, 25);
-            this.kryptonLabel7.Name = "kryptonLabel7";
-            this.kryptonLabel7.Size = new System.Drawing.Size(120, 35);
-            this.kryptonLabel7.StateCommon.ShortText.Color1 = System.Drawing.Color.White;
-            this.kryptonLabel7.StateCommon.ShortText.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.kryptonLabel7.StateCommon.ShortText.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.kryptonLabel7.StateCommon.ShortText.TextV = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.kryptonLabel7.TabIndex = 1;
-            this.kryptonLabel7.Values.Text = "1000000.00";
+            this.commissioncost.AutoSize = false;
+            this.commissioncost.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.commissioncost.Location = new System.Drawing.Point(0, 25);
+            this.commissioncost.Name = "commissioncost";
+            this.commissioncost.Size = new System.Drawing.Size(120, 35);
+            this.commissioncost.StateCommon.ShortText.Color1 = System.Drawing.Color.White;
+            this.commissioncost.StateCommon.ShortText.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.commissioncost.StateCommon.ShortText.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
+            this.commissioncost.StateCommon.ShortText.TextV = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
+            this.commissioncost.TabIndex = 1;
+            this.commissioncost.Values.Text = "1000000.00";
             // 
             // kryptonLabel8
             // 
@@ -148,7 +148,7 @@
             // kryptonPanel4
             // 
             this.kryptonPanel4.Controls.Add(this.label5);
-            this.kryptonPanel4.Controls.Add(this.kryptonLabel9);
+            this.kryptonPanel4.Controls.Add(this.commissionincome);
             this.kryptonPanel4.Controls.Add(this.kryptonLabel10);
             this.kryptonPanel4.Location = new System.Drawing.Point(120, 0);
             this.kryptonPanel4.Name = "kryptonPanel4";
@@ -165,19 +165,19 @@
             this.label5.TabIndex = 1;
             this.label5.Text = "label5";
             // 
-            // kryptonLabel9
+            // commissionincome
             // 
-            this.kryptonLabel9.AutoSize = false;
-            this.kryptonLabel9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.kryptonLabel9.Location = new System.Drawing.Point(0, 25);
-            this.kryptonLabel9.Name = "kryptonLabel9";
-            this.kryptonLabel9.Size = new System.Drawing.Size(120, 35);
-            this.kryptonLabel9.StateCommon.ShortText.Color1 = System.Drawing.Color.White;
-            this.kryptonLabel9.StateCommon.ShortText.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.kryptonLabel9.StateCommon.ShortText.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.kryptonLabel9.StateCommon.ShortText.TextV = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.kryptonLabel9.TabIndex = 1;
-            this.kryptonLabel9.Values.Text = "1000000.00";
+            this.commissionincome.AutoSize = false;
+            this.commissionincome.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.commissionincome.Location = new System.Drawing.Point(0, 25);
+            this.commissionincome.Name = "commissionincome";
+            this.commissionincome.Size = new System.Drawing.Size(120, 35);
+            this.commissionincome.StateCommon.ShortText.Color1 = System.Drawing.Color.White;
+            this.commissionincome.StateCommon.ShortText.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.commissionincome.StateCommon.ShortText.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
+            this.commissionincome.StateCommon.ShortText.TextV = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
+            this.commissionincome.TabIndex = 1;
+            this.commissionincome.Values.Text = "1000000.00";
             // 
             // kryptonLabel10
             // 
@@ -196,7 +196,7 @@
             // kryptonPanel5
             // 
             this.kryptonPanel5.Controls.Add(this.label6);
-            this.kryptonPanel5.Controls.Add(this.kryptonLabel11);
+            this.kryptonPanel5.Controls.Add(this.lastequity);
             this.kryptonPanel5.Controls.Add(this.kryptonLabel12);
             this.kryptonPanel5.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel5.Name = "kryptonPanel5";
@@ -213,19 +213,19 @@
             this.label6.TabIndex = 1;
             this.label6.Text = "label6";
             // 
-            // kryptonLabel11
+            // lastequity
             // 
-            this.kryptonLabel11.AutoSize = false;
-            this.kryptonLabel11.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.kryptonLabel11.Location = new System.Drawing.Point(0, 25);
-            this.kryptonLabel11.Name = "kryptonLabel11";
-            this.kryptonLabel11.Size = new System.Drawing.Size(120, 35);
-            this.kryptonLabel11.StateCommon.ShortText.Color1 = System.Drawing.Color.White;
-            this.kryptonLabel11.StateCommon.ShortText.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.kryptonLabel11.StateCommon.ShortText.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.kryptonLabel11.StateCommon.ShortText.TextV = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.kryptonLabel11.TabIndex = 1;
-            this.kryptonLabel11.Values.Text = "1000000.00";
+            this.lastequity.AutoSize = false;
+            this.lastequity.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lastequity.Location = new System.Drawing.Point(0, 25);
+            this.lastequity.Name = "lastequity";
+            this.lastequity.Size = new System.Drawing.Size(120, 35);
+            this.lastequity.StateCommon.ShortText.Color1 = System.Drawing.Color.White;
+            this.lastequity.StateCommon.ShortText.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lastequity.StateCommon.ShortText.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
+            this.lastequity.StateCommon.ShortText.TextV = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
+            this.lastequity.TabIndex = 1;
+            this.lastequity.Values.Text = "1000000.00";
             // 
             // kryptonLabel12
             // 
@@ -430,15 +430,15 @@
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel2;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel3;
         private System.Windows.Forms.Label label4;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel commissioncost;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel8;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel4;
         private System.Windows.Forms.Label label5;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel9;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel commissionincome;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel10;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel5;
         private System.Windows.Forms.Label label6;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel11;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lastequity;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel12;
 
     }
