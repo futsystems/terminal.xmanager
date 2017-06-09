@@ -168,7 +168,7 @@ namespace TradingLib.MoniterControl
                         break;
                     case 9:
                         {
-                            ctBrokerCTPDirect input = new ctBrokerCTPDirect();
+                            ctBrokerXGJDirect input = new ctBrokerXGJDirect();
                             holder.Controls.Add(input);
                             input.Dock = DockStyle.Fill;
                             connCtrl = input;
