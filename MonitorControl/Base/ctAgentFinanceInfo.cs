@@ -46,6 +46,14 @@ namespace TradingLib.MoniterControl
         {
             _agent = agent;
             account.Text = _agent.Account;
+            if (_agent.AgentType == EnumAgentType.Normal)
+            {
+                panelSelfOperatedAgent.Visible = false;
+            }
+            if (_agent.AgentType == EnumAgentType.SelfOperated)
+            {
+                panelSelfOperatedAgent.Visible = true;
+            }
         }
 
         public void OnInit()
@@ -104,15 +112,15 @@ namespace TradingLib.MoniterControl
                 marginfrozen.Text = info.MarginFrozen.ToFormatStr();
                 
                 staticEquity.Text = info.StaticEquity.ToFormatStr();
-                subStaticEquity.Text = info.SubStaticEquity.ToFormatStr();
+                custStaticEquity.Text = info.SubStaticEquity.ToFormatStr();
                 canUseEquity.Text = (info.StaticEquity - info.SubStaticEquity).ToFormatStr();
 
                 lastcredit.Text = info.LastCredit.ToFormatStr();
                 creditcashin.Text = info.CreditCashIn.ToFormatStr();
                 creditcashout.Text = info.CreditCashOut.ToFormatStr();
-                credit.Text = info.NowCredit.ToFormatStr();
+                nowcredit.Text = info.NowCredit.ToFormatStr();
 
-                totalEquity.Text = (info.NowCredit + info.NowEquity).ToFormatStr();
+                
             }
         }
 

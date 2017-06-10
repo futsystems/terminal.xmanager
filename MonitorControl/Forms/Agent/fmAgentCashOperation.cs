@@ -19,6 +19,9 @@ namespace TradingLib.MoniterControl
             InitializeComponent();
             MoniterHelper.AdapterToIDataSource(cbEquityTypeList).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumEquityType>());
             MoniterHelper.AdapterToIDataSource(cbCurrency).BindDataSource(MoniterHelper.GetEnumValueObjects<CurrencyType>());
+
+            cbEquityTypeList.SelectedValue = QSEnumEquityType.OwnEquity;//默认为劣后
+
             this.Load += new EventHandler(fmCashOperationCounter_Load);
         }
 
@@ -104,6 +107,13 @@ namespace TradingLib.MoniterControl
         {
             _agent = agent;
             ctAgentFinanceInfo1.SetAgent(agent);
+            this.Text = string.Format("出入金/帐户查询[{0}]", Util.GetEnumDescription(_agent.AgentType));
+
+            if (_agent.AgentType == EnumAgentType.Normal)
+            {
+                cbEquityTypeList.Enabled = false;
+            }
+
         }
 
     }

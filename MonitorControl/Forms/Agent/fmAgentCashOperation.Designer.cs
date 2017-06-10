@@ -78,7 +78,7 @@
             this.kryptonGroupBox1.Panel.Controls.Add(this.ctAgentFinanceInfo1);
             this.kryptonGroupBox1.Size = new System.Drawing.Size(522, 246);
             this.kryptonGroupBox1.TabIndex = 6;
-            this.kryptonGroupBox1.Values.Heading = "代理帐户查询";
+            this.kryptonGroupBox1.Values.Heading = "帐户查询";
             // 
             // kryptonGroupBox2
             // 
@@ -105,6 +105,7 @@
             // 
             // cbCurrency
             // 
+            this.cbCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCurrency.DropDownWidth = 181;
             this.cbCurrency.Location = new System.Drawing.Point(77, 54);
             this.cbCurrency.Name = "cbCurrency";
@@ -130,6 +131,7 @@
             // 
             // cbEquityTypeList
             // 
+            this.cbEquityTypeList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEquityTypeList.DropDownWidth = 121;
             this.cbEquityTypeList.Location = new System.Drawing.Point(77, 29);
             this.cbEquityTypeList.Name = "cbEquityTypeList";
