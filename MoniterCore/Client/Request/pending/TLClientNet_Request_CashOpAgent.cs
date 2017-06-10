@@ -33,10 +33,10 @@ namespace TradingLib.MoniterCore
         /// <param name="account"></param>
         /// <param name="start"></param>
         /// <param name="end"></param>
-        public void ReqQryAgentCashTrans(int mgrfk, long start, long end)
-        {
-            this.ReqContribRequest("MgrExchServer", "QueryAgentCashTrans", mgrfk.ToString() + "," + start.ToString() + "," + end.ToString());
-        }
+        //public void ReqQryAgentCashTrans(int mgrfk, long start, long end)
+        //{
+        //    this.ReqContribRequest("MgrExchServer", "QueryAgentCashTrans", mgrfk.ToString() + "," + start.ToString() + "," + end.ToString());
+        //}
 
         /// <summary>
         /// 请求出入金操作

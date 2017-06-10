@@ -34,6 +34,27 @@ namespace TradingLib.MoniterControl.Base
         {
             kryptonContextMenuItem1.Click += new EventHandler(kryptonContextMenuItem1_Click);
             kryptonContextMenuItem2.Click += new EventHandler(kryptonContextMenuItem2_Click);
+            kryptonContextMenuItem7.Click += new EventHandler(kryptonContextMenuItem7_Click);
+        }
+
+        /// <summary>
+        /// 出入金
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void kryptonContextMenuItem7_Click(object sender, EventArgs e)
+        {
+            if (_agent == null)
+            {
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("代理财务账户不存在");
+                return;
+            }
+
+            fmHistQueryCashTrans fm = new fmHistQueryCashTrans();
+            fm.AccountType = CashOpViewType.Agent;
+            fm.SetAccount(_agent.Account);
+            fm.ShowDialog();
+            fm.Close();
         }
 
         /// <summary>

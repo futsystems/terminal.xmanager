@@ -46,6 +46,12 @@ namespace TradingLib.MoniterCore
         /// 代理账户财务信息更新通知
         /// </summary>
         public const string NOTIFY_AGENT_FINANCE_INFO = "NotifyAgentFinInfo";
+
+
+        /// <summary>
+        /// 查询代理出入金记录
+        /// </summary>
+        public const string QRY_AGENT_CASH_TXN = "QueryAgentCashTxn";
     }
 
     public static class AgentManager
@@ -108,6 +114,16 @@ namespace TradingLib.MoniterCore
         {
             return client.ReqContribRequest(Modules.AgentManager, Method_AGENT_MGR.QRY_AGENT_FINANCE_INFO, account);
         }
+
+        /// <summary>
+        /// 查询代理帐户出入金记录
+        /// </summary>
+        /// <param name="account"></param>
+        public static int ReqQryAgentCashTxn(this TLClientNet client, string account, long start, long end)
+        {
+            return client.ReqContribRequest(Modules.AgentManager, Method_AGENT_MGR.QRY_AGENT_CASH_TXN, new { account = account, start = start, end = end });
+        }
+
 
     }
 }

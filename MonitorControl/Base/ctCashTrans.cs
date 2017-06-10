@@ -21,14 +21,7 @@ namespace TradingLib.MoniterControl
         {
             InitializeComponent();
 
-            SetPreferences();
-            InitTable();
-            BindToTable();
-
-            start.Value = Convert.ToDateTime(DateTime.Today.AddMonths(-1).ToString("yyyy-MM-01") + " 0:00:00");
-            end.Value = DateTime.Now;
-
-            
+            this.AccountType = CashOpViewType.Account;
 
             //控件设置的属性在构造函数中是不起作用的，需要构造函数完毕在load事件内才发生作用，没有构造完毕则无法获得对应的参数 因此初始化工程中 如果有用到控件参数的需要延迟到load事件过程中执行
             //这里需要研究下控件的相关加载机制和事件先后顺序
@@ -37,6 +30,13 @@ namespace TradingLib.MoniterControl
 
         void ctCashTrans_Load(object sender, EventArgs e)
         {
+            SetPreferences();
+            InitTable();
+            BindToTable();
+
+            start.Value = Convert.ToDateTime(DateTime.Today.AddMonths(-1).ToString("yyyy-MM-01") + " 0:00:00");
+            end.Value = DateTime.Now;
+
             //全局事件回调
             CoreService.EventCore.RegIEventHandler(this);
 
@@ -46,92 +46,26 @@ namespace TradingLib.MoniterControl
             cashgrid.CellFormatting += new DataGridViewCellFormattingEventHandler(cashgrid_CellFormatting);
         }
 
-        void cashgrid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
-        {
-            e.PaintParts = e.PaintParts ^ DataGridViewPaintParts.Focus;
-        }
-
-        
-
-        //属性获得和设置
-        [DefaultValue(CashOpViewType.Account)]
-        CashOpViewType _viewType = CashOpViewType.Account;
-        public CashOpViewType ViewType
-        {
-            get
-            {
-                return _viewType;
-            }
-            set
-            {
-                _viewType = value;
-                OnViewTypeChange();
-            }
-        }
-
-
-
-
         public void OnInit()
         {
-            //调整空间可视
-            OnViewTypeChange();
-
-            //绑定事件
-            if (ViewType == CashOpViewType.Account)
-            {
-                CoreService.EventCore.RegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_TXN, this.OnQryCashTrans);
-            }
-            else
-            {
-                CoreService.EventCore.RegisterCallback("MgrExchServer", "QueryAgentCashTrans", this.OnQryCashTrans);
-            }
+            CoreService.EventCore.RegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_TXN, this.OnQryCashTrans);
+            CoreService.EventCore.RegisterCallback(Modules.AgentManager, Method_AGENT_MGR.QRY_AGENT_CASH_TXN, this.OnQryCashTrans);
         }
 
         public void OnDisposed()
         {
-            if (ViewType == CashOpViewType.Account)
-            {
-                CoreService.EventCore.UnRegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_TXN, this.OnQryCashTrans);
-            }
-            else
-            {
-                CoreService.EventCore.UnRegisterCallback("MgrExchServer", "QueryAgentCashTrans", this.OnQryCashTrans);
-            }
-        }
-
-        /// <summary>
-        /// 当viewtype调整时 调整控件可视
-        /// </summary>
-        void OnViewTypeChange()
-        {
-            //调整界面
-            if (ViewType == CashOpViewType.Account)
-            {
-                cashgrid.Columns[MGRFK].Visible = false;
-                ctAgentList1.Visible = false;
-            }
-            else
-            {
-                cashgrid.Columns[ACCOUNT].Visible = false;
-                lbaccount.Visible = false;
-                boxaccount.Visible = false;
-            }
+            CoreService.EventCore.UnRegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_TXN, this.OnQryCashTrans);
+            CoreService.EventCore.UnRegisterCallback(Modules.AgentManager, Method_AGENT_MGR.QRY_AGENT_CASH_TXN, this.OnQryCashTrans);
         }
 
 
         void OnQryCashTrans(string jsonstr, bool islast)
         {
-            CashTransactionImpl[] obj = CoreService.ParseJsonResponse<CashTransactionImpl[]>(jsonstr);
+            CashTransactionImpl obj = CoreService.ParseJsonResponse<CashTransactionImpl>(jsonstr);
             if (obj != null)
             {
-                foreach (CashTransactionImpl c in obj)
-                {
-                    GotCashTrans(c);
-                }
+                GotCashTrans(obj);
             }
-
-
         }
 
         void GotCashTrans(CashTransactionImpl trans)
@@ -144,16 +78,15 @@ namespace TradingLib.MoniterControl
             {
                 DataRow r = gt.Rows.Add("");
                 int i = gt.Rows.Count - 1;//得到新建的Row号
-                gt.Rows[i][ID] = trans.TxnID;
+                gt.Rows[i][TXNID] = trans.TxnID;
                 gt.Rows[i][SETTLEDAY] = trans.Settleday;
                 gt.Rows[i][DATETIME] = Util.ToDateTime(trans.DateTime);
                 gt.Rows[i][ACCOUNT] = trans.Account;
-                gt.Rows[i][MGRFK] = trans.Operator;
                 gt.Rows[i][OPERATION] = trans.TxnType == QSEnumCashOperation.Deposit?"入金" : "出金";
                 gt.Rows[i][TYPE] = Util.GetEnumDescription(trans.EquityType);
-                gt.Rows[i][AMOUNT] = Math.Abs(trans.Amount);
-                gt.Rows[i][REF] = trans.TxnRef;
-
+                gt.Rows[i][AMOUNT] = trans.Amount;
+                gt.Rows[i][OPERATOR] = trans.Operator;
+                gt.Rows[i][TAG] = trans;
             }
         }
 
@@ -172,15 +105,15 @@ namespace TradingLib.MoniterControl
 
         #region 显示字段
 
-        const string ID = "ID";
+        const string TXNID = "交易编号";
         const string SETTLEDAY = "交易日";
         const string DATETIME = "时间";
         const string ACCOUNT = "帐户";
-        const string MGRFK = "代理域ID";
         const string OPERATION = "操作";
         const string AMOUNT = "金额";
-        const string REF = "流水号";
         const string TYPE = "资金类别";
+        const string OPERATOR = "操作员";
+        const string TAG = "TAG";
         #endregion
 
         DataTable gt = new DataTable();
@@ -202,8 +135,6 @@ namespace TradingLib.MoniterControl
             grid.ReadOnly = true;
             grid.RowHeadersVisible = false;
             grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            grid.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
-
             grid.StateCommon.Background.Color1 = Color.WhiteSmoke;
             grid.StateCommon.Background.Color2 = Color.WhiteSmoke;
 
@@ -212,16 +143,16 @@ namespace TradingLib.MoniterControl
         //初始化Account显示空格
         private void InitTable()
         {
-            gt.Columns.Add(ID);//1
+            gt.Columns.Add(TXNID);
             gt.Columns.Add(ACCOUNT);//4
-            gt.Columns.Add(MGRFK);//5
-
             gt.Columns.Add(SETTLEDAY);//2
             gt.Columns.Add(DATETIME);//3
             gt.Columns.Add(OPERATION);//6
             gt.Columns.Add(AMOUNT);//
             gt.Columns.Add(TYPE);
-            gt.Columns.Add(REF);//
+            gt.Columns.Add(OPERATOR);
+
+            gt.Columns.Add(TAG, typeof(CashTransactionImpl));
         }
 
         /// <summary>
@@ -230,57 +161,52 @@ namespace TradingLib.MoniterControl
         private void BindToTable()
         {
             ComponentFactory.Krypton.Toolkit.KryptonDataGridView grid = cashgrid;
-
-
             datasource.DataSource = gt;
             grid.DataSource = datasource;
 
             //需要在绑定数据源后设定具体的可见性
-            //grid.Columns[ID].Width = 40;
+            grid.Columns[TXNID].Width = 200;
             grid.Columns[SETTLEDAY].Width = 80;
             grid.Columns[DATETIME].Width = 120;
             grid.Columns[OPERATION].Width = 40;
             grid.Columns[ACCOUNT].Width = 80;
             grid.Columns[TYPE].Width = 60;
             grid.Columns[AMOUNT].Width = 100;
+            grid.Columns[TAG].Visible = false;
 
-            if (ViewType == CashOpViewType.Account)
-            {
-                cashgrid.Columns[MGRFK].Visible = false;
-            }
-            else
-            {
-                cashgrid.Columns[ACCOUNT].Visible = false;
-            }
-            cashgrid.Columns[ID].Visible = false;
+
         }
         #endregion
+
 
         private void btnQryReport_Click(object sender, EventArgs e)
         {
             this.Clear();
-                if (ViewType == CashOpViewType.Account)
-                {
-                    if (string.IsNullOrEmpty(boxaccount.Text))
-                    {
-                        MoniterHelper.WindowMessage("请输入正确的交易帐户");
-                        return;
-                    }
-
-                    CoreService.TLClient.ReqQryAccountCashTxn(boxaccount.Text, Util.ToTLDateTime(start.Value), Util.ToTLDateTimeEnd(end.Value));
-                }
-                else
-                {
-                    CoreService.TLClient.ReqQryAgentCashTrans(ctAgentList1.CurrentAgentFK, Util.ToTLDateTime(start.Value), Util.ToTLDateTimeEnd(end.Value));
-                }
+            if (string.IsNullOrEmpty(inputAccount.Text))
+            {
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请输入帐户");
+                return;
+            }
+            if (this.AccountType == CashOpViewType.Account)
+            {
+                CoreService.TLClient.ReqQryAccountCashTxn(inputAccount.Text, Util.ToTLDateTime(start.Value), Util.ToTLDateTimeEnd(end.Value));
+            }
+            else
+            {
+                CoreService.TLClient.ReqQryAgentCashTxn(inputAccount.Text, Util.ToTLDateTime(start.Value), Util.ToTLDateTimeEnd(end.Value));
+            }
         }
 
+        void cashgrid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            e.PaintParts = e.PaintParts ^ DataGridViewPaintParts.Focus;
+        }
 
         void cashgrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 5)
+            if (e.ColumnIndex == 4)
             {
-                string op = cashgrid[5, e.RowIndex].Value.ToString();
+                string op = cashgrid[4, e.RowIndex].Value.ToString();
                 if (op.Equals("入金"))
                 {
                     e.CellStyle.ForeColor = UIConstant.LongSideColor;
@@ -290,18 +216,19 @@ namespace TradingLib.MoniterControl
                     e.CellStyle.ForeColor = UIConstant.ShortSideColor;
                 }
             }
-            if (e.ColumnIndex == 5 || e.ColumnIndex == 6)
+            if (e.ColumnIndex == 4 || e.ColumnIndex == 5)
             {
                 e.CellStyle.Font = UIConstant.BoldFont;
             }
         }
 
 
+        public CashOpViewType AccountType { get; set; }
+
+
         public void SetAccount(string account)
         {
-            if (this._viewType == CashOpViewType.Agent)
-                return;
-            boxaccount.Text = account;
+            inputAccount.Text = account;
         }
     }
 }

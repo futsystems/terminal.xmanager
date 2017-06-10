@@ -17,6 +17,12 @@ namespace TradingLib.MoniterControl
         }
 
 
+
+        public CashOpViewType AccountType
+        {
+            get { return ctCashTrans1.AccountType; }
+            set { ctCashTrans1.AccountType = value; }
+        }
         public void SetAccount(string account)
         {
             ctCashTrans1.SetAccount(account);

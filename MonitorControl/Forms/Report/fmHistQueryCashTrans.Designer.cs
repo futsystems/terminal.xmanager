@@ -51,7 +51,7 @@
             this.ctCashTrans1.Name = "ctCashTrans1";
             this.ctCashTrans1.Size = new System.Drawing.Size(891, 476);
             this.ctCashTrans1.TabIndex = 0;
-            this.ctCashTrans1.ViewType = TradingLib.MoniterControl.CashOpViewType.Account;
+            
             // 
             // fmHistQueryCashTrans
             // 

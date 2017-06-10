@@ -29,9 +29,8 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.boxaccount = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.inputAccount = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.lbaccount = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.ctAgentList1 = new ctAgentList();
             this.btnQryReport = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.end = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -45,9 +44,8 @@
             // 
             // kryptonPanel1
             // 
-            this.kryptonPanel1.Controls.Add(this.boxaccount);
+            this.kryptonPanel1.Controls.Add(this.inputAccount);
             this.kryptonPanel1.Controls.Add(this.lbaccount);
-            this.kryptonPanel1.Controls.Add(this.ctAgentList1);
             this.kryptonPanel1.Controls.Add(this.btnQryReport);
             this.kryptonPanel1.Controls.Add(this.end);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
@@ -60,34 +58,22 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(688, 340);
             this.kryptonPanel1.TabIndex = 0;
             // 
-            // boxaccount
+            // inputAccount
             // 
-            this.boxaccount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.boxaccount.Location = new System.Drawing.Point(123, 307);
-            this.boxaccount.Name = "boxaccount";
-            this.boxaccount.Size = new System.Drawing.Size(106, 21);
-            this.boxaccount.TabIndex = 8;
+            this.inputAccount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputAccount.Location = new System.Drawing.Point(126, 308);
+            this.inputAccount.Name = "inputAccount";
+            this.inputAccount.Size = new System.Drawing.Size(106, 20);
+            this.inputAccount.TabIndex = 8;
             // 
             // lbaccount
             // 
             this.lbaccount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbaccount.Location = new System.Drawing.Point(55, 308);
+            this.lbaccount.Location = new System.Drawing.Point(82, 309);
             this.lbaccount.Name = "lbaccount";
-            this.lbaccount.Size = new System.Drawing.Size(68, 18);
+            this.lbaccount.Size = new System.Drawing.Size(38, 20);
             this.lbaccount.TabIndex = 7;
-            this.lbaccount.Values.Text = "交易帐户:";
-            // 
-            // ctAgentList1
-            // 
-            this.ctAgentList1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ctAgentList1.EnableAny = false;
-            this.ctAgentList1.EnableDefaultBaseMGR = true;
-            this.ctAgentList1.EnableSelected = true;
-            this.ctAgentList1.EnableSelf = true;
-            this.ctAgentList1.Location = new System.Drawing.Point(53, 306);
-            this.ctAgentList1.Name = "ctAgentList1";
-            this.ctAgentList1.Size = new System.Drawing.Size(183, 25);
-            this.ctAgentList1.TabIndex = 6;
+            this.lbaccount.Values.Text = "帐户:";
             // 
             // btnQryReport
             // 
@@ -103,15 +89,15 @@
             this.end.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.end.Location = new System.Drawing.Point(465, 308);
             this.end.Name = "end";
-            this.end.Size = new System.Drawing.Size(128, 20);
+            this.end.Size = new System.Drawing.Size(128, 21);
             this.end.TabIndex = 4;
             // 
             // kryptonLabel2
             // 
             this.kryptonLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonLabel2.Location = new System.Drawing.Point(417, 308);
+            this.kryptonLabel2.Location = new System.Drawing.Point(421, 309);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(41, 18);
+            this.kryptonLabel2.Size = new System.Drawing.Size(38, 20);
             this.kryptonLabel2.TabIndex = 3;
             this.kryptonLabel2.Values.Text = "结束:";
             // 
@@ -120,23 +106,23 @@
             this.start.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.start.Location = new System.Drawing.Point(283, 308);
             this.start.Name = "start";
-            this.start.Size = new System.Drawing.Size(128, 20);
+            this.start.Size = new System.Drawing.Size(128, 21);
             this.start.TabIndex = 2;
             // 
             // kryptonLabel1
             // 
             this.kryptonLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonLabel1.Location = new System.Drawing.Point(235, 308);
+            this.kryptonLabel1.Location = new System.Drawing.Point(238, 309);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(41, 18);
+            this.kryptonLabel1.Size = new System.Drawing.Size(38, 20);
             this.kryptonLabel1.TabIndex = 1;
             this.kryptonLabel1.Values.Text = "开始:";
             // 
             // cashgrid
             // 
-            this.cashgrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.cashgrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cashgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cashgrid.Location = new System.Drawing.Point(0, 0);
             this.cashgrid.Name = "cashgrid";
@@ -168,8 +154,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker start;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnQryReport;
-        private ctAgentList ctAgentList1;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox boxaccount;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox inputAccount;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbaccount;
     }
 }
