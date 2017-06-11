@@ -52,6 +52,12 @@ namespace TradingLib.MoniterCore
         /// 查询代理出入金记录
         /// </summary>
         public const string QRY_AGENT_CASH_TXN = "QueryAgentCashTxn";
+
+
+        /// <summary>
+        /// 查询一个时间区间内的结算单
+        /// </summary>
+        public const string QRY_AGENT_SETTLEMENTS = "QueryAgentSettlements";
     }
 
     public static class AgentManager
@@ -124,6 +130,13 @@ namespace TradingLib.MoniterCore
             return client.ReqContribRequest(Modules.AgentManager, Method_AGENT_MGR.QRY_AGENT_CASH_TXN, new { account = account, start = start, end = end });
         }
 
-
+        /// <summary>
+        /// 查询代理帐户结算单记录
+        /// </summary>
+        /// <param name="account"></param>
+        public static int ReqQryAgentSettlement(this TLClientNet client, string account, int start, int end)
+        {
+            return client.ReqContribRequest(Modules.AgentManager, Method_AGENT_MGR.QRY_AGENT_SETTLEMENTS, new { account = account, start = start, end = end });
+        }
     }
 }
