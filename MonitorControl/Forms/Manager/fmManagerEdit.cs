@@ -13,7 +13,7 @@ using TradingLib.MoniterCore;
 
 namespace TradingLib.MoniterControl
 {
-    public partial class fmManagerEdit : ComponentFactory.Krypton.Toolkit.KryptonForm
+    public partial class fmManagerEdit : ComponentFactory.Krypton.Toolkit.KryptonForm,IEventBinder
     {
         public fmManagerEdit()
         {
@@ -21,7 +21,20 @@ namespace TradingLib.MoniterControl
             MoniterHelper.AdapterToIDataSource(type).BindDataSource(MoniterHelper.GetManagerTypeCBList());
             MoniterHelper.AdapterToIDataSource(agentType).BindDataSource(MoniterHelper.GetEnumValueObjects<EnumAgentType>());
             type.SelectedValueChanged += new EventHandler(type_SelectedValueChanged);
-            
+            CoreService.EventCore.RegIEventHandler(this);
+
+            this.type.Enabled = false;
+        }
+
+        public void OnInit()
+        {
+            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_MANAGER_PROFILE, OnQryManagerProfile);
+
+        }
+
+        public void OnDisposed()
+        {
+            CoreService.EventCore.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MANAGER, OnQryManagerProfile);
         }
 
         void type_SelectedValueChanged(object sender, EventArgs e)
@@ -38,17 +51,11 @@ namespace TradingLib.MoniterControl
         {
             this.login.Enabled = false;//登入用户名不可编辑
             this.agentBox.Visible = false;
-            this.agentType.Visible = false;
-
+            this.agentType.Enabled = false;
+            
             _manger = mgr;
-            this.Text = string.Format("编辑管理员:{0}({1})-{2} 分区:{3}",_manger.Login,_manger.Name,_manger.ID,_manger.domain_id);
+            this.Text = string.Format("编辑管理员:{0} 分区:{1}",_manger.Login,_manger.domain_id);
             this.login.Text = _manger.Login;
-            this.name.Text = _manger.Name;
-            this.mobile.Text = _manger.Mobile;
-            this.qq.Text = _manger.QQ;
-
-           
-
             if (_manger.Type == QSEnumManagerType.AGENT)
             {
                 agentBox.Visible = true;
@@ -56,21 +63,34 @@ namespace TradingLib.MoniterControl
                 this.agentlimit.Value = _manger.AgentLimit;
 
             }
-            
-            
-            //this.acclimit.Enabled = false;
-            // this.agentlimit.Enabled = false;
 
-            //如果是代理商则可以修改帐户数量限制 同时设定限制为自己的限制 给代理的客户数量不能超过过自己的限制
-            //if (_manger.Type == QSEnumManagerType.AGENT)
-            //{
-            //    this.acclimit.Enabled = true;
-            //    this.acclimit.Maximum = CoreService.SiteInfo.Manager.AccLimit;
-            //    this.agentlimit.Enabled = true;
-            //    this.agentlimit.Maximum = CoreService.SiteInfo.Manager.AgentLimit;
-            //}
+            CoreService.TLClient.ReqQryManagerProfile(mgr.ID);
         }
 
+        void OnQryManagerProfile(string json, bool islast)
+        {
+            ManagerProfile profile = CoreService.ParseJsonResponse<ManagerProfile>(json);
+            if (profile != null)
+            {
+                if (InvokeRequired)
+                {
+                    Invoke(new Action<string, bool>(OnQryManagerProfile), new object[] { json, islast });
+                }
+                else
+                {
+                    name.Text = profile.Name;
+                    mobile.Text = profile.Mobile;
+                    qq.Text = profile.QQ;
+                    email.Text = profile.Email;
+                    idcard.Text = profile.IDCard;
+                    memo.Text = profile.Memo;
+
+                    ctBankList.BankSelected = profile.Bank_ID;
+                    bankac.Text = profile.BankAC;
+                    branch.Text = profile.Branch;
+                }
+            }
+        }
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             if (!CoreService.SiteInfo.Manager.RightAddManager())
@@ -79,20 +99,13 @@ namespace TradingLib.MoniterControl
                 return;
             }
 
-            var mgr_type = (QSEnumManagerType)type.SelectedValue;
             var login = this.login.Text;
+            var mgr_type = (QSEnumManagerType)type.SelectedValue;
 
-            var name = this.name.Text;
-            var mobile = this.mobile.Text;
-            var qq = this.qq.Text;
-            var acc_limit = (int)this.acclimit.Value;
-            var agent_limit = (int)this.agentlimit.Value;
             var mgr_fk = 0;
 
             if (_manger == null)
             {
-               
-                
                 if (string.IsNullOrEmpty(login))
                 {
                     ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请输入登入名");
@@ -108,8 +121,6 @@ namespace TradingLib.MoniterControl
                     ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("登入名长度不能大于12位");
                     return;
                 }
-
-                
 
                 //如果添加代理则mgr_fk=0
                 if (CoreService.SiteInfo.Manager.Type == QSEnumManagerType.ROOT)
@@ -132,16 +143,22 @@ namespace TradingLib.MoniterControl
                     id=0,
                     login = login,
                     mgr_type = mgr_type,
-                    name = name,
-                    mobile = mobile,
-                    qq = qq,
-                    acc_limit = acc_limit,
-                    agent_limit = agent_limit,
+                    acc_limit = (int)this.acclimit.Value,
+                    agent_limit = (int)this.agentlimit.Value,
                     mgr_fk = mgr_fk,
                     agent_type = (EnumAgentType)agentType.SelectedValue,
+
+                    name = name.Text,
+                    mobile = mobile.Text,
+                    qq = qq.Text,
+                    email = email.Text,
+                    memo=memo.Text,
+                    idcard = idcard.Text,
+                    bank = ctBankList.BankSelected,
+                    branch = branch.Text,
+                    bankac = bankac.Text,
                     
                 };
-
 
                 if (MoniterHelper.WindowConfirm("确认添加管理员信息?") == System.Windows.Forms.DialogResult.Yes)
                 {
@@ -155,14 +172,20 @@ namespace TradingLib.MoniterControl
                     id = _manger.ID,
                     login = _manger.Login,
                     mgr_type = _manger.Type,
-
-                    name = name,
-                    mobile = mobile,
-                    qq = qq,
-                    acc_limit = acc_limit,
-                    agent_limit = agent_limit,
+                    acc_limit = (int)this.acclimit.Value,
+                    agent_limit = (int)this.agentlimit.Value,
                     mgr_fk = mgr_fk,
                     agent_type = (EnumAgentType)agentType.SelectedValue,
+
+                    name = name.Text,
+                    mobile = mobile.Text,
+                    qq = qq.Text,
+                    email = email.Text,
+                    memo = memo.Text,
+                    idcard = idcard.Text,
+                    bank = ctBankList.BankSelected,
+                    branch = branch.Text,
+                    bankac = bankac.Text
 
                 };
 
@@ -175,5 +198,6 @@ namespace TradingLib.MoniterControl
             }
             this.Close();
         }
+
     }
 }

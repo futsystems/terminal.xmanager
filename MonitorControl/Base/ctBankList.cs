@@ -27,10 +27,32 @@ namespace TradingLib.MoniterControl
             
         }
 
+        public  bool IsDesignMode()
+        {
+            bool returnFlag = false;
+
+#if DEBUG
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+            {
+                returnFlag = true;
+            }
+            else if (this.GetService(typeof(System.ComponentModel.Design.IDesignerHost)) != null)
+            {
+                returnFlag = true;
+            }
+#endif
+
+            return returnFlag;
+        }  
+
+
         void ctBankList_Load(object sender, EventArgs e)
         {
-            CoreService.EventCore.RegIEventHandler(this);
             this.cbbank.SelectedIndexChanged += new EventHandler(cbbank_SelectedIndexChanged);
+            if (!IsDesignMode())
+            {
+                CoreService.EventCore.RegIEventHandler(this);
+            }
         }
 
         public void OnInit()

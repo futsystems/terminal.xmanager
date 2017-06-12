@@ -35,10 +35,15 @@ namespace TradingLib.MoniterControl
         {
             lbbasemgrfk.Text = CoreService.SiteInfo.BaseMGRFK.ToString();
             lblogin.Text = CoreService.SiteInfo.ContractorInfo.LoginID;
-            lbname.Text = CoreService.SiteInfo.ContractorInfo.Name;
-            lbmobile.Text = CoreService.SiteInfo.ContractorInfo.Mobile;
-            lbqq.Text = CoreService.SiteInfo.ContractorInfo.QQ;
+           
             lbrole.Text = Util.GetEnumDescription(CoreService.SiteInfo.Manager.Type);
+        }
+
+        public void GotProfile(ManagerProfile profile)
+        {
+            lbname.Text = profile.Name;
+            lbmobile.Text = profile.Mobile;
+            lbqq.Text = profile.QQ;
         }
 
 

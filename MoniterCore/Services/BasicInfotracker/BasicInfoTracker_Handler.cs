@@ -391,10 +391,9 @@ namespace TradingLib.MoniterCore
             ManagerSetting target = null;
             if (managermap.TryGetValue(manager.ID, out target))
             {
-                target.Mobile = manager.Mobile;
-                target.Name = manager.Name;
-                target.QQ = manager.QQ;
                 target.Active = manager.Active;
+                target.AccLimit = manager.AccLimit;
+                target.AgentLimit = manager.AgentLimit;
             }
             else
             {
@@ -462,6 +461,15 @@ namespace TradingLib.MoniterCore
             {
                 Status("代理账户信息下载完成,下载投资者账户列表");
                 CoreService.TLClient.ReqQryAccountList();
+            }
+        }
+
+        void OnNotifyAgent(string json)
+        {
+            AgentSetting agent = CoreService.ParseJsonResponse<AgentSetting>(json);
+            if (agent != null)
+            {
+                this.GotAgent(agent);
             }
         }
         #endregion

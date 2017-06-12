@@ -101,9 +101,30 @@ namespace TradingLib.MoniterControl
         {
             InitializeComponent();
             this.Load += new EventHandler(ctAgentList_Load);
-            CoreService.EventCore.RegIEventHandler(this);
+            if (!IsDesignMode())
+            {
+                CoreService.EventCore.RegIEventHandler(this);
+            }
         }
 
+
+        public bool IsDesignMode()
+        {
+            bool returnFlag = false;
+
+#if DEBUG
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+            {
+                returnFlag = true;
+            }
+            else if (this.GetService(typeof(System.ComponentModel.Design.IDesignerHost)) != null)
+            {
+                returnFlag = true;
+            }
+#endif
+
+            return returnFlag;
+        }  
 
 
         void ctAgentList_Load(object sender, EventArgs e)

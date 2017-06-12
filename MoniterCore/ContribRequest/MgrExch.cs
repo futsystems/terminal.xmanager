@@ -333,7 +333,10 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public const string UPDATE_MANAGER_INACTIVE = "InactiveManager";
 
-
+        /// <summary>
+        /// 查询管理员Profile
+        /// </summary>
+        public const string QRY_MANAGER_PROFILE = "QryManagerProfile";
         #endregion
 
         #region Other
@@ -709,6 +712,16 @@ namespace TradingLib.MoniterCore
         {
             return client.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_MANAGER, reqObj.SerializeObject());
         }
+
+        /// <summary>
+        /// 查询管理员Profile
+        /// </summary>
+        public static int ReqQryManagerProfile(this TLClientNet client,int mgrid)
+        {
+            return client.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_MANAGER_PROFILE, mgrid.ToString());
+        }
+
+
         #endregion
 
         #region Agent
