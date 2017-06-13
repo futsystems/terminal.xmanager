@@ -378,11 +378,15 @@ namespace TradingLib.MoniterCore
             ManagerSetting mgr = CoreService.ParseJsonResponse<ManagerSetting>(json);
             if (mgr != null)
             {
-                if (managermap.Keys.Contains(mgr.ID))
-                {
-                    managermap.Remove(mgr.ID);
-                }
+                GotManager(mgr);
             }
+            //if (mgr != null)
+            //{
+            //    if (managermap.Keys.Contains(mgr.ID))
+            //    {
+            //        managermap.Remove(mgr.ID);
+            //    }
+            //}
         }
 
 
@@ -394,6 +398,9 @@ namespace TradingLib.MoniterCore
                 target.Active = manager.Active;
                 target.AccLimit = manager.AccLimit;
                 target.AgentLimit = manager.AgentLimit;
+                target.Deleted = manager.Deleted;
+                target.DeletedSettleday = manager.DeletedSettleday;
+
             }
             else
             {

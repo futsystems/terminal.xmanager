@@ -16,7 +16,7 @@ namespace TradingLib.MoniterControl
         /// <param name="filterArgs"></param>
         void FilterAccount()
         {
-            string strFilter = string.Format(DELETE + " ='{0}'", false);
+            string strFilter = ACCOUNT + " like '*'";
 
             if (filterArgs != null)
             {

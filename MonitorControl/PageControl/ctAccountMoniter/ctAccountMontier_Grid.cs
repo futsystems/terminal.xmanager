@@ -447,19 +447,21 @@ namespace TradingLib.MoniterControl
                         gt.Rows[r][WARN] = account.IsWarn;
                         gt.Rows[r][WARNSTR] = account.WarnMessage;
                         gt.Rows[r][MEMO] = account.Memo;
+                        gt.Rows[r][TAG] = account;
+
                         if (oldwarn && !account.IsWarn)
                         {
                             InvokeAccountWarnOff(account.Account);
                         }
 
-                        //如果删除帐户 则需要刷新帐户列表 防止没有任何选中帐户
-                        if (account.Deleted)
-                        {
-                            if (accountgrid.RowCount > 0)
-                            {
-                                accountgrid.Rows[0].Selected = true;
-                            }
-                        }
+                        ////如果删除帐户 则需要刷新帐户列表 防止没有任何选中帐户
+                        //if (account.Deleted)
+                        //{
+                        //    if (accountgrid.RowCount > 0)
+                        //    {
+                        //        accountgrid.Rows[0].Selected = true;
+                        //    }
+                        //}
                     }
 
                 }

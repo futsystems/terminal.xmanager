@@ -30,8 +30,22 @@ namespace TradingLib.MoniterControl
         void fmManagerCentre_Load(object sender, EventArgs e)
         {
             this.mgrgrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(mgrgrid_RowPrePaint);
+            this.mgrgrid.CellFormatting += new DataGridViewCellFormattingEventHandler(mgrgrid_CellFormatting);
             this.mgrgrid.DoubleClick += new EventHandler(mgrgrid_DoubleClick);
             CoreService.EventCore.RegIEventHandler(this);
+        }
+
+        void mgrgrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 1)
+            {
+                bool deleted = (bool)mgrgrid[8, e.RowIndex].Value;
+                if (deleted)
+                {
+                    e.CellStyle.Font = new Font("黑体", 10, FontStyle.Strikeout); 
+                }
+
+            }
         }
 
        
@@ -290,6 +304,8 @@ namespace TradingLib.MoniterControl
             }
             else
             {
+                GotManager(manager);
+
                 int r = MangerIdx(manager.ID);
                 if (r > 0)
                 {
@@ -344,7 +360,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][AGENTLIMIT] = manger.Type == QSEnumManagerType.AGENT ? manger.AgentLimit.ToString() : "";
                     gt.Rows[i][MGRFK] = manger.mgr_fk;
                     gt.Rows[i][STATUS] = getStatusImage(manger.Active);
-                    gt.Rows[i][DELETE] = false;
+                    gt.Rows[i][DELETE] = manger.Deleted;
                     gt.Rows[i][TAG] = manger;
 
                     mgridmap.Add(manger.ID, i);//记录全局ID和table序号的映射
@@ -360,6 +376,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows[i][AGENTLIMIT] = manger.Type == QSEnumManagerType.AGENT ? manger.AgentLimit.ToString() : "";
                     gt.Rows[i][MGRFK] = manger.mgr_fk;
                     gt.Rows[i][STATUS] = getStatusImage(manger.Active);
+                    gt.Rows[i][DELETE] = manger.Deleted;
 
                 }
             }
@@ -423,16 +440,16 @@ namespace TradingLib.MoniterControl
         //初始化Account显示空格
         private void InitTable()
         {
-            gt.Columns.Add(ID);//
-            gt.Columns.Add(LOGIN);//
-            gt.Columns.Add(MGRTYPE);//
-            gt.Columns.Add(MGRTYPESTR);
-            gt.Columns.Add(ACCNUMLIMIT);//
-            gt.Columns.Add(AGENTLIMIT);
-            gt.Columns.Add(MGRFK);//
-            gt.Columns.Add(STATUS,typeof(Image));//
-            gt.Columns.Add(DELETE);
-            gt.Columns.Add(TAG, typeof(ManagerSetting));
+            gt.Columns.Add(ID);//0
+            gt.Columns.Add(LOGIN);//1
+            gt.Columns.Add(MGRTYPE);//2
+            gt.Columns.Add(MGRTYPESTR);//3
+            gt.Columns.Add(ACCNUMLIMIT);//4
+            gt.Columns.Add(AGENTLIMIT);//5
+            gt.Columns.Add(MGRFK);//6
+            gt.Columns.Add(STATUS,typeof(Image));//7
+            gt.Columns.Add(DELETE,typeof(bool));//8
+            gt.Columns.Add(TAG, typeof(ManagerSetting));//9
         }
 
         /// <summary>
@@ -447,7 +464,7 @@ namespace TradingLib.MoniterControl
             //datasource.Filter=""
             grid.DataSource = datasource;
             datasource.Sort = ID + " ASC";
-            datasource.Filter = DELETE + " ='false'";
+            //datasource.Filter = DELETE + " ='false'";
 
             grid.Columns[MGRTYPE].Visible = false;
             grid.Columns[ID].Visible = false;

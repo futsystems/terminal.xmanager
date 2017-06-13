@@ -282,6 +282,14 @@ namespace TradingLib.MoniterControl
 
                 }
             }
+            if (e.ColumnIndex == 0)
+            {
+                var account = accountgrid[TAG, e.RowIndex].Value as AccountItem;
+                if (account.Deleted)
+                {
+                    e.CellStyle.Font = new Font("雅黑", 9, FontStyle.Strikeout); 
+                }
+            }
         }
 
         /// <summary>
