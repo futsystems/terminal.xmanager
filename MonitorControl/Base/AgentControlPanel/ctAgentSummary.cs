@@ -157,8 +157,16 @@ namespace TradingLib.MoniterControl.Base
                 ctNormalAgentSummary.Visible = false;
                 ctSelfOperateAgentSummary.Visible = true;
                 ctSelfOperateAgentSummary.Location = new Point(90, 0);
-                ctSelfOperateAgentSummary.Size = new System.Drawing.Size(720, 60);
-                ctCustSummary.Location = new Point(90 + 720, 0);
+                if (_manager.Type == QSEnumManagerType.ROOT)
+                {
+                    ctSelfOperateAgentSummary.IsRootView = true;
+                    ctCustSummary.Location = new Point(90 + 240, 0);
+                }
+                else
+                {
+                    ctSelfOperateAgentSummary.IsRootView = false;
+                    ctCustSummary.Location = new Point(90 + 720, 0);
+                }
             }
         }
 

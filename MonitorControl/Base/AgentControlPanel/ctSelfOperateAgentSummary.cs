@@ -31,8 +31,39 @@ namespace TradingLib.MoniterControl
             canuseequity.Text = EMPTY;
             nowequity.Text = EMPTY;
             flatequity.Text = EMPTY;
+        }
+
+        bool _isRootView = false;
+        public bool IsRootView
+        {
+            get
+            {
+                return _isRootView;
+            }
+            set
+            {
+                _isRootView = value;
+
+                if (_isRootView)
+                {
+                    this.Width = 240;
+                    this.panelLastEquity.Visible = false;
+                    this.panelIncome.Location = new Point(0, 0);
+                    this.panelCost.Location = new Point(120, 0);
+                }
+                else
+                {
+                    this.Width = 720;
+                    this.lastequity.Visible = true;
+                    this.lastequitylabel.Visible = true;
+                    this.panelLastEquity.Visible = true;
+                    this.panelLastEquity.Location = new Point(0, 0);
+                    this.panelIncome.Location = new Point(120, 0);
+                    this.panelCost.Location = new Point(240, 0);
+                }
 
 
+            }
         }
 
         public void GotAgentStatic(AgentStatistic info)

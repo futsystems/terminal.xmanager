@@ -50,7 +50,8 @@
             this.panelLastEquity = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.lastequity = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.lastequitylabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
@@ -61,10 +62,12 @@
             this.panelIncome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelLastEquity)).BeginInit();
             this.panelLastEquity.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonPanel3);
             this.kryptonPanel1.Controls.Add(this.kryptonPanel2);
             this.kryptonPanel1.Controls.Add(this.panelCost);
             this.kryptonPanel1.Controls.Add(this.panelIncome);
@@ -72,7 +75,7 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(794, 60);
+            this.kryptonPanel1.Size = new System.Drawing.Size(1116, 60);
             this.kryptonPanel1.StateCommon.Color1 = System.Drawing.Color.DimGray;
             this.kryptonPanel1.TabIndex = 0;
             // 
@@ -282,7 +285,7 @@
             // 
             this.panelLastEquity.Controls.Add(this.label1);
             this.panelLastEquity.Controls.Add(this.lastequity);
-            this.panelLastEquity.Controls.Add(this.kryptonLabel1);
+            this.panelLastEquity.Controls.Add(this.lastequitylabel);
             this.panelLastEquity.Location = new System.Drawing.Point(0, 0);
             this.panelLastEquity.Name = "panelLastEquity";
             this.panelLastEquity.Size = new System.Drawing.Size(120, 60);
@@ -312,19 +315,26 @@
             this.lastequity.TabIndex = 1;
             this.lastequity.Values.Text = "1000000.00";
             // 
-            // kryptonLabel1
+            // lastequitylabel
             // 
-            this.kryptonLabel1.AutoSize = false;
-            this.kryptonLabel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonLabel1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(120, 25);
-            this.kryptonLabel1.StateCommon.ShortText.Color1 = System.Drawing.Color.White;
-            this.kryptonLabel1.StateCommon.ShortText.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.kryptonLabel1.StateCommon.ShortText.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.kryptonLabel1.StateCommon.ShortText.TextV = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "昨日权益";
+            this.lastequitylabel.AutoSize = false;
+            this.lastequitylabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lastequitylabel.Location = new System.Drawing.Point(0, 0);
+            this.lastequitylabel.Name = "lastequitylabel";
+            this.lastequitylabel.Size = new System.Drawing.Size(120, 25);
+            this.lastequitylabel.StateCommon.ShortText.Color1 = System.Drawing.Color.White;
+            this.lastequitylabel.StateCommon.ShortText.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lastequitylabel.StateCommon.ShortText.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
+            this.lastequitylabel.StateCommon.ShortText.TextV = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
+            this.lastequitylabel.TabIndex = 0;
+            this.lastequitylabel.Values.Text = "昨日权益";
+            // 
+            // kryptonPanel3
+            // 
+            this.kryptonPanel3.Location = new System.Drawing.Point(727, 0);
+            this.kryptonPanel3.Name = "kryptonPanel3";
+            this.kryptonPanel3.Size = new System.Drawing.Size(334, 60);
+            this.kryptonPanel3.TabIndex = 4;
             // 
             // ctSelfOperateAgentSummary
             // 
@@ -333,7 +343,7 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.kryptonPanel1);
             this.Name = "ctSelfOperateAgentSummary";
-            this.Size = new System.Drawing.Size(794, 60);
+            this.Size = new System.Drawing.Size(1116, 60);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).EndInit();
@@ -345,6 +355,7 @@
             this.panelIncome.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelLastEquity)).EndInit();
             this.panelLastEquity.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -353,7 +364,7 @@
 
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel panelLastEquity;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lastequitylabel;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lastequity;
         private System.Windows.Forms.Label label1;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel panelIncome;
@@ -374,6 +385,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel flatequity;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel14;
         private System.Windows.Forms.Label label4;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel3;
 
     }
 }
