@@ -36,6 +36,20 @@ namespace TradingLib.MoniterControl.Base
             kryptonContextMenuItem2.Click += new EventHandler(kryptonContextMenuItem2_Click);
             kryptonContextMenuItem7.Click += new EventHandler(kryptonContextMenuItem7_Click);
             kryptonContextMenuItem8.Click += new EventHandler(kryptonContextMenuItem8_Click);
+            kryptonContextMenuItem9.Click += new EventHandler(kryptonContextMenuItem9_Click);
+        }
+
+        void kryptonContextMenuItem9_Click(object sender, EventArgs e)
+        {
+            if (_agent == null)
+            {
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("代理财务账户不存在");
+                return;
+            }
+            fmAgentFlatEquity fm= new fmAgentFlatEquity();
+            fm.SetAgent(_agent);
+            fm.ShowDialog();
+            fm.Close();
         }
 
         /// <summary>
@@ -151,12 +165,16 @@ namespace TradingLib.MoniterControl.Base
                 ctCustSummary.Location = new Point(90 + 360, 0);
 
 
+                kryptonContextMenuItem9.Visible = false;
             }
             if (_agent.AgentType == EnumAgentType.SelfOperated)
             {
                 ctNormalAgentSummary.Visible = false;
                 ctSelfOperateAgentSummary.Visible = true;
                 ctSelfOperateAgentSummary.Location = new Point(90, 0);
+
+                kryptonContextMenuItem9.Visible = true;
+
                 if (_manager.Type == QSEnumManagerType.ROOT)
                 {
                     ctSelfOperateAgentSummary.IsRootView = true;
@@ -168,6 +186,8 @@ namespace TradingLib.MoniterControl.Base
                     ctCustSummary.Location = new Point(90 + 720, 0);
                 }
             }
+
+            
         }
 
         const string EMPTY = "--";

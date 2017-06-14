@@ -58,6 +58,11 @@ namespace TradingLib.MoniterCore
         /// 查询一个时间区间内的结算单
         /// </summary>
         public const string QRY_AGENT_SETTLEMENTS = "QueryAgentSettlements";
+
+        /// <summary>
+        /// 更新强平权益值
+        /// </summary>
+        public const string REQ_UPDATE_AGENT_FLAT_EQUITY = "UpdateAgentFlatEquity";
     }
 
     public static class AgentManager
@@ -137,6 +142,18 @@ namespace TradingLib.MoniterCore
         public static int ReqQryAgentSettlement(this TLClientNet client, string account, int start, int end)
         {
             return client.ReqContribRequest(Modules.AgentManager, Method_AGENT_MGR.QRY_AGENT_SETTLEMENTS, new { account = account, start = start, end = end });
+        }
+
+        /// <summary>
+        /// 更新代理强平权益
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="account"></param>
+        /// <param name="val"></param>
+        /// <returns></returns>
+        public static int ReqUpdateAgentFlatEquity(this TLClientNet client, string account, decimal val)
+        {
+            return client.ReqContribRequest(Modules.AgentManager, Method_AGENT_MGR.REQ_UPDATE_AGENT_FLAT_EQUITY, new { account = account, flat_equity = val });
         }
     }
 }

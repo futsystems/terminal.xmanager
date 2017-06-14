@@ -48,6 +48,7 @@
             this.kryptonContextMenuItems3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuItem3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem4 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.kryptonContextMenuItem9 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -118,6 +119,7 @@
             this.kryptonContextMenuItems1.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
             this.kryptonContextMenuItem1,
             this.kryptonContextMenuItem2,
+            this.kryptonContextMenuItem9,
             this.kryptonContextMenuSeparator1,
             this.kryptonContextMenuItem6});
             // 
@@ -163,6 +165,10 @@
             // 
             this.kryptonContextMenuItem4.Text = "Menu Item";
             // 
+            // kryptonContextMenuItem9
+            // 
+            this.kryptonContextMenuItem9.Text = "强平设置";
+            // 
             // ctAgentSummary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -198,5 +204,6 @@
         private ctCustSummary ctCustSummary;
         private ctSelfOperateAgentSummary ctSelfOperateAgentSummary;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading kryptonContextMenuHeading1;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem9;
     }
 }

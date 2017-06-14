@@ -63,6 +63,7 @@ namespace TradingLib.MoniterControl
         void ctAccountMontier_Load(object sender, EventArgs e)
         {
             WireEvents();
+
             FilterAccount();
         }
 
@@ -116,9 +117,25 @@ namespace TradingLib.MoniterControl
             //启动更新线程
             StartUpdate();
 
-            agentTree.NodeMouseClick += new TreeNodeMouseClickEventHandler(agentTree_NodeMouseClick);
-            InitMgrList();
+            
 
+            //有代理模块
+            if (CoreService.SiteInfo.Domain.Module_Agent)
+            {
+                //初始化左侧树状菜单
+                agentTree.NodeMouseClick += new TreeNodeMouseClickEventHandler(agentTree_NodeMouseClick);
+                InitMgrList();
+
+                splitContainer.Panel1Collapsed = false;
+                splitContainer.SplitterWidth = 5;
+                splitContainer.SplitterDistance = 120;
+                //splitContainer.IsSplitterFixed = true;
+            }
+            else
+            {
+                splitContainer.Panel1Collapsed = true;
+                splitContainer.SplitterWidth = 0;
+            }
             //初始化后自动设定到当前顶级管理员
             if (CoreService.SiteInfo.Agent != null)
             {
