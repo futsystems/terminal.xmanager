@@ -73,6 +73,7 @@
             this.kryptonPage4 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonPanel5 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonGroupBox2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.module_insert = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.cfg_followstrategynum = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.kryptonLabel21 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.module_follow = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -95,7 +96,6 @@
             this.kryptonPanel7 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.finsplist = new System.Windows.Forms.CheckedListBox();
             this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.module_insert = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
@@ -160,7 +160,7 @@
             this.kryptonPage5,
             this.intfaceTab,
             this.splisttab});
-            this.kryptonNavigator1.SelectedIndex = 0;
+            this.kryptonNavigator1.SelectedIndex = 2;
             this.kryptonNavigator1.Size = new System.Drawing.Size(431, 256);
             this.kryptonNavigator1.TabIndex = 15;
             this.kryptonNavigator1.Text = "kryptonNavigator1";
@@ -627,6 +627,14 @@
             this.kryptonGroupBox2.TabIndex = 8;
             this.kryptonGroupBox2.Values.Heading = "功能模块";
             // 
+            // module_insert
+            // 
+            this.module_insert.Location = new System.Drawing.Point(4, 58);
+            this.module_insert.Name = "module_insert";
+            this.module_insert.Size = new System.Drawing.Size(98, 20);
+            this.module_insert.TabIndex = 9;
+            this.module_insert.Values.Text = "持仓纠正模块";
+            // 
             // cfg_followstrategynum
             // 
             this.cfg_followstrategynum.Location = new System.Drawing.Point(140, 106);
@@ -679,7 +687,6 @@
             this.module_subagent.Size = new System.Drawing.Size(73, 20);
             this.module_subagent.TabIndex = 3;
             this.module_subagent.Values.Text = "多级代理";
-            this.module_subagent.Visible = false;
             // 
             // module_slip
             // 
@@ -836,14 +843,6 @@
             this.btnSubmit.TabIndex = 14;
             this.btnSubmit.Values.Text = "提 交";
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
-            // 
-            // module_insert
-            // 
-            this.module_insert.Location = new System.Drawing.Point(4, 58);
-            this.module_insert.Name = "module_insert";
-            this.module_insert.Size = new System.Drawing.Size(98, 20);
-            this.module_insert.TabIndex = 9;
-            this.module_insert.Values.Text = "持仓纠正模块";
             // 
             // fmDomainEdit
             // 

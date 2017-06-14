@@ -595,10 +595,10 @@
     <Compile Include="Forms\Agent\fmAgentCashOperation.Designer.cs">
       <DependentUpon>fmAgentCashOperation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Manager\fmEditAgentTemplate.cs">
+    <Compile Include="Forms\Agent\fmEditAgentTemplate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Manager\fmEditAgentTemplate.Designer.cs">
+    <Compile Include="Forms\Agent\fmEditAgentTemplate.Designer.cs">
       <DependentUpon>fmEditAgentTemplate.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Payment\ctGateWayBaoFu.cs">
@@ -1258,7 +1258,7 @@
     <EmbeddedResource Include="Forms\Agent\fmAgentCashOperation.resx">
       <DependentUpon>fmAgentCashOperation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Manager\fmEditAgentTemplate.resx">
+    <EmbeddedResource Include="Forms\Agent\fmEditAgentTemplate.resx">
       <DependentUpon>fmEditAgentTemplate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Payment\ctGateWayBaoFu.resx">

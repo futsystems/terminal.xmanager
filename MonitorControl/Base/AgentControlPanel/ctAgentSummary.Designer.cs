@@ -34,6 +34,7 @@
             this.ctNormalAgentSummary = new TradingLib.MoniterControl.ctNormalAgentSummary();
             this.agentBtnGroup = new ComponentFactory.Krypton.Toolkit.KryptonDropButton();
             this.agentMenu = new ComponentFactory.Krypton.Toolkit.KryptonContextMenu();
+            this.kryptonContextMenuHeading1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading();
             this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuItem1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
@@ -47,7 +48,6 @@
             this.kryptonContextMenuItems3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuItem3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem4 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonContextMenuHeading1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -68,6 +68,7 @@
             // ctSelfOperateAgentSummary
             // 
             this.ctSelfOperateAgentSummary.BackColor = System.Drawing.SystemColors.Control;
+            this.ctSelfOperateAgentSummary.IsRootView = false;
             this.ctSelfOperateAgentSummary.Location = new System.Drawing.Point(301, 0);
             this.ctSelfOperateAgentSummary.Name = "ctSelfOperateAgentSummary";
             this.ctSelfOperateAgentSummary.Size = new System.Drawing.Size(173, 60);
@@ -106,6 +107,11 @@
             this.agentMenu.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
             this.kryptonContextMenuHeading1,
             this.kryptonContextMenuItems1});
+            // 
+            // kryptonContextMenuHeading1
+            // 
+            this.kryptonContextMenuHeading1.ExtraText = "";
+            this.kryptonContextMenuHeading1.Text = "--";
             // 
             // kryptonContextMenuItems1
             // 
@@ -156,11 +162,6 @@
             // kryptonContextMenuItem4
             // 
             this.kryptonContextMenuItem4.Text = "Menu Item";
-            // 
-            // kryptonContextMenuHeading1
-            // 
-            this.kryptonContextMenuHeading1.ExtraText = "";
-            this.kryptonContextMenuHeading1.Text = "--";
             // 
             // ctAgentSummary
             // 

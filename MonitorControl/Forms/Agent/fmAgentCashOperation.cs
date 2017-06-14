@@ -114,6 +114,14 @@ namespace TradingLib.MoniterControl
                 cbEquityTypeList.Enabled = false;
             }
 
+            //当前管理员隐藏出入金操作界面
+            if (_agent.Account == CoreService.SiteInfo.Manager.Login)
+            {
+                cashopGroup.Visible = false;
+                financeInfoGroup.Location = new Point(0, 3);
+                this.Width = this.Width - cashopGroup.Width;
+            }
+
         }
 
     }

@@ -26,43 +26,32 @@ namespace TradingLib.MoniterControl
             this.imageList1.Images.Add((System.Drawing.Image)Properties.Resources.folder_sel);
             this.imageList1.Images.Add((System.Drawing.Image)Properties.Resources.items);
             tempateTree.ImageList = this.imageList1;
-
-
             tempateTree.Nodes.Add(CreateBaseItem("手续费率模板"));
 
-            this.Load += new EventHandler(fmCommission_Load);
-            this.Disposed += new EventHandler(fmCommission_Disposed);
-            this.FormClosing += new FormClosingEventHandler(fmCommission_FormClosing);
-            this.FormClosed += new FormClosedEventHandler(fmCommission_FormClosed);
+            
             this.btnAddTemplate.Click += new EventHandler(btnAddTemplate_Click);
-            this.tempateTree.Disposed += new EventHandler(tempateTree_Disposed);
+            commissionGrid.DoubleClick += new EventHandler(commissionGrid_DoubleClick);
+            commissionGrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(commissionGrid_RowPrePaint);
+
+            this.Load += new EventHandler(fmCommission_Load);
         }
 
-        void btnAddTemplate_Click(object sender, EventArgs e)
+        bool _viewMode = false;
+        int _viewTemplateId = 0;
+        public void ShowTemplate(int templateid)
         {
-            fmTemplateEdit fm = new fmTemplateEdit(TemplateEditType.Commission);
-            fm.ShowDialog();
-        }
+            _viewMode = true;
+            _viewTemplateId = templateid;
+            treePanel.Visible = false;
+            listPanel.Location = new Point(0, 0);
+            this.Width = this.Width - treePanel.Width;
 
-        void tempateTree_Disposed(object sender, EventArgs e)
-        {
-            //LogService.Debug("tempateTree disposed......");
-        }
+            this.ShowDialog();
 
-        void fmCommission_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            //LogService.Debug("fmcommission closed......");
         }
+        
 
-        void fmCommission_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //LogService.Debug("fmcommission closing......");
-        }
 
-        void fmCommission_Disposed(object sender, EventArgs e)
-        {
-            //LogService.Debug("fmcommission disposed......");
-        }
 
         private ComponentFactory.Krypton.Toolkit.KryptonTreeNode CreateBaseItem(string lb)
         {
@@ -87,26 +76,48 @@ namespace TradingLib.MoniterControl
 
         void fmCommission_Load(object sender, EventArgs e)
         {
-            
-
             this.tempateTree.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
             this.tempateTree.ContextMenuStrip.Items.Add("添加手续费模板", null, new EventHandler(Add_Click));
             this.tempateTree.ContextMenuStrip.Items.Add("删除手续费模板", null, new EventHandler(Del_Click));
-
-            commissionGrid.DoubleClick += new EventHandler(commissionGrid_DoubleClick);
-            commissionGrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(commissionGrid_RowPrePaint);
-
             tempateTree.NodeMouseClick += new TreeNodeMouseClickEventHandler(tempateTree_NodeMouseClick);
-            tempateTree.MouseClick += new MouseEventHandler(tempateTree_MouseClick);
 
             CoreService.EventCore.RegIEventHandler(this);
-
-            
         }
 
-        void tempateTree_MouseClick(object sender, MouseEventArgs e)
+        public void OnInit()
         {
-            
+            //超级域 可以单独添加模板项
+            if (CoreService.SiteInfo.Domain.Super)
+            {
+                commissionGrid.ContextMenuStrip = new ContextMenuStrip();
+                commissionGrid.ContextMenuStrip.Items.Add("添加模板项目", null, new EventHandler(AddItem_Click));
+            }
+
+
+            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_COMMISSION_TEMPLATE, this.OnQryCommissionTemplate);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_COMMISSION_TEMPLATE, this.OnNotifyCommissionTemplate);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_COMMISSION_TEMPLATE_DELETE, this.OnNotifyDelCommissionTemplate);
+
+            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_COMMISSION_ITEM, this.OnQryCommissionTemplateItem);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_COMMISSION_ITEM, this.OnNotifyCommissionTemplateItem);
+            CoreService.TLClient.ReqQryCommissionTemplate();
+
+            if (_viewMode)
+            {
+                QryTemplate(_viewTemplateId);
+            }
+        }
+
+        public void OnDisposed()
+        {
+            CoreService.EventCore.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_COMMISSION_TEMPLATE, this.OnQryCommissionTemplate);
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_COMMISSION_TEMPLATE, this.OnNotifyCommissionTemplate);
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_COMMISSION_TEMPLATE_DELETE, this.OnNotifyDelCommissionTemplate);
+
+            CoreService.EventCore.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_COMMISSION_ITEM, this.OnQryCommissionTemplateItem);
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_COMMISSION_ITEM, this.OnNotifyCommissionTemplateItem);
+
+
         }
 
         bool _onqry = false;
@@ -123,9 +134,7 @@ namespace TradingLib.MoniterControl
                     {
                         if (!_onqry)
                         {
-                            _onqry = true;
-                            ClearItem();
-                            CoreService.TLClient.ReqQryCommissionTemplateItem(t.ID);
+                            QryTemplate(t.ID);
                         }
                         else
                         {
@@ -136,30 +145,12 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        void commissionGrid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        void QryTemplate(int templateid)
         {
-            e.PaintParts = e.PaintParts ^ DataGridViewPaintParts.Focus;
+            _onqry = true;
+            ClearItem();
+            CoreService.TLClient.ReqQryCommissionTemplateItem(templateid);
         }
-
-
-        void commissionGrid_DoubleClick(object sender, EventArgs e)
-        {
-            CommissionTemplateItemSetting item = CurrentItem;
-            if (item == null)
-            {
-                MoniterHelper.WindowMessage("请选择需要编辑的手续费模板项目");
-                return;
-            }
-
-            fmCommissionTemplateItemEdit fm = new fmCommissionTemplateItemEdit();
-            fm.SetCommissionTemplateItem(item);
-            //fm.SetCommissionTemplateItems(itemmap.Values);
-            fm.ShowDialog();
-        }
-
-
-        
-
 
 
         void AddItem_Click(object sender, EventArgs e)
@@ -190,6 +181,12 @@ namespace TradingLib.MoniterControl
             fm.ShowDialog();
         }
 
+        void btnAddTemplate_Click(object sender, EventArgs e)
+        {
+            fmTemplateEdit fm = new fmTemplateEdit(TemplateEditType.Commission);
+            fm.ShowDialog();
+        }
+
         void Del_Click(object sender, EventArgs e)
         { 
             if(tempateTree.SelectedNode.Parent != null)//父节点不为空 表面为二级节点
@@ -210,34 +207,7 @@ namespace TradingLib.MoniterControl
         }
 
 
-        public void OnInit()
-        {
-            //超级域 可以单独添加模板项
-            if (CoreService.SiteInfo.Domain.Super)
-            {
-                commissionGrid.ContextMenuStrip = new ContextMenuStrip();
-                commissionGrid.ContextMenuStrip.Items.Add("添加模板项目", null, new EventHandler(AddItem_Click));
-            }
-
-
-            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH,Method_MGR_EXCH.QRY_COMMISSION_TEMPLATE, this.OnQryCommissionTemplate);
-            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH,Method_MGR_EXCH.NOTIFY_COMMISSION_TEMPLATE, this.OnNotifyCommissionTemplate);
-            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_COMMISSION_TEMPLATE_DELETE, this.OnNotifyDelCommissionTemplate);
-
-            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_COMMISSION_ITEM, this.OnQryCommissionTemplateItem);
-            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH,Method_MGR_EXCH.NOTIFY_COMMISSION_ITEM, this.OnNotifyCommissionTemplateItem);
-            CoreService.TLClient.ReqQryCommissionTemplate();
-        }
-
-        public void OnDisposed()
-        {
-            CoreService.EventCore.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_COMMISSION_TEMPLATE, this.OnQryCommissionTemplate);
-            CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_COMMISSION_TEMPLATE, this.OnNotifyCommissionTemplate);
-            CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_COMMISSION_TEMPLATE_DELETE, this.OnNotifyDelCommissionTemplate);
-
-            CoreService.EventCore.UnRegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_COMMISSION_ITEM, this.OnQryCommissionTemplateItem);
-            CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_COMMISSION_ITEM, this.OnNotifyCommissionTemplateItem);
-        }
+        
 
         string GetChargeTypeStr(QSEnumChargeType type)
         {
@@ -253,6 +223,8 @@ namespace TradingLib.MoniterControl
                     return "";
             }
         }
+
+
         void ClearItem()
         {
             commissionGrid.DataSource = null;
@@ -514,6 +486,27 @@ namespace TradingLib.MoniterControl
         }
 
 
+
+        void commissionGrid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            e.PaintParts = e.PaintParts ^ DataGridViewPaintParts.Focus;
+        }
+        void commissionGrid_DoubleClick(object sender, EventArgs e)
+        {
+            if (_viewMode) return;
+
+            CommissionTemplateItemSetting item = CurrentItem;
+            if (item == null)
+            {
+                MoniterHelper.WindowMessage("请选择需要编辑的手续费模板项目");
+                return;
+            }
+
+            fmCommissionTemplateItemEdit fm = new fmCommissionTemplateItemEdit();
+            fm.SetCommissionTemplateItem(item);
+            //fm.SetCommissionTemplateItems(itemmap.Values);
+            fm.ShowDialog();
+        }
 
 
 

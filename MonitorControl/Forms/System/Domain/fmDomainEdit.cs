@@ -68,6 +68,7 @@ namespace TradingLib.MoniterControl
 
 
             module_agent.Visible = CoreService.SiteInfo.Domain.Module_Agent;
+            module_subagent.Visible = CoreService.SiteInfo.Domain.Module_SubAgent;
             module_payonline.Visible = CoreService.SiteInfo.Domain.Module_PayOnline;
             module_slip.Visible = CoreService.SiteInfo.Domain.Module_Slip;
             module_insert.Visible = CoreService.SiteInfo.Domain.Misc_InsertTrade;

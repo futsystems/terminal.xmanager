@@ -36,6 +36,9 @@
             this.cbCommissionTemplate = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.kryptonLabel13 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.btnQryCommissionItem = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnQryMarinItem = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnQryExStrategy = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbExStrategyTemplate)).BeginInit();
@@ -45,6 +48,9 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.btnQryExStrategy);
+            this.kryptonPanel1.Controls.Add(this.btnQryMarinItem);
+            this.kryptonPanel1.Controls.Add(this.btnQryCommissionItem);
             this.kryptonPanel1.Controls.Add(this.btnSubmit);
             this.kryptonPanel1.Controls.Add(this.cbExStrategyTemplate);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel15);
@@ -72,7 +78,7 @@
             this.cbExStrategyTemplate.DropDownWidth = 145;
             this.cbExStrategyTemplate.Location = new System.Drawing.Point(112, 82);
             this.cbExStrategyTemplate.Name = "cbExStrategyTemplate";
-            this.cbExStrategyTemplate.Size = new System.Drawing.Size(145, 21);
+            this.cbExStrategyTemplate.Size = new System.Drawing.Size(116, 21);
             this.cbExStrategyTemplate.TabIndex = 12;
             // 
             // kryptonLabel15
@@ -88,7 +94,7 @@
             this.cbMarginTemplate.DropDownWidth = 145;
             this.cbMarginTemplate.Location = new System.Drawing.Point(112, 50);
             this.cbMarginTemplate.Name = "cbMarginTemplate";
-            this.cbMarginTemplate.Size = new System.Drawing.Size(145, 21);
+            this.cbMarginTemplate.Size = new System.Drawing.Size(116, 21);
             this.cbMarginTemplate.TabIndex = 10;
             // 
             // cbCommissionTemplate
@@ -96,7 +102,7 @@
             this.cbCommissionTemplate.DropDownWidth = 145;
             this.cbCommissionTemplate.Location = new System.Drawing.Point(113, 20);
             this.cbCommissionTemplate.Name = "cbCommissionTemplate";
-            this.cbCommissionTemplate.Size = new System.Drawing.Size(145, 21);
+            this.cbCommissionTemplate.Size = new System.Drawing.Size(115, 21);
             this.cbCommissionTemplate.TabIndex = 9;
             // 
             // kryptonLabel13
@@ -115,7 +121,31 @@
             this.kryptonLabel4.TabIndex = 7;
             this.kryptonLabel4.Values.Text = "手续费模板:";
             // 
-            // fmEditAccountTemplate
+            // btnQryCommissionItem
+            // 
+            this.btnQryCommissionItem.Location = new System.Drawing.Point(235, 16);
+            this.btnQryCommissionItem.Name = "btnQryCommissionItem";
+            this.btnQryCommissionItem.Size = new System.Drawing.Size(61, 25);
+            this.btnQryCommissionItem.TabIndex = 14;
+            this.btnQryCommissionItem.Values.Text = "查 询";
+            // 
+            // btnQryMarinItem
+            // 
+            this.btnQryMarinItem.Location = new System.Drawing.Point(235, 50);
+            this.btnQryMarinItem.Name = "btnQryMarinItem";
+            this.btnQryMarinItem.Size = new System.Drawing.Size(61, 25);
+            this.btnQryMarinItem.TabIndex = 15;
+            this.btnQryMarinItem.Values.Text = "查 询";
+            // 
+            // btnQryExStrategy
+            // 
+            this.btnQryExStrategy.Location = new System.Drawing.Point(235, 83);
+            this.btnQryExStrategy.Name = "btnQryExStrategy";
+            this.btnQryExStrategy.Size = new System.Drawing.Size(61, 25);
+            this.btnQryExStrategy.TabIndex = 16;
+            this.btnQryExStrategy.Values.Text = "查 询";
+            // 
+            // fmEditAgentTemplate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -124,7 +154,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "fmEditAccountTemplate";
+            this.Name = "fmEditAgentTemplate";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "帐户模板设置";
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
@@ -147,5 +177,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox cbCommissionTemplate;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel13;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnQryCommissionItem;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnQryExStrategy;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnQryMarinItem;
     }
 }
