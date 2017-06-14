@@ -146,6 +146,8 @@ namespace TradingLib.MoniterControl.Base
             _manager = mgr;
             agentBtnGroup.Values.Text = _agent.Account;
 
+            agentBtnGroup.StateCommon.Content.ShortText.Color1 = Color.Black;
+            //管理员与代理显示Heading
             if (_manager.Type == QSEnumManagerType.ROOT)
             {
                 kryptonContextMenuHeading1.Text = "管理员";
@@ -155,6 +157,9 @@ namespace TradingLib.MoniterControl.Base
                 kryptonContextMenuHeading1.Text = Util.GetEnumDescription(_agent.AgentType);
             }
 
+            
+
+            //普通代理
             if (_agent.AgentType == EnumAgentType.Normal)
             {
                 ctNormalAgentSummary.Visible = true;
@@ -164,9 +169,9 @@ namespace TradingLib.MoniterControl.Base
                 ctNormalAgentSummary.Size = new System.Drawing.Size(360, 60);
                 ctCustSummary.Location = new Point(90 + 360, 0);
 
-
-                kryptonContextMenuItem9.Visible = false;
+                kryptonContextMenuItem9.Visible = false;//普通代理不显示强平设置
             }
+
             if (_agent.AgentType == EnumAgentType.SelfOperated)
             {
                 ctNormalAgentSummary.Visible = false;
@@ -175,10 +180,12 @@ namespace TradingLib.MoniterControl.Base
 
                 kryptonContextMenuItem9.Visible = true;
 
+
                 if (_manager.Type == QSEnumManagerType.ROOT)
                 {
                     ctSelfOperateAgentSummary.IsRootView = true;
                     ctCustSummary.Location = new Point(90 + 240, 0);
+                    kryptonContextMenuItem9.Visible = false;
                 }
                 else
                 {
@@ -207,6 +214,11 @@ namespace TradingLib.MoniterControl.Base
             AgentStatistic st = CoreService.ParseJsonResponse<AgentStatistic>(json);
             if (st != null && _agent!= null)
             {
+                if (st.Freezed)
+                {
+                    agentBtnGroup.StateCommon.Content.ShortText.Color1 = Color.Red;
+                }
+
                 if (_agent.AgentType == EnumAgentType.Normal)
                 {
                     ctNormalAgentSummary.GotAgentStatic(st);
