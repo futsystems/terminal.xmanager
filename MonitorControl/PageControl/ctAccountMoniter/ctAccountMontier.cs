@@ -117,8 +117,6 @@ namespace TradingLib.MoniterControl
             //启动更新线程
             StartUpdate();
 
-            
-
             //有代理模块
             if (CoreService.SiteInfo.Domain.Module_Agent)
             {
@@ -135,6 +133,8 @@ namespace TradingLib.MoniterControl
             {
                 splitContainer.Panel1Collapsed = true;
                 splitContainer.SplitterWidth = 0;
+                ctAgentSummary.Visible = false;
+                accountgrid.Dock = DockStyle.Fill;
             }
             //初始化后自动设定到当前顶级管理员
             if (CoreService.SiteInfo.Agent != null)
