@@ -15,13 +15,16 @@ namespace TradingLib.MoniterControl
     public partial class ctAccountFilter : UserControl
     {
         public event Action<FilterArgs> FilterArgsChanged = delegate { };
+        ConfigFile config;
         void FireFilterArgsChanged(FilterArgs arg)
         {
+            
             FilterArgsChanged(arg);
         }
 
         public ctAccountFilter()
         {
+            config = ConfigFile.GetConfigFile("moniter.cfg");
             InitializeComponent();
             MoniterHelper.AdapterToIDataSource(accountType).BindDataSource(MoniterHelper.GetAccountTypeCombList(true));
 
@@ -39,6 +42,10 @@ namespace TradingLib.MoniterControl
             tbMemo.TextChanged += new EventHandler(tbMemo_TextChanged);
             btnDebug.Click += new EventHandler(btnDebug_Click);
             btnStatistic.Click +=new EventHandler(btnStatistic_Click);
+            if (config["HideConn"].AsBool())
+            {
+                cbLogin.Visible = false;
+            }
         }
 
         void btnStatistic_Click(object sender, EventArgs e)
