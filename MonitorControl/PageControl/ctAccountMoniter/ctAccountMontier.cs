@@ -22,10 +22,12 @@ namespace TradingLib.MoniterControl
         ILog logger = LogManager.GetLogger("AccountMontier");
         public Control FilterToolBar { get; set; }
         ctAccountFilter filterBox;
+        ConfigFile config;
         public ctAccountMontier()
         {
             try
             {
+                config = ConfigFile.GetConfigFile("moniter.cfg");
                 InitializeComponent();
                 SetPreferences();
                 InitTable();
@@ -35,7 +37,7 @@ namespace TradingLib.MoniterControl
                 filterBox.DebugEvent += new VoidDelegate(filterBox_DebugEvent);
                 filterBox.StatisticEvent += new VoidDelegate(filterBox_StatisticEvent);
                 this.FilterToolBar = filterBox;
-               
+                
                 
                 this.Load += new EventHandler(ctAccountMontier_Load);
             }

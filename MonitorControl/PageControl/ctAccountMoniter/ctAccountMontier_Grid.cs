@@ -159,7 +159,10 @@ namespace TradingLib.MoniterControl
             accountgrid.Columns[TAG].Visible = false;
             accountgrid.Columns[TAG2].Visible = false;
             accountgrid.Columns[DELETE].Visible = false;
-
+            if (config["HideConn"].AsBool())
+            {
+                accountgrid.Columns[LOGINSTATUSIMG].Visible = false;
+            }
             for (int i = 0; i < gt.Columns.Count; i++)
             {
                 accountgrid.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -168,6 +171,8 @@ namespace TradingLib.MoniterControl
 
         private void CounterMoniterWidth()
         {
+            
+
             accountgrid.Columns[ACCOUNT].Width = 100;
             accountgrid.Columns[NAME].Width = 80;
             accountgrid.Columns[EXECUTEIMG].Width = 30;
