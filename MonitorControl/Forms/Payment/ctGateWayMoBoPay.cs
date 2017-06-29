@@ -26,6 +26,14 @@ namespace TradingLib.MoniterControl
             payurl.Text = data["PayUrl"].ToString();
             MerNo.Text = data["MerNo"].ToString();
             MD5Key.Text = data["MD5Key"].ToString();
+            try
+            {
+                domain.Text = data["Domain"].ToString();
+            }
+            catch (Exception ex)
+            { 
+            
+            }
         }
 
         public string GetGateWayConfig()
@@ -35,6 +43,7 @@ namespace TradingLib.MoniterControl
                 PayUrl = payurl.Text,
                 MerNo = MerNo.Text,
                 MD5Key = MD5Key.Text,
+                Domain= domain.Text,
             }
             .SerializeObject();
         }

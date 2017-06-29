@@ -35,12 +35,16 @@
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.payurl = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.domain = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.domain);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel4);
             this.kryptonPanel1.Controls.Add(this.MD5Key);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel7);
             this.kryptonPanel1.Controls.Add(this.MerNo);
@@ -57,7 +61,7 @@
             // 
             this.MD5Key.Location = new System.Drawing.Point(27, 133);
             this.MD5Key.Name = "MD5Key";
-            this.MD5Key.Size = new System.Drawing.Size(269, 20);
+            this.MD5Key.Size = new System.Drawing.Size(269, 22);
             this.MD5Key.TabIndex = 12;
             this.MD5Key.Text = "abcdefg";
             // 
@@ -65,7 +69,7 @@
             // 
             this.kryptonLabel7.Location = new System.Drawing.Point(7, 107);
             this.kryptonLabel7.Name = "kryptonLabel7";
-            this.kryptonLabel7.Size = new System.Drawing.Size(57, 20);
+            this.kryptonLabel7.Size = new System.Drawing.Size(58, 18);
             this.kryptonLabel7.TabIndex = 11;
             this.kryptonLabel7.Values.Text = "MD5Key";
             // 
@@ -73,7 +77,7 @@
             // 
             this.MerNo.Location = new System.Drawing.Point(27, 81);
             this.MerNo.Name = "MerNo";
-            this.MerNo.Size = new System.Drawing.Size(148, 20);
+            this.MerNo.Size = new System.Drawing.Size(148, 22);
             this.MerNo.TabIndex = 3;
             this.MerNo.Text = "1111";
             // 
@@ -81,7 +85,7 @@
             // 
             this.kryptonLabel2.Location = new System.Drawing.Point(4, 55);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(47, 20);
+            this.kryptonLabel2.Size = new System.Drawing.Size(50, 18);
             this.kryptonLabel2.TabIndex = 2;
             this.kryptonLabel2.Values.Text = "商户ID";
             // 
@@ -89,7 +93,7 @@
             // 
             this.payurl.Location = new System.Drawing.Point(27, 29);
             this.payurl.Name = "payurl";
-            this.payurl.Size = new System.Drawing.Size(259, 20);
+            this.payurl.Size = new System.Drawing.Size(259, 22);
             this.payurl.TabIndex = 1;
             this.payurl.Text = "http://saascashier.mobaopay.com/cgi-bin/netpayment/pay_gate.cgi";
             // 
@@ -97,9 +101,25 @@
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(4, 4);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(93, 20);
+            this.kryptonLabel1.Size = new System.Drawing.Size(97, 18);
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "MoBo网关地址";
+            // 
+            // domain
+            // 
+            this.domain.Location = new System.Drawing.Point(27, 193);
+            this.domain.Name = "domain";
+            this.domain.Size = new System.Drawing.Size(269, 22);
+            this.domain.TabIndex = 18;
+            this.domain.Text = "www.demo.com";
+            // 
+            // kryptonLabel4
+            // 
+            this.kryptonLabel4.Location = new System.Drawing.Point(7, 167);
+            this.kryptonLabel4.Name = "kryptonLabel4";
+            this.kryptonLabel4.Size = new System.Drawing.Size(65, 18);
+            this.kryptonLabel4.TabIndex = 17;
+            this.kryptonLabel4.Values.Text = "绑定域名";
             // 
             // ctGateWayMoBoPay
             // 
@@ -124,5 +144,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox MerNo;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox MD5Key;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox domain;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
     }
 }
