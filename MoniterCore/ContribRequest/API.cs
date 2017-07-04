@@ -75,6 +75,16 @@ namespace TradingLib.MoniterCore
         /// 易通支付
         /// </summary>
         ETonePay,
+
+        /// <summary>
+        /// 智汇付
+        /// </summary>
+        ZhiHPay,
+
+        /// <summary>
+        /// 分众支付
+        /// </summary>
+        FZPay,
     }
 
     public enum EnumBusinessType
