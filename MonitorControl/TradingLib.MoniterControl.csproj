@@ -662,6 +662,18 @@
     <Compile Include="Forms\Payment\ctGateWayZhiHPay.Designer.cs">
       <DependentUpon>ctGateWayZhiHPay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Payment\ctGateWayFZPay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Payment\ctGateWayFZPay.Designer.cs">
+      <DependentUpon>ctGateWayFZPay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Payment\ctGateWayDDBillPay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Payment\ctGateWayDDBillPay.Designer.cs">
+      <DependentUpon>ctGateWayDDBillPay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\System\Domain\fmDomain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1258,6 +1270,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Payment\ctGateWayZhiHPay.resx">
       <DependentUpon>ctGateWayZhiHPay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Payment\ctGateWayFZPay.resx">
+      <DependentUpon>ctGateWayFZPay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Payment\ctGateWayDDBillPay.resx">
+      <DependentUpon>ctGateWayDDBillPay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\System\Domain\fmDomain.resx">
       <DependentUpon>fmDomain.cs</DependentUpon>

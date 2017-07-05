@@ -85,6 +85,11 @@ namespace TradingLib.MoniterCore
         /// 分众支付
         /// </summary>
         FZPay,
+
+        /// <summary>
+        /// 多得宝
+        /// </summary>
+        DDBillPay,
     }
 
     public enum EnumBusinessType
