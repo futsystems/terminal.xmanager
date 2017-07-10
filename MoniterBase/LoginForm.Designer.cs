@@ -118,10 +118,6 @@
             this.ckremberuser.TabIndex = 28;
             this.ckremberuser.Values.Text = "记住代码";
             // 
-            // kryptonPalette1
-            // 
-            this.kryptonPalette1.BasePaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
-            // 
             // kryptonManager1
             // 
             this.kryptonManager1.GlobalPalette = this.kryptonPalette1;
@@ -148,7 +144,7 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
+            this.statusStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lbLoginStatus});
             this.statusStrip1.Location = new System.Drawing.Point(0, 149);
@@ -161,7 +157,7 @@
             // lbLoginStatus
             // 
             this.lbLoginStatus.Name = "lbLoginStatus";
-            this.lbLoginStatus.Size = new System.Drawing.Size(18, 17);
+            this.lbLoginStatus.Size = new System.Drawing.Size(17, 17);
             this.lbLoginStatus.Text = "--";
             // 
             // ckremberpass

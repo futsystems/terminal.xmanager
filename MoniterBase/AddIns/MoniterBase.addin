@@ -49,13 +49,11 @@
 
     
       <Condition name="ProductState" product="counter">
-        <Condition name="ModuleState" module="agent">
         <MenuItem id = "Manager"
                   type = "Menu"
                   label = "柜员管理">
           <Include id = "Manager" path = "/Workspace/MgrManager"/>
         </MenuItem>
-        </Condition>
       </Condition>
 
     <Condition name="DeployState" deploy="s">
@@ -193,19 +191,19 @@
       <MenuItem id = "Separator1" type = "Separator"/>
     </Condition>
 
-    <Condition name="PermissionState" permission="commission" >
+    <Condition name="PermissionState" permission="TEMPLATE_EDIT" >
       <MenuItem id = "CommissionTemplateCommand"
               label = "手续费模板管理"
               class = "TradingLib.MoniterBase.Command.CommissionTemplateCommand"/>
     </Condition>
 
-    <Condition name="PermissionState" permission="margin" >
+    <Condition name="PermissionState" permission="TEMPLATE_EDIT" >
       <MenuItem id = "MarginTemplateCommand"
               label = "保证金模板管理"
               class = "TradingLib.MoniterBase.Command.MarginTemplateCommand"/>
     </Condition>
 
-    <Condition name="PermissionState" permission="exstrategy" >
+    <Condition name="PermissionState" permission="TEMPLATE_EDIT" >
       <MenuItem id = "Separator1" type = "Separator"/>
       <MenuItem id = "ExStrategyTemplateCommand"
               label = "交易参数管理"

@@ -45,8 +45,8 @@
               class = "TradingLib.MoniterControl.SuspendFollowStrategySignalCommand"/>
     
   </Path>
-  
-  
+
+  <!-- 交易账户右键菜单-->
   <Path name = "/AccountList/ContextMenu">
 
       <Condition name="PermissionState" permission="cashop">
@@ -82,9 +82,7 @@
 
     <ComplexCondition>
       <Or>
-        <Condition name="PermissionState" permission="commission" />
-        <Condition name="PermissionState" permission="margin" />
-        <Condition name="PermissionState" permission="exstrategy" />
+        <Condition name="PermissionState" permission="account_template" />
       </Or>
       <MenuItem id = "UpdateTemplateCommand"
                 label = "手续费/保证金模板"
@@ -99,9 +97,7 @@
     </Condition>
     <ComplexCondition>
       <Or>
-        <Condition name="PermissionState" permission="commission" />
-        <Condition name="PermissionState" permission="margin" />
-        <Condition name="PermissionState" permission="exstrategy" />
+        <Condition name="PermissionState" permission="account_template" />
         <Condition name="PermissionState" permission="riskrule" />
       </Or>
       <MenuItem id = "Separator1" type = "Separator"/>

@@ -71,11 +71,11 @@ namespace TradingLib.MoniterBase.Command
     {
         public override void Run()
         {
-            if (!CoreService.SiteInfo.UIAccess.r_commission)
-            {
-                MoniterHelper.WindowMessage("无权限");
-                return;
-            }
+            //if (!CoreService.SiteInfo.UIAccess.r_commission)
+            //{
+            //    MoniterHelper.WindowMessage("无权限");
+            //    return;
+            //}
             fmCommission fm = new fmCommission();
             fm.ShowDialog();
             fm.Close();
@@ -89,11 +89,11 @@ namespace TradingLib.MoniterBase.Command
     {
         public override void Run()
         {
-            if (!CoreService.SiteInfo.UIAccess.r_margin)
-            {
-                MoniterHelper.WindowMessage("无权限");
-                return;
-            }
+            //if (!CoreService.SiteInfo.UIAccess.r_margin)
+            //{
+            //    MoniterHelper.WindowMessage("无权限");
+            //    return;
+            //}
             fmMargin fm = new fmMargin();
             fm.ShowDialog();
             fm.Close();
@@ -107,11 +107,11 @@ namespace TradingLib.MoniterBase.Command
     {
         public override void Run()
         {
-            if (!CoreService.SiteInfo.UIAccess.r_exstrategy)
-            {
-                MoniterHelper.WindowMessage("无权限");
-                return;
-            }
+            //if (!CoreService.SiteInfo.UIAccess.r_exstrategy)
+            //{
+            //    MoniterHelper.WindowMessage("无权限");
+            //    return;
+            //}
             fmExStrategy fm = new fmExStrategy();
             fm.ShowDialog();
             fm.Close();

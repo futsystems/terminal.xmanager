@@ -289,25 +289,24 @@ namespace TradingLib.MoniterControl
         {
             ArrayList list = new ArrayList();
 
-            ValueObject<QSEnumManagerType> vo1 = new ValueObject<QSEnumManagerType>();
-            vo1.Name = Util.GetEnumDescription(QSEnumManagerType.AGENT);
-            vo1.Value = QSEnumManagerType.AGENT;
-            list.Add(vo1);
-
             ValueObject<QSEnumManagerType> vo2 = new ValueObject<QSEnumManagerType>();
-            vo2.Name = Util.GetEnumDescription(QSEnumManagerType.ACCOUNTENTER);
-            vo2.Value = QSEnumManagerType.ACCOUNTENTER;
+            vo2.Name = Util.GetEnumDescription(QSEnumManagerType.STAFF);
+            vo2.Value = QSEnumManagerType.STAFF;
             list.Add(vo2);
 
-            ValueObject<QSEnumManagerType> vo3 = new ValueObject<QSEnumManagerType>();
-            vo3.Name = Util.GetEnumDescription(QSEnumManagerType.RISKER);
-            vo3.Value = QSEnumManagerType.RISKER;
-            list.Add(vo3);
+            bool agentAvabile=true;
 
-            ValueObject<QSEnumManagerType> vo4 = new ValueObject<QSEnumManagerType>();
-            vo4.Name = Util.GetEnumDescription(QSEnumManagerType.MONITER);
-            vo4.Value = QSEnumManagerType.MONITER;
-            list.Add(vo4);
+            if (!CoreService.SiteInfo.Domain.Module_Agent) agentAvabile = false;
+            if (CoreService.SiteInfo.Manager.IsAgent() && (CoreService.SiteInfo.Manager.AgentLimit == 0)) agentAvabile = false;
+
+            if (agentAvabile)
+            {
+                ValueObject<QSEnumManagerType> vo1 = new ValueObject<QSEnumManagerType>();
+                vo1.Name = Util.GetEnumDescription(QSEnumManagerType.AGENT);
+                vo1.Value = QSEnumManagerType.AGENT;
+                list.Add(vo1);
+            }
+
             return list;
 
         }

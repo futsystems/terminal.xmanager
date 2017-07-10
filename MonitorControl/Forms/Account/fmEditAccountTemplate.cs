@@ -32,25 +32,14 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            cbCommissionTemplate.Enabled = CoreService.SiteInfo.UIAccess.r_commission;
-            cbMarginTemplate.Enabled = CoreService.SiteInfo.UIAccess.r_margin;
-            cbExStrategyTemplate.Enabled = CoreService.SiteInfo.UIAccess.r_exstrategy;
-
             CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_COMMISSION_TEMPLATE, this.OnQryCommissionTemplate);
             CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_MARGIN_TEMPLATE, this.OnQryMarginTemplate);
             CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_EXSTRATEGY_TEMPLATE, this.OnQryExStrategyTemplate);
-            if (CoreService.SiteInfo.UIAccess.r_commission)
-            {
-                CoreService.TLClient.ReqQryCommissionTemplate();
-            }
-            if (CoreService.SiteInfo.UIAccess.r_margin)
-            {
-                CoreService.TLClient.ReqQryMarginTemplate();
-            }
-            if (CoreService.SiteInfo.UIAccess.r_exstrategy)
-            {
-                CoreService.TLClient.ReqQryExStrategyTemplate();
-            }
+
+            CoreService.TLClient.ReqQryCommissionTemplate();
+            CoreService.TLClient.ReqQryMarginTemplate();
+            CoreService.TLClient.ReqQryExStrategyTemplate();
+            
 
         }
 
@@ -189,32 +178,31 @@ namespace TradingLib.MoniterControl
         }
         void btnSubmit_Click(object sender, EventArgs e)
         {
+            if (!CoreService.SiteInfo.UIAccess.r_account_template)
+            {
+                MoniterHelper.WindowMessage("无权修改账户参数模板");
+                return;
+            }
             if (MoniterHelper.WindowConfirm("确认更新帐户手续费与保证金模板?") == System.Windows.Forms.DialogResult.Yes)
             {
-                if (CoreService.SiteInfo.UIAccess.r_commission)
+                int commissionid = (int)cbCommissionTemplate.SelectedValue;
+                if (_account.Commissin_ID != commissionid)
                 {
-                    int commissionid = (int)cbCommissionTemplate.SelectedValue;
-                    if (_account.Commissin_ID != commissionid)
-                    {
-                        CoreService.TLClient.ReqUpdateAccountCommissionTemplate(_account.Account, commissionid);
-                    }
+                    CoreService.TLClient.ReqUpdateAccountCommissionTemplate(_account.Account, commissionid);
                 }
-                if (CoreService.SiteInfo.UIAccess.r_margin)
+               
+                int marginid = (int)cbMarginTemplate.SelectedValue;
+                if (_account.Margin_ID != marginid)
                 {
-                    int marginid = (int)cbMarginTemplate.SelectedValue;
-                    if (_account.Margin_ID != marginid)
-                    {
-                        CoreService.TLClient.ReqUpdateAccountMarginTemplate(_account.Account, marginid);
-                    }
+                    CoreService.TLClient.ReqUpdateAccountMarginTemplate(_account.Account, marginid);
                 }
-                if (CoreService.SiteInfo.UIAccess.r_exstrategy)
+                
+                int strategyid = (int)cbExStrategyTemplate.SelectedValue;
+                if (_account.ExStrategy_ID != strategyid)
                 {
-                    int strategyid = (int)cbExStrategyTemplate.SelectedValue;
-                    if (_account.ExStrategy_ID != strategyid)
-                    {
-                        CoreService.TLClient.ReqUpdateAccountExStrategyTemplate(_account.Account, strategyid);
-                    }
+                    CoreService.TLClient.ReqUpdateAccountExStrategyTemplate(_account.Account, strategyid);
                 }
+
                 this.Close();
             }
             

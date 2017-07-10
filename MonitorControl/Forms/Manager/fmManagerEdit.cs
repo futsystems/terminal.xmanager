@@ -23,7 +23,8 @@ namespace TradingLib.MoniterControl
             type.SelectedValueChanged += new EventHandler(type_SelectedValueChanged);
             CoreService.EventCore.RegIEventHandler(this);
 
-            this.type.Enabled = false;
+            //this.type.Enabled = false;
+            agentBox.Visible = false;
         }
 
         public void OnInit()

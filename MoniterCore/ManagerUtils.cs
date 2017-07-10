@@ -54,6 +54,11 @@ namespace TradingLib.MoniterCore
             return mgr.Type == QSEnumManagerType.AGENT;
         }
 
+        public static bool IsStaff(this ManagerSetting mgr)
+        {
+            return mgr.Type == QSEnumManagerType.STAFF;
+        }
+
         public static bool IsAgentDomain(this ManagerSetting mgr)
         {
             return mgr.Type == QSEnumManagerType.AGENT;//'|| mgr.BaseManager.Type == QSEnumManagerType.AGENT;

@@ -117,6 +117,9 @@ namespace TradingLib.MoniterControl
                     return CoreService.SiteInfo.UIAccess.r_account_del;
                 case "ACCOUNT_EXECUTION":
                     return CoreService.SiteInfo.UIAccess.r_execution;
+                case "ACCOUNT_TEMPLATE":
+                    return CoreService.SiteInfo.UIAccess.r_account_template;
+
                 case "BLOCK":
                     return CoreService.SiteInfo.UIAccess.r_block;
 
@@ -136,18 +139,16 @@ namespace TradingLib.MoniterControl
                             {
                                 return true;
                             }
-
                         }
                         return false;
                     }
                 case "RISKRULE":
                     return CoreService.SiteInfo.UIAccess.r_riskrule;
-                case "COMMISSION":
-                    return CoreService.SiteInfo.UIAccess.r_commission;
-                case "MARGIN":
-                    return CoreService.SiteInfo.UIAccess.r_margin;
+                case "TEMPLATE_EDIT":
+                    return CoreService.SiteInfo.UIAccess.r_template_edit;
+                
                 case "EXSTRATEGY":
-                    return CoreService.SiteInfo.UIAccess.r_exstrategy;
+                    return CoreService.SiteInfo.UIAccess.r_template_edit;
                 case "ACCOUNT_INFO":
                     return CoreService.SiteInfo.UIAccess.r_account_info;
                 
