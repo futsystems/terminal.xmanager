@@ -33,7 +33,21 @@ namespace TradingLib.MoniterControl
             if (String.Compare(role, "agent", true) == 0 || String.Compare(role, "a", true) == 0)
             {
                 return CoreService.SiteInfo.Manager.Type == QSEnumManagerType.AGENT;
-            }  
+            }
+            if (string.Compare(role, "inroot", true) == 0)
+            {
+                //管理域在Root中 
+                if (CoreService.SiteInfo.Manager.Type == QSEnumManagerType.ROOT)
+                    return true;
+                if (CoreService.SiteInfo.Manager.Type == QSEnumManagerType.STAFF)
+                {
+                    var mgr = CoreService.BasicInfoTracker.GetManager(CoreService.SiteInfo.Manager.GetBaseMGR());
+                    if (mgr != null && mgr.Type == QSEnumManagerType.ROOT)
+                    {
+                        return true;
+                    }
+                }
+            }
             return false;
         }
     }

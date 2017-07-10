@@ -214,6 +214,7 @@
   </Path>
 
 
+  <!-- 记录查询右键子菜单-->
   <Path name = "/AccountList/ContextMenu/Qry">
     <MenuItem id = "QryHistTradingInfoCommand"
           label = "交易记录"
@@ -224,18 +225,6 @@
     <MenuItem id = "QryHistCashTransCommand"
               label = "出入金记录"
               class = "TradingLib.MoniterBase.Command.QryHistCashTransCommand"/>
-  </Path>
-
-  <!--工具栏-->
-  <Path name = "/Workbench/Toolbar">
-
-    <!--ToolbarItem id = "FilterAccountCommand"
-                 tooltip = "筛选帐户"
-                 shortcut = "Control|F"
-                 icon = "Icons.FilterAccount"
-                 class  = "TradingLib.MoniterControl.FilterAccountCommand"/-->
-
-
   </Path>
   
 </AddIn>

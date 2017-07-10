@@ -47,7 +47,11 @@
       <Include id = "Account" path = "/Workspace/MainAccount-Vendor"/>
     </MenuItem>
 
-    
+    <ComplexCondition>
+      <Or>
+        <Condition name="RoleState" role="root" />
+        <Condition name="RoleState" role="agent" />
+      </Or>
       <Condition name="ProductState" product="counter">
         <MenuItem id = "Manager"
                   type = "Menu"
@@ -55,6 +59,7 @@
           <Include id = "Manager" path = "/Workspace/MgrManager"/>
         </MenuItem>
       </Condition>
+    </ComplexCondition>
 
     <Condition name="DeployState" deploy="s">
       <Condition name="ProductState" product="counter">
@@ -74,14 +79,20 @@
         <Include id = "HistQuery" path = "/Workspace/HisQryManager"/>
       </MenuItem>
     </Condition>
-
-      <Condition name="ProductState" product="*">
+    
+      
+        <ComplexCondition>
+          <And>
+            <Condition name="ModuleState" module="payonline" />
+            <Condition name="RoleState" role="inroot" />
+            <Condition name="PermissionState" permission="r_account_cashop" />
+          </And>
         <MenuItem id = "FinManager"
                   type = "Menu"
                   label = "财务管理">
           <Include id = "FinManager" path = "/Workspace/FinManager"/>
         </MenuItem>
-      </Condition>
+      </ComplexCondition>
     
 
     <MenuItem id = "Help"
@@ -182,12 +193,6 @@
       <MenuItem id = "SymbolManagerCommand"
               label = "合约数据"
               class = "TradingLib.MoniterBase.Command.SymbolManagerCommand"/>
-
-    <!--MenuItem id = "SynSymbolManagerCommand"
-             label = "合约数据同步"
-             class = "TradingLib.MoniterBase.Command.SynSymbolManagerCommand"/-->
-    
-    
       <MenuItem id = "Separator1" type = "Separator"/>
     </Condition>
 
@@ -227,25 +232,9 @@
   
   <!--帐户管理-->
   <Path name = "/Workspace/MainAccount-Vendor">
-    <ComplexCondition>
-      <And>
-        <Condition name="ProductState" product="v" />
-        <Condition name="RoleState" role="root" />
-      </And>
-      <MenuItem id = "AddFinServiceAccountCommand"
-              label = "添加配资帐户"
-              class = "TradingLib.MoniterBase.Command.AddFinServiceAccountCommand"/>
-
-      <MenuItem id = "Separator1" type = "Separator"/>
-      <MenuItem id = "MainAccount-Vendor"
-              label = "主帐户管理"
-              shortcut = "Control|M"
-              class = "TradingLib.MoniterBase.Command.ManagerConnectorCommand"/>
-    </ComplexCondition>
-
     <!-- 分账户柜台系统-->
     <Condition name="ProductState" product="counter" >
-      <Condition name="PermissionState" permission="account_add" >
+      <Condition name="PermissionState" permission="r_account_add" >
       <MenuItem id = "AddFAccountCommand"
               label = "添加交易帐户"
                 shortcut = "Control|A"
@@ -268,16 +257,13 @@
 
   <!--柜员管理-->
   <Path name = "/Workspace/MgrManager">
-    <MenuItem id = "ManagerCommand"
-            label = "柜员管理"
-            class = "TradingLib.MoniterBase.Command.ManagerCommand"/>
-    <Condition name="RoleState" role="root" >
-    <MenuItem id = "Separator1" type = "Separator"/>
-    <MenuItem id = "PermissionTemplateCommand"
-            label = "权限模板管理"
-            class = "TradingLib.MoniterBase.Command.AgentPermissionTemplateCommand"/>
-    </Condition>
-
+      <MenuItem id = "ManagerCommand"
+              label = "柜员管理"
+              class = "TradingLib.MoniterBase.Command.ManagerCommand"/>
+      <MenuItem id = "Separator1" type = "Separator"/>
+      <MenuItem id = "PermissionTemplateCommand"
+              label = "权限模板管理"
+              class = "TradingLib.MoniterBase.Command.AgentPermissionTemplateCommand"/>
   </Path>
   
   <!--管理工具-->
@@ -313,23 +299,21 @@
 
   <!--财务管理-->
   <Path name = "/Workspace/FinManager">
-    <Condition name="ProductState" product="vendor">
-      <MenuItem id = "FeeManagerCommand"
-              label = "收费管理"
-              class = "TradingLib.MoniterBase.Command.FeeManagerCommand"/>
-    </Condition>
-    <Condition name="ModuleState" module="payonline" >
         <Condition name="RoleState" role="root" >
         <MenuItem id = "PayGateWayCommand"
                 label = "支付通道"
                 class = "TradingLib.MoniterBase.Command.PayGateWayCommand"/>
         </Condition>
-      <Condition name="PermissionState" permission="cashop">
+    <ComplexCondition>
+      <And>
+        <Condition name="RoleState" role="inroot" />
+        <Condition name="PermissionState" permission="r_account_cashop" />
+      </And>
+      
         <MenuItem id = "CashOperationCommand"
                 label = "在线出入金管理"
                 class = "TradingLib.MoniterBase.Command.CashOperationCommand"/>
-      </Condition>
-    </Condition>
+    </ComplexCondition>
   </Path>
 
   
