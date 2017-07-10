@@ -191,24 +191,16 @@
       <MenuItem id = "Separator1" type = "Separator"/>
     </Condition>
 
-    <Condition name="PermissionState" permission="TEMPLATE_EDIT" >
       <MenuItem id = "CommissionTemplateCommand"
               label = "手续费模板管理"
               class = "TradingLib.MoniterBase.Command.CommissionTemplateCommand"/>
-    </Condition>
-
-    <Condition name="PermissionState" permission="TEMPLATE_EDIT" >
       <MenuItem id = "MarginTemplateCommand"
               label = "保证金模板管理"
               class = "TradingLib.MoniterBase.Command.MarginTemplateCommand"/>
-    </Condition>
-
-    <Condition name="PermissionState" permission="TEMPLATE_EDIT" >
       <MenuItem id = "Separator1" type = "Separator"/>
       <MenuItem id = "ExStrategyTemplateCommand"
               label = "交易参数管理"
               class = "TradingLib.MoniterBase.Command.ExStrategyTemplateCommand"/>
-    </Condition>
     <Condition name="RoleState" role="root" >
     <MenuItem id = "Separator1" type = "Separator"/>
     <MenuItem id = "ExchangeRateCommand"

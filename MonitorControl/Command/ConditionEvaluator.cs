@@ -127,12 +127,13 @@ namespace TradingLib.MoniterControl
                 //    return CoreService.SiteInfo.UIAccess.r_cashop;
                 case "CASHOP":
                     {
-                        //分区管理员 可以查看出入金按钮
+                        //分区管理员可执行出入金
                         if (CoreService.SiteInfo.Manager.IsRoot())
                         {
                             return true;
                         }
 
+                        //自营代理可以出入金
                         if(CoreService.SiteInfo.Manager.IsAgent())
                         {
                             //自盈代理有出入金权限

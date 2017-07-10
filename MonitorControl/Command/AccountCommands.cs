@@ -79,12 +79,47 @@ namespace TradingLib.MoniterControl
 
             if (CoreService.SiteInfo.ProductType == QSEnumProductType.CounterSystem)
             {
-                //不是超级超级管理员 不是自营代理主管理员 (特殊权限信息)
-                if (!CoreService.SiteInfo.Manager.IsRoot() && !(CoreService.SiteInfo.Agent!= null && CoreService.SiteInfo.Agent.AgentType == EnumAgentType.SelfOperated && CoreService.SiteInfo.Manager.Type == QSEnumManagerType.AGENT))
+                bool access = false;
+                //管理员可出入金
+                if (CoreService.SiteInfo.Manager.IsRoot())
+                {
+                    access =  true;
+                }
+
+                //自营代理可以出入金
+                if (CoreService.SiteInfo.Manager.IsAgent())
+                {
+                    //自盈代理有出入金权限
+                    if (CoreService.SiteInfo.Agent != null && CoreService.SiteInfo.Agent.AgentType == EnumAgentType.SelfOperated)
+                    {
+                        access = true;
+                    }
+                }
+                
+                if (CoreService.SiteInfo.Manager.IsStaff())
+                {
+                    var basemgr = CoreService.BasicInfoTracker.Managers.FirstOrDefault(m => m.mgr_fk == CoreService.SiteInfo.Manager.GetBaseMGR());
+                    //管理员下属员工按权限模板
+                    if (basemgr.IsRoot())
+                    {
+                        access =  CoreService.SiteInfo.UIAccess.r_cashop;
+                    }
+                    //自营代理下属员工按权限模板
+                    if (basemgr.IsAgent())
+                    {
+                        if (CoreService.SiteInfo.Agent != null && CoreService.SiteInfo.Agent.AgentType == EnumAgentType.SelfOperated)
+                        {
+                            access = CoreService.SiteInfo.UIAccess.r_cashop;
+                        }
+                    }
+                }
+
+                if (!access)
                 {
                     MoniterHelper.WindowMessage("无权限");
                     return;
                 }
+
                 fmCashOperationCounter fm = new fmCashOperationCounter();
                 fm.SetAccount(account);
                 fm.ShowDialog();
