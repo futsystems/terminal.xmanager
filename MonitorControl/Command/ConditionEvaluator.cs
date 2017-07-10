@@ -132,15 +132,34 @@ namespace TradingLib.MoniterControl
                         {
                             return true;
                         }
-                        else
+
+                        if(CoreService.SiteInfo.Manager.IsAgent())
                         {
                             //自盈代理有出入金权限
                             if (CoreService.SiteInfo.Agent != null && CoreService.SiteInfo.Agent.AgentType == EnumAgentType.SelfOperated)
                             {
                                 return true;
                             }
+                            return false;
+                        }
+                        if (CoreService.SiteInfo.Manager.IsStaff())
+                        {
+                            var basemgr = CoreService.BasicInfoTracker.Managers.FirstOrDefault(m => m.mgr_fk == CoreService.SiteInfo.Manager.GetBaseMGR());
+                            if(basemgr.IsRoot())
+                            {
+                                return CoreService.SiteInfo.UIAccess.r_cashop;
+                            }
+                            if(basemgr.IsAgent())
+                            {
+                                if (CoreService.SiteInfo.Agent != null && CoreService.SiteInfo.Agent.AgentType == EnumAgentType.SelfOperated)
+                                {
+                                    return CoreService.SiteInfo.UIAccess.r_cashop;
+                                }
+                            }
+                            return false;
                         }
                         return false;
+                        
                     }
                 case "RISKRULE":
                     return CoreService.SiteInfo.UIAccess.r_riskrule;
