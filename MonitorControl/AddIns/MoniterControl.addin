@@ -24,6 +24,7 @@
     </Import>
   </Runtime>
 
+  <!-- 跟单策略右键菜单-->
   <Path name = "/FollowStrategyList/ContextMenu">
     <MenuItem id = "EditFollowStrategyCommand"
                       label = "添加跟单策略"
@@ -49,13 +50,13 @@
   <!-- 交易账户右键菜单-->
   <Path name = "/AccountList/ContextMenu">
 
-      <Condition name="PermissionState" permission="cashop">
+      <Condition name="PermissionState" permission="r_account_cashop">
         <MenuItem id = "CashOperationCommand"
                   label = "出入金/帐户信息"
                   class = "TradingLib.MoniterControl.CashOperationCommand"/>
       </Condition>
 
-      <Condition name="PermissionState" permission="block">
+      <Condition name="PermissionState" permission="r_account_edit_execution">
         <ComplexCondition>
           <Not>
             <Condition name="AccountActiveState" />
@@ -74,15 +75,15 @@
 
     <ComplexCondition>
       <Or>
-        <Condition name="PermissionState" permission="cashop" />
-        <Condition name="PermissionState" permission="block" />
+        <Condition name="PermissionState" permission="r_account_cashop" />
+        <Condition name="PermissionState" permission="r_account_edit_execution" />
       </Or>
     <MenuItem id = "Separator1" type = "Separator"/>
     </ComplexCondition>
 
     <ComplexCondition>
       <Or>
-        <Condition name="PermissionState" permission="account_template" />
+        <Condition name="PermissionState" permission="r_account_edit_template" />
       </Or>
       <MenuItem id = "UpdateTemplateCommand"
                 label = "手续费/保证金模板"
@@ -109,22 +110,34 @@
                  label = "记录查询">
         <Include id = "QryMenu" path = "/AccountList/ContextMenu/Qry"/>
       </MenuItem>
-    
 
-    <Condition name="PermissionState" permission="account_info">
+
+    <ComplexCondition>
+      <Or>
+        <Condition name="PermissionState" permission="r_account_qry_pass" />
+        <Condition name="PermissionState" permission="r_account_edit_pass" />
+        <Condition name="PermissionState" permission="r_account_edit_profile" />
+      </Or>
       <MenuItem id = "Separator1" type = "Separator"/>
-      <MenuItem id = "Product"
-                label = "修改交易密码"
-                class = "TradingLib.MoniterControl.ChangeAccountPasswordCommand"/>
-
+    </ComplexCondition>
+    
+      
+      <Condition name="PermissionState" permission="r_account_qry_pass">
+        <MenuItem id = "QryAccountPasswordCommand"
+                  label = "查询交易密码"
+                  class = "TradingLib.MoniterControl.QryAccountPasswordCommand"/>
+      </Condition>
+      
+      <Condition name="PermissionState" permission="r_account_edit_pass">
+        <MenuItem id = "Product"
+                  label = "修改交易密码"
+                  class = "TradingLib.MoniterControl.ChangeAccountPasswordCommand"/>
+      </Condition>
+      <Condition name="PermissionState" permission="r_account_edit_profile">
       <MenuItem id = "UpdateAccountProfileCommand"
                 label = "修改客户信息"
                 class = "TradingLib.MoniterControl.UpdateAccountProfileCommand"/>
-      
-      <MenuItem id = "QryAccountPasswordCommand"
-                label = "查询交易密码"
-                class = "TradingLib.MoniterControl.QryAccountPasswordCommand"/>
-    </Condition>
+      </Condition>
 
 
     <Condition name="RoleState" role="root" >
@@ -134,16 +147,16 @@
                 class = "TradingLib.MoniterControl.UpdateAccountRouterGroup"/>
     </Condition>
 
-    <Condition name="PermissionState" permission="account_del">
+    <Condition name="PermissionState" permission="r_account_del">
       <MenuItem id = "Separator1" type = "Separator"/>
       <MenuItem id = "DelAccount"
                 label = "删除帐户"
                 class = "TradingLib.MoniterControl.DelAccountCommand"/>
     </Condition>
-    
-    
 
-    <Condition name="ProductState" product="Vendor">
+
+
+    <!--Condition name="ProductState" product="Vendor">
       <ComplexCondition>
         <Not>
           <Condition name="AccountBindedState" />
@@ -151,10 +164,10 @@
         <MenuItem id = "UpdateAccountConnectorCommand"
                   label = "借出主帐户"
                   class = "TradingLib.MoniterControl.UpdateAccountConnectorCommand"/>
-      </ComplexCondition>
+      </ComplexCondition-->
       
       <!--交易帐户绑定主帐户 显示菜单-->
-      <Condition name="AccountBindedState">
+    <!--Condition name="AccountBindedState">
         <MenuItem id = "DelAccountConnectorCommand"
                   label = "收回主帐户"
                   class = "TradingLib.MoniterControl.DelAccountConnectorCommand"/>
@@ -170,7 +183,7 @@
                   class = "TradingLib.MoniterControl.MotherAccountManagerCommand"/>
       </Condition>
       
-    </Condition>
+    </Condition-->
 
 
     <!--Condition name="ProductState" product="Counter">
@@ -185,7 +198,7 @@
                 class = "TradingLib.MoniterControl.ClearAccountTerminal"/>
     </Condition-->
 
-    <Condition name="ProductState" product="Vendor">
+    <!--Condition name="ProductState" product="Vendor">
       <MenuItem id = "UpdateTemplateCommand"
                 shortcut = "Control|F"
                 label = "强平规则"
@@ -196,7 +209,7 @@
       <MenuItem id = "UpdateFinServiceCommand"
                 label = "配资服务"
                 class = "TradingLib.MoniterControl.UpdateFinServiceCommand"/>
-    </Condition>
+    </Condition-->
     
   </Path>
 

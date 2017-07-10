@@ -121,14 +121,14 @@ namespace TradingLib.MoniterBase.Command
                 //管理员下属员工按权限模板
                 if (basemgr.IsRoot())
                 {
-                    access = CoreService.SiteInfo.Permission.r_cashop;
+                    access = CoreService.SiteInfo.Permission.r_account_cashop;
                 }
                 //自营代理下属员工按权限模板
                 if (basemgr.IsAgent())
                 {
                     if (CoreService.SiteInfo.Agent != null && CoreService.SiteInfo.Agent.AgentType == EnumAgentType.SelfOperated)
                     {
-                        access = CoreService.SiteInfo.Permission.r_cashop;
+                        access = CoreService.SiteInfo.Permission.r_account_cashop;
                     }
                 }
             }

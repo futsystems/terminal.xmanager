@@ -97,6 +97,7 @@ namespace TradingLib.MoniterControl
 
 
 
+
     /// <summary>
     /// 权限检查
     /// </summary>
@@ -107,74 +108,47 @@ namespace TradingLib.MoniterControl
             //管理员默认拥有所有权限
             if (CoreService.SiteInfo.Manager.IsRoot()) return true;
 
-            string module = condition.Properties["permission"];//对应的产品
-            module = module.ToUpper();
-            switch (module)
+            string permission = condition.Properties["permission"].ToLower();
+
+            //排除特例
+            if (permission == "r_account_cashop")
             {
-                case "ACCOUNT_ADD":
-                    return CoreService.SiteInfo.Permission.r_account_add;
-                case "ACCOUNT_DEL":
-                    return CoreService.SiteInfo.Permission.r_account_del;
-                case "ACCOUNT_EXECUTION":
-                    return CoreService.SiteInfo.Permission.r_execution;
-                case "ACCOUNT_TEMPLATE":
-                    return CoreService.SiteInfo.Permission.r_account_template;
+                //分区管理员可执行出入金
+                if (CoreService.SiteInfo.Manager.IsRoot())
+                {
+                    return true;
+                }
 
-                case "BLOCK":
-                    return CoreService.SiteInfo.Permission.r_block;
-
-                //case "CASHOP":
-                //    return CoreService.SiteInfo.UIAccess.r_cashop;
-                case "CASHOP":
+                //自营代理可以出入金
+                if (CoreService.SiteInfo.Manager.IsAgent())
+                {
+                    //自盈代理有出入金权限
+                    if (CoreService.SiteInfo.Agent != null && CoreService.SiteInfo.Agent.AgentType == EnumAgentType.SelfOperated)
                     {
-                        //分区管理员可执行出入金
-                        if (CoreService.SiteInfo.Manager.IsRoot())
-                        {
-                            return true;
-                        }
-
-                        //自营代理可以出入金
-                        if(CoreService.SiteInfo.Manager.IsAgent())
-                        {
-                            //自盈代理有出入金权限
-                            if (CoreService.SiteInfo.Agent != null && CoreService.SiteInfo.Agent.AgentType == EnumAgentType.SelfOperated)
-                            {
-                                return true;
-                            }
-                            return false;
-                        }
-                        if (CoreService.SiteInfo.Manager.IsStaff())
-                        {
-                            var basemgr = CoreService.BasicInfoTracker.Managers.FirstOrDefault(m => m.mgr_fk == CoreService.SiteInfo.Manager.GetBaseMGR());
-                            if(basemgr.IsRoot())
-                            {
-                                return CoreService.SiteInfo.Permission.r_cashop;
-                            }
-                            if(basemgr.IsAgent())
-                            {
-                                if (CoreService.SiteInfo.Agent != null && CoreService.SiteInfo.Agent.AgentType == EnumAgentType.SelfOperated)
-                                {
-                                    return CoreService.SiteInfo.Permission.r_cashop;
-                                }
-                            }
-                            return false;
-                        }
-                        return false;
-                        
+                        return true;
                     }
-                case "RISKRULE":
-                    return CoreService.SiteInfo.Permission.r_riskrule;
-                case "TEMPLATE_EDIT":
-                    return CoreService.SiteInfo.Permission.r_template_edit;
-                
-                case "EXSTRATEGY":
-                    return CoreService.SiteInfo.Permission.r_template_edit;
-                case "ACCOUNT_INFO":
-                    return CoreService.SiteInfo.Permission.r_account_info;
-                
-                default:
                     return false;
+                }
+                if (CoreService.SiteInfo.Manager.IsStaff())
+                {
+                    var basemgr = CoreService.BasicInfoTracker.Managers.FirstOrDefault(m => m.mgr_fk == CoreService.SiteInfo.Manager.GetBaseMGR());
+                    if (basemgr.IsRoot())
+                    {
+                        return CoreService.SiteInfo.Permission.r_account_cashop;
+                    }
+                    if (basemgr.IsAgent())
+                    {
+                        if (CoreService.SiteInfo.Agent != null && CoreService.SiteInfo.Agent.AgentType == EnumAgentType.SelfOperated)
+                        {
+                            return CoreService.SiteInfo.Permission.r_account_cashop;
+                        }
+                    }
+                    return false;
+                }
+                return false;
             }
+
+            return CoreService.SiteInfo.Permission.GetPermission(permission);
 
         }
     }

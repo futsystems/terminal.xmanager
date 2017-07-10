@@ -102,22 +102,16 @@ namespace TradingLib.MoniterControl
                     //管理员下属员工按权限模板
                     if (basemgr.IsRoot())
                     {
-                        access = CoreService.SiteInfo.Permission.r_cashop;
+                        access = CoreService.SiteInfo.Permission.r_account_cashop;
                     }
                     //自营代理下属员工按权限模板
                     if (basemgr.IsAgent())
                     {
                         if (CoreService.SiteInfo.Agent != null && CoreService.SiteInfo.Agent.AgentType == EnumAgentType.SelfOperated)
                         {
-                            access = CoreService.SiteInfo.Permission.r_cashop;
+                            access = CoreService.SiteInfo.Permission.r_account_cashop;
                         }
                     }
-                }
-
-                if (!access)
-                {
-                    MoniterHelper.WindowMessage("无权限");
-                    return;
                 }
 
                 fmCashOperationCounter fm = new fmCashOperationCounter();
@@ -142,13 +136,6 @@ namespace TradingLib.MoniterControl
                 return;
             }
 
-            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.Permission.r_block)
-            {
-                MoniterHelper.WindowMessage("无权限");
-                return;
-            }
-
-
             if (MoniterHelper.WindowConfirm(string.Format("确认激活交易帐户:{0}?", account.Account)) == System.Windows.Forms.DialogResult.Yes)
             {
                 CoreService.TLClient.ReqUpdateAccountExecute(account.Account,true);
@@ -171,11 +158,6 @@ namespace TradingLib.MoniterControl
                 return;
             }
 
-            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.Permission.r_block)
-            {
-                MoniterHelper.WindowMessage("无权限");
-                return;
-            }
 
             if (MoniterHelper.WindowConfirm(string.Format("确认冻结交易帐户:{0}?", account.Account)) == System.Windows.Forms.DialogResult.Yes)
             {
@@ -183,89 +165,6 @@ namespace TradingLib.MoniterControl
             }
         }
 
-    }
-
-
-
-
-
-    /// <summary>
-    /// 修改交易帐户密码
-    /// </summary>
-    public class ChangeAccountPasswordCommand : AbstractMenuCommand
-    {
-        public override void Run()
-        {
-            AccountItem account = null;
-            if (!AccountMoniterHelper.GetCurrentAccount(this.Owner,out account))
-            {
-                return;
-            }
-            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.Permission.r_account_info)
-            {
-                MoniterHelper.WindowMessage("无权限");
-                return;
-            }
-
-            fmChangePassword fm = new fmChangePassword();
-            fm.SetAccount(account.Account);
-            fm.ShowDialog();
-            fm.Close();
-        }
-
-    }
-
-    /// <summary>
-    /// 修改投资者信息
-    /// </summary>
-    public class ChangeInvestorInfoCommand : AbstractMenuCommand
-    {
-        public override void Run()
-        {
-            //AccountItem account = null;
-            //if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
-            //{
-            //    return;
-            //}
-
-            //if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.UIAccess.r_account_info)
-            //{
-            //    MoniterHelper.WindowMessage("无权限");
-            //    return;
-            //}
-
-            //fmChangeInvestor fm = new fmChangeInvestor();
-            //fm.SetAccount(account);
-            //fm.ShowDialog();
-            //fm.Close();
-        }
-    }
-
-    /// <summary>
-    /// 更新交易帐户个人信息
-    /// </summary>
-    public class UpdateAccountProfileCommand : AbstractMenuCommand
-    {
-        public override void Run()
-        {
-            AccountItem account = null;
-            if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
-            {
-                return;
-            }
-
-            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.Permission.r_account_info)
-            {
-                MoniterHelper.WindowMessage("无权限");
-                return;
-            }
-
-
-            fmEditAccount fm = new fmEditAccount();
-            fm.SetAccount(account);
-            fm.ShowDialog();
-            fm.Close();
-        }
     }
 
 
@@ -288,6 +187,7 @@ namespace TradingLib.MoniterControl
         }
     }
 
+
     public class EditRiskRuleCommand : AbstractMenuCommand
     {
         public override void Run()
@@ -298,56 +198,14 @@ namespace TradingLib.MoniterControl
                 return;
             }
 
-            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.Permission.r_riskrule)
-            {
-                MoniterHelper.WindowMessage("无权限");
-                return;
-            }
-
-
             fmEditRiskRule fm = new fmEditRiskRule();
             fm.SetAccount(account);
             fm.ShowDialog();
             fm.Close();
         }
     }
-    /// <summary>
-    /// 更新主帐户强平规则
-    /// </summary>
-    public class UpdateFlatRuleCommand : AbstractMenuCommand
-    {
-        public override void Run()
-        {
-            AccountItem account = null;
-            if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
-            {
-                return;
-            }
-            fmEditVendorFlatRule fm = new fmEditVendorFlatRule();
-            fm.SetAccount(account);
-            fm.ShowDialog();
-            fm.Close();
-        }
-    }
 
-    /// <summary>
-    /// 更新配资服务
-    /// </summary>
-    public class UpdateFinServiceCommand : AbstractMenuCommand
-    {
-        public override void Run()
-        {
-            AccountItem account = null;
-            if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
-            {
-                return;
-            }
-            fmEditService fm = new fmEditService();
-            fm.SetAccount(account);
-            fm.ShowDialog();
-            fm.Close();
-        }
-    }
+
     /// <summary>
     /// 查询交易密码
     /// </summary>
@@ -367,6 +225,52 @@ namespace TradingLib.MoniterControl
         }
     }
 
+
+    /// <summary>
+    /// 修改交易帐户密码
+    /// </summary>
+    public class ChangeAccountPasswordCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            AccountItem account = null;
+            if (!AccountMoniterHelper.GetCurrentAccount(this.Owner,out account))
+            {
+                return;
+            }
+
+            fmChangePassword fm = new fmChangePassword();
+            fm.SetAccount(account.Account);
+            fm.ShowDialog();
+            fm.Close();
+        }
+
+    }
+
+
+
+    /// <summary>
+    /// 更新交易帐户个人信息
+    /// </summary>
+    public class UpdateAccountProfileCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            AccountItem account = null;
+            if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
+            {
+                return;
+            }
+
+            fmEditAccount fm = new fmEditAccount();
+            fm.SetAccount(account);
+            fm.ShowDialog();
+            fm.Close();
+        }
+    }
+
+
+   
     /// <summary>
     /// 更新交易帐户路由组设定
     /// </summary>
@@ -421,86 +325,6 @@ namespace TradingLib.MoniterControl
     }
 
     /// <summary>
-    /// 删除交易帐户与主帐户的绑定关系
-    /// </summary>
-    public class DelAccountConnectorCommand : AbstractCommand
-    {
-        public override void Run()
-        {
-            //AccountItem account = null;
-            //if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
-            //{
-            //    return;
-            //}
-            //if (MoniterHelper.WindowConfirm("确认从帐户:" + account.Account + "解绑主帐户?") == System.Windows.Forms.DialogResult.Yes)
-            //{
-            //    CoreService.TLClient.ReqDelAccountConnector(account.Account);
-            //}
-        }
-    }
-
-    /// <summary>
-    /// 更新交易帐户与主帐户的绑定关系
-    /// </summary>
-    public class UpdateAccountConnectorCommand : AbstractCommand
-    {
-        public override void Run()
-        {
-            //AccountItem account = null;
-            //if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
-            //{
-            //    return;
-            //}
-
-            //fmBindConnector fm = new fmBindConnector();
-            //fm.SetAccount(account);
-            //fm.ShowDialog();
-            //fm.Close();
-        }
-    }
-
-    /// <summary>
-    /// 重新从CTP接口同步主帐户交易数据
-    /// </summary>
-    public class SyncAccountDataCommand : AbstractCommand
-    {
-        public override void Run()
-        {
-
-            //AccountItem account = null;
-            //if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
-            //{
-            //    return;
-            //}
-
-            //CoreService.EventAccount.FireSyncAccountEvent(account);//触发同步事件，
-
-            //CoreService.TLClient.ReqSyncData(account.Account);
-        }
-    }
-
-    /// <summary>
-    /// 对应主帐户管理界面
-    /// </summary>
-    public class MotherAccountManagerCommand : AbstractCommand
-    {
-        public override void Run()
-        {
-            //AccountItem account = null;
-            //if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
-            //{
-            //    return;
-            //}
-
-            //fmMainAccountManager fm = new fmMainAccountManager();
-            //fm.SetAccount(account);
-            //fm.ShowDialog();
-            //fm.Close();
-        }
-    }
-
-
-    /// <summary>
     /// 注销交易客户端
     /// </summary>
     public class ClearAccountTerminal : AbstractCommand
@@ -520,23 +344,5 @@ namespace TradingLib.MoniterControl
         }
     }
 
-    /// <summary>
-    /// 过滤交易帐户
-    /// </summary>
-    public class FilterAccountCommand : AbstractMenuCommand
-    {
-        public override void Run()
-        {
-        //    fmAcctFilter fm = 
-        //    fm.FilterArgsChangedEvent += new VoidDelegate(fm_FilterArgsChangedEvent);
-        //    fm.Show();
-            //fmAcctFilter.Instance.Show();
-        }
-
-        void fm_FilterArgsChangedEvent()
-        {
-            //LogService.Debug("filter args changed");
-        }
-    }
 
 }

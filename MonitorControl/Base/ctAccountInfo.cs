@@ -73,9 +73,9 @@ namespace TradingLib.MoniterControl
             if (!CoreService.SiteInfo.Manager.IsRoot())
             {
                 PanelRouter.Visible = false;
-                btnExecute.Visible = CoreService.SiteInfo.Permission.r_block;
-                btnUpdateInterday.Visible = CoreService.SiteInfo.Permission.r_account_interday;
-                cbHoldNight.Enabled = CoreService.SiteInfo.Permission.r_account_interday;
+                btnExecute.Visible = CoreService.SiteInfo.Permission.r_account_edit_execution;
+                btnUpdateInterday.Visible = CoreService.SiteInfo.Permission.r_account_edit_interday;
+                cbHoldNight.Enabled = CoreService.SiteInfo.Permission.r_account_edit_interday;
             }
         }
 

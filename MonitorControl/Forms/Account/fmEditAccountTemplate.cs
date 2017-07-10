@@ -178,11 +178,11 @@ namespace TradingLib.MoniterControl
         }
         void btnSubmit_Click(object sender, EventArgs e)
         {
-            if (!CoreService.SiteInfo.Permission.r_account_template)
-            {
-                MoniterHelper.WindowMessage("无权修改账户参数模板");
-                return;
-            }
+            //if (!CoreService.SiteInfo.Permission.r_account_template)
+            //{
+            //    MoniterHelper.WindowMessage("无权修改账户参数模板");
+            //    return;
+            //}
             if (MoniterHelper.WindowConfirm("确认更新帐户手续费与保证金模板?") == System.Windows.Forms.DialogResult.Yes)
             {
                 int commissionid = (int)cbCommissionTemplate.SelectedValue;
