@@ -98,15 +98,48 @@ namespace TradingLib.MoniterBase.Command
         static fmCashOperationManager mgr = null;
         public override void Run()
         {
-            //root可查看
-            if (!CoreService.SiteInfo.Manager.IsRoot())
+            bool access = false;
+            //管理员可出入金
+            if (CoreService.SiteInfo.Manager.IsRoot())
+            {
+                access = true;
+            }
+
+            //自营代理可以出入金
+            if (CoreService.SiteInfo.Manager.IsAgent())
+            {
+                //自盈代理有出入金权限
+                if (CoreService.SiteInfo.Agent != null && CoreService.SiteInfo.Agent.AgentType == EnumAgentType.SelfOperated)
+                {
+                    access = true;
+                }
+            }
+
+            if (CoreService.SiteInfo.Manager.IsStaff())
+            {
+                var basemgr = CoreService.BasicInfoTracker.Managers.FirstOrDefault(m => m.mgr_fk == CoreService.SiteInfo.Manager.GetBaseMGR());
+                //管理员下属员工按权限模板
+                if (basemgr.IsRoot())
+                {
+                    access = CoreService.SiteInfo.Permission.r_cashop;
+                }
+                //自营代理下属员工按权限模板
+                if (basemgr.IsAgent())
+                {
+                    if (CoreService.SiteInfo.Agent != null && CoreService.SiteInfo.Agent.AgentType == EnumAgentType.SelfOperated)
+                    {
+                        access = CoreService.SiteInfo.Permission.r_cashop;
+                    }
+                }
+            }
+
+            if (!access)
             {
                 MoniterHelper.WindowMessage("无权限");
                 return;
             }
             if (mgr == null)
                 mgr = new fmCashOperationManager();
-            //fmCashOperationManager fm = new fmCashOperationManager();
             mgr.Show();
         }
     }

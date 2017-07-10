@@ -318,11 +318,13 @@
               label = "收费管理"
               class = "TradingLib.MoniterBase.Command.FeeManagerCommand"/>
     </Condition>
-    <Condition name="RoleState" role="root" >
-      <Condition name="ModuleState" module="payonline" >
+    <Condition name="ModuleState" module="payonline" >
+        <Condition name="RoleState" role="root" >
         <MenuItem id = "PayGateWayCommand"
                 label = "支付通道"
                 class = "TradingLib.MoniterBase.Command.PayGateWayCommand"/>
+        </Condition>
+      <Condition name="PermissionState" permission="cashop">
         <MenuItem id = "CashOperationCommand"
                 label = "在线出入金管理"
                 class = "TradingLib.MoniterBase.Command.CashOperationCommand"/>

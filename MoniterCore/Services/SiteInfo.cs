@@ -96,12 +96,12 @@ namespace TradingLib.MoniterCore
             }
         }
 
-        public UIAccess UIAccess
+        public Permission Permission
         {
             get
             {
                 if (_response != null)
-                    return _response.LoginResponse.UIAccess;
+                    return _response.LoginResponse.Permission;
                 return null;
             }
         }

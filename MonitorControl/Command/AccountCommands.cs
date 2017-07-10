@@ -102,14 +102,14 @@ namespace TradingLib.MoniterControl
                     //管理员下属员工按权限模板
                     if (basemgr.IsRoot())
                     {
-                        access =  CoreService.SiteInfo.UIAccess.r_cashop;
+                        access = CoreService.SiteInfo.Permission.r_cashop;
                     }
                     //自营代理下属员工按权限模板
                     if (basemgr.IsAgent())
                     {
                         if (CoreService.SiteInfo.Agent != null && CoreService.SiteInfo.Agent.AgentType == EnumAgentType.SelfOperated)
                         {
-                            access = CoreService.SiteInfo.UIAccess.r_cashop;
+                            access = CoreService.SiteInfo.Permission.r_cashop;
                         }
                     }
                 }
@@ -142,7 +142,7 @@ namespace TradingLib.MoniterControl
                 return;
             }
 
-            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.UIAccess.r_block)
+            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.Permission.r_block)
             {
                 MoniterHelper.WindowMessage("无权限");
                 return;
@@ -171,7 +171,7 @@ namespace TradingLib.MoniterControl
                 return;
             }
 
-            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.UIAccess.r_block)
+            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.Permission.r_block)
             {
                 MoniterHelper.WindowMessage("无权限");
                 return;
@@ -201,7 +201,7 @@ namespace TradingLib.MoniterControl
             {
                 return;
             }
-            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.UIAccess.r_account_info)
+            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.Permission.r_account_info)
             {
                 MoniterHelper.WindowMessage("无权限");
                 return;
@@ -254,7 +254,7 @@ namespace TradingLib.MoniterControl
                 return;
             }
 
-            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.UIAccess.r_account_info)
+            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.Permission.r_account_info)
             {
                 MoniterHelper.WindowMessage("无权限");
                 return;
@@ -298,7 +298,7 @@ namespace TradingLib.MoniterControl
                 return;
             }
 
-            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.UIAccess.r_riskrule)
+            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.Permission.r_riskrule)
             {
                 MoniterHelper.WindowMessage("无权限");
                 return;
@@ -402,7 +402,7 @@ namespace TradingLib.MoniterControl
                 return;
             }
 
-            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.UIAccess.r_account_del)
+            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.Permission.r_account_del)
             {
                 MoniterHelper.WindowMessage("无权限");
                 return;

@@ -112,16 +112,16 @@ namespace TradingLib.MoniterControl
             switch (module)
             {
                 case "ACCOUNT_ADD":
-                    return CoreService.SiteInfo.UIAccess.r_account_add;
+                    return CoreService.SiteInfo.Permission.r_account_add;
                 case "ACCOUNT_DEL":
-                    return CoreService.SiteInfo.UIAccess.r_account_del;
+                    return CoreService.SiteInfo.Permission.r_account_del;
                 case "ACCOUNT_EXECUTION":
-                    return CoreService.SiteInfo.UIAccess.r_execution;
+                    return CoreService.SiteInfo.Permission.r_execution;
                 case "ACCOUNT_TEMPLATE":
-                    return CoreService.SiteInfo.UIAccess.r_account_template;
+                    return CoreService.SiteInfo.Permission.r_account_template;
 
                 case "BLOCK":
-                    return CoreService.SiteInfo.UIAccess.r_block;
+                    return CoreService.SiteInfo.Permission.r_block;
 
                 //case "CASHOP":
                 //    return CoreService.SiteInfo.UIAccess.r_cashop;
@@ -148,13 +148,13 @@ namespace TradingLib.MoniterControl
                             var basemgr = CoreService.BasicInfoTracker.Managers.FirstOrDefault(m => m.mgr_fk == CoreService.SiteInfo.Manager.GetBaseMGR());
                             if(basemgr.IsRoot())
                             {
-                                return CoreService.SiteInfo.UIAccess.r_cashop;
+                                return CoreService.SiteInfo.Permission.r_cashop;
                             }
                             if(basemgr.IsAgent())
                             {
                                 if (CoreService.SiteInfo.Agent != null && CoreService.SiteInfo.Agent.AgentType == EnumAgentType.SelfOperated)
                                 {
-                                    return CoreService.SiteInfo.UIAccess.r_cashop;
+                                    return CoreService.SiteInfo.Permission.r_cashop;
                                 }
                             }
                             return false;
@@ -163,14 +163,14 @@ namespace TradingLib.MoniterControl
                         
                     }
                 case "RISKRULE":
-                    return CoreService.SiteInfo.UIAccess.r_riskrule;
+                    return CoreService.SiteInfo.Permission.r_riskrule;
                 case "TEMPLATE_EDIT":
-                    return CoreService.SiteInfo.UIAccess.r_template_edit;
+                    return CoreService.SiteInfo.Permission.r_template_edit;
                 
                 case "EXSTRATEGY":
-                    return CoreService.SiteInfo.UIAccess.r_template_edit;
+                    return CoreService.SiteInfo.Permission.r_template_edit;
                 case "ACCOUNT_INFO":
-                    return CoreService.SiteInfo.UIAccess.r_account_info;
+                    return CoreService.SiteInfo.Permission.r_account_info;
                 
                 default:
                     return false;

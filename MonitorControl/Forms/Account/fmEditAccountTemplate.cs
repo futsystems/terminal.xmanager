@@ -178,7 +178,7 @@ namespace TradingLib.MoniterControl
         }
         void btnSubmit_Click(object sender, EventArgs e)
         {
-            if (!CoreService.SiteInfo.UIAccess.r_account_template)
+            if (!CoreService.SiteInfo.Permission.r_account_template)
             {
                 MoniterHelper.WindowMessage("无权修改账户参数模板");
                 return;

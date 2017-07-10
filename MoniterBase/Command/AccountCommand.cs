@@ -18,7 +18,7 @@ namespace TradingLib.MoniterBase.Command
     {
         public override void Run()
         {
-            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.UIAccess.r_account_add)
+            if (!CoreService.SiteInfo.Manager.IsRoot() && !CoreService.SiteInfo.Permission.r_account_add)
             {
                 MoniterHelper.WindowMessage("无权添加分账户");
                 return;

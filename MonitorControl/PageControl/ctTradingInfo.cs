@@ -63,8 +63,8 @@ namespace TradingLib.MoniterControl
             if (!CoreService.SiteInfo.Domain.Super)
             {
                 //管理员可以执行平仓操作
-                ctOrderView1.EnableOperation = CoreService.SiteInfo.Manager.IsRoot() || CoreService.SiteInfo.UIAccess.r_execution;
-                ctPositionView1.EnableOperation = CoreService.SiteInfo.Manager.IsRoot() || CoreService.SiteInfo.UIAccess.r_execution;
+                ctOrderView1.EnableOperation = CoreService.SiteInfo.Manager.IsRoot() || CoreService.SiteInfo.Permission.r_execution;
+                ctPositionView1.EnableOperation = CoreService.SiteInfo.Manager.IsRoot() || CoreService.SiteInfo.Permission.r_execution;
             }
 
         }

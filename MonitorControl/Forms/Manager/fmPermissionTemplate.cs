@@ -45,7 +45,7 @@ namespace TradingLib.MoniterControl
             return item;
         }
 
-        private ComponentFactory.Krypton.Toolkit.KryptonTreeNode CreatePermissionTemplateItem(UIAccess template)
+        private ComponentFactory.Krypton.Toolkit.KryptonTreeNode CreatePermissionTemplateItem(Permission template)
         {
             ComponentFactory.Krypton.Toolkit.KryptonTreeNode item = new ComponentFactory.Krypton.Toolkit.KryptonTreeNode();
             item.Text = template.name;
@@ -82,7 +82,7 @@ namespace TradingLib.MoniterControl
             {
                 if (e.Node.Parent.Index == 0)
                 {
-                    UIAccess access = e.Node.Tag as UIAccess;
+                    Permission access = e.Node.Tag as Permission;
                     if (access != null)
                     {
                         foreach (string key in permissionmap.Keys)
@@ -110,7 +110,7 @@ namespace TradingLib.MoniterControl
             {
                 if (templateTree.SelectedNode.Parent.Index == 0)//父节点 index为0 表面为二级节点
                 {
-                    UIAccess t = templateTree.SelectedNode.Tag as UIAccess;
+                    Permission t = templateTree.SelectedNode.Tag as Permission;
 
                     if (MoniterHelper.WindowConfirm(string.Format("确认删除权限模板:{0}?", t.name)) == System.Windows.Forms.DialogResult.Yes)
                     {
@@ -133,7 +133,7 @@ namespace TradingLib.MoniterControl
             TreeNode node = templateTree.SelectedNode;
             if (node != null && node.Parent != null && node.Parent.Index == 0)
             {
-                UIAccess access = node.Tag as UIAccess;
+                Permission access = node.Tag as Permission;
                 if (access != null)
                 {
                     foreach (string key in permissionmap.Keys)
@@ -175,10 +175,10 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyDelPermissionTemplate(string json)
         {
-            UIAccess obj = CoreService.ParseJsonResponse<UIAccess>(json);
+            Permission obj = CoreService.ParseJsonResponse<Permission>(json);
             if (obj != null)
             {
-                UIAccess template = templateTree.SelectedNode.Tag as UIAccess;
+                Permission template = templateTree.SelectedNode.Tag as Permission;
                 if (template.id == obj.id)
                 {
                     templateTree.SelectedNode.Parent.Nodes.Remove(templateTree.SelectedNode);
@@ -188,7 +188,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyPermissionTemplate(string json)
         {
-            UIAccess obj = CoreService.ParseJsonResponse<UIAccess>(json);
+            Permission obj = CoreService.ParseJsonResponse<Permission>(json);
             if (obj != null)
             {
                 if (accessmap.Keys.Contains(obj.id))
@@ -204,13 +204,13 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        Dictionary<int, UIAccess> accessmap = new Dictionary<int, UIAccess>();
+        Dictionary<int, Permission> accessmap = new Dictionary<int, Permission>();
         void OnQryPermissionTemplate(string jsonstr, bool islast)
         {
-            UIAccess[] objs = CoreService.ParseJsonResponse<UIAccess[]>(jsonstr);
+            Permission[] objs = CoreService.ParseJsonResponse<Permission[]>(jsonstr);
             if (objs != null)
             {
-                foreach (UIAccess access in objs)
+                foreach (Permission access in objs)
                 {
                     accessmap.Add(access.id, access);
                     InvokeGotAgentPermission(access);
@@ -224,11 +224,11 @@ namespace TradingLib.MoniterControl
         }
 
 
-        void InvokeGotAgentPermission(UIAccess access)
+        void InvokeGotAgentPermission(Permission access)
         {
             if (InvokeRequired)
             {
-                Invoke(new Action<UIAccess>(InvokeGotAgentPermission), new object[] { access });
+                Invoke(new Action<Permission>(InvokeGotAgentPermission), new object[] { access });
             }
             else
             {
@@ -242,7 +242,7 @@ namespace TradingLib.MoniterControl
 
         void InitLaylout()
         {
-            Type type = typeof(UIAccess);
+            Type type = typeof(Permission);
             List<PropertyInfo> list = new List<PropertyInfo>();
             PropertyInfo[] propertyInfos = type.GetProperties();
             foreach (PropertyInfo pi in propertyInfos)

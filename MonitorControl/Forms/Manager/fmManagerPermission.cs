@@ -83,7 +83,7 @@ namespace TradingLib.MoniterControl
 
         void OnNotifyAgentPermission(string jsonstr)
         {
-            UIAccess obj = CoreService.ParseJsonResponse<UIAccess>(jsonstr);
+            Permission obj = CoreService.ParseJsonResponse<Permission>(jsonstr);
             if (obj != null)
             {
                 pmcurrent.Text = obj.name;
@@ -96,7 +96,7 @@ namespace TradingLib.MoniterControl
         void OnAgentPermission(string jsonstr, bool islast)
         {
 
-            UIAccess obj = CoreService.ParseJsonResponse<UIAccess>(jsonstr);
+            Permission obj = CoreService.ParseJsonResponse<Permission>(jsonstr);
             if (obj != null)
             {   
                 pmcurrent.Text = obj.name;
@@ -110,10 +110,10 @@ namespace TradingLib.MoniterControl
         bool _loaded = false;
         void OnPermissionTemplate(string jsonstr, bool islast)
         {
-            UIAccess[] objs = CoreService.ParseJsonResponse<UIAccess[]>(jsonstr);
+            Permission[] objs = CoreService.ParseJsonResponse<Permission[]>(jsonstr);
             if (objs!= null)
             {
-                foreach (UIAccess access in objs)
+                foreach (Permission access in objs)
                 {
                     GotUIAccess(access);
                 }
@@ -122,8 +122,8 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        Dictionary<int, UIAccess> accessmap = new Dictionary<int, UIAccess>();
-        void GotUIAccess(UIAccess access)
+        Dictionary<int, Permission> accessmap = new Dictionary<int, Permission>();
+        void GotUIAccess(Permission access)
         {
             if (!accessmap.Keys.Contains(access.id))
             {
@@ -141,7 +141,7 @@ namespace TradingLib.MoniterControl
         {
             ArrayList list = new ArrayList();
 
-            foreach (UIAccess access in accessmap.Values)
+            foreach (Permission access in accessmap.Values)
             {
                 ValueObject<int> vo = new ValueObject<int>();
                 vo.Name = access.id.ToString() + "-" + access.name;

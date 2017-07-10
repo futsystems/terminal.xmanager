@@ -25,7 +25,7 @@ namespace TradingLib.MoniterControl
         {
             if (MoniterHelper.WindowConfirm("确认添加模板?") == System.Windows.Forms.DialogResult.Yes)
             {
-                UIAccess access = new UIAccess();
+                Permission access = new Permission();
                 access.id = 0;
                 access.name = name.Text;
                 access.desp = desp.Text;
