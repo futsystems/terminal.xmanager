@@ -153,7 +153,7 @@
             this.kryptonLabel9.Name = "kryptonLabel9";
             this.kryptonLabel9.Size = new System.Drawing.Size(38, 20);
             this.kryptonLabel9.TabIndex = 3;
-            this.kryptonLabel9.Values.Text = "角色:";
+            this.kryptonLabel9.Values.Text = "类别:";
             // 
             // kryptonLabel10
             // 
@@ -174,11 +174,11 @@
             // 
             // kryptonLabel12
             // 
-            this.kryptonLabel12.Location = new System.Drawing.Point(11, 4);
+            this.kryptonLabel12.Location = new System.Drawing.Point(-2, 3);
             this.kryptonLabel12.Name = "kryptonLabel12";
-            this.kryptonLabel12.Size = new System.Drawing.Size(63, 20);
+            this.kryptonLabel12.Size = new System.Drawing.Size(75, 20);
             this.kryptonLabel12.TabIndex = 0;
-            this.kryptonLabel12.Values.Text = "分区编号:";
+            this.kryptonLabel12.Values.Text = "管理域编号:";
             // 
             // ctBasicMangerInfo
             // 

@@ -368,8 +368,19 @@ namespace TradingLib.MoniterControl
                 menuMap.Add(mgr.mgr_fk, new MenuItem(mgr.mgr_fk,mgr.parent_fk, CoreService.BasicInfoTracker.GetAgent(mgr.Login),mgr));
             }
             //最后生成当前管理域菜单项
-            MenuItem menu = new MenuItem(CoreService.SiteInfo.Manager.mgr_fk, CoreService.SiteInfo.Manager.parent_fk, CoreService.BasicInfoTracker.GetAgent(CoreService.SiteInfo.Manager.Login), CoreService.SiteInfo.Manager);
-            menuMap.Add(menu.MGR_ID, menu);
+            MenuItem menu = null;
+            if (CoreService.SiteInfo.Manager.Type != QSEnumManagerType.STAFF)
+            {
+                menu = new MenuItem(CoreService.SiteInfo.Manager.mgr_fk, CoreService.SiteInfo.Manager.parent_fk, CoreService.BasicInfoTracker.GetAgent(CoreService.SiteInfo.Manager.Login), CoreService.SiteInfo.Manager);
+                menuMap.Add(menu.MGR_ID, menu);
+            }
+            else
+            {
+                var basemgr = CoreService.BasicInfoTracker.GetManager(CoreService.SiteInfo.Manager.GetBaseMGR());
+
+                menu = new MenuItem(basemgr.mgr_fk, basemgr.parent_fk, CoreService.BasicInfoTracker.GetAgent(basemgr.Login), basemgr);
+                menuMap.Add(menu.MGR_ID, menu);
+            }
 
             foreach (var item in menuMap.Values)
             {

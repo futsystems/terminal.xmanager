@@ -378,9 +378,9 @@
             // 
             this.kryptonLabel18.Location = new System.Drawing.Point(229, 160);
             this.kryptonLabel18.Name = "kryptonLabel18";
-            this.kryptonLabel18.Size = new System.Drawing.Size(85, 20);
+            this.kryptonLabel18.Size = new System.Drawing.Size(155, 20);
             this.kryptonLabel18.TabIndex = 42;
-            this.kryptonLabel18.Values.Text = "帐户数量上限";
+            this.kryptonLabel18.Values.Text = "柜员数量上限(代理和员工)";
             // 
             // agentLimit
             // 
@@ -395,7 +395,7 @@
             this.kryptonLabel19.Name = "kryptonLabel19";
             this.kryptonLabel19.Size = new System.Drawing.Size(63, 20);
             this.kryptonLabel19.TabIndex = 40;
-            this.kryptonLabel19.Values.Text = "代理数量:";
+            this.kryptonLabel19.Values.Text = "柜员数量:";
             // 
             // discountNum
             // 

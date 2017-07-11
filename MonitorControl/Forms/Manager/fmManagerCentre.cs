@@ -354,7 +354,7 @@ namespace TradingLib.MoniterControl
                     gt.Rows.Add(manger.ID);
                     int i = gt.Rows.Count - 1;
                     gt.Rows[i][LOGIN] = manger.Login;
-                    gt.Rows[i][MGRTYPESTR] = (manger.Type == QSEnumManagerType.AGENT ? "" : "员工-") + Util.GetEnumDescription(manger.Type);
+                    gt.Rows[i][MGRTYPESTR] = Util.GetEnumDescription(manger.Type);
                     gt.Rows[i][MGRTYPE] = manger.Type;
                     gt.Rows[i][ACCNUMLIMIT] = manger.Type == QSEnumManagerType.AGENT ? manger.AccLimit.ToString() : "";
                     gt.Rows[i][AGENTLIMIT] = manger.Type == QSEnumManagerType.AGENT ? manger.AgentLimit.ToString() : "";

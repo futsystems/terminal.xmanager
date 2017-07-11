@@ -61,7 +61,7 @@ namespace TradingLib.MoniterControl
         {
             this.templateTree.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
             this.templateTree.ContextMenuStrip.Items.Add("添加权限模板", null, new EventHandler(Add_Click));
-            this.templateTree.ContextMenuStrip.Items.Add("删除保证金模板", null, new EventHandler(Del_Click));
+            this.templateTree.ContextMenuStrip.Items.Add("删除权限模板", null, new EventHandler(Del_Click));
 
             templateTree.NodeMouseClick += new TreeNodeMouseClickEventHandler(templateTree_NodeMouseClick);
             btnAddTemplate.Click += new EventHandler(btnAddTemplate_Click);
@@ -87,9 +87,17 @@ namespace TradingLib.MoniterControl
                     {
                         foreach (string key in permissionmap.Keys)
                         {
-                            ctTLPermissionEdit edit = permissioneditmap[key];
-                            PermissionField field = permissionmap[key];
-                            edit.Value = (bool)field.Info.GetValue(access, null);
+                            if (permissioneditmap.ContainsKey(key))
+                            {
+                                ctTLPermissionEdit edit = permissioneditmap[key];
+                                PermissionField field = permissionmap[key];
+                                edit.Value = (bool)field.Info.GetValue(access, null);
+                            }
+                            else
+                            {
+                                PermissionField field = permissionmap[key];
+                                field.Info.SetValue(access, false, null);
+                            }
                         }
 
                         this.Text = "权限模板设置-" + access.name;
@@ -252,12 +260,19 @@ namespace TradingLib.MoniterControl
                 {
                     list.Add(pi);
                     permissionmap.Add(pi.Name, new PermissionField(pi, attr));
-
-                    ctTLPermissionEdit edit = new ctTLPermissionEdit();
-                    edit.PermissionTitle = attr.Title;
-                    edit.PermissionDesp = attr.Desp;
-                    laylout.Controls.Add(edit);
-                    permissioneditmap.Add(pi.Name, edit);
+                    bool needshow = true;
+                    if(CoreService.SiteInfo.Manager.Type == QSEnumManagerType.AGENT)
+                    {
+                        needshow  = CoreService.SiteInfo.Permission.GetPermission(pi.Name);
+                    }
+                    if (needshow)
+                    {
+                        ctTLPermissionEdit edit = new ctTLPermissionEdit();
+                        edit.PermissionTitle = attr.Title;
+                        edit.PermissionDesp = attr.Desp;
+                        laylout.Controls.Add(edit);
+                        permissioneditmap.Add(pi.Name, edit);
+                    }
                 }
             }
         }

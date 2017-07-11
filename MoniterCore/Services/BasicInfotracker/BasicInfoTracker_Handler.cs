@@ -348,13 +348,10 @@ namespace TradingLib.MoniterCore
         #region Manager
         void OnRspManager(string jsonstr, bool islast)
         {
-            ManagerSetting[] mgrlist = CoreService.ParseJsonResponse<ManagerSetting[]>(jsonstr);
-            if (mgrlist != null)
+            ManagerSetting mgr = CoreService.ParseJsonResponse<ManagerSetting>(jsonstr);
+            if (mgr != null)
             {
-                foreach (ManagerSetting mgr in mgrlist)
-                {
-                    this.GotManager(mgr);
-                }
+                this.GotManager(mgr);
             }
 
             if (islast && !_initialized)
