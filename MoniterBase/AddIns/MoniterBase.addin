@@ -332,7 +332,7 @@
   <!--工具栏-->
   <Path name = "/Workbench/Toolbar">
 
-    <Condition name="PermissionState" permission="account_add" >
+    <Condition name="PermissionState" permission="r_account_add" >
       <ToolbarItem id = "ViewAccount"
 		               tooltip = "添加子账户"
 		               icon = "Icons.AccountAdd"

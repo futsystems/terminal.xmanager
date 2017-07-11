@@ -90,7 +90,7 @@
                 class = "TradingLib.MoniterControl.UpdateTemplateCommand"/>
     </ComplexCondition>
     
-    <Condition name="PermissionState" permission="riskrule">
+    <Condition name="PermissionState" permission="r_riskrule">
       <MenuItem id = "EditRiskRuleCommand"
                 shortcut = "Control|R"
                 label = "风控规则"
