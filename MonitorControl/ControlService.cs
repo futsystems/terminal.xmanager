@@ -14,8 +14,7 @@ namespace TradingLib.MoniterControl
         static ControlService()
         {
             defaultintance = new ControlService();
-            ConfigFile _config = ConfigFile.GetConfigFile("moniter.cfg");
-            SuperRoot = _config["SuperRoot"].AsString();
+           
         }
 
         private ControlService()

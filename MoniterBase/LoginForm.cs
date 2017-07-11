@@ -36,6 +36,7 @@ namespace TradingLib.MoniterBase
             Global.Brand = config["Brand"].AsString();
             Global.HideExpire = config["HideExpire"].AsBool();
 
+            TradingLib.MoniterControl.ControlService.SuperRoot = config["SuperRoot"].AsString();
 
             mStart = start;
 
