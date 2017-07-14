@@ -57,7 +57,7 @@ namespace TradingLib.MoniterControl
         {
             if (e.ColumnIndex == 5)
             {
-                QSEnumCashOperation op = (QSEnumCashOperation)cashOperationGrid[4, e.RowIndex].Value;
+                QSEnumCashOperation op = (cashOperationGrid[4, e.RowIndex].Value.ToString()).ParseEnum<QSEnumCashOperation>();
                 if (op== QSEnumCashOperation.Deposit)
                 {
                     e.CellStyle.ForeColor = UIConstant.LongSideColor;
@@ -285,7 +285,7 @@ namespace TradingLib.MoniterControl
                     tb.Rows[i][ID] = 0;
                     tb.Rows[i][ACCOUNT] = op.Account;
                     tb.Rows[i][DATETIME] = Util.ToDateTime(op.DateTime).ToString("yyy/MM/dd HH:mm:ss");
-                    tb.Rows[i][OPERATION] = op.OperationType;
+                    tb.Rows[i][OPERATION] = op.OperationType.ToString();
                     tb.Rows[i][OPERATIONSTR] = Util.GetEnumDescription(op.OperationType);
                     tb.Rows[i][AMOUNT] = op.Amount.ToFormatStr();
                     tb.Rows[i][GATEWAYTYPE] = (int)op.GateWayType == -1 ? "手工" : Util.GetEnumDescription(op.GateWayType);
@@ -365,7 +365,7 @@ namespace TradingLib.MoniterControl
             tb.Columns.Add(ACCOUNT);//4
             tb.Columns.Add(DATETIME);//5
 
-            tb.Columns.Add(OPERATION,typeof(QSEnumCashOperation));//2
+            tb.Columns.Add(OPERATION);//2
             tb.Columns.Add(OPERATIONSTR);
             tb.Columns.Add(AMOUNT);//
             tb.Columns.Add(GATEWAYTYPE);
