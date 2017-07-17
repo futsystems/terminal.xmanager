@@ -222,6 +222,14 @@ namespace TradingLib.MoniterControl
                             gwControl = input;
                         }
                         break;
+                    case QSEnumGateWayType.Ecpss:
+                        {
+                            ctGateWayEcpss input = new ctGateWayEcpss();
+                            holder.Controls.Add(input);
+                            input.Dock = DockStyle.Fill;
+                            gwControl = input;
+                        }
+                        break;
                     default:
                         break;
                 }

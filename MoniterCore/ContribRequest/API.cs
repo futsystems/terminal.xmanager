@@ -91,7 +91,11 @@ namespace TradingLib.MoniterCore
         /// 多得宝
         /// </summary>
         DDBillPay,
-    
+
+        /// <summary>
+        /// 汇潮支付
+        /// </summary>
+        Ecpss,
     }
 
     public enum EnumBusinessType
