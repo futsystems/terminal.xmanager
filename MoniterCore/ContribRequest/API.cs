@@ -93,6 +93,11 @@ namespace TradingLib.MoniterCore
         DDBillPay,
 
         /// <summary>
+        /// 高汇通
+        /// </summary>
+        GaoHuiTong,
+
+        /// <summary>
         /// 汇潮支付
         /// </summary>
         Ecpss,
