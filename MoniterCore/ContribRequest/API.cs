@@ -11,6 +11,7 @@ namespace TradingLib.MoniterCore
 {
     public enum  QSEnumGateWayType
     {
+
         /// <summary>
         /// 宝付
         /// </summary>
@@ -45,6 +46,7 @@ namespace TradingLib.MoniterCore
         /// 财易支付
         /// </summary>
         Cai1Pay,
+
 
         /// <summary>
         /// 国付宝
@@ -90,6 +92,22 @@ namespace TradingLib.MoniterCore
         /// 多得宝
         /// </summary>
         DDBillPay,
+
+        /// <summary>
+        /// 高汇通
+        /// </summary>
+        GaoHuiTong,
+
+
+        /// <summary>
+        /// 汇潮支付
+        /// </summary>
+        Ecpss,
+
+        /// <summary>
+        /// 易路通
+        /// </summary>
+        Fjelt
     }
 
     public enum EnumBusinessType
