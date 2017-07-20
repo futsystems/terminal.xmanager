@@ -595,7 +595,7 @@
             this.kryptonPage4.LastVisibleSet = true;
             this.kryptonPage4.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage4.Name = "kryptonPage4";
-            this.kryptonPage4.Size = new System.Drawing.Size(429, 229);
+            this.kryptonPage4.Size = new System.Drawing.Size(429, 231);
             this.kryptonPage4.Text = "模块与参数";
             this.kryptonPage4.ToolTipTitle = "Page ToolTip";
             this.kryptonPage4.UniqueName = "106522AE1E254B89D2A606033C9FF041";
@@ -607,7 +607,7 @@
             this.kryptonPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel5.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel5.Name = "kryptonPanel5";
-            this.kryptonPanel5.Size = new System.Drawing.Size(429, 229);
+            this.kryptonPanel5.Size = new System.Drawing.Size(429, 231);
             this.kryptonPanel5.TabIndex = 0;
             // 
             // kryptonGroupBox2
