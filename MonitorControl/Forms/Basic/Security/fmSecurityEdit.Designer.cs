@@ -403,7 +403,7 @@
             // 
             // pricetick
             // 
-            this.pricetick.DecimalPlaces = 4;
+            this.pricetick.DecimalPlaces = 5;
             this.pricetick.Increment = new decimal(new int[] {
             1,
             0,
@@ -423,7 +423,7 @@
             // 
             this.multiple.Location = new System.Drawing.Point(115, 168);
             this.multiple.Maximum = new decimal(new int[] {
-            100000,
+            1000000,
             0,
             0,
             0});
