@@ -409,10 +409,10 @@ namespace TradingLib.MoniterControl
             this.Parent_ID = parent;
             this.AgentAccount = agent;
             this.SubAgents = new List<MenuItem>();
-            this.Title = string.Format("{0}({1})", manager.Login,Util.GetEnumDescription(agent.AgentType).Substring(0,2));
+            this.Title = string.Format("{0}({1})-{2}", manager.Login,Util.GetEnumDescription(agent.AgentType).Substring(0,2),manager.mgr_fk);
             if (manager.GetBaseMGR() == CoreService.SiteInfo.Manager.GetBaseMGR())
             {
-                this.Title = manager.Login;
+                this.Title = string.Format("{0}-{1}", manager.Login, manager.mgr_fk);
             }
         }
 
