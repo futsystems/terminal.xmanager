@@ -352,7 +352,7 @@ namespace TradingLib.MoniterBase
                     Reset();
                     this.EnableLogin();
                 }
-                if (_qrybasicinfo && (DateTime.Now - qrybasicinfoTime).TotalSeconds > 10 && (!initsuccess))
+                if (_qrybasicinfo && (DateTime.Now - qrybasicinfoTime).TotalSeconds > 30 && (!initsuccess))
                 {
                     logger.Info("获取基础数据超过10秒没有成功");
                     ShowLoginStatus("获取基础数据失败,请重新登入");
