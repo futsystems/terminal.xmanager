@@ -223,6 +223,15 @@ namespace TradingLib.MoniterControl
                     fm.Close();
 
                 }
+                else if (item.ClassName.Equals("RuleSet2.Account.RSRiskRatioFlat"))
+                {
+                    var fm = new fmAccountRule_RiskRatio();
+                    fm.Account = _account;
+                    fm.RuleClass = item;
+                    fm.ShowDialog();
+                    fm.Close();
+
+                }
             }
         }
 

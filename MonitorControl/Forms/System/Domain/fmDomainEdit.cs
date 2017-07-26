@@ -26,7 +26,6 @@ namespace TradingLib.MoniterControl
 
         void fmDomainEdit_Load(object sender, EventArgs e)
         {
-            module_finservice.CheckedChanged += new EventHandler(module_finservice_CheckedChanged);
             module_agent.CheckedChanged += new EventHandler(module_agent_CheckedChanged);
             router_live.CheckedChanged += new EventHandler(router_CheckedChanged);
             router_sim.CheckedChanged += new EventHandler(router_CheckedChanged);
@@ -49,24 +48,16 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        void module_finservice_CheckedChanged(object sender, EventArgs e)
-        {
-            splisttab.Enabled = module_finservice.Checked;
-        }
-
         public void OnInit()
         {
             CoreService.EventCore.RegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_INTERFACE, this.OnQryInterface);
-            //CoreService.EventCore.RegisterCallback("FinServiceCentre", "QryFinServicePlan", this.OnQryFinServicePlan);
-            
+
             //请求操作可以放在OnInit调用内，这样所有回调注册或初始化操作均已经完成
             CoreService.TLClient.ReqQryInterface();
-            //CoreService.TLClient.ReqQryServicePlan();
+
             module_follow.Visible = CoreService.SiteInfo.Domain.Module_Follow;
             kryptonLabel21.Visible = CoreService.SiteInfo.Domain.Module_Follow;
             cfg_followstrategynum.Visible = CoreService.SiteInfo.Domain.Module_Follow;
-
-
             module_agent.Visible = CoreService.SiteInfo.Domain.Module_Agent;
             module_subagent.Visible = CoreService.SiteInfo.Domain.Module_SubAgent;
             module_payonline.Visible = CoreService.SiteInfo.Domain.Module_PayOnline;
@@ -78,7 +69,7 @@ namespace TradingLib.MoniterControl
         public void OnDisposed()
         {
             CoreService.EventCore.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_INTERFACE, this.OnQryInterface);
-            //CoreService.EventCore.UnRegisterCallback("FinServiceCentre", "QryFinServicePlan", this.OnQryFinServicePlan);
+         
         }
 
 
@@ -155,71 +146,71 @@ namespace TradingLib.MoniterControl
 
 
         #region 配资服务计划
-        string GetSPListString()
-        {
-            List<string> list = new List<string>();
-            foreach (object obj in finsplist.CheckedItems)
-            {
-                ValueObject<int> item = (ValueObject<int>)obj;
-                list.Add(item.Value.ToString());
-            }
-            return string.Join(",", list.ToArray());
-        }
+        //string GetSPListString()
+        //{
+        //    List<string> list = new List<string>();
+        //    foreach (object obj in finsplist.CheckedItems)
+        //    {
+        //        ValueObject<int> item = (ValueObject<int>)obj;
+        //        list.Add(item.Value.ToString());
+        //    }
+        //    return string.Join(",", list.ToArray());
+        //}
 
-        void SetSPList(string list)
-        {
-            IEnumerable<int> clist = list.Split(',').Select(v => int.Parse(v));
+        //void SetSPList(string list)
+        //{
+        //    IEnumerable<int> clist = list.Split(',').Select(v => int.Parse(v));
 
-            for (int i = 0; i < finsplist.Items.Count; i++)
-            {
-                ValueObject<int> item = (ValueObject<int>)finsplist.Items[i];
-                if (clist.Contains(item.Value))
-                {
-                    finsplist.SetItemChecked(i, true);
-                }
-            }
-        }
+        //    for (int i = 0; i < finsplist.Items.Count; i++)
+        //    {
+        //        ValueObject<int> item = (ValueObject<int>)finsplist.Items[i];
+        //        if (clist.Contains(item.Value))
+        //        {
+        //            finsplist.SetItemChecked(i, true);
+        //        }
+        //    }
+        //}
 
-        ArrayList GetSPList()
-        {
-            ArrayList list = new System.Collections.ArrayList();
-            foreach (JsonWrapperServicePlane it in servicePlanMap.Values)
-            {
-                ValueObject<int> vo = new ValueObject<int>();
-                vo.Name = string.Format("{0}[{1}]", it.Title, it.Name);
-                vo.Value = it.ID;
-                list.Add(vo);
-            }
-            return list;
-        }
+        //ArrayList GetSPList()
+        //{
+        //    ArrayList list = new System.Collections.ArrayList();
+        //    foreach (JsonWrapperServicePlane it in servicePlanMap.Values)
+        //    {
+        //        ValueObject<int> vo = new ValueObject<int>();
+        //        vo.Name = string.Format("{0}[{1}]", it.Title, it.Name);
+        //        vo.Value = it.ID;
+        //        list.Add(vo);
+        //    }
+        //    return list;
+        //}
 
-        ConcurrentDictionary<int, JsonWrapperServicePlane> servicePlanMap = new ConcurrentDictionary<int, JsonWrapperServicePlane>();
-        bool _gotsplist = false;
-        void OnQryFinServicePlan(string jsonstr, bool islast)
-        {
-            JsonWrapperServicePlane[] objs = CoreService.ParseJsonResponse<JsonWrapperServicePlane[]>(jsonstr);
-            if (objs != null)
-            {
-                foreach (JsonWrapperServicePlane sp in objs)
-                {
-                    if (!servicePlanMap.Keys.Contains(sp.ID))
-                    {
-                        servicePlanMap.TryAdd(sp.ID, sp);
-                    }
-                }
-                _gotsplist = true;
+        //ConcurrentDictionary<int, JsonWrapperServicePlane> servicePlanMap = new ConcurrentDictionary<int, JsonWrapperServicePlane>();
+        //bool _gotsplist = false;
+        //void OnQryFinServicePlan(string jsonstr, bool islast)
+        //{
+        //    JsonWrapperServicePlane[] objs = CoreService.ParseJsonResponse<JsonWrapperServicePlane[]>(jsonstr);
+        //    if (objs != null)
+        //    {
+        //        foreach (JsonWrapperServicePlane sp in objs)
+        //        {
+        //            if (!servicePlanMap.Keys.Contains(sp.ID))
+        //            {
+        //                servicePlanMap.TryAdd(sp.ID, sp);
+        //            }
+        //        }
+        //        _gotsplist = true;
 
-                MoniterHelper.AdapterToIDataSource(finsplist).BindDataSource(GetSPList());
-                if (_domain != null)
-                {
-                    SetSPList(_domain.FinSPList);
-                }
-            }
-            else//如果没有配资服
-            {
+        //        MoniterHelper.AdapterToIDataSource(finsplist).BindDataSource(GetSPList());
+        //        if (_domain != null)
+        //        {
+        //            SetSPList(_domain.FinSPList);
+        //        }
+        //    }
+        //    else//如果没有配资服
+        //    {
 
-            }
-        }
+        //    }
+        //}
         #endregion
 
         DomainImpl _domain = null;
@@ -254,13 +245,17 @@ namespace TradingLib.MoniterControl
 
             router_live.Checked = _domain.Router_Live;
             router_sim.Checked = _domain.Router_Sim;
-            splisttab.Enabled = _domain.Module_FinService;
 
             agentLimit.Value = _domain.AgentLimit;
             discountNum.Value = _domain.DiscountNum;
             isproduction.Checked = _domain.IsProduction;
             dedicated.Checked = _domain.Dedicated;
             dedicated.Enabled = false;
+
+            cfg_device_droid.Checked = _domain.Device_Droid;
+            cfg_device_ios.Checked = _domain.Device_IOS;
+            cfg_md5key.Text = _domain.Cfg_MD5Key;
+
 
             this.Text = "编辑域分区:" + _domain.Name;
 
@@ -293,7 +288,7 @@ namespace TradingLib.MoniterControl
                 _domain.VendorLimit = (int)vendorlimit.Value;
 
                 _domain.InterfaceList = GetInterfaceListString();
-                _domain.FinSPList = GetSPListString();
+                _domain.FinSPList = string.Empty;// GetSPListString();
 
                 _domain.Module_Agent = module_agent.Checked;
                 _domain.Module_SubAgent = module_agent.Checked?module_subagent.Checked:false;
@@ -310,9 +305,15 @@ namespace TradingLib.MoniterControl
                 _domain.DiscountNum = (int)discountNum.Value; 
                 _domain.IsProduction = isproduction.Checked;
                 _domain.Dedicated = dedicated.Checked;
+
                 _domain.Cfg_MaxMarginSide = cfg_MaxMarginSide.Checked;
                 _domain.Cfg_GrossPosition = cfg_GrossPositioin.Checked;
                 _domain.Cfg_FollowStrategyNum = (int)cfg_followstrategynum.Value;
+
+                _domain.Cfg_MD5Key = cfg_md5key.Text;
+                _domain.Device_Droid = cfg_device_droid.Checked;
+                _domain.Device_IOS = cfg_device_ios.Checked;
+
 
                 if (MoniterHelper.WindowConfirm("确认更新分区设置?") == System.Windows.Forms.DialogResult.Yes)
                 {
@@ -337,7 +338,7 @@ namespace TradingLib.MoniterControl
 
 
                 _domain.InterfaceList = GetInterfaceListString();
-                _domain.FinSPList = GetSPListString();
+                _domain.FinSPList = string.Empty;// GetSPListString();
 
                 _domain.Module_Agent = module_agent.Checked;
                 _domain.Module_SubAgent = module_agent.Checked ? module_subagent.Checked : false;
@@ -345,7 +346,8 @@ namespace TradingLib.MoniterControl
                 _domain.Module_FinService = module_finservice.Checked;
                 _domain.Module_PayOnline = module_payonline.Checked;
                 _domain.Module_Slip = module_slip.Checked;
-
+                _domain.Module_Follow = module_follow.Checked;
+                _domain.Misc_InsertTrade = module_insert.Checked;
                 _domain.Router_Live = router_live.Checked;
                 _domain.Router_Sim = router_sim.Checked;
 
@@ -356,6 +358,11 @@ namespace TradingLib.MoniterControl
 
                 _domain.Cfg_MaxMarginSide = cfg_MaxMarginSide.Checked;
                 _domain.Cfg_GrossPosition = cfg_GrossPositioin.Checked;
+                _domain.Cfg_FollowStrategyNum = (int)cfg_followstrategynum.Value;
+
+                _domain.Cfg_MD5Key = cfg_md5key.Text;
+                _domain.Device_Droid = cfg_device_droid.Checked;
+                _domain.Device_IOS = cfg_device_ios.Checked;
 
                 if ( (!_domain.Router_Live)&& (!_domain.Router_Sim))
                 {
