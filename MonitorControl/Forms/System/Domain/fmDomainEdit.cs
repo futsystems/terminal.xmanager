@@ -55,14 +55,22 @@ namespace TradingLib.MoniterControl
             //请求操作可以放在OnInit调用内，这样所有回调注册或初始化操作均已经完成
             CoreService.TLClient.ReqQryInterface();
 
+            //超管自身模块权限决定开设分区的最大模块集
             module_follow.Visible = CoreService.SiteInfo.Domain.Module_Follow;
             kryptonLabel21.Visible = CoreService.SiteInfo.Domain.Module_Follow;
             cfg_followstrategynum.Visible = CoreService.SiteInfo.Domain.Module_Follow;
+
             module_agent.Visible = CoreService.SiteInfo.Domain.Module_Agent;
             module_subagent.Visible = CoreService.SiteInfo.Domain.Module_SubAgent;
             module_payonline.Visible = CoreService.SiteInfo.Domain.Module_PayOnline;
             module_slip.Visible = CoreService.SiteInfo.Domain.Module_Slip;
             module_insert.Visible = CoreService.SiteInfo.Domain.Misc_InsertTrade;
+
+            cfg_device_droid.Visible = CoreService.SiteInfo.Domain.Device_Droid;
+            cfg_device_ios.Visible = CoreService.SiteInfo.Domain.Device_IOS;
+            cfg_md5key.Visible = !string.IsNullOrEmpty(CoreService.SiteInfo.Domain.Cfg_MD5Key);
+            kryptonLabel22.Visible = cfg_md5key.Visible;
+
 
         }
 

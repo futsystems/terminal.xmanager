@@ -92,13 +92,13 @@
             this.intfaceTab = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonPanel4 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.interfacelist = new System.Windows.Forms.CheckedListBox();
-            this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPage3 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonPanel7 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.cfg_md5key = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel22 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cfg_device_ios = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.cfg_device_droid = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
@@ -163,7 +163,7 @@
             this.kryptonPage5,
             this.intfaceTab,
             this.kryptonPage3});
-            this.kryptonNavigator1.SelectedIndex = 0;
+            this.kryptonNavigator1.SelectedIndex = 5;
             this.kryptonNavigator1.Size = new System.Drawing.Size(431, 256);
             this.kryptonNavigator1.TabIndex = 15;
             this.kryptonNavigator1.Text = "kryptonNavigator1";
@@ -811,16 +811,6 @@
             this.interfacelist.Size = new System.Drawing.Size(429, 229);
             this.interfacelist.TabIndex = 0;
             // 
-            // btnSubmit
-            // 
-            this.btnSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSubmit.Location = new System.Drawing.Point(329, 262);
-            this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(90, 25);
-            this.btnSubmit.TabIndex = 14;
-            this.btnSubmit.Values.Text = "提 交";
-            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
-            // 
             // kryptonPage3
             // 
             this.kryptonPage3.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
@@ -876,6 +866,16 @@
             this.cfg_device_droid.Size = new System.Drawing.Size(48, 20);
             this.cfg_device_droid.TabIndex = 0;
             this.cfg_device_droid.Values.Text = "安卓";
+            // 
+            // btnSubmit
+            // 
+            this.btnSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSubmit.Location = new System.Drawing.Point(329, 262);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(90, 25);
+            this.btnSubmit.TabIndex = 14;
+            this.btnSubmit.Values.Text = "提 交";
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // fmDomainEdit
             // 
