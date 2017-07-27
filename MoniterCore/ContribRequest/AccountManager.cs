@@ -105,7 +105,13 @@ namespace TradingLib.MoniterCore
         /// <summary>
         /// 查询交易账户结算单
         /// </summary>
-        public const string QRY_ACC_SETTLEMENT = "QueryAccountSettlement";
+        public const string QRY_ACC_SETTLEMENT = "QueryAccountSettlementDetail";
+
+
+        /// <summary>
+        /// 查询交易账户结算单
+        /// </summary>
+        public const string QRY_ACC_SETTLEMENTS = "QueryAccountSettlements";
 
         /// <summary>
         /// 查询交易账户出入金记录
@@ -258,6 +264,18 @@ namespace TradingLib.MoniterCore
         {
             return client.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_SETTLEMENT, new { account = account, tradingday = tradingday });
         }
+
+
+
+        /// <summary>
+        /// 查询账户结算单列表
+        /// </summary>
+        /// <param name="mgrid"></param>
+        public static int ReqQryAccountSettlements(this TLClientNet client, string account, int start,int end)
+        {
+            return client.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_SETTLEMENTS, new { account = account, start = start, end = end });
+        }
+
 
         /// <summary>
         /// 查询账户委托记录

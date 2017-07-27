@@ -12,21 +12,16 @@ using TradingLib.MoniterCore;
 
 namespace TradingLib.MoniterControl
 {
-    public partial class fmSettlement : ComponentFactory.Krypton.Toolkit.KryptonForm,IEventBinder
+    public partial class fmSettlementDetail : ComponentFactory.Krypton.Toolkit.KryptonForm,IEventBinder
     {
 
         StringBuilder sb = new StringBuilder();
 
-        public fmSettlement()
+        public fmSettlementDetail()
         {
             InitializeComponent();
-            this.Load += new EventHandler(fmSettlement_Load);
-            
-        }
-
-        void fmSettlement_Load(object sender, EventArgs e)
-        {
             CoreService.EventCore.RegIEventHandler(this);
+            
         }
 
         public void OnInit()
@@ -42,6 +37,11 @@ namespace TradingLib.MoniterControl
         public void SetAccount(string acc)
         {
             account.Text = acc;
+        }
+
+        public void SetSettleday(int day)
+        {
+            settleday.Value = Util.ToDateTime(day, 0);
         }
 
         void OnSettlement(string json, bool islast)
@@ -70,20 +70,43 @@ namespace TradingLib.MoniterControl
 
 
         DateTime lastqrytime = DateTime.Now;
-
+        bool _first = true;
         private void btnQryHist_Click(object sender, EventArgs e)
         {
-            sb.Clear();
-            settlebox.Clear();
+            if (_first)
+            {
+                _first = false;
+            }
+            else
+            {
+                if (!(DateTime.Now.Subtract(lastqrytime).TotalSeconds > 2))
+                {
+                    MoniterHelper.WindowMessage("请不要频繁查询,每隔2秒查询一次!");
+                    return;
+                }
+            }
+
             if (string.IsNullOrEmpty(account.Text))
             {
                 MoniterHelper.WindowMessage("请输入要查询的交易帐号");
                 return;
             }
-            string ac = account.Text;
-           
+
+            this.QrySettlementDetail();
+        }
+
+        public void QrySettlementDetail()
+        {
+            if (_first)
+            {
+                _first = false;
+            }
+
+            sb.Clear();
+            settlebox.Clear();
             lastqrytime = DateTime.Now;
-            CoreService.TLClient.ReqQryAccountSettlement(ac, Settleday);
+            CoreService.TLClient.ReqQryAccountSettlement(account.Text, Settleday);
+
         }
         int Settleday
         {

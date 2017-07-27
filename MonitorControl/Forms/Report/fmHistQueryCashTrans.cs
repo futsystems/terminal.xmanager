@@ -18,10 +18,10 @@ namespace TradingLib.MoniterControl
 
 
 
-        public CashOpViewType AccountType
+        public EnumHistReportType HistReportType
         {
-            get { return ctCashTrans1.AccountType; }
-            set { ctCashTrans1.AccountType = value; }
+            get { return ctCashTrans1.HistReportType; }
+            set { ctCashTrans1.HistReportType = value; }
         }
         public void SetAccount(string account)
         {

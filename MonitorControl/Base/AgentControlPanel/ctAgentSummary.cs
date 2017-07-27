@@ -64,8 +64,8 @@ namespace TradingLib.MoniterControl.Base
                 ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("代理财务账户不存在");
                 return;
             }
-            fmReportSettlement fm = new fmReportSettlement();
-            fm.AccountType = CashOpViewType.Agent;
+            fmHistSettlement fm = new fmHistSettlement();
+            fm.HistReportType = EnumHistReportType.Agent;
             fm.SetAccount(_agent.Account);
             fm.ShowDialog();
             fm.Close();
@@ -85,7 +85,7 @@ namespace TradingLib.MoniterControl.Base
             }
 
             fmHistQueryCashTrans fm = new fmHistQueryCashTrans();
-            fm.AccountType = CashOpViewType.Agent;
+            fm.HistReportType = EnumHistReportType.Agent;
             fm.SetAccount(_agent.Account);
             fm.ShowDialog();
             fm.Close();

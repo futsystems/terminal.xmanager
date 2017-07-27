@@ -1,6 +1,6 @@
 ﻿namespace TradingLib.MoniterControl
 {
-    partial class fmSettlement
+    partial class fmSettlementDetail
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmSettlement));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmSettlementDetail));
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.settlebox = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
             this.btnQryHist = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -62,7 +62,7 @@
             this.settlebox.Location = new System.Drawing.Point(0, 0);
             this.settlebox.Name = "settlebox";
             this.settlebox.Size = new System.Drawing.Size(895, 440);
-            this.settlebox.TabIndex = 11;
+            this.settlebox.TabIndex = 1;
             this.settlebox.Text = "";
             // 
             // btnQryHist
@@ -71,7 +71,7 @@
             this.btnQryHist.Location = new System.Drawing.Point(823, 444);
             this.btnQryHist.Name = "btnQryHist";
             this.btnQryHist.Size = new System.Drawing.Size(60, 25);
-            this.btnQryHist.TabIndex = 10;
+            this.btnQryHist.TabIndex = 4;
             this.btnQryHist.Values.Text = "查 询";
             this.btnQryHist.Click += new System.EventHandler(this.btnQryHist_Click);
             // 
@@ -81,7 +81,7 @@
             this.settleday.Location = new System.Drawing.Point(657, 444);
             this.settleday.Name = "settleday";
             this.settleday.Size = new System.Drawing.Size(147, 21);
-            this.settleday.TabIndex = 9;
+            this.settleday.TabIndex = 3;
             // 
             // kryptonLabel2
             // 
@@ -98,7 +98,7 @@
             this.account.Location = new System.Drawing.Point(454, 442);
             this.account.Name = "account";
             this.account.Size = new System.Drawing.Size(126, 20);
-            this.account.TabIndex = 7;
+            this.account.TabIndex = 2;
             // 
             // kryptonLabel1
             // 

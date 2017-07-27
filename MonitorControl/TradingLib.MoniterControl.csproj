@@ -710,11 +710,11 @@
     <Compile Include="Forms\Payment\ctGateWayIELPMPay.Designer.cs">
       <DependentUpon>ctGateWayIELPMPay.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Report\fmReportSettlement.cs">
+    <Compile Include="Forms\Report\fmHistSettlement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Report\fmReportSettlement.Designer.cs">
-      <DependentUpon>fmReportSettlement.cs</DependentUpon>
+    <Compile Include="Forms\Report\fmHistSettlement.Designer.cs">
+      <DependentUpon>fmHistSettlement.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\System\Domain\fmDomain.cs">
       <SubType>Form</SubType>
@@ -855,11 +855,11 @@
     <Compile Include="Forms\Report\fmHistQueryCashTrans.Designer.cs">
       <DependentUpon>fmHistQueryCashTrans.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Report\fmSettlement.cs">
+    <Compile Include="Forms\Report\fmSettlementDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Report\fmSettlement.Designer.cs">
-      <DependentUpon>fmSettlement.cs</DependentUpon>
+    <Compile Include="Forms\Report\fmSettlementDetail.Designer.cs">
+      <DependentUpon>fmSettlementDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Account\MainAccount\ConnectorManager\fmConnectorManager.cs">
       <SubType>Form</SubType>
@@ -1339,8 +1339,8 @@
     <EmbeddedResource Include="Forms\Payment\ctGateWayIELPMPay.resx">
       <DependentUpon>ctGateWayIELPMPay.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Report\fmReportSettlement.resx">
-      <DependentUpon>fmReportSettlement.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Report\fmHistSettlement.resx">
+      <DependentUpon>fmHistSettlement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\System\Domain\fmDomain.resx">
       <DependentUpon>fmDomain.cs</DependentUpon>
@@ -1411,8 +1411,8 @@
     <EmbeddedResource Include="Forms\Report\fmHistQueryCashTrans.resx">
       <DependentUpon>fmHistQueryCashTrans.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Report\fmSettlement.resx">
-      <DependentUpon>fmSettlement.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Report\fmSettlementDetail.resx">
+      <DependentUpon>fmSettlementDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\MainAccount\ConnectorManager\fmConnectorManager.resx">
       <DependentUpon>fmConnectorManager.cs</DependentUpon>

@@ -21,7 +21,7 @@ namespace TradingLib.MoniterControl
         {
             InitializeComponent();
 
-            this.AccountType = CashOpViewType.Account;
+            this.HistReportType = EnumHistReportType.Account;
 
             //控件设置的属性在构造函数中是不起作用的，需要构造函数完毕在load事件内才发生作用，没有构造完毕则无法获得对应的参数 因此初始化工程中 如果有用到控件参数的需要延迟到load事件过程中执行
             //这里需要研究下控件的相关加载机制和事件先后顺序
@@ -204,7 +204,7 @@ namespace TradingLib.MoniterControl
                 ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请输入帐户");
                 return;
             }
-            if (this.AccountType == CashOpViewType.Account)
+            if (this.HistReportType == EnumHistReportType.Account)
             {
                 CoreService.TLClient.ReqQryAccountCashTxn(inputAccount.Text, Util.ToTLDateTime(start.Value), Util.ToTLDateTimeEnd(end.Value));
             }
@@ -240,7 +240,7 @@ namespace TradingLib.MoniterControl
         }
 
 
-        public CashOpViewType AccountType { get; set; }
+        public EnumHistReportType HistReportType { get; set; }
 
 
         public void SetAccount(string account)

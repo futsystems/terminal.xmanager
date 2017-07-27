@@ -12,12 +12,12 @@ using TradingLib.MoniterCore;
 
 namespace TradingLib.MoniterControl
 {
-    public partial class fmReportSettlement : ComponentFactory.Krypton.Toolkit.KryptonForm,IEventBinder
+    public partial class fmHistSettlement : ComponentFactory.Krypton.Toolkit.KryptonForm,IEventBinder
     {
-        public fmReportSettlement()
+        public fmHistSettlement()
         {
             InitializeComponent();
-            this.AccountType = CashOpViewType.Account;
+            this.HistReportType = EnumHistReportType.Account;
 
             this.Load += new EventHandler(fmReportSettlement_Load);
         }
@@ -28,14 +28,45 @@ namespace TradingLib.MoniterControl
             InitTable();
             BindToTable();
 
-            start.Value = Convert.ToDateTime(DateTime.Today.AddMonths(-1).ToString("yyyy-MM-01") + " 0:00:00");
+            start.Value = Convert.ToDateTime(DateTime.Today.AddDays(-7).ToString("yyyy-MM-dd") + " 0:00:00");
             end.Value = DateTime.Now;
 
             btnQry.Click +=new EventHandler(btnQry_Click);
             inputAccount.TextChanged += new EventHandler(inputAccount_TextChanged);
             CoreService.EventCore.RegIEventHandler(this);
 
+            settlementGrid.DoubleClick += new EventHandler(settlementGrid_DoubleClick);
+
             UpdateTitle();
+        }
+
+        /// <summary>
+        /// 当前选中交易日
+        /// </summary>
+        public int  CurrentSettleday
+        {
+            get
+            {
+                int row = (settlementGrid.SelectedRows.Count > 0 ? settlementGrid.SelectedRows[0].Index : -1);
+                return row == -1 ? 0 : int.Parse((settlementGrid[SETTLEDAY, row].Value.ToString()));
+            }
+        }
+
+        void settlementGrid_DoubleClick(object sender, EventArgs e)
+        {
+            int settleday = CurrentSettleday;
+            if (settleday <= 0) return;
+
+            if (HistReportType == EnumHistReportType.Account)
+            {
+                fmSettlementDetail fm = new fmSettlementDetail();
+                fm.SetAccount(inputAccount.Text);
+                fm.SetSettleday(settleday);
+                fm.QrySettlementDetail();
+                fm.ShowDialog();
+                fm.Close();
+            }
+
         }
 
         void inputAccount_TextChanged(object sender, EventArgs e)
@@ -45,7 +76,7 @@ namespace TradingLib.MoniterControl
 
         void UpdateTitle()
         {
-            this.Text = string.Format("结算单查询[{0}]-{1}", this.AccountType == CashOpViewType.Agent ? "代理" : "投资者", inputAccount.Text);
+            this.Text = string.Format("结算单查询[{0}]-{1}", this.HistReportType == EnumHistReportType.Agent ? "代理" : "投资者", inputAccount.Text);
         }
         void  btnQry_Click(object sender, EventArgs e)
         {
@@ -55,9 +86,9 @@ namespace TradingLib.MoniterControl
                 ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请输入帐户");
                 return;
             }
-            if (this.AccountType == CashOpViewType.Account)
+            if (this.HistReportType == EnumHistReportType.Account)
             {
-                //CoreService.TLClient.ReqQryAccountCashTxn(inputAccount.Text, Util.ToTLDateTime(start.Value), Util.ToTLDateTimeEnd(end.Value));
+                CoreService.TLClient.ReqQryAccountSettlements(inputAccount.Text, Util.ToTLDate(start.Value), Util.ToTLDate(end.Value));
             }
             else
             {
@@ -67,13 +98,13 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            //CoreService.EventCore.RegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_TXN, this.OnQryCashTrans);
+            CoreService.EventCore.RegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_SETTLEMENTS, this.OnQrySettlements);
             CoreService.EventCore.RegisterCallback(Modules.AgentManager, Method_AGENT_MGR.QRY_AGENT_SETTLEMENTS, this.OnQrySettlements);
         }
 
         public void OnDisposed()
         {
-            //CoreService.EventCore.UnRegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_TXN, this.OnQryCashTrans);
+            CoreService.EventCore.UnRegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_SETTLEMENTS, this.OnQrySettlements);
             CoreService.EventCore.UnRegisterCallback(Modules.AgentManager, Method_AGENT_MGR.QRY_AGENT_SETTLEMENTS, this.OnQrySettlements);
         }
 
@@ -156,7 +187,7 @@ namespace TradingLib.MoniterControl
         }
 
 
-        public CashOpViewType AccountType { get; set; }
+        public EnumHistReportType HistReportType { get; set; }
         public void SetAccount(string account)
         {
             inputAccount.Text = account;

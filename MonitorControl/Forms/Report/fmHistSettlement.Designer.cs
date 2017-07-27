@@ -1,6 +1,6 @@
 ﻿namespace TradingLib.MoniterControl
 {
-    partial class fmReportSettlement
+    partial class fmHistSettlement
     {
         /// <summary>
         /// Required designer variable.

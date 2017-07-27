@@ -57,7 +57,9 @@ namespace TradingLib.MoniterBase.Command
     {
         public override void Run()
         {
-            fmSettlement fm = new fmSettlement();
+            fmHistSettlement fm = new fmHistSettlement();
+            fm.HistReportType = EnumHistReportType.Account;
+
             AccountItem account = null;
             if (AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
             {

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TradingLib.MoniterControl
 {
-    public enum CashOpViewType
+    public enum EnumHistReportType
     {
         /// <summary>
         /// 显示代理
