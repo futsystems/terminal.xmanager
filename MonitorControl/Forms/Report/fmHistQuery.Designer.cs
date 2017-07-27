@@ -32,17 +32,19 @@
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.btnExport = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnQryHist = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.settleday = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
+            this.settleday_end = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.account = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonNavigator1 = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
             this.pageOrder = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.ctHistOrder1 = new TradingLib.MoniterControl.ctHistOrder();
             this.pageTrade = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.ctHistTrade1 = new TradingLib.MoniterControl.ctHistTrade();
             this.pagePosition = new ComponentFactory.Krypton.Navigator.KryptonPage();
+            this.ctHistOrder1 = new TradingLib.MoniterControl.ctHistOrder();
+            this.ctHistTrade1 = new TradingLib.MoniterControl.ctHistTrade();
             this.ctHistPosition1 = new TradingLib.MoniterControl.ctHistPosition();
+            this.settleday_start = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
+            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
@@ -57,9 +59,11 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.settleday_start);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel3);
             this.kryptonPanel1.Controls.Add(this.btnExport);
             this.kryptonPanel1.Controls.Add(this.btnQryHist);
-            this.kryptonPanel1.Controls.Add(this.settleday);
+            this.kryptonPanel1.Controls.Add(this.settleday_end);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
             this.kryptonPanel1.Controls.Add(this.account);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
@@ -86,31 +90,31 @@
             this.btnQryHist.TabIndex = 5;
             this.btnQryHist.Values.Text = "查 询";
             // 
-            // settleday
+            // settleday_end
             // 
-            this.settleday.Location = new System.Drawing.Point(562, 439);
-            this.settleday.Name = "settleday";
-            this.settleday.Size = new System.Drawing.Size(147, 21);
-            this.settleday.TabIndex = 4;
+            this.settleday_end.Location = new System.Drawing.Point(596, 439);
+            this.settleday_end.Name = "settleday_end";
+            this.settleday_end.Size = new System.Drawing.Size(113, 21);
+            this.settleday_end.TabIndex = 4;
             // 
             // kryptonLabel2
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(501, 441);
+            this.kryptonLabel2.Location = new System.Drawing.Point(552, 440);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(51, 20);
+            this.kryptonLabel2.Size = new System.Drawing.Size(38, 20);
             this.kryptonLabel2.TabIndex = 3;
-            this.kryptonLabel2.Values.Text = "结算日:";
+            this.kryptonLabel2.Values.Text = "结束:";
             // 
             // account
             // 
-            this.account.Location = new System.Drawing.Point(359, 437);
+            this.account.Location = new System.Drawing.Point(257, 440);
             this.account.Name = "account";
             this.account.Size = new System.Drawing.Size(126, 20);
             this.account.TabIndex = 2;
             // 
             // kryptonLabel1
             // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(285, 441);
+            this.kryptonLabel1.Location = new System.Drawing.Point(188, 440);
             this.kryptonLabel1.Name = "kryptonLabel1";
             this.kryptonLabel1.Size = new System.Drawing.Size(63, 20);
             this.kryptonLabel1.TabIndex = 1;
@@ -153,14 +157,6 @@
             this.pageOrder.ToolTipTitle = "Page ToolTip";
             this.pageOrder.UniqueName = "590193F15ED84477088CD0F38750A7C3";
             // 
-            // ctHistOrder1
-            // 
-            this.ctHistOrder1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctHistOrder1.Location = new System.Drawing.Point(0, 0);
-            this.ctHistOrder1.Name = "ctHistOrder1";
-            this.ctHistOrder1.Size = new System.Drawing.Size(867, 401);
-            this.ctHistOrder1.TabIndex = 0;
-            // 
             // pageTrade
             // 
             this.pageTrade.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
@@ -174,14 +170,6 @@
             this.pageTrade.ToolTipTitle = "Page ToolTip";
             this.pageTrade.UniqueName = "484B4FDD7D58432A7BA5AEDB09324076";
             // 
-            // ctHistTrade1
-            // 
-            this.ctHistTrade1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctHistTrade1.Location = new System.Drawing.Point(0, 0);
-            this.ctHistTrade1.Name = "ctHistTrade1";
-            this.ctHistTrade1.Size = new System.Drawing.Size(867, 401);
-            this.ctHistTrade1.TabIndex = 0;
-            // 
             // pagePosition
             // 
             this.pagePosition.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
@@ -194,6 +182,23 @@
             this.pagePosition.Text = "持 仓";
             this.pagePosition.ToolTipTitle = "Page ToolTip";
             this.pagePosition.UniqueName = "93EA66440495432B228CD438AC6F3C4F";
+            this.pagePosition.Visible = false;
+            // 
+            // ctHistOrder1
+            // 
+            this.ctHistOrder1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctHistOrder1.Location = new System.Drawing.Point(0, 0);
+            this.ctHistOrder1.Name = "ctHistOrder1";
+            this.ctHistOrder1.Size = new System.Drawing.Size(867, 401);
+            this.ctHistOrder1.TabIndex = 0;
+            // 
+            // ctHistTrade1
+            // 
+            this.ctHistTrade1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctHistTrade1.Location = new System.Drawing.Point(0, 0);
+            this.ctHistTrade1.Name = "ctHistTrade1";
+            this.ctHistTrade1.Size = new System.Drawing.Size(867, 401);
+            this.ctHistTrade1.TabIndex = 0;
             // 
             // ctHistPosition1
             // 
@@ -202,6 +207,21 @@
             this.ctHistPosition1.Name = "ctHistPosition1";
             this.ctHistPosition1.Size = new System.Drawing.Size(867, 401);
             this.ctHistPosition1.TabIndex = 0;
+            // 
+            // settleday_start
+            // 
+            this.settleday_start.Location = new System.Drawing.Point(433, 439);
+            this.settleday_start.Name = "settleday_start";
+            this.settleday_start.Size = new System.Drawing.Size(113, 21);
+            this.settleday_start.TabIndex = 8;
+            // 
+            // kryptonLabel3
+            // 
+            this.kryptonLabel3.Location = new System.Drawing.Point(389, 440);
+            this.kryptonLabel3.Name = "kryptonLabel3";
+            this.kryptonLabel3.Size = new System.Drawing.Size(38, 20);
+            this.kryptonLabel3.TabIndex = 7;
+            this.kryptonLabel3.Values.Text = "开始:";
             // 
             // fmHistQuery
             // 
@@ -234,7 +254,7 @@
         #endregion
 
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker settleday;
+        private ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker settleday_end;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox account;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
@@ -247,5 +267,7 @@
         private ctHistTrade ctHistTrade1;
         private ctHistPosition ctHistPosition1;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnExport;
+        private ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker settleday_start;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
     }
 }

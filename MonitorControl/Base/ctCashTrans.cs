@@ -59,12 +59,21 @@ namespace TradingLib.MoniterControl
         }
 
 
+        List<CashTransactionImpl> txnlist = new List<CashTransactionImpl>();
         void OnQryCashTrans(string jsonstr, bool islast)
         {
             CashTransactionImpl obj = CoreService.ParseJsonResponse<CashTransactionImpl>(jsonstr);
             if (obj != null)
             {
                 GotCashTrans(obj);
+                txnlist.Add(obj);
+            }
+            if (islast)
+            {
+                equity_in.Text = txnlist.Where(t => (t.EquityType == QSEnumEquityType.OwnEquity) && (t.TxnType == QSEnumCashOperation.Deposit)).Sum(t => t.Amount).ToFormatStr();
+                equity_out.Text = txnlist.Where(t => (t.EquityType == QSEnumEquityType.OwnEquity) && (t.TxnType == QSEnumCashOperation.WithDraw)).Sum(t => t.Amount).ToFormatStr();
+                credit_in.Text = txnlist.Where(t => (t.EquityType == QSEnumEquityType.CreditEquity) && (t.TxnType == QSEnumCashOperation.Deposit)).Sum(t => t.Amount).ToFormatStr();
+                credit_out.Text = txnlist.Where(t => (t.EquityType == QSEnumEquityType.CreditEquity) && (t.TxnType == QSEnumCashOperation.WithDraw)).Sum(t => t.Amount).ToFormatStr();
             }
         }
 
@@ -90,14 +99,21 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        
 
 
+
+        string EMPTY = "--";
         public void Clear()
         {
             cashgrid.DataSource = null;
             gt.Rows.Clear();
             BindToTable();
+            txnlist.Clear();
+            equity_in.Text = EMPTY;
+            equity_out.Text = EMPTY;
+            credit_in.Text = EMPTY;
+            credit_out.Text = EMPTY;
+
         }
 
 
@@ -182,6 +198,7 @@ namespace TradingLib.MoniterControl
         private void btnQryReport_Click(object sender, EventArgs e)
         {
             this.Clear();
+
             if (string.IsNullOrEmpty(inputAccount.Text))
             {
                 ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("请输入帐户");

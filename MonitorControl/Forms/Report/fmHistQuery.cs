@@ -22,7 +22,9 @@ namespace TradingLib.MoniterControl
             InitializeComponent();
 
             this.Load += new EventHandler(fmHistQuery_Load);
-            settleday.Value = DateTime.Now;
+            settleday_end.Value = DateTime.Now;
+            settleday_start.Value = DateTime.Now;
+
         }
 
         void fmHistQuery_Load(object sender, EventArgs e)
@@ -59,7 +61,7 @@ namespace TradingLib.MoniterControl
         }
         string GetCsvFilePrefix()
         {
-            string b= string.Format("{0}_{1}", account.Text, Settleday);
+            string b = string.Format("{0}_{1}", account.Text, string.Format("{0}-{1}", Start, End));
             if (kryptonNavigator1.SelectedPage.Name == "pageOrder")
             {
                 return b + "_Order";
@@ -115,7 +117,7 @@ namespace TradingLib.MoniterControl
             }
             if (isLast)
             {
-                CoreService.TLClient.ReqQryAccountTrade(account.Text, Settleday, Settleday);
+                CoreService.TLClient.ReqQryAccountTrade(account.Text, Start, End);
             }
         }
         void OnTrade(string json, bool isLast)
@@ -128,10 +130,10 @@ namespace TradingLib.MoniterControl
                 ctHistTrade1.GotHistFill(f);
             }
 
-            if (isLast)
-            {
-                CoreService.TLClient.ReqQryAccountPosition(account.Text, Settleday);
-            }
+            //if (isLast)
+            //{
+            //    CoreService.TLClient.ReqQryAccountPosition(account.Text, Settleday);
+            //}
             
         }
 
@@ -145,37 +147,6 @@ namespace TradingLib.MoniterControl
                 ctHistPosition1.GotHistPosition(p);
             }
         }
-        //void GotHistOrder(Order o,RspInfo rsp,int reqid, bool islast)
-        //{
-
-        //    if (islast)
-        //    {
-        //        if (o!=null)
-        //        {
-        //            ctHistOrder1.GotHistOrder(o);
-        //        }
-        //        CoreService.TLClient.ReqQryHistTrades(account.Text, Settleday,Settleday);
-        //    }
-        //    else
-        //    {
-        //        ctHistOrder1.GotHistOrder(o);
-        //    }
-        //}
-        //public void GotHistTrade(Trade f,RspInfo rsp,int reqid, bool islast)
-        //{
-        //    if (islast)
-        //    {
-        //        if (f!=null)
-        //        {
-        //            ctHistTrade1.GotHistFill(f);
-        //        }
-        //        CoreService.TLClient.ReqQryHistPosition(account.Text, Settleday);
-        //    }
-        //    else
-        //    {
-        //        ctHistTrade1.GotHistFill(f);
-        //    }
-        //}
 
         public void SetAccount(string acc)
         {
@@ -198,9 +169,9 @@ namespace TradingLib.MoniterControl
             }
             else
             {
-                if (!(DateTime.Now.Subtract(lastqrytime).TotalSeconds > 5))
+                if (!(DateTime.Now.Subtract(lastqrytime).TotalSeconds > 2))
                 {
-                    MoniterHelper.WindowMessage("请不要频繁查询,每隔5秒查询一次!");
+                    MoniterHelper.WindowMessage("请不要频繁查询,每隔2秒查询一次!");
                     return;
                 }
             }
@@ -210,15 +181,23 @@ namespace TradingLib.MoniterControl
             ctHistOrder1.Clear();
             ctHistTrade1.Clear();
             ctHistPosition1.Clear();
-            CoreService.TLClient.ReqQryAccountOrder(account.Text, Settleday, Settleday);
+            CoreService.TLClient.ReqQryAccountOrder(account.Text, Start, End);
                 
         }
 
-        int Settleday
+        int Start
         {
             get
             {
-                return TradingLib.Common.Util.ToTLDate(settleday.Value);
+                return TradingLib.Common.Util.ToTLDate(settleday_start.Value);
+            }
+        }
+
+        int End
+        {
+            get
+            {
+                return TradingLib.Common.Util.ToTLDate(settleday_end.Value);
             }
         }
     }
