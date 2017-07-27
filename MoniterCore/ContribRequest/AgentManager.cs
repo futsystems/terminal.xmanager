@@ -60,6 +60,11 @@ namespace TradingLib.MoniterCore
         public const string QRY_AGENT_SETTLEMENTS = "QueryAgentSettlements";
 
         /// <summary>
+        /// 统计查询
+        /// </summary>
+        public const string QRY_STATISTIC_SETTLEMENT = "QueryStatisticSettlement";
+
+        /// <summary>
         /// 更新强平权益值
         /// </summary>
         public const string REQ_UPDATE_AGENT_FLAT_EQUITY = "UpdateAgentFlatEquity";
@@ -142,6 +147,19 @@ namespace TradingLib.MoniterCore
         public static int ReqQryAgentSettlement(this TLClientNet client, string account, int start, int end)
         {
             return client.ReqContribRequest(Modules.AgentManager, Method_AGENT_MGR.QRY_AGENT_SETTLEMENTS, new { account = account, start = start, end = end });
+        }
+
+        /// <summary>
+        /// 查询某个代理下账户结算统计
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="account"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public static int ReqQrySettlementStatistic(this TLClientNet client, string account, int start, int end ,bool direct)
+        {
+            return client.ReqContribRequest(Modules.AgentManager, Method_AGENT_MGR.QRY_STATISTIC_SETTLEMENT, new { account = account, start = start, end = end, direct = direct });
         }
 
         /// <summary>

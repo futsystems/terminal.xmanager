@@ -38,6 +38,7 @@
             this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuItem1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.kryptonContextMenuItem9 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuSeparator1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuSeparator();
             this.kryptonContextMenuItem6 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItems4 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
@@ -48,7 +49,11 @@
             this.kryptonContextMenuItems3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuItem3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem4 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonContextMenuItem9 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.kryptonContextMenuSeparator2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuSeparator();
+            this.kryptonContextMenuItem10 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.kryptonContextMenuItem11 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.kryptonContextMenuItems5 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
+            this.kryptonContextMenuItem12 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -121,7 +126,9 @@
             this.kryptonContextMenuItem2,
             this.kryptonContextMenuItem9,
             this.kryptonContextMenuSeparator1,
-            this.kryptonContextMenuItem6});
+            this.kryptonContextMenuItem6,
+            this.kryptonContextMenuSeparator2,
+            this.kryptonContextMenuItem10});
             // 
             // kryptonContextMenuItem1
             // 
@@ -130,6 +137,10 @@
             // kryptonContextMenuItem2
             // 
             this.kryptonContextMenuItem2.Text = "手续费/保证金";
+            // 
+            // kryptonContextMenuItem9
+            // 
+            this.kryptonContextMenuItem9.Text = "强平设置";
             // 
             // kryptonContextMenuItem6
             // 
@@ -165,9 +176,24 @@
             // 
             this.kryptonContextMenuItem4.Text = "Menu Item";
             // 
-            // kryptonContextMenuItem9
+            // kryptonContextMenuItem10
             // 
-            this.kryptonContextMenuItem9.Text = "强平设置";
+            this.kryptonContextMenuItem10.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
+            this.kryptonContextMenuItems5});
+            this.kryptonContextMenuItem10.Text = "统计";
+            // 
+            // kryptonContextMenuItem11
+            // 
+            this.kryptonContextMenuItem11.Text = "Menu Item";
+            // 
+            // kryptonContextMenuItems5
+            // 
+            this.kryptonContextMenuItems5.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
+            this.kryptonContextMenuItem12});
+            // 
+            // kryptonContextMenuItem12
+            // 
+            this.kryptonContextMenuItem12.Text = "客户结算统计";
             // 
             // ctAgentSummary
             // 
@@ -205,5 +231,10 @@
         private ctSelfOperateAgentSummary ctSelfOperateAgentSummary;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading kryptonContextMenuHeading1;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem9;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuSeparator kryptonContextMenuSeparator2;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem10;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems5;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem12;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem11;
     }
 }

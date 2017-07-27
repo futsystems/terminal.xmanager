@@ -716,6 +716,12 @@
     <Compile Include="Forms\Report\fmHistSettlement.Designer.cs">
       <DependentUpon>fmHistSettlement.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Report\fmHistSettlementStatistic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Report\fmHistSettlementStatistic.Designer.cs">
+      <DependentUpon>fmHistSettlementStatistic.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\System\Domain\fmDomain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1341,6 +1347,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Report\fmHistSettlement.resx">
       <DependentUpon>fmHistSettlement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Report\fmHistSettlementStatistic.resx">
+      <DependentUpon>fmHistSettlementStatistic.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\System\Domain\fmDomain.resx">
       <DependentUpon>fmDomain.cs</DependentUpon>
