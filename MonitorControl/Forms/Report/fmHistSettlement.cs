@@ -19,6 +19,7 @@ namespace TradingLib.MoniterControl
             InitializeComponent();
             this.HistReportType = EnumHistReportType.Account;
 
+          
             this.Load += new EventHandler(fmReportSettlement_Load);
         }
 
@@ -36,10 +37,50 @@ namespace TradingLib.MoniterControl
             CoreService.EventCore.RegIEventHandler(this);
 
             settlementGrid.DoubleClick += new EventHandler(settlementGrid_DoubleClick);
+            //settlementGrid.MouseClick += new MouseEventHandler(settlementGrid_MouseClick);
+            settlementGrid.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+
+            settlementGrid.ContextMenuStrip.Items.Add("查询明细", null, new EventHandler(QryDetail_Click));
+
             btn_export.Click += new EventHandler(btn_export_Click);
 
             UpdateTitle();
         }
+
+        void QryDetail_Click(object sender, EventArgs e)
+        {
+            int settleday = CurrentSettleday;
+            if (settleday <= 0) return;
+
+            if (HistReportType == EnumHistReportType.Account)
+            {
+                fmSettlementDetail fm = new fmSettlementDetail();
+                fm.SetAccount(inputAccount.Text);
+                fm.SetSettleday(settleday);
+                fm.QrySettlementDetail();
+                fm.ShowDialog();
+                fm.Close();
+            }
+            else
+            {
+                MoniterHelper.WindowMessage("无代理明细数据");
+            }
+          
+        }
+
+        
+        void settlementGrid_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                int settleday = CurrentSettleday;
+                if (settleday <= 0) return;
+
+                
+            }
+        }
+
+
 
         void btn_export_Click(object sender, EventArgs e)
         {
