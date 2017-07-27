@@ -35,12 +35,14 @@
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.acc_lock = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.acc_lock);
             this.kryptonPanel1.Controls.Add(this.lbDesp);
             this.kryptonPanel1.Controls.Add(this.btnSubmit);
             this.kryptonPanel1.Controls.Add(this.risk_ratio);
@@ -50,12 +52,12 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(456, 149);
+            this.kryptonPanel1.Size = new System.Drawing.Size(456, 159);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // lbDesp
             // 
-            this.lbDesp.Location = new System.Drawing.Point(12, 73);
+            this.lbDesp.Location = new System.Drawing.Point(12, 83);
             this.lbDesp.Name = "lbDesp";
             this.lbDesp.Size = new System.Drawing.Size(20, 20);
             this.lbDesp.TabIndex = 9;
@@ -64,7 +66,7 @@
             // btnSubmit
             // 
             this.btnSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSubmit.Location = new System.Drawing.Point(377, 112);
+            this.btnSubmit.Location = new System.Drawing.Point(377, 122);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(67, 25);
             this.btnSubmit.TabIndex = 8;
@@ -107,11 +109,19 @@
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "(冻结保证金+占用保证金)/动态权益";
             // 
+            // acc_lock
+            // 
+            this.acc_lock.Location = new System.Drawing.Point(64, 67);
+            this.acc_lock.Name = "acc_lock";
+            this.acc_lock.Size = new System.Drawing.Size(111, 20);
+            this.acc_lock.TabIndex = 10;
+            this.acc_lock.Values.Text = "强平后冻结账户";
+            // 
             // fmAccountRule_RiskRatio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(456, 149);
+            this.ClientSize = new System.Drawing.Size(456, 159);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
@@ -135,5 +145,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown risk_ratio;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnSubmit;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbDesp;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox acc_lock;
     }
 }

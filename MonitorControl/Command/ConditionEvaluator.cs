@@ -141,6 +141,14 @@ namespace TradingLib.MoniterControl
                     {
                         return true;
                     }
+                    //普通老版代理 可带出入金权限
+                    if (CoreService.SiteInfo.Agent != null && CoreService.SiteInfo.Agent.AgentType == EnumAgentType.Normal)
+                    {
+                        if (CoreService.SiteInfo.Permission.r_tradition)
+                        {
+                            return true;
+                        }
+                    }
                     return false;
                 }
                 if (CoreService.SiteInfo.Manager.IsStaff())

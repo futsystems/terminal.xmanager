@@ -74,6 +74,7 @@ namespace TradingLib.MoniterControl
                 var args = new
                 {
                     risk_ratio = risk_ratio.Value,
+                    acc_lock = acc_lock.Checked,
                 };
 
                 item.Value = args.SerializeObject();// TradingLib.Mixins.Json.JsonMapper.ToJson(args);
