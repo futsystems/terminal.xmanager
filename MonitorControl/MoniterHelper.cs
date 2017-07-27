@@ -79,6 +79,7 @@ namespace TradingLib.MoniterControl
             {
                 for (int k = 0; k < view.Columns.Count; k++)
                 {
+                    if (!view.Columns[k].Visible) continue;
                     //add separator
                     strColumn.Append(view.Columns[k].HeaderText + ',');
                 }
@@ -87,9 +88,12 @@ namespace TradingLib.MoniterControl
 
                 for (int i = 0; i < view.Rows.Count; i++)
                 {
+                    
+
                     strValue.Remove(0, strValue.Length); //clear the temp row value
                     for (int k = 0; k < view.Columns.Count; k++)
                     {
+                        if (!view.Columns[k].Visible) continue;
                         //add separator
                         strValue.Append(view.Rows[i].Cells[k].Value.ToString() + ',');
                     }

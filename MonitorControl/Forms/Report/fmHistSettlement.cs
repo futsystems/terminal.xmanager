@@ -36,8 +36,18 @@ namespace TradingLib.MoniterControl
             CoreService.EventCore.RegIEventHandler(this);
 
             settlementGrid.DoubleClick += new EventHandler(settlementGrid_DoubleClick);
+            btn_export.Click += new EventHandler(btn_export_Click);
 
             UpdateTitle();
+        }
+
+        void btn_export_Click(object sender, EventArgs e)
+        {
+            MoniterHelper.ExportToCSV(GetCsvFilePrefix(), settlementGrid);
+        }
+        string GetCsvFilePrefix()
+        {
+           return string.Format("{0}_{1}_Settlement",inputAccount.Text, string.Format("{0}-{1}", Start, End));
         }
 
         /// <summary>
@@ -88,13 +98,16 @@ namespace TradingLib.MoniterControl
             }
             if (this.HistReportType == EnumHistReportType.Account)
             {
-                CoreService.TLClient.ReqQryAccountSettlements(inputAccount.Text, Util.ToTLDate(start.Value), Util.ToTLDate(end.Value));
+                CoreService.TLClient.ReqQryAccountSettlements(inputAccount.Text, Start, End);
             }
             else
             {
-                CoreService.TLClient.ReqQryAgentSettlement(inputAccount.Text, Util.ToTLDate(start.Value), Util.ToTLDate(end.Value));
+                CoreService.TLClient.ReqQryAgentSettlement(inputAccount.Text, Start, End);
             }
         }
+
+        int Start { get { return Util.ToTLDate(start.Value); } }
+        int End { get { return Util.ToTLDate(end.Value); } }
 
         public void OnInit()
         {

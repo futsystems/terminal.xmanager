@@ -44,7 +44,7 @@
             this.tcommission = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btn_export = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.inputAccount = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.lbaccount = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btnQry = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -65,7 +65,7 @@
             // kryptonPanel1
             // 
             this.kryptonPanel1.Controls.Add(this.kryptonGroupBox1);
-            this.kryptonPanel1.Controls.Add(this.kryptonButton1);
+            this.kryptonPanel1.Controls.Add(this.btn_export);
             this.kryptonPanel1.Controls.Add(this.inputAccount);
             this.kryptonPanel1.Controls.Add(this.lbaccount);
             this.kryptonPanel1.Controls.Add(this.btnQry);
@@ -223,14 +223,14 @@
             this.kryptonLabel4.TabIndex = 23;
             this.kryptonLabel4.Values.Text = "出金:";
             // 
-            // kryptonButton1
+            // btn_export
             // 
-            this.kryptonButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonButton1.Location = new System.Drawing.Point(810, 414);
-            this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.Size = new System.Drawing.Size(70, 25);
-            this.kryptonButton1.TabIndex = 16;
-            this.kryptonButton1.Values.Text = "导 出";
+            this.btn_export.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_export.Location = new System.Drawing.Point(810, 414);
+            this.btn_export.Name = "btn_export";
+            this.btn_export.Size = new System.Drawing.Size(70, 25);
+            this.btn_export.TabIndex = 16;
+            this.btn_export.Values.Text = "导 出";
             // 
             // inputAccount
             // 
@@ -302,7 +302,7 @@
             this.settlementGrid.Size = new System.Drawing.Size(884, 330);
             this.settlementGrid.TabIndex = 0;
             // 
-            // fmReportSettlement
+            // fmHistSettlement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -311,7 +311,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "fmReportSettlement";
+            this.Name = "fmHistSettlement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
@@ -337,7 +337,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker start;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_export;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel trealizedpl;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel tunrealized;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel tcommission;
