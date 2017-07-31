@@ -481,6 +481,12 @@
     <Compile Include="Forms\Account\RiskRule\fm\fmAccountRule_RiskRatio.Designer.cs">
       <DependentUpon>fmAccountRule_RiskRatio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Account\RiskRule\fm\fmAccountRule_LossRatio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Account\RiskRule\fm\fmAccountRule_LossRatio.Designer.cs">
+      <DependentUpon>fmAccountRule_LossRatio.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Agent\fmAgentFlatEquity.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1230,6 +1236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Account\RiskRule\fm\fmAccountRule_RiskRatio.resx">
       <DependentUpon>fmAccountRule_RiskRatio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Account\RiskRule\fm\fmAccountRule_LossRatio.resx">
+      <DependentUpon>fmAccountRule_LossRatio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Agent\fmAgentFlatEquity.resx">
       <DependentUpon>fmAgentFlatEquity.cs</DependentUpon>
