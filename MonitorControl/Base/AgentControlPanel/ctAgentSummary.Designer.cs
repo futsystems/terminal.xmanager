@@ -54,6 +54,8 @@
             this.kryptonContextMenuItem3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem4 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem11 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.kryptonContextMenuItem13 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.kryptonContextMenuSeparator3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -126,6 +128,8 @@
             this.kryptonContextMenuItem2,
             this.kryptonContextMenuItem9,
             this.kryptonContextMenuSeparator1,
+            this.kryptonContextMenuItem13,
+            this.kryptonContextMenuSeparator3,
             this.kryptonContextMenuItem6,
             this.kryptonContextMenuSeparator2,
             this.kryptonContextMenuItem10});
@@ -195,6 +199,10 @@
             // 
             this.kryptonContextMenuItem11.Text = "Menu Item";
             // 
+            // kryptonContextMenuItem13
+            // 
+            this.kryptonContextMenuItem13.Text = "设定默认配置模板";
+            // 
             // ctAgentSummary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -236,5 +244,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems5;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem12;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem11;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem13;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuSeparator kryptonContextMenuSeparator3;
     }
 }

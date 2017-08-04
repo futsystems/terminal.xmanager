@@ -425,6 +425,10 @@ namespace TradingLib.MoniterCore
                 target.Commission_ID = agent.Commission_ID;
                 target.ExStrategy_ID = agent.ExStrategy_ID;
                 target.Margin_ID = agent.Margin_ID;
+
+                target.FlatEquity = agent.FlatEquity;
+                target.Freezed = agent.Freezed;
+                target.Default_Config_ID = agent.Default_Config_ID;
                 
             }
             else

@@ -1,6 +1,6 @@
 ﻿namespace TradingLib.MoniterControl
 {
-    partial class fmEditAccountConfigTemplate
+    partial class fmEditAgentDefaultConfigTemplate
     {
         /// <summary>
         /// Required designer variable.
@@ -59,15 +59,15 @@
             this.kryptonLabel1.Name = "kryptonLabel1";
             this.kryptonLabel1.Size = new System.Drawing.Size(320, 81);
             this.kryptonLabel1.TabIndex = 15;
-            this.kryptonLabel1.Values.Text = "强制使用配置模板将重置账户手续费、保证金、交易\r\n参数模板并删除设定的风控规则，从而使用配置模板\r\n中的设定项";
+            this.kryptonLabel1.Values.Text = "设定代理默认配置模板后，在该代理下新增交易账户\r\n默认使用该配置模板，如果添加账户时指定了配置模\r\n板则使用指定的配置模板";
             // 
             // force
             // 
             this.force.Location = new System.Drawing.Point(113, 47);
             this.force.Name = "force";
-            this.force.Size = new System.Drawing.Size(123, 20);
+            this.force.Size = new System.Drawing.Size(148, 20);
             this.force.TabIndex = 14;
-            this.force.Values.Text = "强制使用配置模板";
+            this.force.Values.Text = "同时设定代理下属客户";
             // 
             // btnSubmit
             // 
@@ -95,7 +95,7 @@
             this.kryptonLabel4.TabIndex = 7;
             this.kryptonLabel4.Values.Text = "配置模板:";
             // 
-            // fmEditAccountConfigTemplate
+            // fmEditAgentDefaultConfigTemplate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -104,9 +104,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "fmEditAccountConfigTemplate";
+            this.Name = "fmEditAgentDefaultConfigTemplate";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "帐户模板设置";
+            this.Text = "编辑代理默认配置模板";
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();

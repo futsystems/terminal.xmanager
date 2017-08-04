@@ -68,6 +68,11 @@ namespace TradingLib.MoniterCore
         /// 更新强平权益值
         /// </summary>
         public const string REQ_UPDATE_AGENT_FLAT_EQUITY = "UpdateAgentFlatEquity";
+
+        /// <summary>
+        /// 设定代理默认配置模板
+        /// </summary>
+        public const string REQ_UPDATE_AGEENT_FLAT_EQUITY = "UpdateAgentDefaultConfigTemplate";
     }
 
     public static class AgentManager
@@ -172,6 +177,19 @@ namespace TradingLib.MoniterCore
         public static int ReqUpdateAgentFlatEquity(this TLClientNet client, string account, decimal val)
         {
             return client.ReqContribRequest(Modules.AgentManager, Method_AGENT_MGR.REQ_UPDATE_AGENT_FLAT_EQUITY, new { account = account, flat_equity = val });
+        }
+
+        /// <summary>
+        /// 更新代理默认配置模板
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="account"></param>
+        /// <param name="template_id"></param>
+        /// <param name="setaccount"></param>
+        /// <returns></returns>
+        public static int ReqUpdateAgentDefaultConfigTemplate(this TLClientNet client, string account, int config_id, bool setaccount)
+        {
+            return client.ReqContribRequest(Modules.AgentManager, Method_AGENT_MGR.REQ_UPDATE_AGEENT_FLAT_EQUITY, new { account = account, config_id = config_id, setaccount = setaccount });
         }
     }
 }
