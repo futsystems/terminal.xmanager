@@ -107,16 +107,25 @@ namespace TradingLib.MoniterBase.Command
     {
         public override void Run()
         {
-            //if (!CoreService.SiteInfo.UIAccess.r_exstrategy)
-            //{
-            //    MoniterHelper.WindowMessage("无权限");
-            //    return;
-            //}
             fmExStrategy fm = new fmExStrategy();
             fm.ShowDialog();
             fm.Close();
         }
     }
+
+    /// <summary>
+    /// 配置模板
+    /// </summary>
+    public class ConfigTemplateCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            fmConfigTemplate fm = new fmConfigTemplate();
+            fm.ShowDialog();
+            fm.Close();
+        }
+    }
+
 
     /// <summary>
     /// 交易时间段管理

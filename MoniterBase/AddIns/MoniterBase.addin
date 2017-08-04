@@ -206,6 +206,10 @@
       <MenuItem id = "ExStrategyTemplateCommand"
               label = "交易参数管理"
               class = "TradingLib.MoniterBase.Command.ExStrategyTemplateCommand"/>
+    <MenuItem id = "Separator1" type = "Separator"/>
+    <MenuItem id = "ConfigTemplateCommand"
+            label = "配置模板管理"
+            class = "TradingLib.MoniterBase.Command.ConfigTemplateCommand"/>
     <Condition name="RoleState" role="root" >
     <MenuItem id = "Separator1" type = "Separator"/>
     <MenuItem id = "ExchangeRateCommand"

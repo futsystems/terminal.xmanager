@@ -70,7 +70,7 @@ namespace TradingLib.MoniterControl
             return string.Join(",", tmp.ToArray());
         }
 
-        public AccountItem Account { get; set; }
+        public string Account { get; set; }
 
         RuleClassItem _ruleclass = null;
 
@@ -125,7 +125,7 @@ namespace TradingLib.MoniterControl
                 
 
                 RuleItem item = new RuleItem();
-                item.Account = this.Account.Account;
+                item.Account = this.Account;
                 item.Compare = QSEnumCompareType.Equals;
                 item.Enable = true;
                 item.RuleName = _ruleclass.ClassName;

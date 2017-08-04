@@ -269,6 +269,35 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public const string NOTIFY_EXSTRATEGY_ITEM = "NotifyExStrategyTemplateItem";
 
+        /// <summary>
+        /// 查询配置模板
+        /// </summary>
+        public const string QRY_CONFIG_TEMPLATE = "QryConfigTemplate";
+
+        /// <summary>
+        /// 更新配置模板
+        /// </summary>
+        public const string UPDATE_CONFIG_TEMPLATE = "UpdateConfigTemplate";
+
+        /// <summary>
+        /// 配置模板更新通知
+        /// </summary>
+        public const string NOTIFY_CONFIG_TEMPLATE = "NotifyConfigTemplate";
+
+        /// <summary>
+        /// 删除配置模板
+        /// </summary>
+        public const string DELETE_CONFIG_TEMPLATE = "DeleteConfigTemplate";
+
+        /// <summary>
+        /// 删除配置模板通知
+        /// </summary>
+        public const string NOTIFY_CONFIG_TEMPLATE_DELETE = "NotifyDeleteConfigTemplate";
+
+
+
+
+
         #endregion
 
         #region Domain
@@ -621,6 +650,40 @@ namespace TradingLib.MoniterCore
         {
             return client.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.DEL_EXSTRATEGY_TEMPLATE, t.ID.ToString());
         }
+
+        /// <summary>
+        /// 查询配置模板
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
+        public static int ReqQryConfigTemplate(this TLClientNet client)
+        {
+            return client.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_CONFIG_TEMPLATE, "");
+        }
+
+        /// <summary>
+        /// 更新配置模板
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public static int ReqUpdateConfigTemplate(this TLClientNet client,ConfigTemplate item)
+        {
+            return client.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.UPDATE_CONFIG_TEMPLATE, item);
+        }
+
+        /// <summary>
+        /// 删除配置模板
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public static int ReqDelConfigTemplate(this TLClientNet client, ConfigTemplate item)
+        {
+            return client.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.DELETE_CONFIG_TEMPLATE, item.ID.ToString());
+        }
+
+
         #endregion
 
         #region Domain

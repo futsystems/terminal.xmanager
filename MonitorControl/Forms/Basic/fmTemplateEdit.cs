@@ -16,7 +16,8 @@ namespace TradingLib.MoniterControl
     { 
         Margin,
         Commission,
-        Strategy
+        Strategy,
+        Config
     }
     public partial class fmTemplateEdit : ComponentFactory.Krypton.Toolkit.KryptonForm
     {
@@ -36,6 +37,7 @@ namespace TradingLib.MoniterControl
         CommissionTemplateSetting _commissionTemplate = null;
         MarginTemplateSetting _marginTemplate = null;
         ExStrategyTemplateSetting _exstrategyTemplate = null;
+        ConfigTemplate _configTemplate = null;
 
         bool isedit = false;
         public void SetTemplate(object t)
@@ -79,10 +81,21 @@ namespace TradingLib.MoniterControl
                     name.Text = _exstrategyTemplate.Name;
                     desp.Text = _exstrategyTemplate.Description;
                     //id.Text = _exstrategyTemplate.ID.ToString();
-                    this.Text = "标记交易参数模板";
+                    this.Text = "编辑交易参数模板";
                 }
             }
 
+            else if (_type == TemplateEditType.Config)
+            {
+                if (t is ConfigTemplate)
+                {
+                    _configTemplate = t as ConfigTemplate;
+                    name.Text = _configTemplate.Name;
+                    desp.Text = _configTemplate.Description;
+                    //id.Text = _exstrategyTemplate.ID.ToString();
+                    this.Text = "编辑配置模板";
+                }
+            }
            
         }
 
@@ -138,6 +151,24 @@ namespace TradingLib.MoniterControl
                     _exstrategyTemplate.Description = desp.Text;
 
                     CoreService.TLClient.ReqUpdateExStrategyTemplate(_exstrategyTemplate);
+                }
+            }
+            else if (_type == TemplateEditType.Config)
+            {
+                if (_configTemplate == null)
+                {
+                    ConfigTemplate target = new ConfigTemplate();
+                    target.Name = name.Text;
+                    target.Description = desp.Text;
+
+                    CoreService.TLClient.ReqUpdateConfigTemplate(target);
+                }
+                else
+                {
+                    _configTemplate.Name = name.Text;
+                    _configTemplate.Description = desp.Text;
+
+                    CoreService.TLClient.ReqUpdateConfigTemplate(_configTemplate);
                 }
             }
 

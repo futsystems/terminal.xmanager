@@ -86,7 +86,7 @@
             this.kryptonNavigator1.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
             this.kryptonPage1,
             this.kryptonPage2});
-            this.kryptonNavigator1.SelectedIndex = 0;
+            this.kryptonNavigator1.SelectedIndex = 1;
             this.kryptonNavigator1.Size = new System.Drawing.Size(407, 391);
             this.kryptonNavigator1.TabIndex = 0;
             this.kryptonNavigator1.Text = "kryptonNavigator1";
@@ -152,8 +152,8 @@
             // 
             // orderRuleClassList
             // 
-            this.orderRuleClassList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.orderRuleClassList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.orderRuleClassList.Location = new System.Drawing.Point(5, 27);
             this.orderRuleClassList.Name = "orderRuleClassList";
             this.orderRuleClassList.Size = new System.Drawing.Size(392, 120);
@@ -161,8 +161,8 @@
             // 
             // orderRuleItemList
             // 
-            this.orderRuleItemList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.orderRuleItemList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.orderRuleItemList.Location = new System.Drawing.Point(5, 207);
             this.orderRuleItemList.Name = "orderRuleItemList";
             this.orderRuleItemList.Size = new System.Drawing.Size(392, 120);
@@ -229,8 +229,8 @@
             // 
             // accountRuleClassList
             // 
-            this.accountRuleClassList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.accountRuleClassList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.accountRuleClassList.Location = new System.Drawing.Point(5, 27);
             this.accountRuleClassList.Name = "accountRuleClassList";
             this.accountRuleClassList.Size = new System.Drawing.Size(392, 120);
@@ -238,8 +238,8 @@
             // 
             // accountRuleItemList
             // 
-            this.accountRuleItemList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.accountRuleItemList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.accountRuleItemList.Location = new System.Drawing.Point(5, 207);
             this.accountRuleItemList.Name = "accountRuleItemList";
             this.accountRuleItemList.Size = new System.Drawing.Size(392, 120);

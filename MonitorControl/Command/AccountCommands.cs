@@ -199,7 +199,7 @@ namespace TradingLib.MoniterControl
             }
 
             fmEditRiskRule fm = new fmEditRiskRule();
-            fm.SetAccount(account);
+            fm.SetAccount(account.Account);
             fm.ShowDialog();
             fm.Close();
         }

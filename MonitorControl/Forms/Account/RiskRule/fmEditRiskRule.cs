@@ -64,8 +64,8 @@ namespace TradingLib.MoniterControl
             CoreService.EventCore.RegisterCallback(Modules.RiskCentre, Method_RiskCentre.QRY_RULEITEM, this.OnRuleItem);
             CoreService.EventCore.RegisterCallback(Modules.RiskCentre, Method_RiskCentre.UPDATE_RULEITEM, this.OnRuleItemUpdate);
             CoreService.EventCore.RegisterCallback(Modules.RiskCentre, Method_RiskCentre.DEL_RULEITEM, this.OnRuleItemDel);
-            CoreService.TLClient.ReqQryRuleItem(_account.Account, QSEnumRuleType.OrderRule);
-            CoreService.TLClient.ReqQryRuleItem(_account.Account, QSEnumRuleType.AccountRule);
+            CoreService.TLClient.ReqQryRuleItem(_account, QSEnumRuleType.OrderRule);
+            CoreService.TLClient.ReqQryRuleItem(_account, QSEnumRuleType.AccountRule);
         }
 
         public void OnDisposed()
@@ -517,8 +517,8 @@ namespace TradingLib.MoniterControl
         #endregion
 
 
-        AccountItem _account = null;
-        public void SetAccount(AccountItem account)
+        string _account = null;
+        public void SetAccount(string account)
         {
             _account = account;
         }
