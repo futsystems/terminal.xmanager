@@ -66,12 +66,29 @@ namespace TradingLib.MoniterControl
             btnAddTemplate.Click += new EventHandler(btnAddTemplate_Click);
 
             btnSubmit.Click += new EventHandler(btnSubmit_Click);
+            btnRiskRule.Click += new EventHandler(btnRiskRule_Click);
 
             templateTree.NodeMouseClick += new TreeNodeMouseClickEventHandler(templateTree_NodeMouseClick);
 
             CoreService.EventCore.RegIEventHandler(this);
 
             btnSubmit.Enabled = false;
+            btnRiskRule.Enabled = false;
+        }
+
+        void btnRiskRule_Click(object sender, EventArgs e)
+        {
+
+            if (_current == null)
+            {
+                MoniterHelper.WindowMessage("请选择要编辑的交易参数模板");
+                return;
+            }
+
+            fmEditRiskRule fm = new fmEditRiskRule();
+            fm.SetAccount(Const.CONFIG_TEMPLATE_PREFIX + _current.ID.ToString());
+            fm.ShowDialog();
+            fm.Close();
         }
 
 
@@ -203,6 +220,8 @@ namespace TradingLib.MoniterControl
             _current = null;
             currentTitle.Text = "--";
             btnSubmit.Enabled = false;
+            btnRiskRule.Enabled = false;
+
             cbCommissionTemplate.SelectedIndex = 0;
             cbExStrategyTemplate.SelectedIndex = 0;
             cbMarginTemplate.SelectedIndex = 0;
@@ -214,6 +233,7 @@ namespace TradingLib.MoniterControl
             _current = t;
             currentTitle.Text = _current.Name;
             btnSubmit.Enabled = true;
+            btnRiskRule.Enabled = true;
             cbCommissionTemplate.SelectedValue = AnyMathItem(cbCommissionTemplate, _current.Commission_ID) ? _current.Commission_ID : 0;
             cbMarginTemplate.SelectedValue = AnyMathItem(cbMarginTemplate, _current.Margin_ID) ? _current.Margin_ID : 0;
             cbExStrategyTemplate.SelectedValue = AnyMathItem(cbExStrategyTemplate, _current.ExStrategy_ID) ? _current.ExStrategy_ID : 0;

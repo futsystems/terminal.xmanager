@@ -29,6 +29,12 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public const string DEL_RULEITEM = "DelRuleItem";
 
+
+        /// <summary>
+        /// 风控规则更新通知
+        /// </summary>
+        public const string NOTIFY_UPDATE_RISKRULE = "NotifyRiskRuleUpdate";
+
         /// <summary>
         /// 强平分账户所有持仓
         /// </summary>
@@ -55,7 +61,7 @@ namespace TradingLib.MoniterCore
         /// <param name="type"></param>
         public static int ReqQryRuleItem(this TLClientNet client, string account, QSEnumRuleType type)
         {
-            return client.ReqContribRequest(Modules.RiskCentre, Method_RiskCentre.QRY_RULEITEM, new { account = account, ruletype = type });
+            return client.ReqContribRequest(Modules.RiskCentre, Method_RiskCentre.QRY_RULEITEM, new { account = account, ruletype = type});
         }
 
         /// <summary>

@@ -74,6 +74,11 @@ namespace TradingLib.MoniterCore
 
 
         /// <summary>
+        /// 更新配置模板
+        /// </summary>
+        public const string UPDATE_TEMPLATE_CONFIG = "UpdateAccountConfigTemplate";
+
+        /// <summary>
         /// 更新账户路由组
         /// </summary>
         public const string UPDATE_ACC_ROUTEGROUP = "UpdateAccountRouterGroup";
@@ -225,6 +230,11 @@ namespace TradingLib.MoniterCore
         public static int ReqUpdateAccountExStrategyTemplate(this TLClientNet client, string account, int templateid)
         {
             return client.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.UPDATE_TEMPLATE_EXSTRATEGY, account + "," + templateid.ToString());
+        }
+
+        public static int ReqUpdateAccountConfigTemplate(this TLClientNet client, string account, int templateid,bool force)
+        {
+            return client.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.UPDATE_TEMPLATE_CONFIG, new { account = account, template_id = templateid,force=force });
         }
 
         /// <summary>

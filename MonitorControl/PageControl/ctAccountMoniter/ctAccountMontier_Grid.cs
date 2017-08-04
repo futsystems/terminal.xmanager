@@ -51,10 +51,12 @@ namespace TradingLib.MoniterControl
         const string CURRENCY = "基币";
         const string AGENTMGRFK = "AGENTMGRFK";
         const string AGENTCODE = "代理编号";
+        const string CFGNAME = "配置模板";
         const string MEMO = "备注";
         const string DELETE = "DELETE";
         const string TAG = "ACCOUNTTAG";
         const string TAG2 = "ACCOUNTTAG2";
+        const string CFGID = "CONFIGID";
 
         DataTable gt = new DataTable();
         BindingSource datasource = new BindingSource();
@@ -131,6 +133,8 @@ namespace TradingLib.MoniterControl
             //代理编号
             gt.Columns.Add(AGENTCODE);//20
             gt.Columns.Add(AGENTMGRFK);//21
+            gt.Columns.Add(CFGNAME);
+            gt.Columns.Add(CFGID);
             gt.Columns.Add(MEMO);
             gt.Columns.Add(TAG,typeof(AccountItem));
             gt.Columns.Add(TAG2, typeof(AccountStatistic));
@@ -159,6 +163,7 @@ namespace TradingLib.MoniterControl
             accountgrid.Columns[TAG].Visible = false;
             accountgrid.Columns[TAG2].Visible = false;
             accountgrid.Columns[DELETE].Visible = false;
+            accountgrid.Columns[CFGID].Visible = false;
 
             for (int i = 0; i < gt.Columns.Count; i++)
             {
@@ -180,6 +185,7 @@ namespace TradingLib.MoniterControl
             accountgrid.Columns[EXECUTEIMG].Width = 50;
             accountgrid.Columns[CURRENCY].Width = 50;
             accountgrid.Columns[AGENTCODE].Width = 80;
+            accountgrid.Columns[CFGNAME].Width = 80;
         }
 
         private void accountgrid_SizeChanged_FixWidth(object sender, EventArgs e)
@@ -401,7 +407,8 @@ namespace TradingLib.MoniterControl
 
                         gt.Rows[i][EXECUTE] = getExecuteStatus(account.Execute);
                         gt.Rows[i][EXECUTEIMG] = getExecuteStatusImage(account.Execute);
-
+                        gt.Rows[i][CFGNAME] = account.ConfigName;
+                        gt.Rows[i][CFGID] = account.Config_ID;
                         gt.Rows[i][DELETE] = account.Deleted;
                         gt.Rows[i][CURRENCY] = Util.GetEnumDescription(account.Currency);
                         gt.Rows[i][TAG] = account;
@@ -429,6 +436,9 @@ namespace TradingLib.MoniterControl
                         gt.Rows[r][AGENTCODE] = string.Format("{0:d2}-{1}", mgr.ID, mgr.Login);
 
                         gt.Rows[r][NAME] = account.Name;
+
+                        gt.Rows[r][CFGNAME] = account.ConfigName;
+                        gt.Rows[r][CFGID] = account.Config_ID;
                         gt.Rows[r][DELETE] = account.Deleted;
                         
                         gt.Rows[r][CURRENCY] = Util.GetEnumDescription(account.Currency);

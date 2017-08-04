@@ -30,32 +30,39 @@
         {
             this.components = new System.ComponentModel.Container();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.btnAddTemplate = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.templateTree = new ComponentFactory.Krypton.Toolkit.KryptonTreeView();
-            this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.cbExStrategyTemplate = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.currentTitle = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.kryptonLabel15 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.cbExStrategyTemplate = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.btnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonLabel13 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cbMarginTemplate = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.cbCommissionTemplate = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.kryptonLabel13 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.currentTitle = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.btnAddTemplate = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.templateTree = new ComponentFactory.Krypton.Toolkit.KryptonTreeView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.kryptonGroupBox2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.btnRiskRule = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbExStrategyTemplate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbMarginTemplate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbCommissionTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).BeginInit();
             this.kryptonGroupBox1.Panel.SuspendLayout();
             this.kryptonGroupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbExStrategyTemplate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbMarginTemplate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbCommissionTemplate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2.Panel)).BeginInit();
+            this.kryptonGroupBox2.Panel.SuspendLayout();
+            this.kryptonGroupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonGroupBox2);
             this.kryptonPanel1.Controls.Add(this.currentTitle);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
             this.kryptonPanel1.Controls.Add(this.kryptonGroupBox1);
@@ -67,85 +74,21 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(554, 581);
             this.kryptonPanel1.TabIndex = 0;
             // 
-            // btnAddTemplate
+            // currentTitle
             // 
-            this.btnAddTemplate.Location = new System.Drawing.Point(70, 553);
-            this.btnAddTemplate.Name = "btnAddTemplate";
-            this.btnAddTemplate.Size = new System.Drawing.Size(90, 25);
-            this.btnAddTemplate.TabIndex = 20;
-            this.btnAddTemplate.Values.Text = "添加模板";
+            this.currentTitle.Location = new System.Drawing.Point(260, 13);
+            this.currentTitle.Name = "currentTitle";
+            this.currentTitle.Size = new System.Drawing.Size(20, 20);
+            this.currentTitle.TabIndex = 29;
+            this.currentTitle.Values.Text = "--";
             // 
-            // templateTree
+            // kryptonLabel1
             // 
-            this.templateTree.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.templateTree.Location = new System.Drawing.Point(0, 0);
-            this.templateTree.Name = "templateTree";
-            this.templateTree.Size = new System.Drawing.Size(160, 547);
-            this.templateTree.TabIndex = 18;
-            // 
-            // btnSubmit
-            // 
-            this.btnSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSubmit.Location = new System.Drawing.Point(290, 107);
-            this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(70, 25);
-            this.btnSubmit.TabIndex = 13;
-            this.btnSubmit.Values.Text = "提 交";
-            // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // cbExStrategyTemplate
-            // 
-            this.cbExStrategyTemplate.DropDownWidth = 145;
-            this.cbExStrategyTemplate.Location = new System.Drawing.Point(115, 67);
-            this.cbExStrategyTemplate.Name = "cbExStrategyTemplate";
-            this.cbExStrategyTemplate.Size = new System.Drawing.Size(145, 21);
-            this.cbExStrategyTemplate.TabIndex = 26;
-            // 
-            // kryptonLabel15
-            // 
-            this.kryptonLabel15.Location = new System.Drawing.Point(15, 68);
-            this.kryptonLabel15.Name = "kryptonLabel15";
-            this.kryptonLabel15.Size = new System.Drawing.Size(88, 20);
-            this.kryptonLabel15.TabIndex = 25;
-            this.kryptonLabel15.Values.Text = "交易参数模板:";
-            // 
-            // cbMarginTemplate
-            // 
-            this.cbMarginTemplate.DropDownWidth = 145;
-            this.cbMarginTemplate.Location = new System.Drawing.Point(115, 35);
-            this.cbMarginTemplate.Name = "cbMarginTemplate";
-            this.cbMarginTemplate.Size = new System.Drawing.Size(145, 21);
-            this.cbMarginTemplate.TabIndex = 24;
-            // 
-            // cbCommissionTemplate
-            // 
-            this.cbCommissionTemplate.DropDownWidth = 145;
-            this.cbCommissionTemplate.Location = new System.Drawing.Point(116, 5);
-            this.cbCommissionTemplate.Name = "cbCommissionTemplate";
-            this.cbCommissionTemplate.Size = new System.Drawing.Size(145, 21);
-            this.cbCommissionTemplate.TabIndex = 23;
-            // 
-            // kryptonLabel13
-            // 
-            this.kryptonLabel13.Location = new System.Drawing.Point(30, 35);
-            this.kryptonLabel13.Name = "kryptonLabel13";
-            this.kryptonLabel13.Size = new System.Drawing.Size(75, 20);
-            this.kryptonLabel13.TabIndex = 22;
-            this.kryptonLabel13.Values.Text = "保证金模板:";
-            // 
-            // kryptonLabel4
-            // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(30, 6);
-            this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(75, 20);
-            this.kryptonLabel4.TabIndex = 21;
-            this.kryptonLabel4.Values.Text = "手续费模板:";
+            this.kryptonLabel1.Location = new System.Drawing.Point(166, 13);
+            this.kryptonLabel1.Name = "kryptonLabel1";
+            this.kryptonLabel1.Size = new System.Drawing.Size(88, 20);
+            this.kryptonLabel1.TabIndex = 28;
+            this.kryptonLabel1.Values.Text = "当前配置模板:";
             // 
             // kryptonGroupBox1
             // 
@@ -165,21 +108,106 @@
             this.kryptonGroupBox1.TabIndex = 27;
             this.kryptonGroupBox1.Values.Heading = "手续费/保证金";
             // 
-            // kryptonLabel1
+            // kryptonLabel15
             // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(166, 13);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(88, 20);
-            this.kryptonLabel1.TabIndex = 28;
-            this.kryptonLabel1.Values.Text = "当前配置模板:";
+            this.kryptonLabel15.Location = new System.Drawing.Point(15, 68);
+            this.kryptonLabel15.Name = "kryptonLabel15";
+            this.kryptonLabel15.Size = new System.Drawing.Size(88, 20);
+            this.kryptonLabel15.TabIndex = 25;
+            this.kryptonLabel15.Values.Text = "交易参数模板:";
             // 
-            // currentTitle
+            // cbExStrategyTemplate
             // 
-            this.currentTitle.Location = new System.Drawing.Point(260, 13);
-            this.currentTitle.Name = "currentTitle";
-            this.currentTitle.Size = new System.Drawing.Size(20, 20);
-            this.currentTitle.TabIndex = 29;
-            this.currentTitle.Values.Text = "--";
+            this.cbExStrategyTemplate.DropDownWidth = 145;
+            this.cbExStrategyTemplate.Location = new System.Drawing.Point(115, 67);
+            this.cbExStrategyTemplate.Name = "cbExStrategyTemplate";
+            this.cbExStrategyTemplate.Size = new System.Drawing.Size(145, 21);
+            this.cbExStrategyTemplate.TabIndex = 26;
+            // 
+            // kryptonLabel4
+            // 
+            this.kryptonLabel4.Location = new System.Drawing.Point(30, 6);
+            this.kryptonLabel4.Name = "kryptonLabel4";
+            this.kryptonLabel4.Size = new System.Drawing.Size(75, 20);
+            this.kryptonLabel4.TabIndex = 21;
+            this.kryptonLabel4.Values.Text = "手续费模板:";
+            // 
+            // btnSubmit
+            // 
+            this.btnSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSubmit.Location = new System.Drawing.Point(290, 107);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(70, 25);
+            this.btnSubmit.TabIndex = 13;
+            this.btnSubmit.Values.Text = "提 交";
+            // 
+            // kryptonLabel13
+            // 
+            this.kryptonLabel13.Location = new System.Drawing.Point(30, 35);
+            this.kryptonLabel13.Name = "kryptonLabel13";
+            this.kryptonLabel13.Size = new System.Drawing.Size(75, 20);
+            this.kryptonLabel13.TabIndex = 22;
+            this.kryptonLabel13.Values.Text = "保证金模板:";
+            // 
+            // cbMarginTemplate
+            // 
+            this.cbMarginTemplate.DropDownWidth = 145;
+            this.cbMarginTemplate.Location = new System.Drawing.Point(115, 35);
+            this.cbMarginTemplate.Name = "cbMarginTemplate";
+            this.cbMarginTemplate.Size = new System.Drawing.Size(145, 21);
+            this.cbMarginTemplate.TabIndex = 24;
+            // 
+            // cbCommissionTemplate
+            // 
+            this.cbCommissionTemplate.DropDownWidth = 145;
+            this.cbCommissionTemplate.Location = new System.Drawing.Point(116, 5);
+            this.cbCommissionTemplate.Name = "cbCommissionTemplate";
+            this.cbCommissionTemplate.Size = new System.Drawing.Size(145, 21);
+            this.cbCommissionTemplate.TabIndex = 23;
+            // 
+            // btnAddTemplate
+            // 
+            this.btnAddTemplate.Location = new System.Drawing.Point(70, 553);
+            this.btnAddTemplate.Name = "btnAddTemplate";
+            this.btnAddTemplate.Size = new System.Drawing.Size(90, 25);
+            this.btnAddTemplate.TabIndex = 20;
+            this.btnAddTemplate.Values.Text = "添加模板";
+            // 
+            // templateTree
+            // 
+            this.templateTree.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.templateTree.Location = new System.Drawing.Point(0, 0);
+            this.templateTree.Name = "templateTree";
+            this.templateTree.Size = new System.Drawing.Size(160, 547);
+            this.templateTree.TabIndex = 18;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // kryptonGroupBox2
+            // 
+            this.kryptonGroupBox2.Location = new System.Drawing.Point(167, 238);
+            this.kryptonGroupBox2.Name = "kryptonGroupBox2";
+            // 
+            // kryptonGroupBox2.Panel
+            // 
+            this.kryptonGroupBox2.Panel.Controls.Add(this.btnRiskRule);
+            this.kryptonGroupBox2.Size = new System.Drawing.Size(375, 100);
+            this.kryptonGroupBox2.TabIndex = 30;
+            this.kryptonGroupBox2.Values.Heading = "风控规则";
+            // 
+            // btnRiskRule
+            // 
+            this.btnRiskRule.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRiskRule.Location = new System.Drawing.Point(270, 21);
+            this.btnRiskRule.Name = "btnRiskRule";
+            this.btnRiskRule.Size = new System.Drawing.Size(89, 35);
+            this.btnRiskRule.TabIndex = 27;
+            this.btnRiskRule.Values.Text = "编辑风控规则";
             // 
             // fmConfigTemplate
             // 
@@ -196,14 +224,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbExStrategyTemplate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbMarginTemplate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbCommissionTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).EndInit();
             this.kryptonGroupBox1.Panel.ResumeLayout(false);
             this.kryptonGroupBox1.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
             this.kryptonGroupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cbExStrategyTemplate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbMarginTemplate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbCommissionTemplate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2.Panel)).EndInit();
+            this.kryptonGroupBox2.Panel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).EndInit();
+            this.kryptonGroupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -224,5 +256,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox cbCommissionTemplate;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel currentTitle;
+        private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox2;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnRiskRule;
     }
 }

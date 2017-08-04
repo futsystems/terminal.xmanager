@@ -187,6 +187,21 @@ namespace TradingLib.MoniterControl
         }
     }
 
+    public class UpdateConfigTemplateCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            AccountItem account = null;
+            if (!AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
+            {
+                return;
+            }
+            fmEditAccountConfigTemplate fm = new fmEditAccountConfigTemplate();
+            fm.SetAccount(account);
+            fm.ShowDialog();
+            fm.Close();
+        }
+    }
 
     public class EditRiskRuleCommand : AbstractMenuCommand
     {

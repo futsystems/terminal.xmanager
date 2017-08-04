@@ -88,6 +88,9 @@
       <MenuItem id = "UpdateTemplateCommand"
                 label = "手续费/保证金模板"
                 class = "TradingLib.MoniterControl.UpdateTemplateCommand"/>
+      <MenuItem id = "UpdateConfigTemplateCommand"
+                label = "配置模板"
+                class = "TradingLib.MoniterControl.UpdateConfigTemplateCommand"/>
     </ComplexCondition>
     
     <Condition name="PermissionState" permission="r_riskrule">

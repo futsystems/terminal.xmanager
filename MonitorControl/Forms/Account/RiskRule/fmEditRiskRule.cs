@@ -18,7 +18,6 @@ namespace TradingLib.MoniterControl
         public fmEditRiskRule()
         {
             InitializeComponent();
-
             this.Load += new EventHandler(fmRiskRuleConfig_Load);
         }
 
@@ -49,21 +48,15 @@ namespace TradingLib.MoniterControl
             CoreService.EventCore.RegIEventHandler(this);
         }
 
-
-
-        
-
-      
-
-
-
-
         public void OnInit()
         {
 
             CoreService.EventCore.RegisterCallback(Modules.RiskCentre, Method_RiskCentre.QRY_RULEITEM, this.OnRuleItem);
+           
             CoreService.EventCore.RegisterCallback(Modules.RiskCentre, Method_RiskCentre.UPDATE_RULEITEM, this.OnRuleItemUpdate);
             CoreService.EventCore.RegisterCallback(Modules.RiskCentre, Method_RiskCentre.DEL_RULEITEM, this.OnRuleItemDel);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.RiskCentre, Method_RiskCentre.NOTIFY_UPDATE_RISKRULE, OnNotify);
+
             CoreService.TLClient.ReqQryRuleItem(_account, QSEnumRuleType.OrderRule);
             CoreService.TLClient.ReqQryRuleItem(_account, QSEnumRuleType.AccountRule);
         }
@@ -73,8 +66,16 @@ namespace TradingLib.MoniterControl
             CoreService.EventCore.UnRegisterCallback(Modules.RiskCentre, Method_RiskCentre.QRY_RULEITEM, this.OnRuleItem);
             CoreService.EventCore.UnRegisterCallback(Modules.RiskCentre, Method_RiskCentre.UPDATE_RULEITEM, this.OnRuleItemUpdate);
             CoreService.EventCore.UnRegisterCallback(Modules.RiskCentre, Method_RiskCentre.DEL_RULEITEM, this.OnRuleItemDel);
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.RiskCentre, Method_RiskCentre.NOTIFY_UPDATE_RISKRULE, OnNotify);
         }
 
+        void OnNotify(string json)
+        {
+            this.Clear();
+            
+            CoreService.TLClient.ReqQryRuleItem(_account, QSEnumRuleType.OrderRule);
+            CoreService.TLClient.ReqQryRuleItem(_account, QSEnumRuleType.AccountRule);
+        }
         void OnRuleItem(string json, bool islast)
         {
             RuleItem item = CoreService.ParseJsonResponse<RuleItem>(json);
@@ -348,6 +349,20 @@ namespace TradingLib.MoniterControl
 
 
         #region 帐户规则
+        void Clear()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(Clear), new object[] { });
+            }
+            else
+            {
+                accountrulemap.Clear();
+                orderruleitemmap.Clear();
+                MoniterHelper.AdapterToIDataSource(accountRuleItemList).BindDataSource(this.GetAccountRuleItemList());
+                MoniterHelper.AdapterToIDataSource(orderRuleItemList).BindDataSource(this.GetOrderRuleItemList());
+            }
+        }
         Dictionary<int, RuleItem> accountrulemap = new Dictionary<int, RuleItem>();
 
         /// <summary>

@@ -66,7 +66,7 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(407, 391);
+            this.kryptonPanel1.Size = new System.Drawing.Size(452, 400);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // kryptonNavigator1
@@ -86,8 +86,8 @@
             this.kryptonNavigator1.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
             this.kryptonPage1,
             this.kryptonPage2});
-            this.kryptonNavigator1.SelectedIndex = 1;
-            this.kryptonNavigator1.Size = new System.Drawing.Size(407, 391);
+            this.kryptonNavigator1.SelectedIndex = 0;
+            this.kryptonNavigator1.Size = new System.Drawing.Size(452, 400);
             this.kryptonNavigator1.TabIndex = 0;
             this.kryptonNavigator1.Text = "kryptonNavigator1";
             // 
@@ -99,7 +99,7 @@
             this.kryptonPage1.LastVisibleSet = true;
             this.kryptonPage1.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage1.Name = "kryptonPage1";
-            this.kryptonPage1.Size = new System.Drawing.Size(405, 364);
+            this.kryptonPage1.Size = new System.Drawing.Size(450, 373);
             this.kryptonPage1.Text = "交易规则";
             this.kryptonPage1.ToolTipTitle = "Page ToolTip";
             this.kryptonPage1.UniqueName = "5E167244D4D64B87BA8633ED5EBD2643";
@@ -115,12 +115,13 @@
             this.kryptonPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel2.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel2.Name = "kryptonPanel2";
-            this.kryptonPanel2.Size = new System.Drawing.Size(405, 364);
+            this.kryptonPanel2.Size = new System.Drawing.Size(450, 373);
             this.kryptonPanel2.TabIndex = 0;
             // 
             // btnDelOrderRule
             // 
-            this.btnDelOrderRule.Location = new System.Drawing.Point(327, 332);
+            this.btnDelOrderRule.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelOrderRule.Location = new System.Drawing.Point(372, 341);
             this.btnDelOrderRule.Name = "btnDelOrderRule";
             this.btnDelOrderRule.Size = new System.Drawing.Size(70, 25);
             this.btnDelOrderRule.TabIndex = 13;
@@ -136,7 +137,8 @@
             // 
             // btnAddOrderRule
             // 
-            this.btnAddOrderRule.Location = new System.Drawing.Point(327, 153);
+            this.btnAddOrderRule.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddOrderRule.Location = new System.Drawing.Point(372, 153);
             this.btnAddOrderRule.Name = "btnAddOrderRule";
             this.btnAddOrderRule.Size = new System.Drawing.Size(70, 25);
             this.btnAddOrderRule.TabIndex = 12;
@@ -156,16 +158,17 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.orderRuleClassList.Location = new System.Drawing.Point(5, 27);
             this.orderRuleClassList.Name = "orderRuleClassList";
-            this.orderRuleClassList.Size = new System.Drawing.Size(392, 120);
+            this.orderRuleClassList.Size = new System.Drawing.Size(437, 120);
             this.orderRuleClassList.TabIndex = 7;
             // 
             // orderRuleItemList
             // 
-            this.orderRuleItemList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.orderRuleItemList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.orderRuleItemList.Location = new System.Drawing.Point(5, 207);
             this.orderRuleItemList.Name = "orderRuleItemList";
-            this.orderRuleItemList.Size = new System.Drawing.Size(392, 120);
+            this.orderRuleItemList.Size = new System.Drawing.Size(437, 129);
             this.orderRuleItemList.TabIndex = 6;
             // 
             // kryptonPage2
@@ -176,7 +179,7 @@
             this.kryptonPage2.LastVisibleSet = true;
             this.kryptonPage2.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage2.Name = "kryptonPage2";
-            this.kryptonPage2.Size = new System.Drawing.Size(405, 364);
+            this.kryptonPage2.Size = new System.Drawing.Size(450, 373);
             this.kryptonPage2.Text = "强平规则";
             this.kryptonPage2.ToolTipTitle = "Page ToolTip";
             this.kryptonPage2.UniqueName = "F1CECBAB5D7F41FD198ACD1AE45AA574";
@@ -192,12 +195,13 @@
             this.kryptonPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel3.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel3.Name = "kryptonPanel3";
-            this.kryptonPanel3.Size = new System.Drawing.Size(405, 364);
+            this.kryptonPanel3.Size = new System.Drawing.Size(450, 373);
             this.kryptonPanel3.TabIndex = 1;
             // 
             // btnDelAccountRule
             // 
-            this.btnDelAccountRule.Location = new System.Drawing.Point(327, 332);
+            this.btnDelAccountRule.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelAccountRule.Location = new System.Drawing.Point(372, 341);
             this.btnDelAccountRule.Name = "btnDelAccountRule";
             this.btnDelAccountRule.Size = new System.Drawing.Size(70, 25);
             this.btnDelAccountRule.TabIndex = 11;
@@ -205,7 +209,8 @@
             // 
             // btnAddAccountRule
             // 
-            this.btnAddAccountRule.Location = new System.Drawing.Point(327, 153);
+            this.btnAddAccountRule.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddAccountRule.Location = new System.Drawing.Point(372, 153);
             this.btnAddAccountRule.Name = "btnAddAccountRule";
             this.btnAddAccountRule.Size = new System.Drawing.Size(70, 25);
             this.btnAddAccountRule.TabIndex = 10;
@@ -233,23 +238,24 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.accountRuleClassList.Location = new System.Drawing.Point(5, 27);
             this.accountRuleClassList.Name = "accountRuleClassList";
-            this.accountRuleClassList.Size = new System.Drawing.Size(392, 120);
+            this.accountRuleClassList.Size = new System.Drawing.Size(437, 120);
             this.accountRuleClassList.TabIndex = 7;
             // 
             // accountRuleItemList
             // 
-            this.accountRuleItemList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.accountRuleItemList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.accountRuleItemList.Location = new System.Drawing.Point(5, 207);
             this.accountRuleItemList.Name = "accountRuleItemList";
-            this.accountRuleItemList.Size = new System.Drawing.Size(392, 120);
+            this.accountRuleItemList.Size = new System.Drawing.Size(437, 129);
             this.accountRuleItemList.TabIndex = 6;
             // 
             // fmEditRiskRule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(407, 391);
+            this.ClientSize = new System.Drawing.Size(452, 400);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
