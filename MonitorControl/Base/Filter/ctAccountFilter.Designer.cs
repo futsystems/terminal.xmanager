@@ -38,6 +38,13 @@
             this.tbMemo = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btnDebug = new System.Windows.Forms.Button();
+            this.tbConfigTemplate = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonDropButton1 = new ComponentFactory.Krypton.Toolkit.KryptonDropButton();
+            this.batch = new ComponentFactory.Krypton.Toolkit.KryptonContextMenu();
+            this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
+            this.kryptonContextMenuItems2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
+            this.kryptonContextMenuItem1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.accountType)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +65,7 @@
             // 
             // cbLogin
             // 
-            this.cbLogin.Location = new System.Drawing.Point(372, 3);
+            this.cbLogin.Location = new System.Drawing.Point(513, 3);
             this.cbLogin.Name = "cbLogin";
             this.cbLogin.Size = new System.Drawing.Size(48, 20);
             this.cbLogin.TabIndex = 2;
@@ -66,7 +73,7 @@
             // 
             // cbPos
             // 
-            this.cbPos.Location = new System.Drawing.Point(419, 3);
+            this.cbPos.Location = new System.Drawing.Point(560, 3);
             this.cbPos.Name = "cbPos";
             this.cbPos.Size = new System.Drawing.Size(48, 20);
             this.cbPos.TabIndex = 3;
@@ -74,7 +81,7 @@
             // 
             // cbLock
             // 
-            this.cbLock.Location = new System.Drawing.Point(466, 3);
+            this.cbLock.Location = new System.Drawing.Point(607, 3);
             this.cbLock.Name = "cbLock";
             this.cbLock.Size = new System.Drawing.Size(48, 20);
             this.cbLock.TabIndex = 4;
@@ -82,7 +89,7 @@
             // 
             // lbAccNum
             // 
-            this.lbAccNum.Location = new System.Drawing.Point(511, 3);
+            this.lbAccNum.Location = new System.Drawing.Point(652, 3);
             this.lbAccNum.Name = "lbAccNum";
             this.lbAccNum.Size = new System.Drawing.Size(51, 20);
             this.lbAccNum.TabIndex = 5;
@@ -92,21 +99,21 @@
             // 
             this.accountType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.accountType.DropDownWidth = 86;
-            this.accountType.Location = new System.Drawing.Point(275, 2);
+            this.accountType.Location = new System.Drawing.Point(416, 2);
             this.accountType.Name = "accountType";
             this.accountType.Size = new System.Drawing.Size(86, 21);
             this.accountType.TabIndex = 6;
             // 
             // tbMemo
             // 
-            this.tbMemo.Location = new System.Drawing.Point(169, 3);
+            this.tbMemo.Location = new System.Drawing.Point(310, 3);
             this.tbMemo.Name = "tbMemo";
             this.tbMemo.Size = new System.Drawing.Size(100, 20);
             this.tbMemo.TabIndex = 8;
             // 
             // kryptonLabel2
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(136, 3);
+            this.kryptonLabel2.Location = new System.Drawing.Point(277, 3);
             this.kryptonLabel2.Name = "kryptonLabel2";
             this.kryptonLabel2.Size = new System.Drawing.Size(35, 20);
             this.kryptonLabel2.TabIndex = 7;
@@ -114,7 +121,7 @@
             // 
             // btnDebug
             // 
-            this.btnDebug.Location = new System.Drawing.Point(690, 0);
+            this.btnDebug.Location = new System.Drawing.Point(899, 0);
             this.btnDebug.Name = "btnDebug";
             this.btnDebug.Size = new System.Drawing.Size(75, 23);
             this.btnDebug.TabIndex = 9;
@@ -122,11 +129,52 @@
             this.btnDebug.UseVisualStyleBackColor = true;
             this.btnDebug.Visible = false;
             // 
+            // tbConfigTemplate
+            // 
+            this.tbConfigTemplate.Location = new System.Drawing.Point(174, 3);
+            this.tbConfigTemplate.Name = "tbConfigTemplate";
+            this.tbConfigTemplate.Size = new System.Drawing.Size(100, 20);
+            this.tbConfigTemplate.TabIndex = 11;
+            // 
+            // kryptonLabel3
+            // 
+            this.kryptonLabel3.Location = new System.Drawing.Point(139, 3);
+            this.kryptonLabel3.Name = "kryptonLabel3";
+            this.kryptonLabel3.Size = new System.Drawing.Size(35, 20);
+            this.kryptonLabel3.TabIndex = 10;
+            this.kryptonLabel3.Values.Text = "配置";
+            // 
+            // kryptonDropButton1
+            // 
+            this.kryptonDropButton1.KryptonContextMenu = this.batch;
+            this.kryptonDropButton1.Location = new System.Drawing.Point(726, -1);
+            this.kryptonDropButton1.Name = "kryptonDropButton1";
+            this.kryptonDropButton1.Size = new System.Drawing.Size(90, 25);
+            this.kryptonDropButton1.TabIndex = 12;
+            this.kryptonDropButton1.Values.Text = "批量操作";
+            // 
+            // batch
+            // 
+            this.batch.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
+            this.kryptonContextMenuItems2});
+            // 
+            // kryptonContextMenuItems2
+            // 
+            this.kryptonContextMenuItems2.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
+            this.kryptonContextMenuItem1});
+            // 
+            // kryptonContextMenuItem1
+            // 
+            this.kryptonContextMenuItem1.Text = "批量修改配置模板";
+            // 
             // ctAccountFilter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.kryptonDropButton1);
+            this.Controls.Add(this.tbConfigTemplate);
+            this.Controls.Add(this.kryptonLabel3);
             this.Controls.Add(this.btnDebug);
             this.Controls.Add(this.tbMemo);
             this.Controls.Add(this.kryptonLabel2);
@@ -138,7 +186,7 @@
             this.Controls.Add(this.tbAccount);
             this.Controls.Add(this.kryptonLabel1);
             this.Name = "ctAccountFilter";
-            this.Size = new System.Drawing.Size(782, 24);
+            this.Size = new System.Drawing.Size(996, 24);
             ((System.ComponentModel.ISupportInitialize)(this.accountType)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -157,5 +205,12 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox tbMemo;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private System.Windows.Forms.Button btnDebug;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox tbConfigTemplate;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
+        private ComponentFactory.Krypton.Toolkit.KryptonDropButton kryptonDropButton1;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenu batch;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems2;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem1;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems1;
     }
 }

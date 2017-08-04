@@ -33,6 +33,7 @@ namespace TradingLib.MoniterControl
                 filterBox = new ctAccountFilter();
                 filterBox.FilterArgsChanged += new Action<FilterArgs>(OnFilterArgsChanged);
                 filterBox.DebugEvent += new VoidDelegate(filterBox_DebugEvent);
+                filterBox.BatchConfigTemplate += new Action(filterBox_BatchConfigTemplate);
                 this.FilterToolBar = filterBox;
                
                
@@ -43,6 +44,22 @@ namespace TradingLib.MoniterControl
                 MessageBox.Show("error ex:" + ex.ToString());
             }
             
+        }
+
+        void filterBox_BatchConfigTemplate()
+        {
+            List<string> list = new List<string>();
+            int rowcnt = accountgrid.Rows.Count;
+
+            for (int i = 0; i < rowcnt; i++)
+            {
+                list.Add(accountgrid[0,i].Value.ToString());
+            }
+           
+            fmEditAccountConfigTemplate fm = new fmEditAccountConfigTemplate();
+            fm.SetAccount(list.ToArray());
+            fm.ShowDialog();
+            fm.Close();
         }
 
 

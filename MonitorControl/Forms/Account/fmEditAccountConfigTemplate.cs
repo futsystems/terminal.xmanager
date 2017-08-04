@@ -64,8 +64,11 @@ namespace TradingLib.MoniterControl
             if (islast)
             {
                 MoniterHelper.AdapterToIDataSource(cbConfigTemplate).BindDataSource(GetConfigTemplateCBList(configlist));
-                int commissoinid = AnyMathItem(cbConfigTemplate, _account.Config_ID) ? _account.Config_ID : 0;
-                cbConfigTemplate.SelectedValue = commissoinid;
+                if (_account != null)
+                {
+                    int commissoinid = AnyMathItem(cbConfigTemplate, _account.Config_ID) ? _account.Config_ID : 0;
+                    cbConfigTemplate.SelectedValue = commissoinid;
+                }
             }
         }
 
@@ -97,12 +100,27 @@ namespace TradingLib.MoniterControl
             this.Text = string.Format("编辑帐户:{0}配置模板项", account.Account);
 
         }
+
+        string[] _accountArray = null;
+        public void SetAccount(string[] array)
+        {
+            _accountArray = array;
+            this.Text = string.Format("批量编辑配置模板项");
+        }
+
         void btnSubmit_Click(object sender, EventArgs e)
         {
             if (MoniterHelper.WindowConfirm("确认更新帐户配置模板?") == System.Windows.Forms.DialogResult.Yes)
             {
                 int configid = (int)cbConfigTemplate.SelectedValue;
-                CoreService.TLClient.ReqUpdateAccountConfigTemplate(_account.Account, configid,force.Checked);
+                if (_account != null)
+                {
+                    CoreService.TLClient.ReqUpdateAccountConfigTemplate(_account.Account, configid, force.Checked);
+                }
+                if (_accountArray!= null)
+                {
+                    CoreService.TLClient.ReqUpdateAccountConfigTemplate(_accountArray, configid, force.Checked);
+                }
                 this.Close();
             }
             

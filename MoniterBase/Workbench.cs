@@ -326,6 +326,7 @@ namespace TradingLib.MoniterBase
             toolBarFilterHost.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
 
             toolbar.Items.Add(toolBarFilterHost);
+            //toolbar.Height = 26;
 
             //ctAccountFilter filter = new ctAccountFilter();
             //toolBarFilterPanel.Size = new Size(filter.Size.Width, filter.Size.Height);

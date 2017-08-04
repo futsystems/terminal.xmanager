@@ -64,6 +64,12 @@ namespace TradingLib.MoniterControl
                 {
                     strFilter = string.Format(strFilter + " and " + ACCOUNT + " like '{0}*'", filterArgs.AccSearch);
                 }
+
+                //配置检索
+                if (!string.IsNullOrEmpty(filterArgs.ConfigNameSearch))
+                {
+                    strFilter = string.Format(strFilter + " and " + CFGNAME + " like '{0}*'", filterArgs.ConfigNameSearch);
+                }
                 
                 //备注检索
                 if (!string.IsNullOrEmpty(filterArgs.MemoSearch))

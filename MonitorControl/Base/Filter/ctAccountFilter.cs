@@ -15,6 +15,8 @@ namespace TradingLib.MoniterControl
     public partial class ctAccountFilter : UserControl
     {
         public event Action<FilterArgs> FilterArgsChanged = delegate { };
+
+
         void FireFilterArgsChanged(FilterArgs arg)
         {
             FilterArgsChanged(arg);
@@ -35,9 +37,29 @@ namespace TradingLib.MoniterControl
             cbLogin.CheckedChanged += new EventHandler(cbLogin_CheckedChanged);
             cbPos.CheckedChanged += new EventHandler(cbPos_CheckedChanged);
             tbAccount.TextChanged += new EventHandler(tbAccount_TextChanged);
+            tbConfigTemplate.TextChanged += new EventHandler(tbConfigTemplate_TextChanged);
             accountType.SelectedValueChanged += new EventHandler(accountType_SelectedValueChanged);
             tbMemo.TextChanged += new EventHandler(tbMemo_TextChanged);
             btnDebug.Click += new EventHandler(btnDebug_Click);
+
+            kryptonContextMenuItem1.Click += new EventHandler(kryptonContextMenuItem1_Click);
+        }
+
+        public event Action BatchConfigTemplate;
+
+        void kryptonContextMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (BatchConfigTemplate != null)
+            {
+                BatchConfigTemplate();
+            }
+        }
+
+
+        void tbConfigTemplate_TextChanged(object sender, EventArgs e)
+        {
+            _arg.ConfigNameSearch = tbConfigTemplate.Text;
+            FireFilterArgsChanged(_arg);
         }
 
 

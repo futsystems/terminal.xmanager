@@ -234,8 +234,13 @@ namespace TradingLib.MoniterCore
 
         public static int ReqUpdateAccountConfigTemplate(this TLClientNet client, string account, int templateid,bool force)
         {
-            return client.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.UPDATE_TEMPLATE_CONFIG, new { account = account, template_id = templateid,force=force });
+            return client.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.UPDATE_TEMPLATE_CONFIG, new { accounts = account, template_id = templateid, force = force });
         }
+        public static int ReqUpdateAccountConfigTemplate(this TLClientNet client, string[] list, int templateid, bool force)
+        {
+            return client.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.UPDATE_TEMPLATE_CONFIG, new { accounts = string.Join(",", list), template_id = templateid, force = force });
+        }
+
 
         /// <summary>
         /// 修改交易帐户路由组

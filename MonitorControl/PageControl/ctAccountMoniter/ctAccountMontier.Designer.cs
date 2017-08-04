@@ -33,11 +33,11 @@
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.splitContainer = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.agentTree = new ComponentFactory.Krypton.Toolkit.KryptonTreeView();
+            this.ctAgentSummary = new TradingLib.MoniterControl.Base.ctAgentSummary();
             this.kcmFilter = new ComponentFactory.Krypton.Toolkit.KryptonContextMenu();
             this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuItem1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.ctAgentSummary = new TradingLib.MoniterControl.Base.ctAgentSummary();
             ((System.ComponentModel.ISupportInitialize)(this.accountgrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
             this.kryptonPanel2.SuspendLayout();
@@ -67,7 +67,7 @@
             this.accountgrid.RowHeadersVisible = false;
             this.accountgrid.RowTemplate.Height = 23;
             this.accountgrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.accountgrid.Size = new System.Drawing.Size(1255, 586);
+            this.accountgrid.Size = new System.Drawing.Size(1255, 578);
             this.accountgrid.TabIndex = 30;
             // 
             // kryptonPanel2
@@ -108,6 +108,14 @@
             this.agentTree.Size = new System.Drawing.Size(120, 638);
             this.agentTree.TabIndex = 0;
             // 
+            // ctAgentSummary
+            // 
+            this.ctAgentSummary.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctAgentSummary.Location = new System.Drawing.Point(0, 0);
+            this.ctAgentSummary.Name = "ctAgentSummary";
+            this.ctAgentSummary.Size = new System.Drawing.Size(1255, 60);
+            this.ctAgentSummary.TabIndex = 31;
+            // 
             // kcmFilter
             // 
             this.kcmFilter.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
@@ -126,14 +134,6 @@
             // kryptonContextMenuItem2
             // 
             this.kryptonContextMenuItem2.Text = "Menu Item";
-            // 
-            // ctAgentSummary
-            // 
-            this.ctAgentSummary.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctAgentSummary.Location = new System.Drawing.Point(0, 0);
-            this.ctAgentSummary.Name = "ctAgentSummary";
-            this.ctAgentSummary.Size = new System.Drawing.Size(1255, 60);
-            this.ctAgentSummary.TabIndex = 31;
             // 
             // ctAccountMontier
             // 

@@ -43,6 +43,9 @@ namespace TradingLib.MoniterControl
 
         //帐号过滤
         public string AccSearch = string.Empty;
+
+        public string ConfigNameSearch = string.Empty;
+
         //备注过滤
         public string MemoSearch = string.Empty;
     }

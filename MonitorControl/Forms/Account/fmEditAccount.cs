@@ -49,12 +49,12 @@ namespace TradingLib.MoniterControl
 
         void BigView()
         {
-            this.Height = 630;
+            this.Height = 665;
             lbNotice.Visible = true;
             kryptonGroupBox1.Visible = true;
             kryptonGroupBox2.Visible = true;
             kryptonGroupBox3.Visible = true;
-            btnSubmit.Location = new Point(215, 565);
+            btnSubmit.Location = new Point(215, 600);
         }
         void btnFillInfo_CheckedChanged(object sender, EventArgs e)
         {
@@ -71,19 +71,83 @@ namespace TradingLib.MoniterControl
         public void OnInit()
         {
             CoreService.EventCore.RegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_PROFILE, this.OnQryAccountProfile);
+            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_CONFIG_TEMPLATE, this.OnQryConfigTemplate);
             
             //如果设定了交易帐户 则表明是编辑/查询个人信息
             if (_account != null)
             {
                 CoreService.TLClient.ReqQryAccountProfile(_account.Account);
             }
+            CoreService.TLClient.ReqQryConfigTemplate();
         }
 
         public void OnDisposed()
         {
             CoreService.EventCore.UnRegisterCallback(Modules.ACC_MGR, Method_ACC_MGR.QRY_ACC_PROFILE, this.OnQryAccountProfile);
+            CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_CONFIG_TEMPLATE, this.OnQryConfigTemplate);
             
         }
+
+        Dictionary<int, ConfigTemplate> templatemap = new Dictionary<int, ConfigTemplate>();
+        void OnQryConfigTemplate(string json, bool islast)
+        {
+            ConfigTemplate item = CoreService.ParseJsonResponse<ConfigTemplate>(json);
+        
+            if (item != null)
+            {
+                templatemap.Add(item.ID, item);
+            }
+
+            if (islast)
+            {
+                ResetConfigTemplateCombox();
+            }
+        }
+
+        void ResetConfigTemplateCombox()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(ResetConfigTemplateCombox), new object[] { });
+            }
+            else
+            {
+                MoniterHelper.AdapterToIDataSource(cbConfigTemplate).BindDataSource(GetConfigTemplateCBList(templatemap.Values));
+
+                int templateid = AnyMathItem(cbConfigTemplate, _account.Config_ID) ? _account.Config_ID : 0;
+                cbConfigTemplate.SelectedValue = templateid;
+            }
+        }
+
+        bool AnyMathItem(ComponentFactory.Krypton.Toolkit.KryptonComboBox cb, int id)
+        {
+            foreach (var item in cb.Items)
+            {
+                if (((ValueObject<int>)item).Value == id)
+                    return true;
+            }
+            return false;
+        }
+
+
+        static ArrayList GetConfigTemplateCBList(IEnumerable<ConfigTemplate> items)
+        {
+            ArrayList list = new ArrayList();
+            ValueObject<int> vo1 = new ValueObject<int>();
+            vo1.Name = "未设置";
+            vo1.Value = 0;
+            list.Add(vo1);
+
+            foreach (ConfigTemplate item in items)
+            {
+                ValueObject<int> vo = new ValueObject<int>();
+                vo.Name = string.Format("{0}{1}", item.Name, item.Manager_ID != CoreService.SiteInfo.Manager.ID ? "*" : "");
+                vo.Value = item.ID;
+                list.Add(vo);
+            }
+            return list;
+        }
+
 
         void OnQryAccountProfile(string json, bool islast)
         {
@@ -112,6 +176,7 @@ namespace TradingLib.MoniterControl
             cbAccountType.Enabled = false;
             cbCurrency.Enabled = false;
             ctAgentList1.Enabled = false;
+            cbConfigTemplate.Enabled = false;
             //设置可以修改扩展信息
             btnFillInfo.Checked = true;
             cbCurrency.SelectedValue = acc.Currency;
@@ -142,6 +207,7 @@ namespace TradingLib.MoniterControl
             createion.Profile = profile;
             createion.Currency = (CurrencyType)cbCurrency.SelectedValue;
             createion.BaseManagerID = ctAgentList1.CurrentAgentFK;
+            createion.Config_ID = (int)cbConfigTemplate.SelectedValue;
 
             //这里加入数据验证和检查
             if (_account == null)
