@@ -88,9 +88,9 @@ namespace TradingLib.MoniterCore
         /// 强平所有分账户持仓
         /// </summary>
         /// <param name="client"></param>
-        public static int ReqFlatAllPosition(this TLClientNet client)
+        public static int ReqFlatAllPosition(this TLClientNet client,string[] accounts)
         {
-            return client.ReqContribRequest(Modules.RiskCentre, Method_RiskCentre.Flat_ALL, "");
+            return client.ReqContribRequest(Modules.RiskCentre, Method_RiskCentre.Flat_ALL, new { accounts=accounts});
         }
     }
 }

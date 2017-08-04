@@ -43,16 +43,41 @@ namespace TradingLib.MoniterControl
             btnDebug.Click += new EventHandler(btnDebug_Click);
 
             kryptonContextMenuItem1.Click += new EventHandler(kryptonContextMenuItem1_Click);
+            kryptonContextMenuItem2.Click += new EventHandler(kryptonContextMenuItem2_Click);
+            kryptonContextMenuItem3.Click += new EventHandler(kryptonContextMenuItem3_Click);
+            kryptonContextMenuItem4.Click +=new EventHandler(kryptonContextMenuItem4_Click);
+            kryptonContextMenuItem5.Click += new EventHandler(kryptonContextMenuItem5_Click);
         }
 
-        public event Action BatchConfigTemplate;
+        void kryptonContextMenuItem5_Click(object sender, EventArgs e)
+        {
+            BatchFlatPosition();
+        }
+
+        void kryptonContextMenuItem4_Click(object sender, EventArgs e)
+        {
+            BatchInActiveAccount();
+        }
+
+        void kryptonContextMenuItem3_Click(object sender, EventArgs e)
+        {
+            BatchActiveAccount();
+        }
+
+        void kryptonContextMenuItem2_Click(object sender, EventArgs e)
+        {
+            BatchDelAccount();
+        }
+
+        public event Action BatchConfigTemplate = delegate { };
+        public event Action BatchDelAccount = delegate { };
+        public event Action BatchActiveAccount = delegate { };
+        public event Action BatchInActiveAccount = delegate { };
+        public event Action BatchFlatPosition = delegate { };
 
         void kryptonContextMenuItem1_Click(object sender, EventArgs e)
         {
-            if (BatchConfigTemplate != null)
-            {
-                BatchConfigTemplate();
-            }
+            BatchConfigTemplate();
         }
 
 

@@ -157,8 +157,14 @@ namespace TradingLib.MoniterCore
         /// <param name="account"></param>
         public static int ReqDelAccount(this TLClientNet client, string account)
         {
-            return client.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.DEL_ACC, account);
+            return client.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.DEL_ACC, new { accounts = new string[] { account } });
         }
+
+        public static int ReqDelAccount(this TLClientNet client, string[] accounts)
+        {
+            return client.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.DEL_ACC, new { accounts = accounts });
+        }
+
 
         /// <summary>
         /// 查询个人信息
@@ -186,8 +192,15 @@ namespace TradingLib.MoniterCore
 
         public static int ReqUpdateAccountExecute(this TLClientNet client, string account, bool active)
         {
-            return client.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.UPDATE_ACC_EXECUTE, new { account = account, execute = active });
+            return client.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.UPDATE_ACC_EXECUTE, new { accounts = new string[]{account}, execute = active });
         }
+
+        public static int ReqUpdateAccountExecute(this TLClientNet client, string[] accounts, bool active)
+        {
+            return client.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.UPDATE_ACC_EXECUTE, new { accounts = accounts, execute = active });
+        }
+
+
 
         public static int ReqUpdateAccountIntraday(this TLClientNet client, string account, bool intraday)
         {
@@ -234,11 +247,11 @@ namespace TradingLib.MoniterCore
 
         public static int ReqUpdateAccountConfigTemplate(this TLClientNet client, string account, int templateid,bool force)
         {
-            return client.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.UPDATE_TEMPLATE_CONFIG, new { accounts = account, template_id = templateid, force = force });
+            return client.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.UPDATE_TEMPLATE_CONFIG, new { accounts = new string[]{ account}, template_id = templateid, force = force });
         }
         public static int ReqUpdateAccountConfigTemplate(this TLClientNet client, string[] list, int templateid, bool force)
         {
-            return client.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.UPDATE_TEMPLATE_CONFIG, new { accounts = string.Join(",", list), template_id = templateid, force = force });
+            return client.ReqContribRequest(Modules.ACC_MGR, Method_ACC_MGR.UPDATE_TEMPLATE_CONFIG, new { accounts = list, template_id = templateid, force = force });
         }
 
 

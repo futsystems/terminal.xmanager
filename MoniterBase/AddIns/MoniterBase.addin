@@ -240,18 +240,15 @@
       <Condition name="PermissionState" permission="r_account_add" >
       <MenuItem id = "AddFAccountCommand"
               label = "添加交易帐户"
-                shortcut = "Control|A"
               class = "TradingLib.MoniterBase.Command.AddFAccountCommand"/>
       </Condition>
       <Condition name="RoleState" role="root" >
       <MenuItem id = "Separator1" type = "Separator"/>
       <MenuItem id = "MainAccount-Vendor"
               label = "主帐户管理"
-              shortcut = "Control|E"
               class = "TradingLib.MoniterBase.Command.ManagerConnectorCommand"/>
       <MenuItem id = "RouterGroup"
               label = "主帐户组管理"
-              shortcut = "Control|R"
               class = "TradingLib.MoniterBase.Command.RouterGroupCommand"/>
         </Condition>
       </Condition>

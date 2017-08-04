@@ -34,6 +34,10 @@ namespace TradingLib.MoniterControl
                 filterBox.FilterArgsChanged += new Action<FilterArgs>(OnFilterArgsChanged);
                 filterBox.DebugEvent += new VoidDelegate(filterBox_DebugEvent);
                 filterBox.BatchConfigTemplate += new Action(filterBox_BatchConfigTemplate);
+                filterBox.BatchDelAccount += new Action(filterBox_BatchDelAccount);
+                filterBox.BatchActiveAccount += new Action(filterBox_BatchActiveAccount);
+                filterBox.BatchInActiveAccount += new Action(filterBox_BatchInActiveAccount);
+                filterBox.BatchFlatPosition += new Action(filterBox_BatchFlatPosition);
                 this.FilterToolBar = filterBox;
                
                
@@ -46,22 +50,61 @@ namespace TradingLib.MoniterControl
             
         }
 
+        void filterBox_BatchFlatPosition()
+        {
+            if (MoniterHelper.WindowConfirm("批量强平选中账户?") == DialogResult.Yes)
+            {
+                CoreService.TLClient.ReqFlatAllPosition(this.AccountsSelected.ToArray());
+            }
+        }
+
+        void filterBox_BatchInActiveAccount()
+        {
+            if (MoniterHelper.WindowConfirm("批量冻结选中账户?") == DialogResult.Yes)
+            {
+                CoreService.TLClient.ReqUpdateAccountExecute(this.AccountsSelected.ToArray(), false);
+            }
+        }
+
+        void filterBox_BatchActiveAccount()
+        {
+            if (MoniterHelper.WindowConfirm("批量激活选中账户?") == DialogResult.Yes)
+            {
+                CoreService.TLClient.ReqUpdateAccountExecute(this.AccountsSelected.ToArray(),true);
+            }
+        }
+
+        void filterBox_BatchDelAccount()
+        {
+            if (MoniterHelper.WindowConfirm("批量删除选中账户?") == DialogResult.Yes)
+            {
+                CoreService.TLClient.ReqDelAccount(this.AccountsSelected.ToArray());
+            }
+        }
+
         void filterBox_BatchConfigTemplate()
         {
-            List<string> list = new List<string>();
-            int rowcnt = accountgrid.Rows.Count;
-
-            for (int i = 0; i < rowcnt; i++)
-            {
-                list.Add(accountgrid[0,i].Value.ToString());
-            }
-           
             fmEditAccountConfigTemplate fm = new fmEditAccountConfigTemplate();
-            fm.SetAccount(list.ToArray());
+            fm.SetAccount(this.AccountsSelected.ToArray());
             fm.ShowDialog();
             fm.Close();
         }
 
+        public List<string> AccountsSelected
+        {
+            get
+            {
+                List<string> list = new List<string>();
+                int rowcnt = accountgrid.SelectedRows.Count;
+
+                for (int i = 0; i < rowcnt; i++)
+                {
+                    list.Add(accountgrid[0, accountgrid.SelectedRows[i].Index].Value.ToString());
+                }
+
+                return list;
+            }
+        }
 
         void filterBox_DebugEvent()
         {

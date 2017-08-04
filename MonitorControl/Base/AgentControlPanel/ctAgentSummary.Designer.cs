@@ -44,16 +44,16 @@
             this.kryptonContextMenuItems4 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuItem7 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem8 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.kryptonContextMenuSeparator2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuSeparator();
+            this.kryptonContextMenuItem10 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.kryptonContextMenuItems5 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
+            this.kryptonContextMenuItem12 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem5 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItems2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuItems3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuItem3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem4 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonContextMenuSeparator2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuSeparator();
-            this.kryptonContextMenuItem10 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem11 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonContextMenuItems5 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
-            this.kryptonContextMenuItem12 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -162,6 +162,21 @@
             // 
             this.kryptonContextMenuItem8.Text = "结算记录";
             // 
+            // kryptonContextMenuItem10
+            // 
+            this.kryptonContextMenuItem10.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
+            this.kryptonContextMenuItems5});
+            this.kryptonContextMenuItem10.Text = "统计";
+            // 
+            // kryptonContextMenuItems5
+            // 
+            this.kryptonContextMenuItems5.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
+            this.kryptonContextMenuItem12});
+            // 
+            // kryptonContextMenuItem12
+            // 
+            this.kryptonContextMenuItem12.Text = "客户结算统计";
+            // 
             // kryptonContextMenuItem5
             // 
             this.kryptonContextMenuItem5.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
@@ -176,24 +191,9 @@
             // 
             this.kryptonContextMenuItem4.Text = "Menu Item";
             // 
-            // kryptonContextMenuItem10
-            // 
-            this.kryptonContextMenuItem10.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
-            this.kryptonContextMenuItems5});
-            this.kryptonContextMenuItem10.Text = "统计";
-            // 
             // kryptonContextMenuItem11
             // 
             this.kryptonContextMenuItem11.Text = "Menu Item";
-            // 
-            // kryptonContextMenuItems5
-            // 
-            this.kryptonContextMenuItems5.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
-            this.kryptonContextMenuItem12});
-            // 
-            // kryptonContextMenuItem12
-            // 
-            this.kryptonContextMenuItem12.Text = "客户结算统计";
             // 
             // ctAgentSummary
             // 
