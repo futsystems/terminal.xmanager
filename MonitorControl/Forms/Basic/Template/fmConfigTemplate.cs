@@ -118,7 +118,7 @@ namespace TradingLib.MoniterControl
 
         void btnAddTemplate_Click(object sender, EventArgs e)
         {
-            fmTemplateEdit fm = new fmTemplateEdit(TemplateEditType.Strategy);
+            fmTemplateEdit fm = new fmTemplateEdit(TemplateEditType.Config);
             fm.ShowDialog();
         }
 
