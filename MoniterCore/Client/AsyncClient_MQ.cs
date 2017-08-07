@@ -242,22 +242,36 @@ namespace TradingLib.MoniterCore
                     {
                         lock (_client)
                         {
-                            NetMQMessage zmsg = e.Socket.ReceiveMessage(timeout);
-                            Message msg = Message.gotmessage(zmsg.Last.Buffer);
-                            handleMessage(msg);
+                            try
+                            {
+                                NetMQMessage zmsg = e.Socket.ReceiveMessage(timeout);
+                                Message msg = Message.gotmessage(zmsg.Last.Buffer);
+                                handleMessage(msg);
+                            }
+                            catch (Exception ex)
+                            {
+                                logger.Error("Handler Message Error:" + ex.ToString());
+                            }
                         }
                     };
 
                     using (var poller = new Poller())
                     {
-                        _msgpoller = poller;
-                        poller.AddSocket(_client);
-                        //当我们运行到这里的时候才可以认为服务启动完毕
-                        _started = true;
-                        poller.Start();
-                        _client.Disconnect(cstr);
-                        _client.Close();
-                        _client = null;
+                        try
+                        {
+                            _msgpoller = poller;
+                            poller.AddSocket(_client);
+                            //当我们运行到这里的时候才可以认为服务启动完毕
+                            _started = true;
+                            poller.Start();
+                            _client.Disconnect(cstr);
+                            _client.Close();
+                            _client = null;
+                        }
+                        catch (Exception ex)
+                        {
+                            logger.Error("Poller Error:" + ex.ToString());
+                        }
                     }
                     _started = false;
                 }
@@ -345,58 +359,50 @@ namespace TradingLib.MoniterCore
 
                     subscriber.ReceiveReady += (s, e) =>
                     {
-                        string tickstr = subscriber.ReceiveString(Encoding.UTF8);
-                        if (!string.IsNullOrEmpty(tickstr))// && tickstr!="H,")
+                        try
                         {
-                            if (tickstr == "H,")
+                            string tickstr = subscriber.ReceiveString(Encoding.UTF8);
+                            if (!string.IsNullOrEmpty(tickstr))// && tickstr!="H,")
                             {
-                                Message msg = new Message();
-                                msg.Type = MessageTypes.TICKHEARTBEAT;
-                                msg.Content = "H,";
-                                handleMessage(msg);
-                            }
-                            else
-                            {
-                                Message msg = new Message();
-                                msg.Type = MessageTypes.TICKNOTIFY;
-                                msg.Content = tickstr;
+                                if (tickstr == "H,")
+                                {
+                                    Message msg = new Message();
+                                    msg.Type = MessageTypes.TICKHEARTBEAT;
+                                    msg.Content = "H,";
+                                    handleMessage(msg);
+                                }
+                                else
+                                {
+                                    Message msg = new Message();
+                                    msg.Type = MessageTypes.TICKNOTIFY;
+                                    msg.Content = tickstr;
 
-                                handleMessage(msg);
+                                    handleMessage(msg);
+                                }
                             }
                         }
+                        catch (Exception ex)
+                        {
+                            logger.Error("Handle Tick Error:" + ex.ToString());
+                        }
 
-                        //string[] p = tickstr.Split('^');
-                        //if (p.Length == 2)
-                        //{
-                        //    string symbol = p[0];
-                        //    string tickcontent = p[1];
-                        //    Message msg = new Message()
-                        //    {
-                        //        Type = MessageTypes.TICKNOTIFY,
-                        //        Content = tickcontent,
-                        //    };
-
-                        //    handleMessage(msg);
-                        //}
-                        //else if (p[0] == "TICKHEARTBEAT")
-                        //{
-                        //    Message msg = new Message()
-                        //    {
-                        //        Type = MessageTypes.TICKHEARTBEAT,
-                        //        Content = "TICKHEARTBEAT",
-                        //    };
-                        //    handleMessage(msg);
-                        //}
                     };
 
                     using (var poller = new Poller())
                     {
-                        _tickpoller = poller;
-                        poller.AddSocket(subscriber);
-                        _tickreceiveruning = true;
-                        poller.Start();
-                        subscriber.Close();
-                        subscriber = null;
+                        try
+                        {
+                            _tickpoller = poller;
+                            poller.AddSocket(subscriber);
+                            _tickreceiveruning = true;
+                            poller.Start();
+                            subscriber.Close();
+                            subscriber = null;
+                        }
+                        catch (Exception ex)
+                        {
+                            logger.Error("Poller Tick Error:" + ex.ToString());
+                        }
                     }
                     _tickreceiveruning = false;
                 }
@@ -554,35 +560,13 @@ namespace TradingLib.MoniterCore
             if (subscriber == null) return;
             string prefix = symbol + "^";
             subscriber.Subscribe(Encoding.UTF8.GetBytes(prefix));
-            //SubscribeTickHeartBeat();
         }
 
         public void SubscribeAll()
         {
             if (subscriber == null) return;
-            //subscriber.SubscribeAll();
             SubscribeTickHeartBeat();
         }
 
-        ///// <summary>
-        ///// 注销symbol数据
-        ///// </summary>
-        ///// <param name="symbol"></param>
-        //public void Unsubscribe(string symbol)
-        //{
-        //    if (subscriber == null) return;
-        //    string prefix = symbol + "^";
-        //    subscriber.Unsubscribe(Encoding.UTF8.GetBytes(prefix));
-        //    //SubscribeTickHeartBeat();
-        //}
-
-        //public void Unsubscribe()
-        //{
-
-        //    if (subscriber == null) return;
-        //    subscriber.UnsubscribeAll();
-        //    debug("ansycsocket 注销所有市场订阅...", QSEnumDebugLevel.ERROR);
-        //    SubscribeTickHeartBeat();
-        //}
     }
 }
