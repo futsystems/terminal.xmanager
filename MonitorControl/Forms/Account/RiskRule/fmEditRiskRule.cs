@@ -357,10 +357,18 @@ namespace TradingLib.MoniterControl
             }
             else
             {
-                accountrulemap.Clear();
-                orderruleitemmap.Clear();
-                MoniterHelper.AdapterToIDataSource(accountRuleItemList).BindDataSource(this.GetAccountRuleItemList());
-                MoniterHelper.AdapterToIDataSource(orderRuleItemList).BindDataSource(this.GetOrderRuleItemList());
+                try
+                {
+                    accountrulemap.Clear();
+                    orderruleitemmap.Clear();
+                    MoniterHelper.AdapterToIDataSource(accountRuleItemList).BindDataSource(this.GetAccountRuleItemList());
+                    MoniterHelper.AdapterToIDataSource(orderRuleItemList).BindDataSource(this.GetOrderRuleItemList());
+                }
+                catch (Exception ex)
+                { 
+                
+                }
+
             }
         }
         Dictionary<int, RuleItem> accountrulemap = new Dictionary<int, RuleItem>();
