@@ -126,6 +126,29 @@ namespace TradingLib.MoniterBase.Command
         }
     }
 
+    /// <summary>
+    /// 设定默认配置模板
+    /// </summary>
+    public class DefaultConfigTemplateCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            var _agent = CoreService.BasicInfoTracker.GetAgent(CoreService.SiteInfo.Manager.Login);
+            if (_agent == null)
+            {
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("代理财务账户不存在");
+                return;
+            }
+
+            fmEditAgentDefaultConfigTemplate fm = new fmEditAgentDefaultConfigTemplate();
+            fm.SetAccount(_agent);
+            fm.ShowDialog();
+            fm.Close();
+        }
+    }
+
+
+
 
     /// <summary>
     /// 交易时间段管理

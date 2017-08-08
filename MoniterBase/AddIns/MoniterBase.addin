@@ -209,6 +209,9 @@
     <MenuItem id = "ConfigTemplateCommand"
             label = "配置模板管理"
             class = "TradingLib.MoniterBase.Command.ConfigTemplateCommand"/>
+    <MenuItem id = "DefaultConfigTemplateCommand"
+            label = "设置默认配置模板"
+            class = "TradingLib.MoniterBase.Command.DefaultConfigTemplateCommand"/>
     <Condition name="RoleState" role="root" >
     <MenuItem id = "Separator1" type = "Separator"/>
     <MenuItem id = "ExchangeRateCommand"
