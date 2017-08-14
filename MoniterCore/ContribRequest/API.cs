@@ -101,6 +101,17 @@ namespace TradingLib.MoniterCore
         /// 汇潮支付
         /// </summary>
         Ecpss,
+
+        /// <summary>
+        /// 七彩支付
+        /// </summary>
+        Se7Pay,
+
+        /// <summary>
+        /// 钱通资产管理
+        /// </summary>
+        QianTong,
+
     }
 
     public enum EnumBusinessType
