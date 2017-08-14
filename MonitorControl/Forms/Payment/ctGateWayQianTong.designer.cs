@@ -91,7 +91,7 @@
             this.payurl.Name = "payurl";
             this.payurl.Size = new System.Drawing.Size(259, 20);
             this.payurl.TabIndex = 1;
-            this.payurl.Text = "http://www.qtongpay.com/pay/pay.htm\r\n";
+            this.payurl.Text = "http://www.qtongpay.com/pay/pay.htm";
             // 
             // kryptonLabel1
             // 
