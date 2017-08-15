@@ -112,6 +112,12 @@ namespace TradingLib.MoniterCore
         /// </summary>
         QianTong,
 
+
+
+        /// <summary>
+        /// Fjelt
+        /// </summary>
+        Fjelt,
     }
 
     public enum EnumBusinessType
