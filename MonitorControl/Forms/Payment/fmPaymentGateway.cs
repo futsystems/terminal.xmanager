@@ -254,6 +254,14 @@ namespace TradingLib.MoniterControl
                             gwControl = input;
                         }
                         break;
+                    case QSEnumGateWayType.XiaoXiaoPay:
+                        {
+                            ctGateWayXiaoXiaoPay input = new ctGateWayXiaoXiaoPay();
+                            holder.Controls.Add(input);
+                            input.Dock = DockStyle.Fill;
+                            gwControl = input;
+                        }
+                        break;
                     default:
                         break;
                 }

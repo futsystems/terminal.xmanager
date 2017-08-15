@@ -118,6 +118,12 @@ namespace TradingLib.MoniterCore
         /// Fjelt
         /// </summary>
         Fjelt,
+
+
+        /// <summary>
+        /// 小小贝
+        /// </summary>
+        XiaoXiaoPay,
     }
 
     public enum EnumBusinessType
