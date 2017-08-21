@@ -42,6 +42,10 @@
             this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.realizedpl = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.shortpos = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.longpos = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -88,6 +92,10 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.shortpos);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel4);
+            this.kryptonPanel1.Controls.Add(this.longpos);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel7);
             this.kryptonPanel1.Controls.Add(this.label1);
             this.kryptonPanel1.Controls.Add(this.cashout);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel10);
@@ -197,6 +205,46 @@
             this.kryptonLabel6.TabIndex = 4;
             this.kryptonLabel6.Values.Text = "平仓盈亏:";
             // 
+            // shortpos
+            // 
+            this.shortpos.Location = new System.Drawing.Point(559, 30);
+            this.shortpos.Name = "shortpos";
+            this.shortpos.Size = new System.Drawing.Size(31, 26);
+            this.shortpos.StateCommon.ShortText.Color1 = System.Drawing.Color.White;
+            this.shortpos.StateCommon.ShortText.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.shortpos.TabIndex = 16;
+            this.shortpos.Values.Text = "22";
+            // 
+            // kryptonLabel4
+            // 
+            this.kryptonLabel4.Location = new System.Drawing.Point(511, 30);
+            this.kryptonLabel4.Name = "kryptonLabel4";
+            this.kryptonLabel4.Size = new System.Drawing.Size(49, 26);
+            this.kryptonLabel4.StateCommon.ShortText.Color1 = System.Drawing.Color.White;
+            this.kryptonLabel4.StateCommon.ShortText.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.kryptonLabel4.TabIndex = 15;
+            this.kryptonLabel4.Values.Text = "空头:";
+            // 
+            // longpos
+            // 
+            this.longpos.Location = new System.Drawing.Point(558, 4);
+            this.longpos.Name = "longpos";
+            this.longpos.Size = new System.Drawing.Size(31, 26);
+            this.longpos.StateCommon.ShortText.Color1 = System.Drawing.Color.White;
+            this.longpos.StateCommon.ShortText.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.longpos.TabIndex = 14;
+            this.longpos.Values.Text = "11";
+            // 
+            // kryptonLabel7
+            // 
+            this.kryptonLabel7.Location = new System.Drawing.Point(511, 4);
+            this.kryptonLabel7.Name = "kryptonLabel7";
+            this.kryptonLabel7.Size = new System.Drawing.Size(49, 26);
+            this.kryptonLabel7.StateCommon.ShortText.Color1 = System.Drawing.Color.White;
+            this.kryptonLabel7.StateCommon.ShortText.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.kryptonLabel7.TabIndex = 13;
+            this.kryptonLabel7.Values.Text = "多头:";
+            // 
             // ctCustSummary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -228,6 +276,10 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel cashin;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel12;
         private System.Windows.Forms.Label label1;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel shortpos;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel longpos;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
 
     }
 }

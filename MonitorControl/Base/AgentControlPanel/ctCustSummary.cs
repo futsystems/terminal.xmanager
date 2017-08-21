@@ -27,6 +27,9 @@ namespace TradingLib.MoniterControl
             unrealizedpl.Text = EMPTY;
             cashin.Text = EMPTY;
             cashout.Text = EMPTY;
+            longpos.Text = EMPTY;
+            shortpos.Text = EMPTY;
+
         }
 
         public void GotAgentStatic(AgentStatistic info)
@@ -43,6 +46,9 @@ namespace TradingLib.MoniterControl
                 unrealizedpl.Text = info.CustUnRealizedPL.ToFormatStr();
                 cashin.Text = info.CustCashIn.ToFormatStr();
                 cashout.Text = info.CustCashOut.ToFormatStr();
+
+                longpos.Text = info.CustLongPositionSize.ToString();
+                shortpos.Text = info.CustShortPositionSize.ToString();
             }
         }
     }

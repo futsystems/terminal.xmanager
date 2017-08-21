@@ -51,12 +51,14 @@ namespace TradingLib.MoniterControl
         public void SetManger(ManagerSetting mgr)
         {
             this.login.Enabled = false;//登入用户名不可编辑
+            this.type.Enabled = false;//管理员类别不可修改
             this.agentBox.Visible = false;
             this.agentType.Enabled = false;
             
             _manger = mgr;
             this.Text = string.Format("编辑管理员:{0} 分区:{1}",_manger.Login,_manger.domain_id);
             this.login.Text = _manger.Login;
+            this.type.SelectedValue = _manger.Type;
             if (_manger.Type == QSEnumManagerType.AGENT)
             {
                 agentBox.Visible = true;

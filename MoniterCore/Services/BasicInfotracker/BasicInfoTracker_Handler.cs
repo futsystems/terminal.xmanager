@@ -398,6 +398,8 @@ namespace TradingLib.MoniterCore
                 target.Deleted = manager.Deleted;
                 target.DeletedSettleday = manager.DeletedSettleday;
 
+                //manager可能会被相关对象引用 因此需要直接更新属性,其下级属性直接更新  如果保存了对Profile的引用 更新后会导致原始引用值没有正常更新的问题
+                target.Profile = manager.Profile;
             }
             else
             {

@@ -30,7 +30,7 @@ namespace TradingLib.MoniterControl
         void fmManagerCentre_Load(object sender, EventArgs e)
         {
             this.mgrgrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(mgrgrid_RowPrePaint);
-            this.mgrgrid.CellFormatting += new DataGridViewCellFormattingEventHandler(mgrgrid_CellFormatting);
+            //this.mgrgrid.CellFormatting += new DataGridViewCellFormattingEventHandler(mgrgrid_CellFormatting);
             this.mgrgrid.DoubleClick += new EventHandler(mgrgrid_DoubleClick);
             CoreService.EventCore.RegIEventHandler(this);
         }
@@ -354,6 +354,8 @@ namespace TradingLib.MoniterControl
                     gt.Rows.Add(manger.ID);
                     int i = gt.Rows.Count - 1;
                     gt.Rows[i][LOGIN] = manger.Login;
+                    gt.Rows[i][MGRNAME] = manger.Profile.Name;
+
                     gt.Rows[i][MGRTYPESTR] = Util.GetEnumDescription(manger.Type);
                     gt.Rows[i][MGRTYPE] = manger.Type;
                     gt.Rows[i][ACCNUMLIMIT] = manger.Type == QSEnumManagerType.AGENT ? manger.AccLimit.ToString() : "";
@@ -370,6 +372,8 @@ namespace TradingLib.MoniterControl
                 {
                     int i = r;
                     gt.Rows[i][LOGIN] = manger.Login;
+                    gt.Rows[i][MGRNAME] = manger.Profile.Name;
+
                     gt.Rows[i][MGRTYPESTR] = Util.GetEnumDescription(manger.Type);
                     gt.Rows[i][MGRTYPE] = manger.Type;
                     gt.Rows[i][ACCNUMLIMIT] = manger.Type == QSEnumManagerType.AGENT ? manger.AccLimit.ToString() : "";
@@ -387,6 +391,7 @@ namespace TradingLib.MoniterControl
 
         const string ID = "全局ID";
         const string LOGIN = "用户名";
+        const string MGRNAME = "MGRNAME";
         const string MGRTYPE = "MGRTYPE";
         const string MGRTYPESTR = "柜员类型";
         const string ACCNUMLIMIT = "帐户数量";
@@ -442,6 +447,7 @@ namespace TradingLib.MoniterControl
         {
             gt.Columns.Add(ID);//0
             gt.Columns.Add(LOGIN);//1
+            gt.Columns.Add(MGRNAME);//2
             gt.Columns.Add(MGRTYPE);//2
             gt.Columns.Add(MGRTYPESTR);//3
             gt.Columns.Add(ACCNUMLIMIT);//4
