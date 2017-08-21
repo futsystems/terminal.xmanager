@@ -19,8 +19,9 @@ namespace TradingLib.MoniterControl
             panelIncome.StateCommon.Color1 = Color.DimGray;
             panelLastEquity.StateCommon.Color1 = Color.DimGray;
             panelCost.StateCommon.Color1 = Color.DimGray;
+            this.Ratio = 1;
         }
-
+        public decimal Ratio { get; set; } 
         const string EMPTY = "--";
         public void Reset()
         {
@@ -74,14 +75,14 @@ namespace TradingLib.MoniterControl
             }
             else
             {
-                lastequity.Text = info.LastEquity.ToFormatStr();
-                commissioncost.Text = info.CommissionCost.ToFormatStr();
-                commissionincome.Text = info.CommissioinIncome.ToFormatStr();
+                lastequity.Text = (info.LastEquity*this.Ratio).ToFormatStr();
+                commissioncost.Text = (info.CommissionCost*this.Ratio).ToFormatStr();
+                commissionincome.Text = (info.CommissioinIncome*this.Ratio).ToFormatStr();
 
-                staticequity.Text = info.StaticEquity.ToFormatStr();
-                canuseequity.Text = (info.StaticEquity - info.SubStaticEquity).ToFormatStr();
-                nowequity.Text = info.NowEquity.ToFormatStr();
-                flatequity.Text = info.FlatEquity.ToFormatStr();
+                staticequity.Text = (info.StaticEquity*this.Ratio).ToFormatStr();
+                canuseequity.Text = ((info.StaticEquity - info.SubStaticEquity)*this.Ratio).ToFormatStr();
+                nowequity.Text = (info.NowEquity*this.Ratio).ToFormatStr();
+                flatequity.Text = (info.FlatEquity * this.Ratio).ToFormatStr();
             }
         }
 

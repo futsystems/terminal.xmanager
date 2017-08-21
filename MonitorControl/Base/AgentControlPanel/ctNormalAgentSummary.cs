@@ -16,8 +16,9 @@ namespace TradingLib.MoniterControl
         public ctNormalAgentSummary()
         {
             InitializeComponent();
+            this.Ratio = 1;
         }
-
+        public decimal Ratio { get; set; }
         const string EMPTY = "--";
         public void Reset()
         {
@@ -35,9 +36,9 @@ namespace TradingLib.MoniterControl
             }
             else
             {
-                lastequity.Text = info.LastEquity.ToFormatStr();
-                commissioncost.Text = info.CommissionCost.ToFormatStr();
-                commissionincome.Text = info.CommissioinIncome.ToFormatStr();
+                lastequity.Text = (info.LastEquity*this.Ratio).ToFormatStr();
+                commissioncost.Text = (info.CommissionCost*this.Ratio).ToFormatStr();
+                commissionincome.Text = (info.CommissioinIncome * this.Ratio).ToFormatStr();
             }
         }
     }

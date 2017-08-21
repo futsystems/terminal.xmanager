@@ -435,7 +435,7 @@ namespace TradingLib.MoniterControl
         private void btnFilterPlaced_CheckedChanged(object sender, EventArgs args)
         {
             string strFilter = DATETIME + " ASC";
-            strFilter = String.Format(STATUS + " = '{0}' or " + STATUS + " = '{1}'", "Placed", "Opened");
+            strFilter = String.Format(STATUS + " = '{0}' or " + STATUS + " = '{1}' or " + STATUS + " = '{2}'", "Placed", "Opened", "PartFilled");
             datasource.Filter = strFilter;
         }
 

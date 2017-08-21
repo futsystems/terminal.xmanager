@@ -16,6 +16,7 @@ namespace TradingLib.MoniterControl
         public ctCustSummary()
         {
             InitializeComponent();
+            this.Ratio = 1;
         }
 
         const string EMPTY = "--";
@@ -29,8 +30,9 @@ namespace TradingLib.MoniterControl
             cashout.Text = EMPTY;
             longpos.Text = EMPTY;
             shortpos.Text = EMPTY;
-
         }
+
+        public decimal Ratio { get; set; }
 
         public void GotAgentStatic(AgentStatistic info)
         {
@@ -40,12 +42,12 @@ namespace TradingLib.MoniterControl
             }
             else
             {
-                margin.Text = info.CustMargin.ToFormatStr();
-                marginfrzoen.Text = info.CustForzenMargin.ToFormatStr();
-                realizedpl.Text = info.CustRealizedPL.ToFormatStr();
-                unrealizedpl.Text = info.CustUnRealizedPL.ToFormatStr();
-                cashin.Text = info.CustCashIn.ToFormatStr();
-                cashout.Text = info.CustCashOut.ToFormatStr();
+                margin.Text = (info.CustMargin * Ratio).ToFormatStr();
+                marginfrzoen.Text = (info.CustForzenMargin* Ratio).ToFormatStr();
+                realizedpl.Text = (info.CustRealizedPL* Ratio).ToFormatStr();
+                unrealizedpl.Text = (info.CustUnRealizedPL* Ratio).ToFormatStr();
+                cashin.Text = (info.CustCashIn* Ratio).ToFormatStr();
+                cashout.Text = (info.CustCashOut* Ratio).ToFormatStr();
 
                 longpos.Text = info.CustLongPositionSize.ToString();
                 shortpos.Text = info.CustShortPositionSize.ToString();

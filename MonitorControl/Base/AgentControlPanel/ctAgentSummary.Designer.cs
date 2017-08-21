@@ -53,15 +53,20 @@
             this.kryptonContextMenuItem3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem4 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem11 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.cbCurrency = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.ctSelfOperateAgentSummary = new TradingLib.MoniterControl.ctSelfOperateAgentSummary();
             this.ctCustSummary = new TradingLib.MoniterControl.ctCustSummary();
             this.ctNormalAgentSummary = new TradingLib.MoniterControl.ctNormalAgentSummary();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbCurrency)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
+            this.kryptonPanel1.Controls.Add(this.cbCurrency);
             this.kryptonPanel1.Controls.Add(this.ctSelfOperateAgentSummary);
             this.kryptonPanel1.Controls.Add(this.ctCustSummary);
             this.kryptonPanel1.Controls.Add(this.ctNormalAgentSummary);
@@ -69,7 +74,7 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(1159, 60);
+            this.kryptonPanel1.Size = new System.Drawing.Size(1228, 60);
             this.kryptonPanel1.StateCommon.Color1 = System.Drawing.Color.DimGray;
             this.kryptonPanel1.TabIndex = 0;
             // 
@@ -178,12 +183,38 @@
             // 
             this.kryptonContextMenuItem11.Text = "Menu Item";
             // 
+            // cbCurrency
+            // 
+            this.cbCurrency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCurrency.DropDownWidth = 69;
+            this.cbCurrency.Location = new System.Drawing.Point(1156, 34);
+            this.cbCurrency.Name = "cbCurrency";
+            this.cbCurrency.Size = new System.Drawing.Size(69, 21);
+            this.cbCurrency.TabIndex = 18;
+            // 
+            // kryptonLabel1
+            // 
+            this.kryptonLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.kryptonLabel1.Location = new System.Drawing.Point(1156, 3);
+            this.kryptonLabel1.Name = "kryptonLabel1";
+            this.kryptonLabel1.Size = new System.Drawing.Size(69, 23);
+            this.kryptonLabel1.StateCommon.ShortText.Color1 = System.Drawing.Color.Gainsboro;
+            this.kryptonLabel1.StateCommon.ShortText.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.kryptonLabel1.TabIndex = 19;
+            this.kryptonLabel1.Values.Text = "折算货币";
+            // 
             // ctSelfOperateAgentSummary
             // 
             this.ctSelfOperateAgentSummary.BackColor = System.Drawing.SystemColors.Control;
             this.ctSelfOperateAgentSummary.IsRootView = false;
             this.ctSelfOperateAgentSummary.Location = new System.Drawing.Point(301, 0);
             this.ctSelfOperateAgentSummary.Name = "ctSelfOperateAgentSummary";
+            this.ctSelfOperateAgentSummary.Ratio = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.ctSelfOperateAgentSummary.Size = new System.Drawing.Size(173, 60);
             this.ctSelfOperateAgentSummary.TabIndex = 17;
             // 
@@ -192,6 +223,11 @@
             this.ctCustSummary.BackColor = System.Drawing.Color.DimGray;
             this.ctCustSummary.Location = new System.Drawing.Point(550, 0);
             this.ctCustSummary.Name = "ctCustSummary";
+            this.ctCustSummary.Ratio = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.ctCustSummary.Size = new System.Drawing.Size(606, 60);
             this.ctCustSummary.TabIndex = 16;
             // 
@@ -200,6 +236,11 @@
             this.ctNormalAgentSummary.BackColor = System.Drawing.Color.DimGray;
             this.ctNormalAgentSummary.Location = new System.Drawing.Point(91, 0);
             this.ctNormalAgentSummary.Name = "ctNormalAgentSummary";
+            this.ctNormalAgentSummary.Ratio = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.ctNormalAgentSummary.Size = new System.Drawing.Size(149, 60);
             this.ctNormalAgentSummary.TabIndex = 15;
             // 
@@ -209,9 +250,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.kryptonPanel1);
             this.Name = "ctAgentSummary";
-            this.Size = new System.Drawing.Size(1159, 60);
+            this.Size = new System.Drawing.Size(1228, 60);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
+            this.kryptonPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbCurrency)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -246,5 +289,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem11;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem13;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuSeparator kryptonContextMenuSeparator3;
+        private ComponentFactory.Krypton.Toolkit.KryptonComboBox cbCurrency;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
     }
 }

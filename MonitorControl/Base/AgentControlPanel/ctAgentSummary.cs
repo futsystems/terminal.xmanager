@@ -21,6 +21,7 @@ namespace TradingLib.MoniterControl.Base
            
             CoreService.EventCore.RegIEventHandler(this);
 
+            MoniterHelper.AdapterToIDataSource(cbCurrency).BindDataSource(MoniterHelper.GetEnumValueObjects<CurrencyType>());
             ctNormalAgentSummary.Location = new Point(90, 0);
             ctNormalAgentSummary.Size = new System.Drawing.Size(120*3, 60);
             ctCustSummary.Location = new Point(90 + 120 * 3, 0);
@@ -28,6 +29,16 @@ namespace TradingLib.MoniterControl.Base
             this.Reset();
 
             WireEvent();
+        }
+
+        decimal GetRatio(CurrencyType targetCurrency)
+        {
+            if (targetCurrency == CurrencyType.RMB) return 1;
+            //获得品种货币对应的汇率 返回中间汇率
+            ExchangeRate secRate = CoreService.BasicInfoTracker.GetExchangeRate(targetCurrency);// BasicTracker.ExchangeRateTracker[TLCtxHelper.ModuleSettleCentre.Tradingday, sec.Currency];
+            if (secRate == null) return 1;//没有找到品种汇率 则默认返回1
+            return 1/secRate.IntermediateRate;
+          
         }
 
         void WireEvent()
@@ -41,6 +52,18 @@ namespace TradingLib.MoniterControl.Base
            
             kryptonContextMenuItem12.Click += new EventHandler(kryptonContextMenuItem12_Click);//下级账户结算统计
             kryptonContextMenuItem13.Click += new EventHandler(kryptonContextMenuItem13_Click);//默认配置模板
+            cbCurrency.SelectedValue = CurrencyType.RMB;
+            cbCurrency.SelectedIndexChanged += new EventHandler(cbCurrency_SelectedIndexChanged);
+        }
+
+        void cbCurrency_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CurrencyType currency = (CurrencyType)cbCurrency.SelectedValue;
+
+            decimal ratio = this.GetRatio(currency);
+            ctNormalAgentSummary.Ratio = ratio;
+            ctSelfOperateAgentSummary.Ratio = ratio;
+            ctCustSummary.Ratio = ratio;
         }
 
         void kryptonContextMenuItem13_Click(object sender, EventArgs e)
