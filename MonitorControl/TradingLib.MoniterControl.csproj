@@ -137,6 +137,12 @@
     <Compile Include="Base\Filter\ctFollowItemFilter.Designer.cs">
       <DependentUpon>ctFollowItemFilter.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\Filter\fmBlockSecurity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\Filter\fmBlockSecurity.Designer.cs">
+      <DependentUpon>fmBlockSecurity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\Follow\ctFollowItemList.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -758,6 +764,12 @@
     <Compile Include="Forms\Payment\ctGateWayXiaoXiaoPay.designer.cs">
       <DependentUpon>ctGateWayXiaoXiaoPay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Payment\ctGateWayZhongWeiPay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Payment\ctGateWayZhongWeiPay.designer.cs">
+      <DependentUpon>ctGateWayZhongWeiPay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Report\fmHistSettlement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1107,6 +1119,9 @@
     <EmbeddedResource Include="Base\Filter\ctFollowItemFilter.resx">
       <DependentUpon>ctFollowItemFilter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Base\Filter\fmBlockSecurity.resx">
+      <DependentUpon>fmBlockSecurity.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Base\Follow\ctFollowItemList.resx">
       <DependentUpon>ctFollowItemList.cs</DependentUpon>
     </EmbeddedResource>
@@ -1416,6 +1431,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Payment\ctGateWayXiaoXiaoPay.resx">
       <DependentUpon>ctGateWayXiaoXiaoPay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Payment\ctGateWayZhongWeiPay.resx">
+      <DependentUpon>ctGateWayZhongWeiPay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Report\fmHistSettlement.resx">
       <DependentUpon>fmHistSettlement.cs</DependentUpon>

@@ -66,10 +66,10 @@ namespace TradingLib.MoniterControl
             module_slip.Visible = CoreService.SiteInfo.Domain.Module_Slip;
             module_insert.Visible = CoreService.SiteInfo.Domain.Misc_InsertTrade;
 
-            cfg_device_droid.Visible = CoreService.SiteInfo.Domain.Device_Droid;
-            cfg_device_ios.Visible = CoreService.SiteInfo.Domain.Device_IOS;
-            cfg_md5key.Visible = !string.IsNullOrEmpty(CoreService.SiteInfo.Domain.Cfg_MD5Key);
-            kryptonLabel22.Visible = cfg_md5key.Visible;
+            //cfg_device_droid.Visible = CoreService.SiteInfo.Domain.Device_Droid;
+            //cfg_device_ios.Visible = CoreService.SiteInfo.Domain.Device_IOS;
+            //cfg_md5key.Visible = !string.IsNullOrEmpty(CoreService.SiteInfo.Domain.Cfg_MD5Key);
+            //kryptonLabel22.Visible = cfg_md5key.Visible;
 
 
         }

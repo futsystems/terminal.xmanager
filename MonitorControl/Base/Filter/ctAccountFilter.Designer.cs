@@ -52,6 +52,8 @@
             this.kryptonContextMenuItem5 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuSeparator1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuSeparator();
+            this.kryptonContextMenuSeparator4 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuSeparator();
+            this.kryptonContextMenuItem6 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.accountType)).BeginInit();
             this.SuspendLayout();
             // 
@@ -174,7 +176,9 @@
             this.kryptonContextMenuItem4,
             this.kryptonContextMenuSeparator3,
             this.kryptonContextMenuItem2,
-            this.kryptonContextMenuItem5});
+            this.kryptonContextMenuItem5,
+            this.kryptonContextMenuSeparator4,
+            this.kryptonContextMenuItem6});
             // 
             // kryptonContextMenuItem1
             // 
@@ -195,6 +199,10 @@
             // kryptonContextMenuItem5
             // 
             this.kryptonContextMenuItem5.Text = "批量强平";
+            // 
+            // kryptonContextMenuItem6
+            // 
+            this.kryptonContextMenuItem6.Text = "临时冻结品种";
             // 
             // ctAccountFilter
             // 
@@ -248,5 +256,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuSeparator kryptonContextMenuSeparator1;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuSeparator kryptonContextMenuSeparator3;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem5;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuSeparator kryptonContextMenuSeparator4;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem6;
     }
 }

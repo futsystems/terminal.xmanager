@@ -12,7 +12,7 @@ using TradingLib.MoniterCore;
 
 namespace TradingLib.MoniterControl
 {
-    public partial class ctAccountFilter : UserControl
+    public partial class ctAccountFilter : UserControl,IEventBinder
     {
         public event Action<FilterArgs> FilterArgsChanged = delegate { };
 
@@ -31,6 +31,23 @@ namespace TradingLib.MoniterControl
         }
         FilterArgs _arg = new FilterArgs();
 
+        public void OnInit()
+        {
+            kryptonContextMenuSeparator4.Visible = false;
+            kryptonContextMenuItem6.Visible = false;
+            if (CoreService.SiteInfo.Manager.IsRoot())
+            {
+                kryptonContextMenuSeparator4.Visible = true;
+                kryptonContextMenuItem6.Visible = true;
+            }
+        }
+
+        public void OnDisposed()
+        {
+        
+        }
+
+
         void ctFilter_Load(object sender, EventArgs e)
         {
             cbLock.CheckStateChanged += new EventHandler(cbExecute_CheckStateChanged);
@@ -47,6 +64,17 @@ namespace TradingLib.MoniterControl
             kryptonContextMenuItem3.Click += new EventHandler(kryptonContextMenuItem3_Click);
             kryptonContextMenuItem4.Click +=new EventHandler(kryptonContextMenuItem4_Click);
             kryptonContextMenuItem5.Click += new EventHandler(kryptonContextMenuItem5_Click);
+
+            kryptonContextMenuItem6.Click += new EventHandler(kryptonContextMenuItem6_Click);//临时冻结品种
+
+            CoreService.EventCore.RegIEventHandler(this);
+        }
+
+        void kryptonContextMenuItem6_Click(object sender, EventArgs e)
+        {
+            fmBlockSecurity fm = new fmBlockSecurity();
+            fm.ShowDialog();
+            fm.Close();
         }
 
         void kryptonContextMenuItem5_Click(object sender, EventArgs e)

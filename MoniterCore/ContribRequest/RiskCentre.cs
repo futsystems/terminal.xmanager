@@ -40,6 +40,16 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public const string Flat_ALL = "FlatAllPosition";
 
+
+        /// <summary>
+        /// 请求冻结品种
+        /// </summary>
+        public const string REQ_BLOCK_SEC = "BlockSecurity";
+
+        /// <summary>
+        /// 查询冻结品种
+        /// </summary>
+        public const string QRY_SEC_BLOCKED = "QrySecurityBlock";
     }
 
     public static class Client_RiskCentre
@@ -91,6 +101,15 @@ namespace TradingLib.MoniterCore
         public static int ReqFlatAllPosition(this TLClientNet client,string[] accounts)
         {
             return client.ReqContribRequest(Modules.RiskCentre, Method_RiskCentre.Flat_ALL, new { accounts=accounts});
+        }
+
+        public static int ReqQrySecurityBlocked(this TLClientNet client)
+        {
+            return client.ReqContribRequest(Modules.RiskCentre, Method_RiskCentre.QRY_SEC_BLOCKED, "");
+        }
+         public static int ReqBlockSecurity(this TLClientNet client,string[] secs)
+        {
+            return client.ReqContribRequest(Modules.RiskCentre, Method_RiskCentre.REQ_BLOCK_SEC, secs);
         }
     }
 }
