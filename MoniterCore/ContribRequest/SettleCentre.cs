@@ -160,7 +160,7 @@ namespace TradingLib.MoniterCore
 
         public static int ReqDelSettleData(this TLClientNet client)
         {
-            return client.ReqContribRequest(Modules.SettleCentre, Method_SettleCentre.REQ_STOREDATA, "");
+            return client.ReqContribRequest(Modules.SettleCentre, Method_SettleCentre.REQ_DELDATA, "");
 
         }
     }

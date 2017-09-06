@@ -42,23 +42,23 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(148, 138);
+            this.kryptonPanel1.Size = new System.Drawing.Size(220, 138);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // kryptonButton1
             // 
             this.kryptonButton1.Location = new System.Drawing.Point(12, 43);
             this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.Size = new System.Drawing.Size(115, 25);
+            this.kryptonButton1.Size = new System.Drawing.Size(177, 25);
             this.kryptonButton1.TabIndex = 1;
-            this.kryptonButton1.Values.Text = "删除已结算数据";
+            this.kryptonButton1.Values.Text = "清空临时表已结算数据";
             this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
             // 
             // btnStoreAll
             // 
             this.btnStoreAll.Location = new System.Drawing.Point(12, 12);
             this.btnStoreAll.Name = "btnStoreAll";
-            this.btnStoreAll.Size = new System.Drawing.Size(115, 25);
+            this.btnStoreAll.Size = new System.Drawing.Size(177, 25);
             this.btnStoreAll.TabIndex = 0;
             this.btnStoreAll.Values.Text = "转储已结算数据";
             this.btnStoreAll.Click += new System.EventHandler(this.btnStoreAll_Click);
@@ -67,7 +67,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(148, 138);
+            this.ClientSize = new System.Drawing.Size(220, 138);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
