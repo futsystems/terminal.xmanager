@@ -64,7 +64,6 @@ namespace TradingLib.MoniterControl
 
 
             btnAddTemplate.Click += new EventHandler(btnAddTemplate_Click);
-
             btnSubmit.Click += new EventHandler(btnSubmit_Click);
             btnRiskRule.Click += new EventHandler(btnRiskRule_Click);
 
@@ -361,7 +360,6 @@ namespace TradingLib.MoniterControl
             if (islast)
             {
                 MoniterHelper.AdapterToIDataSource(cbCommissionTemplate).BindDataSource(GetCommissionTemplateCBList(commissionList));
-                //int commissoinid = AnyMathItem(cbCommissionTemplate, _account.Commissin_ID) ? _account.Commissin_ID : 0;
                 cbCommissionTemplate.SelectedValue = 0;
             }
         }
@@ -379,7 +377,6 @@ namespace TradingLib.MoniterControl
             if (islast)
             {
                 MoniterHelper.AdapterToIDataSource(cbMarginTemplate).BindDataSource(GetMarginTemplateCBList(marginList));
-                //int marginid = AnyMathItem(cbMarginTemplate, _account.Margin_ID) ? _account.Margin_ID : 0;
                 cbMarginTemplate.SelectedValue = 0;
             }
         }
@@ -396,7 +393,6 @@ namespace TradingLib.MoniterControl
             if (islast)
             {
                 MoniterHelper.AdapterToIDataSource(cbExStrategyTemplate).BindDataSource(GetExStrategyTemplateCBList(strategyList));
-                //int strategyid = AnyMathItem(cbExStrategyTemplate, _account.ExStrategy_ID) ? _account.ExStrategy_ID : 0;
                 cbExStrategyTemplate.SelectedValue = 0;
 
             }

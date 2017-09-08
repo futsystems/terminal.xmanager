@@ -340,32 +340,39 @@ namespace TradingLib.MoniterControl
         /// <param name="e"></param>
         private void accountgrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 8 || e.ColumnIndex == 9 || e.ColumnIndex == 11)
+            try
             {
-                e.CellStyle.Font = UIConstant.BoldFont;
-                decimal v = 0;
-                decimal.TryParse(e.Value.ToString(), out v);
-                if (v > 0)
+                if (e.ColumnIndex == 8 || e.ColumnIndex == 9 || e.ColumnIndex == 11)
                 {
-                    e.CellStyle.ForeColor = UIConstant.LongSideColor;
-                }
-                else if (v < 0)
-                {
-                    e.CellStyle.ForeColor = UIConstant.ShortSideColor;
-                }
-                else if (v == 0)
-                {
-                    e.CellStyle.ForeColor = System.Drawing.Color.Black;
+                    e.CellStyle.Font = UIConstant.BoldFont;
+                    decimal v = 0;
+                    decimal.TryParse(e.Value.ToString(), out v);
+                    if (v > 0)
+                    {
+                        e.CellStyle.ForeColor = UIConstant.LongSideColor;
+                    }
+                    else if (v < 0)
+                    {
+                        e.CellStyle.ForeColor = UIConstant.ShortSideColor;
+                    }
+                    else if (v == 0)
+                    {
+                        e.CellStyle.ForeColor = System.Drawing.Color.Black;
 
+                    }
+                }
+                if (e.ColumnIndex == 0)
+                {
+                    var account = accountgrid[TAG, e.RowIndex].Value as AccountItem;
+                    if (account.Deleted)
+                    {
+                        e.CellStyle.Font = new Font("雅黑", 9, FontStyle.Strikeout);
+                    }
                 }
             }
-            if (e.ColumnIndex == 0)
+            catch (Exception ex)
             {
-                var account = accountgrid[TAG, e.RowIndex].Value as AccountItem;
-                if (account.Deleted)
-                {
-                    e.CellStyle.Font = new Font("雅黑", 9, FontStyle.Strikeout); 
-                }
+                logger.Error("cell formatting err:"+ex.ToString());
             }
         }
 
