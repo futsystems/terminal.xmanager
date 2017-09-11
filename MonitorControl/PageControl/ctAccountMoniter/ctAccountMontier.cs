@@ -22,10 +22,13 @@ namespace TradingLib.MoniterControl
         ILog logger = LogManager.GetLogger("AccountMontier");
         public Control FilterToolBar { get; set; }
         ctAccountFilter filterBox;
+        ConfigFile config;
+
         public ctAccountMontier()
         {
             try
             {
+                config = ConfigFile.GetConfigFile("moniter.cfg");
                 InitializeComponent();
                 SetPreferences();
                 InitTable();

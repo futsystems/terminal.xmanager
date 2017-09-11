@@ -43,23 +43,6 @@ namespace TradingLib.MoniterControl
             {
                 _ruleclass = value;
                 lbDesp.Text = _ruleclass.Description;
-                //ruletitle.Text = _ruleclass.Title;
-                //rulecheckargname.Text = _ruleclass.ValueName;
-
-                //description.Text = _ruleclass.Description;
-
-                //symbolset.Enabled = _ruleclass.CanSetSymbols;
-                //comparetype.Enabled = _ruleclass.CanSetCompare;
-                //argvalue.Enabled = _ruleclass.CanSetValue;
-
-                //if (!_ruleclass.CanSetCompare)
-                //{
-                //    comparetype.SelectedValue = _ruleclass.DefaultCompare;
-                //}
-                //if (!_ruleclass.CanSetValue)
-                //{
-                //    argvalue.Text = _ruleclass.DefaultValue;
-                //}
             }
 
         }
@@ -72,13 +55,6 @@ namespace TradingLib.MoniterControl
             {
                 _rule = value;
                 RuleClassItem klass = CoreService.BasicInfoTracker.GetRuleItemClass(_rule);
-                //ruletitle.Text = klass.Title;
-                //rulecheckargname.Text = klass.ValueName;
-                //description.Text = klass.Description;
-
-                //argvalue.Text = _rule.Value;
-                //comparetype.SelectedValue = _rule.Compare;
-                //symbolset.Text = _rule.SymbolSet.Replace('_', ',');
             }
         }
 
@@ -99,7 +75,7 @@ namespace TradingLib.MoniterControl
                     profit_warn = profit_warn.Value,
                 };
 
-                item.Value = args.SerializeObject();// TradingLib.Mixins.Json.JsonMapper.ToJson(args);
+                item.Value = args.SerializeObject();
 
                 if (MoniterHelper.WindowConfirm("确添加帐户风控规则?") == System.Windows.Forms.DialogResult.Yes)
                 {

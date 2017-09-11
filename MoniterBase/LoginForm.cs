@@ -35,6 +35,7 @@ namespace TradingLib.MoniterBase
             Global.IsOEM = config["OEM"].AsBool();
             Global.Brand = config["Brand"].AsString();
             Global.HideExpire = config["HideExpire"].AsBool();
+            Global.HideConn = config["HideConn"].AsBool();
 
             TradingLib.MoniterControl.ControlService.SuperRoot = config["SuperRoot"].AsString();
 

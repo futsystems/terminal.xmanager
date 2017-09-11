@@ -165,6 +165,11 @@ namespace TradingLib.MoniterControl
             accountgrid.Columns[DELETE].Visible = false;
             accountgrid.Columns[CFGID].Visible = false;
 
+            if (config["HideConn"].AsBool())
+            {
+                accountgrid.Columns[LOGINSTATUSIMG].Visible = false;
+            }
+
             for (int i = 0; i < gt.Columns.Count; i++)
             {
                 accountgrid.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
