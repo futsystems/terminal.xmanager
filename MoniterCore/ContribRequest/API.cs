@@ -131,6 +131,17 @@ namespace TradingLib.MoniterCore
         /// 
         /// </summary>
         ZhongWeiPay,
+
+        /// <summary>
+        /// 101卡
+        /// </summary>
+        P101KA,
+
+
+        /// <summary>
+        /// 牛付
+        /// </summary>
+        NewPay,
     }
 
     public enum EnumBusinessType

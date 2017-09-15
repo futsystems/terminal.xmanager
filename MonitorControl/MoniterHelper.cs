@@ -364,6 +364,16 @@ namespace TradingLib.MoniterControl
             return s.GetPriceFormat();
         }
 
+        public static int GetDecimalPlace(string symbol)
+        {
+            string sec = SymbolImpl.ParseSecCode(symbol);
+            SecurityFamily s = CoreService.BasicInfoTracker.GetSecurity(sec);
+            if (s == null) return 2;
+            return s.GetDecimalPlaces();
+        }
+
+
+
         static bool IsWindows(PlatformID id)
         {
             if (id == PlatformID.Unix)

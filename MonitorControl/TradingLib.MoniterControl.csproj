@@ -649,6 +649,12 @@
     <Compile Include="Forms\Payment\ctGateWayBaoFu.Designer.cs">
       <DependentUpon>ctGateWayBaoFu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Payment\ctGateWayDDBillPay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Payment\ctGateWayDDBillPay.designer.cs">
+      <DependentUpon>ctGateWayDDBillPay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Payment\ctGateWayEcpss.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -769,6 +775,18 @@
     </Compile>
     <Compile Include="Forms\Payment\ctGateWayZhongWeiPay.designer.cs">
       <DependentUpon>ctGateWayZhongWeiPay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Payment\ctGateWay101KA.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Payment\ctGateWay101KA.designer.cs">
+      <DependentUpon>ctGateWay101KA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Payment\ctGateWayNewPay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Payment\ctGateWayNewPay.designer.cs">
+      <DependentUpon>ctGateWayNewPay.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Report\fmHistSettlement.cs">
       <SubType>Form</SubType>
@@ -1375,6 +1393,9 @@
     <EmbeddedResource Include="Forms\Payment\ctGateWayBaoFu.resx">
       <DependentUpon>ctGateWayBaoFu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Payment\ctGateWayDDBillPay.resx">
+      <DependentUpon>ctGateWayDDBillPay.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Payment\ctGateWayEcpss.resx">
       <DependentUpon>ctGateWayEcpss.cs</DependentUpon>
     </EmbeddedResource>
@@ -1434,6 +1455,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Payment\ctGateWayZhongWeiPay.resx">
       <DependentUpon>ctGateWayZhongWeiPay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Payment\ctGateWay101KA.resx">
+      <DependentUpon>ctGateWay101KA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Payment\ctGateWayNewPay.resx">
+      <DependentUpon>ctGateWayNewPay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Report\fmHistSettlement.resx">
       <DependentUpon>fmHistSettlement.cs</DependentUpon>

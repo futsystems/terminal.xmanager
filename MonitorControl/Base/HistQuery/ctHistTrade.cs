@@ -66,16 +66,18 @@ namespace TradingLib.MoniterControl
                 DataRow r = tb.Rows.Add(t.id);
                 int i = tb.Rows.Count - 1;//得到新建的Row号
                 string fmt = MoniterHelper.GetPriceFormat(t.Symbol);
+                // int place = MoniterHelper.GetDecimalPlace(t.Symbol);
+
                 tb.Rows[i][ID] = t.id;
                 tb.Rows[i][DATETIME] = Util.ToDateTime(t.xDate, t.xTime).ToString("HH:mm:ss");
                 tb.Rows[i][SYMBOL] = t.Symbol;
                 tb.Rows[i][SIDE] = (t.Side ? "买入" : "   卖出");
                 tb.Rows[i][SIZE] = Math.Abs(t.xSize);
                 tb.Rows[i][PRICE] = string.Format(fmt, t.xPrice);
-                tb.Rows[i][COMMISSION] = string.Format(fmt, t.Commission);
+                tb.Rows[i][COMMISSION] = t.Commission.ToFormatStr();
                 tb.Rows[i][OPERATION] = Util.GetEnumDescription(t.PositionOperation);
                 tb.Rows[i][ACCOUNT] = t.Account;
-                tb.Rows[i][PROFIT] = string.Format(fmt, t.Profit);
+                tb.Rows[i][PROFIT] = t.Profit.ToFormatStr();
                 tb.Rows[i][FILLID] = t.TradeID;
                 tb.Rows[i][ORDERREF] = t.OrderSeq;
                 //toUpdateRow();

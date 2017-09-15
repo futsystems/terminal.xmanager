@@ -277,6 +277,8 @@ namespace TradingLib.MoniterControl
             }
             else
             {
+                if (op.Domain_ID != CoreService.SiteInfo.Manager.domain_id)
+                    return;
                 int i = CashOperatioinIdx(op);
                 if (i == -1)
                 {
