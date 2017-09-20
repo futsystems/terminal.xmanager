@@ -35,16 +35,12 @@
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.payurl = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.domain = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
-            this.kryptonPanel1.Controls.Add(this.domain);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel4);
             this.kryptonPanel1.Controls.Add(this.MD5Key);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel7);
             this.kryptonPanel1.Controls.Add(this.merid);
@@ -103,23 +99,7 @@
             this.kryptonLabel1.Name = "kryptonLabel1";
             this.kryptonLabel1.Size = new System.Drawing.Size(98, 20);
             this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "国付宝网关地址";
-            // 
-            // domain
-            // 
-            this.domain.Location = new System.Drawing.Point(27, 196);
-            this.domain.Name = "domain";
-            this.domain.Size = new System.Drawing.Size(134, 20);
-            this.domain.TabIndex = 20;
-            this.domain.Text = "abc.com";
-            // 
-            // kryptonLabel4
-            // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(7, 170);
-            this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(35, 20);
-            this.kryptonLabel4.TabIndex = 19;
-            this.kryptonLabel4.Values.Text = "域名";
+            this.kryptonLabel1.Values.Text = "智慧付网关地址";
             // 
             // ctGateWayChinagPay
             // 
@@ -144,7 +124,5 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox merid;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox MD5Key;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox domain;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
     }
 }

@@ -26,15 +26,6 @@ namespace TradingLib.MoniterControl
             payurl.Text = data["PayUrl"].ToString();
             merid.Text = data["MerID"].ToString();
             MD5Key.Text = data["MD5Key"].ToString();
-
-            try
-            {
-                domain.Text = data["Domain"].ToString();
-            }
-            catch (Exception ex)
-            {
-
-            }
            
         }
 
@@ -45,7 +36,7 @@ namespace TradingLib.MoniterControl
                 PayUrl = payurl.Text,
                 MerID = merid.Text,
                 MD5Key = MD5Key.Text,
-                Domain = domain.Text,
+                
             }
             .SerializeObject();
         }

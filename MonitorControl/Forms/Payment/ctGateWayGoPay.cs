@@ -27,7 +27,14 @@ namespace TradingLib.MoniterControl
             merid.Text = data["MerID"].ToString();
             VerifyCode.Text = data["VerficationCode"].ToString();
             accNo.Text = data["AccNo"].ToString();
-           
+            try
+            {
+                domain.Text = data["Domain"].ToString();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         public string GetGateWayConfig()
@@ -37,7 +44,8 @@ namespace TradingLib.MoniterControl
                 PayUrl = payurl.Text,
                 MerID = merid.Text,
                 VerficationCode = VerifyCode.Text,
-                AccNo = accNo.Text
+                AccNo = accNo.Text,
+                Domain= domain.Text,
             }
             .SerializeObject();
         }
