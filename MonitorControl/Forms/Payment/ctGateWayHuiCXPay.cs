@@ -12,10 +12,10 @@ using TradingLib.MoniterCore;
 
 namespace TradingLib.MoniterControl
 {
-    public partial class ctGateWayChinagPay : UserControl, IGateWayControl
+    public partial class ctGateWayHuiCXPay : UserControl, IGateWayControl
     {
-        public QSEnumGateWayType GateWayType { get { return QSEnumGateWayType.ChinagPay; } }
-        public ctGateWayChinagPay()
+        public QSEnumGateWayType GateWayType { get { return QSEnumGateWayType.HuiCX; } }
+        public ctGateWayHuiCXPay()
         {
             InitializeComponent();
         }
@@ -24,18 +24,16 @@ namespace TradingLib.MoniterControl
         {
             var data = config.Config.DeserializeObject();
             payurl.Text = data["PayUrl"].ToString();
-            merid.Text = data["MerID"].ToString();
+            MerNo.Text = data["MerNo"].ToString();
             MD5Key.Text = data["MD5Key"].ToString();
-
             try
             {
                 domain.Text = data["Domain"].ToString();
             }
             catch (Exception ex)
-            {
-
+            { 
+                
             }
-           
         }
 
         public string GetGateWayConfig()
@@ -43,9 +41,9 @@ namespace TradingLib.MoniterControl
             return new
             {
                 PayUrl = payurl.Text,
-                MerID = merid.Text,
+                MerNo = MerNo.Text,
                 MD5Key = MD5Key.Text,
-                Domain = domain.Text,
+                Domain= domain.Text,
             }
             .SerializeObject();
         }

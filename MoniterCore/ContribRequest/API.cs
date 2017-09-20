@@ -142,6 +142,11 @@ namespace TradingLib.MoniterCore
         /// 牛付
         /// </summary>
         NewPay,
+
+        /// <summary>
+        /// 创汇通
+        /// </summary>
+        HuiCX
     }
 
     public enum EnumBusinessType

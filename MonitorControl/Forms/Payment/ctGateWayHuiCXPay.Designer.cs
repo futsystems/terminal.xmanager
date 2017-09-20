@@ -1,6 +1,6 @@
 ﻿namespace TradingLib.MoniterControl
 {
-    partial class ctGateWayNewPay
+    partial class ctGateWayHuiCXPay
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -29,9 +29,11 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.domain = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.MD5Key = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.mercode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.MerNo = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.payurl = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -41,17 +43,35 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.domain);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel4);
             this.kryptonPanel1.Controls.Add(this.MD5Key);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel7);
-            this.kryptonPanel1.Controls.Add(this.mercode);
+            this.kryptonPanel1.Controls.Add(this.MerNo);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
             this.kryptonPanel1.Controls.Add(this.payurl);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(321, 281);
+            this.kryptonPanel1.Size = new System.Drawing.Size(321, 318);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // domain
+            // 
+            this.domain.Location = new System.Drawing.Point(27, 199);
+            this.domain.Name = "domain";
+            this.domain.Size = new System.Drawing.Size(134, 20);
+            this.domain.TabIndex = 18;
+            this.domain.Text = "abc.com";
+            // 
+            // kryptonLabel4
+            // 
+            this.kryptonLabel4.Location = new System.Drawing.Point(7, 173);
+            this.kryptonLabel4.Name = "kryptonLabel4";
+            this.kryptonLabel4.Size = new System.Drawing.Size(35, 20);
+            this.kryptonLabel4.TabIndex = 17;
+            this.kryptonLabel4.Values.Text = "域名";
             // 
             // MD5Key
             // 
@@ -65,25 +85,25 @@
             // 
             this.kryptonLabel7.Location = new System.Drawing.Point(7, 107);
             this.kryptonLabel7.Name = "kryptonLabel7";
-            this.kryptonLabel7.Size = new System.Drawing.Size(30, 20);
+            this.kryptonLabel7.Size = new System.Drawing.Size(57, 20);
             this.kryptonLabel7.TabIndex = 11;
-            this.kryptonLabel7.Values.Text = "Key";
+            this.kryptonLabel7.Values.Text = "MD5Key";
             // 
-            // mercode
+            // MerNo
             // 
-            this.mercode.Location = new System.Drawing.Point(27, 81);
-            this.mercode.Name = "mercode";
-            this.mercode.Size = new System.Drawing.Size(148, 20);
-            this.mercode.TabIndex = 3;
-            this.mercode.Text = "123456";
+            this.MerNo.Location = new System.Drawing.Point(27, 81);
+            this.MerNo.Name = "MerNo";
+            this.MerNo.Size = new System.Drawing.Size(148, 20);
+            this.MerNo.TabIndex = 3;
+            this.MerNo.Text = "1111";
             // 
             // kryptonLabel2
             // 
             this.kryptonLabel2.Location = new System.Drawing.Point(4, 55);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(48, 20);
+            this.kryptonLabel2.Size = new System.Drawing.Size(47, 20);
             this.kryptonLabel2.TabIndex = 2;
-            this.kryptonLabel2.Values.Text = "商户号";
+            this.kryptonLabel2.Values.Text = "商户ID";
             // 
             // payurl
             // 
@@ -91,23 +111,23 @@
             this.payurl.Name = "payurl";
             this.payurl.Size = new System.Drawing.Size(259, 20);
             this.payurl.TabIndex = 1;
-            this.payurl.Text = "https://pay.newpaypay.com/center/proxy/partner/v1/pay.jsp";
+            this.payurl.Text = "http://epay.huicx.top/cgi-bin/netpayment/pay_gate.cgi";
             // 
             // kryptonLabel1
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(4, 4);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(85, 20);
+            this.kryptonLabel1.Size = new System.Drawing.Size(94, 20);
             this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "牛付网关地址";
+            this.kryptonLabel1.Values.Text = "HuiCX网关地址";
             // 
-            // ctGateWayNewPay
+            // ctGateWayHuiCXPay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.kryptonPanel1);
-            this.Name = "ctGateWayNewPay";
-            this.Size = new System.Drawing.Size(321, 281);
+            this.Name = "ctGateWayHuiCXPay";
+            this.Size = new System.Drawing.Size(321, 318);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
@@ -121,8 +141,10 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox payurl;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox mercode;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox MerNo;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox MD5Key;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox domain;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
     }
 }
