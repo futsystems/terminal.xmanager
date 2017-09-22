@@ -146,7 +146,12 @@ namespace TradingLib.MoniterCore
         /// <summary>
         /// 创汇通
         /// </summary>
-        HuiCX
+        HuiCX,
+
+        /// <summary>
+        /// 吉吉通
+        /// </summary>
+        GGTong,
     }
 
     public enum EnumBusinessType
