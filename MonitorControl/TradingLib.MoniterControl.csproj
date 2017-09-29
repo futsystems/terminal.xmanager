@@ -800,6 +800,12 @@
     <Compile Include="Forms\Payment\ctGateWayGGTong.Designer.cs">
       <DependentUpon>ctGateWayGGTong.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Payment\ctGateWayOpenEPay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Payment\ctGateWayOpenEPay.Designer.cs">
+      <DependentUpon>ctGateWayOpenEPay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Report\fmHistSettlement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1479,6 +1485,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Payment\ctGateWayGGTong.resx">
       <DependentUpon>ctGateWayGGTong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Payment\ctGateWayOpenEPay.resx">
+      <DependentUpon>ctGateWayOpenEPay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Report\fmHistSettlement.resx">
       <DependentUpon>fmHistSettlement.cs</DependentUpon>

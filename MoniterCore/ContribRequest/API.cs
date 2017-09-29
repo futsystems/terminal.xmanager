@@ -152,6 +152,16 @@ namespace TradingLib.MoniterCore
         /// 吉吉通
         /// </summary>
         GGTong,
+
+        /// <summary>
+        /// 银联
+        /// </summary>
+        UnionPay,
+
+        /// <summary>
+        /// 开联通
+        /// </summary>
+        OpenEPay,
     }
 
     public enum EnumBusinessType
