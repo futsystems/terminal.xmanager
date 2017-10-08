@@ -18,6 +18,8 @@ namespace TradingLib.MoniterControl
         {
             string strFilter = ACCOUNT + " like '*'";
 
+            strFilter = string.Format(strFilter + " and " + DELETE + " ='{0}'", false);
+
             if (filterArgs != null)
             {
                 //路由
@@ -25,6 +27,9 @@ namespace TradingLib.MoniterControl
                 //{
                 //    strFilter = string.Format(strFilter + " and " + ROUTE + " = '{0}'", filterArgs.OrderRouterType);
                 //}
+
+                
+
 
                 //帐户冻结
                 if (filterArgs.AccLock)

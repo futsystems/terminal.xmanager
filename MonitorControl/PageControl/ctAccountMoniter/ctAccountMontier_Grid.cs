@@ -470,13 +470,13 @@ namespace TradingLib.MoniterControl
                         }
 
                         ////如果删除帐户 则需要刷新帐户列表 防止没有任何选中帐户
-                        //if (account.Deleted)
-                        //{
-                        //    if (accountgrid.RowCount > 0)
-                        //    {
-                        //        accountgrid.Rows[0].Selected = true;
-                        //    }
-                        //}
+                        if (account.Deleted)
+                        {
+                            if (accountgrid.RowCount > 0)
+                            {
+                                accountgrid.Rows[0].Selected = true;
+                            }
+                        }
                     }
 
                 }

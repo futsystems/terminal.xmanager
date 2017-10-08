@@ -42,7 +42,7 @@ namespace TradingLib.MoniterControl
                 filterBox.BatchInActiveAccount += new Action(filterBox_BatchInActiveAccount);
                 filterBox.BatchFlatPosition += new Action(filterBox_BatchFlatPosition);
                 this.FilterToolBar = filterBox;
-               
+                //FilterAccount();
                
                 this.Load += new EventHandler(ctAccountMontier_Load);
             }
