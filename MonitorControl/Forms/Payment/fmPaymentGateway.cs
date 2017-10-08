@@ -319,6 +319,14 @@ namespace TradingLib.MoniterControl
                             gwControl = input;
                         }
                         break;
+                    case QSEnumGateWayType.UnionPay:
+                        {
+                            ctGateWayUnionPay input = new ctGateWayUnionPay();
+                            holder.Controls.Add(input);
+                            input.Dock = DockStyle.Fill;
+                            gwControl = input;
+                        }
+                        break;
                     default:
                         break;
                 }
