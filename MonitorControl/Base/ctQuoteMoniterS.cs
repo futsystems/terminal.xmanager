@@ -33,9 +33,13 @@ namespace TradingLib.MoniterControl
             //初始化交易所报价列表
             foreach (var exchange in CoreService.BasicInfoTracker.Exchanges)
             {
-                this.AddExchange(exchange);
+                
                 IEnumerable<Symbol> symbols = CoreService.BasicInfoTracker.Symbols.Where(sym => sym.SecurityFamily.Exchange.EXCode == exchange.EXCode && sym.IsTradeable).OrderBy(sym => sym.Symbol);
-                this.AddSymbols(exchange, symbols);
+                if (symbols.Count() > 1)
+                {
+                    this.AddExchange(exchange);
+                    this.AddSymbols(exchange, symbols);
+                }
             }
 
             //响应行情回报行情

@@ -42,7 +42,6 @@ namespace TradingLib.MoniterControl
                 filterBox.BatchInActiveAccount += new Action(filterBox_BatchInActiveAccount);
                 filterBox.BatchFlatPosition += new Action(filterBox_BatchFlatPosition);
                 this.FilterToolBar = filterBox;
-                //FilterAccount();
                
                 this.Load += new EventHandler(ctAccountMontier_Load);
             }
@@ -164,6 +163,7 @@ namespace TradingLib.MoniterControl
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_ACC_CHANGED, OnAccountChanged);
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_ACC_STATISTIC, OnNotifyAccountStatistic);
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_AGENT_CREATE, OnNotifyAgentCreate);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MANGER_DELETE, OnManagerDelete);
 
             //根据角色隐藏表格相关列
             if (CoreService.SiteInfo.ProductType == QSEnumProductType.CounterSystem)
@@ -215,10 +215,26 @@ namespace TradingLib.MoniterControl
             }
             else
             {
-                agentTree.Nodes.Clear();
-
-                InitMgrList();
+                ReCreateMenuTree();
             }
+        }
+
+
+        void OnManagerDelete(string json)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action<string>(OnManagerDelete), new object[] { json });
+            }
+            else
+            {
+                ReCreateMenuTree();
+            }
+        }
+        void ReCreateMenuTree()
+        {
+            agentTree.Nodes.Clear();
+            InitMgrList();
         }
 
 

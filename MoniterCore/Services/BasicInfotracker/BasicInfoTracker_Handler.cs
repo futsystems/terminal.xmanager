@@ -406,6 +406,18 @@ namespace TradingLib.MoniterCore
                 managermap.Add(manager.ID, manager);
             }
 
+            if (manager.Deleted)
+            {
+                managermap.Remove(manager.ID);
+
+                AgentSetting agent= null;
+                if(agentAccountMap.TryGetValue(manager.Login,out agent))
+                {
+                    agentAccountMap.Remove(agent.Account);
+                    agentmap.Remove(agent.ID);
+                }
+            }
+
             //将获得的柜员列表中 属于本登入mgr_fk的manager绑定到全局对象
             if (CoreService.SiteInfo.MGRID == manager.ID)
             {

@@ -812,6 +812,24 @@
     <Compile Include="Forms\Payment\ctGateWayUnionPay.designer.cs">
       <DependentUpon>ctGateWayUnionPay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Payment\ctGateWayPay848.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Payment\ctGateWayPay848.designer.cs">
+      <DependentUpon>ctGateWayPay848.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Payment\ctGateWayShopping98.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Payment\ctGateWayShopping98.designer.cs">
+      <DependentUpon>ctGateWayShopping98.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Payment\ctGateWayJoinPay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Payment\ctGateWayJoinPay.designer.cs">
+      <DependentUpon>ctGateWayJoinPay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Report\fmHistSettlement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1497,6 +1515,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Payment\ctGateWayUnionPay.resx">
       <DependentUpon>ctGateWayUnionPay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Payment\ctGateWayPay848.resx">
+      <DependentUpon>ctGateWayPay848.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Payment\ctGateWayShopping98.resx">
+      <DependentUpon>ctGateWayShopping98.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Payment\ctGateWayJoinPay.resx">
+      <DependentUpon>ctGateWayJoinPay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Report\fmHistSettlement.resx">
       <DependentUpon>fmHistSettlement.cs</DependentUpon>

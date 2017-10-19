@@ -470,7 +470,7 @@ namespace TradingLib.MoniterControl
             //datasource.Filter=""
             grid.DataSource = datasource;
             datasource.Sort = ID + " ASC";
-            //datasource.Filter = DELETE + " ='false'";
+            datasource.Filter = DELETE + " ='false'";
 
             grid.Columns[MGRTYPE].Visible = false;
             grid.Columns[ID].Visible = false;

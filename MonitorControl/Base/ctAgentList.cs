@@ -162,13 +162,15 @@ namespace TradingLib.MoniterControl
                 }
             }
 
-            CoreService.EventCore.RegisterNotifyCallback("MgrExchServer", "NotifyManagerUpdate", OnManagerNotify);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MANAGER, OnManagerNotify);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MANGER_DELETE, OnManagerNotify);
             _gotdata = true;
         }
 
         public void OnDisposed()
         {
-            CoreService.EventCore.UnRegisterNotifyCallback("MgrExchServer", "NotifyManagerUpdate", OnManagerNotify);
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MANAGER, OnManagerNotify);
+            CoreService.EventCore.UnRegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MANGER_DELETE, OnManagerNotify);
         }
 
 

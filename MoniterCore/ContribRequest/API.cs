@@ -162,6 +162,20 @@ namespace TradingLib.MoniterCore
         /// 开联通
         /// </summary>
         OpenEPay,
+
+        /// <summary>
+        /// 银信通
+        /// </summary>
+        Pay848,
+
+        /// <summary>
+        /// 98
+        /// </summary>
+        Shopping98,
+
+        JoinPay,
+
+
     }
 
     public enum EnumBusinessType
