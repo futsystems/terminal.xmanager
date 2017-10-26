@@ -176,6 +176,8 @@ namespace TradingLib.MoniterCore
         JoinPay,
 
 
+        JuHe,
+
     }
 
     public enum EnumBusinessType
