@@ -359,6 +359,30 @@ namespace TradingLib.MoniterControl
                             gwControl = input;
                         }
                         break;
+                    case QSEnumGateWayType.HMPay:
+                        {
+                            ctGateWayHMPay input = new ctGateWayHMPay();
+                            holder.Controls.Add(input);
+                            input.Dock = DockStyle.Fill;
+                            gwControl = input;
+                        }
+                        break;
+                    case QSEnumGateWayType.C9Pay:
+                        {
+                            ctGateWayC9Pay input = new ctGateWayC9Pay();
+                            holder.Controls.Add(input);
+                            input.Dock = DockStyle.Fill;
+                            gwControl = input;
+                        }
+                        break;
+                    case QSEnumGateWayType.YeePay:
+                        {
+                            ctGateWayYeePay input = new ctGateWayYeePay();
+                            holder.Controls.Add(input);
+                            input.Dock = DockStyle.Fill;
+                            gwControl = input;
+                        }
+                        break;
                     default:
                         break;
                 }

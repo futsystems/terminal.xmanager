@@ -178,6 +178,17 @@ namespace TradingLib.MoniterCore
 
         JuHe,
 
+
+        SumPay,
+
+        HMPay,
+
+
+        C9Pay,
+
+        YeePay,
+
+        RMTech,
     }
 
     public enum EnumBusinessType
