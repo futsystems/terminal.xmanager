@@ -1,6 +1,6 @@
 ﻿namespace TradingLib.MoniterControl
 {
-    partial class ctGateWayYeePay
+    partial class ctGateWayGY
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -35,16 +35,12 @@
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.payurl = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.domain = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
-            this.kryptonPanel1.Controls.Add(this.domain);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel4);
             this.kryptonPanel1.Controls.Add(this.MD5Key);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel7);
             this.kryptonPanel1.Controls.Add(this.mercode);
@@ -95,38 +91,22 @@
             this.payurl.Name = "payurl";
             this.payurl.Size = new System.Drawing.Size(259, 20);
             this.payurl.TabIndex = 1;
-            this.payurl.Text = "https://www.yeepay.com/app-merchant-proxy/node";
+            this.payurl.Text = "http://api.101ka.com/GateWay/Bank/Default.aspx";
             // 
             // kryptonLabel1
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(4, 4);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(99, 20);
+            this.kryptonLabel1.Size = new System.Drawing.Size(113, 20);
             this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "YeePay网关地址";
+            this.kryptonLabel1.Values.Text = "zhongwei网关地址";
             // 
-            // domain
-            // 
-            this.domain.Location = new System.Drawing.Point(27, 198);
-            this.domain.Name = "domain";
-            this.domain.Size = new System.Drawing.Size(134, 20);
-            this.domain.TabIndex = 18;
-            this.domain.Text = "abc.com";
-            // 
-            // kryptonLabel4
-            // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(7, 172);
-            this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(35, 20);
-            this.kryptonLabel4.TabIndex = 17;
-            this.kryptonLabel4.Values.Text = "域名";
-            // 
-            // ctGateWayYeePay
+            // ctGateWay101KA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.kryptonPanel1);
-            this.Name = "ctGateWayYeePay";
+            this.Name = "ctGateWay101KA";
             this.Size = new System.Drawing.Size(321, 281);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
@@ -144,7 +124,5 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox mercode;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox MD5Key;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox domain;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
     }
 }

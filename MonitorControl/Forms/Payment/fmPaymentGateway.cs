@@ -383,6 +383,14 @@ namespace TradingLib.MoniterControl
                             gwControl = input;
                         }
                         break;
+                    case QSEnumGateWayType.GYPay:
+                        {
+                            ctGateWayGY input = new ctGateWayGY();
+                            holder.Controls.Add(input);
+                            input.Dock = DockStyle.Fill;
+                            gwControl = input;
+                        }
+                        break;
                     default:
                         break;
                 }

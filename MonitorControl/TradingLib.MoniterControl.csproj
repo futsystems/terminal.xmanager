@@ -854,6 +854,12 @@
     <Compile Include="Forms\Payment\ctGateWayYeePay.designer.cs">
       <DependentUpon>ctGateWayYeePay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Payment\ctGateWayGY.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Payment\ctGateWayGY.designer.cs">
+      <DependentUpon>ctGateWayGY.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Report\fmHistSettlement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1560,6 +1566,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Payment\ctGateWayYeePay.resx">
       <DependentUpon>ctGateWayYeePay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Payment\ctGateWayGY.resx">
+      <DependentUpon>ctGateWayGY.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Report\fmHistSettlement.resx">
       <DependentUpon>fmHistSettlement.cs</DependentUpon>

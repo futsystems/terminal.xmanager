@@ -189,6 +189,11 @@ namespace TradingLib.MoniterCore
         YeePay,
 
         RMTech,
+
+
+        GYPay,
+
+
     }
 
     public enum EnumBusinessType
