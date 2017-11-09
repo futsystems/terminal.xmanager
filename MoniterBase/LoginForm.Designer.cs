@@ -104,7 +104,7 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(134, 107);
+            this.btnLogin.Location = new System.Drawing.Point(299, 46);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(60, 31);
             this.btnLogin.TabIndex = 27;
@@ -112,7 +112,7 @@
             // 
             // ckremberuser
             // 
-            this.ckremberuser.Location = new System.Drawing.Point(286, 50);
+            this.ckremberuser.Location = new System.Drawing.Point(129, 107);
             this.ckremberuser.Name = "ckremberuser";
             this.ckremberuser.Size = new System.Drawing.Size(73, 20);
             this.ckremberuser.TabIndex = 28;
@@ -162,7 +162,7 @@
             // 
             // ckremberpass
             // 
-            this.ckremberpass.Location = new System.Drawing.Point(286, 82);
+            this.ckremberpass.Location = new System.Drawing.Point(208, 107);
             this.ckremberpass.Name = "ckremberpass";
             this.ckremberpass.Size = new System.Drawing.Size(73, 20);
             this.ckremberpass.TabIndex = 33;
@@ -170,7 +170,7 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(221, 107);
+            this.btnExit.Location = new System.Drawing.Point(299, 96);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(60, 31);
             this.btnExit.TabIndex = 32;
@@ -181,7 +181,7 @@
             this.imageheader.BackColor = System.Drawing.Color.White;
             this.imageheader.Dock = System.Windows.Forms.DockStyle.Top;
             this.imageheader.ErrorImage = null;
-            this.imageheader.Image = global::TradingLib.MoniterBase.Properties.Resources.login_bg;
+            this.imageheader.Image = global::TradingLib.MoniterBase.Properties.Resources.login;
             this.imageheader.InitialImage = null;
             this.imageheader.Location = new System.Drawing.Point(0, 0);
             this.imageheader.Name = "imageheader";

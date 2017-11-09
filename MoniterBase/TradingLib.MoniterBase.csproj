@@ -152,6 +152,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Resources\login.png" />
     <None Include="Resource\cashnotify.wav" />
     <None Include="Resource\login-bg.png" />
     <None Include="Resource\online.png" />

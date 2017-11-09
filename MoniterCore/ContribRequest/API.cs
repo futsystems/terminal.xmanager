@@ -193,6 +193,9 @@ namespace TradingLib.MoniterCore
 
         GYPay,
 
+        HaiFu,
+
+        UUOPay,
 
     }
 

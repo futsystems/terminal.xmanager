@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,6 +24,24 @@ namespace TradingLib.MoniterBase
         ILog logger = LogManager.GetLogger("LoginForm");
 
         Starter mStart;
+        void layout1()
+        {
+            ckremberuser.Location = new Point(286, 50);
+            ckremberpass.Location = new Point(286, 82);
+            btnLogin.Location = new Point(134, 107);
+            btnExit.Location = new Point(221, 107);
+            btnLogin.Size = new Size(60, 31);
+
+        }
+        void layout2()
+        {
+            ckremberuser.Location = new Point(129, 107);
+            ckremberpass.Location = new Point(208, 107);
+            btnLogin.Location = new Point(299, 46);
+            btnExit.Location = new Point(299, 96);
+            btnLogin.Size = new Size(60, 45);
+
+        }
         public LoginForm(Starter start)
         {
             //允许线程间调用控件属性 否则无法本地调试
@@ -36,6 +55,19 @@ namespace TradingLib.MoniterBase
             Global.Brand = config["Brand"].AsString();
             Global.HideExpire = config["HideExpire"].AsBool();
             Global.HideConn = config["HideConn"].AsBool();
+            string layout = config["Layout"].AsString();
+            int style = config["Style"].AsInt();
+            int layoutid = 1;
+            if (layout == "1") layoutid = 1;
+            if (layout == "2") layoutid = 2;
+            if (layoutid == 1) layout1();
+            if (layoutid == 2) layout2();
+            if (style == 0)
+            {
+                style = 6;
+            }
+
+            kryptonPalette1.BasePaletteMode = (ComponentFactory.Krypton.Toolkit.PaletteMode)style;
 
             TradingLib.MoniterControl.ControlService.SuperRoot = config["SuperRoot"].AsString();
 
@@ -45,12 +77,12 @@ namespace TradingLib.MoniterBase
             this.AcceptButton = btnLogin;
             btnLogin.Enabled = false;
 
-            //设置登入窗口图片
-            System.Drawing.Bitmap img = ResourceService.GetBitmap("LoginBanner_JR");
-            if(img!= null)
+            if (File.Exists("config/login.png"))
             {
-                //imageheader.Image = img;
+                imageheader.Image = Image.FromFile("config/login.png");
+
             }
+            
 
             //加载服务端IP地址
             string[] addresses = config["Servers"].AsString().Split(',');
@@ -84,7 +116,7 @@ namespace TradingLib.MoniterBase
             }
 
 
-            this.Text = string.Format("{0}资管柜台系统-{1}", Global.IsOEM ? Global.Brand : "巨融",TradingLib.API.Const.APIVersion);
+            this.Text = string.Format("{0}", Global.IsOEM ? Global.Brand : "系统登入");
             
             
 

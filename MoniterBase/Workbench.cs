@@ -198,6 +198,9 @@ namespace TradingLib.MoniterBase
 
             //管理端启动第一次加载时 执行查询行情快照
             CoreService.TLClient.ReqQryTickSnapshot();
+
+            //使用全局图标
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
         }
 
         void EventCore_OnDisconnectedEvent()
@@ -231,15 +234,7 @@ namespace TradingLib.MoniterBase
         
         string GetProductName(QSEnumProductType type)
         {
-            switch (type)
-            { 
-                case QSEnumProductType.CounterSystem:
-                    return string.Format("{0}资管柜台系统",Global.IsOEM?Global.Brand:"巨融");
-                case QSEnumProductType.VendorMoniter:
-                    return string.Format("{0}主帐户监控系统", Global.IsOEM ? Global.Brand : "巨融");
-                default:
-                    return string.Format("{0}业务系统", Global.IsOEM ? Global.Brand : "巨融");
-            }
+            return string.Format("{0}", Global.IsOEM ? Global.Brand : "柜台系统");
         }
 
 
