@@ -91,22 +91,22 @@
             this.payurl.Name = "payurl";
             this.payurl.Size = new System.Drawing.Size(259, 20);
             this.payurl.TabIndex = 1;
-            this.payurl.Text = "http://api.101ka.com/GateWay/Bank/Default.aspx";
+            this.payurl.Text = "https://www.rm-tech.com.cn/agent-platform/cloudplatform/api/trade.html";
             // 
             // kryptonLabel1
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(4, 4);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(113, 20);
+            this.kryptonLabel1.Size = new System.Drawing.Size(104, 20);
             this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "zhongwei网关地址";
+            this.kryptonLabel1.Values.Text = "RMTech网关地址";
             // 
-            // ctGateWay101KA
+            // ctGateWayRMTech
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.kryptonPanel1);
-            this.Name = "ctGateWay101KA";
+            this.Name = "ctGateWayRMTech";
             this.Size = new System.Drawing.Size(321, 281);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
