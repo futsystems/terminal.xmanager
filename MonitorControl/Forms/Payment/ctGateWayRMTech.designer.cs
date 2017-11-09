@@ -1,6 +1,6 @@
 ﻿namespace TradingLib.MoniterControl
 {
-    partial class ctGateWayUUOPay
+    partial class ctGateWayRMTech
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.meracc = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.MD5Key = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.mercode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -43,8 +41,6 @@
             // 
             // kryptonPanel1
             // 
-            this.kryptonPanel1.Controls.Add(this.meracc);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel3);
             this.kryptonPanel1.Controls.Add(this.MD5Key);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel7);
             this.kryptonPanel1.Controls.Add(this.mercode);
@@ -57,25 +53,9 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(321, 281);
             this.kryptonPanel1.TabIndex = 0;
             // 
-            // meracc
-            // 
-            this.meracc.Location = new System.Drawing.Point(27, 133);
-            this.meracc.Name = "meracc";
-            this.meracc.Size = new System.Drawing.Size(148, 20);
-            this.meracc.TabIndex = 14;
-            this.meracc.Text = "123456@qq.com";
-            // 
-            // kryptonLabel3
-            // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(4, 107);
-            this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(60, 20);
-            this.kryptonLabel3.TabIndex = 13;
-            this.kryptonLabel3.Values.Text = "商户账号";
-            // 
             // MD5Key
             // 
-            this.MD5Key.Location = new System.Drawing.Point(27, 185);
+            this.MD5Key.Location = new System.Drawing.Point(27, 133);
             this.MD5Key.Name = "MD5Key";
             this.MD5Key.Size = new System.Drawing.Size(269, 20);
             this.MD5Key.TabIndex = 12;
@@ -83,7 +63,7 @@
             // 
             // kryptonLabel7
             // 
-            this.kryptonLabel7.Location = new System.Drawing.Point(7, 159);
+            this.kryptonLabel7.Location = new System.Drawing.Point(7, 107);
             this.kryptonLabel7.Name = "kryptonLabel7";
             this.kryptonLabel7.Size = new System.Drawing.Size(30, 20);
             this.kryptonLabel7.TabIndex = 11;
@@ -111,22 +91,22 @@
             this.payurl.Name = "payurl";
             this.payurl.Size = new System.Drawing.Size(259, 20);
             this.payurl.TabIndex = 1;
-            this.payurl.Text = "http://pay.uuopay.com/pay.php";
+            this.payurl.Text = "http://api.101ka.com/GateWay/Bank/Default.aspx";
             // 
             // kryptonLabel1
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(4, 4);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(85, 20);
+            this.kryptonLabel1.Size = new System.Drawing.Size(113, 20);
             this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "优宝网关地址";
+            this.kryptonLabel1.Values.Text = "zhongwei网关地址";
             // 
-            // ctGateWayUUOPay
+            // ctGateWay101KA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.kryptonPanel1);
-            this.Name = "ctGateWayUUOPay";
+            this.Name = "ctGateWay101KA";
             this.Size = new System.Drawing.Size(321, 281);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
@@ -144,7 +124,5 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox mercode;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox MD5Key;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox meracc;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
     }
 }

@@ -12,10 +12,10 @@ using TradingLib.MoniterCore;
 
 namespace TradingLib.MoniterControl
 {
-    public partial class ctGateWayUUOPay : UserControl, IGateWayControl
+    public partial class ctGateWayRMTech : UserControl, IGateWayControl
     {
-        public QSEnumGateWayType GateWayType { get { return QSEnumGateWayType.UUOPay; } }
-        public ctGateWayUUOPay()
+        public QSEnumGateWayType GateWayType { get { return QSEnumGateWayType.RMTech; } }
+        public ctGateWayRMTech()
         {
             InitializeComponent();
         }
@@ -26,7 +26,6 @@ namespace TradingLib.MoniterControl
             payurl.Text = data["PayUrl"].ToString();
             mercode.Text = data["MerID"].ToString();
             MD5Key.Text = data["Key"].ToString();
-            meracc.Text = data["MerACC"].ToString();
      
         }
 
@@ -37,7 +36,7 @@ namespace TradingLib.MoniterControl
                 PayUrl = payurl.Text,
                 MerID = mercode.Text,
                 Key = MD5Key.Text,
-                MerACC = meracc.Text,
+              
             }
             .SerializeObject();
         }
