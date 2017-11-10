@@ -278,6 +278,9 @@
       <MenuItem id = "SettleManagerCommand"
               label = "手工结算"
               class = "TradingLib.MoniterBase.Command.SettleManagerCommand"/>
+      <MenuItem id = "ClearUnsettledInfoCommand"
+              label = "清除未结算"
+              class = "TradingLib.MoniterBase.Command.ClearUnsettledInfoCommand"/>
     </Condition>
   </Path>
   

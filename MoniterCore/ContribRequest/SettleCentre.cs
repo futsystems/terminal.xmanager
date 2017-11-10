@@ -65,9 +65,23 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public const string REQ_DELDATA = "DeleteSettledData";
 
+        /// <summary>
+        /// 清除未结算数据
+        /// </summary>
+        public const string REQ_CLEAR_UNSETTLED = "ClearUnsettledInfo";
+
     }
     public static class SettleCentre
     {
+        /// <summary>
+        /// 清除未结算数据
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
+        public static int ReqClearUnsettledInfo(this TLClientNet client)
+        {
+            return client.ReqContribRequest(Modules.SettleCentre, Method_SettleCentre.REQ_CLEAR_UNSETTLED, "");
+        }
 
         /// <summary>
         /// 查询结算状态

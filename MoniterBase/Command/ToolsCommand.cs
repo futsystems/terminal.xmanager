@@ -7,6 +7,7 @@ using TradingLib.Common;
 using TradingLib.MoniterCore;
 using TradingLib.MoniterControl;
 using ICSharpCode.Core;
+using System.Windows.Forms;
 
 namespace TradingLib.MoniterBase.Command
 {
@@ -28,6 +29,24 @@ namespace TradingLib.MoniterBase.Command
             fm.Close();
         }
     }
+
+    public class ClearUnsettledInfoCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            if (!CoreService.SiteInfo.Domain.Super)
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+
+            if (MoniterHelper.WindowConfirm("确认清除未结算数据?") == DialogResult.Yes)
+            {
+                CoreService.TLClient.ReqClearUnsettledInfo();
+            }
+        }
+    }
+
 
     public class DataStoreCommand : AbstractMenuCommand
     {
