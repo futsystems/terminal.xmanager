@@ -50,6 +50,24 @@ namespace TradingLib.MoniterBase.Command
         }
     }
 
+    public class QryHistSecurityCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+
+
+            fmHistSecurityStatistic fm = new fmHistSecurityStatistic();
+            AccountItem account = null;
+            if (AccountMoniterHelper.GetCurrentAccount(this.Owner, out account))
+            {
+                fm.SetAccount(account.Account);
+            }
+            fm.ShowDialog();
+            fm.Close();
+
+        }
+    }
+
     /// <summary>
     /// 查询结算单
     /// </summary>

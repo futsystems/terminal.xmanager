@@ -295,6 +295,9 @@
       <MenuItem id = "QryHistCashTransCommand"
             label = "出入金记录"
             class = "TradingLib.MoniterBase.Command.QryHistCashTransCommand"/>
+    <MenuItem id = "QryHistSecurityCommand"
+           label = "品种统计"
+           class = "TradingLib.MoniterBase.Command.QryHistSecurityCommand"/>
     <Condition name="ModuleState" module="follow" >
     <MenuItem id = "Separator1" type = "Separator"/>
     <MenuItem id = "QryFollowExecutioinCommand"
