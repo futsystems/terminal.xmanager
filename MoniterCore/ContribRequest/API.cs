@@ -197,6 +197,7 @@ namespace TradingLib.MoniterCore
 
         UUOPay,
 
+        PlugPay
     }
 
     public enum EnumBusinessType

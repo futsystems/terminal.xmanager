@@ -31,9 +31,9 @@
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonNavigator1 = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
             this.pageAccountSetting = new ComponentFactory.Krypton.Navigator.KryptonPage();
+            this.ctAccountInfo1 = new TradingLib.MoniterControl.ctAccountInfo();
             this.pageExecution = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.ctAccountInfo1 = new TradingLib.MoniterControl.ctAccountInfo();
             this.ctQuoteMoniterS1 = new TradingLib.MoniterControl.ctQuoteMoniterS();
             this.ctOrderSenderM1 = new TradingLib.MoniterControl.ctOrderSenderM();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
@@ -91,6 +91,14 @@
             this.pageAccountSetting.ToolTipTitle = "Page ToolTip";
             this.pageAccountSetting.UniqueName = "4F5C53DB656B4BFD9ABE0F998C4FAAEB";
             // 
+            // ctAccountInfo1
+            // 
+            this.ctAccountInfo1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctAccountInfo1.Location = new System.Drawing.Point(0, 0);
+            this.ctAccountInfo1.Name = "ctAccountInfo1";
+            this.ctAccountInfo1.Size = new System.Drawing.Size(587, 335);
+            this.ctAccountInfo1.TabIndex = 0;
+            // 
             // pageExecution
             // 
             this.pageExecution.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
@@ -113,14 +121,6 @@
             this.kryptonPanel2.Name = "kryptonPanel2";
             this.kryptonPanel2.Size = new System.Drawing.Size(587, 335);
             this.kryptonPanel2.TabIndex = 0;
-            // 
-            // ctAccountInfo1
-            // 
-            this.ctAccountInfo1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctAccountInfo1.Location = new System.Drawing.Point(0, 0);
-            this.ctAccountInfo1.Name = "ctAccountInfo1";
-            this.ctAccountInfo1.Size = new System.Drawing.Size(587, 335);
-            this.ctAccountInfo1.TabIndex = 0;
             // 
             // ctQuoteMoniterS1
             // 

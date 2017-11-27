@@ -83,6 +83,7 @@ namespace TradingLib.MoniterBase
 
             //订阅出入金通知
             CoreService.EventCore.RegisterNotifyCallback(Modules.APIService, Method_API.NOTIFY_CASH_OPERATION, this.OnNotifyCashOperation);
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_TERMINAL_NUM, this.OnNotifyTerminaNum);
 
             //超管查看结算状态
             if (CoreService.SiteInfo.Domain.Super)
@@ -90,6 +91,8 @@ namespace TradingLib.MoniterBase
                 CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH, Method_MGR_EXCH.QRY_SYSTEM_STATUS, this.OnQrySystemStatus);
                 CoreService.TLClient.ReqQrySystemStatus();
             }
+
+            this.lbTerminalStatus.Visible = CoreService.SiteInfo.Manager.IsRoot();
         }
 
         void OnNotifyCashOperation(string json)
@@ -109,6 +112,14 @@ namespace TradingLib.MoniterBase
             }
         }
 
+        void OnNotifyTerminaNum(string json)
+        {
+            var data = json.DeserializeObject();
+            var AccNum = data["AccNum"].ToString();
+            var MgrNum = data["MgrNum"].ToString();
+            this.lbTerminalStatus.Text = string.Format("A:{0} M:{1}", AccNum, MgrNum);
+        }
+
         void OnQrySystemStatus(string json, bool islast)
         {
             if (this.InvokeRequired)
@@ -120,7 +131,6 @@ namespace TradingLib.MoniterBase
                 SystemStatus status = CoreService.ParseJsonResponse<SystemStatus>(json);
                 if (status != null)
                 {
-                    //GotSystemStatus(status);
                     lbSettleStatus.Text = string.Format("{0}- O:{1} T:{2} E:{3}", status.LastSettleday, status.UnsettledAcctOrderNumOfPreSettleday, status.UnsettledAcctTradeNumOfPreSettleday, status.UnsettledExchangeSettlementNumOfPreSettleday);
                 }
             }
@@ -284,6 +294,7 @@ namespace TradingLib.MoniterBase
         private System.Windows.Forms.ToolStripStatusLabel lbDeployID;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel lbSettleStatus;
+        private System.Windows.Forms.ToolStripStatusLabel lbTerminalStatus;
         private System.Windows.Forms.ToolStripStatusLabel lbExpireMessage;
         private System.Windows.Forms.ToolStripStatusLabel lbSpring;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
@@ -339,6 +350,7 @@ namespace TradingLib.MoniterBase
             this.lbDeployID = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lbSettleStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lbTerminalStatus = new System.Windows.Forms.ToolStripStatusLabel();
 
             this.lbExpireMessage = new System.Windows.Forms.ToolStripStatusLabel();
             this.lbSpring = new System.Windows.Forms.ToolStripStatusLabel();
@@ -375,6 +387,15 @@ namespace TradingLib.MoniterBase
             this.lbSettleStatus.Name = "lbSettleStatus";
             this.lbSettleStatus.Size = new System.Drawing.Size(18, 17);
             this.lbSettleStatus.Text = "";
+
+            // 
+            // lbTerminalStatus
+            // 
+            this.lbTerminalStatus.Name = "lbTerminalStatus";
+            this.lbTerminalStatus.Size = new System.Drawing.Size(18, 17);
+            this.lbTerminalStatus.Text = "--";
+
+
             // 
             // lbExpireMessage
             // 
@@ -419,6 +440,7 @@ namespace TradingLib.MoniterBase
             this.lbDeployID,
             this.toolStripStatusLabel2,
             this.lbSettleStatus,
+            this.lbTerminalStatus,
             this.lbExpireMessage,
             this.lbSpring,
             this.toolStripStatusLabel3,

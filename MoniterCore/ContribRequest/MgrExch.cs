@@ -421,6 +421,11 @@ namespace TradingLib.MoniterCore
         public const string REQ_WATCH_AGENTS = "WatchAgents";
         #endregion
 
+
+        /// <summary>
+        /// 推送登入终端数量
+        /// </summary>
+        public const string NOTIFY_TERMINAL_NUM = "NotifyTerminalNumber";
     }
 
     public static class MgrExch

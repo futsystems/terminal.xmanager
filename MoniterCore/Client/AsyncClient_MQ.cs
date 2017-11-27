@@ -46,21 +46,6 @@ namespace TradingLib.MoniterCore
                 msgdebug(msg);
         }
 
-        //bool _debugEnable = true;
-        //public bool DebugEnable { get { return _debugEnable; } set { _debugEnable = value; } }
-        // _debuglevel = QSEnumDebugLevel.DEBUG;
-        //public QSEnumDebugLevel DebugLevel { get { return _debuglevel; } set { _debuglevel = value; } }
-
-        /// <summary>
-        /// 判断日志级别 然后再进行输出
-        /// </summary>
-        /// <param name="msg"></param>
-        /// <param name="level"></param>
-        //protected void debug(string msg, QSEnumDebugLevel level = QSEnumDebugLevel.DEBUG)
-        //{
-        //    if ((int)level <= (int)_debuglevel && _debugEnable)
-        //        msgdebug("[" + level.ToString() + "] " + msg);
-        //}
 
         private void msgdebug(string msg)
         {

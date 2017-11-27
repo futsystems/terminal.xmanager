@@ -233,8 +233,10 @@ namespace TradingLib.MoniterControl
         }
         void ReCreateMenuTree()
         {
+            agentTree.SelectedNode = null;
             agentTree.Nodes.Clear();
             InitMgrList();
+           
         }
 
 
