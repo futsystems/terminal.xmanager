@@ -96,7 +96,7 @@ namespace TradingLib.MoniterControl
 
         void UpdateAccountNum()
         {
-            filterBox.SetAccountNum(accountgrid.Rows.Count);
+            toolBox.SetAccountNum(accountgrid.Rows.Count);
         }
 
     }

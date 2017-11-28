@@ -1173,6 +1173,15 @@
     <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier_Grid.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier_ToolBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier_.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PageControl\ctAccountMoniter\ctAccountMontier_LeftMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="PageControl\ctFollowCentre.cs">
       <SubType>UserControl</SubType>
     </Compile>

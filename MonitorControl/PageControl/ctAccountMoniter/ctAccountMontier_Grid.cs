@@ -20,6 +20,14 @@ namespace TradingLib.MoniterControl
     /// </summary>
     public partial class ctAccountMontier
     {
+
+
+        void InitGridView()
+        {
+            SetPreferences();
+            InitTable();
+            BindToTable();
+        }
         #region 表格
 
         const string ACCOUNT = "帐户编号";
@@ -322,10 +330,9 @@ namespace TradingLib.MoniterControl
                     }
                     //设置观察帐户列表
                     SetWathAccounts();
-
                     //闪烁警告
                     InvokeFlashAccountWarn();
-                    Thread.Sleep(10);
+                    Thread.Sleep(200);
                 }
                 catch (Exception ex)
                 {

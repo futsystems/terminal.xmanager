@@ -35,12 +35,16 @@
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.payurl = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.channelType = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.channelType);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel3);
             this.kryptonPanel1.Controls.Add(this.AppSecret);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel7);
             this.kryptonPanel1.Controls.Add(this.AppID);
@@ -101,6 +105,22 @@
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "Plug网关地址";
             // 
+            // channelType
+            // 
+            this.channelType.Location = new System.Drawing.Point(27, 184);
+            this.channelType.Name = "channelType";
+            this.channelType.Size = new System.Drawing.Size(269, 20);
+            this.channelType.TabIndex = 14;
+            this.channelType.Text = "YEEPAY-PC";
+            // 
+            // kryptonLabel3
+            // 
+            this.kryptonLabel3.Location = new System.Drawing.Point(7, 158);
+            this.kryptonLabel3.Name = "kryptonLabel3";
+            this.kryptonLabel3.Size = new System.Drawing.Size(81, 20);
+            this.kryptonLabel3.TabIndex = 13;
+            this.kryptonLabel3.Values.Text = "ChannelType";
+            // 
             // ctGateWayPlugPay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -124,5 +144,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox AppID;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox AppSecret;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox channelType;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
     }
 }

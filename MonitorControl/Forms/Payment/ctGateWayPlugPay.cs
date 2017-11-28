@@ -26,6 +26,7 @@ namespace TradingLib.MoniterControl
             payurl.Text = data["PayUrl"].ToString();
             AppID.Text = data["AppID"].ToString();
             AppSecret.Text = data["AppSecret"].ToString();
+            channelType.Text = data["ChannelType"].ToString();
      
         }
 
@@ -36,7 +37,7 @@ namespace TradingLib.MoniterControl
                 PayUrl = payurl.Text,
                 AppID = AppID.Text,
                 AppSecret = AppSecret.Text,
-              
+                ChannelType = channelType.Text,
             }
             .SerializeObject();
         }

@@ -21,7 +21,7 @@ namespace TradingLib.MoniterControl
     {
         ILog logger = LogManager.GetLogger("AccountMontier");
         public Control FilterToolBar { get; set; }
-        ctAccountFilter filterBox;
+        
         ConfigFile config;
 
         public ctAccountMontier()
@@ -30,19 +30,10 @@ namespace TradingLib.MoniterControl
             {
                 config = ConfigFile.GetConfigFile("moniter.cfg");
                 InitializeComponent();
-                SetPreferences();
-                InitTable();
-                BindToTable();
-                filterBox = new ctAccountFilter();
-                filterBox.FilterArgsChanged += new Action<FilterArgs>(OnFilterArgsChanged);
-                filterBox.DebugEvent += new VoidDelegate(filterBox_DebugEvent);
-                filterBox.BatchConfigTemplate += new Action(filterBox_BatchConfigTemplate);
-                filterBox.BatchDelAccount += new Action(filterBox_BatchDelAccount);
-                filterBox.BatchActiveAccount += new Action(filterBox_BatchActiveAccount);
-                filterBox.BatchInActiveAccount += new Action(filterBox_BatchInActiveAccount);
-                filterBox.BatchFlatPosition += new Action(filterBox_BatchFlatPosition);
-                this.FilterToolBar = filterBox;
-               
+
+                InitGridView();
+                InitToolBox();
+                
                 this.Load += new EventHandler(ctAccountMontier_Load);
             }
             catch (Exception ex)
@@ -52,46 +43,34 @@ namespace TradingLib.MoniterControl
             
         }
 
-        void filterBox_BatchFlatPosition()
+        void ctAccountMontier_Load(object sender, EventArgs e)
         {
-            if (MoniterHelper.WindowConfirm("批量强平选中账户?") == DialogResult.Yes)
-            {
-                CoreService.TLClient.ReqFlatAllPosition(this.AccountsSelected.ToArray());
-            }
+            WireEvents();
+
+            FilterAccount();
         }
 
-        void filterBox_BatchInActiveAccount()
+
+        void WireEvents()
         {
-            if (MoniterHelper.WindowConfirm("批量冻结选中账户?") == DialogResult.Yes)
-            {
-                CoreService.TLClient.ReqUpdateAccountExecute(this.AccountsSelected.ToArray(), false);
-            }
+            //绑定表格菜单
+            accountgrid.ContextMenuStrip = MenuService.CreateContextMenu(this, "/AccountList/ContextMenu");
+            //表格事件
+            accountgrid.CellDoubleClick += new DataGridViewCellEventHandler(accountgrid_CellDoubleClick);//双击单元格
+            accountgrid.SizeChanged += new EventHandler(accountgrid_SizeChanged);
+            accountgrid.SizeChanged += new EventHandler(accountgrid_SizeChanged_FixWidth);//大小改变
+            accountgrid.Scroll += new ScrollEventHandler(accountgrid_Scroll);//滚轮滚动
+            //表格样式
+            accountgrid.CellFormatting += new DataGridViewCellFormattingEventHandler(accountgrid_CellFormatting);//格式化单元格
+            accountgrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(accountgrid_RowPrePaint);
+
+            CoreService.EventCore.RegIEventHandler(this);
         }
 
-        void filterBox_BatchActiveAccount()
-        {
-            if (MoniterHelper.WindowConfirm("批量激活选中账户?") == DialogResult.Yes)
-            {
-                CoreService.TLClient.ReqUpdateAccountExecute(this.AccountsSelected.ToArray(),true);
-            }
-        }
-
-        void filterBox_BatchDelAccount()
-        {
-            if (MoniterHelper.WindowConfirm("批量删除选中账户?") == DialogResult.Yes)
-            {
-                CoreService.TLClient.ReqDelAccount(this.AccountsSelected.ToArray());
-            }
-        }
-
-        void filterBox_BatchConfigTemplate()
-        {
-            fmEditAccountConfigTemplate fm = new fmEditAccountConfigTemplate();
-            fm.SetAccount(this.AccountsSelected.ToArray());
-            fm.ShowDialog();
-            fm.Close();
-        }
-
+       
+        /// <summary>
+        /// 选中账户编号列表
+        /// </summary>
         public List<string> AccountsSelected
         {
             get
@@ -108,63 +87,16 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        void filterBox_DebugEvent()
-        {
-            int accCnt = accountmap.Count;
-            int rowCnt = accountrowmap.Count;
-            int tableRowCnt = gt.Rows.Count;
-            int gridCnt = accountgrid.RowCount;
-            
-
-            MessageBox.Show(string.Format("账户:{0} 行:{1} 表:{2} 表格显示:{3} 过滤:{4}", accCnt, rowCnt, tableRowCnt, gridCnt, datasource.Filter));
-            datasource.Filter = "";
-        }
+        
 
        
 
-        void ctAccountMontier_Load(object sender, EventArgs e)
-        {
-            WireEvents();
 
-            FilterAccount();
-        }
-
-
-        void WireEvents()
-        {
-            //绑定表格菜单
-            accountgrid.ContextMenuStrip = MenuService.CreateContextMenu(this, "/AccountList/ContextMenu");
-            //表格事件
-            accountgrid.CellDoubleClick +=new DataGridViewCellEventHandler(accountgrid_CellDoubleClick);//双击单元格
-            accountgrid.SizeChanged +=new EventHandler(accountgrid_SizeChanged);
-            accountgrid.SizeChanged += new EventHandler(accountgrid_SizeChanged_FixWidth);//大小改变
-            accountgrid.Scroll +=new ScrollEventHandler(accountgrid_Scroll);//滚轮滚动
-            //表格样式
-            accountgrid.CellFormatting += new DataGridViewCellFormattingEventHandler(accountgrid_CellFormatting);//格式化单元格
-            accountgrid.RowPrePaint += new DataGridViewRowPrePaintEventHandler(accountgrid_RowPrePaint);
-
-            CoreService.EventCore.RegIEventHandler(this);
-        }
 
         
 
         public void OnInit()
         {
-            //加载帐户
-            foreach (AccountItem account in CoreService.BasicInfoTracker.Accounts)
-            {
-                InvokeGotAccount(account);
-            }
-
-            UpdateAccountNum();
-
-            //CoreService.EventHub.AccountStatisticNotify += new Action<AccountStatistic>(OnAccountStatisticNotify);
-            //CoreService.EventHub.OnAccountChangedEvent += new Action<AccountItem>(OnAccountChanged);
-            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_ACC_CHANGED, OnAccountChanged);
-            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_ACC_STATISTIC, OnNotifyAccountStatistic);
-            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_AGENT_CREATE, OnNotifyAgentCreate);
-            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MANGER_DELETE, OnManagerDelete);
-
             //根据角色隐藏表格相关列
             if (CoreService.SiteInfo.ProductType == QSEnumProductType.CounterSystem)
             {
@@ -177,20 +109,18 @@ namespace TradingLib.MoniterControl
 
                 CounterMoniterWidth();
             }
-            //启动更新线程
-            StartUpdate();
 
-            //有代理模块
+
+            //有代理模块 显示左侧树状菜单
             if (CoreService.SiteInfo.Domain.Module_Agent)
             {
                 //初始化左侧树状菜单
                 agentTree.NodeMouseClick += new TreeNodeMouseClickEventHandler(agentTree_NodeMouseClick);
-                InitMgrList();
+                InitTreeMenu();
 
                 splitContainer.Panel1Collapsed = false;
                 splitContainer.SplitterWidth = 5;
                 splitContainer.SplitterDistance = 120;
-                //splitContainer.IsSplitterFixed = true;
             }
             else
             {
@@ -199,100 +129,46 @@ namespace TradingLib.MoniterControl
                 ctAgentSummary.Visible = false;
                 accountgrid.Dock = DockStyle.Fill;
             }
+
+
+            //加载帐户
+            foreach (AccountItem account in CoreService.BasicInfoTracker.Accounts.ToArray())
+            {
+                //accountcache.Write(account);
+                InvokeGotAccount(account);
+            }
+            //加载帐户
+            foreach (AccountItem account in CoreService.BasicInfoTracker.Accounts.ToArray())
+            {
+                //accountcache.Write(account);
+                InvokeGotAccount(account);
+            }
+            
+            
+
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_ACC_CHANGED, OnAccountChanged);//交易账户参数变化
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_ACC_STATISTIC, OnNotifyAccountStatistic);//交易账户统计
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_AGENT_CREATE, OnNotifyAgentCreate);//代理账户添加
+            CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MANGER_DELETE, OnManagerDelete);//管理账户删除
+
+            UpdateAccountNum();
+
+            //启动更新线程
+            StartUpdate();
+
             //初始化后自动设定到当前顶级管理员
             if (CoreService.SiteInfo.Agent != null)
             {
-                ctAgentSummary.SetAgent(CoreService.SiteInfo.Manager,CoreService.SiteInfo.Agent);
+                ctAgentSummary.SetAgent(CoreService.SiteInfo.Manager, CoreService.SiteInfo.Agent);
                 CoreService.TLClient.ReqWatchAgents(new string[] { CoreService.SiteInfo.Agent.Account });
             }
-        }
-
-        void OnNotifyAgentCreate(string json)
-        {
-            if (InvokeRequired)
-            {
-                Invoke(new Action<string>(OnNotifyAgentCreate), new object[] { json });
-            }
-            else
-            {
-                ReCreateMenuTree();
-            }
-        }
-
-
-        void OnManagerDelete(string json)
-        {
-            if (InvokeRequired)
-            {
-                Invoke(new Action<string>(OnManagerDelete), new object[] { json });
-            }
-            else
-            {
-                ReCreateMenuTree();
-            }
-        }
-        void ReCreateMenuTree()
-        {
-            agentTree.SelectedNode = null;
-            agentTree.Nodes.Clear();
-            InitMgrList();
-           
-        }
-
-
-        void InitMgrList()
-        {
-
-            MenuItem menu = GetAgentMenu();
-
-            TreeNode mainNode = new TreeNode(menu.Title);
-            mainNode.Tag = menu;
-            agentTree.Nodes.Add(mainNode);
-
-            foreach (var subItem in menu.SubAgents.OrderBy(men=>men.Manager.Login))
-            {
-                this.AddMenu(mainNode, subItem);
-            }
-
             
-         
-        }
-        void AddMenu(TreeNode node, MenuItem item)
-        {
-            TreeNode itemNode = new TreeNode(item.Title);
-            itemNode.Tag = item;
-
-            node.Nodes.Add(itemNode);
-            foreach (var subItem in item.SubAgents)
-            {
-                this.AddMenu(itemNode, subItem);
-            }
         }
 
-
-        ManagerSetting _managerSelected = null;
         
-        void agentTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            MenuItem menu = e.Node.Tag as MenuItem;
-            if (menu != null)
-            {
-                if (menu.AgentAccount == null)
-                {
-                    ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show(string.Format("代理:{0}账户不存在", menu.Manager.Login));
-                    return;
-                }
-                _managerSelected = menu.Manager;
-                //设定代理财务统计账户
-                ctAgentSummary.SetAgent(menu.Manager,menu.AgentAccount);
 
-                CoreService.TLClient.ReqWatchAgents(new string[] { menu.AgentAccount.Account });
-                //过滤账户列表
-                FilterAccount();
 
-            }
-            
-        }
+
 
      
         
@@ -302,10 +178,14 @@ namespace TradingLib.MoniterControl
 
         public void OnDisposed()
         {
-            //CoreService.EventHub.AccountStatisticNotify -= new Action<AccountStatistic>(OnAccountStatisticNotify);
-            //CoreService.EventHub.OnAccountChangedEvent -= new Action<AccountItem>(OnAccountChanged);
+        
+
         }
 
+        /// <summary>
+        /// 账户统计更新
+        /// </summary>
+        /// <param name="json"></param>
         void OnNotifyAccountStatistic(string json)
         {
             AccountStatistic item = CoreService.ParseJsonResponse<AccountStatistic>(json);
@@ -315,13 +195,10 @@ namespace TradingLib.MoniterControl
             }
             
         }
-        void OnAccountStatisticNotify(AccountStatistic obj)
-        {
-            accountinfocache.Write(obj);
-        }
+
 
         /// <summary>
-        /// 响应帐户变动事件
+        /// 帐户变动
         /// </summary>
         /// <param name="account"></param>
         public void OnAccountChanged(string json)
@@ -435,53 +312,9 @@ namespace TradingLib.MoniterControl
                 ControlService.FireAccountSelected(account);
             }
         }
-        FilterArgs filterArgs = null;
-        void OnFilterArgsChanged(FilterArgs obj)
-        {
-            filterArgs = obj;
-            FilterAccount();
-        }
+        
 
-        /// <summary>
-        /// 生成代理树状菜单项
-        /// </summary>
-        /// <returns></returns>
-        MenuItem GetAgentMenu()
-        {
-            Dictionary<int, MenuItem> menuMap = new Dictionary<int, MenuItem>();
-            foreach (var mgr in CoreService.BasicInfoTracker.Managers)
-            {
-                if (mgr.mgr_fk == CoreService.SiteInfo.Manager.mgr_fk) continue;//如果对应的管理域ID与当前管理域ID相同则过滤
-                if (mgr.Type != QSEnumManagerType.AGENT) continue;//只生成代理对应菜单项
-                menuMap.Add(mgr.mgr_fk, new MenuItem(mgr.mgr_fk,mgr.parent_fk, CoreService.BasicInfoTracker.GetAgent(mgr.Login),mgr));
-            }
-            //最后生成当前管理域菜单项
-            MenuItem menu = null;
-            if (CoreService.SiteInfo.Manager.Type != QSEnumManagerType.STAFF)
-            {
-                menu = new MenuItem(CoreService.SiteInfo.Manager.mgr_fk, CoreService.SiteInfo.Manager.parent_fk, CoreService.BasicInfoTracker.GetAgent(CoreService.SiteInfo.Manager.Login), CoreService.SiteInfo.Manager);
-                menuMap.Add(menu.MGR_ID, menu);
-            }
-            else
-            {
-                var basemgr = CoreService.BasicInfoTracker.GetManager(CoreService.SiteInfo.Manager.GetBaseMGR());
-
-                menu = new MenuItem(basemgr.mgr_fk, basemgr.parent_fk, CoreService.BasicInfoTracker.GetAgent(basemgr.Login), basemgr);
-                menuMap.Add(menu.MGR_ID, menu);
-            }
-
-            foreach (var item in menuMap.Values)
-            {
-                MenuItem parent = null;
-                if (menuMap.TryGetValue(item.Parent_ID, out parent))
-                {
-                    if (parent.MGR_ID == item.MGR_ID) continue;
-                    parent.SubAgents.Add(item);
-                }
-                
-            }
-            return menu;
-        }
+        
     }
 
 
