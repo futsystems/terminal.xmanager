@@ -179,6 +179,9 @@
       <MenuItem id = "HostedManagerCommand"
                 label = "托管服务"
                 class = "TradingLib.MoniterBase.Command.HostedManagerCommand"/>
+      <MenuItem id = "RebootCommand"
+                label = "重启系统"
+                class = "TradingLib.MoniterBase.Command.RebootCommand"/>
     </Condition>
 	
 </Path>      

@@ -46,7 +46,8 @@ namespace TradingLib.MoniterControl
                 totalaccountnum.Text = s.TotalAccountNum.ToString();
                 totalordernum.Text = s.TotalOrderNum.ToString();
                 totaltradenum.Text = s.TotalTradeNum.ToString();
-                
+
+                this.Text = string.Format("系统状态-启动时间:{0}", s.StartUpTime.ToDateTimeEx(DateTime.MaxValue).ToString("HH:mm:ss"));
             }
         }
 

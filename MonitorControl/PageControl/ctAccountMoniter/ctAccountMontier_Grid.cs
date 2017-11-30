@@ -298,6 +298,42 @@ namespace TradingLib.MoniterControl
 
 
 
+        public void ProcessUpdate()
+        {
+            try
+            {
+                //更新账户主体信息
+                while (accountcache.hasItems)
+                {
+                    AccountItem account = accountcache.Read();
+                    InvokeGotAccount(account);
+                    //如果在初始化之后获得AccountItem信息 则表明该帐户是新增造成的 需要重新watchaccount
+                    if (CoreService.BasicInfoTracker.Initialized)
+                    {
+                        GridChanged();
+                    }
+                    Thread.Sleep(1);
+                }
+
+                //更新账户盘中动态财务信息
+                while (!accountcache.hasItems && accountinfocache.hasItems)
+                {
+                    InvokeGotAccountInfoLite(accountinfocache.Read());
+                    Thread.Sleep(1);
+                }
+
+                //设置观察帐户列表
+                SetWathAccounts();
+
+                //闪烁警告
+                InvokeFlashAccountWarn();
+                Thread.Sleep(200);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Account Info Process Error:" + ex.ToString());
+            }
+        }
         bool _accountgo = false;
         Thread _accountthread = null;
         const int bufferisze = 1000;

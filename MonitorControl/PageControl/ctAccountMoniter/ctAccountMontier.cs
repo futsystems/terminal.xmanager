@@ -154,7 +154,7 @@ namespace TradingLib.MoniterControl
             UpdateAccountNum();
 
             //启动更新线程
-            StartUpdate();
+            //StartUpdate();
 
             //初始化后自动设定到当前顶级管理员
             if (CoreService.SiteInfo.Agent != null)

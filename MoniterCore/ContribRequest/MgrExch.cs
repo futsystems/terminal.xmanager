@@ -426,6 +426,11 @@ namespace TradingLib.MoniterCore
         /// 推送登入终端数量
         /// </summary>
         public const string NOTIFY_TERMINAL_NUM = "NotifyTerminalNumber";
+
+        /// <summary>
+        /// 重启系统
+        /// </summary>
+        public const string REQ_REBOOT_SYSTEM = "ExitSystem";
     }
 
     public static class MgrExch
@@ -807,5 +812,10 @@ namespace TradingLib.MoniterCore
         }
         #endregion
 
+
+        public static int ReqExitSystem(this TLClientNet client)
+        {
+            return client.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.REQ_REBOOT_SYSTEM, "");
+        }
     }
 }

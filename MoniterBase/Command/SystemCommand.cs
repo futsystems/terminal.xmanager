@@ -180,6 +180,23 @@ namespace TradingLib.MoniterBase.Command
         }
     }
 
+    public class RebootCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            if (!CoreService.SiteInfo.Domain.Super)
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+
+            if (MoniterHelper.WindowConfirm("确认重启系统") == System.Windows.Forms.DialogResult.Yes)
+            {
+                CoreService.TLClient.ReqExitSystem();
+            }
+        }
+    }
+
 
 
 

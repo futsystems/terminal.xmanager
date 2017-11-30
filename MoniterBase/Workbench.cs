@@ -52,6 +52,7 @@ namespace TradingLib.MoniterBase
                 this.Text = string.Format("{0}-{1}", GetProductName(CoreService.SiteInfo.ProductType), CoreService.SiteInfo.Domain.Name);
             }
 
+            
             //设置部署编号
             lbDeployID.Text = string.Format("{0}-{1}", CoreService.TLClient.Negotiation.DeployID,CoreService.TLClient.Negotiation.Version);
 
@@ -92,7 +93,7 @@ namespace TradingLib.MoniterBase
                 CoreService.TLClient.ReqQrySystemStatus();
             }
 
-            this.lbTerminalStatus.Visible = CoreService.SiteInfo.Manager.IsRoot();
+            this.lbTerminalStatus.Visible = CoreService.SiteInfo.Domain.Super;
         }
 
         void OnNotifyCashOperation(string json)
@@ -551,12 +552,17 @@ namespace TradingLib.MoniterBase
             //MessageBox.Show(string.Format("{0} - {1} / {2}-{3}", toolBarFilterHost.Size.Height, toolBarFilterHost.Size.Width, ctl.Size.Height, ctl.Size.Width));
         }
 
+        ctAccountMontier ctmoniter;
         /// <summary>
         /// 向视区添加控件
         /// </summary>
         /// <param name="ctl"></param>
         public void AppendControl(Control ctl)
         {
+            if (ctl is ctAccountMontier)
+            {
+                ctmoniter = ctl as ctAccountMontier;
+            }
             IMoniterControl mc = ctl as IMoniterControl;
             if (mc == null)
             {
@@ -778,12 +784,19 @@ namespace TradingLib.MoniterBase
                 {
                     RspInfo info = infobuffer.Read();
                     bg.ReportProgress(1, info);
-                    Util.sleep(1000);
+                    Util.sleep(200);
                 }
-                Util.sleep(50);
+
+                if (ctmoniter != null && ctmoniter.Visible)
+                {
+                    ctmoniter.ProcessUpdate();
+                }
+                Util.sleep(100);
             }
         }
 
         #endregion
+
+        
     }
 }
