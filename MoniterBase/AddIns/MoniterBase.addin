@@ -149,7 +149,10 @@
     <Condition name="DeployState" deploy="s">
       <MenuItem id = "TaskLogManagerCommand"
                 label = "任务日志"
-                class = "TradingLib.MoniterBase.Command.TaskLogManagerCommand"/>      
+                class = "TradingLib.MoniterBase.Command.TaskLogManagerCommand"/>
+      <MenuItem id = "RebootCommand"
+          label = "重启系统"
+          class = "TradingLib.MoniterBase.Command.RebootCommand"/>
     </Condition>
 
     <Condition name="RoleState" role="root" >
@@ -160,8 +163,7 @@
     </Condition>
     
     
-    
-    
+   
     <MenuItem id = "ChangePasswordCommand"
           label = "修改密码"
           class = "TradingLib.MoniterBase.Command.ChangePasswordCommand"/>
@@ -179,9 +181,6 @@
       <MenuItem id = "HostedManagerCommand"
                 label = "托管服务"
                 class = "TradingLib.MoniterBase.Command.HostedManagerCommand"/>
-      <MenuItem id = "RebootCommand"
-                label = "重启系统"
-                class = "TradingLib.MoniterBase.Command.RebootCommand"/>
     </Condition>
 	
 </Path>      
