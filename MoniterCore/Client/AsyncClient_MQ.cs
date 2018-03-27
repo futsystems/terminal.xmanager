@@ -206,10 +206,12 @@ namespace TradingLib.MoniterCore
                             {
                                 if (error == ZError.ETERM)
                                 {
+                                    _msg_go = false;
                                     logger.Error("Message Socket ETERM");
                                 }
                                 else
                                 {
+                                    _msg_go = false;
                                     logger.Error("Message Socket Error:" + error.ToString());
                                 }
                             }
@@ -223,11 +225,13 @@ namespace TradingLib.MoniterCore
                         }
                         catch (ZException ex)
                         {
+                            _msg_go = false;
                             logger.Error("Message Socket 错误:" + ex.ToString());
 
                         }
                         catch (System.Exception ex)
                         {
+                            _msg_go = false;
                             logger.Error("Message数据处理错误" + ex.ToString());
                         }
                     }
@@ -256,7 +260,7 @@ namespace TradingLib.MoniterCore
                 return;
             logger.Info("Start Client Tick Reciving Thread....");
             _tick_go = true;
-            _tickthread = new Thread(new ThreadStart(TickHandler));
+            _tickthread = new Thread(TickHandler);
             _tickthread.IsBackground = true;
             _tickthread.Start();
         }
@@ -296,10 +300,12 @@ namespace TradingLib.MoniterCore
                             {
                                 if (error == ZError.ETERM)
                                 {
+                                    _tick_go = false;
                                     logger.Error("Tick Socket ETERM");
                                 }
                                 else
                                 {
+                                    _tick_go = false;
                                     logger.Error("Tick Socket Error:" + error.ToString());
                                 }
                             }
@@ -331,11 +337,13 @@ namespace TradingLib.MoniterCore
                         }
                         catch (ZException ex)
                         {
+                            _tick_go = false;
                             logger.Error("Message Socket 错误:" + ex.ToString());
 
                         }
                         catch (System.Exception ex)
                         {
+                            _tick_go = false;
                             logger.Error("Message数据处理错误" + ex.ToString());
                         }
                     }
