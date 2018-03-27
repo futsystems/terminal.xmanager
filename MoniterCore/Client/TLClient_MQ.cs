@@ -134,7 +134,7 @@ namespace TradingLib.MoniterCore
             _tickwatchthread = new Thread(tickprocess);
             _tickwatchthread.IsBackground = true;
             _tickwatchthread.Start();
-            logger.Info(PROGRAME + " :TickWatcher threade started");
+            logger.Info("TickWatcher threade started");
         }
 
         void StopTickWatcher()
@@ -143,11 +143,9 @@ namespace TradingLib.MoniterCore
             ticktrackergo = false;
             _tickwatchthread.Abort();
             _tickwatchthread = null;
-            logger.Info(PROGRAME + " :TickWatcher threade stopped");
+            logger.Info("TickWatcher threade stopped");
         }
         Thread _tickwatchthread = null;
-        bool tickenable = false;//是否接受tick数据
-        
         bool ticktrackergo = false;
         bool _tickreconnectreq = false;
 
@@ -166,7 +164,7 @@ namespace TradingLib.MoniterCore
                     //debug("connect:" + _connect.ToString() + " reconnecttick:" + _tickreconnectreq.ToString() + " diff:" + diff.ToString() + " _tickheartbeatdead:" + _tickheartbeatdead.ToString() + " now:" + now.ToString() + " _lastick:" + _tickhartbeat.ToString());
                     if (_tickreconnectreq == false)
                     {
-                        logger.Info(PROGRAME + ":Tick Publisher stream stopped");
+                        logger.Info("Tick  Stream Stopped");
                         //重新启动tick数据连接
                         _tickreconnectreq = true;
                         new Thread(reconnectTick).Start();
@@ -184,7 +182,7 @@ namespace TradingLib.MoniterCore
 
         #region 服务端连接监控线程(该服务端连接处理委托/成交/查询)
         Thread _bwthread = null;
-        void StartBW()
+        void StartMessageWatcher()
         {
             if (_started) return;
 
@@ -192,17 +190,17 @@ namespace TradingLib.MoniterCore
             _bwthread = new Thread(_bw_DoWork);
             _bwthread.IsBackground = true;
             _bwthread.Start();
-            logger.Info(PROGRAME + " :BW Backend threade started");
+            logger.Info("MessageWatcher  threade started");
         }
 
-        void StopBW()
+        void StopMessageWatcher()
         {
             if (!_started) return;
 
             _started = false;
             _bwthread.Abort();
             _bwthread = null;
-            logger.Info(PROGRAME + " :BW Backend threade stopped");
+            logger.Info("MessageWatcher  threade stopped");
         }
     
         /// <summary>
@@ -241,7 +239,7 @@ namespace TradingLib.MoniterCore
                             if (_reconnectreq == false)
                             {
                                 _reconnectreq = true;//请求重新连接标识,避免重复请求连接
-                                //debug(PROGRAME + ":heartbeat is dead, reconnecting at: " + DateTime.Now.ToString());
+                                logger.Info("Message Heartbeat Lost,reconnect");
                                 new Thread(reconnect).Start();
                             }
                         }
@@ -261,14 +259,6 @@ namespace TradingLib.MoniterCore
 
 
         #region 心跳检测 线程 用于定时向服务器发送心跳数据
-        //刷新数据
-        /*
-        System.Threading.Timer _timer;
-        void timerHeartBeat(object obj)
-        {
-            this.HeartBeat();
-        }**/
-
         bool _heartbeatgo = false;
         Thread _heartbeatthread = null;
 
@@ -287,7 +277,7 @@ namespace TradingLib.MoniterCore
             _heartbeatthread = new Thread(_hbproc);
             _heartbeatthread.IsBackground = true;
             _heartbeatthread.Start();
-            logger.Info(PROGRAME + " :HeartBeatSend Backend threade started");
+            logger.Info("HeartBeatSend threade started");
         }
 
         void StopHeartBeat()
@@ -296,7 +286,7 @@ namespace TradingLib.MoniterCore
             _heartbeatgo = false;
             _heartbeatthread.Abort();
             _heartbeatthread = null;
-            logger.Info(PROGRAME + " :HeartBeatSend Backend threade stoped");
+            logger.Info("HeartBeatSend threade stoped");
         }
         #endregion
 
@@ -338,7 +328,7 @@ namespace TradingLib.MoniterCore
         public void Start(bool retry=false)
         {
             
-            _logger.Info(PROGRAME + ":Start to connect to server....");
+            _logger.Info("Start to connect to server....");
 
             bool _modesuccess = false;
             int _retry = 0;
@@ -346,15 +336,14 @@ namespace TradingLib.MoniterCore
             while (_modesuccess == false && _retry < (retry?_modeRetries:1))
             {
                 _retry++;
-                _logger.Info(PROGRAME + ":attempting connect to server... retry times:" + _retry.ToString());
+                _logger.Info("attempting connect to server... retry times:" + _retry.ToString());
                 _modesuccess = Mode(_curprovider, false);//尝试连接第一可用服务端,对一组IP地址进行服务查询后,将可用服务端放入队列，并尝试连接第一个服务端
                 //因此重新连接用Mode来进行,有重新搜索服务端列表的功能
                 Thread.Sleep(_remodedelay * 1000);
             }
             if (!_modesuccess)
             {
-                _logger.Info(PROGRAME + ":网络故障,无法连接到服务器");
-                //throw new QSAsyncClientError();
+                _logger.Info("网络故障,无法连接到服务器");
             } 
         }
         /// <summary>
@@ -379,29 +368,26 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public void Stop()
         {
-            logger.Info(PROGRAME + ":Stop TLCLient_MQ....");
+            logger.Info("Stop Client");
             try
             {
                 
                 StopTickWatcher();//停止tick监控
-                StopBW();//停止后台心跳监控
+                StopMessageWatcher();//停止后台心跳监控
                 StopHeartBeat();//停止心跳发送
                 if (_mqcli!=null && _mqcli.isConnected) //如果实现已经stop了brokerfeed 会造成服务器循环相应。应该将_stated放在这里进行相应
                 {
-                    logger.Info("stop go to here");
                     try
                     {
                         UnregisterClientRequest req = RequestTemplate<UnregisterClientRequest>.CliSendRequest(0);
-
                         TLSend(req);//向服务器发送clearClient消息用于注销客户端
-                        _mqcli.Disconnect();
-                        logger.Info("stop to hereh2");
-                        markdisconnect();
+                        _mqcli.Disconnect(); 
                     }
                     catch (Exception ex){
                         logger.Info("stop mqcli error:" + ex.ToString());
                     }
                 }
+                markdisconnect();
             }
             catch (Exception ex)
             {
@@ -409,14 +395,13 @@ namespace TradingLib.MoniterCore
             }
             finally
             {
-                logger.Info(PROGRAME + ":Realse asyncClient and thread resource");
+                logger.Info("Realse asyncClient and thread resource");
                 _mqcli = null;
                 _bwthread = null;
                 _heartbeatthread = null;
                 _tickwatchthread = null;
                 
             }
-            logger.Info(PROGRAME + ":Client:" + Name + " Disconnected");
         }
 
 
@@ -525,14 +510,14 @@ namespace TradingLib.MoniterCore
             while (_modesuccess == false && _retry < _modeRetries)
             {
                 _retry++;
-                logger.Info(PROGRAME + ":attempting reconnect... retry times:" + _retry.ToString());
+                logger.Info("attempting reconnect... retry times:" + _retry.ToString());
                 _modesuccess = Mode();//尝试连接第一可用服务端,对一组IP地址进行服务查询后,将可用服务端放入队列，并尝试连接第一个服务端
                 //因此重新连接用Mode来进行,有重新搜索服务端列表的功能
                 Thread.Sleep(_remodedelay * 1000);
             }
             if (!_modesuccess)
             {
-                logger.Info(PROGRAME + ":网络故障,无法连接到服务器");
+                logger.Info( "网络故障,无法连接到服务器");
                 //MessageBox.Show("网络故障,无法连接到服务器,请稍后按F9重新尝试!");
                 //throw new QSAsyncClientError();
             }
@@ -560,6 +545,21 @@ namespace TradingLib.MoniterCore
             }
         }
 
+        public void debug_StopTick()
+        {
+            if (_mqcli != null)
+            {
+                _mqcli.StopTickReciver();
+            }
+        }
+
+        public void debug_StopMessage()
+        {
+            if (_mqcli != null)
+            {
+                _mqcli.StopRecvThread();
+            }
+        }
         /// <summary>
         /// 启动行情通道
         /// </summary>
@@ -578,9 +578,8 @@ namespace TradingLib.MoniterCore
                 OnDataPubDisconnectEvent();
 
 
-            _mqcli.StartTickReciver(true);//建立tickpublisher的连接
+            _mqcli.StartTickReciver();//建立tickpublisher的连接
             _tickhartbeat = DateTime.Now.Ticks;//将当前时间设定为tickheartbeat时间
-            tickenable = true;
             StartTickWatcher();
             //启动市场数据接收之后才会触发datapubavabile,这样外层逻辑才可以注册市场数据
             if (OnDataPubConnectEvent != null)
@@ -626,7 +625,7 @@ namespace TradingLib.MoniterCore
             if (ok)
             {
                 logger.Info("connected ok, try to start thread");
-                StartBW();
+                StartMessageWatcher();
                 StartHartBeat();
             }
             else
@@ -767,8 +766,8 @@ namespace TradingLib.MoniterCore
                 {
                     //当发送信息的过程中，如果当前连接无效,则我们尝试重新建立当前连接
                     //注意:本地heartbeat线程会一致通过TLSend发送心跳信息到服务器,因此如果连接中断,则他会在这里触发重新建立连接的要求。
-                    if (_started)
-                        retryconnect();
+                    //if (_started)
+                    //    retryconnect();
                     return 0;
                 }
             }

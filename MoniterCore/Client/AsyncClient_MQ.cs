@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NetMQ;
+using ZeroMQ;
 
 using TradingLib.Common;
 using System.Threading;
@@ -24,7 +24,6 @@ namespace TradingLib.MoniterCore
         const string PROGRAME = "AsyncClient";
         public event DebugDelegate SendDebugEvent;
         public event Action<Message> SendTLMessage;
-        //public event TickDelegate GotTick;
 
         /// <summary>
         /// 消息处理函数事件,当客户端接收到消息 解析后调用该函数实现相应函数调用
@@ -90,25 +89,18 @@ namespace TradingLib.MoniterCore
         /// <summary>
         /// 客户端是否已经连接
         /// </summary>
-        public bool isConnected { get { return _started; } }
+        public bool isConnected { get { return _msg_go; } }
 
-        public bool isTickConnected { get { return _tickreceiveruning; } }
+        public bool isTickConnected { get { return _tick_go; } }
 
         public void Stop()
         {
-            try
-            {
-                logger.Info("___________________AnsyncClient Stop Thread and Socket....");
-                bool a = StopRecvThread();
-                bool b = StopTickReciver();
-                bool c = StopSendThread();
-                logger.Info("___________________Stop Task Report: " + "[MessageThread Stop]:" + a.ToString() + "  [TickThread Stop]:" + b.ToString() + "  [SendThread Stop]:" + b.ToString());
 
-            }
-            catch (Exception ex)
-            {
-                logger.Info(PROGRAME + ":stop error :" + ex.ToString());
-            }
+            logger.Info("___________________AnsyncClient Stop Thread and Socket....");
+            StopRecvThread();
+            StopTickReciver();
+            StopSendThread();
+              
         }
 
         /// <summary>
@@ -162,175 +154,127 @@ namespace TradingLib.MoniterCore
 
         #region 管理通道
         Thread _cliThread = null;
-        NetMQSocket _client = null;
-        Poller _msgpoller = null;
-        bool _started = false;
-
-        void StartRecvThread()
+        ZSocket _client = null;
+        bool _msg_go = false;
+        ZContext _msg_ctx = null;
+        public void StartRecvThread()
         {
-            if (_started)
+            if (_msg_go)
                 return;
             v("[AsyncClient] starting ....");
+            _msg_go = true;
             _cliThread = new Thread(new ThreadStart(MessageTranslate));
             _cliThread.IsBackground = true;
             _cliThread.Start();
             
         }
 
-        bool StopRecvThread()
+        public void StopRecvThread()
         {
-            if (!_started)
-                return true;
+            if (!_msg_go)
+                return;
             logger.Info("Stop Client Message Reciving Thread....");
-            int _wait = 0;
-            while (_cliThread.IsAlive && (_wait++ < 5))
-            {
-                logger.Info("#:" + _wait.ToString() + "  AsynClient is stoping...." + "MessageThread Status:" + _cliThread.IsAlive.ToString());
-                if (_msgpoller.IsStarted)//如果poller处于启动状态 则停止poller
-                {
-                    //debug("stop msgpoller");
-                    _msgpoller.Stop();
-                }
-                Thread.Sleep(1000);
-            }
-
-
-            if (!_cliThread.IsAlive)
-            {
-                _cliThread = null;
-                logger.Info("MessageThread Stopped successfull...");
-                return true;
-            }
-            logger.Info("Some Error Happend In Stoping MessageThread");
-            return false;
+            _msg_go = false;
+            _msg_ctx.Shutdown();
         }
+
 
         TimeSpan timeout = new TimeSpan(0, 0, 2);
         //消息翻译线程,当socket有新的数据进来时候,我们将数据转换成TL交易协议的内部信息,并触发SendTLMessage事件,从而TLClient可以用于调用对应的处理逻辑对信息进行处理
         private void MessageTranslate()
         {
-            using (NetMQContext _mctx = NetMQContext.Create())
+            using (_msg_ctx = new ZContext())
             {
-                using (_client = _mctx.CreateDealerSocket())
+                using (_client = new ZSocket(_msg_ctx, ZSocketType.DEALER))
                 {
-                    _client.Options.SendHighWatermark = 1000000;
-                    _client.Options.ReceiveHighWatermark = 1000000;
+                    _client.SendHighWatermark = 1000000;
+                    _client.ReceiveHighWatermark = 1000000;
 
                     _identity = System.Guid.NewGuid().ToString();
-                    _client.Options.Identity = Encoding.UTF8.GetBytes(_identity);
+                    _client.Identity = Encoding.UTF8.GetBytes(_identity);
                     string cstr = "tcp://" + _serverip.ToString() + ":" + Port.ToString();
                     logger.Info(PROGRAME + ":Connect to Message Server:" + cstr);
                     _client.Connect(cstr);
 
-                    //当客户端有消息近来时,我们读取消息并调用handleMessage出来消息 
-                    _client.ReceiveReady += (s, e) =>
-                    {
-                        lock (_client)
-                        {
-                            try
-                            {
-                                NetMQMessage zmsg = e.Socket.ReceiveMessage(timeout);
-                                Message msg = Message.gotmessage(zmsg.Last.Buffer);
-                                handleMessage(msg);
-                            }
-                            catch (Exception ex)
-                            {
-                                logger.Error("Handler Message Error:" + ex.ToString());
-                            }
-                        }
-                    };
-
-                    using (var poller = new Poller())
+                    ZMessage zmsg;
+                    ZError error;
+                    while (_msg_go)
                     {
                         try
                         {
-                            _msgpoller = poller;
-                            poller.AddSocket(_client);
-                            //当我们运行到这里的时候才可以认为服务启动完毕
-                            _started = true;
-                            poller.Start();
-                            _client.Disconnect(cstr);
-                            _client.Close();
-                            _client = null;
+                            if (null == (zmsg = _client.ReceiveMessage(out error)))
+                            {
+                                if (error == ZError.ETERM)
+                                {
+                                    logger.Error("Message Socket ETERM");
+                                }
+                                else
+                                {
+                                    logger.Error("Message Socket Error:" + error.ToString());
+                                }
+                            }
+                            else
+                            {
+                                byte[] data = zmsg.Last().Read();
+                                zmsg.Clear();
+                                Message msg = Message.gotmessage(data);
+                                handleMessage(msg);
+                            }
                         }
-                        catch (Exception ex)
+                        catch (ZException ex)
                         {
-                            logger.Error("Poller Error:" + ex.ToString());
+                            logger.Error("Message Socket 错误:" + ex.ToString());
+
+                        }
+                        catch (System.Exception ex)
+                        {
+                            logger.Error("Message数据处理错误" + ex.ToString());
                         }
                     }
-                    _started = false;
+                    logger.Info("Message Thread stopped");
                 }
             }
+            _client.Close();
         }
 
         #endregion
 
 
         #region 行情连接
-        NetMQSocket subscriber;
+        ZSocket subscriber;
         Thread _tickthread;
-        bool _tickreceiveruning = false;
-        Poller _tickpoller = null;
+        bool _tick_go = false;
+        ZContext _tickCtx = null;
 
-        bool _suballtick = false;
+        bool _suballtick = true;
         /// <summary>
         /// 启动Tick数据接收,如果TLClient所连接的服务器支持Tick数据,则我们可以启动单独的Tick对话流程,用于接收数据
         /// </summary>
-        public void StartTickReciver(bool suballtick = false)
+        public void StartTickReciver()
         {
-            _suballtick = suballtick;
-            if (_tickreceiveruning)
+            if (_tick_go)
                 return;
-            v("Start Client Tick Reciving Thread....");
+            logger.Info("Start Client Tick Reciving Thread....");
+            _tick_go = true;
             _tickthread = new Thread(new ThreadStart(TickHandler));
             _tickthread.IsBackground = true;
             _tickthread.Start();
-
-            int _wait = 0;
-            while (!_tickreceiveruning && (_wait++ < 5))
-            {
-                //等待1秒,当后台正式启动完毕后方可有进入下面的程序端运行
-                Thread.Sleep(500);
-                logger.Info(PROGRAME + "#:" + _wait.ToString() + "  AsynClient[Tick Reciver] is connecting....");
-            }
-            if (!_tickreceiveruning)
-                throw new QSAsyncClientError();
-            else
-                logger.Info(PROGRAME + ":[TickReciver] started successfull");
         }
 
-        public bool StopTickReciver()
+        public void StopTickReciver()
         {
-            if (!_tickreceiveruning)
-                return true;
+            if (!_tick_go)
+                return;
             logger.Info("Stop Client Tick Reciving Thread....");
-            int _wait = 0;
-            while (_tickthread.IsAlive && (_wait++ < 5))
-            {
-                //等待1秒,当后台正式启动完毕后方可有进入下面的程序端运行
-                logger.Info("#:" + _wait.ToString() + "  AsynClient[Tick Reciver] is stoping...." + "TickThread Status:" + _tickthread.IsAlive.ToString());
-                if (_tickpoller.IsStarted)
-                {
-                    //debug("tick poller stop");
-                    _tickpoller.Stop();
-                }
-                Thread.Sleep(1000);
-            }
-            if (!_tickthread.IsAlive)
-            {
-                _tickthread = null;
-                logger.Info("TickThread Stopped successfull...");
-                return true;
-            }
-            logger.Info("Some Error Happend In Stoping TickThread");
-            return false;
+            _tick_go = false;
+            _tickCtx.Shutdown();
         }
 
         private void TickHandler()
         {
-            using (var context = NetMQContext.Create())
+            using (_tickCtx = new ZContext())
             {
-                using (subscriber = context.CreateSubscriberSocket())
+                using (subscriber = new ZSocket(_tickCtx, ZSocketType.SUB))
                 {
                     string cstr = "tcp://" + _tickip.ToString() + ":" + _tickport.ToString();
                     logger.Info(PROGRAME + ":Connect to TickServer :" + cstr);
@@ -341,12 +285,29 @@ namespace TradingLib.MoniterCore
                     {
                         subscriber.Subscribe("");
                     }
-
-                    subscriber.ReceiveReady += (s, e) =>
+                    ZMessage tickdata;
+                    ZError error;
+                    string tickstr = string.Empty;
+                    while (_tick_go)
                     {
-                        try
+                        if (null == (tickdata = subscriber.ReceiveMessage(out error)))
                         {
-                            string tickstr = subscriber.ReceiveString(Encoding.UTF8);
+                            if (error == ZError.ETERM)
+                            {
+                                logger.Error("Tick Socket ETERM");
+                            }
+                            else
+                            {
+                                logger.Error("Tick Socket Error:" + error.ToString());
+                            }
+                        }
+                        else
+                        {
+
+                            tickstr = tickdata.First().ReadString(Encoding.UTF8);
+                            //清空zmessage 否则内存溢出
+                            tickdata.Clear();
+                            //logger.Info("tickstr:" + tickstr);
                             if (!string.IsNullOrEmpty(tickstr))// && tickstr!="H,")
                             {
                                 if (tickstr == "H,")
@@ -361,37 +322,15 @@ namespace TradingLib.MoniterCore
                                     Message msg = new Message();
                                     msg.Type = MessageTypes.TICKNOTIFY;
                                     msg.Content = tickstr;
-
                                     handleMessage(msg);
                                 }
                             }
                         }
-                        catch (Exception ex)
-                        {
-                            logger.Error("Handle Tick Error:" + ex.ToString());
-                        }
-
-                    };
-
-                    using (var poller = new Poller())
-                    {
-                        try
-                        {
-                            _tickpoller = poller;
-                            poller.AddSocket(subscriber);
-                            _tickreceiveruning = true;
-                            poller.Start();
-                            subscriber.Close();
-                            subscriber = null;
-                        }
-                        catch (Exception ex)
-                        {
-                            logger.Error("Poller Tick Error:" + ex.ToString());
-                        }
                     }
-                    _tickreceiveruning = false;
+                    logger.Info("Tick Handler Thread Stopped");
                 }
             }
+            subscriber.Close();
         }
 
         #endregion
@@ -452,6 +391,7 @@ namespace TradingLib.MoniterCore
         RingBuffer<byte[]> msgcache = new RingBuffer<byte[]>(1000);
         void procmessageout()
         {
+            ZError error;
             while (msggo)
             {
                 try
@@ -459,9 +399,22 @@ namespace TradingLib.MoniterCore
                     while (msgcache.hasItems)
                     {
                         byte[] data = msgcache.Read();
-                        if (_client != null)
+                        if (_client != null && data != null && data.Length>0)
                         {
-                            _client.Send(data);
+                            using (ZMessage zmsg = new ZMessage())
+                            {
+                                zmsg.Add(new ZFrame(data));
+                                if (!_client.Send(zmsg, out error))
+                                {
+                                    if (error == ZError.ETERM)
+                                    {
+                                        logger.Error("got ZError.ETERM,return directly");
+                                        return;	// Interrupted
+                                    }
+                                    throw new ZException(error);
+                                }
+                            }
+                           
                         }
                     }
                     Thread.Sleep(10);
@@ -471,7 +424,6 @@ namespace TradingLib.MoniterCore
                     logger.Info("client send message out error:" + ex.ToString());
                 }
             }
-            //debug("SendThread stop to here");
         }
         #endregion
 
@@ -486,35 +438,33 @@ namespace TradingLib.MoniterCore
         public static string HelloServer(string ip, int port)
         {
             //("[AsyncClient]Start say hello to server...");
-            using (NetMQContext context = NetMQContext.Create())
+            using (var context = new ZContext())
             {
-                using (NetMQSocket requester = context.CreateRequestSocket())
+                using (ZSocket requester = new ZSocket(context, ZSocketType.REQ))
                 {
                     string cstr = "tcp://" + ip + ":" + (port + 1).ToString();
-                    requester.Options.ReceiveTimeout = new TimeSpan(0,0,2);
+                    requester.ReceiveTimeout = new TimeSpan(0,0,2);
                     requester.Connect(cstr);
                     BrokerNameResponse br=null;
-                    requester.ReceiveReady += (s, e) =>
-                    {
-                        NetMQMessage msg = requester.ReceiveMessage(new TimeSpan(0, 0, 2));
 
-                        TradingLib.Common.Message message = TradingLib.Common.Message.gotmessage(msg.Last.Buffer);
-                        br= ResponseTemplate<BrokerNameResponse>.CliRecvResponse(message);
-                        //debug("response:" + br.ToString());
-                        
-                    };
+                    ZMessage zresponse;
+                    ZError error;
+                    BrokerNameRequest package = new BrokerNameRequest();
+                    package.SetRequestID(10001);
+                    requester.Send(new ZFrame(package.Data));
 
-                    using (var poller = new Poller())
+                    var poller = ZPollItem.CreateReceiver();
+                    if (requester.PollIn(poller, out zresponse, out error, new TimeSpan(0, 0, 2)))
                     {
-                        poller.AddSocket(requester);
-                        BrokerNameRequest package = new BrokerNameRequest();
-                        package.SetRequestID(10001);
-                        requester.Send(package.Data);
-                        //debug("send to here");
-                        poller.PollOnce();
-                        //debug("polled once");
+                        //loger.Debug(string.Format("Got Rep Response:", response.First().ReadString(Encoding.UTF8)));
+                        TradingLib.Common.Message message = TradingLib.Common.Message.gotmessage(zresponse.Last().Read());
+                        br = ResponseTemplate<BrokerNameResponse>.CliRecvResponse(message);
+                        zresponse.Clear();
                     }
-                    requester.Disconnect(cstr);
+                    else
+                    {
+                        br = null;
+                    }
                     requester.Close();
                     //debug("socket closed....");
                     if (br == null)

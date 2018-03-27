@@ -12,7 +12,8 @@ namespace TradingLib.MoniterCore
     public partial class TLClientNet
     {
 
-
+        string _user = string.Empty;
+        string _pass = string.Empty;
         /// <summary>
         /// 请求登入
         /// </summary>
@@ -20,12 +21,14 @@ namespace TradingLib.MoniterCore
         /// <param name="pass"></param>
         public int ReqLogin(string loginid, string pass)
         {
-            logger.Info(string.Format("请求登入,{0} {1}", loginid, pass));
+            logger.Info(string.Format("request login user:{0} pass:{1}", loginid, pass));
             int reqid = NextRequestID;
             LoginRequest request = RequestTemplate<LoginRequest>.CliSendRequest(reqid);
             request.LoginID = loginid;
             request.Passwd = pass;
-            
+            _user = loginid;
+            _pass = pass;
+
             SendPacket(request);
             Func<LocationInfo> del = new Func<LocationInfo>(Util.GetLocationInfo);
             del.BeginInvoke(QryLocaltionInfoCallback, null);

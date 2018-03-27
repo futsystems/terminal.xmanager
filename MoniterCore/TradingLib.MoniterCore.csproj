@@ -40,9 +40,6 @@
       <HintPath>..\..\..\Futs.base\lib\Common.Logging.Core.dll</HintPath>
     </Reference>
     <Reference Include="ComponentFactory.Krypton.Toolkit, Version=4.4.0.0, Culture=neutral, PublicKeyToken=dc91bbef911870e2" />
-    <Reference Include="NetMQ">
-      <HintPath>..\RequiredLibraries\NetMQ.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\Futs.base\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -59,6 +56,9 @@
     <Reference Include="TradingLib.Common, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Futs.base\lib\TradingLib\TradingLib.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ZeroMQ">
+      <HintPath>..\..\..\Futs.base\lib\ZeroMQ.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

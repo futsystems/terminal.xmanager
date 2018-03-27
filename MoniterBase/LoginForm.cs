@@ -140,6 +140,15 @@ namespace TradingLib.MoniterBase
             
         }
 
+        void UnBindEvent()
+        {
+            CoreService.EventCore.OnConnectedEvent -= new VoidDelegate(EventCore_OnConnectedEvent);
+            CoreService.EventCore.OnDisconnectedEvent -= new VoidDelegate(EventCore_OnDisconnectedEvent);
+            CoreService.EventCore.OnLoginEvent -= new Action<RspMGRLoginResponse>(EventCore_OnLoginEvent);
+            CoreService.EventCore.OnInitializeStatusEvent -= new Action<string>(EventCore_OnInitializeStatusEvent);
+            CoreService.EventCore.OnInitializedEvent -= new VoidDelegate(EventCore_OnInitializedEvent);
+        }
+
         #region 事件响应
         /// <summary>
         /// 退出按钮
@@ -367,6 +376,7 @@ namespace TradingLib.MoniterBase
                 {
                     logger.Info("关闭登入窗体");
                     mStart.CloseSplashScreen();
+                    UnBindEvent();
                 }
 
                 if (_connectstart && (DateTime.Now - _connecttime).TotalSeconds > 5 && (!_connected))

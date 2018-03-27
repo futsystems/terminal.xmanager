@@ -11,12 +11,13 @@ using TradingLib.API;
 using TradingLib.Common;
 using TradingLib.MoniterCore;
 using TradingLib.MoniterControl;
-
+using Common.Logging;
 
 namespace TradingLib.MoniterBase
 {
     public partial class Workbench : ComponentFactory.Krypton.Toolkit.KryptonForm,IEventBinder
     {
+        ILog logger = LogManager.GetLogger("Workbench");
         static Workbench instance;
 
         public static Workbench Instance
@@ -158,7 +159,8 @@ namespace TradingLib.MoniterBase
             // restore form location from last session
             //FormLocationHelper.Apply(this, "StartupFormPosition", true);
 
-            
+            //将控件日志输出时间绑定到debug函数 用于输出到控件
+            ControlLogFactoryAdapter.SendDebugEvent += new Action<string>(Debug);
 
             
 
@@ -176,6 +178,17 @@ namespace TradingLib.MoniterBase
             }
         }
 
+        void Debug(string msg)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action<string>(Debug), new object[] { msg });
+            }
+            else
+            {
+                fmHelp.Instance.GotDebug(msg);
+            }
+        }
 
 
         /// <summary>
@@ -222,8 +235,9 @@ namespace TradingLib.MoniterBase
             }
             else
             {
+                //logger.Info("Staff OnDisconnected");
                 imgLink.Image = (Image)Properties.Resources.offline;
-                contentPanel.Visible = false;
+                //contentPanel.Visible = false;
                 lbSpring.Text = "网络故障,管理段掉线,请退出软件后重新登入";
             }
             
@@ -233,10 +247,12 @@ namespace TradingLib.MoniterBase
         {
             if (InvokeRequired)
             {
-                Invoke(new VoidDelegate(EventCore_OnDisconnectedEvent), new object[] { });
+                Invoke(new VoidDelegate(EventCore_OnConnectedEvent), new object[] { });
             }
             else
             {
+                //logger.Info("Staff OnConnected");
+                //contentPanel.Visible = true;
                 imgLink.Image = (Image)Properties.Resources.online;
                 lbSpring.Text = "";
             }

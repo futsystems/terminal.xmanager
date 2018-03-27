@@ -112,22 +112,30 @@ namespace TradingLib.MoniterCore
 
         void connecton_OnDataPubDisconnectEvent()
         {
+            logger.Info("OnDataPubDisconnectEvent");
             CoreService.EventCore.FireDataDisconnectedEvent();
         }
 
         void connecton_OnDataPubConnectEvent()
         {
+            logger.Info("OnDataPubConnectEvent");
             CoreService.EventCore.FireDataConnectedEvent();
         }
 
         void connecton_OnDisconnectEvent()
         {
+            logger.Info("OnDisconnectEvent");
             CoreService.EventCore.FireDisconnectedEvent();
         }
 
         void connecton_OnConnectEvent()
         {
+            logger.Info("OnConnectEvent");
             CoreService.EventCore.FireConnectedEvent();
+            if (_everlogin)
+            {
+                this.ReqLogin(_user, _pass);
+            }
         }
 
 
@@ -139,54 +147,20 @@ namespace TradingLib.MoniterCore
         }
 
 
+        public void DebugStopTick()
+        {
+            if (connecton != null)
+            {
+                connecton.debug_StopTick();
+            }
+        }
 
-
-
-
-
-        //ILogicHandler handler = null;
-        //public void BindLogicHandler(ILogicHandler h)
-        //{
-        //    handler = h;
-        //}
-
-        //#region 功能函数
-
-        //bool _debugEnable = true;
-        //public bool DebugEnable { get { return _debugEnable; } set { _debugEnable = value; } }
-        //QSEnumDebugLevel _debuglevel = QSEnumDebugLevel.DEBUG;
-        //public QSEnumDebugLevel DebugLevel { get { return _debuglevel; } set { _debuglevel = value; } }
-
-        ///// <summary>
-        ///// 判断日志级别 然后再进行输出
-        ///// </summary>
-        ///// <param name="msg"></param>
-        ///// <param name="level"></param>
-        //protected void debug(string msg, QSEnumDebugLevel level = QSEnumDebugLevel.DEBUG)
-        //{
-        //    if ((int)level <= (int)_debuglevel && _debugEnable)
-        //        msgdebug("[" + level.ToString() + "] " + msg);
-        //}
-        //void msgdebug(string msg)
-        //{
-        //    if (OnDebugEvent != null)
-        //        OnDebugEvent(msg);
-
-        //}
-        //bool _noverb = true;
-        ///// <summary>
-        ///// enable/disable extended debugging
-        ///// </summary>
-        //public bool VerboseDebugging { get { return !_noverb; } set { _noverb = !value; } }
-
-        //void v(string msg)
-        //{
-        //    if (_noverb) return;
-        //    msgdebug(msg);
-        //}
-
-
-        //#endregion
-
+        public void DebugStopMessage()
+        {
+            if (connecton != null)
+            {
+                connecton.debug_StopMessage();
+            }
+        }
     }
 }

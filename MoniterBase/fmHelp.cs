@@ -23,6 +23,7 @@ namespace TradingLib.MoniterBase
         }
 
 
+
         static fmHelp()
         {
             instance = new fmHelp();
@@ -44,6 +45,20 @@ namespace TradingLib.MoniterBase
         private void btnDebug_Click(object sender, EventArgs e)
         {
             TradingLib.MoniterCore.CoreService.TLClient.ReqQryTickSnapshot();
+        }
+
+        public void GotDebug(string msg)
+        {
+            debugControl1.GotDebug(msg);
+        }
+        private void stop_Click(object sender, EventArgs e)
+        {
+            CoreService.TLClient.DebugStopTick();
+        }
+
+        private void stopMsg_Click(object sender, EventArgs e)
+        {
+            CoreService.TLClient.DebugStopMessage();
         }
     }
 }

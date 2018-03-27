@@ -73,6 +73,13 @@
     <Compile Include="Command\ReportCommand.cs" />
     <Compile Include="Command\SystemCommand.cs" />
     <Compile Include="Command\ToolsCommand.cs" />
+    <Compile Include="ControlLogFactoryAdapter.cs" />
+    <Compile Include="DebugControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DebugControl.designer.cs">
+      <DependentUpon>DebugControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="EnumControlLocation.cs" />
     <Compile Include="Command\ViewCommand.cs" />
     <Compile Include="fmHelp.cs">
@@ -113,6 +120,9 @@
   <ItemGroup>
     <EmbeddedResource Include="..\Resource\ImageResources.resources">
       <Link>ImageResources.resources</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DebugControl.resx">
+      <DependentUpon>DebugControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fmHelp.resx">
       <DependentUpon>fmHelp.cs</DependentUpon>

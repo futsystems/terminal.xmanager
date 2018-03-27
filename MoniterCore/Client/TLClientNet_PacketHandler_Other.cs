@@ -10,7 +10,7 @@ namespace TradingLib.MoniterCore
 {
     public partial class TLClientNet
     {
-        bool _firstlogin = true;
+        bool _everlogin = false;
         /// <summary>
         /// 登入回报
         /// </summary>
@@ -21,11 +21,15 @@ namespace TradingLib.MoniterCore
 
             CoreService.EventCore.FireLoginEvent(response);
             //第一次登入成功 请求基础数据
-            if (response.RspInfo.ErrorID == 0 && _firstlogin)
+            if (response.RspInfo.ErrorID == 0)
             {
-                _firstlogin = false;
-                //查询
                 CoreService.SiteInfo.LoginResponse = response;
+            }
+            //第一次登入
+            if(!_everlogin)
+            {
+                _everlogin = true;
+                //查询
                 this.ReqQryMarketTime();
             }
         }
@@ -40,13 +44,18 @@ namespace TradingLib.MoniterCore
             CoreService.EventCore.GotMGRContribResponse(module, cmd, ret, response.IsLast);
         }
 
+        //排除过量通知 日志
+        string[] filter = new string[] { "NotifyAccountStatistic", "NotifyAgentStatistic", "NotifyTerminalNumber" };
         void CliOnMGRContribNotify(NotifyMGRContribNotify notify)
         {
             string module = notify.ModuleID;
             string cmd = notify.CMDStr;
             string ret = notify.Result;
 
-            logger.Debug("ContribNotify ->Module:" + module + " CMD:" + cmd + " Ret:" + ret);
+            if (!filter.Contains(cmd))
+            {
+                logger.Debug("ContribNotify ->Module:" + module + " CMD:" + cmd + " Ret:" + ret);
+            }
             CoreService.EventCore.GotMGRContribNotifyResponse(module, cmd, ret);
         }
 
