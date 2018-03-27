@@ -151,6 +151,7 @@ namespace TradingLib.MoniterControl
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_AGENT_CREATE, OnNotifyAgentCreate);//代理账户添加
             CoreService.EventCore.RegisterNotifyCallback(Modules.MGR_EXCH, Method_MGR_EXCH.NOTIFY_MANGER_DELETE, OnManagerDelete);//管理账户删除
 
+            CoreService.EventCore.OnConnectedEvent += new VoidDelegate(EventCore_OnConnectedEvent);
             UpdateAccountNum();
 
             //启动更新线程
@@ -165,16 +166,12 @@ namespace TradingLib.MoniterControl
             
         }
 
-        
-
-
-
-
-     
-        
+        void EventCore_OnConnectedEvent()
+        {
+            GridChanged();
+        }
 
         
-
 
         public void OnDisposed()
         {

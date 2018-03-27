@@ -253,6 +253,7 @@ namespace TradingLib.MoniterBase
             {
                 //logger.Info("Staff OnConnected");
                 //contentPanel.Visible = true;
+                CoreService.TLClient.StartTick();
                 imgLink.Image = (Image)Properties.Resources.online;
                 lbSpring.Text = "";
             }

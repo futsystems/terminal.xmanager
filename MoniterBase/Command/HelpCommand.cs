@@ -15,7 +15,9 @@ namespace TradingLib.MoniterBase.Command
     {
         public override void Run()
         {
+#if DEBUG
             fmHelp.Instance.Show();
+#endif
         }
     }
 

@@ -9,6 +9,7 @@ using System.Xml;
 using TradingLib.API;
 using TradingLib.Common;
 using Common.Logging;
+using System.Windows.Forms;
 
 
 /*关于客户端与服务端的连接机制
@@ -36,13 +37,7 @@ namespace TradingLib.MoniterCore
     public class TLClient_MQ
     {
         ILog logger = LogManager.GetLogger("TLClient_MQ");
-        string PROGRAME = "TLClient_MQ";
         const string _skip = "        ";
-        /// <summary>
-        /// 服务类型，数据/成交/两者同时支持
-        /// </summary>
-        //public QSEnumProviderType ProviderType { get; set; }
-
         AsyncClient _mqcli = null;//通讯client组件
         int _tickerrors = 0;//tick数据处理错误计数
         int port = Const.TLDEFAULTBASEPORT;//默认服务端口
@@ -110,14 +105,11 @@ namespace TradingLib.MoniterCore
         public bool isHeartbeatOk { get { return _connect && (_requestheartbeat == _recvheartbeat); } }
 
         #region Event
-        //public event MessageTypesMsgDelegate gotFeatures;//功能列表回报
         public event ConnectDel OnConnectEvent;//客户端连接事件
         public event DisconnectDel OnDisconnectEvent;//客户端断开连接事件
         public event DataPubConnectDel OnDataPubConnectEvent;//Tick publisher成功
         public event DataPubDisconnectDel OnDataPubDisconnectEvent;//Tick publisher成功
-
-        public event RspMGRLoginResponseDel OnLoginResponse;//账户回报
-
+        public event RspMGRLoginResponseDel OnLoginResponse;
         public event TickDelegate OnTick;//tick数据回报
         public event IPacketDelegate OnPacketEvent;//其他逻辑数据包处理
         #endregion
@@ -126,6 +118,9 @@ namespace TradingLib.MoniterCore
         #region 后台维护线程
 
         #region tick数据维护线程 用于检测tick数据 若消息流中断,自动重连
+        Thread _tickwatchthread = null;
+        bool ticktrackergo = false;
+        bool _tickreconnectreq = false;
 
         void StartTickWatcher()
         {
@@ -145,13 +140,10 @@ namespace TradingLib.MoniterCore
             _tickwatchthread = null;
             logger.Info("TickWatcher threade stopped");
         }
-        Thread _tickwatchthread = null;
-        bool ticktrackergo = false;
-        bool _tickreconnectreq = false;
+        
 
         void tickprocess()
         {
-
             while (ticktrackergo)
             {
                 // 获得当前时间
@@ -169,7 +161,6 @@ namespace TradingLib.MoniterCore
                         _tickreconnectreq = true;
                         new Thread(reconnectTick).Start();
                     }
-
                 }
 
                 Thread.Sleep(_tickprocesscheckfreq);
@@ -182,6 +173,7 @@ namespace TradingLib.MoniterCore
 
         #region 服务端连接监控线程(该服务端连接处理委托/成交/查询)
         Thread _bwthread = null;
+
         void StartMessageWatcher()
         {
             if (_started) return;
@@ -210,7 +202,6 @@ namespace TradingLib.MoniterCore
         /// <param name="e"></param>
         void _bw_DoWork()
         {
-            //int p = (int)e.Argument;
             while (_started)
             {
 
@@ -305,12 +296,8 @@ namespace TradingLib.MoniterCore
         /// <param name="ClientName">客户端连接名称</param>
         /// <param name="deb">日志输出回调</param>
         /// <param name="verbose">是否输出详细日志</param>
-        public TLClient_MQ(string[] servers, int srvport, string name)
+        public TLClient_MQ(string[] servers, int srvport)
         {
-            
-            //SendDebugEvent = deb;//首先绑定日志输出函数,则接下来的日志可以正常输出
-            PROGRAME = name+"_"+PROGRAME;
-            //debug(PROGRAME + ":Init TLClient_MQ...");
             port = srvport;//服务器端口
             foreach (string s in servers)//服务器地址
                 serverip.Add(s);
@@ -319,16 +306,13 @@ namespace TradingLib.MoniterCore
         #endregion
 
 
-
-
         #region Start Stop Section
         /// <summary>
         /// 启动服务
         /// </summary>
         public void Start(bool retry=false)
         {
-            
-            _logger.Info("Start to connect to server....");
+            logger.Info("Start to connect to server....");
 
             bool _modesuccess = false;
             int _retry = 0;
@@ -336,33 +320,18 @@ namespace TradingLib.MoniterCore
             while (_modesuccess == false && _retry < (retry?_modeRetries:1))
             {
                 _retry++;
-                _logger.Info("attempting connect to server... retry times:" + _retry.ToString());
+                logger.Info("attempting connect to server... retry times:" + _retry.ToString());
                 _modesuccess = Mode(_curprovider, false);//尝试连接第一可用服务端,对一组IP地址进行服务查询后,将可用服务端放入队列，并尝试连接第一个服务端
                 //因此重新连接用Mode来进行,有重新搜索服务端列表的功能
                 Thread.Sleep(_remodedelay * 1000);
             }
             if (!_modesuccess)
             {
-                _logger.Info("网络故障,无法连接到服务器");
+                logger.Info("网络故障,无法连接到服务器");
+                MessageBox.Show("网络故障，无法连接到服务器");
             } 
         }
-        /// <summary>
-        /// 退出,用于向服务器发送clearclient信息
-        /// </summary>
-        public void Exit()
-        {
-            try
-            {
-                if (_mqcli != null && _mqcli.isConnected) //如果实现已经stop了brokerfeed 会造成服务器循环相应。应该将_stated放在这里进行相应
-                {
-                    //TLSend(MessageTypes.CLEARCLIENT, Name);//向服务器发送clearClient消息用于注销客户端
-                }
-            }
-            catch (Exception ex)
-            { 
-                
-            }
-        }
+       
         /// <summary>
         /// 停止连接服务
         /// </summary>
@@ -400,7 +369,6 @@ namespace TradingLib.MoniterCore
                 _bwthread = null;
                 _heartbeatthread = null;
                 _tickwatchthread = null;
-                
             }
         }
 
@@ -420,7 +388,7 @@ namespace TradingLib.MoniterCore
         /// <returns></returns>
         bool connect(int providerindex, bool showwarn)
         {
-            logger.Info(PROGRAME + ":[connect] Connect to prvider....");
+            logger.Info("[connect] Connect to prvider....");
             if ((providerindex >= servers.Count) || (providerindex < 0))
             {
                 logger.Info(_skip + " Ensure provider is running and Mode() is called with correct provider number.   invalid provider: " + providerindex);
@@ -443,7 +411,7 @@ namespace TradingLib.MoniterCore
                     //实例化asyncClient并绑定对已的函数
                     _mqcli = new AsyncClient(avabileip[providerindex], port, true);
                     //_mqcli.SendDebugEvent += new DebugDelegate(msgdebug);
-                    _mqcli.SendTLMessage += new Action<Message>(handle);
+                    _mqcli.SendTLMessage += new Action<Common.Message>(handle);
                     //开始启动连接
                     _mqcli.Start();
                     updateheartbeat();
@@ -518,8 +486,7 @@ namespace TradingLib.MoniterCore
             if (!_modesuccess)
             {
                 logger.Info( "网络故障,无法连接到服务器");
-                //MessageBox.Show("网络故障,无法连接到服务器,请稍后按F9重新尝试!");
-                //throw new QSAsyncClientError();
+                MessageBox.Show("网络故障，无法连接到服务器");
             }
         }
         /// <summary>
@@ -541,7 +508,7 @@ namespace TradingLib.MoniterCore
             }
             catch (Exception ex)
             {
-                logger.Info(PROGRAME + ":reconnect tick error:" + ex.ToString());
+                logger.Info("reconnect tick error:" + ex.ToString());
             }
         }
 
@@ -603,12 +570,12 @@ namespace TradingLib.MoniterCore
         public bool Mode(int ProviderIndex, bool showwarning)
         {
             //1.在对应的服务器列表中查询可提供服务的服务端
-            logger.Info(PROGRAME + ":[Mode] Mode to Provider");
+            logger.Info("[Mode] Mode to Provider");
             TLFound();//查询提供的IP上是否存在对应的服务响应
             //不存在有效服务则直接返回
             if (servers.Count == 0)
             {
-                logger.Info(PROGRAME + ": There is no any server avabile... try angain later");
+                logger.Info("There is no any server avabile... try angain later");
                 return false;
             }
             // see if called from start
@@ -660,7 +627,7 @@ namespace TradingLib.MoniterCore
         /// </summary>
         void InitConnection()
         {
-            logger.Info(PROGRAME + ":InitConnection......");
+            logger.Info(":InitConnection......");
             // register ourselves with provider 注册
             Register();
             Util.sleep(100);
@@ -677,7 +644,7 @@ namespace TradingLib.MoniterCore
         /// <returns></returns>
         public Providers[] TLFound()
         {
-            logger.Info(PROGRAME + ":[TLFound] Searching provider list...");
+            logger.Info("[TLFound] Searching provider list...");
             logger.Info(_skip + "clearing existing list of available providers");
             servers.Clear();
             avabileip.Clear();
@@ -792,7 +759,7 @@ namespace TradingLib.MoniterCore
         /// </summary>
         void Register()
         {
-            logger.Info(PROGRAME + ":注册到服务端...");
+            logger.Info("注册到服务端...");
             RegisterClientRequest req = RequestTemplate<RegisterClientRequest>.CliSendRequest(++requestid);
             req.VersionToken = "Mars";
             TLSend(req);
@@ -802,7 +769,7 @@ namespace TradingLib.MoniterCore
         /// </summary>
         void RequestFeatures()
         {
-            logger.Info(PROGRAME + ":请求服务端功能列表...");
+            logger.Info(":请求服务端功能列表...");
             _rfl.Clear();
             FeatureRequest request = RequestTemplate<FeatureRequest>.CliSendRequest(++requestid);
             TLSend(request);
@@ -814,7 +781,7 @@ namespace TradingLib.MoniterCore
         /// </summary>
         void ReqServerVersion()
         {
-            logger.Info(PROGRAME + ":请求服务端版本...");
+            logger.Info(":请求服务端版本...");
             VersionRequest request = RequestTemplate<VersionRequest>.CliSendRequest(++requestid);
             request.ClientVersion = "2.0";
             request.DeviceType = "PC";
@@ -826,13 +793,7 @@ namespace TradingLib.MoniterCore
 
             TLSend(request);
         }
-        /// <summary>
-        /// 请求brokername
-        /// </summary>
-        void ReqBrokerName()
-        {
 
-        }
 
 
         //SymbolBasket _lastbasekt;
@@ -942,8 +903,6 @@ namespace TradingLib.MoniterCore
         #endregion
 
 
-        //string _srvversion = string.Empty;
-        //string _uuid = string.Empty;
         #region 客户端消息回报处理函数
 
         /// <summary>
@@ -1000,7 +959,7 @@ namespace TradingLib.MoniterCore
             }
             //检查是否支持tick然后我们就可以启动tickreceive
             //只有当返回特征列表支持数据服务时,并且设定客户端同时支持 数据服务时 TLClient_MQ才会注册到数据服务地址
-            checkTickSupport();
+            //checkTickSupport();
         }
 
         /// <summary>
@@ -1026,42 +985,6 @@ namespace TradingLib.MoniterCore
 
         #region 功能函数
 
-        ILog _logger = LogManager.GetLogger("TLClientMQ");
-
-        /// <summary>
-        /// 判断日志级别 然后再进行输出
-        /// </summary>
-        /// <param name="msg"></param>
-        /// <param name="level"></param>
-        //protected void debug(string msg, QSEnumDebugLevel level = QSEnumDebugLevel.DEBUG)
-        //{
-        //    switch (level)
-        //    {
-        //        case QSEnumDebugLevel.DEBUG:
-        //            _logger.Debug(msg);
-        //            break;
-        //        case QSEnumDebugLevel.ERROR:
-        //            _logger.Error(msg);
-        //            break;
-        //        case QSEnumDebugLevel.INFO:
-        //            _logger.Info(msg);
-        //            break;
-        //        case QSEnumDebugLevel.FATAL:
-        //            _logger.Fatal(msg);
-        //            break;
-        //        case QSEnumDebugLevel.WARN:
-        //            _logger.Warn(msg);
-        //            break;
-        //        default:
-        //            _logger.Debug(msg);
-        //            break;
-        //    }
-        //}
-
-        //void msgdebug(string msg)
-        //{
-        //    debug(msg, QSEnumDebugLevel.DEBUG);
-        //}
         void updateheartbeat()
         {
             _lastheartbeat = DateTime.Now.Ticks;
@@ -1072,7 +995,7 @@ namespace TradingLib.MoniterCore
         {
             _connect = false;
             //_mqcli.SendDebugEvent -= new DebugDelegate(msgdebug);
-            _mqcli.SendTLMessage -= new Action<Message>(handle);
+            _mqcli.SendTLMessage -= new Action<Common.Message>(handle);
             _mqcli = null;//将_mqcli至null 内存才会被回收
 
             if (OnDisconnectEvent != null)
@@ -1080,19 +1003,7 @@ namespace TradingLib.MoniterCore
         }
 
 
-        //当有服务特性返回如果对应的服务端支持tick则我们需要单独启动tick数据服务
-        //我们使用不同的连接来处理数据以及请求当一个Provider同时满足数据和交易的要求时,我们的交易连接也会根据Featuresupport自动注册到服务端的Tick分发接口.在这里我们需要
-        //对provider的类型进行验证.该TLClient所对应的连接是DataFeed还是Execution进行区分。这样数据就不会应为多次注册 造成Tick数据的重复
-        private void checkTickSupport()
-        {
-            _logger.Info(PROGRAME + ":Checing TickDataSupport...");
-            ////debug(_skip+"providertype:" + ProviderType.ToString());
-            //if (_rfl.Contains(MessageTypes.TICKNOTIFY));//&& (ProviderType == QSEnumProviderType.DataFeed || ProviderType == QSEnumProviderType.Both))
-            //{
-            //    debug(_skip+"Spuuort Tick we subscribde tick data server",QSEnumDebugLevel.INFO);
-            //    // new Thread(connectTick).Start();
-            //}
-        }
+        
 
         /// <summary>
         /// 检查客户端API版本与服务端API版本 用于版本检查
@@ -1104,12 +1015,12 @@ namespace TradingLib.MoniterCore
             //debug(PROGRAME + " :API版本检查...");
             if (srvVersion > Util.Version)
             {
-                logger.Info(PROGRAME + " :API版本检查-->请更新API");
+                logger.Info("API版本检查-->请更新API");
                 return false;
             }
             else
             {
-                logger.Info(PROGRAME + " :API版本检查-->API兼容");
+                logger.Info("API版本检查-->API兼容");
                 return true;
             }
         }
@@ -1118,7 +1029,7 @@ namespace TradingLib.MoniterCore
         string _sessionID = string.Empty;
 
         //消息处理逻辑
-        void handle(Message msg)
+        void handle(Common.Message msg)
         {
             //if (type != MessageTypes.TICKHEARTBEAT && type != MessageTypes.MGRACCOUNTINFOLITENOTIFY && type != MessageTypes.TICKNOTIFY)
             //{

@@ -44,8 +44,6 @@ namespace TradingLib.MoniterCore
         string[] _servers = new string[] { };
         int _port = 5570;
 
-
-        string _account = "";
         public TLClientNet(string[] servers, int port)
         {
             _servers = servers;
@@ -53,17 +51,13 @@ namespace TradingLib.MoniterCore
 
 
         }
+
         public void Start()
         {
             logger.Info("TLClientNet Starting......");
-            connecton = new TLClient_MQ(_servers, _port, "demo");
-            //connecton.ProviderType = QSEnumProviderType.Both;
+            connecton = new TLClient_MQ(_servers, _port);
             BindConnectionEvent();
-
             connecton.Start();
-
-
-        
         }
 
         /// <summary>

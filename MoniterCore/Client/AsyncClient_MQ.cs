@@ -290,41 +290,53 @@ namespace TradingLib.MoniterCore
                     string tickstr = string.Empty;
                     while (_tick_go)
                     {
-                        if (null == (tickdata = subscriber.ReceiveMessage(out error)))
+                        try
                         {
-                            if (error == ZError.ETERM)
+                            if (null == (tickdata = subscriber.ReceiveMessage(out error)))
                             {
-                                logger.Error("Tick Socket ETERM");
-                            }
-                            else
-                            {
-                                logger.Error("Tick Socket Error:" + error.ToString());
-                            }
-                        }
-                        else
-                        {
-
-                            tickstr = tickdata.First().ReadString(Encoding.UTF8);
-                            //清空zmessage 否则内存溢出
-                            tickdata.Clear();
-                            //logger.Info("tickstr:" + tickstr);
-                            if (!string.IsNullOrEmpty(tickstr))// && tickstr!="H,")
-                            {
-                                if (tickstr == "H,")
+                                if (error == ZError.ETERM)
                                 {
-                                    Message msg = new Message();
-                                    msg.Type = MessageTypes.TICKHEARTBEAT;
-                                    msg.Content = "H,";
-                                    handleMessage(msg);
+                                    logger.Error("Tick Socket ETERM");
                                 }
                                 else
                                 {
-                                    Message msg = new Message();
-                                    msg.Type = MessageTypes.TICKNOTIFY;
-                                    msg.Content = tickstr;
-                                    handleMessage(msg);
+                                    logger.Error("Tick Socket Error:" + error.ToString());
                                 }
                             }
+                            else
+                            {
+
+                                tickstr = tickdata.First().ReadString(Encoding.UTF8);
+                                //清空zmessage 否则内存溢出
+                                tickdata.Clear();
+                                //logger.Info("tickstr:" + tickstr);
+                                if (!string.IsNullOrEmpty(tickstr))// && tickstr!="H,")
+                                {
+                                    if (tickstr == "H,")
+                                    {
+                                        Message msg = new Message();
+                                        msg.Type = MessageTypes.TICKHEARTBEAT;
+                                        msg.Content = "H,";
+                                        handleMessage(msg);
+                                    }
+                                    else
+                                    {
+                                        Message msg = new Message();
+                                        msg.Type = MessageTypes.TICKNOTIFY;
+                                        msg.Content = tickstr;
+                                        handleMessage(msg);
+                                    }
+                                }
+                            }
+                        }
+                        catch (ZException ex)
+                        {
+                            logger.Error("Message Socket 错误:" + ex.ToString());
+
+                        }
+                        catch (System.Exception ex)
+                        {
+                            logger.Error("Message数据处理错误" + ex.ToString());
                         }
                     }
                     logger.Info("Tick Handler Thread Stopped");
