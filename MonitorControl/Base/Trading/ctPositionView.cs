@@ -341,14 +341,14 @@ namespace TradingLib.MoniterControl
                     string _format = pos.oSymbol.SecurityFamily.GetPriceFormat();
                     AccountItem account = CoreService.BasicInfoTracker.GetAccount(pos.Account);
 
-                    int size = pos.Size;
+                    int size = pos.UnsignedSize;
                     int todayPosition = pos.PositionDetailTodayNew.Where(pd => !pd.IsClosed()).Sum(pd => pd.Volume);//当日新开仓 持仓数量
                     int ydPosition = pos.PositionDetailYdRef.Where(pd => !pd.IsClosed()).Sum(pd => pd.Volume);//昨仓数量
 
                     if ((posidx > -1) && (posidx < gt.Rows.Count))//idx存在
                     {
                         
-                        gt.Rows[posidx][SIZE] = Math.Abs(size);
+                        gt.Rows[posidx][SIZE] = size;
                         gt.Rows[posidx][YDSIZE] = (size - todayPosition);// pos.PositionDetailYdNew.Sum(p => p.Volume);
                         gt.Rows[posidx][CANFLATSIZE] = getCanFlatSize(pos);
                         gt.Rows[posidx][AVGPRICE] = pos.AvgPrice.ToFormatStr(_format);
@@ -362,7 +362,7 @@ namespace TradingLib.MoniterControl
                         //如果不存在,则我们将该account-symbol对插入映射列表我们的键用的是account_symbol配对
                         int i = InsertNewRow(pos);
                         if (i < 0) return;
-                        gt.Rows[i][SIZE] = Math.Abs(size);
+                        gt.Rows[i][SIZE] = size;
                         gt.Rows[i][YDSIZE] = (size - todayPosition); //pos.PositionDetailYdNew.Sum(p => p.Volume);
                         gt.Rows[i][CANFLATSIZE] = getCanFlatSize(pos);
                         gt.Rows[i][AVGPRICE] = pos.AvgPrice.ToFormatStr(_format);
