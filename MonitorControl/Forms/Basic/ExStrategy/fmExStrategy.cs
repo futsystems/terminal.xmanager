@@ -154,17 +154,6 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        bool ShowInSuper()
-        {
-            if (!string.IsNullOrEmpty(ControlService.SuperRoot))
-            {
-                if (CoreService.SiteInfo.Manager.Login == "adminx")
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
         public void OnInit()
         {
             executionblock.Visible = false;

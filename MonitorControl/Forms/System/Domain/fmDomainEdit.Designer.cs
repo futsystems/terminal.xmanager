@@ -73,14 +73,11 @@
             this.kryptonPage4 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonPanel5 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonGroupBox2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
-            this.module_insert = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.cfg_followstrategynum = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.kryptonLabel21 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.module_follow = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
-            this.module_finservice = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.module_agent = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.module_subagent = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
-            this.module_slip = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.module_payonline = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.cfg_MaxMarginSide = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -622,30 +619,19 @@
             // 
             // kryptonGroupBox2.Panel
             // 
-            this.kryptonGroupBox2.Panel.Controls.Add(this.module_insert);
             this.kryptonGroupBox2.Panel.Controls.Add(this.cfg_followstrategynum);
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonLabel21);
             this.kryptonGroupBox2.Panel.Controls.Add(this.module_follow);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.module_finservice);
             this.kryptonGroupBox2.Panel.Controls.Add(this.module_agent);
             this.kryptonGroupBox2.Panel.Controls.Add(this.module_subagent);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.module_slip);
             this.kryptonGroupBox2.Panel.Controls.Add(this.module_payonline);
             this.kryptonGroupBox2.Size = new System.Drawing.Size(424, 157);
             this.kryptonGroupBox2.TabIndex = 8;
             this.kryptonGroupBox2.Values.Heading = "功能模块";
             // 
-            // module_insert
-            // 
-            this.module_insert.Location = new System.Drawing.Point(4, 58);
-            this.module_insert.Name = "module_insert";
-            this.module_insert.Size = new System.Drawing.Size(98, 20);
-            this.module_insert.TabIndex = 9;
-            this.module_insert.Values.Text = "持仓纠正模块";
-            // 
             // cfg_followstrategynum
             // 
-            this.cfg_followstrategynum.Location = new System.Drawing.Point(140, 106);
+            this.cfg_followstrategynum.Location = new System.Drawing.Point(140, 64);
             this.cfg_followstrategynum.Name = "cfg_followstrategynum";
             this.cfg_followstrategynum.Size = new System.Drawing.Size(50, 22);
             this.cfg_followstrategynum.TabIndex = 8;
@@ -657,7 +643,7 @@
             // 
             // kryptonLabel21
             // 
-            this.kryptonLabel21.Location = new System.Drawing.Point(82, 108);
+            this.kryptonLabel21.Location = new System.Drawing.Point(82, 66);
             this.kryptonLabel21.Name = "kryptonLabel21";
             this.kryptonLabel21.Size = new System.Drawing.Size(51, 20);
             this.kryptonLabel21.TabIndex = 7;
@@ -665,20 +651,11 @@
             // 
             // module_follow
             // 
-            this.module_follow.Location = new System.Drawing.Point(3, 108);
+            this.module_follow.Location = new System.Drawing.Point(3, 66);
             this.module_follow.Name = "module_follow";
             this.module_follow.Size = new System.Drawing.Size(73, 20);
             this.module_follow.TabIndex = 5;
             this.module_follow.Values.Text = "跟单模块";
-            // 
-            // module_finservice
-            // 
-            this.module_finservice.Location = new System.Drawing.Point(341, 3);
-            this.module_finservice.Name = "module_finservice";
-            this.module_finservice.Size = new System.Drawing.Size(73, 20);
-            this.module_finservice.TabIndex = 1;
-            this.module_finservice.Values.Text = "配资模块";
-            this.module_finservice.Visible = false;
             // 
             // module_agent
             // 
@@ -696,17 +673,9 @@
             this.module_subagent.TabIndex = 3;
             this.module_subagent.Values.Text = "多级代理";
             // 
-            // module_slip
-            // 
-            this.module_slip.Location = new System.Drawing.Point(3, 34);
-            this.module_slip.Name = "module_slip";
-            this.module_slip.Size = new System.Drawing.Size(98, 20);
-            this.module_slip.TabIndex = 4;
-            this.module_slip.Values.Text = "交易风险模块";
-            // 
             // module_payonline
             // 
-            this.module_payonline.Location = new System.Drawing.Point(3, 84);
+            this.module_payonline.Location = new System.Drawing.Point(3, 37);
             this.module_payonline.Name = "module_payonline";
             this.module_payonline.Size = new System.Drawing.Size(111, 20);
             this.module_payonline.TabIndex = 2;
@@ -976,7 +945,6 @@
         private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage4;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel5;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox module_agent;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox module_finservice;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox module_payonline;
         private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage5;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel6;
@@ -994,7 +962,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel20;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox isproduction;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox dedicated;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox module_slip;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox cfg_MaxMarginSide;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox cfg_GrossPositioin;
         private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox1;
@@ -1002,7 +969,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox module_follow;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel21;
         private ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown cfg_followstrategynum;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox module_insert;
         private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage3;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel7;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox cfg_md5key;

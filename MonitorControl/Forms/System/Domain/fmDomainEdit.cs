@@ -63,21 +63,11 @@ namespace TradingLib.MoniterControl
             module_agent.Visible = CoreService.SiteInfo.Domain.Module_Agent;
             module_subagent.Visible = CoreService.SiteInfo.Domain.Module_SubAgent;
             module_payonline.Visible = CoreService.SiteInfo.Domain.Module_PayOnline;
-            module_slip.Visible = CoreService.SiteInfo.Domain.Module_Slip;
-            module_insert.Visible = CoreService.SiteInfo.Domain.Misc_InsertTrade;
-
-            //cfg_device_droid.Visible = CoreService.SiteInfo.Domain.Device_Droid;
-            //cfg_device_ios.Visible = CoreService.SiteInfo.Domain.Device_IOS;
-            //cfg_md5key.Visible = !string.IsNullOrEmpty(CoreService.SiteInfo.Domain.Cfg_MD5Key);
-            //kryptonLabel22.Visible = cfg_md5key.Visible;
-
-
         }
 
         public void OnDisposed()
         {
             CoreService.EventCore.UnRegisterCallback(Modules.CONN_MGR, Method_CONN_MGR.QRY_INTERFACE, this.OnQryInterface);
-         
         }
 
 
@@ -241,11 +231,8 @@ namespace TradingLib.MoniterControl
             module_agent.Checked = _domain.Module_Agent;
             module_subagent.Checked = !module_agent.Checked ? false : _domain.Module_SubAgent;
 
-            module_finservice.Checked = _domain.Module_FinService;
             module_payonline.Checked = _domain.Module_PayOnline;
-            module_slip.Checked = _domain.Module_Slip;
             module_follow.Checked = _domain.Module_Follow;
-            module_insert.Checked = _domain.Misc_InsertTrade;
 
             cfg_GrossPositioin.Checked = _domain.Cfg_GrossPosition;
             cfg_MaxMarginSide.Checked = _domain.Cfg_MaxMarginSide;
@@ -301,11 +288,8 @@ namespace TradingLib.MoniterControl
                 _domain.Module_Agent = module_agent.Checked;
                 _domain.Module_SubAgent = module_agent.Checked?module_subagent.Checked:false;
 
-                _domain.Module_FinService = module_finservice.Checked;
                 _domain.Module_PayOnline = module_payonline.Checked;
-                _domain.Module_Slip = module_slip.Checked;
                 _domain.Module_Follow = module_follow.Checked;
-                _domain.Misc_InsertTrade = module_insert.Checked;
                 _domain.Router_Live = router_live.Checked;
                 _domain.Router_Sim = router_sim.Checked;
 
@@ -351,11 +335,8 @@ namespace TradingLib.MoniterControl
                 _domain.Module_Agent = module_agent.Checked;
                 _domain.Module_SubAgent = module_agent.Checked ? module_subagent.Checked : false;
 
-                _domain.Module_FinService = module_finservice.Checked;
                 _domain.Module_PayOnline = module_payonline.Checked;
-                _domain.Module_Slip = module_slip.Checked;
                 _domain.Module_Follow = module_follow.Checked;
-                _domain.Misc_InsertTrade = module_insert.Checked;
                 _domain.Router_Live = router_live.Checked;
                 _domain.Router_Sim = router_sim.Checked;
 
