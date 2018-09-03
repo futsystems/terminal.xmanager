@@ -277,12 +277,17 @@
       <MenuItem id = "DataStoreCommand"
               label = "数据转储"
               class = "TradingLib.MoniterBase.Command.DataStoreCommand"/>
+      <MenuItem id = "Separator1" type = "Separator"/>
       <MenuItem id = "SettleManagerCommand"
               label = "手工结算"
               class = "TradingLib.MoniterBase.Command.SettleManagerCommand"/>
       <MenuItem id = "ClearUnsettledInfoCommand"
               label = "清除未结算"
               class = "TradingLib.MoniterBase.Command.ClearUnsettledInfoCommand"/>
+      <MenuItem id = "Separator1" type = "Separator"/>
+      <MenuItem id = "CleanDataCommand"
+              label = "清理历史数据"
+              class = "TradingLib.MoniterBase.Command.CleanDataCommand"/>
     </Condition>
   </Path>
   

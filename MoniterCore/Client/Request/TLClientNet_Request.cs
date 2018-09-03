@@ -85,10 +85,6 @@ namespace TradingLib.MoniterCore
             return reqid;
         }
 
-        public void ReqInsertTrade(Trade f)
-        {
-            this.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.REQ_INSERT_TRADE, TradeImpl.Serialize(f), true);
-        }
 
         /// <summary>
         /// 

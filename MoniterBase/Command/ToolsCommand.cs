@@ -64,6 +64,22 @@ namespace TradingLib.MoniterBase.Command
         }
     }
 
+    public class CleanDataCommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            if (!CoreService.SiteInfo.Domain.Super)
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+
+            fmCleanData fm = new fmCleanData();
+            fm.ShowDialog();
+            fm.Close();
+        }
+    }
+
     public class ExchangeRateCommand : AbstractMenuCommand
     {
         public override void Run()

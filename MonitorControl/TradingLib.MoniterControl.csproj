@@ -613,12 +613,6 @@
     <Compile Include="Forms\Basic\Template\fmConfigTemplate.Designer.cs">
       <DependentUpon>fmConfigTemplate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Contrib\fmInsertTrade.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Contrib\fmInsertTrade.Designer.cs">
-      <DependentUpon>fmInsertTrade.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\fmStatistic.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1149,6 +1143,12 @@
     <Compile Include="Forms\Tools\SettlementManager\fmUpdateSettlementPrice.designer.cs">
       <DependentUpon>fmUpdateSettlementPrice.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Tools\fmCleanData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Tools\fmCleanData.Designer.cs">
+      <DependentUpon>fmCleanData.cs</DependentUpon>
+    </Compile>
     <Compile Include="HandlerInfo.cs" />
     <Compile Include="Abstract\MoniterCommand.cs" />
     <Compile Include="InputReg.cs" />
@@ -1492,9 +1492,6 @@
     <EmbeddedResource Include="Forms\Basic\Template\fmConfigTemplate.resx">
       <DependentUpon>fmConfigTemplate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Contrib\fmInsertTrade.resx">
-      <DependentUpon>fmInsertTrade.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmStatistic.resx">
       <DependentUpon>fmStatistic.cs</DependentUpon>
     </EmbeddedResource>
@@ -1758,6 +1755,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Tools\SettlementManager\fmUpdateSettlementPrice.resx">
       <DependentUpon>fmUpdateSettlementPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Tools\fmCleanData.resx">
+      <DependentUpon>fmCleanData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImageFolder.resources" />
     <EmbeddedResource Include="ImageResources.resources" />

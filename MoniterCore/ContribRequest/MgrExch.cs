@@ -396,10 +396,6 @@ namespace TradingLib.MoniterCore
         /// </summary>
         public const string QRY_SYSTEM_STATUS = "QrySystemStatus";
 
-        /// <summary>
-        /// 请求补充交易记录
-        /// </summary>
-        public const string REQ_INSERT_TRADE = "InsertTrade";
         #endregion
 
         #region Agent
@@ -431,6 +427,11 @@ namespace TradingLib.MoniterCore
         /// 重启系统
         /// </summary>
         public const string REQ_REBOOT_SYSTEM = "ExitSystem";
+
+        /// <summary>
+        /// 执行数据清理
+        /// </summary>
+        public const string REQ_CLEAN_DATA = "CleanData";
     }
 
     public static class MgrExch
@@ -816,6 +817,11 @@ namespace TradingLib.MoniterCore
         public static int ReqExitSystem(this TLClientNet client)
         {
             return client.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.REQ_REBOOT_SYSTEM, "");
+        }
+
+        public static int ReqCleanData(this TLClientNet client,int date)
+        {
+            return client.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.REQ_CLEAN_DATA, new {date=date});
         }
     }
 }

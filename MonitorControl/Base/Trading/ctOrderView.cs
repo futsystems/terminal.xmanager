@@ -57,67 +57,6 @@ namespace TradingLib.MoniterControl
 
         public void OnInit()
         {
-            btnReserve.Visible = false;
-            btnInsert.Visible = false;
-            if (!CoreService.SiteInfo.Domain.Super)
-            {
-                bool stdfix = _config["FixPosStd"].AsBool();
-                
-
-                if (stdfix)
-                {
-                    if (CoreService.SiteInfo.Manager.IsRoot() && CoreService.SiteInfo.Domain.Misc_InsertTrade)
-                    {
-                        btnReserve.Visible = true;
-                        btnInsert.Visible = true;
-                    }
-                }
-                else
-                {
-                    string super = _config["SuperRoot"].AsString();
-                    if (CoreService.SiteInfo.Manager.IsRoot() && CoreService.SiteInfo.Domain.Misc_InsertTrade)
-                    {
-                        bool see = false;
-                        //如果设置了超级管理员 且管理员为超级管理员则可见按钮
-                        if (!string.IsNullOrEmpty(super))
-                        {
-                            see = (CoreService.SiteInfo.Manager.Login == super);
-                        }
-
-                        btnReserve.Visible = see;
-                        btnInsert.Visible = see;
-                    }
-                    
-                }
-            }
-            else
-            {
-                btnReserve.Visible = true;
-                btnInsert.Visible = true;
-            }
-
-            /*
-            if (!CoreService.SiteInfo.Domain.Super)
-            {
-                string super = _config["SuperRoot"].AsString();
-                if (CoreService.SiteInfo.Manager.IsRoot() && CoreService.SiteInfo.Domain.Misc_InsertTrade)
-                {
-                    bool see = false;
-                    //如果设置了超级管理员 且管理员为超级管理员则可见按钮
-                    if (!string.IsNullOrEmpty(super))
-                    {
-                        see = (CoreService.SiteInfo.Manager.Login == super);
-                    }
-
-                    btnReserve.Visible = see;
-                    btnInsert.Visible = see;
-                }
-            }
-            else
-            {
-                btnReserve.Visible = true;
-                btnInsert.Visible = true;
-            }**/
 
         }
 
@@ -354,8 +293,6 @@ namespace TradingLib.MoniterControl
             
             btnCancelOrder.Click +=new EventHandler(btnCancelOrder_Click);
             btnCancelAll.Click +=new EventHandler(btnCancelAll_Click);
-            btnReserve.Click += new EventHandler(btnReserve_Click);
-            btnInsert.Click += new EventHandler(btnInsert_Click);
 
             orderGrid.SizeChanged += new EventHandler(orderGrid_SizeChanged);
             orderGrid.CellDoubleClick +=new DataGridViewCellEventHandler(orderGrid_CellDoubleClick);
@@ -371,18 +308,7 @@ namespace TradingLib.MoniterControl
             _account = obj;
         }
 
-        void btnInsert_Click(object sender, EventArgs e)
-        {
-            if (_account == null)
-            {
-                MoniterHelper.WindowMessage("请选择交易帐户");
-                return;
-            }
-            fmInsertTrade fm = new fmInsertTrade();
-            fm.SetAccount(_account.Account);
-            fm.ShowDialog();
-            fm.Close();
-        }
+
 
         string CurrentOrderID
         {
@@ -399,16 +325,7 @@ namespace TradingLib.MoniterControl
             }
         }
 
-        void btnReserve_Click(object sender, EventArgs e)
-        {
-            string orderid = CurrentOrderID;
-            if (string.IsNullOrEmpty(orderid))
-            {
-                MoniterHelper.WindowMessage("请选择委托");
-            }
 
-            CoreService.TLClient.ReqContribRequest("MgrExchServer", "ReverseOrder", orderid);
-        }
 
         void orderGrid_SizeChanged(object sender, EventArgs e)
         {

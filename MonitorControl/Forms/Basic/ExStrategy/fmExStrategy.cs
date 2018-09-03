@@ -88,12 +88,8 @@ namespace TradingLib.MoniterControl
             _current.IncludeCloseProfit = includecloseprofit.Checked;
             _current.IncludePositionProfit = includepositionprofit.Checked;
             _current.PositionLock = poslock.Checked;
-            _current.EntrySlip = (int)entrySlip.Value;
-            _current.ExitSlip = (int)exitSlip.Value;
-            _current.LimitCheck = limitcheck.Checked;
-            _current.Probability = (int)probability.Value;
 
-            _current.SimExecuteCFFEXStrategy = simCFFEX.Checked;
+            //_current.SimExecuteCFFEXStrategy = simCFFEX.Checked;
             _current.SimExecuteFillAll = simFillAll.Checked;
             _current.SimExecuteMinSize = (int)simMinSize.Value;
             _current.SimExecuteStickLimitPrice = simStickLimit.Checked;
@@ -171,38 +167,19 @@ namespace TradingLib.MoniterControl
         }
         public void OnInit()
         {
-            slipblock.Visible = false;
             executionblock.Visible = false;
-
             if (!CoreService.SiteInfo.Domain.Super)
             {
                 //运行分区管理员
                 if (CoreService.SiteInfo.Manager.IsRoot())
                 {
-                    //滑点模块判定
-                    if (CoreService.SiteInfo.Domain.Module_Slip)
-                    {
-                        slipblock.Visible = true;
-                    }
-
-                    if (ShowInSuper())
-                    {
-                        executionblock.Visible = true;
-                    }
-                    //bool see = false;
-                    ////如果设置了超级管理员 且管理员为超级管理员则可见按钮
-                    //if (!string.IsNullOrEmpty(ControlService.SuperRoot))
-                    //{
-                    //    see = (CoreService.SiteInfo.Manager.Login == ControlService.SuperRoot);
-                    //}
-
-                    //executionblock.Visible = see;
+                   executionblock.Visible = true;
+                   
                 }
             }
             else
             {
                 executionblock.Visible = true;
-                slipblock.Visible = true;
             }
 
             CoreService.EventCore.RegisterCallback(Modules.MGR_EXCH,Method_MGR_EXCH.QRY_EXSTRATEGY_TEMPLATE, this.OnQryExStrategyTemplate);
@@ -263,12 +240,7 @@ namespace TradingLib.MoniterControl
                 sidemargin.Checked = item.SideMargin;
                 creditseparate.Checked = item.CreditSeparate;
                 poslock.Checked = item.PositionLock;
-                entrySlip.Value = item.EntrySlip;
-                exitSlip.Value = item.ExitSlip;
-                limitcheck.Checked = item.LimitCheck;
-                probability.Value = item.Probability;
 
-                simCFFEX.Checked = item.SimExecuteCFFEXStrategy;
                 simFillAll.Checked = item.SimExecuteFillAll;
                 simMinSize.Value = item.SimExecuteMinSize;
                 simStickLimit.Checked = item.SimExecuteStickLimitPrice;
