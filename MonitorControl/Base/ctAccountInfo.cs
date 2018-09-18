@@ -236,10 +236,9 @@ namespace TradingLib.MoniterControl
                 MoniterHelper.WindowMessage("请选择交易帐号");
                 return;
             }
-            if (MoniterHelper.WindowConfirm("确认修改交易帐户:" + account.Account + "成交方式为:" + Util.GetEnumDescription((QSEnumOrderTransferType)cbTransferType.SelectedValue)) == DialogResult.Yes)
+            if (MoniterHelper.WindowConfirm("确认修改交易帐户:" + account.Account + " 成交方式为:" + Util.GetEnumDescription((QSEnumOrderTransferType)cbTransferType.SelectedValue) + "?\n请勿将练习帐户充当实盘帐户给客户使用，我司不承担由于滥用软件所产生的一切法律责任。") == DialogResult.Yes)
             {
                 CoreService.TLClient.ReqUpdateRouteType(account.Account, (QSEnumOrderTransferType)cbTransferType.SelectedValue);
-                //btnUpdateTransferType.Enabled = false;
             }
         }
 

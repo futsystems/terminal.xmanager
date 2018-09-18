@@ -47,6 +47,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\RequiredLibraries\kypton\ComponentFactory.Krypton.Toolkit.dll</HintPath>
     </Reference>
+    <Reference Include="License">
+      <HintPath>..\..\..\Futs.base\lib\License.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Futs.base\lib\Newtonsoft.Json.dll</HintPath>

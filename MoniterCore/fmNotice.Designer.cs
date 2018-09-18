@@ -41,8 +41,9 @@
             // 
             this.kryptonRichTextBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonRichTextBox1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonRichTextBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.kryptonRichTextBox1.Name = "kryptonRichTextBox1";
-            this.kryptonRichTextBox1.Size = new System.Drawing.Size(540, 296);
+            this.kryptonRichTextBox1.Size = new System.Drawing.Size(1080, 592);
             this.kryptonRichTextBox1.TabIndex = 0;
             this.kryptonRichTextBox1.Text = resources.GetString("kryptonRichTextBox1.Text");
             // 
@@ -53,33 +54,37 @@
             this.kryptonPanel1.Controls.Add(this.kryptonRichTextBox1);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonPanel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(540, 334);
+            this.kryptonPanel1.Size = new System.Drawing.Size(1080, 668);
             this.kryptonPanel1.TabIndex = 1;
             // 
             // btnReject
             // 
-            this.btnReject.Location = new System.Drawing.Point(473, 303);
+            this.btnReject.Location = new System.Drawing.Point(946, 606);
+            this.btnReject.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnReject.Name = "btnReject";
-            this.btnReject.Size = new System.Drawing.Size(55, 25);
+            this.btnReject.Size = new System.Drawing.Size(110, 50);
             this.btnReject.TabIndex = 2;
             this.btnReject.Values.Text = "拒 绝";
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(412, 303);
+            this.btnAccept.Location = new System.Drawing.Point(824, 606);
+            this.btnAccept.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(55, 25);
+            this.btnAccept.Size = new System.Drawing.Size(110, 50);
             this.btnAccept.TabIndex = 1;
             this.btnAccept.Values.Text = "同 意";
             // 
             // fmNotice
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(540, 334);
+            this.ClientSize = new System.Drawing.Size(1080, 668);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "fmNotice";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "免责声明";

@@ -82,19 +82,46 @@ namespace TradingLib.MoniterBase
                 imageheader.Image = Image.FromFile("config/login.png");
 
             }
-            
 
-            //加载服务端IP地址
-            string[] addresses = config["Servers"].AsString().Split(',');
-            foreach (string s in addresses)
+            if (License.Status.Licensed)
             {
-                if (string.IsNullOrEmpty(s))
-                    continue;
-                servers.Items.Add(s);
+                Dictionary<string, string> dict = new Dictionary<string, string>();
+
+                for (int i = 0; i < License.Status.KeyValueList.Count; i++)
+                {
+                    string key = License.Status.KeyValueList.GetKey(i).ToString();
+                    string value = License.Status.KeyValueList.GetByIndex(i).ToString();
+                    dict.Add(key, value);
+                }
+
+                string tmp = "127.0.0.1";
+                //从授权文件获取服务端地址
+                if (dict.TryGetValue("broker_srv", out tmp))
+                {
+                    servers.Items.Add(tmp);
+                }
+                //MessageBox.Show("BROKER_SERVER:" + tmp);
             }
+            else
+            {
+                MessageBox.Show("管理端未授权，只能本地运行");
+
+                //加载服务端IP地址
+                //string[] addresses = config["Servers"].AsString().Split(',');
+                //foreach (string s in addresses)
+                //{
+                //    if (string.IsNullOrEmpty(s))
+                //        continue;
+                //    
+                //}
+                //管理端未授权则只能连接本地服务器
+                servers.Items.Add("127.0.0.1");
+            }
+
+            
             servers.SelectedIndex = 0;
             //如果只有一个服务端地址 则影藏地址选择列表
-            if (addresses.Length == 1)
+            if (servers.Items.Count == 1)
             {
                 servers.Visible = false;
                 label0.Visible = false;
