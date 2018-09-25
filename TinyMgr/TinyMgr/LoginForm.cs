@@ -187,7 +187,7 @@ namespace TinyMgr
             _connecttime = DateTime.Now;
 
             //初始化Client并启动
-            CoreService.InitClient(address, 6670);
+            CoreService.InitClient(address, 8890);
             CoreService.TLClient.Start();
         }
 
