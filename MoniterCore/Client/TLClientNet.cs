@@ -78,7 +78,9 @@ namespace TradingLib.MoniterCore
             {
                 connecton.Stop();
             }
+            UnbindConnectionEvent();
             connecton = null;
+            _everlogin = false;//or relogin will not avabile ,not request marketinfo
             logger.Info("TLClientNet Stopped");
         }
 
@@ -91,9 +93,20 @@ namespace TradingLib.MoniterCore
 
             connecton.OnTick += new TickDelegate(connecton_OnTick);
             connecton.OnPacketEvent += new IPacketDelegate(connecton_OnPacketEvent);
-
-
         }
+
+        void UnbindConnectionEvent()
+        {
+            connecton.OnConnectEvent -= new ConnectDel(connecton_OnConnectEvent);
+            connecton.OnDisconnectEvent -= new DisconnectDel(connecton_OnDisconnectEvent);
+            connecton.OnDataPubConnectEvent -= new DataPubConnectDel(connecton_OnDataPubConnectEvent);
+            connecton.OnDataPubDisconnectEvent -= new DataPubDisconnectDel(connecton_OnDataPubDisconnectEvent);
+
+            connecton.OnTick -= new TickDelegate(connecton_OnTick);
+            connecton.OnPacketEvent -= new IPacketDelegate(connecton_OnPacketEvent);
+        }
+
+
 
         void SendPacket(IPacket packet)
         {
