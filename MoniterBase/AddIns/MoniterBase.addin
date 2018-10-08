@@ -288,6 +288,9 @@
       <MenuItem id = "CleanDataCommand"
               label = "清理历史数据"
               class = "TradingLib.MoniterBase.Command.CleanDataCommand"/>
+      <MenuItem id = "CleanOTECommand"
+              label = "清理结算异常数据"
+              class = "TradingLib.MoniterBase.Command.CleanOTECommand"/>
     </Condition>
   </Path>
   

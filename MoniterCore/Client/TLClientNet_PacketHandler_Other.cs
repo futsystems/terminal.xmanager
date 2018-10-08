@@ -40,7 +40,13 @@ namespace TradingLib.MoniterCore
             string module = response.ModuleID;
             string cmd = response.CMDStr;
             string ret = response.Result;
+            if (string.IsNullOrEmpty(module) || string.IsNullOrEmpty(cmd))
+            {
+                logger.Warn("Invalid respone:" + response.ToString());
+                return;
+            }
             logger.Debug("ContribResponse ->Module:" + module + " CMD:" + cmd + " Ret:" + ret);
+
             CoreService.EventCore.GotMGRContribResponse(module, cmd, ret, response.IsLast);
         }
 

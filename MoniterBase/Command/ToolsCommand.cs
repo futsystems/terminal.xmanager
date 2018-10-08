@@ -80,6 +80,23 @@ namespace TradingLib.MoniterBase.Command
         }
     }
 
+    public class CleanOTECommand : AbstractMenuCommand
+    {
+        public override void Run()
+        {
+            if (!CoreService.SiteInfo.Domain.Super)
+            {
+                MoniterHelper.WindowMessage("无权限");
+                return;
+            }
+
+            if (MoniterHelper.WindowConfirm("确认清理结算异常数据?") == System.Windows.Forms.DialogResult.Yes)
+            {
+                CoreService.TLClient.ReqCleanOTE();
+            }
+        }
+    }
+
     public class ExchangeRateCommand : AbstractMenuCommand
     {
         public override void Run()

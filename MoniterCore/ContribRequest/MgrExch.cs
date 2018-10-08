@@ -432,6 +432,11 @@ namespace TradingLib.MoniterCore
         /// 执行数据清理
         /// </summary>
         public const string REQ_CLEAN_DATA = "CleanData";
+
+        /// <summary>
+        /// 清理结算异常数据
+        /// </summary>
+        public const string REQ_CLEAN_OTE = "CleanOTE";
     }
 
     public static class MgrExch
@@ -822,6 +827,11 @@ namespace TradingLib.MoniterCore
         public static int ReqCleanData(this TLClientNet client,int date)
         {
             return client.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.REQ_CLEAN_DATA, new {date=date});
+        }
+
+        public static int ReqCleanOTE(this TLClientNet client)
+        {
+            return client.ReqContribRequest(Modules.MGR_EXCH, Method_MGR_EXCH.REQ_CLEAN_OTE, "");
         }
     }
 }
