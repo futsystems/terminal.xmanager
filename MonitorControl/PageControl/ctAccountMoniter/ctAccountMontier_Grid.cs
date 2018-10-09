@@ -77,7 +77,7 @@ namespace TradingLib.MoniterControl
         /// </summary>
         private void SetPreferences()
         {
-            ComponentFactory.Krypton.Toolkit.KryptonDataGridView grid = accountgrid;
+              grid = accountgrid;
 
             grid.AllowUserToAddRows = false;
             grid.AllowUserToDeleteRows = false;
