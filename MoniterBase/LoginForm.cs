@@ -18,30 +18,30 @@ using Common.Logging;
 
 namespace TradingLib.MoniterBase
 {
-    public partial class LoginForm : ComponentFactory.Krypton.Toolkit.KryptonForm
+    public partial class LoginForm : DevExpress.XtraEditors.XtraForm
     {
 
         ILog logger = LogManager.GetLogger("LoginForm");
 
         Starter mStart;
-        void layout1()
-        {
-            ckremberuser.Location = new Point(286, 50);
-            ckremberpass.Location = new Point(286, 82);
-            btnLogin.Location = new Point(134, 107);
-            btnExit.Location = new Point(221, 107);
-            btnLogin.Size = new Size(60, 31);
+        //void layout1()
+        //{
+        //    ckremberuser.Location = new Point(286, 50);
+        //    ckremberpass.Location = new Point(286, 82);
+        //    btnLogin.Location = new Point(134, 107);
+        //    btnExit.Location = new Point(221, 107);
+        //    btnLogin.Size = new Size(60, 31);
 
-        }
-        void layout2()
-        {
-            ckremberuser.Location = new Point(129, 107);
-            ckremberpass.Location = new Point(208, 107);
-            btnLogin.Location = new Point(299, 46);
-            btnExit.Location = new Point(299, 96);
-            btnLogin.Size = new Size(60, 45);
+        //}
+        //void layout2()
+        //{
+        //    ckremberuser.Location = new Point(129, 107);
+        //    ckremberpass.Location = new Point(208, 107);
+        //    btnLogin.Location = new Point(299, 46);
+        //    btnExit.Location = new Point(299, 96);
+        //    btnLogin.Size = new Size(60, 45);
 
-        }
+        //}
         public LoginForm(Starter start)
         {
             //允许线程间调用控件属性 否则无法本地调试
@@ -57,17 +57,17 @@ namespace TradingLib.MoniterBase
             Global.HideConn = config["HideConn"].AsBool();
             string layout = config["Layout"].AsString();
             int style = config["Style"].AsInt();
-            int layoutid = 1;
-            if (layout == "1") layoutid = 1;
-            if (layout == "2") layoutid = 2;
-            if (layoutid == 1) layout1();
-            if (layoutid == 2) layout2();
-            if (style == 0)
-            {
-                style = 6;
-            }
+            //int layoutid = 1;
+            //if (layout == "1") layoutid = 1;
+            //if (layout == "2") layoutid = 2;
+            //if (layoutid == 1) layout1();
+            //if (layoutid == 2) layout2();
+            //if (style == 0)
+            //{
+            //    style = 6;
+            //}
 
-            kryptonPalette1.BasePaletteMode = (ComponentFactory.Krypton.Toolkit.PaletteMode)style;
+            //kryptonPalette1.BasePaletteMode = (ComponentFactory.Krypton.Toolkit.PaletteMode)style;
 
             TradingLib.MoniterControl.ControlService.SuperRoot = config["SuperRoot"].AsString();
 
@@ -89,12 +89,12 @@ namespace TradingLib.MoniterBase
             {
                 if (string.IsNullOrEmpty(s))
                     continue;
-                servers.Items.Add(s);
+                servers.Properties.Items.Add(s);
             }
             
             servers.SelectedIndex = 0;
             //如果只有一个服务端地址 则影藏地址选择列表
-            if (servers.Items.Count == 1)
+            if (servers.Properties.Items.Count == 1)
             {
                 servers.Visible = false;
                 label0.Visible = false;
@@ -128,7 +128,7 @@ namespace TradingLib.MoniterBase
         void WireEvent()
         { 
             btnLogin.Click +=new EventHandler(btnLogin_Click);
-            btnExit.Click += new EventHandler(btnExit_LinkClicked);
+            linkExit.Click += new EventHandler(linkExit_LinkClicked);
             this.FormClosing += new FormClosingEventHandler(LoginForm_FormClosing);
 
             CoreService.EventCore.OnConnectedEvent += new VoidDelegate(EventCore_OnConnectedEvent);
@@ -155,7 +155,7 @@ namespace TradingLib.MoniterBase
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnExit_LinkClicked(object sender, EventArgs e)
+        private void linkExit_LinkClicked(object sender, EventArgs e)
         {
             System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
@@ -168,6 +168,9 @@ namespace TradingLib.MoniterBase
         private void btnLogin_Click(object sender, EventArgs e)
         {
             SaveLoginConfig();
+
+            this.btnLogin.Enabled = false;
+
             new Thread(delegate()
             {
                 Connect();
@@ -236,7 +239,7 @@ namespace TradingLib.MoniterBase
         void Connect()
         {
             //禁止登入按钮操作
-            this.btnLogin.Enabled = false;
+            //this.btnLogin.Enabled = false;
 
             string address = servers.SelectedItem.ToString();
             //登入过程开始

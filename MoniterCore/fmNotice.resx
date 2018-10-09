@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="kryptonRichTextBox1.Text" xml:space="preserve">
+  <data name="memoEdit1.EditValue" xml:space="preserve">
     <value>本软件仅用于合法用途如： 
 1、操盘手交易培训； 
 2、投资者期货风险教育与操盘演练； 

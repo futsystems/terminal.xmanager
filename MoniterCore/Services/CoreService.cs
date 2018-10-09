@@ -79,8 +79,8 @@ namespace TradingLib.MoniterCore
                 
             //}
             //defaultinstance._tlclient.Start();
-
         }
+
         TLClientNet _tlclient = null;
         public static TLClientNet TLClient
         {

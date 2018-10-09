@@ -29,77 +29,76 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmNotice));
-            this.kryptonRichTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.btnReject = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btnAccept = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
-            this.kryptonPanel1.SuspendLayout();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.memoEdit1 = new DevExpress.XtraEditors.MemoEdit();
+            this.btnReject = new DevExpress.XtraEditors.SimpleButton();
+            this.btnAccept = new DevExpress.XtraEditors.SimpleButton();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
-            // kryptonRichTextBox1
+            // panelControl1
             // 
-            this.kryptonRichTextBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonRichTextBox1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonRichTextBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.kryptonRichTextBox1.Name = "kryptonRichTextBox1";
-            this.kryptonRichTextBox1.Size = new System.Drawing.Size(1080, 592);
-            this.kryptonRichTextBox1.TabIndex = 0;
-            this.kryptonRichTextBox1.Text = resources.GetString("kryptonRichTextBox1.Text");
+            this.panelControl1.Controls.Add(this.memoEdit1);
+            this.panelControl1.Controls.Add(this.btnReject);
+            this.panelControl1.Controls.Add(this.btnAccept);
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl1.Location = new System.Drawing.Point(0, 0);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(521, 297);
+            this.panelControl1.TabIndex = 3;
             // 
-            // kryptonPanel1
+            // memoEdit1
             // 
-            this.kryptonPanel1.Controls.Add(this.btnReject);
-            this.kryptonPanel1.Controls.Add(this.btnAccept);
-            this.kryptonPanel1.Controls.Add(this.kryptonRichTextBox1);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonPanel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(1080, 668);
-            this.kryptonPanel1.TabIndex = 1;
+            this.memoEdit1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.memoEdit1.EditValue = resources.GetString("memoEdit1.EditValue");
+            this.memoEdit1.Location = new System.Drawing.Point(2, 2);
+            this.memoEdit1.Name = "memoEdit1";
+            this.memoEdit1.Size = new System.Drawing.Size(517, 259);
+            this.memoEdit1.TabIndex = 3;
             // 
             // btnReject
             // 
-            this.btnReject.Location = new System.Drawing.Point(946, 606);
-            this.btnReject.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnReject.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReject.Location = new System.Drawing.Point(441, 269);
             this.btnReject.Name = "btnReject";
-            this.btnReject.Size = new System.Drawing.Size(110, 50);
-            this.btnReject.TabIndex = 2;
-            this.btnReject.Values.Text = "拒 绝";
+            this.btnReject.Size = new System.Drawing.Size(75, 23);
+            this.btnReject.TabIndex = 1;
+            this.btnReject.Text = "拒绝";
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(824, 606);
-            this.btnAccept.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnAccept.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAccept.Location = new System.Drawing.Point(360, 269);
             this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(110, 50);
-            this.btnAccept.TabIndex = 1;
-            this.btnAccept.Values.Text = "同 意";
+            this.btnAccept.Size = new System.Drawing.Size(75, 23);
+            this.btnAccept.TabIndex = 0;
+            this.btnAccept.Text = "同意";
             // 
             // fmNotice
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1080, 668);
-            this.Controls.Add(this.kryptonPanel1);
+            this.ClientSize = new System.Drawing.Size(521, 297);
+            this.Controls.Add(this.panelControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "fmNotice";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "免责声明";
             this.TopMost = true;
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
-            this.kryptonPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonRichTextBox kryptonRichTextBox1;
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btnReject;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btnAccept;
+        private DevExpress.XtraEditors.PanelControl panelControl1;
+        private DevExpress.XtraEditors.SimpleButton btnReject;
+        private DevExpress.XtraEditors.SimpleButton btnAccept;
+        private DevExpress.XtraEditors.MemoEdit memoEdit1;
     }
 }

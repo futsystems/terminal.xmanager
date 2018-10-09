@@ -10,7 +10,7 @@ using TradingLib.MoniterCore;
 
 namespace TradingLib.MoniterBase
 {
-    public partial class fmHelp : ComponentFactory.Krypton.Toolkit.KryptonForm
+    public partial class fmHelp : DevExpress.XtraEditors.XtraForm
     {
         static fmHelp instance;
 

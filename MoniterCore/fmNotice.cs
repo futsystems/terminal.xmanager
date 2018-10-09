@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace TradingLib.MoniterCore
 {
-    public partial class fmNotice : ComponentFactory.Krypton.Toolkit.KryptonForm
+    public partial class fmNotice : DevExpress.XtraEditors.XtraForm
     {
         public fmNotice()
         {

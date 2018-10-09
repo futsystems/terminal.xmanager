@@ -28,153 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.label0 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.label1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.label2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.username = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.password = new ComponentFactory.Krypton.Toolkit.KryptonMaskedTextBox();
-            this.servers = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.btnLogin = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.ckremberuser = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
-            this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
-            this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.lbLoginStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.ckremberpass = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
-            this.btnExit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.imageheader = new System.Windows.Forms.PictureBox();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.servers)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
-            this.kryptonPanel1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.lbLoginStatus = new DevExpress.XtraEditors.LabelControl();
+            this.linkExit = new DevExpress.XtraEditors.HyperlinkLabelControl();
+            this.ckremberpass = new DevExpress.XtraEditors.CheckEdit();
+            this.ckremberuser = new DevExpress.XtraEditors.CheckEdit();
+            this.label0 = new DevExpress.XtraEditors.LabelControl();
+            this.btnLogin = new DevExpress.XtraEditors.SimpleButton();
+            this.password = new DevExpress.XtraEditors.TextEdit();
+            this.username = new DevExpress.XtraEditors.TextEdit();
+            this.servers = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.imageheader)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ckremberpass.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ckremberuser.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.password.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.username.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.servers.Properties)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label0
-            // 
-            this.label0.Location = new System.Drawing.Point(59, 17);
-            this.label0.Name = "label0";
-            this.label0.Size = new System.Drawing.Size(63, 20);
-            this.label0.TabIndex = 20;
-            this.label0.Values.Text = "柜台地址:";
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(59, 49);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 20);
-            this.label1.TabIndex = 21;
-            this.label1.Values.Text = "柜员代码:";
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(59, 82);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 20);
-            this.label2.TabIndex = 22;
-            this.label2.Values.Text = "柜员密码:";
-            // 
-            // username
-            // 
-            this.username.Location = new System.Drawing.Point(134, 46);
-            this.username.Name = "username";
-            this.username.Size = new System.Drawing.Size(147, 20);
-            this.username.TabIndex = 23;
-            // 
-            // password
-            // 
-            this.password.Location = new System.Drawing.Point(134, 79);
-            this.password.Name = "password";
-            this.password.PasswordChar = '#';
-            this.password.Size = new System.Drawing.Size(147, 20);
-            this.password.TabIndex = 24;
-            // 
-            // servers
-            // 
-            this.servers.DropDownWidth = 121;
-            this.servers.Location = new System.Drawing.Point(134, 14);
-            this.servers.Name = "servers";
-            this.servers.Size = new System.Drawing.Size(147, 21);
-            this.servers.TabIndex = 25;
-            this.servers.Text = "--";
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.Location = new System.Drawing.Point(299, 46);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(60, 31);
-            this.btnLogin.TabIndex = 27;
-            this.btnLogin.Values.Text = "登 入";
-            // 
-            // ckremberuser
-            // 
-            this.ckremberuser.Location = new System.Drawing.Point(129, 107);
-            this.ckremberuser.Name = "ckremberuser";
-            this.ckremberuser.Size = new System.Drawing.Size(73, 20);
-            this.ckremberuser.TabIndex = 28;
-            this.ckremberuser.Values.Text = "记住代码";
-            // 
-            // kryptonManager1
-            // 
-            this.kryptonManager1.GlobalPalette = this.kryptonPalette1;
-            this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Custom;
-            // 
-            // kryptonPanel1
-            // 
-            this.kryptonPanel1.Controls.Add(this.statusStrip1);
-            this.kryptonPanel1.Controls.Add(this.ckremberpass);
-            this.kryptonPanel1.Controls.Add(this.btnExit);
-            this.kryptonPanel1.Controls.Add(this.label1);
-            this.kryptonPanel1.Controls.Add(this.label0);
-            this.kryptonPanel1.Controls.Add(this.label2);
-            this.kryptonPanel1.Controls.Add(this.username);
-            this.kryptonPanel1.Controls.Add(this.ckremberuser);
-            this.kryptonPanel1.Controls.Add(this.password);
-            this.kryptonPanel1.Controls.Add(this.btnLogin);
-            this.kryptonPanel1.Controls.Add(this.servers);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 97);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(401, 171);
-            this.kryptonPanel1.TabIndex = 33;
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lbLoginStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 149);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
-            this.statusStrip1.Size = new System.Drawing.Size(401, 22);
-            this.statusStrip1.TabIndex = 35;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // lbLoginStatus
-            // 
-            this.lbLoginStatus.Name = "lbLoginStatus";
-            this.lbLoginStatus.Size = new System.Drawing.Size(17, 17);
-            this.lbLoginStatus.Text = "--";
-            // 
-            // ckremberpass
-            // 
-            this.ckremberpass.Location = new System.Drawing.Point(208, 107);
-            this.ckremberpass.Name = "ckremberpass";
-            this.ckremberpass.Size = new System.Drawing.Size(73, 20);
-            this.ckremberpass.TabIndex = 33;
-            this.ckremberpass.Values.Text = "记住密码";
-            // 
-            // btnExit
-            // 
-            this.btnExit.Location = new System.Drawing.Point(299, 96);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(60, 31);
-            this.btnExit.TabIndex = 32;
-            this.btnExit.Values.Text = "退 出";
             // 
             // imageheader
             // 
@@ -185,19 +60,129 @@
             this.imageheader.InitialImage = null;
             this.imageheader.Location = new System.Drawing.Point(0, 0);
             this.imageheader.Name = "imageheader";
-            this.imageheader.Size = new System.Drawing.Size(401, 97);
+            this.imageheader.Size = new System.Drawing.Size(420, 113);
             this.imageheader.TabIndex = 0;
             this.imageheader.TabStop = false;
             this.imageheader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.imageheader_MouseDown);
             this.imageheader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.imageheader_MouseMove);
             this.imageheader.MouseUp += new System.Windows.Forms.MouseEventHandler(this.imageheader_MouseUp);
             // 
+            // panelControl1
+            // 
+            this.panelControl1.Controls.Add(this.lbLoginStatus);
+            this.panelControl1.Controls.Add(this.linkExit);
+            this.panelControl1.Controls.Add(this.ckremberpass);
+            this.panelControl1.Controls.Add(this.ckremberuser);
+            this.panelControl1.Controls.Add(this.label0);
+            this.panelControl1.Controls.Add(this.btnLogin);
+            this.panelControl1.Controls.Add(this.password);
+            this.panelControl1.Controls.Add(this.username);
+            this.panelControl1.Controls.Add(this.servers);
+            this.panelControl1.Controls.Add(this.labelControl2);
+            this.panelControl1.Controls.Add(this.labelControl1);
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl1.Location = new System.Drawing.Point(0, 113);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(420, 176);
+            this.panelControl1.TabIndex = 34;
+            // 
+            // lbLoginStatus
+            // 
+            this.lbLoginStatus.Appearance.ForeColor = System.Drawing.Color.DimGray;
+            this.lbLoginStatus.Appearance.Options.UseForeColor = true;
+            this.lbLoginStatus.Location = new System.Drawing.Point(22, 150);
+            this.lbLoginStatus.Name = "lbLoginStatus";
+            this.lbLoginStatus.Size = new System.Drawing.Size(8, 14);
+            this.lbLoginStatus.TabIndex = 37;
+            this.lbLoginStatus.Text = "--";
+            // 
+            // linkExit
+            // 
+            this.linkExit.Location = new System.Drawing.Point(355, 108);
+            this.linkExit.Name = "linkExit";
+            this.linkExit.Size = new System.Drawing.Size(28, 14);
+            this.linkExit.TabIndex = 36;
+            this.linkExit.Text = "退 出";
+            this.linkExit.Visible = false;
+            // 
+            // ckremberpass
+            // 
+            this.ckremberpass.Location = new System.Drawing.Point(216, 108);
+            this.ckremberpass.Name = "ckremberpass";
+            this.ckremberpass.Properties.Caption = "记住密码";
+            this.ckremberpass.Size = new System.Drawing.Size(75, 19);
+            this.ckremberpass.TabIndex = 9;
+            // 
+            // ckremberuser
+            // 
+            this.ckremberuser.Location = new System.Drawing.Point(121, 108);
+            this.ckremberuser.Name = "ckremberuser";
+            this.ckremberuser.Properties.Caption = "记住用户名";
+            this.ckremberuser.Size = new System.Drawing.Size(89, 19);
+            this.ckremberuser.TabIndex = 8;
+            // 
+            // label0
+            // 
+            this.label0.Location = new System.Drawing.Point(56, 12);
+            this.label0.Name = "label0";
+            this.label0.Size = new System.Drawing.Size(24, 14);
+            this.label0.TabIndex = 7;
+            this.label0.Text = "地址";
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Location = new System.Drawing.Point(297, 41);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(86, 53);
+            this.btnLogin.TabIndex = 5;
+            this.btnLogin.Text = "登  入";
+            // 
+            // password
+            // 
+            this.password.Location = new System.Drawing.Point(125, 74);
+            this.password.Name = "password";
+            this.password.Properties.PasswordChar = '*';
+            this.password.Size = new System.Drawing.Size(136, 20);
+            this.password.TabIndex = 4;
+            // 
+            // username
+            // 
+            this.username.Location = new System.Drawing.Point(125, 38);
+            this.username.Name = "username";
+            this.username.Size = new System.Drawing.Size(136, 20);
+            this.username.TabIndex = 3;
+            // 
+            // servers
+            // 
+            this.servers.Location = new System.Drawing.Point(125, 6);
+            this.servers.Name = "servers";
+            this.servers.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.servers.Size = new System.Drawing.Size(136, 20);
+            this.servers.TabIndex = 2;
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(56, 80);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(24, 14);
+            this.labelControl2.TabIndex = 1;
+            this.labelControl2.Text = "密码";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(44, 44);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(36, 14);
+            this.labelControl1.TabIndex = 0;
+            this.labelControl1.Text = "用户名";
+            // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(401, 268);
-            this.Controls.Add(this.kryptonPanel1);
+            this.ClientSize = new System.Drawing.Size(420, 289);
+            this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.imageheader);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -208,14 +193,15 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "巨融资管柜台系统";
             this.TopMost = true;
-            ((System.ComponentModel.ISupportInitialize)(this.servers)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
-            this.kryptonPanel1.ResumeLayout(false);
-            this.kryptonPanel1.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageheader)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
+            this.panelControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ckremberpass.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ckremberuser.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.password.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.username.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.servers.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -223,24 +209,17 @@
         #endregion
 
         private System.Windows.Forms.PictureBox imageheader;
-        //private Telerik.WinControls.Themes.Office2010SilverTheme office2010SilverTheme1;
-        //private Telerik.WinControls.Themes.Office2010BlackTheme office2010BlackTheme1;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel label0;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel label1;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel label2;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox username;
-        private ComponentFactory.Krypton.Toolkit.KryptonMaskedTextBox password;
-        private ComponentFactory.Krypton.Toolkit.KryptonComboBox servers;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btnLogin;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox ckremberuser;
-        private ComponentFactory.Krypton.Toolkit.KryptonPalette kryptonPalette1;
-        private ComponentFactory.Krypton.Toolkit.KryptonManager kryptonManager1;
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btnExit;
-        private System.Windows.Forms.BindingSource bindingSource1;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox ckremberpass;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel lbLoginStatus;
-        //private Telerik.WinControls.Themes.Windows8Theme windows8Theme1;
+        private DevExpress.XtraEditors.PanelControl panelControl1;
+        private DevExpress.XtraEditors.TextEdit password;
+        private DevExpress.XtraEditors.TextEdit username;
+        private DevExpress.XtraEditors.ComboBoxEdit servers;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.SimpleButton btnLogin;
+        private DevExpress.XtraEditors.CheckEdit ckremberpass;
+        private DevExpress.XtraEditors.CheckEdit ckremberuser;
+        private DevExpress.XtraEditors.LabelControl label0;
+        private DevExpress.XtraEditors.HyperlinkLabelControl linkExit;
+        private DevExpress.XtraEditors.LabelControl lbLoginStatus;
     }
 }
