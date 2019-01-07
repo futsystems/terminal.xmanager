@@ -38,7 +38,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).BeginInit();
             this.kryptonGroupBox1.Panel.SuspendLayout();
             this.kryptonGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.holder)).BeginInit();
@@ -75,14 +74,14 @@
             this.holder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.holder.Location = new System.Drawing.Point(0, 0);
             this.holder.Name = "holder";
-            this.holder.Size = new System.Drawing.Size(362, 309);
+            this.holder.Size = new System.Drawing.Size(362, 311);
             this.holder.TabIndex = 25;
             // 
             // avabile
             // 
             this.avabile.Location = new System.Drawing.Point(237, 13);
             this.avabile.Name = "avabile";
-            this.avabile.Size = new System.Drawing.Size(48, 20);
+            this.avabile.Size = new System.Drawing.Size(51, 18);
             this.avabile.TabIndex = 3;
             this.avabile.Values.Text = "启用";
             // 
@@ -108,7 +107,7 @@
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(4, 13);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(85, 20);
+            this.kryptonLabel1.Size = new System.Drawing.Size(92, 18);
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "支付网关类别";
             // 
@@ -125,7 +124,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).EndInit();
             this.kryptonGroupBox1.Panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
             this.kryptonGroupBox1.ResumeLayout(false);

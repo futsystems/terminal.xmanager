@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,7 +21,7 @@ namespace TradingLib.MoniterControl
         {
             InitializeComponent();
 
-            MoniterHelper.AdapterToIDataSource(gatewayType).BindDataSource(MoniterHelper.GetEnumValueObjects<QSEnumGateWayType>());
+            MoniterHelper.AdapterToIDataSource(gatewayType).BindDataSource(GetGateWayOptions());
 
             this.Load += new EventHandler(fmPaymentGateway_Load);
         }
@@ -32,6 +33,23 @@ namespace TradingLib.MoniterControl
 
             gatewayType_SelectedIndexChanged(null, null);
             CoreService.EventCore.RegIEventHandler(this);
+        }
+
+        public static ArrayList GetGateWayOptions()
+        {
+            ArrayList list = new ArrayList();
+
+            ValueObject<QSEnumGateWayType> vo1 = new ValueObject<QSEnumGateWayType>();
+            vo1.Name = Util.GetEnumDescription(QSEnumGateWayType.PlugPay);
+            vo1.Value = QSEnumGateWayType.PlugPay;
+            list.Add(vo1);
+
+            ValueObject<QSEnumGateWayType> vo2 = new ValueObject<QSEnumGateWayType>();
+            vo2.Name = Util.GetEnumDescription(QSEnumGateWayType.BaoFu);
+            vo2.Value = QSEnumGateWayType.BaoFu;
+            list.Add(vo2);
+
+            return list;
         }
 
         public void OnInit()
