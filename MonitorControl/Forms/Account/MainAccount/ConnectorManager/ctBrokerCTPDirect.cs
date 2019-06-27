@@ -40,6 +40,13 @@ namespace TradingLib.MoniterControl
             username.Text = cfg.usrinfo_userid;
             pass.Text = cfg.usrinfo_password;
             uf1.Text = cfg.usrinfo_field1;
+            string[] tmp = cfg.usrinfo_field2.Split(' ');
+            if(tmp.Length == 2)
+            {
+                appid.Text = tmp[0];
+                authcode.Text = tmp[1];
+            }
+
         }
 
         public void GetConnectorConfig(ref ConnectorConfig cfg)
@@ -49,6 +56,9 @@ namespace TradingLib.MoniterControl
             cfg.usrinfo_userid = username.Text;
             cfg.usrinfo_password = pass.Text;
             cfg.usrinfo_field1 = uf1.Text;//BroekrID
+
+            string field2 = string.Format("{0} {1}", appid.Text.Trim(), authcode.Text.Trim());
+            cfg.usrinfo_field2 = field2;
 
         }
 
